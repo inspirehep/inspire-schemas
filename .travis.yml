@@ -1,0 +1,35 @@
+notifications:
+  email: false
+sudo: false
+language: python
+matrix:
+  fast_finish: true
+cache:
+  - pip
+python:
+  - '2.7'
+  - '3.5'
+
+before_install:
+  - travis_retry pip install --upgrade pip setuptools py
+  - travis_retry pip install -r requirements.txt
+  - travis_retry pip install -r requirements-build.txt
+  - travis_retry pip install -r requirements-test.txt
+  - travis_retry pip install -r requirements-docs.txt
+
+install:
+  - travis_retry pip install -e .[all]
+
+script:
+  - "./run-tests.sh"
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: pypi
+  user: inspirehep
+  password:
+    secure: qqPTtYfBjklIf0j2NH9uD8AOpnmD9Fi0gRMld7QXMzrT53UBbgz0jlYAiU5D+J0GBIXr5g1qbC6rkw7zpZvcZOd784VllV5toNlqValdbEvXg2LWOGu2vGcrNRqCOLu+RSjVcFb7WG8QfigMMxNFGkbZ3F5ZpT+eHhZ7bNj+j0z/TZzyNTnDdXP8wLtBCLfJom8/LYB0rTQfUif9fZvbDtqlXXsLgYIbUo4qLKQgSxZ3EXq0J6WOsgjL6W1FWmqPlUn/P/D2QNnUH2oSWzxBcfgu/WOsrTF8rXgTvbXmYOGyuFNW6HoHzccMPOSzq/9+jcrFN3lFt6xFDSirV2psr2Iu099b1XPsBQkSnS+EVAJ+AzMOrNoU5dFTqsi6TQq3JMuPQAxUCBWymX+lksKLaQUb9AWpQP2OEjEVvZgai33KK+6/FYYx8wkcCnZi/sJrwdrHxNWpoXs5ko10Cytf0a/FVKv7OyM7O33Eq1Q3Yz8LaDyWFhj8VXfg22/yxKIZVT7Me4wPIhdiQFwOwD657ilVL5Rrp/FAT/v8AUqj3tOv559D3QFBqHIAtodWJ6aPzF3K4yb9Y003B0I2kU7ZDLmfQZpKq/NJnaRHxlvcyzkJZR0/ntEcsS+OEsIpmn5VQ9t6jitlwvUxx/ULjq/81srJHkDFrDSgAxxZvpPg2F1TE=
+  on:
+    branch: master
