@@ -35,7 +35,7 @@ import setup as inspire_schemas_setup
 if not os.path.exists('_build/html/_static'):
     os.makedirs('_build/html/_static')
 
-with open('_build/html/_static/CHANGELOG', 'w') as changelog_fd:
+with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
     subprocess.call(
         [
             '../scripts/version_manager.py', '..', 'changelog',
