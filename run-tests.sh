@@ -26,5 +26,6 @@
 
 pydocstyle --explain --source inspire_schemas tests && \
 isort -rc -c --skip docs/conf.py -df **/*.py && \
+pytest --pep8 --cov=inspire_schemas --cov-report=term-missing -vv tests && \
 sphinx-build -qnN docs docs/_build/html && \
 sphinx-build -qnN -b doctest docs docs/_build/doctest
