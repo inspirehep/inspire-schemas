@@ -88,7 +88,7 @@ def get_schema_path(schema_name):
     schema_path = resource_filename(
         __name__,
         os.path.join('records', schema_name + '.json')
-    )
+        )
     if not os.path.exists(schema_path):
         raise SchemaNotFound(
             schema_path=schema_path,
@@ -109,4 +109,5 @@ def load_schema(schema_name):
 
     if '$schema' not in schema_data:
         schema_data = {'$schema': schema_data}
+
     return schema_data
