@@ -44,4 +44,4 @@
 INSPIREHEP schemas and related tools bundle.
 
 * Free software: GPLv2 license
-* Documentation: https://pythonhosted.org/inspire-schemas/
+* Documentation: https://inspire-schemas.readthedocs.io

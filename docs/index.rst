@@ -64,4 +64,4 @@ Changelog
 Here you can find the `full changelog for this version`_
 
 
-.. _full changelog for this version: _static/CHANGELOG
+.. _full changelog for this version: _static/CHANGELOG.txt
