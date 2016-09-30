@@ -6,7 +6,7 @@
             "type": "array"
         },
         "address": {
-            "item": {
+            "items": {
                 "$ref": "elements/address.json"
             },
             "type": "array",
@@ -47,15 +47,18 @@
             "uniqueItems": true
         },
         "keywords": {
-            "properties": {
-                "source": {
-                    "type": "string"
+            "items": {
+                "properties": {
+                    "source": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
                 },
-                "value": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "title": "Free keywords",
+            "title": "Keywords",
             "type": "array",
             "uniqueItems": true
         },
