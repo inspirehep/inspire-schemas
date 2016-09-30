@@ -8,14 +8,13 @@ cache:
   - pip
 python:
   - '2.7'
-  - '3.5'
 
 before_install:
   - travis_retry pip install --upgrade pip setuptools py
   - travis_retry pip install -r requirements-test.txt
 
 install:
-  - travis_retry pip install -e .[all]
+  - travis_retry pip install -e .
 
 script:
   - "./run-tests.sh"
