@@ -1,0 +1,154 @@
+{
+    "ICN": [],
+    "address": [
+        {
+            "city": "aute commodo minim",
+            "country_code": "CC",
+            "latitude": -26092780,
+            "longitude": 7361334,
+            "original address": "dolore",
+            "postal_code": "id voluptate laborum",
+            "state": "velit labore aliquip"
+        },
+        {
+            "city": "quis aliqua esse non",
+            "country_code": "AF",
+            "latitude": -57259979,
+            "longitude": -99950886,
+            "original address": "esse nostrud non",
+            "postal_code": "pariatur tempor irure cillum sunt",
+            "state": ""
+        },
+        {
+            "city": "et consectetur veniam officia",
+            "country_code": "AX",
+            "latitude": 10421411,
+            "longitude": -50079301,
+            "original address": "culpa aliquip dolore enim",
+            "postal_code": "dolor Duis quis dolor",
+            "state": "ipsum esse laborum in officia"
+        },
+        {
+            "city": "ex in fugiat elit",
+            "country_code": "BF",
+            "latitude": 12406821,
+            "longitude": -22620995,
+            "original address": "consectetur Ut adipisicing quis ut",
+            "postal_code": "consequat adipisicing dolore in dolor",
+            "state": "commodo do"
+        }
+    ],
+    "core": true,
+    "deleted": true,
+    "department": [],
+    "department_acronym": "et",
+    "extra_words": [
+        "proident consequat dolor magna",
+        "consequat ad anim cupidatat commodo"
+    ],
+    "field_activity": [
+        "Company",
+        "Company"
+    ],
+    "field_categories": [
+        {
+            "scheme": "Ut laborum",
+            "source": "magpie",
+            "term": "Phenomenology-HEP"
+        },
+        {
+            "scheme": "laboris et non voluptate",
+            "source": "INSPIRE",
+            "term": "General Physics"
+        },
+        {
+            "scheme": "qui est",
+            "source": "publisher",
+            "term": "Instrumentation"
+        },
+        {
+            "scheme": "ex nisi dolore Duis incididunt",
+            "source": "magpie",
+            "term": "Gravitation and Cosmology"
+        }
+    ],
+    "hidden_notes": [
+        "nulla voluptate irure",
+        "nisi quis cupidatat",
+        "sed anim officia"
+    ],
+    "historical_data": [
+        "reprehenderit in Lorem in",
+        "occaecat Ut moll",
+        "irure",
+        "do incididunt",
+        "ut ipsum sint in"
+    ],
+    "institution": [],
+    "institution_acronym": "Lorem ullamco labore",
+    "location": {
+        "latitude": -20543405,
+        "longitude": -96193963
+    },
+    "name_variants": [
+        {
+            "source": "DESY",
+            "value": [
+                "tempor dolor dolor cupidatat",
+                "adipisicing",
+                "in in",
+                "qui dolore Duis",
+                "magna amet dolo"
+            ]
+        }
+    ],
+    "non_public_notes": [
+        "aliquip"
+    ],
+    "public_notes": [
+        "minim commodo",
+        "in sunt sit",
+        "dolor anim voluptate eu",
+        "do velit ipsum dolore"
+    ],
+    "related_institutes": [
+        {
+            "curated_relation": false,
+            "name": "dolore",
+            "record": {
+                "$ref": "1mc0 _B.:n"
+            },
+            "relation_type": "predecessor"
+        },
+        {
+            "curated_relation": true,
+            "name": "irure",
+            "record": {
+                "$ref": "1fMH9OLnvFh.ePPcx%(@hEJHi;K 9 Ly1}sa+YfT?X9}k[r>]cB+[|L\\^'nrU8|5p;mXN^Ax2r%taVL@Ri%&"
+            },
+            "relation_type": "superseded"
+        }
+    ],
+    "self": {
+        "$ref": "1WN]p2}D#2<"
+    },
+    "time_zone": "be",
+    "urls": [
+        {
+            "description": "consequat ullamco",
+            "value": "1>1_OynCO9k4I*0 ljL.*)Ecr"
+        },
+        {
+            "description": "cillum aliquip ad Lorem",
+            "value": "1L`reQ[VApwB-];`sfL#5#';Dg/h!GGz`/G~9yD3T8![G'A;}XDe}Z2`#.Sw"
+        },
+        {
+            "description": "Ut nostrud ea mollit",
+            "value": "1Z^Bk)I4.pJ\"IY\"E tu5zsvmY.|g;]<ChV6\\, _TM?)HWd6uNJJ"
+        },
+        {
+            "description": "aliquip",
+            "value": "1&,-`1N8_%I}<%^\"aIC+FvgvUD$<A;A0iTQu"
+        }
+    ]
+}

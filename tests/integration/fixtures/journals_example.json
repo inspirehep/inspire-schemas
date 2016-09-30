@@ -1,0 +1,102 @@
+{
+    "coden": [
+        "436N90",
+        "6_OB",
+        "7TOV",
+        "6VMUY"
+    ],
+    "deleted": true,
+    "history": "sed culpa",
+    "issn": [
+        {
+            "comment": "enim eiusmod ea proident",
+            "medium": "print",
+            "value": "2693-1045"
+        },
+        {
+            "comment": "occaecat",
+            "medium": "print",
+            "value": "8625-6837"
+        },
+        {
+            "comment": "voluptate cupidatat fugiat",
+            "medium": "online",
+            "value": "2677-9897"
+        },
+        {
+            "comment": "Excepteur eiusmod in",
+            "medium": "print",
+            "value": "2032-6941"
+        },
+        {
+            "comment": "culpa adipisicing in",
+            "medium": "online",
+            "value": "9613-6307"
+        }
+    ],
+    "journal_handling": "reprehenderit Ut",
+    "journal_titles": [
+        {
+            "source": "L",
+            "subtitle": "tempor reprehenderit sit dolore",
+            "title": "tempor veniam"
+        },
+        {
+            "source": "cillum ad",
+            "subtitle": "magna",
+            "title": "proident dolore deserunt dolor sit"
+        },
+        {
+            "source": "conse",
+            "subtitle": "id do ex",
+            "title": "adipisicing"
+        }
+    ],
+    "license": "is",
+    "license_urls": [
+        {
+            "description": "nulla labore incididunt anim",
+            "value": "1kaeYi96?cHS(He9DVeVEr47|U9\\rS+JkqP^S6X*cEO/cf<8k$/TRV*"
+        }
+    ],
+    "nonpublic_note": "sint",
+    "peer_reviewed": false,
+    "public_note": "magna Ut et",
+    "publisher": [],
+    "relation": {
+        "curated_relation": true,
+        "issn": "6911-2397",
+        "record": {
+            "$ref": "1S(KjnV&KyxNUtbSMtPWN9V~hK%bLqeAX\\w!x4!a3Kp2S"
+        },
+        "relation": "superseeding record"
+    },
+    "self": {
+        "$ref": "1\"h,s}LMz2(JpVL{99*N}m3L]z52<efKn.0F~gQpJ1-,Pg} X\\byzSj\\#:wv=Hn#k|+"
+    },
+    "short_titles": [
+        {
+            "source": "fugiat et veniam amet",
+            "subtitle": "tempor",
+            "title": "sit tempor consequat incididunt"
+        },
+        {
+            "source": "qui irure consect",
+            "subtitle": "veniam anim occaecat q",
+            "title": ""
+        }
+    ],
+    "title_variants": [
+        {
+            "source": "sed in aliqua",
+            "subtitle": "proident Excepteur exercitation et",
+            "title": "anim"
+        }
+    ],
+    "urls": [
+        {
+            "description": "in proident volupt",
+            "value": "1kylPX:wIFy+6EI`0/hZh*a#'KGM9!~w:G,SJ,7bO~NGj!hCA8]l0m_>`RwfR5LO"
+        }
+    ]
+}
