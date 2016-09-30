@@ -16,7 +16,7 @@ before_install:
   - pip freeze
 
 install:
-  - travis_retry pip install -e .[all]
+  - travis_retry pip install -e .
 
 script:
   - "./run-tests.sh"
