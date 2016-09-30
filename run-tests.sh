@@ -31,6 +31,7 @@ pytest \
     --cov=inspire_schemas \
     --cov-report=term-missing \
     -vv \
+    "$@" \
     tests \
     inspire_schemas && \
 sphinx-build -qnN docs docs/_build/html && \
