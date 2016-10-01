@@ -144,14 +144,15 @@ if __name__ == '__main__':
         changelog_fd.write(get_changelog())
 
     setup(
-        name='inspire-schemas',
-        license='GPLv2',
         author='CERN',
         author_email='admin@inspirehep.net',
-        version=get_version(),
-        url='https://github.com/inspirehep/inspire-schemas',
-        zip_safe=False,
         include_package_data=True,
+        install_requires=['jsonschema'],
+        license='GPLv2',
+        name='inspire-schemas',
+        package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']}
+        url='https://github.com/inspirehep/inspire-schemas',
+        version=get_version(),
+        zip_safe=False,
     )
