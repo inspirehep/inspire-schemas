@@ -24,7 +24,15 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 
-pydocstyle inspire_schemas tests && \
+pydocstyle --explain --source inspire_schemas tests && \
 isort -rc -c --skip docs/conf.py -df **/*.py && \
-sphinx-build -qnNW docs docs/_build/html && \
-sphinx-build -qnNW -b doctest docs docs/_build/doctest
+pytest \
+    --pep8 \
+    --cov=inspire_schemas \
+    --cov-report=term-missing \
+    -vv \
+    "$@" \
+    tests \
+    inspire_schemas && \
+sphinx-build -qnN docs docs/_build/html && \
+sphinx-build -qnN -b doctest docs docs/_build/doctest
