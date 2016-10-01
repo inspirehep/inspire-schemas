@@ -27,6 +27,7 @@ import os
 
 import jsonschema
 import pytest
+import six
 
 from inspire_schemas import api
 
@@ -35,7 +36,7 @@ FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 def get_schema_names(fixtures_path):
     schema_names = []
-    _, _, files = os.walk(fixtures_path).next()
+    _, _, files = six.next(os.walk(fixtures_path))
     for file_name in files:
         schema_names.append(file_name.split('_', 1)[0])
 

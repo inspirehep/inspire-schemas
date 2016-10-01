@@ -22,11 +22,11 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
-import StringIO
 import contextlib
 import json
 import pytest
 import mock
+import six
 
 from inspire_schemas import utils
 
@@ -63,9 +63,14 @@ def test_local_ref_resolver_proxied(mock_super, mock_resolve_remote):
     mock_resolve_remote.side_effect = lambda *x: x[0]
     mock_super.side_effect = lambda *x: utils.RefResolver
 
-    resolve_remote = utils.LocalRefResolver.resolve_remote.__func__
-    result = resolve_remote('dummy', 'some path')
+    class MockResolver(utils.LocalRefResolver):
+        """Needed to be able to call the resolve_remote function on the
+        LocalRefResolver without having to instantiate it on both python2 and
+        3 as they handle the unbound methods differently.
+        """
+        def __init__(self): pass
 
+    result = MockResolver().resolve_remote('some path')
     assert result == 'some path'
 
 
@@ -80,13 +85,18 @@ def test_local_ref_resolver_adapted(mock_get_schema_path, mock_super,
 
         raise ValueError()
 
+    class MockResolver(utils.LocalRefResolver):
+        """Needed to be able to call the resolve_remote function on the
+        LocalRefResolver without having to instantiate it on both python2 and
+        3 as they handle the unbound methods differently.
+        """
+        def __init__(self): pass
+
     mock_resolve_remote.side_effect = _mocked_resolve_remote
     mock_super.side_effect = lambda *x: utils.RefResolver
     mock_get_schema_path.side_effect = lambda *args: ' '.join(args)
 
-    resolve_remote = utils.LocalRefResolver.resolve_remote.__func__
-    result = resolve_remote('dummy', 'some path')
-
+    result = MockResolver().resolve_remote('some path')
     assert result == 'file://some path'
 
 
@@ -101,7 +111,7 @@ def test_load_schema_with_schema_key(mock_get_schema_path, mock_open):
         }
     }
     mock_open.side_effect = \
-        lambda x: contextlib.closing(StringIO.StringIO(json.dumps(myschema)))
+        lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
     mock_get_schema_path.side_effect = \
         lambda x: 'And his nostrils ripped and his bottom burned off'
 
@@ -117,7 +127,7 @@ def test_load_schema_without_schema_key(mock_get_schema_path, mock_open):
         'Sir Robin': 'The fleeing brave',
     }
     mock_open.side_effect = \
-        lambda x: contextlib.closing(StringIO.StringIO(json.dumps(myschema)))
+        lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
     mock_get_schema_path.side_effect = \
         lambda x: 'And his nostrils ripped and his bottom burned off'
 
