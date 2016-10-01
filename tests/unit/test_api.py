@@ -25,11 +25,11 @@
 import mock
 import pytest
 
-from inspire_schemas import api, utils
+from inspire_schemas import api, errors
 
 
 def test_validate_raises_if_no_schema_key():
-    with pytest.raises(utils.SchemaKeyNotFound):
+    with pytest.raises(errors.SchemaKeyNotFound):
         api.validate(data={})
 
 

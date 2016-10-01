@@ -25,7 +25,8 @@
 """Public api for methods and functions to handle/verify the jsonschemas."""
 from jsonschema import validate as jsonschema_validate
 
-from .utils import LocalRefResolver, SchemaKeyNotFound, load_schema
+from .errors import SchemaKeyNotFound
+from .utils import LocalRefResolver, load_schema
 
 
 def validate(data, schema_name=None):
@@ -38,9 +39,9 @@ def validate(data, schema_name=None):
         data to have the schema specified in the `$ref` key.
     :type schema_name: str
     :return: None
-    :raises inspire_schemas.utils.SchemaNotFound: if the given schema was not
+    :raises inspire_schemas.errors.SchemaNotFound: if the given schema was not
         found.
-    :raises inspire_schemas.utils.SchemaKeyNotFound: if the given schema was
+    :raises inspire_schemas.errors.SchemaKeyNotFound: if the given schema was
         not found.
     :raises jsonschema.SchemaError: if the schema is invalid
     :raises jsonschema.ValidationError: if the data is invalid

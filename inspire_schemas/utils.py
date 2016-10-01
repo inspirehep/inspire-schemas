@@ -29,37 +29,7 @@ import os
 from jsonschema import RefResolver
 from pkg_resources import resource_filename
 
-
-class InspireSchemasException(Exception):
-    """Base class for all the exceptions in this package."""
-
-    pass
-
-
-class SchemaNotFound(InspireSchemasException):
-    """Exception raised on missing schema."""
-
-    def __init__(self, schema_path, schema_name):
-        """Exception raised on missing schema.
-
-        :param schema_path: Non-existent path that was tried.
-        :param schema_name: Name of the schema that was requested.
-        """
-        message = 'Unable to find schema "{}" at "{}".'.format(
-            schema_name, schema_path)
-        super(SchemaNotFound, self).__init__(message)
-
-
-class SchemaKeyNotFound(InspireSchemasException):
-    """Exception raised on missing schema key."""
-
-    def __init__(self, data):
-        """Exception raised on missing schema key.
-
-        :param data: data dict that was checked.
-        """
-        message = 'Unable to find "$schema" key in "{}".'.format(data)
-        super(SchemaKeyNotFound, self).__init__(message)
+from .errors import SchemaNotFound
 
 
 class LocalRefResolver(RefResolver):

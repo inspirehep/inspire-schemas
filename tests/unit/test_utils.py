@@ -28,7 +28,7 @@ import pytest
 import mock
 import six
 
-from inspire_schemas import utils
+from inspire_schemas import utils, errors
 
 
 @mock.patch('inspire_schemas.utils.os.path.exists')
@@ -51,7 +51,7 @@ def test_get_schema_path_negative(mock_resource_filename, mock_exists):
     mock_resource_filename.side_effect = lambda *_: 'shrubbery'
     mock_exists.side_effect = lambda *_: False
 
-    with pytest.raises(utils.SchemaNotFound):
+    with pytest.raises(errors.SchemaNotFound):
         utils.get_schema_path(
             'Go and boil your bottoms, sons of a silly person!'
         )
