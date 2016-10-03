@@ -32,6 +32,9 @@
             "type": "string"
         },
         "extra_words": {
+            "items": {
+                "type": "string"
+            },
             "title": "Extra words",
             "type": "array",
             "uniqueItems": true
