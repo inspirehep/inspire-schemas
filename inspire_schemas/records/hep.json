@@ -45,29 +45,7 @@
             "uniqueItems": true
         },
         "acquisition_source": {
-            "properties": {
-                "date": {
-                    "description": "Date of acquisition",
-                    "type": "string"
-                },
-                "email": {
-                    "description": "Email of acquisition contact",
-                    "type": "string"
-                },
-                "method": {
-                    "description": "Method of acquisition",
-                    "type": "string"
-                },
-                "source": {
-                    "description": "Source of acquisition",
-                    "type": "string"
-                },
-                "submission_number": {
-                    "description": "Special submission ID",
-                    "type": "string"
-                }
-            },
-            "type": "object"
+            "$ref": "elements/acquisition_source.json"
         },
         "arxiv_eprints": {
             "items": {
