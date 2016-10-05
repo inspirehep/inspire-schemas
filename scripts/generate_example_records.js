@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 //requires the json-schema-faker npm package installed
-var jsf = require('json-schema-faker')
+var fs = require('fs',
+    jsf = require('json-schema-faker'),
+    path = require('path');
 
 jsf.format('ISO 639-1', function(gen, schema){ return gen.randexp('^1.*$');});
 jsf.format('date', function(gen, schema){ return gen.randexp('^1.*$');});
