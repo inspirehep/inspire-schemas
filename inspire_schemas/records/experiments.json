@@ -109,6 +109,11 @@
             "title": "Hidden note",
             "type": "string"
         },
+        "new_record": {
+            "$ref": "elements/json_reference.json",
+            "description": "Master record that replaces this record",
+            "title": "New record"
+        },
         "nonpublic_note": {
             "description": "FIXME: difference from hidden_note!?",
             "title": "Non public note",

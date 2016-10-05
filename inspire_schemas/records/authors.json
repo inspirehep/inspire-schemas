@@ -147,6 +147,11 @@
             "description": "Stores name in native form.",
             "type": "array"
         },
+        "new_record": {
+            "$ref": "elements/json_reference.json",
+            "description": "Master record that replaces this record",
+            "title": "New record"
+        },
         "other_names": {
             "description": "Contains other variation of names. Usually a different form of writing the primary name.",
             "items": {
