@@ -11,7 +11,7 @@ python:
   - '3.5'
 
 before_install:
-  - travis_retry pip install --upgrade pip setuptools py
+  - travis_retry pip install --upgrade pip setuptools py coveralls
   - travis_retry pip install -r requirements-test.txt
   - pip freeze
 
