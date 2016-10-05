@@ -2,6 +2,9 @@
     "$schema": "http://json-schema.org/schema#",
     "properties": {
         "acronym": {
+            "items": {
+                "type": "string"
+            },
             "title": "Conference acronym",
             "type": "array"
         },
@@ -72,6 +75,9 @@
             "type": "string"
         },
         "note": {
+            "items": {
+                "type": "string"
+            },
             "title": "Note",
             "type": "array"
         },
@@ -110,13 +116,16 @@
             "uniqueItems": true
         },
         "short_description": {
-            "properties": {
-                "source": {
-                    "type": "string"
+            "items": {
+                "properties": {
+                    "source": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
                 },
-                "value": {
-                    "type": "string"
-                }
+                "type": "object"
             },
             "title": "Short description",
             "type": "array"

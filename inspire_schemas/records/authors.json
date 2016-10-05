@@ -145,6 +145,9 @@
         },
         "native_name": {
             "description": "Stores name in native form.",
+            "items": {
+                "type": "string"
+            },
             "type": "array"
         },
         "new_record": {

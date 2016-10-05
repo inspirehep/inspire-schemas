@@ -92,6 +92,9 @@
             "type": "string"
         },
         "publisher": {
+            "items": {
+                "type": "string"
+            },
             "title": "Publisher",
             "type": "array"
         },

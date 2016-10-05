@@ -103,7 +103,8 @@
                     "pattern": "CERN-\\d+",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
@@ -117,59 +118,68 @@
                     "pattern": "DESY-\\d+",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
                 "type": {
                     "enum": [
                         "GOOGLESCHOLAR"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "value": {
                     "pattern": "(\\w|-){12}",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
                 "type": {
                     "enum": [
                         "VIAF"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "value": {
                     "pattern": "\\d{7,9}",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
                 "type": {
                     "enum": [
                         "RESEARCHERID"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "value": {
                     "pattern": "[A-z]-\\d{4}-\\d{4}",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
                 "type": {
                     "enum": [
                         "SCOPUS"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "value": {
                     "pattern": "\\d{10,11}",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
@@ -183,7 +193,8 @@
                     "pattern": "\\w+",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         },
         {
             "properties": {
@@ -197,7 +208,8 @@
                     "pattern": "SLAC-\\d+",
                     "type": "string"
                 }
-            }
+            },
+            "type": "object"
         }
     ],
     "required": [
