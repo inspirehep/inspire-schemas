@@ -1,42 +1,98 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "properties": {
-        "scheme": {
-            "title": "INSPIRE",
-            "type": "string"
-        },
-        "source": {
+    "definitions": {
+        "sources": {
             "enum": [
                 "INSPIRE",
                 "submitter",
                 "conference",
                 "curator",
                 "publisher",
+                "arxiv",
+                "pos",
+                "aps",
                 "magpie"
             ],
             "type": "string"
-        },
-        "term": {
-            "enum": [
-                "Accelerators",
-                "Astrophysics",
-                "Computing",
-                "Data Analysis and Statistics",
-                "Experiment-HEP",
-                "Experiment-Nucl",
-                "General Physics",
-                "Gravitation and Cosmology",
-                "Instrumentation",
-                "Lattice",
-                "Math and Math Physics",
-                "Other",
-                "Phenomenology-HEP",
-                "Theory-HEP",
-                "Theory-Nucl"
-            ],
-            "title": "INSPIRE term",
-            "type": "string"
         }
     },
-    "type": "object"
+    "anyOf": [
+        {
+            "properties": {
+                "scheme": {
+                    "type": "string",
+                    "enum": ["INSPIRE"]
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "enum": [
+                        "Accelerators",
+                        "Astrophysics",
+                        "Computing",
+                        "Data Analysis and Statistics",
+                        "Experiment-HEP",
+                        "Experiment-Nucl",
+                        "General Physics",
+                        "Gravitation and Cosmology",
+                        "Instrumentation",
+                        "Lattice",
+                        "Math and Math Physics",
+                        "Other",
+                        "Phenomenology-HEP",
+                        "Theory-HEP",
+                        "Theory-Nucl"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        {
+            "properties": {
+                "scheme": {
+                    "type": "string",
+                    "enum": ["ARXIV"]
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "$ref": "arxiv_categories.json"
+                }
+            },
+            "type": "object"
+        },
+        {
+            "properties": {
+                "scheme": {
+                    "type": "string",
+                    "enum": ["APS"]
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        {
+            "properties": {
+                "scheme": {
+                    "type": "string",
+                    "enum": ["POS"]
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    ]
 }

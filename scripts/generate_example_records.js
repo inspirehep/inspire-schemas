@@ -25,7 +25,7 @@ function resolve_schema(unresolved_schema, base_path) {
         return new_array
     }
     for (var key in unresolved_schema) {
-        if (key === '$ref' && typeof(unresolved_schema[key]) === 'string') {
+        if (key === '$ref' && typeof(unresolved_schema[key]) === 'string' && unresolved_schema[key][0] !== '#') {
             var schema_path = base_path + "/" + unresolved_schema[key];
             var new_base_path = path.dirname(schema_path);
             var element_schema = JSON.parse(fs.readFileSync(schema_path));
