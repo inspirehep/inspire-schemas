@@ -146,6 +146,7 @@ if __name__ == '__main__':
     setup(
         author='CERN',
         author_email='admin@inspirehep.net',
+        description='Inspire JSON schemas and utilities to use them.',
         install_requires=['jsonschema'],
         license='GPLv2',
         name='inspire-schemas',
