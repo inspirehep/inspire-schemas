@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 //requires the json-schema-faker npm package installed
-var fs = require('fs',
+var fs = require('fs'),
     jsf = require('json-schema-faker'),
     path = require('path');
 
