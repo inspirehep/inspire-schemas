@@ -163,6 +163,6 @@
         "stat.OT",
         "stat.TH"
     ],
-    "type": "string",
-    "title": "All arXiv categoires"
+    "title": "All arXiv categoires",
+    "type": "string"
 }

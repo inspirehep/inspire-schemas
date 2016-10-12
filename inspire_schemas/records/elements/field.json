@@ -1,27 +1,13 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "definitions": {
-        "sources": {
-            "enum": [
-                "INSPIRE",
-                "submitter",
-                "conference",
-                "curator",
-                "publisher",
-                "arxiv",
-                "pos",
-                "aps",
-                "magpie"
-            ],
-            "type": "string"
-        }
-    },
     "anyOf": [
         {
             "properties": {
                 "scheme": {
-                    "type": "string",
-                    "enum": ["INSPIRE"]
+                    "enum": [
+                        "INSPIRE"
+                    ],
+                    "type": "string"
                 },
                 "source": {
                     "$ref": "#/definitions/sources"
@@ -52,8 +38,10 @@
         {
             "properties": {
                 "scheme": {
-                    "type": "string",
-                    "enum": ["ARXIV"]
+                    "enum": [
+                        "ARXIV"
+                    ],
+                    "type": "string"
                 },
                 "source": {
                     "$ref": "#/definitions/sources"
@@ -67,8 +55,10 @@
         {
             "properties": {
                 "scheme": {
-                    "type": "string",
-                    "enum": ["APS"]
+                    "enum": [
+                        "APS"
+                    ],
+                    "type": "string"
                 },
                 "source": {
                     "$ref": "#/definitions/sources"
@@ -82,8 +72,10 @@
         {
             "properties": {
                 "scheme": {
-                    "type": "string",
-                    "enum": ["POS"]
+                    "enum": [
+                        "POS"
+                    ],
+                    "type": "string"
                 },
                 "source": {
                     "$ref": "#/definitions/sources"
@@ -94,5 +86,21 @@
             },
             "type": "object"
         }
-    ]
+    ],
+    "definitions": {
+        "sources": {
+            "enum": [
+                "INSPIRE",
+                "submitter",
+                "conference",
+                "curator",
+                "publisher",
+                "arxiv",
+                "pos",
+                "aps",
+                "magpie"
+            ],
+            "type": "string"
+        }
+    }
 }

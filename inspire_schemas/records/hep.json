@@ -51,10 +51,10 @@
             "items": {
                 "properties": {
                     "categories": {
-                        "type": "array",
                         "items": {
                             "$ref": "elements/arxiv_categories.json"
-                        }
+                        },
+                        "type": "array"
                     },
                     "value": {
                         "pattern": "\\d{4}.\\d{4,5}|\\w+-\\w+/\\d+|\\w+/\\d+",
