@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
@@ -24,6 +24,35 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 
+clean_dir() {
+    local to_clean="${1?No dir to clean passed}"
+    [[ -d "$to_clean" ]] \
+    && [[ "$to_clean" != "/" ]] \
+    && rm -rf "$to_clean"
+    return 0
+}
+
+
+check_prettified() {
+    local dir_to_check="${1?No dir to check passed}"
+    local tmpdir="$(mktemp -d 'Prettified_check.XXXXX' --tmpdir)"
+    trap "clean_dir '$tmpdir'" TERM EXIT
+    cp -a "$dir_to_check" "$tmpdir/"
+    scripts/prettify_json.sh "$tmpdir"
+    diff \
+        --side-by-side \
+        --recursive \
+        --brief \
+        "$tmpdir/${dir_to_check##*/}" "$dir_to_check"
+    res="$?"
+    if [[ "$res" != "0" ]]; then
+        echo "PRETTIFY::ERROR:: Found unprettified json files, please run" \
+            "the scripts/prettify_json.sh script on the repo to fix."
+    fi
+    return "$res"
+}
+
+
 pydocstyle --explain --source inspire_schemas tests && \
 isort -rc -c --skip docs/conf.py -df **/*.py && \
 pytest \
@@ -35,4 +64,5 @@ pytest \
     tests \
     inspire_schemas && \
 sphinx-build -qnN docs docs/_build/html && \
-sphinx-build -qnN -b doctest docs docs/_build/doctest
+sphinx-build -qnN -b doctest docs docs/_build/doctest && \
+check_prettified "${0%/*}"
