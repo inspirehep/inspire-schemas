@@ -25,23 +25,18 @@
 from __future__ import print_function
 
 import os
-import subprocess
-import sys
 
-sys.path.insert(0, os.path.abspath('..'))  # noqa
-import setup as inspire_schemas_setup
+from autosemver.packaging import get_changelog, get_current_version
 
 
 if not os.path.exists('_build/html/_static'):
     os.makedirs('_build/html/_static')
 
 with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
-    subprocess.call(
-        [
-            '../scripts/version_manager.py', '..', 'changelog',
-        ],
-        stdout=changelog_fd,
-    )
+    changelog_fd.write(get_changelog(
+        project_dir='..',
+        bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
+    ))
 
 # -- General configuration ------------------------------------------------
 
@@ -88,7 +83,7 @@ author = u'CERN'
 # The short X.Y version.
 
 # Get the version string. Cannot be done with import!
-version = inspire_schemas_setup.get_version('..')
+version = get_current_version(project_dir='..')
 
 # The full version, including alpha/beta/rc tags.
 release = version
