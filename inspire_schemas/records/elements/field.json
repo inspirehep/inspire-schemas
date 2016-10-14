@@ -1,42 +1,106 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "properties": {
-        "scheme": {
-            "title": "INSPIRE",
-            "type": "string"
+    "anyOf": [
+        {
+            "properties": {
+                "scheme": {
+                    "enum": [
+                        "INSPIRE"
+                    ],
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "enum": [
+                        "Accelerators",
+                        "Astrophysics",
+                        "Computing",
+                        "Data Analysis and Statistics",
+                        "Experiment-HEP",
+                        "Experiment-Nucl",
+                        "General Physics",
+                        "Gravitation and Cosmology",
+                        "Instrumentation",
+                        "Lattice",
+                        "Math and Math Physics",
+                        "Other",
+                        "Phenomenology-HEP",
+                        "Theory-HEP",
+                        "Theory-Nucl"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
         },
-        "source": {
+        {
+            "properties": {
+                "scheme": {
+                    "enum": [
+                        "ARXIV"
+                    ],
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "$ref": "arxiv_categories.json"
+                }
+            },
+            "type": "object"
+        },
+        {
+            "properties": {
+                "scheme": {
+                    "enum": [
+                        "APS"
+                    ],
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        {
+            "properties": {
+                "scheme": {
+                    "enum": [
+                        "POS"
+                    ],
+                    "type": "string"
+                },
+                "source": {
+                    "$ref": "#/definitions/sources"
+                },
+                "term": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    ],
+    "definitions": {
+        "sources": {
             "enum": [
                 "INSPIRE",
                 "submitter",
                 "conference",
                 "curator",
                 "publisher",
+                "arxiv",
+                "pos",
+                "aps",
                 "magpie"
             ],
             "type": "string"
-        },
-        "term": {
-            "enum": [
-                "Accelerators",
-                "Astrophysics",
-                "Computing",
-                "Data Analysis and Statistics",
-                "Experiment-HEP",
-                "Experiment-Nucl",
-                "General Physics",
-                "Gravitation and Cosmology",
-                "Instrumentation",
-                "Lattice",
-                "Math and Math Physics",
-                "Other",
-                "Phenomenology-HEP",
-                "Theory-HEP",
-                "Theory-Nucl"
-            ],
-            "title": "INSPIRE term",
-            "type": "string"
         }
-    },
-    "type": "object"
+    }
 }

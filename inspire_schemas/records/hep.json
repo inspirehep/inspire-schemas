@@ -52,7 +52,7 @@
                 "properties": {
                     "categories": {
                         "items": {
-                            "type": "string"
+                            "$ref": "elements/arxiv_categories.json"
                         },
                         "type": "array"
                     },
