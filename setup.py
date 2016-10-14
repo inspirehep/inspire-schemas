@@ -26,21 +26,10 @@
 
 from setuptools import setup, find_packages
 
-from autosemver.packaging import (
-    get_authors,
-    get_current_version,
-    get_changelog,
-)
 
 URL = 'https://github.com/inspirehep/inspire-schemas'
 
 if __name__ == '__main__':
-    with open('AUTHORS', 'w') as authors_fd:
-        authors_fd.write('\n'.join(get_authors()))
-
-    with open('CHANGELOG', 'w') as changelog_fd:
-        changelog_fd.write(get_changelog(bugtracker_url=URL + '/issues/'))
-
     setup(
         author='CERN',
         author_email='admin@inspirehep.net',
@@ -50,7 +39,9 @@ if __name__ == '__main__':
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
+        setup_requires=['autosemver'],
         url=URL,
-        version=get_current_version(project_name='inspire-schemas'),
+        bugtracker_url=URL + '/issues/',
         zip_safe=False,
+        autosemver=True,
     )
