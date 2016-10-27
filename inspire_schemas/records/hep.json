@@ -254,6 +254,9 @@
             "type": "array",
             "uniqueItems": true
         },
+        "control_number": {
+            "type": "integer"
+        },
         "copyright": {
             "items": {
                 "properties": {
@@ -733,6 +736,10 @@
             "$ref": "elements/json_reference.json",
             "description": "Url of the record itself",
             "title": "Url of the record"
+        },
+        "$schema": {
+            "format": "url",
+            "type": "string"
         },
         "succeeding_entry": {
             "description": "Reference to previously merged records.",
