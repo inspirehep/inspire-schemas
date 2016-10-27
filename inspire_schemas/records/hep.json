@@ -2,6 +2,10 @@
     "$schema": "http://json-schema.org/schema#",
     "description": "An article or thesis or book or...",
     "properties": {
+        "$schema": {
+            "format": "url",
+            "type": "string"
+        },
         "abstracts": {
             "items": {
                 "properties": {
@@ -253,6 +257,9 @@
             "title": "Collection",
             "type": "array",
             "uniqueItems": true
+        },
+        "control_number": {
+            "type": "integer"
         },
         "copyright": {
             "items": {
@@ -733,6 +740,10 @@
             "$ref": "elements/json_reference.json",
             "description": "Url of the record itself",
             "title": "Url of the record"
+        },
+        "$schema": {
+            "format": "url",
+            "type": "string"
         },
         "succeeding_entry": {
             "description": "Reference to previously merged records.",
