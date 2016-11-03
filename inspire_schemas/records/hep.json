@@ -741,10 +741,6 @@
             "description": "Url of the record itself",
             "title": "Url of the record"
         },
-        "$schema": {
-            "format": "url",
-            "type": "string"
-        },
         "succeeding_entry": {
             "description": "Reference to previously merged records.",
             "properties": {
