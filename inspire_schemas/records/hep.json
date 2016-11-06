@@ -2,10 +2,6 @@
     "$schema": "http://json-schema.org/schema#",
     "description": "An article or thesis or book or...",
     "properties": {
-        "$schema": {
-            "format": "url",
-            "type": "string"
-        },
         "abstracts": {
             "items": {
                 "properties": {
@@ -257,9 +253,6 @@
             "title": "Collection",
             "type": "array",
             "uniqueItems": true
-        },
-        "control_number": {
-            "type": "integer"
         },
         "copyright": {
             "items": {
