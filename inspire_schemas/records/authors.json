@@ -200,6 +200,13 @@
                         },
                         "type": "object"
                     },
+                    "old_emails": {
+                        "items": {
+                            "format": "email",
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
                     "rank": {
                         "$ref": "elements/rank.json"
                     },
