@@ -1,148 +1,82 @@
 {
     "coden": [
-        "R-6Z",
-        "110QNC"
+        "7NOV-",
+        "FW4QS2"
     ],
     "deleted": false,
-    "history": "Excepteur cupidatat ad",
+    "history": "ad",
     "issn": [
         {
-            "comment": "et irure",
+            "comment": "sint ad",
             "medium": "print",
-            "value": "1839-807X"
+            "value": "3827-2330"
         },
         {
-            "comment": "commodo consequat irure nostrud",
-            "medium": "print",
-            "value": "5330-9726"
-        },
-        {
-            "comment": "non",
-            "medium": "print",
-            "value": "9494-9480"
-        },
-        {
-            "comment": "occaecat Excepteur deserunt dolore",
-            "medium": "print",
-            "value": "0725-541X"
-        },
-        {
-            "comment": "sit dolore sed incididunt aliqu",
+            "comment": "nulla dolore in laborum ipsum",
             "medium": "online",
-            "value": "2587-1570"
+            "value": "3529-5518"
         }
     ],
-    "journal_handling": "Lorem amet commodo",
+    "journal_handling": "tempor voluptate",
     "journal_titles": [
         {
-            "source": "do aute in",
-            "subtitle": "in",
-            "title": "voluptate et mollit culpa Ut"
-        },
-        {
-            "source": "cupidatat tempor eiusmod do",
-            "subtitle": "ullamco proident sint irure",
-            "title": "Duis esse labore mollit"
-        },
-        {
-            "source": "Ut ea tempor",
-            "subtitle": "elit Excepteur ullamco",
-            "title": "quis magna dolor commodo id"
-        },
-        {
-            "source": "reprehenderit",
-            "subtitle": "nostrud",
-            "title": "quis laborum"
-        },
-        {
-            "source": "est",
-            "subtitle": "D",
-            "title": "laborum voluptate irure"
+            "source": "tempor consectetur non",
+            "subtitle": "anim sint aute",
+            "title": "esse veniam commodo occaecat"
         }
     ],
-    "license": "needed",
+    "license": "is",
     "license_urls": [
         {
-            "description": "et",
-            "value": "1o_@.ua@Dn0?P|"
+            "description": "commodo nisi est anim",
+            "value": "1/42C>A\"/^y!?kTl2eu=lr;kcy[|BAa'f~J4!f}#|(<_sJVG0OoDMzDV<~;hVZ@J~_oRR"
         },
         {
-            "description": "est laborum magna dolor sint",
-            "value": "1$;6} DKsu:o.p=BZs&$>=X+6T_O/jV@F2sO%eOlGU$:D6nLf`;0KHI >P 9mS(g\"x\"e=5B7%;2"
-        },
-        {
-            "description": "elit officia",
-            "value": "1VA EAxu5f,NM\"6WvyTJQYyBF_f:!,h@zrUCmde!grwenQsm|-lD2ng;l?eR/Cl0r59<F7dG'usl[1/"
-        },
-        {
-            "description": "fugiat ex ipsum Duis",
-            "value": "1%=8WfkaeR"
-        },
-        {
-            "description": "magna sit",
-            "value": "1M)r'H`(-6pVqh#w.|8-z1/RaCp!WNci_c8JBP"
+            "description": "enim exercitation mollit ad id",
+            "value": "1le\\$0b,I6<hR8gV}d[gDPj)qsayt}>VqWYJpq$bpvt]&s@1?cFAW8F.h;]j8l.S\\,q9Y8GK!"
         }
     ],
     "new_record": {
-        "$ref": "1wKbv)Cd\\'KS2)Y<;#.!g!1os1q^Z.6VK3CAjdm8a3I7A%9@Rqz%Yc*_V~usCWhnkS;C~~X tr[r+H/"
+        "$ref": "1y,,JgPontKE\\Xs//Tq:[|V:;IAkc_OJ8YfcNG3Rv$m<hV'.WjUgv{pL+a+H(tuRsO\\L;gTdo*n)%Ew4Y}D=7K]"
     },
-    "nonpublic_note": "in sit mollit",
+    "nonpublic_note": "id eiusmod et anim",
     "peer_reviewed": false,
-    "public_note": "est dolore enim",
+    "public_note": "occaec",
     "publisher": [],
     "relation": {
         "curated_relation": false,
-        "issn": "6284-2390",
+        "issn": "1626-689X",
         "record": {
-            "$ref": "1__BOe/:\"Rz06+UR?Y/,zg~M 4i]DVx?*\"* cdEc&oDa1#ypOuxPwiB..=b%XFLgVQ'!#NOCloG]zYfE:3\\^"
+            "$ref": "1Cqks,v"
         },
         "relation": "superseeding record"
     },
     "self": {
-        "$ref": "1SduX oZtXax8LZKSybNn`t|O+*K[';Krmo5C(UPb1Y5ex+hkCuU"
+        "$ref": "1_w^<>%M{}Y<u!p9wY*be2M?GKAG(zp:+6..0o%Hob\\\\O9G)t<IV;D4]RSJN8nc-Ll/GIo,:-!b*\"%=2G#2[K,X% 1vZzR`C"
     },
     "short_titles": [
         {
-            "source": "voluptate ea cillum",
-            "subtitle": "fugiat sit in consequat sint",
-            "title": "amet laborum"
-        },
-        {
-            "source": "consequat aliqua",
-            "subtitle": "et incididunt in consequat exerc",
-            "title": "voluptate sed proident"
-        },
-        {
-            "source": "tempor Duis dolor",
-            "subtitle": "aute",
-            "title": "veniam dolore"
-        },
-        {
-            "source": "eiusmod",
-            "subtitle": "aliquip laborum",
-            "title": "eu"
+            "source": "non aut",
+            "subtitle": "magna deserunt nisi",
+            "title": "nulla proident tempor"
         }
     ],
     "title_variants": [
         {
-            "source": "consequat dolor deserunt est",
-            "subtitle": "commodo c",
-            "title": "nulla cupidatat culpa"
+            "source": "voluptate non anim culpa",
+            "subtitle": "in",
+            "title": "Ut id"
         },
         {
-            "source": "et sunt elit",
-            "subtitle": "sunt magna",
-            "title": "id dolore"
+            "source": "est reprehenderit",
+            "subtitle": "in dolor",
+            "title": "sunt anim"
         }
     ],
     "urls": [
         {
-            "description": "elit nisi ut id",
-            "value": "1[i;*7~\\45\":NpUWJQ<,@eFB9"
-        },
-        {
-            "description": "ut id consectetur velit in",
-            "value": "1>/WKG9_q3*RqI@#%a6;XjWM&k2hd41uQb6hr]2DT2<al;tn"
+            "description": "proident adipisicing",
+            "value": "1b[_S6>!MUr#v`[&6BaC66Ea*>')"
         }
     ]
 }

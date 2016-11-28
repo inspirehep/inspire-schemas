@@ -2,149 +2,166 @@
     "ICN": [],
     "address": [
         {
-            "city": "consectetur dolore ipsum adipisicing amet",
-            "country_code": "MZ",
-            "latitude": 16896542,
-            "longitude": -58267017,
-            "original address": "fugiat magna velit pariatur",
-            "postal_code": "Duis",
-            "state": "est dolor "
-        },
-        {
-            "city": "tempor elit fugiat ad ullamco",
-            "country_code": "SG",
-            "latitude": -21468158,
-            "longitude": 55738864,
-            "original address": "anim non elit veniam",
-            "postal_code": "cillum",
-            "state": "do"
-        },
-        {
-            "city": "ull",
-            "country_code": "CA",
-            "latitude": 9754071,
-            "longitude": -36921159,
-            "original address": "magna culpa labore amet",
-            "postal_code": "occaecat est",
-            "state": "ut deserunt nulla cupidatat"
-        },
-        {
-            "city": "laboris",
-            "country_code": "YU",
-            "latitude": -79386926,
-            "longitude": -18760996,
-            "original address": "id non eiusmod",
-            "postal_code": "irure anim eiusmod dolore",
-            "state": "magna nisi eiusmod dolor"
+            "city": "officia",
+            "country_code": "IL",
+            "latitude": 33247265,
+            "longitude": 41748336,
+            "original address": "aliquip proident culpa in irure",
+            "postal_code": "nisi quis fugiat",
+            "state": "dolor fugiat tempor sint laboris"
         }
     ],
-    "core": false,
+    "core": true,
     "deleted": true,
     "department": [],
-    "department_acronym": "reprehenderit deserunt",
-    "extra_words": [
-        "adipisicing",
-        "Lorem",
-        "enim"
-    ],
-    "field_activity": [
-        "Other"
-    ],
-    "field_categories": [
+    "department_acronym": "laboris consectetur",
+    "external_field_categories": [
         {
             "scheme": "POS",
-            "source": "conference",
-            "term": "Lorem irure"
+            "source": "arxiv",
+            "term": "nisi"
+        },
+        {
+            "scheme": "POS",
+            "source": "INSPIRE",
+            "term": "id in sunt eu nulla"
+        },
+        {
+            "scheme": "POS",
+            "source": "aps",
+            "term": "Duis Lorem mollit in dolor"
+        },
+        {
+            "scheme": "POS",
+            "source": "submitter",
+            "term": "cillum eiusmod fugiat consectetur"
         }
     ],
+    "extra_words": [
+        "dolore ex Excepteur cupidatat"
+    ],
+    "field_activity": [
+        "Research Center"
+    ],
     "hidden_notes": [
-        "nostrud",
-        "qui veniam",
-        "aute elit dolore non",
-        "dolore reprehenderit nostrud"
+        "ad nostrud",
+        "magna",
+        "in mollit exercitation",
+        "eiusmod veniam dolore"
     ],
     "historical_data": [
-        "proident dolore sunt",
-        "consectetur qui fugiat exerci",
-        "culpa Excepteur eiusmod esse non"
+        "nulla do",
+        "sit laboris enim ut quis",
+        "sed ea des",
+        "in consequat Lorem dolore"
+    ],
+    "inspire_field_categories": [
+        {},
+        {
+            "properties": {
+                "term": "Lattice"
+            }
+        },
+        {
+            "properties": {
+                "term": "Computing"
+            }
+        },
+        {
+            "properties": {
+                "term": "Accelerators"
+            }
+        },
+        {
+            "properties": {
+                "term": "Experiment-HEP"
+            }
+        }
     ],
     "institution": [],
-    "institution_acronym": "ut mollit amet ipsum",
+    "institution_acronym": "laborum ad",
     "location": {
-        "latitude": 34347365,
-        "longitude": -68486861
+        "latitude": -15566610,
+        "longitude": -64409032
     },
     "name_variants": [
         {
-            "source": "ADS",
+            "source": "DESY",
             "value": [
-                "nostrud magna quis commodo qui",
-                "sunt non"
+                "dolor veniam fugiat ut",
+                "eiusmod eu sit aliqua",
+                "s"
+            ]
+        },
+        {
+            "source": "DESY",
+            "value": [
+                "eu repr",
+                "sed nostrud fugiat enim",
+                "velit adipisicing enim"
             ]
         }
     ],
     "new_record": {
-        "$ref": "1ahLC8%O&[BI!zvAXf!TRXtc|`>!LD_UM|K<{iuNE%S>eev.V(\\"
+        "$ref": "1o'.ZPo{6&%wTaprgzo#CXA1A@B:2r6'JV(c4\\#qas\\4#I7<Q5P"
     },
     "non_public_notes": [
-        "sit et cillum sint in",
-        "elit aliqua ut sit eu",
-        "in",
-        "commodo exercitation"
+        "voluptate",
+        "tempor in velit nostrud voluptate"
     ],
     "public_notes": [
-        "laboris",
-        "exercitation fugiat enim",
-        "sit incididunt sint",
-        "dolor cupidatat",
-        "id voluptate dolor est"
+        "eu anim"
     ],
     "related_institutes": [
         {
             "curated_relation": true,
-            "name": "mollit nisi sint exercitation",
+            "name": "cupidatat consectetur deserunt",
             "record": {
-                "$ref": "135>I/@4vzPbS;nIq\"u*R?R5jhS_<5S+8vSZ|FYQO9/Z{jQ5NJv6[<Ni?_a*Sz22h#|/"
+                "$ref": "1+\\llhg]Bjqg@Q^Ni])V9JOVX!{G"
             },
-            "relation_type": "other"
+            "relation_type": "successor"
+        },
+        {
+            "curated_relation": false,
+            "name": "magna aliqua dolor",
+            "record": {
+                "$ref": "1(J(bu'CEYMp,BZRjHu/AWkQVdUg6c5XwXw>'YA--D|5NKMPJ6X"
+            },
+            "relation_type": "predecessor"
         },
         {
             "curated_relation": true,
-            "name": "consequat sit ad",
+            "name": "eu",
             "record": {
-                "$ref": "1/UrT-\\wwY<o}Z/]@a?4FA0%y@c{ \\EeV~hAb#\\@9?gwj-\\bU!.}hfrdGQt@'/:[b}#PF\\;_&/8i3"
-            },
-            "relation_type": "parent"
-        },
-        {
-            "curated_relation": false,
-            "name": "laboris ad",
-            "record": {
-                "$ref": "1/DvY\\r'#8P<~1S Du\"U~hV"
-            },
-            "relation_type": "parent"
-        },
-        {
-            "curated_relation": false,
-            "name": "nisi eu laborum",
-            "record": {
-                "$ref": "1AjM1r[+YEn6G&u7ldy!(!E5vw^px[W?>j^\"I\"$c}M3c3b(e_'r?|rQj(s!H!FR0^W+-9T#N#7RGUsDq*aMK28Np[WD=STw/ZhT"
+                "$ref": "1"
             },
             "relation_type": "parent"
         }
     ],
     "self": {
-        "$ref": "1GP1'.k/Uu\\P]$Yd6%[3DD+nxeG_>/I]8?E@?507rK{X66e+|"
+        "$ref": "1J)"
     },
-    "time_zone": "must",
+    "time_zone": "be",
     "urls": [
         {
-            "description": "sed",
-            "value": "1qq;HI;F%_rN?t^p\\cJI/EILy;J(Jn1y#}|7mlVxX4r`X4Rgzz!61d;|6 T3r-xs`IJj!6dncp, \\+F"
+            "description": "deserunt laborum dolor dolore",
+            "value": "1Q8&s4|&]qY:X$8"
         },
         {
-            "description": "veniam deserunt reprehenderi",
-            "value": "1CG@0`bn5+L0()Fl{n1m[bjGSFIr)FWb.Oq<"
+            "description": "laborum",
+            "value": "18M?JG@wLWS`TX5-iRvwx0o^"
+        },
+        {
+            "description": "proident magna velit commodo est",
+            "value": "1zvANftw%x\\gP6$8u&~!w-/^sLW-et3)c'F{^K[p?JAsgL3w=QRn_Q"
+        },
+        {
+            "description": "aliquip",
+            "value": "1o;gS6Po>f%8$N]^7'S$vGl>5nm.PH8yd8.P`<G#~9Vj<iWc#l| %(|)3Jm!\"]j&k[f^Us3Z!qcv$$?f_c+>H]:#di"
+        },
+        {
+            "description": "cupidatat",
+            "value": "1M7XTGn[Pk-FCU&!/rqDH}No<\"K8Q#~vj=gSd)y]~CQe[V8a1_s:GpvG4N=q<J*UC2~JN#}#[1J,Mza7)X\"_xYj@A"
         }
     ]
 }

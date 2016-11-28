@@ -5,40 +5,6 @@
             "properties": {
                 "scheme": {
                     "enum": [
-                        "INSPIRE"
-                    ],
-                    "type": "string"
-                },
-                "source": {
-                    "$ref": "#/definitions/sources"
-                },
-                "term": {
-                    "enum": [
-                        "Accelerators",
-                        "Astrophysics",
-                        "Computing",
-                        "Data Analysis and Statistics",
-                        "Experiment-HEP",
-                        "Experiment-Nucl",
-                        "General Physics",
-                        "Gravitation and Cosmology",
-                        "Instrumentation",
-                        "Lattice",
-                        "Math and Math Physics",
-                        "Other",
-                        "Phenomenology-HEP",
-                        "Theory-HEP",
-                        "Theory-Nucl"
-                    ],
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        {
-            "properties": {
-                "scheme": {
-                    "enum": [
                         "ARXIV"
                     ],
                     "type": "string"

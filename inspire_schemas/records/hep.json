@@ -373,6 +373,13 @@
             },
             "type": "array"
         },
+        "external_field_categories": {
+            "items": {
+                "$ref": "elements/external_field.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "external_system_numbers": {
             "items": {
                 "properties": {
@@ -393,13 +400,6 @@
                 "type": "object"
             },
             "title": "External system numbers",
-            "type": "array",
-            "uniqueItems": true
-        },
-        "field_categories": {
-            "items": {
-                "$ref": "elements/field.json"
-            },
             "type": "array",
             "uniqueItems": true
         },
@@ -459,6 +459,13 @@
                     }
                 },
                 "type": "object"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
+        "inspire_field_categories": {
+            "items": {
+                "$ref": "elements/inspire_field.json"
             },
             "type": "array",
             "uniqueItems": true
