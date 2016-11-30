@@ -3,6 +3,9 @@
     "properties": {
         "ICN": {
             "description": "HEP affiliation following new standards",
+            "items": {
+                "type": "string"
+            },
             "title": "New INSPIRE control number",
             "type": "array"
         },
@@ -23,6 +26,9 @@
         },
         "department": {
             "description": "Subordinate unit in native language",
+            "items": {
+                "type": "string"
+            },
             "title": "Department",
             "type": "array"
         },
@@ -76,6 +82,9 @@
         },
         "institution": {
             "description": "Corporate name in native language",
+            "items": {
+                "type": "string"
+            },
             "title": "Institution name",
             "type": "array"
         },

@@ -79,6 +79,9 @@
             "type": "boolean"
         },
         "description": {
+            "items": {
+                "type": "string"
+            },
             "title": "Description",
             "type": "array"
         },
