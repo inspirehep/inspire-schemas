@@ -5,7 +5,7 @@
             "properties": {
                 "scheme": {
                     "enum": [
-                        "ARXIV"
+                        "arxiv"
                     ],
                     "type": "string"
                 },
@@ -22,7 +22,7 @@
             "properties": {
                 "scheme": {
                     "enum": [
-                        "APS"
+                        "aps"
                     ],
                     "type": "string"
                 },
@@ -39,7 +39,7 @@
             "properties": {
                 "scheme": {
                     "enum": [
-                        "POS"
+                        "pos"
                     ],
                     "type": "string"
                 },
@@ -56,7 +56,7 @@
     "definitions": {
         "sources": {
             "enum": [
-                "INSPIRE",
+                "inspire",
                 "submitter",
                 "conference",
                 "curator",
