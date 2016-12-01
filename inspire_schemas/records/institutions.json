@@ -37,6 +37,13 @@
             "title": "Department acronym",
             "type": "string"
         },
+        "external_field_categories": {
+            "items": {
+                "$ref": "elements/external_field.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "extra_words": {
             "items": {
                 "type": "string"
@@ -58,13 +65,6 @@
             "title": "Field of activity",
             "type": "array"
         },
-        "field_categories": {
-            "items": {
-                "$ref": "elements/field.json"
-            },
-            "type": "array",
-            "uniqueItems": true
-        },
         "hidden_notes": {
             "items": {
                 "title": "Hidden note",
@@ -79,6 +79,13 @@
                 "type": "string"
             },
             "type": "array"
+        },
+        "inspire_field_categories": {
+            "items": {
+                "$ref": "elements/inspire_field.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "institution": {
             "description": "Corporate name in native language",

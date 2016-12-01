@@ -2,149 +2,137 @@
     "ICN": [],
     "address": [
         {
-            "city": "consectetur dolore ipsum adipisicing amet",
-            "country_code": "MZ",
-            "latitude": 16896542,
-            "longitude": -58267017,
-            "original address": "fugiat magna velit pariatur",
-            "postal_code": "Duis",
-            "state": "est dolor "
-        },
-        {
-            "city": "tempor elit fugiat ad ullamco",
-            "country_code": "SG",
-            "latitude": -21468158,
-            "longitude": 55738864,
-            "original address": "anim non elit veniam",
-            "postal_code": "cillum",
-            "state": "do"
-        },
-        {
-            "city": "ull",
-            "country_code": "CA",
-            "latitude": 9754071,
-            "longitude": -36921159,
-            "original address": "magna culpa labore amet",
-            "postal_code": "occaecat est",
-            "state": "ut deserunt nulla cupidatat"
-        },
-        {
-            "city": "laboris",
-            "country_code": "YU",
-            "latitude": -79386926,
-            "longitude": -18760996,
-            "original address": "id non eiusmod",
-            "postal_code": "irure anim eiusmod dolore",
-            "state": "magna nisi eiusmod dolor"
+            "city": "ut do occaecat ut",
+            "country_code": "MS",
+            "latitude": -89575206,
+            "longitude": 21942379,
+            "original address": "consequat amet non reprehenderit in",
+            "postal_code": "eiusmod enim tempor ex",
+            "state": "labore Excepteur ut aliqua"
         }
     ],
     "core": false,
     "deleted": true,
     "department": [],
-    "department_acronym": "reprehenderit deserunt",
+    "department_acronym": "commodo culpa anim Lorem ex",
+    "external_field_categories": [
+        {
+            "scheme": "arxiv",
+            "source": "pos",
+            "term": "math.CT"
+        },
+        {
+            "scheme": "arxiv",
+            "source": "magpie",
+            "term": "physics.ao-ph"
+        }
+    ],
     "extra_words": [
-        "adipisicing",
+        "cupid",
+        "mollit Lorem",
+        "cupidatat nisi",
         "Lorem",
-        "enim"
+        "culpa"
     ],
     "field_activity": [
         "Other"
     ],
-    "field_categories": [
-        {
-            "scheme": "POS",
-            "source": "conference",
-            "term": "Lorem irure"
-        }
-    ],
     "hidden_notes": [
-        "nostrud",
-        "qui veniam",
-        "aute elit dolore non",
-        "dolore reprehenderit nostrud"
+        "ex enim occaecat incididunt ullamco",
+        "minim Lorem sunt",
+        "magna"
     ],
     "historical_data": [
-        "proident dolore sunt",
-        "consectetur qui fugiat exerci",
-        "culpa Excepteur eiusmod esse non"
+        "esse laboris amet",
+        "est Ut aute dolore"
+    ],
+    "inspire_field_categories": [
+        {},
+        {
+            "properties": {
+                "term": "Theory-HEP"
+            }
+        }
     ],
     "institution": [],
-    "institution_acronym": "ut mollit amet ipsum",
+    "institution_acronym": "anim sit comm",
     "location": {
-        "latitude": 34347365,
-        "longitude": -68486861
+        "latitude": 41581194,
+        "longitude": -70172397
     },
     "name_variants": [
         {
             "source": "ADS",
             "value": [
-                "nostrud magna quis commodo qui",
-                "sunt non"
+                "eiusmod",
+                "et consectetur",
+                "laborum enim",
+                "enim i"
+            ]
+        },
+        {
+            "source": "DESY",
+            "value": [
+                "sunt tempor incididunt",
+                "Excepteur in cillum",
+                "non culpa veniam est id",
+                ""
+            ]
+        },
+        {
+            "source": "ADS",
+            "value": [
+                "nulla ad aute"
+            ]
+        },
+        {
+            "source": "INSPIRE",
+            "value": [
+                "officia in ea Duis incididunt",
+                "consectetur nulla",
+                "Lorem"
             ]
         }
     ],
     "new_record": {
-        "$ref": "1ahLC8%O&[BI!zvAXf!TRXtc|`>!LD_UM|K<{iuNE%S>eev.V(\\"
+        "$ref": "1>v{D/Qk1~h(@3wBP.CCXs \\&RTC*F+X:9%n}MzGmRU"
     },
     "non_public_notes": [
-        "sit et cillum sint in",
-        "elit aliqua ut sit eu",
-        "in",
-        "commodo exercitation"
+        "officia non ut Excepteur"
     ],
     "public_notes": [
-        "laboris",
-        "exercitation fugiat enim",
-        "sit incididunt sint",
-        "dolor cupidatat",
-        "id voluptate dolor est"
+        "veniam pariatur"
     ],
     "related_institutes": [
         {
             "curated_relation": true,
-            "name": "mollit nisi sint exercitation",
+            "name": "ullamco veniam eiusmod Duis",
             "record": {
-                "$ref": "135>I/@4vzPbS;nIq\"u*R?R5jhS_<5S+8vSZ|FYQO9/Z{jQ5NJv6[<Ni?_a*Sz22h#|/"
+                "$ref": "1MK5/&-(G)Zc>e1K$`7f?4Sb)4]n#@eo0IyqSWW^>xRgkC`C$S"
             },
-            "relation_type": "other"
+            "relation_type": "successor"
         },
         {
             "curated_relation": true,
-            "name": "consequat sit ad",
+            "name": "non",
             "record": {
-                "$ref": "1/UrT-\\wwY<o}Z/]@a?4FA0%y@c{ \\EeV~hAb#\\@9?gwj-\\bU!.}hfrdGQt@'/:[b}#PF\\;_&/8i3"
+                "$ref": "1VjD  1Ep$N/2{!B2lF/5w[is(cO6shpCGXADuFuA/%-]3muL^3u!FU?k8ADIt;1umdr5,fQt+k#$d4',"
             },
-            "relation_type": "parent"
-        },
-        {
-            "curated_relation": false,
-            "name": "laboris ad",
-            "record": {
-                "$ref": "1/DvY\\r'#8P<~1S Du\"U~hV"
-            },
-            "relation_type": "parent"
-        },
-        {
-            "curated_relation": false,
-            "name": "nisi eu laborum",
-            "record": {
-                "$ref": "1AjM1r[+YEn6G&u7ldy!(!E5vw^px[W?>j^\"I\"$c}M3c3b(e_'r?|rQj(s!H!FR0^W+-9T#N#7RGUsDq*aMK28Np[WD=STw/ZhT"
-            },
-            "relation_type": "parent"
+            "relation_type": "successor"
         }
     ],
     "self": {
-        "$ref": "1GP1'.k/Uu\\P]$Yd6%[3DD+nxeG_>/I]8?E@?507rK{X66e+|"
+        "$ref": "1:"
     },
-    "time_zone": "must",
+    "time_zone": "there",
     "urls": [
         {
-            "description": "sed",
-            "value": "1qq;HI;F%_rN?t^p\\cJI/EILy;J(Jn1y#}|7mlVxX4r`X4Rgzz!61d;|6 T3r-xs`IJj!6dncp, \\+F"
+            "description": "ad",
+            "value": "1MTP:Ag7x1R~vE8]$~c;90s.R,I@gzHt7y4xKckuZzwpBa!FiwlcXjK?*3PI"
         },
         {
-            "description": "veniam deserunt reprehenderi",
-            "value": "1CG@0`bn5+L0()Fl{n1m[bjGSFIr)FWb.Oq<"
+            "description": "exercitation est ut",
+            "value": "1S*%7y-w&b,,y#BDYDZO{.zp@GPAIB2nkCgKH^j SZ*({"
         }
     ]
 }
