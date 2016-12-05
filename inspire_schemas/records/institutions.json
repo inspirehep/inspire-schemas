@@ -37,13 +37,6 @@
             "title": "Department acronym",
             "type": "string"
         },
-        "external_field_categories": {
-            "items": {
-                "$ref": "elements/external_field.json"
-            },
-            "type": "array",
-            "uniqueItems": true
-        },
         "extra_words": {
             "items": {
                 "type": "string"
@@ -80,9 +73,13 @@
             },
             "type": "array"
         },
-        "inspire_field_categories": {
+        "inspire_categories": {
             "items": {
-                "$ref": "elements/inspire_field.json"
+                "oneOf": [
+                    {
+                        "$ref": "elements/inspire_field.json"
+                    }
+                ]
             },
             "type": "array",
             "uniqueItems": true
