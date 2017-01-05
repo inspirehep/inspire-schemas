@@ -30,6 +30,16 @@ User's Guide
 This part of the documentation will show you how to get started in using
 inspire-schemas.
 
+**NOTE**: is highly encouraged to pin the version of inspire-schemas that you
+use to the major number, for example using the `~=` version matcher in your
+`requires.txt` or your `setup.py` like::
+
+    inspire-schemas~=1.1.0
+
+That will prevent any major update (compatibility breaking) to be pulled
+automatically, and will only download minor and feature updates (1.X.Y).
+
+
 .. toctree::
    :maxdepth: 2
 
