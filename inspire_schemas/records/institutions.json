@@ -73,6 +73,33 @@
             },
             "type": "array"
         },
+        "ids": {
+            "items": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "HAL"
+                                ],
+                                "type": "string"
+                            },
+                            "value": {
+                                "pattern": "\\d+",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ],
+                "required": [
+                    "type",
+                    "value"
+                ]
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "inspire_categories": {
             "items": {
                 "oneOf": [

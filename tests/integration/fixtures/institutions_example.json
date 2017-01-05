@@ -1,151 +1,215 @@
 {
     "ICN": [
-        "ipsum"
+        "minim quis nisi mollit ",
+        "laboris",
+        "nostrud sunt"
     ],
     "address": [
         {
-            "city": "deserunt do consequat ut pariatur",
-            "country_code": "MG",
-            "latitude": 89167810,
-            "longitude": -71774958,
-            "original address": "incididunt ex",
-            "postal_code": "est",
-            "state": "Excepteur"
-        },
-        {
-            "city": "cillum Ut occaecat dolor",
-            "country_code": "TD",
-            "latitude": -87337428,
-            "longitude": 93909909,
-            "original address": "sunt eiusmod laborum nulla cupidatat",
-            "postal_code": "laboris dolor",
-            "state": "occaecat do"
-        },
-        {
-            "city": "enim dolor dolore",
-            "country_code": "FO",
-            "latitude": -9088052,
-            "longitude": 82972327,
-            "original address": "est",
-            "postal_code": "sint velit deserunt qui",
-            "state": "ad"
+            "city": "laboris anim",
+            "country_code": "LY",
+            "latitude": -95187570,
+            "longitude": 73764892,
+            "original address": "in cillum ut Excepteur",
+            "postal_code": "Ut elit cupidatat id",
+            "state": "in ut"
         }
     ],
-    "core": true,
-    "deleted": false,
+    "core": false,
+    "deleted": true,
     "department": [
-        "deserunt",
-        "minim"
+        "laboris aliqua",
+        "dolore reprehenderit magna non ",
+        "mollit s",
+        "ut magna et",
+        "sunt ut nostrud Excepteur"
     ],
-    "department_acronym": "laboris tempor irure",
+    "department_acronym": "ut qui",
     "extra_words": [
-        "irure est officia id labore"
+        "aliquip pariatur",
+        "esse Ut",
+        "minim ut tempor dolore",
+        "sint"
     ],
     "field_activity": [
+        "Company",
         "Research Center",
-        "Research Center",
-        "Research Center",
-        "Research Center",
-        "Research Center"
+        "Other"
     ],
     "hidden_notes": [
-        "irure labore minim in"
+        "exercitation est officia"
     ],
     "historical_data": [
-        "aute amet ea"
+        "sit laborum ullamco",
+        "in",
+        "Duis",
+        "deserunt quis tempor occaecat"
+    ],
+    "ids": [
+        {
+            "aliqua19": -12031360,
+            "quis0": "Excepteur aliquip commodo",
+            "type": "HAL",
+            "value": "27"
+        },
+        {
+            "non0": -69073838,
+            "tempore": 11306059,
+            "type": "HAL",
+            "value": "636353536"
+        },
+        {
+            "occaecat1c7": false,
+            "quis67": "si",
+            "type": "HAL",
+            "value": "58887"
+        },
+        {
+            "do4": true,
+            "quisd": "eiusmod o",
+            "type": "HAL",
+            "value": "55003325160"
+        },
+        {
+            "dof": 92165356,
+            "sit357": 71525870,
+            "type": "HAL",
+            "value": "131466892"
+        }
     ],
     "inspire_categories": [
         {
-            "source": "undefined",
-            "term": "Lattice"
+            "source": "arxiv",
+            "term": "Instrumentation"
         },
         {
             "source": "curator",
-            "term": "Experiment-Nucl"
-        },
-        {
-            "source": "arxiv",
             "term": "Phenomenology-HEP"
-        },
-        {
-            "source": "magpie",
-            "term": "Theory-HEP"
         }
     ],
     "institution": [
-        "proident ipsum dolor"
+        "minim laboris commodo aliqua dolor",
+        "dolore sed Excepteur veniam",
+        "eiusmod",
+        "tempor dolor voluptate ex quis",
+        "ut"
     ],
-    "institution_acronym": "aliquip anim u",
+    "institution_acronym": "anim consequat",
     "location": {
-        "latitude": 65818626,
-        "longitude": -52929568
+        "latitude": 13408867,
+        "longitude": 21460710
     },
     "name_variants": [
         {
             "source": "INSPIRE",
             "value": [
-                "proident incididunt elit"
+                "nisi labore Excepteur",
+                "cupidatat velit nulla laborum",
+                "cupidatat"
             ]
         },
         {
             "source": "ADS",
             "value": [
-                "in consequat Ut E",
-                "qui",
-                "cillum qui sint in",
-                "in commodo pariatur velit",
-                "velit proident qui"
+                "Ut culpa enim"
+            ]
+        },
+        {
+            "source": "ADS",
+            "value": [
+                "nisi consequat irure amet pariatur",
+                "dolore in et",
+                "ex ipsum sint ut",
+                "eu"
+            ]
+        },
+        {
+            "source": "DESY",
+            "value": [
+                "culpa pariatur laborum qui",
+                "dolore elit in"
+            ]
+        },
+        {
+            "source": "INSPIRE",
+            "value": [
+                "nisi dolor pariatur nulla laboru",
+                "est anim"
             ]
         }
     ],
     "new_record": {
-        "$ref": "1L&=$;~>?vT{1vKV+~hh6Esh|-w2nU,MQ\\rsObV$VC}^SBjPzST3_QK3W?'Aegw9!u>kB>}9OiT[%$"
+        "$ref": "1fj"
     },
     "non_public_notes": [
-        "id reprehenderit ipsum",
-        "qui proident sint"
+        "ullamco reprehenderit Duis",
+        "mollit ad",
+        "id amet"
     ],
     "public_notes": [
-        "exercitation",
-        "velit eiu",
-        "id",
-        "ex in laboris",
-        "laboris nisi officia in"
+        "irure esse aute ipsum cillum",
+        "ex nisi ad ut",
+        "sed sint esse laborum",
+        "dolore eiusmod culpa"
     ],
     "related_institutes": [
         {
             "curated_relation": true,
-            "name": "ipsum enim",
+            "name": "esse",
             "record": {
-                "$ref": "1fvq%y{NmM\\|X|,U(6 !M7}frnv1&gP/~esN+1aBQQN8)UK)gG=VwU&q-eWi!N@R2=L!"
+                "$ref": "1h8yz"
             },
             "relation_type": "parent"
+        },
+        {
+            "curated_relation": true,
+            "name": "dolore",
+            "record": {
+                "$ref": "1{i@^3se0"
+            },
+            "relation_type": "predecessor"
+        },
+        {
+            "curated_relation": false,
+            "name": "veniam minim",
+            "record": {
+                "$ref": "1+dT~)"
+            },
+            "relation_type": "superseded"
+        },
+        {
+            "curated_relation": false,
+            "name": "anim enim qui nostrud",
+            "record": {
+                "$ref": "1rr,zEuH8"
+            },
+            "relation_type": "other"
+        },
+        {
+            "curated_relation": false,
+            "name": "mollit Lorem v",
+            "record": {
+                "$ref": "13]yT.\\mKa"
+            },
+            "relation_type": "superseded"
         }
     ],
     "self": {
-        "$ref": "1%`F.$F0`YJXi+k3Cw]Y"
+        "$ref": "1E<e"
     },
     "time_zone": "be",
     "urls": [
         {
-            "description": "Excepteur",
-            "value": "1\\aO,BxUU1w5@@hzm.}h?0fhy7liJ#cgj3sT[1MyY]TRJ554:x19S"
+            "description": "anim aliquip mollit id nostrud",
+            "value": "182["
         },
         {
-            "description": "aliquip",
-            "value": "1{R,PwWqK0vH&jb;&A5!m*v4QI?=a6EASTA4~wcgHrcC)5tPBr1i'|M;QE`dNO(Li!mmJ:h+yMvD;v4qnPh"
+            "description": "quis minim esse consectetur",
+            "value": "1CTSi"
         },
         {
-            "description": "eiusmod",
-            "value": "1QuR[4b^X5#35xObbU9[p(e=H18^R</TC $Bex}1CHsN[3B_)s28Fx;"
-        },
-        {
-            "description": "deserunt dolor nostr",
-            "value": "1q!NB"
-        },
-        {
-            "description": "tempor consequat voluptate",
-            "value": "12D<)laF`TR-%z{oK`jw}"
+            "description": "deserunt sit Excepteur nostrud velit",
+            "value": "1\"'-;&DM"
         }
     ]
 }
