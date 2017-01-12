@@ -23,6 +23,7 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
+from jsonref import JsonRef
 from jsonschema import validate as jsonschema_validate
 
 from .errors import SchemaKeyNotFound
@@ -56,4 +57,21 @@ def validate(data, schema_name=None):
         instance=data,
         schema=schema,
         resolver=LocalRefResolver.from_schema(schema),
+    )
+
+
+def resolve(schema_name):
+    """Resolve all $ref in the given schema.
+
+    :param schema_name: String with the name of the schema to validate, for
+        example, 'authors' or 'jobs'. If `None` passed it will expect for the
+        data to have the schema specified in the `$ref` key.
+    :type schema_name: str
+    :return: resolved schema
+    :return type: dict
+    """
+    schema = load_schema(schema_name=schema_name)
+    return JsonRef.replace_refs(
+        schema,
+        loader=LocalRefResolver.from_schema(schema).resolve_remote
     )
