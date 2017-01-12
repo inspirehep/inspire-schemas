@@ -1,33 +1,36 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "source": {
-        "enum": [
-            "curator",
-            "magpie",
-            "arxiv",
-            "user",
-            "undefined"
-        ],
-        "type": "string"
+    "properties": {
+        "source": {
+            "enum": [
+                "curator",
+                "magpie",
+                "arxiv",
+                "user",
+                "undefined"
+            ],
+            "type": "string"
+        },
+        "term": {
+            "enum": [
+                "Accelerators",
+                "Astrophysics",
+                "Computing",
+                "Data Analysis and Statistics",
+                "Experiment-HEP",
+                "Experiment-Nucl",
+                "General Physics",
+                "Gravitation and Cosmology",
+                "Instrumentation",
+                "Lattice",
+                "Math and Math Physics",
+                "Other",
+                "Phenomenology-HEP",
+                "Theory-HEP",
+                "Theory-Nucl"
+            ],
+            "type": "string"
+        }
     },
-    "term": {
-        "enum": [
-            "Accelerators",
-            "Astrophysics",
-            "Computing",
-            "Data Analysis and Statistics",
-            "Experiment-HEP",
-            "Experiment-Nucl",
-            "General Physics",
-            "Gravitation and Cosmology",
-            "Instrumentation",
-            "Lattice",
-            "Math and Math Physics",
-            "Other",
-            "Phenomenology-HEP",
-            "Theory-HEP",
-            "Theory-Nucl"
-        ],
-        "type": "string"
-    }
+    "type": "object"
 }
