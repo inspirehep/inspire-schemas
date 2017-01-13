@@ -1,12 +1,18 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "properties": {
+        "_private_note": {
+            "type": "string"
+        },
         "acquisition_source": {
             "$ref": "elements/acquisition_source.json"
         },
         "advisors": {
             "items": {
                 "properties": {
+                    "_degree_type": {
+                        "type": "string"
+                    },
                     "curated_relation": {
                         "type": "boolean"
                     },
@@ -39,6 +45,19 @@
             "description": "Stores birth date",
             "format": "date",
             "type": "string"
+        },
+        "collections": {
+            "items": {
+                "properties": {
+                    "primary": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
         },
         "conferences": {
             "description": "Contains information about attended conferences. (their record URIs)",
@@ -175,6 +194,9 @@
         "positions": {
             "items": {
                 "properties": {
+                    "_rank": {
+                        "type": "string"
+                    },
                     "current": {
                         "type": "boolean"
                     },
