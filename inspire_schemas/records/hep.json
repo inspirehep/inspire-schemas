@@ -52,6 +52,7 @@
             "$ref": "elements/acquisition_source.json"
         },
         "arxiv_eprints": {
+            "description": "Read only meta-data (identifiers and categories) coming from arXiv",
             "items": {
                 "properties": {
                     "categories": {
@@ -61,10 +62,14 @@
                         "type": "array"
                     },
                     "value": {
-                        "pattern": "\\d{4}.\\d{4,5}|\\w+-\\w+/\\d+|\\w+/\\d+",
+                        "description": "arXiv eprint number, e.g. math.DG/0307245 or 1701.01431",
+                        "pattern": "\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+",
                         "type": "string"
                     }
                 },
+                "required": [
+                    "value"
+                ],
                 "type": "object"
             },
             "type": "array",
