@@ -71,25 +71,22 @@
             "uniqueItems": true
         },
         "authors": {
-            "description": "List with all the authors",
+            "description": "Anybody who has acted on a given document (including supervisors, editors, etc.)",
             "items": {
                 "properties": {
                     "affiliations": {
                         "items": {
                             "properties": {
                                 "curated_relation": {
-                                    "description": "Did a cataloguer proof-checked the recid?",
-                                    "title": "The affiliation is curated?",
+                                    "description": "Does this affiliation point to the correct Institution?",
                                     "type": "boolean"
                                 },
                                 "record": {
                                     "$ref": "elements/json_reference.json",
-                                    "description": "URI for the Institution collection record",
-                                    "title": "URI for the Institution collection record"
+                                    "description": "URI for the Institution collection record"
                                 },
                                 "value": {
-                                    "description": "The affiliation as it appears on the paper",
-                                    "title": "Name of institution",
+                                    "description": "The normalized affiliation, i.e. the institution identifier.",
                                     "type": "string"
                                 }
                             },
@@ -102,47 +99,37 @@
                     },
                     "alternative_names": {
                         "items": {
+                            "description": "E.g. '\u697c \u7acb\u6d0b', or 'Smith, Joe John'",
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "contributor_roles": {
+                    "credit_roles": {
                         "items": {
-                            "properties": {
-                                "schema": {
-                                    "enum": [
-                                        "CRediT"
-                                    ],
-                                    "type": "string"
-                                },
-                                "value": {
-                                    "enum": [
-                                        "Conceptualization",
-                                        "Data curation",
-                                        "Formal analysis",
-                                        "Funding acquisition",
-                                        "Investigation",
-                                        "Methodology",
-                                        "Project administration",
-                                        "Resources",
-                                        "Software",
-                                        "Supervision",
-                                        "Validation",
-                                        "Visualization",
-                                        "Writing - original draft",
-                                        "Writing - review & editing"
-                                    ],
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
+                            "description": "CRediT http://dictionary.casrai.org/Contributor_Roles role for authors",
+                            "enum": [
+                                "Conceptualization",
+                                "Data curation",
+                                "Formal analysis",
+                                "Funding acquisition",
+                                "Investigation",
+                                "Methodology",
+                                "Project administration",
+                                "Resources",
+                                "Software",
+                                "Supervision",
+                                "Validation",
+                                "Visualization",
+                                "Writing - original draft",
+                                "Writing - review & editing"
+                            ],
+                            "type": "string"
                         },
-                        "type": "array",
-                        "uniqueItems": true
+                        "type": "array"
                     },
                     "curated_relation": {
                         "default": false,
-                        "description": "Was this signature actually claimed or proof-checked by cataloguer?",
+                        "description": "Does this signature point to the correct author profile?",
                         "title": "The relation is curated?",
                         "type": "boolean"
                     },
@@ -154,7 +141,7 @@
                         "type": "array"
                     },
                     "full_name": {
-                        "description": "author name as it appears in the paper",
+                        "description": "'family names, first names' of the author (as they appear on the paper)",
                         "title": "Author name",
                         "type": "string"
                     },
@@ -165,18 +152,51 @@
                         "type": "array",
                         "uniqueItems": true
                     },
+                    "inspire_roles": {
+                        "items": {
+                            "default": "author",
+                            "enum": [
+                                "author",
+                                "supervisor",
+                                "editor"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "raw_affiliations": {
+                        "items": {
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "description": "The affiliation as it appears on the paper",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "value"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "record": {
                         "$ref": "elements/json_reference.json",
                         "description": "URI for the person record",
                         "title": "URI for the person record"
                     },
                     "uuid": {
-                        "description": "Universally unique identifier of the author.",
+                        "description": "Signature identifier. (read-only)",
                         "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
                         "title": "UUID",
                         "type": "string"
                     }
                 },
+                "required": [
+                    "full_name"
+                ],
                 "title": "Author",
                 "type": "object"
             },
