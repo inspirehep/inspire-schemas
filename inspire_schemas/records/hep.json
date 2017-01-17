@@ -548,13 +548,9 @@
             "description": "Master record that replaces this record",
             "title": "New record"
         },
-        "page_nr": {
-            "items": {
-                "description": "FIXME: shall it be integer perhaps?",
-                "title": "Number of pages",
-                "type": "string"
-            },
-            "type": "array"
+        "number_of_pages": {
+            "minimum": 1,
+            "type": "integer"
         },
         "persistent_identifiers": {
             "items": {
