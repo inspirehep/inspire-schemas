@@ -229,7 +229,7 @@
             "type": "array",
             "uniqueItems": true
         },
-        "collaboration": {
+        "collaborations": {
             "items": {
                 "properties": {
                     "record": {
