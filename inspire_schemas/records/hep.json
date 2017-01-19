@@ -230,30 +230,6 @@
             "title": "Citeable?",
             "type": "boolean"
         },
-        "classification_number": {
-            "items": {
-                "properties": {
-                    "source": {
-                        "title": "Source",
-                        "type": "string"
-                    },
-                    "standard": {
-                        "title": "Standard",
-                        "type": "string"
-                    },
-                    "value": {
-                        "description": "PACS or PDG codes. FIXME: What about better separating these into a PACS field and a PDG field?",
-                        "title": "Number",
-                        "type": "string"
-                    }
-                },
-                "title": "Classification number",
-                "type": "object"
-            },
-            "title": "Classification numbers",
-            "type": "array",
-            "uniqueItems": true
-        },
         "collaborations": {
             "items": {
                 "properties": {
@@ -515,13 +491,19 @@
         "keywords": {
             "items": {
                 "properties": {
-                    "classification_scheme": {
-                        "type": "string"
-                    },
-                    "keyword": {
+                    "schema": {
+                        "description": "The particular vocabulary against which this keyword is valid and found. Leave empty for free form keywords",
+                        "enum": [
+                            "INSPIRE",
+                            "PACS",
+                            "PDG"
+                        ],
                         "type": "string"
                     },
                     "source": {
+                        "type": "string"
+                    },
+                    "value": {
                         "type": "string"
                     }
                 },
