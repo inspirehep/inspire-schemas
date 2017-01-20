@@ -759,7 +759,7 @@
             },
             "type": "object"
         },
-        "thesis": {
+        "thesis_info": {
             "properties": {
                 "date": {
                     "format": "date",
@@ -770,18 +770,7 @@
                     "type": "string"
                 },
                 "degree_type": {
-                    "enum": [
-                        "Other",
-                        "Internship Report",
-                        "Diploma",
-                        "Bachelor",
-                        "Laurea",
-                        "Master",
-                        "Thesis",
-                        "PhD",
-                        "Habilitation"
-                    ],
-                    "type": "string"
+                    "$ref": "elements/degree_type.json"
                 },
                 "institutions": {
                     "items": {

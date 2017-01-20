@@ -17,13 +17,7 @@
                         "type": "boolean"
                     },
                     "degree_type": {
-                        "enum": [
-                            "PhD",
-                            "Master",
-                            "Bachelor",
-                            "Other"
-                        ],
-                        "type": "string"
+                        "$ref": "elements/json_reference.json"
                     },
                     "name": {
                         "type": "string"
