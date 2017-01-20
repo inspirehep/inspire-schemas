@@ -654,6 +654,7 @@
                         "type": "string"
                     },
                     "parent_isbn": {
+                        "format": "isbn",
                         "type": "string"
                     },
                     "parent_record": {
@@ -745,6 +746,7 @@
             "description": "Reference to previously merged records.",
             "properties": {
                 "isbn": {
+                    "format": "isbn",
                     "type": "string"
                 },
                 "record": {
