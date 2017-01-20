@@ -17,7 +17,7 @@
                         "type": "boolean"
                     },
                     "degree_type": {
-                        "$ref": "elements/json_reference.json"
+                        "$ref": "elements/degree_type.json"
                     },
                     "name": {
                         "type": "string"

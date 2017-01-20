@@ -203,31 +203,31 @@
     "copyright": [
         {
             "holder": "aute in adipisicing",
-            "material": "id fugiat",
+            "material": "addendum",
             "statement": "elit",
             "url": "1C|sF0J4$:TG'Kx0f`h'#k!l#`Q;c+rTc~bEM(eFHaB0\"jk-,}e!5X1jSH|{C^:/y9nm"
         },
         {
             "holder": "adipisicing qui sint",
-            "material": "dolor",
+            "material": "erratum",
             "statement": "exercitation",
             "url": "1%V?E_Qew2Wye<No7*kV#qiNgc="
         },
         {
             "holder": "do velit",
-            "material": "labore enim sunt",
+            "material": "preprint",
             "statement": "irure do",
             "url": "1'm 3^sqD;` pJ}@sp0*7{P]WPf'!H*qbY_fw4Q!Y$1imut3J[~AVI2Dx3eZvZ\"\"WTR@\"0NGq2sY&cN"
         },
         {
             "holder": "Excepteur ad veniam",
-            "material": "non cillum",
+            "material": "reprint",
             "statement": "",
             "url": "1B\\8hA5"
         },
         {
             "holder": "officia minim occ",
-            "material": "dolore labore sint fugiat",
+            "material": "publication",
             "statement": "sunt nostrud aute Excepteur ut",
             "url": "1[U~uv5?blByhyZ@XFhObS9qsv].{jrxT<vR-zK&C&G)_LI1 1RUF},E9iR5*S?v'!dH3^x,jQ.t0yh!/E`"
         }
@@ -404,13 +404,13 @@
         {
             "imposing": "qui exercitation voluptate magna",
             "license": "Duis",
-            "material": "elit ut veniam",
+            "material": "addendum",
             "url": "1Jn?j9c,:fR:y^o+QS*]?5/x6F#\\9'e4&V6"
         },
         {
             "imposing": "",
             "license": "voluptate",
-            "material": "consequat",
+            "material": "erratum",
             "url": "1:~=WKXIeRks+^A0Jgv(bE5\"0/|V}&>-x"
         },
         {
@@ -468,26 +468,21 @@
             },
             "confpaper_info": "et ",
             "curated_relation": false,
-            "isbn": "elit consectetur",
             "journal_issue": "non",
             "journal_record": {
                 "$ref": "1N4sn\"4f,_r*CqcT*m^\\#sBz&'<m3]/%86Yf^^K'<;s<L/]&.?#~i1Ru-5#GGuB5Hp!56YzZ"
             },
             "journal_title": "Ut mollit labore ipsum",
             "journal_volume": "mollit labore qui ullamco",
-            "notes": [
-                "amet aliqua dolor consectetur commodo",
-                "culpa reprehenderit ipsum",
-                "dolor cillum veniam nulla minim",
-                "aliqua"
-            ],
+            "material": "addendum",
             "page_end": "amet ut Duis anim",
             "page_start": "adipisicing qui voluptate eiusmod",
+            "parent_isbn": "elit consectetur",
             "parent_record": {
                 "$ref": "1A<%}^'<WdJ6ibKSn%,[<JoH}ZO)-ru,m(}{|o9~05O4m&d2M(rP!*P*ol&7',aL0N^jzq_,OHZDXVypDZMG i`g=fRC2.H%Q8"
             },
+            "parent_report_number": "adipisicing in",
             "pubinfo_freetext": "reprehenderit ex sunt ut",
-            "reportnumber": "adipisicing in",
             "year": 1062
         }
     ],

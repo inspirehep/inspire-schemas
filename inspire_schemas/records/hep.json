@@ -270,7 +270,7 @@
                         "type": "string"
                     },
                     "material": {
-                        "type": "string"
+                        "$ref": "elements/material.json"
                     },
                     "statement": {
                         "description": "FIXME: What's that? there are all sorts of usages on production!",
@@ -336,6 +336,9 @@
         "dois": {
             "items": {
                 "properties": {
+                    "material": {
+                        "$ref": "elements/material.json"
+                    },
                     "source": {
                         "description": "Issuing of DOI.",
                         "title": "DOI registrant",
@@ -534,8 +537,7 @@
                         "type": "string"
                     },
                     "material": {
-                        "title": "Material referred by the license",
-                        "type": "string"
+                        "$ref": "elements/material.json"
                     },
                     "url": {
                         "format": "url",
@@ -605,7 +607,6 @@
             "uniqueItems": true
         },
         "publication_info": {
-            "description": "FIXME: Shall we split conference information away? FIXME: shall we move the DOI and ISBN next to where it belongs? So that we can also align erratum and friends?",
             "items": {
                 "properties": {
                     "artid": {
@@ -613,7 +614,7 @@
                         "type": "string"
                     },
                     "cnum": {
-                        "type": "string"
+                        "$ref": "elements/cnum.json"
                     },
                     "conf_acronym": {
                         "type": "string"
@@ -628,9 +629,6 @@
                     "curated_relation": {
                         "type": "boolean"
                     },
-                    "isbn": {
-                        "type": "string"
-                    },
                     "journal_issue": {
                         "type": "string"
                     },
@@ -644,12 +642,8 @@
                     "journal_volume": {
                         "type": "string"
                     },
-                    "notes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "uniqueItems": true
+                    "material": {
+                        "$ref": "elements/material.json"
                     },
                     "page_end": {
                         "description": "Last page",
@@ -659,14 +653,17 @@
                         "description": "First page",
                         "type": "string"
                     },
+                    "parent_isbn": {
+                        "type": "string"
+                    },
                     "parent_record": {
                         "$ref": "elements/json_reference.json",
                         "description": "URI for the parent this record is part of"
                     },
-                    "pubinfo_freetext": {
+                    "parent_report_number": {
                         "type": "string"
                     },
-                    "reportnumber": {
+                    "pubinfo_freetext": {
                         "type": "string"
                     },
                     "year": {
