@@ -377,26 +377,18 @@
             },
             "type": "array"
         },
-        "external_system_numbers": {
+        "external_system_identifiers": {
             "items": {
                 "properties": {
-                    "institute": {
-                        "title": "Institute",
+                    "schema": {
                         "type": "string"
                     },
-                    "obsolete": {
-                        "title": "Obsolete?",
-                        "type": "boolean"
-                    },
                     "value": {
-                        "title": "Number",
                         "type": "string"
                     }
                 },
-                "title": "External system number",
                 "type": "object"
             },
-            "title": "External system numbers",
             "type": "array",
             "uniqueItems": true
         },
@@ -755,6 +747,13 @@
                 }
             },
             "type": "object"
+        },
+        "texkeys": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "thesis_info": {
             "properties": {
