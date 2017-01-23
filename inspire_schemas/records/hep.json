@@ -425,11 +425,9 @@
             "uniqueItems": true
         },
         "hidden_notes": {
-            "description": "FIXME: what about 595__d??",
             "items": {
                 "properties": {
                     "source": {
-                        "description": "FIXME: What's the semantic of this source?",
                         "type": "string"
                     },
                     "value": {
