@@ -546,12 +546,12 @@
         "persistent_identifiers": {
             "items": {
                 "properties": {
+                    "schema": {
+                        "title": "Type of persistent identifier (e.g. HDL, URN)",
+                        "type": "string"
+                    },
                     "source": {
                         "$ref": "elements/source.json"
-                    },
-                    "type": {
-                        "title": "Type of persistent identifier",
-                        "type": "string"
                     },
                     "value": {
                         "title": "Value of the persistent identifier",
