@@ -10,7 +10,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -173,7 +173,7 @@
                         "items": {
                             "properties": {
                                 "source": {
-                                    "type": "string"
+                                    "$ref": "elements/source.json"
                                 },
                                 "value": {
                                     "description": "The affiliation as it appears on the paper",
@@ -334,9 +334,7 @@
                         "$ref": "elements/material.json"
                     },
                     "source": {
-                        "description": "Issuing of DOI.",
-                        "title": "DOI registrant",
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "pattern": "10\\.\\d+(\\.\\d+)?/.+",
@@ -414,7 +412,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -488,7 +486,7 @@
                         "type": "string"
                     },
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -549,8 +547,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "description": "Provenance of the persistent identifier",
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "type": {
                         "title": "Type of persistent identifier",
@@ -576,7 +573,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -691,7 +688,7 @@
                                     "type": "string"
                                 },
                                 "source": {
-                                    "type": "string"
+                                    "$ref": "elements/source.json"
                                 },
                                 "value": {
                                     "type": "string"
@@ -721,7 +718,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -826,7 +823,7 @@
                         "type": "string"
                     },
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "subtitle": {
                         "type": "string"
