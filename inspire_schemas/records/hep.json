@@ -312,24 +312,18 @@
         "document_type": {
             "items": {
                 "enum": [
-                    "Published",
-                    "arXiv",
-                    "ActivityReport",
-                    "ConferencePaper",
-                    "Thesis",
-                    "Review",
-                    "Lectures",
-                    "Note",
-                    "Proceedings",
-                    "Introductory",
-                    "Book",
-                    "BookChapter",
-                    "Report"
+                    "article",
+                    "book",
+                    "book chapter",
+                    "conference paper",
+                    "note",
+                    "proceedings",
+                    "report",
+                    "thesis"
                 ],
                 "type": "string"
             },
             "minItems": 1,
-            "title": "Document type",
             "type": "array",
             "uniqueItems": true
         },
@@ -668,6 +662,17 @@
             "type": "array",
             "uniqueItems": true
         },
+        "publication_type": {
+            "enum": [
+                "introductory",
+                "lecture",
+                "review"
+            ],
+            "type": "string"
+        },
+        "published": {
+            "type": "boolean"
+        },
         "references": {
             "items": {
                 "properties": {
@@ -731,6 +736,29 @@
             "$ref": "elements/json_reference.json",
             "description": "Url of the record itself",
             "title": "Url of the record"
+        },
+        "special_collection": {
+            "items": {
+                "enum": [
+                    "CDF-INTERNAL-NOTE",
+                    "CDF-NOTE",
+                    "CDS",
+                    "D0-INTERNAL-NOTE",
+                    "D0-PRELIMINARY-NOTE",
+                    "H1-INTERNAL-NOTE",
+                    "H1-PRELIMINARY-NOTE",
+                    "HALhidden",
+                    "HEPHIDDEN",
+                    "HERMES-INTERNAL-NOTE",
+                    "LARSOFT-INTERNAL-NOTE",
+                    "LARSOFT-NOTE",
+                    "ZEUS-INTERNAL-NOTE",
+                    "ZEUS-PRELIMINARY-NOTE"
+                ],
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "succeeding_entry": {
             "description": "Reference to previously merged records.",
@@ -825,6 +853,9 @@
             },
             "type": "array",
             "uniqueItems": true
+        },
+        "withdrawn": {
+            "type": "boolean"
         }
     },
     "title": "Publication",
