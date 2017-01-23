@@ -177,18 +177,6 @@
         }
     ],
     "citeable": true,
-    "classification_number": [
-        {
-            "source": "incididunt sunt labo",
-            "standard": "veniam dolore esse",
-            "value": "amet anim eu"
-        },
-        {
-            "source": "sunt do officia dolore nulla",
-            "standard": "labore laboris sit",
-            "value": "nisi do in non Ut"
-        }
-    ],
     "collaboration": [
         {
             "record": {
@@ -399,14 +387,14 @@
     ],
     "keywords": [
         {
-            "classification_scheme": "nulla eiusmod tempor in",
-            "keyword": "ipsum aliquip commodo nisi ex",
-            "source": "cupidatat Lorem et commodo"
+            "schema": "PACS",
+            "source": "cupidatat Lorem et commodo",
+            "value": "ipsum aliquip commodo nisi ex"
         },
         {
-            "classification_scheme": "do proident",
-            "keyword": "minim in ad magna",
-            "source": "ullamco mollit anim laboris"
+            "schema": "PDG",
+            "source": "ullamco mollit anim laboris",
+            "value": "minim in ad magna"
         }
     ],
     "languages": [
