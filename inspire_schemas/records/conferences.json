@@ -85,7 +85,7 @@
             "type": "string"
         },
         "place": {
-            "pattern": ".+,.+,?.*",
+            "pattern": "^.+,.+,?.*$",
             "title": "Conference place",
             "type": "string"
         },

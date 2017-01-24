@@ -63,7 +63,7 @@
                     },
                     "value": {
                         "description": "arXiv eprint number, e.g. math.DG/0307245 or 1701.01431",
-                        "pattern": "\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+",
+                        "pattern": "^\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+$",
                         "type": "string"
                     }
                 },
@@ -194,7 +194,7 @@
                     },
                     "uuid": {
                         "description": "Signature identifier. (read-only)",
-                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
                         "title": "UUID",
                         "type": "string"
                     }
@@ -337,7 +337,7 @@
                         "$ref": "elements/source.json"
                     },
                     "value": {
-                        "pattern": "10\\.\\d+(\\.\\d+)?/.+",
+                        "pattern": "^10\\.\\d+(\\.\\d+)?/.+$",
                         "title": "DOI",
                         "type": "string"
                     }
@@ -456,12 +456,11 @@
                         "description": "Further information about type.",
                         "type": "string"
                     },
-                    "medium": {
-                        "description": "Medium (type) of the ISBN.",
-                        "type": "string"
+                    "material": {
+                        "$ref": "elements/material.json"
                     },
                     "value": {
-                        "format": "isbn",
+                        "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                         "type": "string"
                     }
                 },
@@ -499,8 +498,7 @@
         },
         "languages": {
             "items": {
-                "format": "ISO 639-1",
-                "pattern": "\\w{2}",
+                "pattern": "^\\w{2}$",
                 "title": "Language",
                 "type": "string"
             },
@@ -635,7 +633,7 @@
                         "type": "string"
                     },
                     "parent_isbn": {
-                        "format": "isbn",
+                        "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                         "type": "string"
                     },
                     "parent_record": {
@@ -761,7 +759,7 @@
             "description": "Reference to previously merged records.",
             "properties": {
                 "isbn": {
-                    "format": "isbn",
+                    "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                     "type": "string"
                 },
                 "record": {
@@ -818,8 +816,7 @@
             "items": {
                 "properties": {
                     "language": {
-                        "format": "ISO 639-1",
-                        "pattern": "\\w{2}",
+                        "pattern": "^\\w{2}$",
                         "type": "string"
                     },
                     "source": {

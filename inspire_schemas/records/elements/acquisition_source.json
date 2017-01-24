@@ -11,7 +11,7 @@
             "type": "string"
         },
         "orcid": {
-            "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9Xx]",
+            "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
             "type": "string"
         },
         "source": {

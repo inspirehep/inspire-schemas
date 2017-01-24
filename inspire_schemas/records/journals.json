@@ -3,7 +3,7 @@
     "properties": {
         "coden": {
             "items": {
-                "pattern": "[0-9\\.A-Z_-]{4,6}",
+                "pattern": "^[0-9\\.A-Z_-]{4,6}$",
                 "title": "CODEN",
                 "type": "string"
             },
@@ -34,7 +34,7 @@
                         "type": "string"
                     },
                     "value": {
-                        "pattern": "\\d{4}-\\d{3}[\\dX]",
+                        "pattern": "^\\d{4}-\\d{3}[\\dX]$",
                         "type": "string"
                     }
                 },
@@ -105,7 +105,7 @@
                     "type": "boolean"
                 },
                 "issn": {
-                    "pattern": "\\d{4}-\\d{3}[\\dX]",
+                    "pattern": "^\\d{4}-\\d{3}[\\dX]$",
                     "title": "ISSN of the related record",
                     "type": "string"
                 },
