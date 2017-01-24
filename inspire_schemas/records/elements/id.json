@@ -2,6 +2,7 @@
     "$schema": "http://json-schema.org/schema#",
     "anyOf": [
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -17,6 +18,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -32,6 +34,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -47,6 +50,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -62,6 +66,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -77,6 +82,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -92,6 +98,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -107,6 +114,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -122,6 +130,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -137,6 +146,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -152,6 +162,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -167,6 +178,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -182,6 +194,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [
@@ -197,6 +210,7 @@
             "type": "object"
         },
         {
+            "noAdditionalProperties": true,
             "properties": {
                 "type": {
                     "enum": [

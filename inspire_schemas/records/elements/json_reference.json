@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "noAdditionalProperties": true,
     "properties": {
         "$ref": {
             "description": "URL to the referenced resource",

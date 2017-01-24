@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "Contact person's data",
+    "noAdditionalProperties": true,
     "properties": {
         "email": {
             "description": "Contact person's e-mail",

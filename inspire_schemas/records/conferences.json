@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "noAdditionalProperties": true,
     "properties": {
         "acronym": {
             "items": {
@@ -49,6 +50,7 @@
         },
         "keywords": {
             "items": {
+                "noAdditionalProperties": true,
                 "properties": {
                     "source": {
                         "type": "string"
@@ -96,6 +98,7 @@
         },
         "series": {
             "items": {
+                "noAdditionalProperties": true,
                 "properties": {
                     "name": {
                         "type": "string"
@@ -115,6 +118,7 @@
         },
         "short_description": {
             "items": {
+                "noAdditionalProperties": true,
                 "properties": {
                     "source": {
                         "type": "string"
