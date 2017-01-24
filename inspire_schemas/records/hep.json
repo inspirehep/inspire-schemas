@@ -1,7 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "description": "An article or thesis or book or...",
-    "noAdditionalProperties": true,
     "properties": {
         "$schema": {
             "format": "url",
@@ -9,7 +8,6 @@
         },
         "abstracts": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "source": {
                         "$ref": "elements/source.json"
@@ -25,7 +23,6 @@
         },
         "accelerator_experiments": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "accelerator": {
                         "type": "string"
@@ -57,7 +54,6 @@
         "arxiv_eprints": {
             "description": "Read only meta-data (identifiers and categories) coming from arXiv",
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "categories": {
                         "items": {
@@ -82,11 +78,9 @@
         "authors": {
             "description": "Anybody who has acted on a given document (including supervisors, editors, etc.)",
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "affiliations": {
                         "items": {
-                            "noAdditionalProperties": true,
                             "properties": {
                                 "curated_relation": {
                                     "description": "Does this affiliation point to the correct Institution?",
@@ -177,7 +171,6 @@
                     },
                     "raw_affiliations": {
                         "items": {
-                            "noAdditionalProperties": true,
                             "properties": {
                                 "source": {
                                     "$ref": "elements/source.json"
@@ -218,7 +211,6 @@
         },
         "book_series": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "title": {
                         "description": "Title of the book series",
@@ -240,7 +232,6 @@
         },
         "collaborations": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "record": {
                         "$ref": "elements/json_reference.json"
@@ -256,7 +247,6 @@
         },
         "collections": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "primary": {
                         "type": "string"
@@ -274,7 +264,6 @@
         },
         "copyright": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "holder": {
                         "description": "Copyright holder.",
@@ -340,7 +329,6 @@
         },
         "dois": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "material": {
                         "$ref": "elements/material.json"
@@ -363,7 +351,6 @@
         },
         "edition": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "edition": {
                         "type": "string"
@@ -384,7 +371,6 @@
         },
         "external_system_identifiers": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "schema": {
                         "type": "string"
@@ -401,7 +387,6 @@
         "funding_info": {
             "description": "Information related to funding. FIXME: Do we care about this? So far only 349 records were tagged and all for a single EU project.",
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "agency": {
                         "title": "Agency",
@@ -425,7 +410,6 @@
         },
         "hidden_notes": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "source": {
                         "$ref": "elements/source.json"
@@ -441,7 +425,6 @@
         },
         "imprints": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "date": {
                         "format": "date",
@@ -468,7 +451,6 @@
         },
         "isbns": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "comment": {
                         "description": "Further information about type.",
@@ -492,7 +474,6 @@
         },
         "keywords": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "schema": {
                         "description": "The particular vocabulary against which this keyword is valid and found. Leave empty for free form keywords",
@@ -525,7 +506,6 @@
         },
         "license": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "imposing": {
                         "description": "FIXME: what is this!?",
@@ -563,7 +543,6 @@
         },
         "persistent_identifiers": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "schema": {
                         "title": "Type of persistent identifier (e.g. HDL, URN)",
@@ -590,7 +569,6 @@
         },
         "public_notes": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "source": {
                         "$ref": "elements/source.json"
@@ -609,7 +587,6 @@
         },
         "publication_info": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "artid": {
                         "description": "Electronic Article ID",
@@ -693,14 +670,12 @@
         },
         "references": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
                     },
                     "raw_refs": {
                         "items": {
-                            "noAdditionalProperties": true,
                             "properties": {
                                 "position": {
                                     "description": "The position of the reference as it appears on the document",
@@ -739,7 +714,6 @@
         },
         "report_numbers": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "source": {
                         "$ref": "elements/source.json"
@@ -783,7 +757,6 @@
         },
         "succeeding_entry": {
             "description": "Reference to previously merged records.",
-            "noAdditionalProperties": true,
             "properties": {
                 "isbn": {
                     "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
@@ -806,7 +779,6 @@
             "uniqueItems": true
         },
         "thesis_info": {
-            "noAdditionalProperties": true,
             "properties": {
                 "date": {
                     "format": "date",
@@ -821,7 +793,6 @@
                 },
                 "institutions": {
                     "items": {
-                        "noAdditionalProperties": true,
                         "properties": {
                             "curated_relation": {
                                 "type": "boolean"
@@ -843,7 +814,6 @@
         },
         "title_translations": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "language": {
                         "pattern": "^\\w{2}$",

@@ -1,6 +1,5 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
     "properties": {
         "_private_note": {
             "type": "string"
@@ -10,7 +9,6 @@
         },
         "advisors": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "_degree_type": {
                         "type": "string"
@@ -44,7 +42,6 @@
         },
         "collections": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "primary": {
                         "type": "string"
@@ -84,7 +81,6 @@
         "experiments": {
             "description": "Contains information about experiments.",
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
@@ -127,7 +123,6 @@
         },
         "name": {
             "description": "Contains name information.",
-            "noAdditionalProperties": true,
             "properties": {
                 "numeration": {
                     "enum": [
@@ -192,7 +187,6 @@
         },
         "positions": {
             "items": {
-                "noAdditionalProperties": true,
                 "properties": {
                     "_rank": {
                         "type": "string"
@@ -212,7 +206,6 @@
                         "type": "string"
                     },
                     "institution": {
-                        "noAdditionalProperties": true,
                         "properties": {
                             "curated_relation": {
                                 "type": "boolean"
@@ -271,12 +264,11 @@
         "source": {
             "description": "This is the source of informatio. It is currently a mixed bags of user IDs or provenance information, e.g. arXiv etc. FIXME: we should really discuss about it. E.g. eprint, webform, Rachel.Lumpkin@durham.ac.uk(96), Fermilab, C09-05-04, KYOTOU...",
             "items": {
-                "noAdditionalProperties": true,
+                "date_verified": {
+                    "format": "date",
+                    "type": "string"
+                },
                 "properties": {
-                    "date_verified": {
-                        "format": "date",
-                        "type": "string"
-                    },
                     "name": {
                         "type": "string"
                     }
