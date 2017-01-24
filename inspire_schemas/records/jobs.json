@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "noAdditionalProperties": true,
     "properties": {
         "address": {
             "items": {
@@ -34,6 +35,7 @@
         },
         "experiments": {
             "items": {
+                "noAdditionalProperties": true,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
@@ -62,6 +64,7 @@
         },
         "institutions": {
             "items": {
+                "noAdditionalProperties": true,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
