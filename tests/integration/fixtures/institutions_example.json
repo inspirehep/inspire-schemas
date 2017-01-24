@@ -1,153 +1,204 @@
 {
     "ICN": [
-        "culpa commodo ea veniam",
-        "aute proident",
-        "et",
-        "aute reprehenderit ullamco consequat"
+        "Excepteur veniam dolore ea",
+        "deserunt aliqua incididunt aliq",
+        "anim",
+        "dolore"
     ],
     "address": [
         {
-            "city": "tempor in",
-            "country_code": "CM",
-            "latitude": 13976279,
-            "longitude": -10394592,
-            "original address": "Lorem minim sunt id",
-            "postal_code": "adipisicing enim ex aliqua",
-            "state": "ea"
+            "city": "deserunt",
+            "country_code": "GB",
+            "latitude": -39663177,
+            "longitude": -22281658,
+            "original address": "laborum cupidatat eu nisi est",
+            "postal_code": "exercitation commodo adipisicing reprehenderit dolore",
+            "state": "ipsum consequat dolor enim ex"
         },
         {
-            "city": "cupidatat nisi consectetur",
-            "country_code": "SA",
-            "latitude": -68223859,
-            "longitude": -44708433,
-            "original address": "aliquip in ",
-            "postal_code": "do est deserunt",
-            "state": "aute exercitation"
+            "city": "amet irure ullamco eu culpa",
+            "country_code": "NT",
+            "latitude": 82361131,
+            "longitude": 87368296,
+            "original address": "eu et dolore in",
+            "postal_code": "reprehenderit occaecat pariatur",
+            "state": "mollit do Ut in incididunt"
         },
         {
-            "city": "velit quis minim incididunt reprehenderit",
-            "country_code": "KI",
-            "latitude": -62778200,
-            "longitude": 5510732,
-            "original address": "dolore ad",
-            "postal_code": "qui sit",
-            "state": "ad dolor"
+            "city": "incididunt cillum tempor",
+            "country_code": "PG",
+            "latitude": -25596441,
+            "longitude": -19424458,
+            "original address": "quis",
+            "postal_code": "in",
+            "state": "labore in anim"
         },
         {
-            "city": "nulla ut Excepteur anim",
-            "country_code": "PS",
-            "latitude": -53446109,
-            "longitude": 11237736,
-            "original address": "dolore ut voluptate",
-            "postal_code": "anim",
-            "state": "ad consequat dolor exercitation cillum"
+            "city": "i",
+            "country_code": "LI",
+            "latitude": 60759164,
+            "longitude": -27431765,
+            "original address": "commodo laborum",
+            "postal_code": "aliquip minim Lorem ut dolor",
+            "state": "tempor anim Excepteur mollit aute"
+        },
+        {
+            "city": "aliqua Ut sed",
+            "country_code": "CR",
+            "latitude": -92616445,
+            "longitude": 38587160,
+            "original address": "velit eiusmod",
+            "postal_code": "non in Excepteur ut ad",
+            "state": "et consectetur deserunt ipsum"
         }
     ],
-    "core": false,
+    "core": true,
     "deleted": false,
     "department": [
-        "elit",
-        "ea occaecat nulla esse",
-        "elit irure",
-        "est"
+        "dolore",
+        "enim",
+        "id laboris enim adipisicing",
+        "consectetur reprehenderit"
     ],
-    "department_acronym": "aliquip",
+    "department_acronym": "adipisicing",
     "extra_words": [
-        "pariatur deserunt",
-        "occaecat fugiat velit id dolor"
+        "Lorem labore nostrud",
+        "consequat Excepteur",
+        "eu"
     ],
     "field_activity": [
+        "Company",
         "University"
     ],
     "hidden_notes": [
-        "adipisicing",
-        "elit incididunt in dolore",
-        "veniam",
-        "occaecat in quis elit",
-        "pariatur do nostrud"
+        "proident irure sed",
+        "amet tempor"
     ],
     "historical_data": [
-        "amet aliqua ex laborum ad"
+        "officia sint",
+        "ipsum"
     ],
     "ids": [
         {
-            "laborumc1b": "deserunt aute",
-            "suntb96": -22114435,
+            "aute79": 59914447,
+            "dolorefee": true,
             "type": "HAL",
-            "value": "426941718"
+            "value": "3"
+        },
+        {
+            "cillumf8": -92665552,
+            "sit6": -12399148,
+            "type": "HAL",
+            "value": "02043107025"
         }
     ],
     "inspire_categories": [
+        {
+            "source": "user",
+            "term": "Theory-Nucl"
+        },
+        {
+            "source": "undefined",
+            "term": "Computing"
+        },
+        {
+            "source": "curator",
+            "term": "Computing"
+        },
         {
             "source": "user",
             "term": "Theory-HEP"
         },
         {
             "source": "arxiv",
-            "term": "Experiment-HEP"
-        },
-        {
-            "source": "arxiv",
-            "term": "Other"
+            "term": "Astrophysics"
         }
     ],
     "institution": [
-        "officia",
-        "reprehenderit consequat veniam culpa"
+        "exercitation commodo eu ex",
+        "enim in sint",
+        "dolore",
+        "in enim"
     ],
-    "institution_acronym": "in culpa",
+    "institution_acronym": "velit ullamco incididunt mol",
     "location": {
-        "latitude": -4550739,
-        "longitude": -95517832
+        "latitude": -34224204,
+        "longitude": -84039479
     },
     "name_variants": [
         {
+            "source": "INSPIRE",
+            "value": [
+                "amet mollit",
+                "eiusmod et Lorem Duis Ut",
+                "reprehenderit aliqua nostrud adipisicing",
+                "mollit adipisicing",
+                "aliquip Duis sunt"
+            ]
+        },
+        {
+            "source": "DESY_AFF",
+            "value": [
+                "Ut officia ut",
+                "",
+                "ut"
+            ]
+        },
+        {
+            "source": "DESY_AFF",
+            "value": [
+                "labore dolore sunt ullamco id",
+                "cupidatat Lorem ad",
+                "irure",
+                "adipisicing Lorem esse aute"
+            ]
+        },
+        {
             "source": "ADS",
             "value": [
-                "Duis"
+                "cupidatat",
+                "id ex exercitation",
+                "ipsum in Lorem sint",
+                "deserunt"
             ]
         }
     ],
     "new_record": {
-        "$ref": "1FMK"
+        "$ref": "http://1E=0?2"
     },
     "non_public_notes": [
-        "Excepteur fugiat",
-        "non tempor eiusmod"
+        "culpa"
     ],
     "public_notes": [
-        "labore enim deserunt aliquip laboris",
-        "sint et sit",
-        "irure do aliqua officia id",
-        "cillum commodo Excepteur cupidatat",
-        "et veniam amet"
+        "reprehenderit eiusmod ea",
+        "id laboris"
     ],
     "related_institutes": [
         {
             "curated_relation": false,
-            "name": "Ut",
+            "name": "proident elit dolor",
             "record": {
-                "$ref": "1"
+                "$ref": "http://1["
             },
-            "relation_type": "predecessor"
+            "relation_type": "superseded"
         },
         {
             "curated_relation": true,
-            "name": "sed",
+            "name": "et nostrud",
             "record": {
-                "$ref": "1]n]R[V6@"
+                "$ref": "http://1FY)ZA"
             },
-            "relation_type": "other"
+            "relation_type": "predecessor"
         }
     ],
     "self": {
-        "$ref": "1AUCDTqX:"
+        "$ref": "http://17"
     },
-    "time_zone": "there",
+    "time_zone": "one",
     "urls": [
         {
-            "description": "aliq",
-            "value": "1sa6"
+            "description": "",
+            "value": "http://1)4"
         }
     ]
 }
