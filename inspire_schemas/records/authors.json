@@ -18,10 +18,10 @@
                     },
                     "degree_type": {
                         "enum": [
-                            "PhD",
-                            "Master",
-                            "Bachelor",
-                            "Other"
+                            "PHD",
+                            "MASTER",
+                            "BACHELOR",
+                            "OTHER"
                         ],
                         "type": "string"
                     },
