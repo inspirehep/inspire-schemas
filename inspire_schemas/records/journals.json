@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "noAdditionalProperties": true,
     "properties": {
         "coden": {
             "items": {
@@ -20,6 +21,7 @@
         },
         "issn": {
             "items": {
+                "noAdditionalProperties": true,
                 "properties": {
                     "comment": {
                         "description": "Further information about type.",
@@ -99,6 +101,7 @@
             "type": "array"
         },
         "relation": {
+            "noAdditionalProperties": true,
             "properties": {
                 "curated_relation": {
                     "title": "Is the relation curated?",
