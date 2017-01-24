@@ -10,7 +10,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "INSPIRE-\\d{8}",
+                    "pattern": "^INSPIRE-\\d{8}$",
                     "type": "string"
                 }
             },
@@ -25,7 +25,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "(\\w+\\.)+\\d+",
+                    "pattern": "^(\\w+\\.)+\\d+$",
                     "type": "string"
                 }
             },
@@ -40,7 +40,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9Xx]",
+                    "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
                     "type": "string"
                 }
             },
@@ -55,7 +55,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "JACoW-\\d{8}",
+                    "pattern": "^JACoW-\\d{8}$",
                     "type": "string"
                 }
             },
@@ -70,7 +70,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "KAKEN-\\d{8}",
+                    "pattern": "^KAKEN-\\d{8}$",
                     "type": "string"
                 }
             },
@@ -85,7 +85,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "\\w+_(\\w_)?\\d+",
+                    "pattern": "^\\w+_(\\w_)?\\d+$",
                     "type": "string"
                 }
             },
@@ -100,7 +100,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "CERN-\\d+",
+                    "pattern": "^CERN-\\d+$",
                     "type": "string"
                 }
             },
@@ -115,7 +115,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "DESY-\\d+",
+                    "pattern": "^DESY-\\d+$",
                     "type": "string"
                 }
             },
@@ -130,7 +130,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "(\\w|-){12}",
+                    "pattern": "^(\\w|-){12}$",
                     "type": "string"
                 }
             },
@@ -145,7 +145,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "\\d{7,9}",
+                    "pattern": "^\\d{7,9}$",
                     "type": "string"
                 }
             },
@@ -160,7 +160,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "[A-z]-\\d{4}-\\d{4}",
+                    "pattern": "^[A-z]-\\d{4}-\\d{4}$",
                     "type": "string"
                 }
             },
@@ -175,7 +175,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "\\d{10,11}",
+                    "pattern": "^\\d{10,11}$",
                     "type": "string"
                 }
             },
@@ -190,7 +190,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "\\w+",
+                    "pattern": "^\\w+$",
                     "type": "string"
                 }
             },
@@ -205,7 +205,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "SLAC-\\d+",
+                    "pattern": "^SLAC-\\d+$",
                     "type": "string"
                 }
             },

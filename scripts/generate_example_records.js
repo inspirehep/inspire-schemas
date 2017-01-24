@@ -4,10 +4,8 @@ var fs = require('fs'),
     jsf = require('json-schema-faker'),
     path = require('path');
 
-jsf.format('ISO 639-1', function(gen, schema){ return gen.randexp('^1.*$');});
-jsf.format('date', function(gen, schema){ return gen.randexp('^1.*$');});
-jsf.format('url', function(gen, schema){ return gen.randexp('^1.*$');});
-jsf.format('isbn', function(gen, schema){ return gen.randexp('^1.*$');});
+jsf.format('date', function(gen, schema){ return gen.randexp('^\d{4}-\d{2}-\d{2}$');});
+jsf.format('url', function(gen, schema){ return gen.randexp('^http://1.*$');});
 jsf.format('.+, .+', function(gen, schema){ return gen.randexp('^.+, .+$');});
 
 function resolve_schema(unresolved_schema, base_path) {

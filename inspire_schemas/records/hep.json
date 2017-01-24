@@ -10,7 +10,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -63,7 +63,7 @@
                     },
                     "value": {
                         "description": "arXiv eprint number, e.g. math.DG/0307245 or 1701.01431",
-                        "pattern": "\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+",
+                        "pattern": "^\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+$",
                         "type": "string"
                     }
                 },
@@ -173,7 +173,7 @@
                         "items": {
                             "properties": {
                                 "source": {
-                                    "type": "string"
+                                    "$ref": "elements/source.json"
                                 },
                                 "value": {
                                     "description": "The affiliation as it appears on the paper",
@@ -194,7 +194,7 @@
                     },
                     "uuid": {
                         "description": "Signature identifier. (read-only)",
-                        "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
                         "title": "UUID",
                         "type": "string"
                     }
@@ -270,7 +270,7 @@
                         "type": "string"
                     },
                     "material": {
-                        "type": "string"
+                        "$ref": "elements/material.json"
                     },
                     "statement": {
                         "description": "FIXME: What's that? there are all sorts of usages on production!",
@@ -312,37 +312,32 @@
         "document_type": {
             "items": {
                 "enum": [
-                    "Published",
-                    "arXiv",
-                    "ActivityReport",
-                    "ConferencePaper",
-                    "Thesis",
-                    "Review",
-                    "Lectures",
-                    "Note",
-                    "Proceedings",
-                    "Introductory",
-                    "Book",
-                    "BookChapter",
-                    "Report"
+                    "article",
+                    "book",
+                    "book chapter",
+                    "conference paper",
+                    "note",
+                    "proceedings",
+                    "report",
+                    "thesis"
                 ],
                 "type": "string"
             },
             "minItems": 1,
-            "title": "Document type",
             "type": "array",
             "uniqueItems": true
         },
         "dois": {
             "items": {
                 "properties": {
+                    "material": {
+                        "$ref": "elements/material.json"
+                    },
                     "source": {
-                        "description": "Issuing of DOI.",
-                        "title": "DOI registrant",
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
-                        "pattern": "10\\.\\d+(\\.\\d+)?/.+",
+                        "pattern": "^10\\.\\d+(\\.\\d+)?/.+$",
                         "title": "DOI",
                         "type": "string"
                     }
@@ -374,26 +369,18 @@
             },
             "type": "array"
         },
-        "external_system_numbers": {
+        "external_system_identifiers": {
             "items": {
                 "properties": {
-                    "institute": {
-                        "title": "Institute",
+                    "schema": {
                         "type": "string"
                     },
-                    "obsolete": {
-                        "title": "Obsolete?",
-                        "type": "boolean"
-                    },
                     "value": {
-                        "title": "Number",
                         "type": "string"
                     }
                 },
-                "title": "External system number",
                 "type": "object"
             },
-            "title": "External system numbers",
             "type": "array",
             "uniqueItems": true
         },
@@ -422,12 +409,10 @@
             "uniqueItems": true
         },
         "hidden_notes": {
-            "description": "FIXME: what about 595__d??",
             "items": {
                 "properties": {
                     "source": {
-                        "description": "FIXME: What's the semantic of this source?",
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -471,12 +456,11 @@
                         "description": "Further information about type.",
                         "type": "string"
                     },
-                    "medium": {
-                        "description": "Medium (type) of the ISBN.",
-                        "type": "string"
+                    "material": {
+                        "$ref": "elements/material.json"
                     },
                     "value": {
-                        "format": "isbn",
+                        "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                         "type": "string"
                     }
                 },
@@ -501,7 +485,7 @@
                         "type": "string"
                     },
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -514,8 +498,7 @@
         },
         "languages": {
             "items": {
-                "format": "ISO 639-1",
-                "pattern": "\\w{2}",
+                "pattern": "^\\w{2}$",
                 "title": "Language",
                 "type": "string"
             },
@@ -534,8 +517,7 @@
                         "type": "string"
                     },
                     "material": {
-                        "title": "Material referred by the license",
-                        "type": "string"
+                        "$ref": "elements/material.json"
                     },
                     "url": {
                         "format": "url",
@@ -562,13 +544,12 @@
         "persistent_identifiers": {
             "items": {
                 "properties": {
-                    "source": {
-                        "description": "Provenance of the persistent identifier",
+                    "schema": {
+                        "title": "Type of persistent identifier (e.g. HDL, URN)",
                         "type": "string"
                     },
-                    "type": {
-                        "title": "Type of persistent identifier",
-                        "type": "string"
+                    "source": {
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "title": "Value of the persistent identifier",
@@ -590,7 +571,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -605,7 +586,6 @@
             "uniqueItems": true
         },
         "publication_info": {
-            "description": "FIXME: Shall we split conference information away? FIXME: shall we move the DOI and ISBN next to where it belongs? So that we can also align erratum and friends?",
             "items": {
                 "properties": {
                     "artid": {
@@ -613,7 +593,7 @@
                         "type": "string"
                     },
                     "cnum": {
-                        "type": "string"
+                        "$ref": "elements/cnum.json"
                     },
                     "conf_acronym": {
                         "type": "string"
@@ -628,9 +608,6 @@
                     "curated_relation": {
                         "type": "boolean"
                     },
-                    "isbn": {
-                        "type": "string"
-                    },
                     "journal_issue": {
                         "type": "string"
                     },
@@ -644,12 +621,8 @@
                     "journal_volume": {
                         "type": "string"
                     },
-                    "notes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "uniqueItems": true
+                    "material": {
+                        "$ref": "elements/material.json"
                     },
                     "page_end": {
                         "description": "Last page",
@@ -659,14 +632,18 @@
                         "description": "First page",
                         "type": "string"
                     },
+                    "parent_isbn": {
+                        "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
+                        "type": "string"
+                    },
                     "parent_record": {
                         "$ref": "elements/json_reference.json",
                         "description": "URI for the parent this record is part of"
                     },
-                    "pubinfo_freetext": {
+                    "parent_report_number": {
                         "type": "string"
                     },
-                    "reportnumber": {
+                    "pubinfo_freetext": {
                         "type": "string"
                     },
                     "year": {
@@ -679,6 +656,17 @@
             },
             "type": "array",
             "uniqueItems": true
+        },
+        "publication_type": {
+            "enum": [
+                "introductory",
+                "lecture",
+                "review"
+            ],
+            "type": "string"
+        },
+        "published": {
+            "type": "boolean"
         },
         "references": {
             "items": {
@@ -698,7 +686,7 @@
                                     "type": "string"
                                 },
                                 "source": {
-                                    "type": "string"
+                                    "$ref": "elements/source.json"
                                 },
                                 "value": {
                                     "type": "string"
@@ -728,7 +716,7 @@
             "items": {
                 "properties": {
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "value": {
                         "type": "string"
@@ -744,10 +732,34 @@
             "description": "Url of the record itself",
             "title": "Url of the record"
         },
+        "special_collection": {
+            "items": {
+                "enum": [
+                    "CDF-INTERNAL-NOTE",
+                    "CDF-NOTE",
+                    "CDS",
+                    "D0-INTERNAL-NOTE",
+                    "D0-PRELIMINARY-NOTE",
+                    "H1-INTERNAL-NOTE",
+                    "H1-PRELIMINARY-NOTE",
+                    "HALhidden",
+                    "HEPHIDDEN",
+                    "HERMES-INTERNAL-NOTE",
+                    "LARSOFT-INTERNAL-NOTE",
+                    "LARSOFT-NOTE",
+                    "ZEUS-INTERNAL-NOTE",
+                    "ZEUS-PRELIMINARY-NOTE"
+                ],
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "succeeding_entry": {
             "description": "Reference to previously merged records.",
             "properties": {
                 "isbn": {
+                    "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
                     "type": "string"
                 },
                 "record": {
@@ -759,7 +771,14 @@
             },
             "type": "object"
         },
-        "thesis": {
+        "texkeys": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
+        "thesis_info": {
             "properties": {
                 "date": {
                     "format": "date",
@@ -770,18 +789,7 @@
                     "type": "string"
                 },
                 "degree_type": {
-                    "enum": [
-                        "Other",
-                        "Internship Report",
-                        "Diploma",
-                        "Bachelor",
-                        "Laurea",
-                        "Master",
-                        "Thesis",
-                        "PhD",
-                        "Habilitation"
-                    ],
-                    "type": "string"
+                    "$ref": "elements/degree_type.json"
                 },
                 "institutions": {
                     "items": {
@@ -808,12 +816,11 @@
             "items": {
                 "properties": {
                     "language": {
-                        "format": "ISO 639-1",
-                        "pattern": "\\w{2}",
+                        "pattern": "^\\w{2}$",
                         "type": "string"
                     },
                     "source": {
-                        "type": "string"
+                        "$ref": "elements/source.json"
                     },
                     "subtitle": {
                         "type": "string"
@@ -840,6 +847,9 @@
             },
             "type": "array",
             "uniqueItems": true
+        },
+        "withdrawn": {
+            "type": "boolean"
         }
     },
     "title": "Publication",

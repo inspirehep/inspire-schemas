@@ -4,7 +4,7 @@
     "properties": {
         "arxiv_eprints": {
             "items": {
-                "pattern": "\\d{4}.\\d{4,5}|\\w+-\\w+/\\d+|\\w+/\\d+",
+                "pattern": "^\\d{4}.\\d{4,5}|\\w+-\\w+/\\d+|\\w+/\\d+$",
                 "type": "string"
             },
             "type": "array",
@@ -49,7 +49,7 @@
         },
         "dois": {
             "items": {
-                "pattern": "10\\.\\d+(\\.\\d+)?/.+",
+                "pattern": "^10\\.\\d+(\\.\\d+)?/.+$",
                 "type": "string"
             },
             "type": "array",

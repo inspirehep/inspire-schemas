@@ -1,0 +1,6 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "pattern": "^C\\d\\d-\\d\\d-\\d\\d(\\.\\d+)?$",
+    "title": "INSPIRE Conference ID (CNUM)",
+    "type": "string"
+}

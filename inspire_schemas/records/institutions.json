@@ -85,7 +85,7 @@
                                 "type": "string"
                             },
                             "value": {
-                                "pattern": "\\d+",
+                                "pattern": "^\\d+$",
                                 "type": "string"
                             }
                         },

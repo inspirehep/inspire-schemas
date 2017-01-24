@@ -28,9 +28,7 @@
             "type": "string"
         },
         "cnum": {
-            "pattern": "C\\d\\d-\\d\\d(-\\d\\d)?(\\.\\d+)?",
-            "title": "Conference ID (CNUM)",
-            "type": "string"
+            "$ref": "elements/cnum.json"
         },
         "contact_details": {
             "items": {
@@ -87,7 +85,7 @@
             "type": "string"
         },
         "place": {
-            "pattern": ".+,.+,?.*",
+            "pattern": "^.+,.+,?.*$",
             "title": "Conference place",
             "type": "string"
         },
