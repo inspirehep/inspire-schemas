@@ -24,6 +24,7 @@
 
 import contextlib
 import json
+import os
 import pytest
 import mock
 import six
@@ -31,30 +32,49 @@ import six
 from inspire_schemas import utils, errors
 
 
-@mock.patch('inspire_schemas.utils.os.path.exists')
-@mock.patch('inspire_schemas.utils.os.path.abspath')
-@mock.patch('inspire_schemas.utils.resource_filename')
-def test_get_schema_path_positive(mock_resource_filename, mock_abspath,
-                                  mock_exists):
-    mock_resource_filename.side_effect = lambda *_: 'shrubbery'
-    mock_exists.side_effect = lambda *_: True
-    mock_abspath.side_effect = lambda x: x
+@pytest.mark.parametrize(
+    'schema,expected',
+    (
+        ('hep.json', 'hep.json'),
+        ('elements/id.json', 'elements/id.json'),
+        ('hep', 'hep.json'),
+        ('/hep.json', 'hep.json'),
+        ('/something/../hep.json', 'hep.json'),
+        ('file://somewhe.re/over/the/rainbow/hep.json', 'hep.json'),
+        ('../../../../../hep.json', 'hep.json'),
+        ('http://somewhe.re/../../../../../hep.json', 'hep.json'),
+    ),
+    ids=[
+        'relative simple path',
+        'relative subfolder path',
+        'relative simlple path without extension',
+        'absolute path',
+        'dotted_path',
+        'full url',
+        'too many dotted relative path',
+        'too many dotted full url',
+    ],
+)
+def test_get_schema_path_positive(schema, expected):
+    schema_path = utils.get_schema_path(schema)
 
-    schema_path = utils.get_schema_path('ni!')
-
-    assert schema_path == 'shrubbery'
+    assert schema_path == os.path.join(utils._schema_root_path, expected)
 
 
-@mock.patch('inspire_schemas.utils.os.path.exists')
-@mock.patch('inspire_schemas.utils.resource_filename')
-def test_get_schema_path_negative(mock_resource_filename, mock_exists):
-    mock_resource_filename.side_effect = lambda *_: 'shrubbery'
-    mock_exists.side_effect = lambda *_: False
-
+@pytest.mark.parametrize(
+    'schema',
+    (
+        'Go and boil your bottoms, sons of a silly person!',
+        '../../../../../../etc/passwd',
+    ),
+    ids=[
+        'non existing path',
+        'existing malicious path',
+    ],
+)
+def test_get_schema_path_negative(schema):
     with pytest.raises(errors.SchemaNotFound):
-        utils.get_schema_path(
-            'Go and boil your bottoms, sons of a silly person!'
-        )
+        utils.get_schema_path(schema)
 
 
 @mock.patch('inspire_schemas.utils.RefResolver.resolve_remote')
