@@ -34,14 +34,13 @@ class InspireSchemasException(Exception):
 class SchemaNotFound(InspireSchemasException):
     """Exception raised on missing schema."""
 
-    def __init__(self, schema_path, schema_name):
+    def __init__(self, schema):
         """Exception raised on missing schema.
 
-        :param schema_path: Non-existent path that was tried.
-        :param schema_name: Name of the schema that was requested.
+        :param schema: the schema that was requested.
         """
-        message = 'Unable to find schema "{}" at "{}".'.format(
-            schema_name, schema_path)
+        message = 'Unable to find schema "{}"'.format(
+            schema)
         super(SchemaNotFound, self).__init__(message)
 
 

@@ -26,11 +26,14 @@
 import json
 import os
 
+from urlparse import urlsplit
+
 from jsonschema import RefResolver
 from pkg_resources import resource_filename
 
 from .errors import SchemaNotFound
 
+_schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 
 class LocalRefResolver(RefResolver):
     """Simple resolver to handle non-uri relative paths."""
@@ -45,27 +48,32 @@ class LocalRefResolver(RefResolver):
             )
 
 
-def get_schema_path(schema_name):
+def get_schema_path(schema):
     """Retrieve the installed path for the given schema.
 
-    :param schema_name: String with the name of the schema to validate, for
-        example, 'authors' or 'jobs'.
-    :type schema_name: str
+    :param schema: String with the (relative or absolute) url of the
+        schema to validate, for example, 'records/authors.json' or 'jobs.json',
+        or 'jobs'.
+    :type schema: str
     :rtype: bool
     :return: The path or the given schema name.
     :rtype: str
     """
-    schema_path = resource_filename(
-        __name__,
-        os.path.join('records', schema_name + '.json')
-        )
-    if not os.path.exists(schema_path):
-        raise SchemaNotFound(
-            schema_path=schema_path,
-            schema_name=schema_name,
-        )
+    path = original_path = os.path.normpath(urlsplit(schema).path)
+    if path.startswith(os.path.sep):
+        path = path[1:]
+    if not path.endswith('.json'):
+        path += '.json'
 
-    return os.path.abspath(schema_path)
+    while path:
+        schema_path = os.path.abspath(os.path.join(_schema_root_path, path))
+        if not schema_path.startswith(_schema_root_path):
+            raise SchemaNotFound(schema=schema)
+        if os.path.exists(schema_path):
+            return os.path.abspath(schema_path)
+        # @jacquerie forgive us because we do not know what we are doing
+        path = (path.split(os.path.sep, 1)[1:] or [""])[0]
+    raise SchemaNotFound(schema=schema)
 
 
 def load_schema(schema_name):
