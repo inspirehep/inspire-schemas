@@ -683,12 +683,12 @@
         "publication_type": {
             "enum": [
                 "introductory",
-                "lecture",
+                "lectures",
                 "review"
             ],
             "type": "string"
         },
-        "published": {
+        "refereed": {
             "type": "boolean"
         },
         "references": {
@@ -768,7 +768,7 @@
                     "D0-PRELIMINARY-NOTE",
                     "H1-INTERNAL-NOTE",
                     "H1-PRELIMINARY-NOTE",
-                    "HALhidden",
+                    "HALHIDDEN",
                     "HEPHIDDEN",
                     "HERMES-INTERNAL-NOTE",
                     "LARSOFT-INTERNAL-NOTE",
