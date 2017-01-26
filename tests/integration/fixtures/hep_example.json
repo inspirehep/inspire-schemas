@@ -1038,7 +1038,7 @@
     "special_collection": [
         "ZEUS-INTERNAL-NOTE",
         "HERMES-INTERNAL-NOTE",
-        "HALhidden",
+        "HALHIDDEN",
         "D0-INTERNAL-NOTE"
     ],
     "succeeding_entry": {
@@ -1054,7 +1054,7 @@
     "thesis_info": {
         "date": "dddd-dd-dd",
         "defense_date": "dddd-dd-dd",
-        "degree_type": "PhD",
+        "degree_type": "phd",
         "institutions": [
             {
                 "curated_relation": false,

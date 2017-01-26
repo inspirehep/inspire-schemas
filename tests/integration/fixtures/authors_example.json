@@ -12,7 +12,7 @@
         {
             "_degree_type": "in laboris eu qui",
             "curated_relation": false,
-            "degree_type": "Laurea",
+            "degree_type": "laurea",
             "name": "enim aliqua ea",
             "record": {
                 "$ref": "http://17A&i"
@@ -21,7 +21,7 @@
         {
             "_degree_type": "nulla veniam eiusmod consequat non",
             "curated_relation": true,
-            "degree_type": "Diploma",
+            "degree_type": "diploma",
             "name": "labore nostrud qui non ut",
             "record": {
                 "$ref": "http://1nkcl7+b"
@@ -30,7 +30,7 @@
         {
             "_degree_type": "qui cillum do tempor exerci",
             "curated_relation": true,
-            "degree_type": "Diploma",
+            "degree_type": "diploma",
             "name": "enim",
             "record": {
                 "$ref": "http://1!"
@@ -39,7 +39,7 @@
         {
             "_degree_type": "do minim ut Duis",
             "curated_relation": true,
-            "degree_type": "Laurea",
+            "degree_type": "laurea",
             "name": "adipisicing",
             "record": {
                 "$ref": "http://1~eP"
