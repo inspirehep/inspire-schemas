@@ -26,14 +26,15 @@
 import json
 import os
 
-from urlparse import urlsplit
-
 from jsonschema import RefResolver
 from pkg_resources import resource_filename
+from six.moves.urllib.parse import urlsplit
 
 from .errors import SchemaNotFound
 
+
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
+
 
 class LocalRefResolver(RefResolver):
     """Simple resolver to handle non-uri relative paths."""
@@ -53,26 +54,44 @@ def get_schema_path(schema):
 
     :param schema: String with the (relative or absolute) url of the
         schema to validate, for example, 'records/authors.json' or 'jobs.json',
-        or 'jobs'.
+        or by just the name like 'jobs'.
     :type schema: str
-    :rtype: bool
     :return: The path or the given schema name.
     :rtype: str
     """
-    path = original_path = os.path.normpath(urlsplit(schema).path)
-    if path.startswith(os.path.sep):
-        path = path[1:]
-    if not path.endswith('.json'):
-        path += '.json'
+    def _strip_first_path_elem(path):
+        """Pass doctests.
 
+        Strip the first element of the given path, returning an empty string if
+        there are no more elements. For example, 'something/other' will end up
+        as 'other', but  passing then 'other' will return ''
+        """
+        stripped_path = path.split(os.path.sep, 1)[1:]
+        return ''.join(stripped_path)
+
+    def _schema_to_normalized_path(schema):
+        """Pass doctests.
+
+        Extracts the path from the url, makes sure to get rid of any '..' in
+        the path and adds the json extension if not there.
+        """
+        path = os.path.normpath(os.path.sep + urlsplit(schema).path)
+        if path.startswith(os.path.sep):
+            path = path[1:]
+
+        if not path.endswith('.json'):
+            path += '.json'
+
+        return path
+
+    path = _schema_to_normalized_path(schema)
     while path:
         schema_path = os.path.abspath(os.path.join(_schema_root_path, path))
-        if not schema_path.startswith(_schema_root_path):
-            raise SchemaNotFound(schema=schema)
         if os.path.exists(schema_path):
             return os.path.abspath(schema_path)
-        # @jacquerie forgive us because we do not know what we are doing
-        path = (path.split(os.path.sep, 1)[1:] or [""])[0]
+
+        path = _strip_first_path_elem(path)
+
     raise SchemaNotFound(schema=schema)
 
 
