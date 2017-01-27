@@ -9,6 +9,12 @@
             "type": "string"
         },
         "method": {
+            "enum": [
+                "submitter",
+                "oai",
+                "batchuploader",
+                "hepcrawl"
+            ],
             "type": "string"
         },
         "orcid": {
