@@ -2,6 +2,13 @@
     "$schema": "http://json-schema.org/schema#",
     "noAdditionalProperties": true,
     "properties": {
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "coden": {
             "items": {
                 "pattern": "^[0-9\\.A-Z_-]{4,6}$",
@@ -81,17 +88,16 @@
             "description": "Master record that replaces this record",
             "title": "New record"
         },
-        "nonpublic_note": {
-            "title": "Non public note",
-            "type": "string"
-        },
         "peer_reviewed": {
             "title": "Is the journal peer-reviewed?",
             "type": "boolean"
         },
-        "public_note": {
-            "title": "Publisher",
-            "type": "string"
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "publisher": {
             "items": {

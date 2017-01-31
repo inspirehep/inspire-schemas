@@ -2,6 +2,13 @@
     "$schema": "http://json-schema.org/schema#",
     "noAdditionalProperties": true,
     "properties": {
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "accelerator": {
             "title": "Accelerator",
             "type": "string"
@@ -119,11 +126,6 @@
             "description": "Master record that replaces this record",
             "title": "New record"
         },
-        "nonpublic_note": {
-            "description": "FIXME: difference from hidden_note!?",
-            "title": "Non public note",
-            "type": "string"
-        },
         "other_experiment_names": {
             "items": {
                 "$ref": "elements/title.json"
@@ -131,9 +133,12 @@
             "type": "array",
             "uniqueItems": true
         },
-        "public_note": {
-            "title": "Public note",
-            "type": "string"
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "related_experiments": {
             "items": {

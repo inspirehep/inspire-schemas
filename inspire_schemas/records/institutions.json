@@ -10,6 +10,13 @@
             "title": "New INSPIRE control number",
             "type": "array"
         },
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "address": {
             "items": {
                 "$ref": "elements/address.json"
@@ -58,15 +65,6 @@
             },
             "title": "Field of activity",
             "type": "array"
-        },
-        "hidden_notes": {
-            "items": {
-                "title": "Hidden note",
-                "type": "string"
-            },
-            "title": "Hidden notes",
-            "type": "array",
-            "uniqueItems": true
         },
         "historical_data": {
             "items": {
@@ -150,15 +148,6 @@
             "$ref": "elements/json_reference.json",
             "description": "Master record that replaces this record",
             "title": "New record"
-        },
-        "non_public_notes": {
-            "items": {
-                "title": "Non-Public note",
-                "type": "string"
-            },
-            "title": "FIXME: Difference between hidden note?",
-            "type": "array",
-            "uniqueItems": true
         },
         "public_notes": {
             "items": {

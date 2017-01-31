@@ -2,6 +2,13 @@
     "$schema": "http://json-schema.org/schema#",
     "noAdditionalProperties": true,
     "properties": {
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "address": {
             "items": {
                 "$ref": "elements/address.json"
@@ -92,6 +99,13 @@
         "position": {
             "title": "Job position",
             "type": "string"
+        },
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "ranks": {
             "items": {

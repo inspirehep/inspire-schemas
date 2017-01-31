@@ -2,6 +2,13 @@
     "$schema": "http://json-schema.org/schema#",
     "noAdditionalProperties": true,
     "properties": {
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "acronym": {
             "items": {
                 "type": "string"
@@ -70,17 +77,6 @@
             "description": "Master record that replaces this record",
             "title": "New record"
         },
-        "nonpublic_note": {
-            "title": "Non public note",
-            "type": "string"
-        },
-        "note": {
-            "items": {
-                "type": "string"
-            },
-            "title": "Note",
-            "type": "array"
-        },
         "opening_date": {
             "format": "date",
             "title": "Conference opening date",
@@ -90,6 +86,13 @@
             "pattern": "^.+,.+,?.*$",
             "title": "Conference place",
             "type": "string"
+        },
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "self": {
             "$ref": "elements/json_reference.json",
