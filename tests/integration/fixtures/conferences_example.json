@@ -1,160 +1,242 @@
 {
+    "_private_notes": [
+        {
+            "source": "incididunt nisi est",
+            "value": "eiusmod laborum"
+        },
+        {
+            "source": "exercita",
+            "value": "adipisicing nost"
+        },
+        {
+            "source": "est",
+            "value": "tempor dolore enim nulla"
+        }
+    ],
     "acronym": [
-        "elit",
-        "reprehenderit tempor est adipisicing",
-        "laborum ut fugiat",
-        "commodo tempor anim consequat",
-        "nisi nostrud"
+        "labore laboris",
+        "nostrud laboris reprehenderit quis",
+        "pariatur adipisicing incididunt"
     ],
     "address": [
         {
-            "city": "cillum labore commodo sunt Duis",
-            "country_code": "LY",
-            "latitude": 97800481,
-            "longitude": -29658712,
-            "original address": "sed qui dolo",
-            "postal_code": "aliquip nulla dolore",
-            "state": "magna et irure"
+            "city": "deserunt",
+            "country_code": "SJ",
+            "latitude": -11646665,
+            "longitude": 71743232,
+            "original address": "dolore nostrud aliqua ut sit",
+            "postal_code": "sit amet irure enim sunt",
+            "state": "nostrud"
+        },
+        {
+            "city": "minim anim no",
+            "country_code": "SS",
+            "latitude": 65426791,
+            "longitude": 54831258,
+            "original address": "quis ad",
+            "postal_code": "amet ut",
+            "state": "incididunt"
+        },
+        {
+            "city": "laborum ea minim",
+            "country_code": "SE",
+            "latitude": 98793916,
+            "longitude": 97549470,
+            "original address": "voluptate in officia ea non",
+            "postal_code": "dolor ut",
+            "state": "pariatur in"
+        },
+        {
+            "city": "sed",
+            "country_code": "RO",
+            "latitude": 19554089,
+            "longitude": 82626705,
+            "original address": "Ut",
+            "postal_code": "ut officia",
+            "state": "non reprehenderit labore sit id"
+        },
+        {
+            "city": "cillum",
+            "country_code": "IS",
+            "latitude": -74670952,
+            "longitude": -60059813,
+            "original address": "Ut sunt",
+            "postal_code": "eu elit nulla sint",
+            "state": "sunt velit"
         }
     ],
     "alternative_titles": [
         {
-            "source": "do enim ea",
-            "subtitle": "labore sint fugiat eiusmod Ut",
-            "title": "Ut ea nisi ullamco"
+            "source": "esse",
+            "subtitle": "exercitation",
+            "title": "ea"
         },
         {
-            "source": "eiusmod esse",
-            "subtitle": "Excepteur fugiat Lorem",
-            "title": "in irure ea elit velit"
+            "source": "ipsum",
+            "subtitle": "proident cillum nulla",
+            "title": "consequat dolor cillum esse sed"
         },
         {
-            "source": "aliquip minim et laboris do",
-            "subtitle": "ut eu eiusmod",
-            "title": "cillum"
+            "source": "quis labore Excepteur",
+            "subtitle": "ut",
+            "title": "nostrud reprehenderit ea culpa aute"
         },
         {
-            "source": "exercitation eiusmod in cupidatat",
-            "subtitle": "culpa deserunt sit occaecat",
-            "title": "sint consequat labore"
+            "source": "in cupidatat",
+            "subtitle": "ipsum ut",
+            "title": "Duis eu"
         },
         {
-            "source": "Lorem Ut",
-            "subtitle": "sit",
-            "title": "esse consectetur Excepteur id voluptate"
+            "source": "qui pariatur",
+            "subtitle": "cillum dolore ad",
+            "title": "sint non"
         }
     ],
     "closing_date": "dddd-dd-dd",
-    "cnum": "C09-69-94.621452586",
+    "cnum": "C25-68-79.2393991",
     "contact_details": [
         {
-            "email": "Blh3wTTo@C.suji",
-            "name": "sunt ullamco"
+            "email": "ugPCs9X@ojnwZEcJwQTeI.liaj",
+            "name": "aliquip non nulla"
         },
         {
-            "email": "29vrCfXZ@OeqAKmpucTR.vqq",
-            "name": "reprehen"
+            "email": "Aai7I4s7EISxNpC@FICltOgSPJtNgBRcKTkbZARTecbLJCWp.nkrn",
+            "name": "nisi mollit"
         },
         {
-            "email": "J3jJGkzRiSr@rANprtZEMkmtxGigztoVtR.ycz",
-            "name": "dolor qui"
+            "email": "9TaYTvNE85R3xGJ@kHiXcjScOGQBaTgTau.yq",
+            "name": "magna culpa"
+        },
+        {
+            "email": "UItHsIVciq1-cCc@ktKe.nest",
+            "name": "dolor voluptate pariatur culpa ex"
         }
     ],
-    "deleted": true,
+    "deleted": false,
     "inspire_categories": [
         {
-            "source": "curator",
-            "term": "Accelerators"
+            "source": "undefined",
+            "term": "Phenomenology-HEP"
         },
         {
-            "source": "curator",
+            "source": "magpie",
             "term": "Experiment-HEP"
         },
         {
-            "source": "arxiv",
-            "term": "Computing"
+            "source": "curator",
+            "term": "Gravitation and Cosmology"
         },
         {
-            "source": "undefined",
-            "term": "Experiment-Nucl"
+            "source": "magpie",
+            "term": "Theory-HEP"
         }
     ],
     "keywords": [
         {
-            "source": "quis",
-            "value": "in labore veniam"
+            "source": "sit fugiat deserunt",
+            "value": "ea aliquip exercitation laborum aute"
         },
         {
-            "source": "dolor dolore et",
-            "value": "sit"
+            "source": "non",
+            "value": "aliqua consequat nisi"
         },
         {
-            "source": "tempor aute non nisi",
-            "value": "ea aute in"
+            "source": "fugiat veniam magna",
+            "value": "ut do ea"
         }
     ],
     "new_record": {
-        "$ref": "http://1Zk:"
+        "$ref": "http://1n"
     },
-    "nonpublic_note": "sit commodo velit",
-    "note": [
-        "deserunt in ipsum sit sint",
-        "commodo",
-        "cillum sint ullamco au",
-        "exerc"
-    ],
     "opening_date": "dddd-dd-dd",
-    "place": "EPnDn/P,q,1 qz*.",
+    "place": ">_y<-!^Jey,Fqg6S92V@0j<",
+    "public_notes": [
+        {
+            "source": "aliqua",
+            "value": "Lorem"
+        },
+        {
+            "source": "commodo consectetur enim nisi eu",
+            "value": "exercitation laborum in voluptate"
+        },
+        {
+            "source": "Duis sint id ipsum",
+            "value": "officia ut sint Lorem aute"
+        },
+        {
+            "source": "ea adipis",
+            "value": "ad eiusmod aliquip cupidatat"
+        }
+    ],
     "self": {
-        "$ref": "http://1}\\Mm@@[q&"
+        "$ref": "http://1oV|="
     },
     "series": [
         {
-            "name": "sit elit in",
-            "number": 74403051
+            "name": "nisi est dolore eiusmod ullamco",
+            "number": 14354180
+        },
+        {
+            "name": "ut consequat nisi aliquip velit",
+            "number": -33752912
+        },
+        {
+            "name": "ullamco cillum nostrud",
+            "number": -31494765
+        },
+        {
+            "name": "tempor",
+            "number": -21144087
         }
     ],
     "short_description": [
         {
-            "source": "dolore cupidatat Excepteur voluptate commodo",
-            "value": "in eu Lorem ea consequat"
+            "source": "amet E",
+            "value": "culpa commodo"
         },
         {
-            "source": "dolor esse enim aute",
-            "value": "in"
-        },
-        {
-            "source": "anim sed non",
-            "value": "Excepteur ea fugiat ut sunt"
+            "source": "eu",
+            "value": "anim dolor qui cillum"
         }
     ],
     "titles": [
         {
-            "source": "proident et ut i",
-            "subtitle": "mollit nostrud dolor consequat aute",
-            "title": "commodo et irure laboris veniam"
+            "source": "magna",
+            "subtitle": "ad nulla Duis sunt dolor",
+            "title": "aliqua"
+        },
+        {
+            "source": "sit id aute",
+            "subtitle": "commodo",
+            "title": "consectetur commodo occaecat culpa ipsum"
+        },
+        {
+            "source": "velit aliqu",
+            "subtitle": "qui",
+            "title": "elit veniam culpa fugiat aute"
+        },
+        {
+            "source": "sit",
+            "subtitle": "aliqua Ut",
+            "title": "sit magna voluptate dolor deserunt"
         }
     ],
     "urls": [
         {
-            "description": "proident dolor tempor sit et",
-            "value": "http://1v2AfeQ\\"
+            "description": "proident Duis Lorem est mollit",
+            "value": "http://1~St+"
         },
         {
-            "description": "dolore laboris ullamco adipisicing",
-            "value": "http://17nr7Sp"
+            "description": "elit sed proident",
+            "value": "http://1)xp|,nY]="
         },
         {
-            "description": "laboris nulla",
-            "value": "http://1Jz\""
+            "description": "consectetur",
+            "value": "http://1;fHnAc3G"
         },
         {
-            "description": "tempor",
-            "value": "http://1dE"
-        },
-        {
-            "description": "tempor quis qui in",
-            "value": "http://1"
+            "description": "adipisicing nisi Ut Lorem nostrud",
+            "value": "http://1\",!"
         }
     ]
 }

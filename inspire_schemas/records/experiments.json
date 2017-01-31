@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
         "_private_notes": {
             "items": {
@@ -15,7 +15,7 @@
         },
         "affiliations": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
@@ -142,7 +142,7 @@
         },
         "related_experiments": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "title": "Is the relation curated?",
@@ -179,7 +179,7 @@
         },
         "spokespersons": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "title": "Is the relation curated?",

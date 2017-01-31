@@ -1,5 +1,5 @@
 {
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
         "source": {
             "$ref": "source.json"

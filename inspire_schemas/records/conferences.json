@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
         "_private_notes": {
             "items": {
@@ -57,7 +57,7 @@
         },
         "keywords": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "source": {
                         "type": "string"
@@ -101,7 +101,7 @@
         },
         "series": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "name": {
                         "type": "string"

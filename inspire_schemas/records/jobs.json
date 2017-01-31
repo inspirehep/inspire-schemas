@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
         "_private_notes": {
             "items": {
@@ -42,7 +42,7 @@
         },
         "experiments": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
@@ -71,7 +71,7 @@
         },
         "institutions": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"

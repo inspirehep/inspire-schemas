@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
         "source": {
             "enum": [

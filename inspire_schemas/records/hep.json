@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "additionalProperties": false,
     "description": "An article or thesis or book or...",
-    "noAdditionalProperties": true,
     "properties": {
         "$schema": {
             "format": "url",
@@ -23,7 +23,7 @@
         },
         "accelerator_experiments": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "accelerator": {
                         "type": "string"
@@ -55,7 +55,7 @@
         "arxiv_eprints": {
             "description": "Read only meta-data (identifiers and categories) coming from arXiv",
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "categories": {
                         "items": {
@@ -80,11 +80,11 @@
         "authors": {
             "description": "Anybody who has acted on a given document (including supervisors, editors, etc.)",
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "affiliations": {
                         "items": {
-                            "noAdditionalProperties": true,
+                            "additionalProperties": false,
                             "properties": {
                                 "curated_relation": {
                                     "description": "Does this affiliation point to the correct Institution?",
@@ -204,7 +204,7 @@
         },
         "book_series": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "title": {
                         "description": "Title of the book series",
@@ -226,7 +226,7 @@
         },
         "collaborations": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "record": {
                         "$ref": "elements/json_reference.json"
@@ -242,7 +242,7 @@
         },
         "collections": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "primary": {
                         "type": "string"
@@ -260,7 +260,7 @@
         },
         "copyright": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "holder": {
                         "description": "Copyright holder.",
@@ -326,7 +326,7 @@
         },
         "dois": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "material": {
                         "$ref": "elements/material.json"
@@ -352,7 +352,7 @@
         },
         "edition": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "edition": {
                         "type": "string"
@@ -373,7 +373,7 @@
         },
         "external_system_identifiers": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "schema": {
                         "type": "string"
@@ -390,7 +390,7 @@
         "funding_info": {
             "description": "Information related to funding. FIXME: Do we care about this? So far only 349 records were tagged and all for a single EU project.",
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "agency": {
                         "title": "Agency",
@@ -414,7 +414,7 @@
         },
         "imprints": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "date": {
                         "format": "date",
@@ -441,7 +441,7 @@
         },
         "isbns": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "comment": {
                         "description": "Further information about type.",
@@ -465,7 +465,7 @@
         },
         "keywords": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "schema": {
                         "description": "The particular vocabulary against which this keyword is valid and found. Leave empty for free form keywords",
@@ -501,7 +501,7 @@
         },
         "license": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "imposing": {
                         "description": "FIXME: what is this!?",
@@ -539,7 +539,7 @@
         },
         "persistent_identifiers": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "schema": {
                         "title": "Type of persistent identifier (e.g. HDL, URN)",
@@ -573,7 +573,7 @@
         },
         "publication_info": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "artid": {
                         "description": "Electronic Article ID",
@@ -657,14 +657,14 @@
         },
         "references": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
                     },
                     "raw_refs": {
                         "items": {
-                            "noAdditionalProperties": true,
+                            "additionalProperties": false,
                             "properties": {
                                 "position": {
                                     "description": "The position of the reference as it appears on the document",
@@ -737,8 +737,8 @@
             "uniqueItems": true
         },
         "succeeding_entry": {
+            "additionalProperties": false,
             "description": "Reference to previously merged records.",
-            "noAdditionalProperties": true,
             "properties": {
                 "isbn": {
                     "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
@@ -761,7 +761,7 @@
             "uniqueItems": true
         },
         "thesis_info": {
-            "noAdditionalProperties": true,
+            "additionalProperties": false,
             "properties": {
                 "date": {
                     "format": "date",
@@ -776,7 +776,7 @@
                 },
                 "institutions": {
                     "items": {
-                        "noAdditionalProperties": true,
+                        "additionalProperties": false,
                         "properties": {
                             "curated_relation": {
                                 "type": "boolean"
@@ -798,7 +798,7 @@
         },
         "title_translations": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "language": {
                         "pattern": "^\\w{2}$",

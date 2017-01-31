@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
+    "additionalProperties": false,
     "description": "record-like Schema for a Publication's reference",
-    "noAdditionalProperties": true,
     "properties": {
         "arxiv_eprints": {
             "items": {
@@ -14,7 +14,7 @@
         "authors": {
             "description": "List with all the authors",
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "full_name": {
                         "type": "string"
@@ -30,7 +30,7 @@
             "uniqueItems": true
         },
         "book_series": {
-            "noAdditionalProperties": true,
+            "additionalProperties": false,
             "properties": {
                 "title": {
                     "description": "Title of the book series",
@@ -59,7 +59,7 @@
             "uniqueItems": true
         },
         "imprint": {
-            "noAdditionalProperties": true,
+            "additionalProperties": false,
             "properties": {
                 "date": {
                     "format": "date",
@@ -93,7 +93,7 @@
             "uniqueItems": true
         },
         "publication_info": {
-            "noAdditionalProperties": true,
+            "additionalProperties": false,
             "properties": {
                 "artid": {
                     "description": "Electronic Article ID",
