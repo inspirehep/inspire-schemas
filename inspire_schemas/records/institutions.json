@@ -141,31 +141,8 @@
         },
         "name_variants": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "description": "FIXME: Do we really care about the source?",
-                        "enum": [
-                            "DESY",
-                            "DESY_AFF",
-                            "ADS",
-                            "INSPIRE"
-                        ],
-                        "title": "Name variant source",
-                        "type": "string"
-                    },
-                    "value": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array",
-                        "uniqueItems": true
-                    }
-                },
-                "title": "Name variant",
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
-            "title": "Name variants",
             "type": "array",
             "uniqueItems": true
         },
@@ -185,10 +162,8 @@
         },
         "public_notes": {
             "items": {
-                "title": "Public note",
-                "type": "string"
+                "$ref": "elements/sourced_value.json"
             },
-            "title": "Public notes",
             "type": "array",
             "uniqueItems": true
         },

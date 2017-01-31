@@ -118,19 +118,10 @@
         },
         "short_description": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
-            "title": "Short description",
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
         },
         "titles": {
             "items": {
