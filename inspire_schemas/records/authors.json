@@ -1,16 +1,20 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
-        "_private_note": {
-            "type": "string"
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "acquisition_source": {
             "$ref": "elements/acquisition_source.json"
         },
         "advisors": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "_degree_type": {
                         "type": "string"
@@ -33,10 +37,6 @@
             "type": "array",
             "uniqueItems": true
         },
-        "author_note": {
-            "description": "Contains public note.",
-            "type": "string"
-        },
         "birth_date": {
             "description": "Stores birth date",
             "format": "date",
@@ -44,7 +44,7 @@
         },
         "collections": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "primary": {
                         "type": "string"
@@ -84,7 +84,7 @@
         "experiments": {
             "description": "Contains information about experiments.",
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
@@ -126,8 +126,8 @@
             "uniqueItems": true
         },
         "name": {
+            "additionalProperties": false,
             "description": "Contains name information.",
-            "noAdditionalProperties": true,
             "properties": {
                 "numeration": {
                     "enum": [
@@ -192,7 +192,7 @@
         },
         "positions": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "_rank": {
                         "type": "string"
@@ -212,7 +212,7 @@
                         "type": "string"
                     },
                     "institution": {
-                        "noAdditionalProperties": true,
+                        "additionalProperties": false,
                         "properties": {
                             "curated_relation": {
                                 "type": "boolean"
@@ -263,6 +263,13 @@
             "type": "array",
             "uniqueItems": true
         },
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "self": {
             "$ref": "elements/json_reference.json",
             "description": "Url of the record itself",
@@ -271,7 +278,7 @@
         "source": {
             "description": "This is the source of informatio. It is currently a mixed bags of user IDs or provenance information, e.g. arXiv etc. FIXME: we should really discuss about it. E.g. eprint, webform, Rachel.Lumpkin@durham.ac.uk(96), Fermilab, C09-05-04, KYOTOU...",
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "date_verified": {
                         "format": "date",

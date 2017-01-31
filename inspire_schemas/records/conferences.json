@@ -1,7 +1,14 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "acronym": {
             "items": {
                 "type": "string"
@@ -50,7 +57,7 @@
         },
         "keywords": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "source": {
                         "type": "string"
@@ -70,17 +77,6 @@
             "description": "Master record that replaces this record",
             "title": "New record"
         },
-        "nonpublic_note": {
-            "title": "Non public note",
-            "type": "string"
-        },
-        "note": {
-            "items": {
-                "type": "string"
-            },
-            "title": "Note",
-            "type": "array"
-        },
         "opening_date": {
             "format": "date",
             "title": "Conference opening date",
@@ -91,6 +87,13 @@
             "title": "Conference place",
             "type": "string"
         },
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "self": {
             "$ref": "elements/json_reference.json",
             "description": "Url of the record itself",
@@ -98,7 +101,7 @@
         },
         "series": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "name": {
                         "type": "string"
@@ -118,19 +121,10 @@
         },
         "short_description": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "type": "string"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
-            "title": "Short description",
-            "type": "array"
+            "type": "array",
+            "uniqueItems": true
         },
         "titles": {
             "items": {

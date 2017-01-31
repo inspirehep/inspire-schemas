@@ -1,14 +1,15 @@
 {
-    "$schema": "http://json-schema.org/schema#",
     "additionalProperties": false,
     "properties": {
-        "description": {
-            "type": "string"
+        "source": {
+            "$ref": "source.json"
         },
         "value": {
-            "format": "url",
             "type": "string"
         }
     },
+    "required": [
+        "value"
+    ],
     "type": "object"
 }

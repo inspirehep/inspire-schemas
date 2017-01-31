@@ -1,14 +1,21 @@
 {
     "$schema": "http://json-schema.org/schema#",
-    "noAdditionalProperties": true,
+    "additionalProperties": false,
     "properties": {
+        "_private_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "accelerator": {
             "title": "Accelerator",
             "type": "string"
         },
         "affiliations": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "type": "boolean"
@@ -119,11 +126,6 @@
             "description": "Master record that replaces this record",
             "title": "New record"
         },
-        "nonpublic_note": {
-            "description": "FIXME: difference from hidden_note!?",
-            "title": "Non public note",
-            "type": "string"
-        },
         "other_experiment_names": {
             "items": {
                 "$ref": "elements/title.json"
@@ -131,13 +133,16 @@
             "type": "array",
             "uniqueItems": true
         },
-        "public_note": {
-            "title": "Public note",
-            "type": "string"
+        "public_notes": {
+            "items": {
+                "$ref": "elements/sourced_value.json"
+            },
+            "type": "array",
+            "uniqueItems": true
         },
         "related_experiments": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "title": "Is the relation curated?",
@@ -174,7 +179,7 @@
         },
         "spokespersons": {
             "items": {
-                "noAdditionalProperties": true,
+                "additionalProperties": false,
                 "properties": {
                     "curated_relation": {
                         "title": "Is the relation curated?",
