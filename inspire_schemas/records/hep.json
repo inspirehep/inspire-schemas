@@ -9,16 +9,7 @@
         },
         "abstracts": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "$ref": "elements/source.json"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
             "type": "array",
             "uniqueItems": true
@@ -177,22 +168,10 @@
                     },
                     "raw_affiliations": {
                         "items": {
-                            "noAdditionalProperties": true,
-                            "properties": {
-                                "source": {
-                                    "$ref": "elements/source.json"
-                                },
-                                "value": {
-                                    "description": "The affiliation as it appears on the paper",
-                                    "type": "string"
-                                }
-                            },
-                            "required": [
-                                "value"
-                            ],
-                            "type": "object"
+                            "$ref": "elements/sourced_value.json"
                         },
-                        "type": "array"
+                        "type": "array",
+                        "uniqueItems": true
                     },
                     "record": {
                         "$ref": "elements/json_reference.json",
@@ -354,6 +333,9 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "value"
+                ],
                 "title": "DOI",
                 "type": "object"
             },
@@ -425,16 +407,7 @@
         },
         "hidden_notes": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "$ref": "elements/source.json"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
             "type": "array",
             "uniqueItems": true
@@ -510,6 +483,9 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "value"
+                ],
                 "type": "object"
             },
             "type": "array",
@@ -590,19 +566,7 @@
         },
         "public_notes": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "$ref": "elements/source.json"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "value"
-                ],
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
             "type": "array",
             "uniqueItems": true
@@ -739,16 +703,7 @@
         },
         "report_numbers": {
             "items": {
-                "noAdditionalProperties": true,
-                "properties": {
-                    "source": {
-                        "$ref": "elements/source.json"
-                    },
-                    "value": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+                "$ref": "elements/sourced_value.json"
             },
             "type": "array",
             "uniqueItems": true

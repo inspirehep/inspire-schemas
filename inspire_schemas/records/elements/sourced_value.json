@@ -1,0 +1,15 @@
+{
+    "noAdditionalProperties": true,
+    "properties": {
+        "source": {
+            "$ref": "source.json"
+        },
+        "value": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "value"
+    ],
+    "type": "object"
+}
