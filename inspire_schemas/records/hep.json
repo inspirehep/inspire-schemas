@@ -688,7 +688,22 @@
         },
         "report_numbers": {
             "items": {
-                "$ref": "elements/sourced_value.json"
+                "additionalProperties": false,
+                "properties": {
+                    "hidden": {
+                        "type": "boolean"
+                    },
+                    "source": {
+                        "$ref": "elements/source.json"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "value"
+                ],
+                "type": "object"
             },
             "type": "array",
             "uniqueItems": true
