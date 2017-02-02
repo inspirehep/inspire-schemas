@@ -270,11 +270,6 @@
             "value": "Lorem"
         }
     ],
-    "collections": [
-        {
-            "primary": "velit dolor consectetur pa"
-        }
-    ],
     "control_number": 95311308,
     "copyright": [
         {
@@ -1228,7 +1223,7 @@
     "self": {
         "$ref": "http://1xZsQ)+fgs"
     },
-    "special_collection": [
+    "special_collections": [
         "ZEUS-PRELIMINARY-NOTE",
         "D0-INTERNAL-NOTE"
     ],

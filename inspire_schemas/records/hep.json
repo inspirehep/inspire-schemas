@@ -240,21 +240,6 @@
             "type": "array",
             "uniqueItems": true
         },
-        "collections": {
-            "items": {
-                "additionalProperties": false,
-                "properties": {
-                    "primary": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "minItems": 1,
-            "title": "Collection",
-            "type": "array",
-            "uniqueItems": true
-        },
         "control_number": {
             "type": "integer"
         },
@@ -713,7 +698,7 @@
             "description": "Url of the record itself",
             "title": "Url of the record"
         },
-        "special_collection": {
+        "special_collections": {
             "items": {
                 "enum": [
                     "CDF-INTERNAL-NOTE",

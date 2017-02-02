@@ -42,20 +42,6 @@
             "format": "date",
             "type": "string"
         },
-        "collections": {
-            "items": {
-                "additionalProperties": false,
-                "properties": {
-                    "primary": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "minItems": 1,
-            "type": "array",
-            "uniqueItems": true
-        },
         "conferences": {
             "description": "Contains information about attended conferences. (their record URIs)",
             "items": {
@@ -302,6 +288,9 @@
                 "retired"
             ],
             "type": "string"
+        },
+        "stub": {
+            "type": "boolean"
         },
         "urls": {
             "items": {
