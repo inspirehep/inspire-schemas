@@ -61,7 +61,9 @@
                         "items": {
                             "$ref": "elements/arxiv_categories.json"
                         },
-                        "type": "array"
+                        "minItems": 1,
+                        "type": "array",
+                        "uniqueItems": true
                     },
                     "value": {
                         "description": "arXiv eprint number, e.g. math.DG/0307245 or 1701.01431",
@@ -70,6 +72,7 @@
                     }
                 },
                 "required": [
+                    "categories",
                     "value"
                 ],
                 "type": "object"
