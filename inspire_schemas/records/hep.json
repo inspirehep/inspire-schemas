@@ -39,6 +39,9 @@
                     "institution": {
                         "type": "string"
                     },
+                    "legacy_identifier": {
+                        "type": "string"
+                    },
                     "record": {
                         "$ref": "elements/json_reference.json",
                         "description": "URI for the corresponding experiment record."
