@@ -1,0 +1,10 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "enum": [
+        "print",
+        "online",
+        "paperback",
+        "hardcover"
+    ],
+    "type": "string"
+}

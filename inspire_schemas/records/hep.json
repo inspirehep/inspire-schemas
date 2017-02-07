@@ -435,8 +435,8 @@
                         "description": "Further information about type.",
                         "type": "string"
                     },
-                    "material": {
-                        "$ref": "elements/material.json"
+                    "medium": {
+                        "$ref": "elements/medium.json"
                     },
                     "value": {
                         "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
