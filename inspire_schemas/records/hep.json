@@ -829,6 +829,7 @@
             "items": {
                 "$ref": "elements/title.json"
             },
+            "minItems": 1,
             "type": "array",
             "uniqueItems": true
         },
@@ -843,6 +844,10 @@
             "type": "boolean"
         }
     },
+    "required": [
+        "document_type",
+        "titles"
+    ],
     "title": "Publication",
     "type": "object"
 }
