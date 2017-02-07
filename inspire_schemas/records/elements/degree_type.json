@@ -7,8 +7,7 @@
         "laurea",
         "master",
         "phd",
-        "habilitation",
-        "thesis"
+        "habilitation"
     ],
     "title": "Degree type",
     "type": "string"
