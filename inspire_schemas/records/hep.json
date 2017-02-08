@@ -39,6 +39,9 @@
                     "institution": {
                         "type": "string"
                     },
+                    "legacy_name": {
+                        "type": "string"
+                    },
                     "record": {
                         "$ref": "elements/json_reference.json",
                         "description": "URI for the corresponding experiment record."
@@ -431,12 +434,14 @@
             "items": {
                 "additionalProperties": false,
                 "properties": {
-                    "comment": {
-                        "description": "Further information about type.",
+                    "medium": {
+                        "enum": [
+                            "hardcover",
+                            "online",
+                            "print",
+                            "softcover"
+                        ],
                         "type": "string"
-                    },
-                    "material": {
-                        "$ref": "elements/material.json"
                     },
                     "value": {
                         "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
@@ -840,6 +845,10 @@
             "type": "boolean"
         }
     },
+    "required": [
+        "document_type",
+        "titles"
+    ],
     "title": "Publication",
     "type": "object"
 }

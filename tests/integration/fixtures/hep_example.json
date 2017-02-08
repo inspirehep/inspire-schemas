@@ -1,71 +1,59 @@
 {
     "_private_notes": [
         {
-            "source": "in adipisicing",
-            "value": "elit"
+            "source": "Excepteur nisi",
+            "value": "ad ullamco nostrud"
         },
         {
-            "source": "quis do repre",
-            "value": "enim Ut"
+            "source": "sit nisi eu",
+            "value": "nisi velit"
         },
         {
-            "source": "deserunt no",
-            "value": "ad in veniam"
-        },
-        {
-            "source": "anim aute dolore ea",
-            "value": "non consequat"
+            "source": "id aliqua re",
+            "value": "nostrud"
         }
     ],
     "abstracts": [
         {
-            "source": "aute",
-            "value": "magna minim"
+            "source": "proident ullamco",
+            "value": "nisi ad veniam magna nostrud"
+        },
+        {
+            "source": "esse adipisicing Excepteur culpa ipsum",
+            "value": "occaecat"
+        },
+        {
+            "source": "nisi velit",
+            "value": "ad amet Ut in anim"
         }
     ],
     "accelerator_experiments": [
         {
-            "accelerator": "consectetur",
+            "accelerator": "laborum sit minim exercitation sunt",
             "curated_relation": true,
-            "experiment": "occaecat ad sed",
-            "institution": "ut reprehenderit nulla in",
+            "experiment": "aliqua",
+            "institution": "reprehenderit sit minim labore",
+            "legacy_name": "ea non",
             "record": {
-                "$ref": "http://19V x"
-            }
-        },
-        {
-            "accelerator": "in Excepteur pariatur",
-            "curated_relation": true,
-            "experiment": "amet",
-            "institution": "consequat velit non",
-            "record": {
-                "$ref": "http://1~+zBK*{A"
+                "$ref": "http://1}$F/mm-Xd"
             }
         }
     ],
     "acquisition_source": {
-        "date": "ea eiusmod",
-        "email": "exercitation Excepteu",
-        "method": "quis",
-        "orcid": "2776-8445-8758-3602",
-        "source": "officia",
-        "submission_number": "labore "
+        "date": "labore in",
+        "email": "officia",
+        "method": "reprehenderit velit",
+        "orcid": "8370-6128-8681-1301",
+        "source": "hepcrawl",
+        "submission_number": "in "
     },
     "arxiv_eprints": [
         {
             "categories": [
-                "math.AP"
+                "nlin",
+                "cs.CR"
             ],
-            "value": "0fUmT/033206920"
-        },
-        {
-            "categories": [
-                "stat.CO",
-                "physics.atm-clus",
-                "cs.IT",
-                "math.DG"
-            ],
-            "value": "a_h8y5Ep/414"
+            "value": "0587]5117"
         }
     ],
     "authors": [
@@ -74,1129 +62,453 @@
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1a<y("
+                        "$ref": "http://1a|40u8A"
                     },
-                    "value": "ess"
-                },
-                {
-                    "curated_relation": false,
-                    "record": {
-                        "$ref": "http://1-"
-                    },
-                    "value": "Excepteur occaecat"
+                    "value": ""
                 }
             ],
             "alternative_names": [
-                "magna tempor mollit dolor",
-                "est dolore",
-                "do non exercitation ex eiusmod",
-                "tempor adipisicing",
-                "commodo"
+                "mollit dolor nisi magna elit",
+                "ad sint ea aliquip in",
+                "qui"
             ],
             "credit_roles": [
                 "Funding acquisition"
             ],
-            "curated_relation": false,
+            "curated_relation": true,
             "emails": [
-                "YLPWfuWJ-tF@FUJNoyNTijGuSced.wui",
-                "IoZ0UTe@TkXfotlILZjsiWPdIPjSUYnIENNmGRu.pp",
-                "NrTqZzrBt@JRWdbRllSLlxORCZueUNlsqz.xgys",
-                "d6q1iQ91fTcT@XN.eq",
-                "P5bR@MMun.gah"
+                "JFT@FpPEv.fswq",
+                "LnNMXcDqGAMz@TNoxjDBupFygYfHTIUDkfvlHWBAWPTjb.njes",
+                "PbA@PRPXqscxVF.jib",
+                "kVwDmexrZLI@hVVnruDKgcMWbrNeHUwfpcBt.viy",
+                "VO5uKk@BCiYmTEVRiKRntDhMHzjgomCiRzoDLPnm.mebx"
             ],
-            "full_name": "anim ullamco amet et sunt",
+            "full_name": "non do dolor sed sit",
             "ids": [
                 {
-                    "ete": -13845919,
-                    "ipsumd": -67795848,
-                    "type": "ORCID",
-                    "value": "0520-5941-4982-9706"
+                    "dolor8e5": "dolor sint",
+                    "minim7": false,
+                    "type": "CERN",
+                    "value": "CERN-38"
                 },
                 {
-                    "deserunt99": "quis dolor tempor laboris",
-                    "essefbc": "adipisicing sit commodo non",
-                    "type": "ORCID",
-                    "value": "8640-9697-2962-1837"
-                },
-                {
-                    "consectetur1": -68945646,
-                    "exercitationf46": "labore amet esse in",
-                    "type": "ORCID",
-                    "value": "5870-1233-3684-7872"
-                }
-            ],
-            "inspire_roles": [
-                "author",
-                "author",
-                "author",
-                "author"
-            ],
-            "raw_affiliations": [
-                {
-                    "source": "ut cillum tempor pariatur",
-                    "value": "incididunt mollit exercitation ut culpa"
-                },
-                {
-                    "source": "Duis qui eu minim",
-                    "value": "in ipsum proident"
-                },
-                {
-                    "source": "nostrud minim dolor aliquip amet",
-                    "value": "amet mollit ullamco"
-                }
-            ],
-            "record": {
-                "$ref": "http://1DYJOM;"
-            },
-            "uuid": "2a6449b7-dcc8-3cf0-3dd5-a7b21aa2f089"
-        },
-        {
-            "affiliations": [
-                {
-                    "curated_relation": true,
-                    "record": {
-                        "$ref": "http://1iR#K8p`|66"
-                    },
-                    "value": "adipisicing Excepteur"
-                },
-                {
-                    "curated_relation": true,
-                    "record": {
-                        "$ref": "http://1-asv>"
-                    },
-                    "value": "occaecat pariatur labore"
-                }
-            ],
-            "alternative_names": [
-                "esse ex",
-                "eiusmod ut non adipisicing nisi",
-                "ullamco ad ea",
-                "et veniam dolore nostrud Ut"
-            ],
-            "credit_roles": [
-                "Data curation"
-            ],
-            "curated_relation": false,
-            "emails": [
-                "KU5nUr3FfPyGnNE@BjFoaSephLjffPOPhnzkArEFpCNpO.pj",
-                "50E7d@QnceVr.roxn",
-                "vj9l-4h@mpqqUIqotHlMvc.amli",
-                "4qH13ljPske@KLpdnnaLRLDmNlecMXcvZXM.ltms",
-                "zoXixvgMDUM8T@tZUpcpLQrQYq.zf"
-            ],
-            "full_name": "anim nisi sint pariatur",
-            "ids": [
-                {
-                    "adipisicinga": -96269341,
-                    "cillum7dd": -50945663,
-                    "type": "ORCID",
-                    "value": "1945-9482-1640-8170"
+                    "ea504": false,
+                    "exercitation802": "elit amet",
+                    "type": "CERN",
+                    "value": "CERN-20665179"
                 }
             ],
             "inspire_roles": [
                 "editor",
                 "author",
                 "author",
-                "editor"
+                "supervisor",
+                "author"
             ],
             "raw_affiliations": [
                 {
-                    "source": "ad su",
-                    "value": "voluptate irure est consectetur"
+                    "source": "ipsum",
+                    "value": "reprehenderit id"
                 },
                 {
-                    "source": "eu mollit sunt deserunt officia",
-                    "value": "amet"
-                },
-                {
-                    "source": "Lorem commodo",
-                    "value": "laborum"
-                },
-                {
-                    "source": "Excepteur dolor elit",
-                    "value": "exercitation dolor"
+                    "source": "voluptate reprehen",
+                    "value": "adipisicing et"
                 }
             ],
             "record": {
-                "$ref": "http://1K\"}]tlQHrT"
+                "$ref": "http://1"
             },
-            "uuid": "a25fe097-6e20-411b-e5d2-62f53bf3ce6f"
+            "uuid": "85ea9331-610d-98a6-05ad-042a1269eb3b"
         }
     ],
     "book_series": [
         {
-            "title": "Ut laborum reprehenderit",
-            "volume": "occaecat tempor aliqua"
+            "title": "adi",
+            "volume": "Duis nulla enim"
         },
         {
-            "title": "quis",
-            "volume": "quis"
-        },
-        {
-            "title": "incididunt mollit Ut consectetur",
-            "volume": "Lorem Duis velit incididunt"
+            "title": "laboris ",
+            "volume": "nisi"
         }
     ],
-    "citeable": true,
+    "citeable": false,
     "collaborations": [
         {
             "record": {
-                "$ref": "http://1>;&]L"
+                "$ref": "http://1[(d"
             },
-            "value": "proident"
+            "value": "adipisicing quis Duis Excepteur"
         },
         {
             "record": {
-                "$ref": "http://1"
+                "$ref": "http://1u\""
             },
-            "value": "mollit exercitation"
-        },
-        {
-            "record": {
-                "$ref": "http://1@<("
-            },
-            "value": "dolore"
-        },
-        {
-            "record": {
-                "$ref": "http://1or\""
-            },
-            "value": "et dolore mollit"
-        },
-        {
-            "record": {
-                "$ref": "http://1"
-            },
-            "value": "Lorem"
+            "value": "amet sit fugiat qui Duis"
         }
     ],
-    "control_number": 95311308,
+    "control_number": 68639101,
     "copyright": [
         {
-            "holder": "sed amet ut",
-            "material": "addendum",
-            "statement": "labore aliquip pariatur",
-            "url": "http://1"
+            "holder": "ullamco cupidatat deserunt",
+            "material": "publication",
+            "statement": "eiusmod elit enim ipsum sunt",
+            "url": "http://1v!F("
         }
     ],
     "core": true,
     "corporate_author": [
-        "nisi ut irure aute",
-        "ad laboris enim amet dolor"
+        "qui Ut",
+        "cillum"
     ],
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://1L"
+            "$ref": "http://1|,27:IDK"
         },
         {
-            "$ref": "http://1?'"
+            "$ref": "http://1h5)rn"
         },
         {
-            "$ref": "http://1FAs"
+            "$ref": "http://1<bhB?"
+        },
+        {
+            "$ref": "http://125L75"
+        },
+        {
+            "$ref": "http://1=! 4"
         }
     ],
     "document_type": [
-        "note",
-        "book",
         "conference paper",
-        "article"
+        "book",
+        "note"
     ],
     "dois": [
         {
-            "material": "reprint",
-            "source": "nostrud ut",
-            "value": "10.788303288/q/\\+s9^"
-        },
-        {
-            "material": "publication",
-            "source": "esse",
-            "value": "10.2/7U^a06#Z-"
-        },
-        {
-            "material": "reprint",
-            "source": "sunt",
-            "value": "10.07.236/*/c  "
+            "material": "addendum",
+            "source": "ut est minim fugiat in",
+            "value": "10.02666661/QnkmAoI66%"
         }
     ],
     "edition": [
         {
-            "edition": "exercitation sunt id"
+            "edition": "labore"
         },
         {
-            "edition": "cup"
+            "edition": "Dui"
+        },
+        {
+            "edition": "tempor id est velit elit"
         }
     ],
     "energy_ranges": [
-        10377474,
-        93394092,
-        71286703,
-        94462635
+        81481706,
+        68513838,
+        85933394
     ],
     "external_system_identifiers": [
         {
-            "schema": "cupidatat",
-            "value": "ea"
+            "schema": "Lorem ullamco si",
+            "value": "magna"
         },
         {
-            "schema": "amet elit et",
-            "value": "sint fugia"
-        },
-        {
-            "schema": "do amet aliqua dolor",
-            "value": "mollit dolor est proident"
-        },
-        {
-            "schema": "laboris nulla dolore ad adipisicing",
-            "value": "sit ex reprehenderit consequat"
+            "schema": "consequat aliqua labore ut",
+            "value": "officia cillum labore fugiat"
         }
     ],
     "funding_info": [
         {
-            "agency": "ea non",
-            "grant_number": "Duis elit ullamco",
-            "project_number": "magna sed in"
+            "agency": "Duis exercitation consequat",
+            "grant_number": "exercitation eiusmod amet minim",
+            "project_number": "fugiat officia dolore voluptate ullamco"
         },
         {
-            "agency": "officia in eu irure",
-            "grant_number": "dolor exercitation te",
-            "project_number": "Excepteur"
+            "agency": "ad consectetur Duis magna",
+            "grant_number": "consequat incididunt labore",
+            "project_number": "sint ea nostrud dolor ex"
         },
         {
-            "agency": "fugiat aliquip labore esse",
-            "grant_number": "dolore commodo aliquip Lorem eiusmod",
-            "project_number": "cillum officia"
+            "agency": "amet minim",
+            "grant_number": "eiusmod anim",
+            "project_number": "dolor"
+        },
+        {
+            "agency": "consectetur magna Ut dolore",
+            "grant_number": "minim",
+            "project_number": "cillum tempor amet"
+        },
+        {
+            "agency": "elit sint",
+            "grant_number": "officia laborum ut",
+            "project_number": "Ut sunt anim eu"
         }
     ],
     "imprints": [
         {
             "date": "dddd-dd-dd",
-            "place": "tempor",
-            "publisher": "aliqua "
+            "place": "consectetur incididunt",
+            "publisher": "labore"
         },
         {
             "date": "dddd-dd-dd",
-            "place": "labore magna dolor",
-            "publisher": "elit dolore"
+            "place": "aliquip irure est reprehenderit aute",
+            "publisher": "esse do Ut deserunt"
         },
         {
             "date": "dddd-dd-dd",
-            "place": "id",
-            "publisher": "in sunt"
+            "place": "quis in dolore nostrud reprehe",
+            "publisher": "aute"
         },
         {
             "date": "dddd-dd-dd",
-            "place": "amet ex",
-            "publisher": "cillum amet nulla"
+            "place": "Ut",
+            "publisher": "velit irure nisi"
         }
     ],
     "inspire_categories": [
         {
             "source": "undefined",
-            "term": "Experiment-HEP"
+            "term": "Theory-HEP"
         },
         {
-            "source": "curator",
-            "term": "Astrophysics"
-        },
-        {
-            "source": "magpie",
-            "term": "Instrumentation"
+            "source": "undefined",
+            "term": "Accelerators"
         }
     ],
     "isbns": [
         {
-            "comment": "laboris deserunt mollit",
-            "material": "reprint",
-            "value": "0427514979"
+            "medium": "softcover",
+            "value": "9798141837773"
         },
         {
-            "comment": "aliquip aute incididunt",
-            "material": "addendum",
-            "value": "2364774024"
-        },
-        {
-            "comment": "quis commodo",
-            "material": "preprint",
-            "value": "800220363X"
+            "medium": "softcover",
+            "value": "013875373X"
         }
     ],
     "keywords": [
         {
-            "schema": "PDG",
-            "source": "Duis",
-            "value": "aliquip eu non in"
-        },
-        {
-            "schema": "INSPIRE",
-            "source": "mollit reprehenderit",
-            "value": "eiusmod id sit quis"
+            "schema": "PACS",
+            "source": "dolor ullamco labore cillum qui",
+            "value": "sit aliquip ipsum ullamco cillum"
         },
         {
             "schema": "PACS",
-            "source": "labore aliquip do id voluptate",
-            "value": "ea aliqua ullamco esse culpa"
+            "source": "consequat minim",
+            "value": "deserunt aute labore"
+        },
+        {
+            "schema": "PACS",
+            "source": "est adipisicing",
+            "value": "esse"
+        },
+        {
+            "schema": "PACS",
+            "source": "voluptate",
+            "value": "laborum minim conse"
+        },
+        {
+            "schema": "PACS",
+            "source": "dolor au",
+            "value": "culp"
         }
     ],
     "languages": [
-        "po"
+        "tV",
+        "fF"
     ],
     "license": [
         {
-            "imposing": "in",
-            "license": "velit",
+            "imposing": "anim labore qui in non",
+            "license": "eiusmod et consectetur sit",
+            "material": "addendum",
+            "url": "http://1,TK"
+        },
+        {
+            "imposing": "nulla id",
+            "license": "et in occaecat ad deserunt",
+            "material": "publication",
+            "url": "http://1 0"
+        },
+        {
+            "imposing": "adipisicing nostrud",
+            "license": "Ut dolor nulla Duis cupidatat",
             "material": "preprint",
-            "url": "http://1\\iT$N/Y2"
+            "url": "http://1&ef['+C"
         }
     ],
     "new_record": {
-        "$ref": "http://1z&"
+        "$ref": "http://1doK\""
     },
-    "number_of_pages": 20010431,
+    "number_of_pages": 87402588,
     "persistent_identifiers": [
         {
-            "schema": "pariatur ad quis",
-            "source": "id",
-            "value": "ut"
+            "schema": "quis Lorem anim fugiat aliqua",
+            "source": "elit eiusmod nisi",
+            "value": "est consectetur enim"
         },
         {
-            "schema": "nulla ut mollit enim",
-            "source": "mollit elit esse incididunt quis",
-            "value": "ex nisi deserunt consectetur Ut"
+            "schema": "occaecat elit irure consequat in",
+            "source": "in dolore esse consequat nostrud",
+            "value": "non in qui"
+        },
+        {
+            "schema": "esse Duis quis est",
+            "source": "cillum proident q",
+            "value": "aliquip"
         }
     ],
     "preprint_date": "dddd-dd-dd",
     "public_notes": [
         {
-            "source": "enim ",
-            "value": "dolore pariatur ullamco magna aliqua"
+            "source": "laborum et nisi reprehenderit",
+            "value": "Ut ex"
         },
         {
-            "source": "proident Duis aliqua non",
-            "value": "eiusmod voluptate reprehenderit ea exercitation"
-        },
-        {
-            "source": "sin",
-            "value": "nostrud id dolor dolore"
-        },
-        {
-            "source": "voluptate dolore",
-            "value": "reprehenderit aliq"
+            "source": "culpa con",
+            "value": "mollit aliquip Excepteur quis"
         }
     ],
     "publication_info": [
         {
-            "artid": "cillum mo",
-            "cnum": "C66-08-94",
-            "conf_acronym": "in",
+            "artid": "cupidatat",
+            "cnum": "C80-60-51.847876",
+            "conf_acronym": "irure",
             "conference_record": {
-                "$ref": "http://1\"P8`>p"
+                "$ref": "http://1'{O#sud"
             },
-            "confpaper_info": "do",
+            "confpaper_info": "velit fugiat",
             "curated_relation": false,
-            "journal_issue": "Ut id consectetur amet",
+            "journal_issue": "deserunt aute",
             "journal_record": {
-                "$ref": "http://1"
+                "$ref": "http://1]Bc`m,=D"
             },
-            "journal_title": "pariat",
-            "journal_volume": "quis qui",
+            "journal_title": "consectetur voluptate laboris",
+            "journal_volume": "sunt ut dolor",
             "material": "erratum",
-            "page_end": "aliqua consectetur adipisicing",
-            "page_start": "ad",
-            "parent_isbn": "4058244900",
+            "page_end": "culpa incididunt ad laboris",
+            "page_start": "nostrud reprehenderit",
+            "parent_isbn": "979078204669X",
             "parent_record": {
-                "$ref": "http://1"
+                "$ref": "http://10OI|%@A/"
             },
-            "parent_report_number": "consectetur nostrud",
-            "pubinfo_freetext": "esse sed ullamco Lorem",
-            "year": 1510
-        },
-        {
-            "artid": "do sunt Lorem velit",
-            "cnum": "C67-30-10.9155732",
-            "conf_acronym": "est voluptate incididunt",
-            "conference_record": {
-                "$ref": "http://1*<S8."
-            },
-            "confpaper_info": "minim in mollit esse nulla",
-            "curated_relation": false,
-            "journal_issue": "ex elit sunt est aliq",
-            "journal_record": {
-                "$ref": "http://1EQ@W7!"
-            },
-            "journal_title": "Duis",
-            "journal_volume": "consequat ad nisi commodo",
-            "material": "preprint",
-            "page_end": "dolor quis ut eu",
-            "page_start": "eu et",
-            "parent_isbn": "979881239729X",
-            "parent_record": {
-                "$ref": "http://1umqME?<6G"
-            },
-            "parent_report_number": "voluptate id dolor proid",
-            "pubinfo_freetext": "esse mollit Duis ea",
-            "year": 1867
-        },
-        {
-            "artid": "dolore ad exercitation",
-            "cnum": "C35-79-68",
-            "conf_acronym": "minim aute dolor",
-            "conference_record": {
-                "$ref": "http://1EH"
-            },
-            "confpaper_info": "qui",
-            "curated_relation": false,
-            "journal_issue": "ut",
-            "journal_record": {
-                "$ref": "http://1[5tUy,,Zo"
-            },
-            "journal_title": "ea amet sunt",
-            "journal_volume": "eiusmod qui",
-            "material": "erratum",
-            "page_end": "consequat",
-            "page_start": "in sit qui",
-            "parent_isbn": "9791391714844",
-            "parent_record": {
-                "$ref": "http://1gTellx"
-            },
-            "parent_report_number": "consectetur aliquip officia in cupidatat",
-            "pubinfo_freetext": "sit aute minim ut dolor",
-            "year": 1005
-        },
-        {
-            "artid": "officia",
-            "cnum": "C96-05-32.6418",
-            "conf_acronym": "ad veniam",
-            "conference_record": {
-                "$ref": "http://1lhXv"
-            },
-            "confpaper_info": "id occaecat pariatur eiusmod in",
-            "curated_relation": true,
-            "journal_issue": "dolore eu ut exercitation",
-            "journal_record": {
-                "$ref": "http://1k~Z]Zg?X7#"
-            },
-            "journal_title": "incidid",
-            "journal_volume": "qui Ut cillum commodo",
-            "material": "erratum",
-            "page_end": "quis elit ipsum",
-            "page_start": "ullamco dolore incididunt amet",
-            "parent_isbn": "9395144873",
-            "parent_record": {
-                "$ref": "http://1~p 59"
-            },
-            "parent_report_number": "dolor magna",
-            "pubinfo_freetext": "nostrud magna nulla",
-            "year": 1877
-        },
-        {
-            "artid": "esse",
-            "cnum": "C89-49-34.6083",
-            "conf_acronym": "enim irure pariatur",
-            "conference_record": {
-                "$ref": "http://1dK7\\H#"
-            },
-            "confpaper_info": "ut do",
-            "curated_relation": true,
-            "journal_issue": "ullamco aute sed commodo",
-            "journal_record": {
-                "$ref": "http://1&@rm"
-            },
-            "journal_title": "adipisicing nostrud irure",
-            "journal_volume": "et laboris consequat",
-            "material": "addendum",
-            "page_end": "Ut nisi",
-            "page_start": "dolore dolor nostrud",
-            "parent_isbn": "9799530181607",
-            "parent_record": {
-                "$ref": "http://11`W"
-            },
-            "parent_report_number": "laborum dolore nulla esse",
-            "pubinfo_freetext": "mollit nulla laboris",
-            "year": 1868
+            "parent_report_number": "mollit aliqua eiusmod incididunt",
+            "pubinfo_freetext": "qui velit au",
+            "year": 1994
         }
     ],
-    "publication_type": "lectures",
-    "refereed": false,
+    "publication_type": "review",
+    "refereed": true,
     "references": [
         {
-            "curated_relation": true,
-            "raw_refs": [
-                {
-                    "position": "nostrud esse ea dolore dolor",
-                    "schema": "proident",
-                    "source": "",
-                    "value": "veniam sint consequat"
-                },
-                {
-                    "position": "aliquip consequat ad",
-                    "schema": "Duis sit et minim",
-                    "source": "c",
-                    "value": "Ut ullamco aliquip"
-                },
-                {
-                    "position": "commodo proident incididunt qui",
-                    "schema": "do Excepteur nulla",
-                    "source": "ullamco eiusmod aute consequat",
-                    "value": "pariatur"
-                }
-            ],
-            "record": {
-                "$ref": "http://1>BE{"
-            },
-            "reference": {
-                "arxiv_eprints": [
-                    "W9mA-lbV2vQ/6545",
-                    "ld3h-WQQK/981007",
-                    "2468 78666",
-                    "8737$9444",
-                    "5530`9870"
-                ],
-                "authors": [
-                    {
-                        "full_name": "sed nostrud anim",
-                        "role": "et occaecat ea"
-                    },
-                    {
-                        "full_name": "amet",
-                        "role": "reprehenderit voluptate et consectetur"
-                    },
-                    {
-                        "full_name": "commodo aute tempor et do",
-                        "role": "amet incididunt"
-                    },
-                    {
-                        "full_name": "aliqua sunt ullamco fugiat no",
-                        "role": "ipsum ad consectetur"
-                    },
-                    {
-                        "full_name": "dolor",
-                        "role": "quis esse eu Excepteur"
-                    }
-                ],
-                "book_series": {
-                    "title": "eiusmod proident",
-                    "volume": "amet"
-                },
-                "collaboration": [
-                    "ut",
-                    "Duis velit consectetur sunt veniam",
-                    "enim ea aliqua"
-                ],
-                "dois": [
-                    "10.15069/:xsmvqM%.Pn",
-                    "10.0751/2(a3f8nVl^",
-                    "10.977588.0986/d*"
-                ],
-                "imprint": {
-                    "date": "dddd-dd-dd",
-                    "place": "dolore ad laboris est",
-                    "publisher": "consequat esse Ut eu"
-                },
-                "misc": [
-                    "eiusmod"
-                ],
-                "number": 35658666,
-                "persistent_identifiers": [
-                    "occaecat pariatur exercitation do qui",
-                    "culpa"
-                ],
-                "publication_info": {
-                    "artid": "cupidatat laborum exercitation eu",
-                    "cnum": "sint",
-                    "isbn": "sunt anim elit Ut exercitation",
-                    "journal_issue": "magna dolore fugiat amet consectetur",
-                    "journal_title": "adipisicing eu ",
-                    "journal_volume": "exercitation reprehenderit",
-                    "page_end": "si",
-                    "page_start": "id sed tempor in",
-                    "reportnumber": "dolore incididunt",
-                    "year": 1669
-                },
-                "texkey": "enim laborum",
-                "titles": [
-                    {
-                        "source": "veniam pariatur non ea amet",
-                        "subtitle": "in ad nisi irure",
-                        "title": "ex"
-                    },
-                    {
-                        "source": "tempor sit ipsum",
-                        "subtitle": "do adipisicing",
-                        "title": "aute culpa"
-                    }
-                ],
-                "urls": [
-                    {
-                        "description": "voluptate mollit ipsum laborum",
-                        "value": "http://1$'pgvX9Cmd"
-                    },
-                    {
-                        "description": "sunt cillum sit fugiat ad",
-                        "value": "http://1hv!d]N7]-"
-                    },
-                    {
-                        "description": "ipsum adipisicing reprehenderit",
-                        "value": "http://1Y+jx"
-                    },
-                    {
-                        "description": "cupidatat sunt amet culpa",
-                        "value": "http://1n>"
-                    }
-                ]
-            }
-        },
-        {
             "curated_relation": false,
             "raw_refs": [
                 {
-                    "position": "aute des",
-                    "schema": "in",
-                    "source": "velit elit mollit magna",
-                    "value": "sunt consequat officia ea"
+                    "position": "laboris",
+                    "schema": "veniam cillum fugiat Duis in",
+                    "source": "cupidatat amet in deserunt eiusmod",
+                    "value": "mollit magna in labore"
                 },
                 {
-                    "position": "ipsum pariatur voluptate amet irure",
-                    "schema": "ut ut velit dolore",
-                    "source": "in enim",
-                    "value": "et mollit Ut in amet"
+                    "position": "commodo",
+                    "schema": "labore",
+                    "source": "occaecat",
+                    "value": "esse est aliquip"
                 }
             ],
             "record": {
-                "$ref": "http://1YI"
+                "$ref": "http://1/"
             },
             "reference": {
                 "arxiv_eprints": [
-                    "vexgGodbW/9502555223",
-                    "371666841"
+                    "HgITfq-t/5645",
+                    "4288R4637",
+                    "gYwSVEs0C/65",
+                    "7340\"5745"
                 ],
                 "authors": [
                     {
-                        "full_name": "sunt mollit enim",
-                        "role": "velit eu incididunt enim"
-                    },
-                    {
-                        "full_name": "amet Lorem dolore sit ad",
-                        "role": "qui fugiat nisi reprehenderit Lorem"
-                    },
-                    {
-                        "full_name": "ea Lorem qui",
-                        "role": "officia ea"
-                    },
-                    {
-                        "full_name": "dolore enim adipisicing qui",
-                        "role": "ea dolore anim ipsum aute"
+                        "full_name": "adipisicing",
+                        "role": "tempor mollit do consectetur"
                     }
                 ],
                 "book_series": {
-                    "title": "anim",
-                    "volume": "amet nulla consequat"
+                    "title": "pariatur",
+                    "volume": "Lorem dolor"
                 },
                 "collaboration": [
-                    "eu aliquip voluptate dolore mollit",
-                    "dolore commodo cillum aute",
-                    "quis consequat sit"
+                    "est sint",
+                    "laborum in",
+                    "elit irure",
+                    "magna eu sunt enim"
                 ],
                 "dois": [
-                    "10.211.59/^_",
-                    "10.54.5518248/LJQ@6?_@BAt"
+                    "10.1581424/J*$m_n/8",
+                    "10.113/$",
+                    "10.505/kI/.%)",
+                    "10.9299920.53637/\\"
                 ],
                 "imprint": {
                     "date": "dddd-dd-dd",
-                    "place": "aliqua proident cupidatat tempor",
-                    "publisher": "esse"
+                    "place": "qui",
+                    "publisher": "sint nulla"
                 },
                 "misc": [
-                    "id Ut Duis consequat elit",
-                    "ex mollit"
+                    "laboris in",
+                    "est esse sed cupidatat",
+                    "occaecat Duis id ipsum r",
+                    "anim Duis",
+                    "dolor deserunt Duis adipisicing Lorem"
                 ],
-                "number": -78612750,
+                "number": -76820626,
                 "persistent_identifiers": [
-                    "pariatur culpa",
-                    "consectetur s"
+                    "dolor nostrud nisi sunt",
+                    "aliquip irure sit in laboris",
+                    "officia minim dolore exercitation",
+                    "adipisicing labore nulla sed Duis",
+                    "anim mollit"
                 ],
                 "publication_info": {
-                    "artid": "ullamco Lorem u",
-                    "cnum": "pariatur voluptate amet",
-                    "isbn": "eiusmod fugiat",
-                    "journal_issue": "aliquip",
-                    "journal_title": "dolor culpa",
-                    "journal_volume": "exercitation esse in",
-                    "page_end": "Lorem",
-                    "page_start": "fugiat anim velit reprehenderit",
-                    "reportnumber": "incididunt ut labore ea",
-                    "year": 1221
+                    "artid": "proident consequat",
+                    "cnum": "pariatur nostrud Lorem",
+                    "isbn": "in nostrud",
+                    "journal_issue": "la",
+                    "journal_title": "ipsum et",
+                    "journal_volume": "do consequat aliqua incididunt",
+                    "page_end": "ut sit eiusmod fugiat",
+                    "page_start": "Lorem dolor Duis proident",
+                    "reportnumber": "in Ut nisi Duis sit",
+                    "year": 1684
                 },
-                "texkey": "reprehenderit",
+                "texkey": "ex",
                 "titles": [
                     {
-                        "source": "irure fugiat",
-                        "subtitle": "velit amet officia ex",
-                        "title": "culpa"
+                        "source": "id cillum irure Lorem",
+                        "subtitle": "",
+                        "title": "irure"
                     },
                     {
-                        "source": "pariatur enim Duis",
-                        "subtitle": "in",
-                        "title": "aute in nisi"
+                        "source": "sint voluptate aliqua",
+                        "subtitle": "adipisicing exercitation Duis in nisi",
+                        "title": "nulla"
+                    },
+                    {
+                        "source": "exercitation in quis nisi",
+                        "subtitle": "exercitation",
+                        "title": "irure aliqua ex incididunt laborum"
                     }
                 ],
                 "urls": [
                     {
-                        "description": "anim",
-                        "value": "http://1y+9MZI"
+                        "description": "exercitation dolor",
+                        "value": "http://1GRa"
                     },
                     {
-                        "description": "voluptate proident mollit id",
-                        "value": "http://1.4 o+H)"
-                    }
-                ]
-            }
-        },
-        {
-            "curated_relation": false,
-            "raw_refs": [
-                {
-                    "position": "eu",
-                    "schema": "sit deserunt dolore",
-                    "source": "id Duis laboris",
-                    "value": "non"
-                },
-                {
-                    "position": "",
-                    "schema": "proide",
-                    "source": "esse amet ad mollit",
-                    "value": "veniam in nisi Lorem"
-                }
-            ],
-            "record": {
-                "$ref": "http://1l9uEn3|z]s"
-            },
-            "reference": {
-                "arxiv_eprints": [
-                    "k7rHAavnRVa-j95VawyQ/895928",
-                    "6280+1757",
-                    "th-s8WyAp/6041924432",
-                    "6646Q3809",
-                    "tDAobUERFoQ/74273549"
-                ],
-                "authors": [
-                    {
-                        "full_name": "nostrud ullamco deserunt magn",
-                        "role": "dolore laborum esse"
+                        "description": "minim",
+                        "value": "http://1&#Sy"
                     },
                     {
-                        "full_name": "aliquip sit sint",
-                        "role": "elit dolore"
-                    },
-                    {
-                        "full_name": "voluptate commodo sed aute",
-                        "role": "eiusmod"
-                    }
-                ],
-                "book_series": {
-                    "title": "elit",
-                    "volume": "nulla"
-                },
-                "collaboration": [
-                    "officia sed minim",
-                    "sed",
-                    "adipisicing Lorem irure",
-                    "incididunt laboris in",
-                    "consequat veniam ut"
-                ],
-                "dois": [
-                    "10.65025/jm#(:;swZm",
-                    "10.706.02820/=",
-                    "10.4581212.273520/Ll&0U*"
-                ],
-                "imprint": {
-                    "date": "dddd-dd-dd",
-                    "place": "consectetur ex",
-                    "publisher": "ullamco adipisicing velit Excepteur"
-                },
-                "misc": [
-                    "velit",
-                    "sint est"
-                ],
-                "number": -273737,
-                "persistent_identifiers": [
-                    "reprehenderit sed",
-                    "minim et amet id",
-                    "aliqua Ut labore",
-                    "minim enim elit",
-                    "adipisicing officia eiusmod"
-                ],
-                "publication_info": {
-                    "artid": "voluptate enim ut eiusmod Ut",
-                    "cnum": "in",
-                    "isbn": "consectetur",
-                    "journal_issue": "exercitation qui ut do Duis",
-                    "journal_title": "cupidatat in",
-                    "journal_volume": "eiusmod consequat do esse ea",
-                    "page_end": "aliqua",
-                    "page_start": "ipsum",
-                    "reportnumber": "dolore",
-                    "year": 1285
-                },
-                "texkey": "sint anim",
-                "titles": [
-                    {
-                        "source": "non",
-                        "subtitle": "culpa voluptate consectetur commodo",
-                        "title": "Ut elit voluptate fugiat ea"
-                    }
-                ],
-                "urls": [
-                    {
-                        "description": "velit nisi id sunt",
-                        "value": "http://1x+M%r1("
-                    },
-                    {
-                        "description": "dolor",
-                        "value": "http://1u!%`/"
-                    }
-                ]
-            }
-        },
-        {
-            "curated_relation": false,
-            "raw_refs": [
-                {
-                    "position": "vo",
-                    "schema": "nulla dolor",
-                    "source": "dolor irure al",
-                    "value": "amet"
-                },
-                {
-                    "position": "enim adipisicing consequat in ad",
-                    "schema": "ad",
-                    "source": "incididunt anim Excepteur minim",
-                    "value": "sint et ad "
-                }
-            ],
-            "record": {
-                "$ref": "http://1ij@\\t\\r"
-            },
-            "reference": {
-                "arxiv_eprints": [
-                    "6583q49136",
-                    "wcySRSG78E/4",
-                    "5352W29567",
-                    "2910l9591",
-                    "9899J00111"
-                ],
-                "authors": [
-                    {
-                        "full_name": "sint",
-                        "role": "pariatur aute labore dolore enim"
-                    }
-                ],
-                "book_series": {
-                    "title": "adipisic",
-                    "volume": "ull"
-                },
-                "collaboration": [
-                    "ut in nostrud",
-                    "Duis ut",
-                    "id laborum",
-                    "id sunt",
-                    "enim Duis"
-                ],
-                "dois": [
-                    "10.239904947.791122/g"
-                ],
-                "imprint": {
-                    "date": "dddd-dd-dd",
-                    "place": "laboris ipsum",
-                    "publisher": "elit officia"
-                },
-                "misc": [
-                    "consectetur esse sit deserunt",
-                    "nostrud adipisicing labore",
-                    "enim velit ullamco"
-                ],
-                "number": 81246764,
-                "persistent_identifiers": [
-                    "dolor magna",
-                    "sunt consectetur et minim dolore",
-                    "veniam eiusmod Exce",
-                    "nulla consectetur culpa irure",
-                    "exercitation eu"
-                ],
-                "publication_info": {
-                    "artid": "ullamco quis consectetur",
-                    "cnum": "deserunt ullamco cillum ex",
-                    "isbn": "veniam",
-                    "journal_issue": "officia laborum",
-                    "journal_title": "anim",
-                    "journal_volume": "reprehenderit proident sunt ad labore",
-                    "page_end": "cillum pariatur ex dolore do",
-                    "page_start": "ut ex non quis eu",
-                    "reportnumber": "velit aute",
-                    "year": 1201
-                },
-                "texkey": "cillum Ut",
-                "titles": [
-                    {
-                        "source": "nisi ex consectetur labore et",
-                        "subtitle": "dolore",
-                        "title": "sunt occaecat"
-                    },
-                    {
-                        "source": "culpa minim laborum Ut aliquip",
-                        "subtitle": "irure",
-                        "title": "non dolore tempor laborum"
-                    },
-                    {
-                        "source": "adipisicing magna",
-                        "subtitle": "irure eiusmod commodo officia",
-                        "title": "ex fugiat Duis id laboris"
-                    }
-                ],
-                "urls": [
-                    {
-                        "description": "do",
-                        "value": "http://18."
-                    },
-                    {
-                        "description": "in ea deserunt anim culpa",
-                        "value": "http://1HebcE54SH"
-                    },
-                    {
-                        "description": "ut eni",
-                        "value": "http://1SDJoXL/M"
-                    }
-                ]
-            }
-        },
-        {
-            "curated_relation": false,
-            "raw_refs": [
-                {
-                    "position": "qui ",
-                    "schema": "aliqua",
-                    "source": "quis eiusmod culpa mollit id",
-                    "value": "dolor velit"
-                },
-                {
-                    "position": "laboris ullamco",
-                    "schema": "irure laboris",
-                    "source": "consequat",
-                    "value": "in quis"
-                },
-                {
-                    "position": "irure amet exercitation sit in",
-                    "schema": "culpa proident cupidatat",
-                    "source": "adipisicing ut",
-                    "value": "sed officia"
-                }
-            ],
-            "record": {
-                "$ref": "http://13d!_q"
-            },
-            "reference": {
-                "arxiv_eprints": [
-                    "I6t5f-VQ/7093874014"
-                ],
-                "authors": [
-                    {
-                        "full_name": "nisi ipsum consecte",
-                        "role": "deserunt officia occaecat incididunt elit"
-                    },
-                    {
-                        "full_name": "minim officia sunt fugiat",
-                        "role": "dolor"
-                    },
-                    {
-                        "full_name": "nulla laboris amet",
-                        "role": "non commodo reprehenderit et dolor"
-                    },
-                    {
-                        "full_name": "volupta",
-                        "role": "incididunt tempor culpa et"
-                    },
-                    {
-                        "full_name": "est nisi deserunt nost",
-                        "role": "Excepteur ut cillum incididunt"
-                    }
-                ],
-                "book_series": {
-                    "title": "adipisicing culpa",
-                    "volume": "nulla"
-                },
-                "collaboration": [
-                    "amet"
-                ],
-                "dois": [
-                    "10.112380/tX1$5ZMO"
-                ],
-                "imprint": {
-                    "date": "dddd-dd-dd",
-                    "place": "incididunt cupidatat",
-                    "publisher": "cupidatat"
-                },
-                "misc": [
-                    "reprehenderit adipisicing",
-                    "dolor sit",
-                    "ut quis",
-                    "e",
-                    "Excepteur est"
-                ],
-                "number": 24459928,
-                "persistent_identifiers": [
-                    "nulla eiusmod",
-                    "Ut",
-                    "sunt",
-                    "et ipsum"
-                ],
-                "publication_info": {
-                    "artid": "consequat culpa cupidatat ad esse",
-                    "cnum": "proident",
-                    "isbn": "irure incididunt",
-                    "journal_issue": "sit consectetur ",
-                    "journal_title": "in",
-                    "journal_volume": "id velit",
-                    "page_end": "dolor dolore eu",
-                    "page_start": "anim Excepteur",
-                    "reportnumber": "non laborum sed ea",
-                    "year": 1777
-                },
-                "texkey": "enim tempor Excepteur quis do",
-                "titles": [
-                    {
-                        "source": "dolor",
-                        "subtitle": "dolore et",
-                        "title": "adipisicing"
-                    },
-                    {
-                        "source": "culpa dolore",
-                        "subtitle": "nulla pariatur ut dolor",
-                        "title": "ut veniam"
-                    },
-                    {
-                        "source": "in proident",
-                        "subtitle": "in",
-                        "title": "anim officia aute"
-                    },
-                    {
-                        "source": "esse in ullamco non",
-                        "subtitle": "do",
-                        "title": "dolore officia ipsum"
-                    },
-                    {
-                        "source": "dolore voluptate deserunt fugiat minim",
-                        "subtitle": "esse Duis est",
-                        "title": "consequat adipisicing culpa ad non"
-                    }
-                ],
-                "urls": [
-                    {
-                        "description": "Ut Excepteur ",
-                        "value": "http://1CdXRanv"
-                    },
-                    {
-                        "description": "ullamco sed cupidatat anim pariatur",
-                        "value": "http://1qx{uORm6}"
+                        "description": "enim incididunt irure et",
+                        "value": "http://1:~~"
                     }
                 ]
             }
@@ -1204,124 +516,133 @@
     ],
     "report_numbers": [
         {
-            "source": "amet aute",
-            "value": "ullamco"
+            "hidden": false,
+            "source": "minim et",
+            "value": "cupidatat Lorem"
         },
         {
-            "source": "ipsum nulla",
-            "value": "reprehenderit"
+            "hidden": true,
+            "source": "non amet aliquip dolor dolor",
+            "value": "adipisicing officia"
         },
         {
-            "source": "velit",
-            "value": "adipisicing enim incididunt nisi et"
+            "hidden": true,
+            "source": "in sit cillum do",
+            "value": "commodo ut consequat"
         },
         {
-            "source": "dolor dolore id",
-            "value": "enim cillum non"
+            "hidden": true,
+            "source": "mollit ad magna minim",
+            "value": "tempor ipsum ullamco"
+        },
+        {
+            "hidden": false,
+            "source": "Lorem qui",
+            "value": "ea in ad quis"
         }
     ],
     "self": {
-        "$ref": "http://1xZsQ)+fgs"
+        "$ref": "http://1Xf-9|?r"
     },
     "special_collections": [
-        "ZEUS-PRELIMINARY-NOTE",
-        "D0-INTERNAL-NOTE"
+        "HEPHIDDEN",
+        "HERMES-INTERNAL-NOTE",
+        "ZEUS-PRELIMINARY-NOTE"
     ],
     "succeeding_entry": {
-        "isbn": "899348532X",
+        "isbn": "979204897912X",
         "record": {
-            "$ref": "http://1j"
+            "$ref": "http://1)R=G6nYi"
         },
-        "relationship_code": "aute"
+        "relationship_code": "eu"
     },
     "texkeys": [
-        "Duis incididunt nisi",
-        "minim velit do",
-        "nostrud voluptate",
-        "eu laboris",
-        "deserunt"
+        "do aliqua nostrud ",
+        "proident deserunt sint ea",
+        "dolore veniam Excepteur id dolor",
+        "ut eiusmod dolore"
     ],
     "thesis_info": {
         "date": "dddd-dd-dd",
         "defense_date": "dddd-dd-dd",
-        "degree_type": "master",
+        "degree_type": "habilitation",
         "institutions": [
             {
-                "curated_relation": false,
-                "name": "voluptate consequat ut",
+                "curated_relation": true,
+                "name": "consequat non id pariatur ut",
                 "record": {
-                    "$ref": "http://1RV/ScI"
+                    "$ref": "http://1#r(N/_&X4t"
                 }
             },
             {
-                "curated_relation": false,
-                "name": "aliquip voluptate incididunt enim",
+                "curated_relation": true,
+                "name": "do eu dolore incididunt",
                 "record": {
-                    "$ref": "http://13n>\" "
+                    "$ref": "http://1K-D;<"
+                }
+            },
+            {
+                "curated_relation": true,
+                "name": "ut dolore ad labore",
+                "record": {
+                    "$ref": "http://1c9=\"*?sgY"
+                }
+            },
+            {
+                "curated_relation": true,
+                "name": "Ut deserunt in laboris",
+                "record": {
+                    "$ref": "http://1jN<"
+                }
+            },
+            {
+                "curated_relation": true,
+                "name": "ut mollit nisi labore dolor",
+                "record": {
+                    "$ref": "http://1-"
                 }
             }
         ]
     },
     "title_translations": [
         {
-            "language": "TE",
-            "source": "mollit minim",
-            "subtitle": "ipsum enim ad et minim",
-            "title": "occaecat pariatur dolore dolor velit"
+            "language": "Cb",
+            "source": "Lorem",
+            "subtitle": "cupidatat s",
+            "title": "tempor aliquip d"
         },
         {
-            "language": "b5",
-            "source": "aute ut cupidatat in",
+            "language": "5r",
+            "source": "ullamc",
             "subtitle": "in",
-            "title": "do enim"
+            "title": "ex"
         },
         {
-            "language": "hN",
-            "source": "es",
-            "subtitle": "Ut in est",
-            "title": "sit id"
-        },
-        {
-            "language": "EP",
-            "source": "dolore",
-            "subtitle": "id",
-            "title": "consequat aute eu ullamco"
-        },
-        {
-            "language": "vY",
-            "source": "in eu commodo",
-            "subtitle": "magna",
-            "title": "veniam qui amet mollit anim"
+            "language": "e7",
+            "source": "in",
+            "subtitle": "eu Ut consectetur",
+            "title": "minim voluptate commodo proident"
         }
     ],
     "titles": [
         {
-            "source": "aliquip",
-            "subtitle": "veniam mollit consectetur eiusmod",
-            "title": "dolore veniam Excepteur"
-        },
-        {
-            "source": "laboris dolor",
-            "subtitle": "consectetur veniam Duis cillum fugiat",
-            "title": "anim ad fugiat amet"
+            "source": "proident",
+            "subtitle": "aliqua velit anim",
+            "title": "ut culpa"
         }
     ],
     "urls": [
         {
-            "description": "in aliqua commodo",
-            "value": "http://1YpPP-/"
-        },
-        {
-            "description": "aliqua quis ut qui",
+            "description": "velit ex Ut",
             "value": "http://1"
         },
         {
-            "description": "culpa mollit cillum sit eu",
-            "value": "http://1uGn>Kt"
+            "description": "nulla id elit aliquip",
+            "value": "http://1,syka{?ht"
         },
         {
-            "description": "dolor in",
-            "value": "http://1/"
+            "description": "fugiat",
+            "value": "http://1|NT/%+H"
         }
     ],
     "withdrawn": true

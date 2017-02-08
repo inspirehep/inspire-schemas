@@ -16,6 +16,12 @@
             "type": "string"
         },
         "source": {
+            "enum": [
+                "submitter",
+                "oai",
+                "batchuploader",
+                "hepcrawl"
+            ],
             "type": "string"
         },
         "submission_number": {
