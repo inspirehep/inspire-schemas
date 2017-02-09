@@ -26,11 +26,16 @@
 import json
 import os
 
-from jsonschema import RefResolver
+from jsonschema import (
+    draft4_format_checker,
+    RefResolver,
+    validate as jsonschema_validate,
+)
+
 from pkg_resources import resource_filename
 from six.moves.urllib.parse import urlsplit
 
-from .errors import SchemaNotFound
+from .errors import SchemaNotFound, SchemaKeyNotFound
 
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
@@ -108,3 +113,34 @@ def load_schema(schema_name):
         schema_data = {'$schema': schema_data}
 
     return schema_data
+
+
+def validate(data, schema_name=None):
+    """Validate the given dictionary against the given schema.
+
+    :param data: Dict to validate.
+    :type data: dict
+    :param schema_name: String with the name of the schema to validate, for
+        example, 'authors' or 'jobs'. If `None` passed it will expect for the
+        data to have the schema specified in the `$ref` key.
+    :type schema_name: str
+    :return: None
+    :raises inspire_schemas.errors.SchemaNotFound: if the given schema was not
+        found.
+    :raises inspire_schemas.errors.SchemaKeyNotFound: if the given schema was
+        not found.
+    :raises jsonschema.SchemaError: if the schema is invalid
+    :raises jsonschema.ValidationError: if the data is invalid
+    """
+    if schema_name is None:
+        if '$schema' not in data:
+            raise SchemaKeyNotFound(data=data)
+        schema_name = data['$schema']
+
+    schema = load_schema(schema_name=schema_name)
+    return jsonschema_validate(
+        instance=data,
+        schema=schema,
+        resolver=LocalRefResolver.from_schema(schema),
+        format_checker=draft4_format_checker,
+    )
