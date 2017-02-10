@@ -464,6 +464,7 @@
                         "description": "The particular vocabulary against which this keyword is valid and found. Leave empty for free form keywords",
                         "enum": [
                             "INSPIRE",
+                            "JACOW",
                             "PACS",
                             "PDG"
                         ],
