@@ -105,6 +105,9 @@
                                     "type": "string"
                                 }
                             },
+                            "required": [
+                                "value"
+                            ],
                             "title": "Affiliation",
                             "type": "object"
                         },
@@ -243,6 +246,9 @@
                 },
                 "type": "object"
             },
+            "required": [
+                "value"
+            ],
             "type": "array",
             "uniqueItems": true
         },
@@ -373,6 +379,10 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "schema",
+                    "value"
+                ],
                 "type": "object"
             },
             "type": "array",
@@ -444,7 +454,7 @@
                         "type": "string"
                     },
                     "value": {
-                        "pattern": "^(97(8|9))?\\d{9}(\\d|X)$",
+                        "pattern": "^\\d*[0-9X]$",
                         "type": "string"
                     }
                 },
@@ -536,7 +546,10 @@
                 "additionalProperties": false,
                 "properties": {
                     "schema": {
-                        "title": "Type of persistent identifier (e.g. HDL, URN)",
+                        "enum": [
+                            "HDL",
+                            "URN"
+                        ],
                         "type": "string"
                     },
                     "source": {
@@ -547,6 +560,10 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "schema",
+                    "value"
+                ],
                 "title": "Persistent Identifier",
                 "type": "object"
             },

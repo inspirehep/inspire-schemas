@@ -66,6 +66,9 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "value"
+                ],
                 "type": "object"
             },
             "title": "Keywords",
