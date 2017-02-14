@@ -16,14 +16,18 @@
             "items": {
                 "additionalProperties": false,
                 "properties": {
-                    "_degree_type": {
-                        "type": "string"
-                    },
                     "curated_relation": {
                         "type": "boolean"
                     },
                     "degree_type": {
                         "$ref": "elements/degree_type.json"
+                    },
+                    "ids": {
+                        "items": {
+                            "$ref": "elements/id.json"
+                        },
+                        "type": "array",
+                        "uniqueItems": true
                     },
                     "name": {
                         "type": "string"
