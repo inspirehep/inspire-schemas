@@ -545,6 +545,9 @@
             "items": {
                 "additionalProperties": false,
                 "properties": {
+                    "material": {
+                        "$ref": "elements/material.json"
+                    },
                     "schema": {
                         "enum": [
                             "HDL",
