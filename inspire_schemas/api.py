@@ -24,6 +24,7 @@
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
 from jsonschema import validate as jsonschema_validate
+from jsonschema import draft4_format_checker
 
 from .errors import SchemaKeyNotFound
 from .utils import LocalRefResolver, load_schema
@@ -56,4 +57,5 @@ def validate(data, schema_name=None):
         instance=data,
         schema=schema,
         resolver=LocalRefResolver.from_schema(schema),
+        format_checker=draft4_format_checker,
     )
