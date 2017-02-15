@@ -7,6 +7,12 @@
             "format": "url",
             "type": "string"
         },
+        "_collections": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
         "_private_notes": {
             "items": {
                 "$ref": "elements/sourced_value.json"

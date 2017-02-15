@@ -2,12 +2,22 @@
     "$schema": "http://json-schema.org/schema#",
     "additionalProperties": false,
     "properties": {
+        "$schema": {
+            "format": "url",
+            "type": "string"
+        },
         "ICN": {
             "description": "HEP affiliation following new standards",
             "items": {
                 "type": "string"
             },
             "title": "New INSPIRE control number",
+            "type": "array"
+        },
+        "_collections": {
+            "items": {
+                "type": "string"
+            },
             "type": "array"
         },
         "_private_notes": {
@@ -23,6 +33,9 @@
             },
             "type": "array",
             "uniqueItems": true
+        },
+        "control_number": {
+            "type": "integer"
         },
         "core": {
             "description": "Is this a CORE institution?",

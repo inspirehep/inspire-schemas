@@ -2,6 +2,16 @@
     "$schema": "http://json-schema.org/schema#",
     "additionalProperties": false,
     "properties": {
+        "$schema": {
+            "format": "url",
+            "type": "string"
+        },
+        "_collections": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
         "_private_notes": {
             "items": {
                 "$ref": "elements/sourced_value.json"
@@ -44,6 +54,9 @@
             },
             "type": "array",
             "uniqueItems": true
+        },
+        "control_number": {
+            "type": "integer"
         },
         "deleted": {
             "type": "boolean"
