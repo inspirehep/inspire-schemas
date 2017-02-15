@@ -6,16 +6,13 @@
             "type": "string"
         },
         "email": {
+            "format": "email",
             "type": "string"
+        },
+        "internal_uid": {
+            "type": "integer"
         },
         "method": {
-            "type": "string"
-        },
-        "orcid": {
-            "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
-            "type": "string"
-        },
-        "source": {
             "enum": [
                 "submitter",
                 "oai",
@@ -23,6 +20,13 @@
                 "hepcrawl"
             ],
             "type": "string"
+        },
+        "orcid": {
+            "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$",
+            "type": "string"
+        },
+        "source": {
+            "$ref": "source.json"
         },
         "submission_number": {
             "type": "string"
