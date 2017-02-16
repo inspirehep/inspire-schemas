@@ -39,6 +39,9 @@
                     "format": {
                         "type": "string"
                     },
+                    "path": {
+                        "type": "string"
+                    },
                     "status": {
                         "type": "string"
                     },
