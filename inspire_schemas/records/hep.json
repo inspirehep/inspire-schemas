@@ -708,12 +708,15 @@
             "uniqueItems": true
         },
         "publication_type": {
-            "enum": [
-                "introductory",
-                "lectures",
-                "review"
-            ],
-            "type": "string"
+            "items": {
+                "enum": [
+                    "introductory",
+                    "lectures",
+                    "review"
+                ],
+                "type": "string"
+            },
+            "type": "array"
         },
         "refereed": {
             "type": "boolean"
