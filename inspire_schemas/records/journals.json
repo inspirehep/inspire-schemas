@@ -79,6 +79,10 @@
             "type": "array",
             "uniqueItems": true
         },
+        "legacy_creation_date": {
+            "format": "date-time",
+            "type": "string"
+        },
         "license": {
             "enum": [
                 "probably",

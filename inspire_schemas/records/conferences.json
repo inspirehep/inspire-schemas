@@ -88,6 +88,10 @@
             "type": "array",
             "uniqueItems": true
         },
+        "legacy_creation_date": {
+            "format": "date-time",
+            "type": "string"
+        },
         "new_record": {
             "$ref": "elements/json_reference.json",
             "description": "Master record that replaces this record",

@@ -552,6 +552,10 @@
             },
             "type": "array"
         },
+        "legacy_creation_date": {
+            "format": "date-time",
+            "type": "string"
+        },
         "license": {
             "items": {
                 "additionalProperties": false,
