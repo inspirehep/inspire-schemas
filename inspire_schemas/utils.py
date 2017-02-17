@@ -23,19 +23,18 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
+import datetime
 import json
 import os
+import re
 
-from jsonschema import (
-    draft4_format_checker,
-    RefResolver,
-    validate as jsonschema_validate,
-)
+from jsonschema import validate as jsonschema_validate
+from jsonschema import RefResolver, draft4_format_checker
 
 from pkg_resources import resource_filename
 from six.moves.urllib.parse import urlsplit
 
-from .errors import SchemaNotFound, SchemaKeyNotFound
+from .errors import SchemaKeyNotFound, SchemaNotFound
 
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
@@ -144,3 +143,39 @@ def validate(data, schema_name=None):
         resolver=LocalRefResolver.from_schema(schema),
         format_checker=draft4_format_checker,
     )
+
+
+def normalize_date_iso(date):
+    """Normalize date for schema (format yyyy-mm-ddT00:00:00).
+
+    :param date: a generic date
+    :type date: string with the format (yyyy-mm-dd)
+
+    :return formatted_date: the input date in
+    the format (yyyy-mm-ddT00:00:00)
+    """
+    try:
+        formatted_date = datetime.datetime.\
+            strptime(date, '%Y-%m-%d').isoformat()
+    except (ValueError, Exception):
+        formatted_date = None
+
+    return formatted_date
+
+
+def normalize_author_name_with_comma(author):
+    """Normalize author name.
+
+    :param author: author name
+    :type author: string
+
+    :return name: the name of the author normilized
+    """
+    def _verify_author_name_initials(author_name):
+        return not bool(re.compile(r'[^A-Z. ]').search(author_name))
+
+    name = author.split(',')
+    if len(name) > 1 and _verify_author_name_initials(name[1]):
+        name[1] = name[1].replace(' ', '')
+    name = ', '.join(name)
+    return name
