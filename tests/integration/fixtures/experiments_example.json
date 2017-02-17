@@ -1,70 +1,56 @@
 {
     "_collections": [
-        "irure consectetur labore",
-        "veniam labore in ex",
-        "ex consectetur officia cupidatat magna",
-        "veniam id nostrud"
+        "irure",
+        "ad",
+        "laborum exercitation ut in",
+        "sint aliquip",
+        "officia tempor aliqua Lorem"
     ],
     "_private_notes": [
         {
-            "source": "ullamco",
-            "value": "Duis dolore velit Ut"
+            "source": "adipisicing",
+            "value": "cillum in"
         },
         {
-            "source": "mo",
-            "value": "magna cupidatat qui"
+            "source": "id ad aliquip esse eiusmod",
+            "value": "ad dolore"
         },
         {
-            "source": "Ut nulla laborum laboris",
-            "value": "pariatur tempor"
+            "source": "adipisicing tempor nulla",
+            "value": "cupi"
         },
         {
-            "source": "aute voluptate do",
-            "value": "culpa consectetur irure nulla"
+            "source": "voluptate nulla eiusmod aliqua cillum",
+            "value": "Duis reprehenderit voluptate"
+        },
+        {
+            "source": "ex sit",
+            "value": "consequat su"
         }
     ],
-    "accelerator": "non qui fugiat",
+    "accelerator": "nulla s",
     "affiliations": [
         {
-            "curated_relation": false,
-            "name": "consequat par",
-            "record": {
-                "$ref": "http://1Nj"
-            }
-        },
-        {
-            "curated_relation": false,
-            "name": "ut nulla consequat",
-            "record": {
-                "$ref": "http://1HiG"
-            }
-        },
-        {
             "curated_relation": true,
-            "name": "officia quis ipsum",
+            "name": "aliqua ex nostrud culpa",
             "record": {
-                "$ref": "http://1KG2sFA}"
-            }
-        },
-        {
-            "curated_relation": false,
-            "name": "Duis minim do",
-            "record": {
-                "$ref": "http://1;O_M\"yL"
+                "$ref": "http://1jl'"
             }
         }
     ],
-    "collaboration": "ut aliqua dol",
+    "collaboration": "aute sed non",
     "collaboration_alternative_names": [
-        "dolore Duis"
+        "dolor voluptate ea ex",
+        "tempor Ut velit",
+        "et"
     ],
     "contact_details": [
         {
-            "email": "3IBoKSidUYc4w3O@nwbfraQUO.yr",
-            "name": "irure pariatur ad"
+            "email": "ItQbstJNzjcQN@IczxyIiWUyjEDWPUrAtiRDOSVWDFfHDo.fuuo",
+            "name": "fugiat velit incididunt ut"
         }
     ],
-    "control_number": 89865816,
+    "control_number": 1914427,
     "curated_relation": true,
     "date_approved": "dddd-dd-dd",
     "date_cancelled": "dddd-dd-dd",
@@ -73,237 +59,171 @@
     "date_started": "dddd-dd-dd",
     "deleted": true,
     "description": [
-        "laborum amet",
         "in",
-        "magna est in fugiat",
-        "do adipisicing Lorem aute incididunt"
+        "eu"
     ],
     "experiment_names": [
         {
-            "source": "ut magna",
-            "subtitle": "cupidatat magna",
-            "title": "ea ut dolor"
+            "source": "proident",
+            "subtitle": "Duis sit ullamco",
+            "title": "deserunt tempor"
         },
         {
-            "source": "sint",
-            "subtitle": "in",
-            "title": "qui"
+            "source": "ut irure ea nostrud sit",
+            "subtitle": "elit",
+            "title": "in"
         },
         {
-            "source": "in aute labore sed eiusmod",
-            "subtitle": "sunt in",
-            "title": "ex reprehenderit commodo"
+            "source": "tempor id Ut",
+            "subtitle": "mollit et Excepteur esse dolor",
+            "title": "enim consequat aliquip"
         },
         {
-            "source": "officia",
-            "subtitle": "in ipsum",
-            "title": "Duis qui commod"
+            "source": "irure",
+            "subtitle": "eiusmod aliqua nulla",
+            "title": "ut"
+        },
+        {
+            "source": "Duis dolor",
+            "subtitle": "eu nulla enim dolor ad",
+            "title": "dolore"
         }
     ],
     "free_keywords": [
-        "adipisicing consectetur aliqua dolor ipsum",
-        "Ut ex tempor esse culpa",
-        "in pariatur ut",
-        "Lorem esse elit tempor",
-        "eu nisi est ut"
+        "esse",
+        "an",
+        "voluptate laborum pariatur",
+        "aliqua culpa",
+        "velit nisi ea"
     ],
-    "hidden_note": "ex",
+    "hidden_note": "voluptate",
     "inspire_categories": [
         {
-            "source": "curator",
-            "term": "Phenomenology-HEP"
+            "source": "undefined",
+            "term": "Theory-HEP"
         },
         {
             "source": "curator",
-            "term": "Lattice"
-        },
-        {
-            "source": "curator",
-            "term": "Data Analysis and Statistics"
-        },
-        {
-            "source": "arxiv",
-            "term": "Computing"
+            "term": "Experiment-Nucl"
         }
     ],
-    "legacy_creation_date": "4358-08-15T23:25:25.328Z",
+    "legacy_creation_date": "3177-08-10T01:50:42.835Z",
     "new_record": {
-        "$ref": "http://1V"
+        "$ref": "http://1W}]o"
     },
     "other_experiment_names": [
         {
-            "source": "commodo",
-            "subtitle": "dolor",
-            "title": "consectetur anim nulla"
+            "source": "magna deserunt",
+            "subtitle": "esse dolore",
+            "title": "incididunt nisi culpa minim"
+        },
+        {
+            "source": "eu aut",
+            "subtitle": "eiusmod cillum aliqua velit",
+            "title": "fugiat elit"
+        },
+        {
+            "source": "aute",
+            "subtitle": "sit",
+            "title": ""
         }
     ],
     "public_notes": [
         {
-            "source": "Lorem do et",
-            "value": "non et dolor sit"
-        },
-        {
-            "source": "et amet in pariatur culpa",
-            "value": "amet deserunt"
-        },
-        {
-            "source": "consectetur",
-            "value": "mollit sit Excepteur irure qui"
+            "source": "id eu",
+            "value": "mollit consequat aliquip in ut"
         }
     ],
     "related_experiments": [
         {
-            "curated_relation": false,
-            "name": "tempor officia non",
+            "curated_relation": true,
+            "name": "ad sint",
             "record": {
-                "$ref": "http://1>"
+                "$ref": "http://1-D4qccJjO_"
             },
             "relation": "predecessor"
-        },
-        {
-            "curated_relation": false,
-            "name": "amet",
-            "record": {
-                "$ref": "http://1XCq"
-            },
-            "relation": "successor"
-        },
-        {
-            "curated_relation": true,
-            "name": "quis sunt laborum ipsum anim",
-            "record": {
-                "$ref": "http://1{+.j|"
-            },
-            "relation": "successor"
-        },
-        {
-            "curated_relation": false,
-            "name": "deserunt",
-            "record": {
-                "$ref": "http://1"
-            },
-            "relation": "successor"
-        },
-        {
-            "curated_relation": true,
-            "name": "laborum",
-            "record": {
-                "$ref": "http://1KKWrH!w"
-            },
-            "relation": "successor"
         }
     ],
     "self": {
-        "$ref": "http://1n\\\"c+w9"
+        "$ref": "http://1O;uB"
     },
     "spokespersons": [
-        {
-            "curated_relation": false,
-            "current": true,
-            "end_date": "dddd-dd-dd",
-            "ids": [
-                {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-73275242"
-                }
-            ],
-            "name": "mollit in dolor",
-            "record": {
-                "$ref": "http://1&0g"
-            },
-            "start_date": "dddd-dd-dd"
-        },
-        {
-            "curated_relation": false,
-            "current": true,
-            "end_date": "dddd-dd-dd",
-            "ids": [
-                {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-34411014"
-                }
-            ],
-            "name": "velit ut",
-            "record": {
-                "$ref": "http://1oPC"
-            },
-            "start_date": "dddd-dd-dd"
-        },
         {
             "curated_relation": true,
             "current": true,
             "end_date": "dddd-dd-dd",
             "ids": [
                 {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-09754012"
+                    "schema": "SLAC",
+                    "value": "SLAC-0389163079"
                 },
                 {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-95109832"
+                    "schema": "SLAC",
+                    "value": "SLAC-61"
                 },
                 {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-80431762"
+                    "schema": "SLAC",
+                    "value": "SLAC-8950939557"
                 },
                 {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-96728388"
+                    "schema": "SLAC",
+                    "value": "SLAC-504286945"
                 },
                 {
-                    "type": "INSPIRE ID",
-                    "value": "INSPIRE-16759357"
+                    "schema": "SLAC",
+                    "value": "SLAC-2250647876"
                 }
             ],
-            "name": "culpa dolor tempor",
+            "name": "tempor laborum consequat anim est",
             "record": {
-                "$ref": "http://13''@,jx"
+                "$ref": "http://1_dcO"
+            },
+            "start_date": "dddd-dd-dd"
+        },
+        {
+            "curated_relation": false,
+            "current": true,
+            "end_date": "dddd-dd-dd",
+            "ids": [
+                {
+                    "schema": "SLAC",
+                    "value": "SLAC-17"
+                }
+            ],
+            "name": "occaecat",
+            "record": {
+                "$ref": "http://1-4|bt~"
             },
             "start_date": "dddd-dd-dd"
         }
     ],
     "titles": [
         {
-            "source": "Ut labore do",
-            "subtitle": "eu pariatur sunt in",
-            "title": "cupidatat sed irure"
-        },
-        {
-            "source": "ullamco sint sed",
-            "subtitle": "proident n",
-            "title": "in cupidatat magna esse dolore"
-        },
-        {
-            "source": "amet a",
-            "subtitle": "non laboris proident",
-            "title": "in"
-        },
-        {
-            "source": "qui in ut amet",
-            "subtitle": "in ullamco Duis",
-            "title": "sint"
+            "source": "Lor",
+            "subtitle": "enim nulla ut",
+            "title": "magna consectetur"
         }
     ],
     "urls": [
         {
-            "description": "exercitati",
-            "value": "http://1\""
+            "description": "eu",
+            "value": "http://1-n5qBE(*"
         },
         {
-            "description": "deserunt ad qui est culpa",
-            "value": "http://1nf//(:!Y"
+            "description": "cupidatat proident",
+            "value": "http://1Bwp;kuY~L^"
         },
         {
-            "description": "cillum dolor consequat",
-            "value": "http://1("
+            "description": "anim id amet Duis dolor",
+            "value": "http://1"
         },
         {
-            "description": "pariatur ipsum ut fugiat velit",
-            "value": "http://1QzwFa)"
+            "description": "occaecat deserunt eiusmod non",
+            "value": "http://1Ja~:"
         },
         {
-            "description": "nisi tempor non",
-            "value": "http://1=R '9VKo"
+            "description": "laborum proident irure enim",
+            "value": "http://1`KShO!=mTm"
         }
     ]
 }
