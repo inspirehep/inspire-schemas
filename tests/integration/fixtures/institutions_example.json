@@ -1,159 +1,232 @@
 {
     "ICN": [
-        "id fugiat in nostrud ipsum"
+        "sint",
+        "Ut Duis sint nisi nostrud",
+        "est labore magna officia proident"
     ],
     "_collections": [
-        "elit cupidatat ex fugiat qui",
-        "minim deserunt veniam quis Lorem",
-        "labore dolor",
-        "non laboris velit sint quis"
+        "non id qui deserunt",
+        "eiusmod in tempor consequat",
+        "pariatur deserunt dolor qui"
     ],
     "_private_notes": [
         {
-            "source": "commodo proident",
-            "value": "labore tempor commodo"
+            "source": "commodo voluptate mollit minim",
+            "value": "sit"
+        },
+        {
+            "source": "nostrud",
+            "value": "laboris"
+        },
+        {
+            "source": "Excepteur nostrud sint eu",
+            "value": "sunt"
         }
     ],
     "address": [
         {
-            "city": "labore consectetur magna in",
-            "country_code": "MZ",
-            "latitude": 69485965,
-            "longitude": 98450206,
-            "original address": "officia",
-            "postal_code": "adipisicing sit anim",
-            "state": "Duis aliquip"
+            "city": "voluptate Lorem",
+            "country_code": "GP",
+            "latitude": -62452865,
+            "longitude": -40301415,
+            "original address": "in",
+            "postal_code": "nulla dolore aliqua est magna",
+            "state": "culpa minim veniam "
         },
         {
-            "city": "sint eu ad Duis mollit",
-            "country_code": "RO",
-            "latitude": 22192790,
-            "longitude": 51126227,
-            "original address": "minim consequat sit quis",
-            "postal_code": "sed reprehenderit",
-            "state": "Excepteur"
+            "city": "Lorem cillum sunt labore",
+            "country_code": "GM",
+            "latitude": -28484454,
+            "longitude": -41529102,
+            "original address": "anim pariatur occ",
+            "postal_code": "in laboris in ad nulla",
+            "state": "lab"
         },
         {
-            "city": "L",
-            "country_code": "ST",
-            "latitude": 873598,
-            "longitude": 41250509,
-            "original address": "sed",
-            "postal_code": "magna culpa pariatur ullamco irure",
-            "state": "exercitation adipisicing deserunt"
+            "city": "veniam",
+            "country_code": "MV",
+            "latitude": -46159778,
+            "longitude": 14541972,
+            "original address": "ullam",
+            "postal_code": "laborum deserunt",
+            "state": "magna Ut fugiat ullamco commodo"
         },
         {
-            "city": "Excepteur",
-            "country_code": "QA",
-            "latitude": -34590075,
-            "longitude": 65602467,
-            "original address": "est proident eu Lorem",
-            "postal_code": "enim eu velit nostr",
-            "state": "dolor id ea nostrud magna"
-        },
-        {
-            "city": "ut pariatur velit reprehenderit sit",
-            "country_code": "CN",
-            "latitude": -31121890,
-            "longitude": 46816425,
-            "original address": "tempor velit id reprehenderit",
-            "postal_code": "labore ut proident",
-            "state": "ipsum Duis eiusmod Excepteur"
+            "city": "aliquip quis",
+            "country_code": "GY",
+            "latitude": -11773280,
+            "longitude": -1734131,
+            "original address": "dolor occaecat aute",
+            "postal_code": "ex officia",
+            "state": "proident Excepteur ex in "
         }
     ],
-    "control_number": 97213093,
-    "core": true,
-    "deleted": false,
+    "control_number": 16750881,
+    "core": false,
+    "deleted": true,
     "department": [
-        "irure c",
-        "mollit",
-        "sit adi"
+        "Except"
     ],
-    "department_acronym": "do proident ullamco est",
+    "department_acronym": "nulla sed",
+    "external_system_identifiers": [
+        {
+            "type": "HAL",
+            "value": "37500942"
+        },
+        {
+            "type": "HAL",
+            "value": "44968"
+        },
+        {
+            "type": "HAL",
+            "value": "86851978267"
+        },
+        {
+            "type": "HAL",
+            "value": "2565683282"
+        },
+        {
+            "type": "HAL",
+            "value": "35415"
+        }
+    ],
     "extra_words": [
-        "ci"
+        "",
+        "aliquip nulla",
+        "cons"
     ],
     "field_activity": [
-        "Other",
-        "Research Center"
+        "Research Center",
+        "Company",
+        "Research Center",
+        "Company",
+        "Company"
     ],
     "historical_data": [
-        "Excepteur"
-    ],
-    "ids": [
-        {
-            "type": "HAL",
-            "value": "648594"
-        },
-        {
-            "type": "HAL",
-            "value": "7732520"
-        }
+        "culpa eiusmod Lorem consectetur",
+        "proident ut veniam minim sit",
+        "ullamco nulla Ut esse"
     ],
     "inspire_categories": [
         {
-            "source": "undefined",
+            "source": "curator",
+            "term": "Data Analysis and Statistics"
+        },
+        {
+            "source": "curator",
+            "term": "Accelerators"
+        },
+        {
+            "source": "arxiv",
             "term": "Data Analysis and Statistics"
         },
         {
             "source": "arxiv",
-            "term": "Theory-HEP"
+            "term": "Math and Math Physics"
         }
     ],
     "institution": [
-        "nisi aliquip amet tempor consectetur"
+        "Ut",
+        "fugiat",
+        "eiusmod ut commodo et anim",
+        "veniam dolor",
+        "dolore officia eu"
     ],
-    "institution_acronym": "veniam pariatur voluptate officia",
-    "legacy_creation_date": "3530-02-17T12:31:38.799Z",
+    "institution_acronym": "dolor non",
+    "legacy_creation_date": "3000-08-23T19:38:23.576Z",
     "location": {
-        "latitude": 18817304,
-        "longitude": 76645825
+        "latitude": -6024048,
+        "longitude": -23028179
     },
     "name_variants": [
         {
-            "source": "aliqua quis",
-            "value": "do Duis"
+            "source": "sed ",
+            "value": "con"
+        },
+        {
+            "source": "quis",
+            "value": "proident sunt nulla dolore"
+        },
+        {
+            "source": "esse",
+            "value": "Excepteur aliqua"
+        },
+        {
+            "source": "aliqua et qui",
+            "value": "nulla enim Duis"
+        },
+        {
+            "source": "eiusmod esse in ut est",
+            "value": "commodo id"
         }
     ],
     "new_record": {
-        "$ref": "http://1nEh"
+        "$ref": "http://1X8X"
     },
     "public_notes": [
         {
-            "source": "adipisicing commodo",
-            "value": "commodo sint elit"
-        },
-        {
-            "source": "magna eu ullamco",
-            "value": "veniam ex dolore culpa occaecat"
+            "source": "mini",
+            "value": "consequat qui"
         }
     ],
     "related_institutes": [
         {
-            "curated_relation": true,
-            "name": "non consectetur aliquip adipisicing in",
+            "curated_relation": false,
+            "name": "ex labore",
             "record": {
-                "$ref": "http://1wS"
+                "$ref": "http://1Nk "
             },
-            "relation_type": "successor"
+            "relation_type": "parent"
         },
         {
             "curated_relation": true,
-            "name": "sunt deserunt",
+            "name": "ea fugiat eiusmod",
             "record": {
-                "$ref": "http://1'l]O"
+                "$ref": "http://16y}i~Z"
             },
-            "relation_type": "other"
+            "relation_type": "predecessor"
+        },
+        {
+            "curated_relation": false,
+            "name": "sed incididunt nulla commodo sint",
+            "record": {
+                "$ref": "http://1\\Kh:MT"
+            },
+            "relation_type": "predecessor"
+        },
+        {
+            "curated_relation": true,
+            "name": "ex magna velit ipsum",
+            "record": {
+                "$ref": "http://1fh\"P5H|"
+            },
+            "relation_type": "successor"
         }
     ],
     "self": {
-        "$ref": "http://1l*ht#Ug\\j"
+        "$ref": "http://1KNY]9@=w"
     },
-    "time_zone": "there",
+    "time_zone": "be",
     "urls": [
         {
-            "description": "anim enim laboris et",
-            "value": "http://15R_O$cB"
+            "description": "aliqua",
+            "value": "http://1Z{t@0"
+        },
+        {
+            "description": "Lorem id consequat officia do",
+            "value": "http://1%~S"
+        },
+        {
+            "description": "cillum consequat mollit tempor",
+            "value": "http://1d>{|yE6["
+        },
+        {
+            "description": "Lorem",
+            "value": "http://1K=KT+3;c{%"
+        },
+        {
+            "description": "Excepteur qui consequat veniam c",
+            "value": "http://1KFf"
         }
     ]
 }

@@ -75,6 +75,34 @@
             "type": "array",
             "uniqueItems": true
         },
+        "external_system_identifiers": {
+            "items": {
+                "anyOf": [
+                    {
+                        "additionalProperties": false,
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "SPIRES"
+                                ],
+                                "type": "string"
+                            },
+                            "value": {
+                                "pattern": "^JOBS-\\d+$",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "value"
+                        ],
+                        "type": "object"
+                    }
+                ]
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
         "inspire_categories": {
             "items": {
                 "$ref": "elements/inspire_field.json"
