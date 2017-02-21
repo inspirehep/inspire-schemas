@@ -13,6 +13,33 @@
             },
             "type": "array"
         },
+        "_desy_bookkeeping": {
+            "additionalProperties": false,
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "expert": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "_export_to": {
+            "additionalProperties": false,
+            "properties": {
+                "CDS": {
+                    "type": "boolean"
+                },
+                "HAL": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "_fft": {
             "items": {
                 "additionalProperties": false,
