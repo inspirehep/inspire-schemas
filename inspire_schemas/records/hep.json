@@ -28,6 +28,18 @@
             },
             "type": "object"
         },
+        "_export_to": {
+            "additionalProperties": false,
+            "properties": {
+                "CDS": {
+                    "type": "boolean"
+                },
+                "HAL": {
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
         "_fft": {
             "items": {
                 "additionalProperties": false,
