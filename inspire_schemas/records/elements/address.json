@@ -18,7 +18,7 @@
             "description": "Longitude of the place",
             "type": "number"
         },
-        "original address": {
+        "original_address": {
             "description": "Original address, entities separeted with a comma",
             "type": "string"
         },
