@@ -13,6 +13,21 @@
             },
             "type": "array"
         },
+        "_desy_bookkeeping": {
+            "additionalProperties": false,
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "expert": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
         "_fft": {
             "items": {
                 "additionalProperties": false,
