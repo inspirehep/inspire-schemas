@@ -64,7 +64,7 @@
                     {
                         "additionalProperties": false,
                         "properties": {
-                            "type": {
+                            "schema": {
                                 "enum": [
                                     "HAL"
                                 ],
@@ -76,7 +76,7 @@
                             }
                         },
                         "required": [
-                            "type",
+                            "schema",
                             "value"
                         ],
                         "type": "object"
@@ -84,7 +84,7 @@
                     {
                         "additionalProperties": false,
                         "properties": {
-                            "type": {
+                            "schema": {
                                 "enum": [
                                     "SPIRES"
                                 ],
@@ -96,7 +96,7 @@
                             }
                         },
                         "required": [
-                            "type",
+                            "schema",
                             "value"
                         ],
                         "type": "object"

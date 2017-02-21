@@ -120,7 +120,7 @@
                     {
                         "additionalProperties": false,
                         "properties": {
-                            "type": {
+                            "schema": {
                                 "enum": [
                                     "SPIRES"
                                 ],
@@ -132,7 +132,7 @@
                             }
                         },
                         "required": [
-                            "type",
+                            "schema",
                             "value"
                         ],
                         "type": "object"
