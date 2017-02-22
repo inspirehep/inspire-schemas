@@ -34,7 +34,7 @@ if __name__ == '__main__':
         author='CERN',
         author_email='admin@inspirehep.net',
         description='Inspire JSON schemas and utilities to use them.',
-        install_requires=['autosemver', 'jsonschema', 'idutils'],
+        install_requires=['autosemver', 'jsonschema', 'idutils', 'pyyaml'],
         license='GPLv2',
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
