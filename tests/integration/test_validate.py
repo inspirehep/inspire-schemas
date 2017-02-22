@@ -37,8 +37,11 @@ FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 def get_schema_names(fixtures_path):
     schema_names = []
     _, _, files = six.next(os.walk(fixtures_path))
-    for file_name in files:
-        schema_names.append(file_name.split('_', 1)[0])
+    schema_names.extend(
+        file_name.split('_', 1)[0]
+        for file_name in files
+        if file_name.endswith('.json')
+    )
 
     return schema_names
 

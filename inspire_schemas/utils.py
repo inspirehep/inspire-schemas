@@ -23,14 +23,18 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
+import datetime
 import json
 import os
+import re
 
-from jsonschema import RefResolver
+from jsonschema import validate as jsonschema_validate
+from jsonschema import RefResolver, draft4_format_checker
+
 from pkg_resources import resource_filename
 from six.moves.urllib.parse import urlsplit
 
-from .errors import SchemaNotFound
+from .errors import SchemaKeyNotFound, SchemaNotFound
 
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
@@ -108,3 +112,70 @@ def load_schema(schema_name):
         schema_data = {'$schema': schema_data}
 
     return schema_data
+
+
+def validate(data, schema_name=None):
+    """Validate the given dictionary against the given schema.
+
+    :param data: Dict to validate.
+    :type data: dict
+    :param schema_name: String with the name of the schema to validate, for
+        example, 'authors' or 'jobs'. If `None` passed it will expect for the
+        data to have the schema specified in the `$ref` key.
+    :type schema_name: str
+    :return: None
+    :raises inspire_schemas.errors.SchemaNotFound: if the given schema was not
+        found.
+    :raises inspire_schemas.errors.SchemaKeyNotFound: if the given schema was
+        not found.
+    :raises jsonschema.SchemaError: if the schema is invalid
+    :raises jsonschema.ValidationError: if the data is invalid
+    """
+    if schema_name is None:
+        if '$schema' not in data:
+            raise SchemaKeyNotFound(data=data)
+        schema_name = data['$schema']
+
+    schema = load_schema(schema_name=schema_name)
+    return jsonschema_validate(
+        instance=data,
+        schema=schema,
+        resolver=LocalRefResolver.from_schema(schema),
+        format_checker=draft4_format_checker,
+    )
+
+
+def normalize_date_iso(date):
+    """Normalize date for schema (format yyyy-mm-ddT00:00:00).
+
+    :param date: a generic date
+    :type date: string with the format (yyyy-mm-dd)
+
+    :return formatted_date: the input date in
+    the format (yyyy-mm-ddT00:00:00)
+    """
+    try:
+        formatted_date = datetime.datetime.\
+            strptime(date, '%Y-%m-%d').isoformat()
+    except (ValueError, Exception):
+        formatted_date = None
+
+    return formatted_date
+
+
+def normalize_author_name_with_comma(author):
+    """Normalize author name.
+
+    :param author: author name
+    :type author: string
+
+    :return name: the name of the author normilized
+    """
+    def _verify_author_name_initials(author_name):
+        return not bool(re.compile(r'[^A-Z. ]').search(author_name))
+
+    name = author.split(',')
+    if len(name) > 1 and _verify_author_name_initials(name[1]):
+        name[1] = name[1].replace(' ', '')
+    name = ', '.join(name)
+    return name
