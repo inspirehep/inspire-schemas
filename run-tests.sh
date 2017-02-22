@@ -53,7 +53,6 @@ check_prettified() {
 }
 
 
-pydocstyle --explain --source inspire_schemas tests && \
 isort -rc -c --skip docs/conf.py -df **/*.py && \
 pytest \
     --pep8 \
