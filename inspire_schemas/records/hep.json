@@ -14,19 +14,22 @@
             "type": "array"
         },
         "_desy_bookkeeping": {
-            "additionalProperties": false,
-            "properties": {
-                "date": {
-                    "type": "string"
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "date": {
+                        "type": "string"
+                    },
+                    "expert": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
                 },
-                "expert": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                }
+                "type": "object"
             },
-            "type": "object"
+            "type": "array"
         },
         "_export_to": {
             "additionalProperties": false,
