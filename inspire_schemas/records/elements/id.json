@@ -31,7 +31,7 @@
                     "type": "string"
                 },
                 "value": {
-                    "pattern": "^(\\w+\\.)+\\d+$",
+                    "pattern": "^((\\w|\\-|\\')+\\.)+\\d+$",
                     "type": "string"
                 }
             },
