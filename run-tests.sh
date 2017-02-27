@@ -58,6 +58,7 @@ pytest \
     --pep8 \
     --cov=inspire_schemas \
     --cov-report=term-missing \
+    --capture=sys \
     -vv \
     "$@" \
     tests \
