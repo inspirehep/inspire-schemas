@@ -30,8 +30,8 @@ import warnings
 from functools import wraps
 import idutils
 
-from .utils import normalize_author_name_with_comma, normalize_date_iso, \
-    validate
+from .utils import (normalize_author_name_with_comma, normalize_date_iso,
+                    validate)
 
 
 def filter_empty_parameters(func):
