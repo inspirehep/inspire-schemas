@@ -865,7 +865,6 @@
                 "enum": [
                     "CDF-INTERNAL-NOTE",
                     "CDF-NOTE",
-                    "CDS",
                     "D0-INTERNAL-NOTE",
                     "D0-PRELIMINARY-NOTE",
                     "H1-INTERNAL-NOTE",
