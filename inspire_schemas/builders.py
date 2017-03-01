@@ -512,6 +512,7 @@ class LiteratureBuilder(object):
     def add_acquisition_source(
         self,
         method,
+        date=None,
         submission_number=None,
         internal_uid=None,
         email=None,
@@ -525,6 +526,9 @@ class LiteratureBuilder(object):
         :type email: integer
 
         :type source: string
+
+        :param date: UTC date in isoformat
+        :type method: string
 
         :param method: method of acquisition for the suggested document
         :type method: string
@@ -541,7 +545,7 @@ class LiteratureBuilder(object):
 
         acquisition_source['submission_number'] = str(submission_number)
         acquisition_source['source'] = self._get_source(source)
-        for key in ('email', 'method', 'orcid', 'internal_uid'):
+        for key in ('date', 'email', 'method', 'orcid', 'internal_uid'):
             if locals()[key] is not None:
                 acquisition_source[key] = locals()[key]
 
