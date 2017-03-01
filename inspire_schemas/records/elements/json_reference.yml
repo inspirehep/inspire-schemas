@@ -1,0 +1,12 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $ref:
+        description: |-
+            URL to the referenced resource
+        format: url
+        type: string
+required:
+- $ref
+title: Reference to another record
+type: object
