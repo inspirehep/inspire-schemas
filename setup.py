@@ -43,7 +43,10 @@ def _yaml2json(yaml_file, json_file):
     data = yaml.load(raw_data)
 
     with open(json_file, 'w') as json_fd:
-        json_fd.write(json.dumps(data, indent=4))
+        json_fd.write(
+            json.dumps(data, indent=4, sort_keys=True, separators=(',', ': '))
+        )
+        json_fd.write('\n')
 
 
 def _find(basepath, extension='.yml'):
