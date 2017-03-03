@@ -458,15 +458,9 @@
             "type": "array",
             "uniqueItems": true
         },
-        "edition": {
+        "editions": {
             "items": {
-                "additionalProperties": false,
-                "properties": {
-                    "edition": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
+                "type": "string"
             },
             "type": "array",
             "uniqueItems": true
