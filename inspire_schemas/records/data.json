@@ -1,0 +1,6 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "description": "Schema is not yet specified",
+    "title": "A data record",
+    "type": "object"
+}
