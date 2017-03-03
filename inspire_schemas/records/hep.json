@@ -72,6 +72,9 @@
                     "path": {
                         "type": "string"
                     },
+                    "send_back": {
+                        "type": "boolean"
+                    },
                     "status": {
                         "type": "string"
                     },
