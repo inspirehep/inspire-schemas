@@ -54,6 +54,37 @@ def filter_empty_parameters(func):
     return func_wrapper
 
 
+def is_citeable(publication_info):
+    """Check some fields in order to define if the article is citeable.
+
+    :param publication_info: publication_info field
+    already populated
+    :type publication_info: list
+    """
+    def _item_has_pub_info(item):
+        return all(
+            key in item for key in (
+                'journal_title', 'journal_volume'
+            )
+        )
+
+    def _item_has_page_or_artid(item):
+        return any(
+            key in item for key in (
+                'page_start', 'artid'
+            )
+        )
+
+    has_pub_info = any(
+        _item_has_pub_info(item) for item in publication_info
+    )
+    has_page_or_artid = any(
+        _item_has_page_or_artid(item) for item in publication_info
+    )
+
+    return has_pub_info and has_page_or_artid
+
+
 class LiteratureBuilder(object):
     """Literature record builder."""
 
@@ -269,36 +300,6 @@ class LiteratureBuilder(object):
         the document has been published
         :type journal_volume: string
         """
-        def _is_citeable(publication_info):
-            """Check some fields in order to define if the article is citeable.
-
-            :param publication_info: publication_info field
-            already populated
-            :type publication_info: list
-            """
-            def _item_has_pub_info(item):
-                return all(
-                    key in item for key in (
-                        'year', 'journal_title', 'journal_volume'
-                    )
-                )
-
-            def _item_has_page_or_artid(item):
-                return any(
-                    key in item for key in (
-                        'page_start', 'artid'
-                    )
-                )
-
-            has_pub_info = any(
-                _item_has_pub_info(item) for item in publication_info
-            )
-            has_page_or_artid = any(
-                _item_has_page_or_artid(item) for item in publication_info
-            )
-
-            return has_pub_info and has_page_or_artid
-
         self.record.setdefault('publication_info', [])
 
         publication_item = {}
@@ -318,7 +319,7 @@ class LiteratureBuilder(object):
 
         self.record['publication_info'].append(publication_item)
 
-        if _is_citeable(self.record['publication_info']):
+        if is_citeable(self.record['publication_info']):
             self.set_citeable(True)
 
     @filter_empty_parameters
