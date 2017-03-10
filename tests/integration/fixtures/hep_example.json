@@ -803,7 +803,6 @@
             "conference_record": {
                 "$ref": "http://1N*Q.9"
             },
-            "confpaper_info": "et veniam aliqua sit mollit",
             "curated_relation": false,
             "journal_issue": "id",
             "journal_record": {
@@ -829,7 +828,6 @@
             "conference_record": {
                 "$ref": "http://1P<CvQ38 2"
             },
-            "confpaper_info": "in",
             "curated_relation": true,
             "journal_issue": "dolor magna ipsum anim",
             "journal_record": {
@@ -855,7 +853,6 @@
             "conference_record": {
                 "$ref": "http://18"
             },
-            "confpaper_info": "pariatur et",
             "curated_relation": true,
             "journal_issue": "non Excep",
             "journal_record": {
