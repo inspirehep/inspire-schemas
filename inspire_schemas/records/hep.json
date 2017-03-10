@@ -712,9 +712,6 @@
                         "$ref": "elements/json_reference.json",
                         "description": "URI for corresponding Conference"
                     },
-                    "confpaper_info": {
-                        "type": "string"
-                    },
                     "curated_relation": {
                         "type": "boolean"
                     },
