@@ -66,6 +66,11 @@
     "control_number": -37534627,
     "core": false,
     "deleted": false,
+    "deleted_records": [
+        {
+            "$ref": "http://1j&Gsun*"
+        }
+    ],
     "department": [
         "id nisi magna irure sunt",
         "adipisicing labore cillum"

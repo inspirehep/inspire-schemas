@@ -79,6 +79,17 @@
     "control_number": 90477573,
     "death_date": "dddd-dd-dd",
     "deleted": false,
+    "deleted_records": [
+        {
+            "$ref": "http://1Gn\"!"
+        },
+        {
+            "$ref": "http://13:i"
+        },
+        {
+            "$ref": "http://1Y8"
+        }
+    ],
     "email_addresses": [
         "f9OjAA1oirTIG@EqHWGPESGmpyaxmTIvYaFrwShMOuaO.soay",
         "oDUhoewqearoZI@ZHEkoVqiLfBhjRCzQRTrvEaTrdKUgDpMh.bprr"

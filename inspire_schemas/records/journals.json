@@ -35,6 +35,14 @@
         "deleted": {
             "type": "boolean"
         },
+        "deleted_records": {
+            "description": "List of deleted records referring to this record",
+            "items": {
+                "$ref": "elements/json_reference.json"
+            },
+            "title": "Deleted Records",
+            "type": "array"
+        },
         "history": {
             "title": "History",
             "type": "string"
