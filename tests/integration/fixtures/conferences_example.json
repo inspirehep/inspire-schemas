@@ -103,6 +103,20 @@
     ],
     "control_number": -79718794,
     "deleted": false,
+    "deleted_records": [
+        {
+            "$ref": "http://1<"
+        },
+        {
+            "$ref": "http://18(@7\"["
+        },
+        {
+            "$ref": "http://1r79~{_"
+        },
+        {
+            "$ref": "http://1m^e!K:"
+        }
+    ],
     "external_system_identifiers": [
         {
             "schema": "SPIRES",

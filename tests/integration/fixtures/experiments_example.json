@@ -67,6 +67,23 @@
     "date_proposed": "dddd-dd-dd",
     "date_started": "dddd-dd-dd",
     "deleted": true,
+    "deleted_records": [
+        {
+            "$ref": "http://1{O4v\\AkLiO"
+        },
+        {
+            "$ref": "http://1kRT{Y[0:e5"
+        },
+        {
+            "$ref": "http://1)_nh2kE%"
+        },
+        {
+            "$ref": "http://1{"
+        },
+        {
+            "$ref": "http://1)f;]k#v4l!"
+        }
+    ],
     "description": [
         "id aute ut Excepteur incididunt",
         "fugiat Excepteur",

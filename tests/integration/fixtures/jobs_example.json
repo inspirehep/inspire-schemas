@@ -78,6 +78,20 @@
     "control_number": 36418374,
     "deadline_date": "dddd-dd-dd",
     "deleted": false,
+    "deleted_records": [
+        {
+            "$ref": "http://13iAhHNVr}"
+        },
+        {
+            "$ref": "http://14=~O"
+        },
+        {
+            "$ref": "http://1"
+        },
+        {
+            "$ref": "http://14ii6"
+        }
+    ],
     "description": "qui sit Duis",
     "experiments": [
         {
