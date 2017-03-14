@@ -33,6 +33,8 @@ import idutils
 from .utils import (normalize_author_name_with_comma, normalize_date_iso,
                     validate)
 
+EMPTIES = [None, '', [], {}]
+
 
 def filter_empty_parameters(func):
     """Decorator that is filtering empty parameters.
@@ -42,9 +44,8 @@ def filter_empty_parameters(func):
     """
     @wraps(func)
     def func_wrapper(self, *args, **kwargs):
-        empties = [None, '', [], {}]
         my_kwargs = {key: value for key, value in kwargs.items()
-                     if value not in empties}
+                     if value not in EMPTIES}
 
         if (
             list(my_kwargs.keys()) == ['source'] or not list(my_kwargs.keys())
@@ -104,6 +105,20 @@ class LiteratureBuilder(object):
         self.record = {} if record is None else record
         self.source = source
 
+    def _append_to(self, field, element):
+        """Append the ``element`` to the ``field`` of the record.
+
+        This method is smart: it does nothing if ``field`` is empty and
+        creates ``field`` if it does not exit yet.
+
+        :param field: the name of the field of the record to append to
+        :type field: string
+        :param element: the element to append
+        """
+        if element not in EMPTIES:
+            self.record.setdefault(field, [])
+            self.record.get(field).append(element)
+
     def __str__(self):
         """Print the current record."""
         return str(self.record)
@@ -134,9 +149,7 @@ class LiteratureBuilder(object):
         :param source: source for the given abstract.
         :type source: string
         """
-        self.record.setdefault('abstracts', [])
-
-        self.record['abstracts'].append({
+        self._append_to('abstracts', {
             'value': abstract.strip(),
             'source': self._get_source(source),
         })
@@ -151,9 +164,7 @@ class LiteratureBuilder(object):
         :param arxiv_categories: arXiv categories for the current document.
         :type arxiv_categories: list
         """
-        self.record.setdefault('arxiv_eprints', [])
-
-        self.record['arxiv_eprints'].append({
+        self._append_to('arxiv_eprints', {
             'value': arxiv_id,
             'categories': arxiv_categories,
         })
@@ -169,10 +180,8 @@ class LiteratureBuilder(object):
         :param source: source for the doi.
         :type source: string
         """
-        self.record.setdefault('dois', [])
-
         if idutils.normalize_doi(doi):
-            self.record['dois'].append({
+            self._append_to('dois', {
                 'value': doi,
                 'source': self._get_source(source),
             })
@@ -185,9 +194,7 @@ class LiteratureBuilder(object):
         :type author: object that make_author method
         produces
         """
-        self.record.setdefault('authors', [])
-
-        self.record['authors'].append(author)
+        self._append_to('authors', author)
 
     @staticmethod
     def make_author(full_name, affiliations=None, roles=None):
@@ -227,6 +234,73 @@ class LiteratureBuilder(object):
         return author
 
     @filter_empty_parameters
+    def add_book(self, publisher=None, place=None, date=None):
+        """
+        Make a dictionary that is representing a book.
+
+        :param publisher: publisher name
+
+        :type publisher: string
+
+        :param place: place of publication
+        :type place: string
+
+        :param date: the date of publication
+        :type date: date
+
+        :rtype: dict
+        """
+
+        imprint = {}
+        if date is not None:
+            imprint['date'] = date
+        if place is not None:
+            imprint['place'] = place
+        if publisher is not None:
+            imprint['publisher'] = publisher
+
+        self._append_to('imprints', imprint)
+
+    @filter_empty_parameters
+    def add_isbn(self, isbn, medium=None):
+        """
+        :param isbns: the isbns of the book
+        :type isbns: object
+        """
+        isbn_dict = {}
+        if isbn is not None:
+            isbn_dict['value'] = isbn
+        if medium is not None:
+            isbn_dict['medium'] = medium
+
+        self._append_to('isbns', isbn_dict)
+
+    @filter_empty_parameters
+    def add_book_series(self, title, volume=None):
+        """
+        :param volume: the volume of the book
+        :type volume: string
+
+        :param title: the title of the book
+        :type title: string
+        """
+        book_series = {}
+        if title is not None:
+            book_series['title'] = title
+        if volume is not None:
+            book_series['volume'] = volume
+
+        self._append_to('book_series', book_series)
+
+    @filter_empty_parameters
+    def add_book_edition(self, edition):
+        """
+        :param edition: the edition of the book
+        :type edition: string
+        """
+        self._append_to('editions', edition)
+
+    @filter_empty_parameters
     def add_inspire_categories(self, subject_terms, source=None):
         """Add inspire categories.
 
@@ -236,12 +310,10 @@ class LiteratureBuilder(object):
         :param source: source for the given categories.
         :type source: string
         """
-        self.record.setdefault('inspire_categories', [])
-
-        self.record['inspire_categories'].extend([{
-            'term': category,
-            'source': self._get_source(source),
-        } for category in subject_terms])
+        for category in subject_terms:
+            category_dict = {'term': category,
+                             'source': self._get_source(source)}
+            self._append_to('inspire_categories', category_dict)
 
     @filter_empty_parameters
     def add_private_note(self, private_notes, source=None):
@@ -253,9 +325,7 @@ class LiteratureBuilder(object):
         :param source: source for the given private notes
         :type source: string
         """
-        self.record.setdefault('_private_notes', [])
-
-        self.record['_private_notes'].append({
+        self._append_to('_private_notes', {
             'value': private_notes,
             'source': self._get_source(source),
         })
@@ -306,8 +376,6 @@ class LiteratureBuilder(object):
         information.
         :type pubinfo_freetext: string
         """
-        self.record.setdefault('publication_info', [])
-
         publication_item = {}
         for key in ('cnum', 'artid', 'page_end', 'page_start',
                     'journal_issue', 'journal_title',
@@ -323,7 +391,7 @@ class LiteratureBuilder(object):
             except (TypeError, ValueError):
                 pass
 
-        self.record['publication_info'].append(publication_item)
+        self._append_to('publication_info', publication_item)
 
         if is_citeable(self.record['publication_info']):
             self.set_citeable(True)
@@ -334,10 +402,8 @@ class LiteratureBuilder(object):
 
         :type imprint_date: string. A formatted date is required (yyyy-mm-dd)
         """
-        self.record.setdefault('imprints', [])
-
-        self.record['imprints'].append({
-            'date': normalize_date_iso(imprint_date)
+        self._append_to('imprints', {
+            'date': imprint_date
         })
 
     @filter_empty_parameters
@@ -372,9 +438,6 @@ class LiteratureBuilder(object):
         """
         self.record.setdefault('thesis_info', {})
 
-        date = normalize_date_iso(date)
-        defense_date = normalize_date_iso(defense_date)
-
         thesis_item = {}
         for key in ('defense_date', 'date'):
             if locals()[key] is not None:
@@ -394,9 +457,7 @@ class LiteratureBuilder(object):
 
         :type legacy_name: string
         """
-        self.record.setdefault('accelerator_experiments', [])
-
-        self.record['accelerator_experiments'].append({
+        self._append_to('accelerator_experiments', {
             'legacy_name': legacy_name
         })
 
@@ -407,9 +468,7 @@ class LiteratureBuilder(object):
         :param language: language for the current document
         :type language: string (2 characters ISO639-1)
         """
-        self.record.setdefault('languages', [])
-
-        self.record['languages'].append(language)
+        self._append_to('languages', language)
 
     @filter_empty_parameters
     def add_license(self, url=None, license=None):
@@ -421,14 +480,12 @@ class LiteratureBuilder(object):
         :param license: license type
         :type license: string
         """
-        self.record.setdefault('license', [])
-
         hep_license = {}
         for key in ('url', 'license'):
             if locals()[key] is not None:
                 hep_license[key] = locals()[key]
 
-        self.record['license'].append(hep_license)
+        self._append_to('license', hep_license)
 
     @filter_empty_parameters
     def add_public_note(self, public_note, source=None):
@@ -440,9 +497,7 @@ class LiteratureBuilder(object):
         :param source: source for the given notes.
         :type source: string
         """
-        self.record.setdefault('public_notes', [])
-
-        self.record['public_notes'].append({
+        self._append_to('public_notes', {
             'value': public_note,
             'source': self._get_source(source),
         })
@@ -457,9 +512,7 @@ class LiteratureBuilder(object):
         :param source: source for the given title
         :type source: string
         """
-        self.record.setdefault('titles', [])
-
-        self.record['titles'].append({
+        self._append_to('titles', {
             'title': title,
             'source': self._get_source(source),
         })
@@ -477,8 +530,6 @@ class LiteratureBuilder(object):
         :param source: source for the given title
         :type source: string
         """
-        self.record.setdefault('title_translations', [])
-
         title_translation = {
             'title': title,
             'source': self._get_source(source),
@@ -486,7 +537,7 @@ class LiteratureBuilder(object):
         if language is not None:
             title_translation['language'] = language
 
-        self.record['title_translations'].append(title_translation)
+        self._append_to('title_translations', title_translation)
 
     @filter_empty_parameters
     def add_url(self, url):
@@ -495,9 +546,7 @@ class LiteratureBuilder(object):
         :param url: url for additional information for the current document
         :type url: string
         """
-        self.record.setdefault('urls', [])
-
-        self.record['urls'].append({
+        self._append_to('urls', {
             'value': url
         })
 
@@ -511,9 +560,7 @@ class LiteratureBuilder(object):
         :param source: source for the given report number
         :type source: string
         """
-        self.record.setdefault('report_numbers', [])
-
-        self.record['report_numbers'].append({
+        self._append_to('report_numbers', {
             'value': report_number,
             'source': self._get_source(source),
         })
@@ -525,9 +572,7 @@ class LiteratureBuilder(object):
         :param collaboration: collaboration for the current document
         :type collaboration: string
         """
-        self.record.setdefault('collaborations', [])
-
-        self.record['collaborations'].append({
+        self._append_to('collaborations', {
             'value': collaboration
         })
 
@@ -593,9 +638,7 @@ class LiteratureBuilder(object):
 
         :type document_type: string
         """
-        self.record.setdefault('document_type', [])
-
-        self.record['document_type'].append(document_type)
+        self._append_to('document_type', document_type)
 
     @filter_empty_parameters
     def add_copyright(
@@ -615,8 +658,6 @@ class LiteratureBuilder(object):
 
         :type url: string
         """
-        self.record.setdefault('copyright', [])
-
         copyright = {}
         for key in ('holder', 'statement', 'url'):
             if locals()[key] is not None:
@@ -625,7 +666,7 @@ class LiteratureBuilder(object):
         if material is not None:
             copyright[key] = material.lower()
 
-        self.record['copyright'].append(copyright)
+        self._append_to('copyright', copyright)
 
     @filter_empty_parameters
     def add_number_of_pages(self, number_of_pages):
@@ -642,9 +683,7 @@ class LiteratureBuilder(object):
         :param special_collection: defines the type of the current document
         :type special_collection: string
         """
-        self.record.setdefault('special_collections', [])
-
-        self.record['special_collections'].append(special_collection)
+        self._append_to('special_collections', special_collection)
 
     @filter_empty_parameters
     def add_publication_type(self, publication_type):
@@ -654,9 +693,7 @@ class LiteratureBuilder(object):
         of the current document
         :type publication_type: string
         """
-        self.record.setdefault('publication_type', [])
-
-        self.record['publication_type'].append(publication_type)
+        self._append_to('publication_type', publication_type)
 
     @filter_empty_parameters
     def set_core(self, core):
