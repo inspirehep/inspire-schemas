@@ -186,7 +186,6 @@ class LiteratureBuilder(object):
         produces
         """
         self.record.setdefault('authors', [])
-
         self.record['authors'].append(author)
 
     @staticmethod
@@ -225,6 +224,79 @@ class LiteratureBuilder(object):
             author['inspire_roles'] = roles
 
         return author
+
+    @filter_empty_parameters
+    def add_book(self, publisher=None, place=None, date=None):
+        """
+        Make a dictionary that is representing a book.
+
+        :param publisher: publisher full name
+        Format: name
+        :type full_name: string
+
+        :param place: place of publication
+        :type affiliations: string
+
+        :param date: the date of publication
+        :type date: string
+
+        :rtype: dict
+        """
+
+        imprint = {}
+        if date is not None:
+            imprint['date'] = date
+        if place is not None:
+            imprint['place'] = place
+        if publisher is not None:
+            imprint['publisher'] = publisher
+        self.record.setdefault('imprints', [])
+
+        self.record['imprints'].append(imprint)
+
+    @filter_empty_parameters
+    def add_isbns(self, isbn):
+        """
+        :param isbns: the isbns of the book
+        :type isbns: list
+        """
+        isbns = {
+            'value': isbn['code'],
+            'medium': isbn['type_of_isbn']
+            }
+        self.record.setdefault('isbns', [])
+
+        self.record['isbns'].append(isbns)
+
+    @filter_empty_parameters
+    def add_book_series(self, title=None, volume=None):
+        """
+        :param volume: the volume of the book
+        :type volume: string
+
+        :param title: the title of the book
+        :type title: string
+        """
+        book_series = {}
+        if title is not None:
+            book_series['title'] = title
+        if volume is not None:
+            book_series['volume'] = volume
+
+        self.record.setdefault('book_series', [])
+
+        self.record['book_series'].append(book_series)
+
+    @filter_empty_parameters
+    def add_book_edition(self, edition):
+        """
+        :param edition: the edition of the book
+        :type edition: string
+        """
+
+        self.record.setdefault('editions', [])
+        if edition is not None:
+            self.record['editions'].append(edition)
 
     @filter_empty_parameters
     def add_inspire_categories(self, subject_terms, source=None):
