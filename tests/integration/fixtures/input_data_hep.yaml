@@ -51,5 +51,17 @@
    "core": true,
    "refereed":true,
    "withdrawn":true,
-   "citeable":true
+   "citeable":true,
+   "publisher":"Harvard",
+   "place":"London",
+   "book_edition":"Second edition",
+   "isbns":[{
+     "code":"1254589845",
+     "type_of_isbn":"online"
+     },{
+      "code":"12545898457",
+      "type_of_isbn":"online"
+      }
+     ],
+  "book_volume":"Doppler phase 2"
 }
