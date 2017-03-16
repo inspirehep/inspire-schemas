@@ -305,6 +305,10 @@
                         "description": "URI for the person record",
                         "title": "URI for the person record"
                     },
+                    "signature_block": {
+                        "description": "Phonetic representation of the name, needed for author disambiguation (read-only)",
+                        "type": "string"
+                    },
                     "uuid": {
                         "description": "Signature identifier. (read-only)",
                         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
