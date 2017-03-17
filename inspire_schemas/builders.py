@@ -26,6 +26,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+import warnings
 from functools import wraps
 import idutils
 
@@ -534,7 +535,8 @@ class LiteratureBuilder(object):
         internal_uid=None,
         email=None,
         orcid=None,
-        source=None
+        source=None,
+        datetime=None,
     ):
         """Add acquisition source.
 
@@ -545,7 +547,10 @@ class LiteratureBuilder(object):
         :type source: string
 
         :param date: UTC date in isoformat
-        :type method: string
+
+                     .. deprecated:: 30.1.0
+                        Use ``datetime`` instead.
+        :type date: string
 
         :param method: method of acquisition for the suggested document
         :type method: string
@@ -555,14 +560,23 @@ class LiteratureBuilder(object):
 
         :param internal_uid: id of the user that is creating the record
         :type internal_uid: string
+
+        :param datetime: UTC datetime in ISO 8601 format
+        :type datetime: string
         """
+        if date is not None:
+            if datetime is not None:
+                raise ValueError("Conflicting args: 'date' and 'datetime'")
+            warnings.warn("Use 'datetime', not 'date'", DeprecationWarning)
+            datetime = date
+
         self.record.setdefault('acquisition_source', {})
 
         acquisition_source = {}
 
         acquisition_source['submission_number'] = str(submission_number)
         acquisition_source['source'] = self._get_source(source)
-        for key in ('date', 'email', 'method', 'orcid', 'internal_uid'):
+        for key in ('datetime', 'email', 'method', 'orcid', 'internal_uid'):
             if locals()[key] is not None:
                 acquisition_source[key] = locals()[key]
 
