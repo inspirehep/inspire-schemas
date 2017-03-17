@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016 CERN.
+# Copyright (C) 2016, 2017 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -23,13 +23,58 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """INSPIRE schemas and related tools bundle."""
+from __future__ import absolute_import, division, print_function
+
+import json
+import os
+import six
 
 from setuptools import setup, find_packages
 
 
 URL = 'https://github.com/inspirehep/inspire-schemas'
 
-if __name__ == '__main__':
+
+def _yaml2json(yaml_file, json_file):
+    import yaml
+    with open(yaml_file, 'rb') as yaml_fd:
+        raw_data = yaml_fd.read()
+
+    data = yaml.load(raw_data)
+
+    with open(json_file, 'w') as json_fd:
+        json_fd.write(
+            json.dumps(data, indent=4, sort_keys=True, separators=(',', ': '))
+        )
+        json_fd.write('\n')
+
+
+def _find(basepath, extension='.yml'):
+    basepath, dirs, files = six.next(os.walk(basepath))
+    for filename in files:
+        if filename.endswith(extension):
+            yield os.path.join(basepath, filename)
+
+    for dirname in dirs:
+        for filename in _find(
+            basepath=os.path.join(basepath, dirname),
+            extension=extension,
+        ):
+            yield filename
+
+
+def _generate_json_schemas():
+    schemas_dir = os.path.join(
+        os.path.dirname(__file__),
+        'inspire_schemas/records'
+    )
+    for yaml_file in _find(basepath=schemas_dir, extension='.yml'):
+        json_file = yaml_file.rsplit('.', 1)[0] + '.json'
+        _yaml2json(yaml_file=yaml_file, json_file=json_file)
+
+
+def do_setup(url=URL):
+    _generate_json_schemas()
     setup(
         author='CERN',
         author_email='admin@inspirehep.net',
@@ -39,9 +84,13 @@ if __name__ == '__main__':
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['autosemver'],
+        setup_requires=['autosemver', 'pyyaml', 'six'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
         autosemver=True,
     )
+
+
+if __name__ == '__main__':
+    do_setup()
