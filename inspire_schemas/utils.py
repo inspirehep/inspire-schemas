@@ -177,5 +177,5 @@ def normalize_author_name_with_comma(author):
     name = author.split(',')
     if len(name) > 1 and _verify_author_name_initials(name[1]):
         name[1] = name[1].replace(' ', '')
-    name = ', '.join(name)
+    name = ', '.join(n_elem.strip() for n_elem in name)
     return name
