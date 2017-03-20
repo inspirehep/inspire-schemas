@@ -270,7 +270,8 @@ class LiteratureBuilder(object):
         page_start=None,
         journal_issue=None,
         journal_title=None,
-        journal_volume=None
+        journal_volume=None,
+        pubinfo_freetext=None,
     ):
         """Add publication info.
 
@@ -300,13 +301,17 @@ class LiteratureBuilder(object):
         :param journal_volume: volume of the journal where
         the document has been published
         :type journal_volume: string
+
+        :param pubinfo_freetext: Unstructured text describing the publication
+        information.
+        :type pubinfo_freetext: string
         """
         self.record.setdefault('publication_info', [])
 
         publication_item = {}
         for key in ('cnum', 'artid', 'page_end', 'page_start',
                     'journal_issue', 'journal_title',
-                    'journal_volume', 'year'):
+                    'journal_volume', 'year', 'pubinfo_freetext'):
             if locals()[key] is not None:
                 publication_item[key] = locals()[key]
 
