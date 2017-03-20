@@ -1,8 +1,6 @@
 #!/bin/bash
-# -*- coding: utf-8 -*-
-#
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016 CERN.
+# Copyright (C) 2016, 2017 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -58,6 +56,7 @@ pytest \
     --pep8 \
     --cov=inspire_schemas \
     --cov-report=term-missing \
+    --capture=sys \
     -vv \
     "$@" \
     tests \

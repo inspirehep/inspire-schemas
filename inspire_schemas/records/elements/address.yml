@@ -1,0 +1,41 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    city:
+        description: |-
+            :example: Geneva
+        title: English name of the city
+        type: string
+    country_code:
+        $ref: country_code.json
+    latitude:
+        description: |-
+            :example: 50.7736
+        title: Latitude of the location
+        type: number
+    longitude:
+        description: |-
+            :example: 6.07532
+        title: Longitude of the location
+        type: number
+    original_address:
+        description: |-
+            FIXME: what is this supposed to contain? the full address string on
+            legacy?
+
+            Original address, entities separeted with a comma
+        type: string
+    postal_code:
+        description: |-
+            :example: 1050
+        title: Postal code of the location
+        type: string
+    state:
+        description: |-
+            For American states, standard 2-letter codes are used.
+
+            :example: TX
+        title: State or province of the location
+        type: string
+title: Location associated to the record
+type: object

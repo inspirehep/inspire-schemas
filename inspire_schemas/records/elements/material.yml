@@ -1,0 +1,9 @@
+$schema: http://json-schema.org/schema#
+enum:
+- preprint
+- publication
+- reprint
+- erratum
+- addendum
+title: Material to which the field refers
+type: string

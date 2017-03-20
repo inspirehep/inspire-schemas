@@ -1,0 +1,1388 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $schema:
+        format: url
+        type: string
+    _collections:
+        description: |-
+            Used by `invenio-collections` to store the collections this record
+            belongs to.
+
+            .. note::
+
+                This field is maintained by `invenio-collections` and should
+                not be edited manually.
+        items:
+            type: string
+        title: '`invenio-collections` metadata'
+        type: array
+    _desy_bookkeeping:
+        description: |-
+            Used by DESY to store information about the keyword-assignment
+            process.
+
+            :MARC: ``595_D``
+        items:
+            additionalProperties: false
+            properties:
+                date:
+                    description: |-
+                        :MARC: ``595_Dd``
+                    type: string
+                expert:
+                    description: |-
+                        :MARC: ``595_Da``
+                    type: string
+                status:
+                    description: |-
+                        :MARC: ``595_Ds``
+                    type: string
+            type: object
+        title: DESY keywording information
+        type: array
+    _export_to:
+        additionalProperties: false
+        description: |-
+            Flags determining to which foreign databases this record should be
+            automatically exported.  Setting one of the keys to ``true`` means
+            that the record must be exported to the corresponding system,
+            setting it to ``false`` means that it must not be exported.
+
+            :MARC: ``595__c``
+        properties:
+            CDS:
+                description: |-
+                    Controls automatic export to the `CERN Document Server
+                    <http://cds.cern.ch>`_.
+                type: boolean
+            HAL:
+                description: |-
+                    Controls automatic export to `HAL
+                    <https://hal.archives-ouvertes.fr/>`_, the French national
+                    repository.
+                type: boolean
+        type: object
+    _fft:
+        description: |-
+            Used to communicate with legacy about files (to be) attached to the
+            record.
+        items:
+            additionalProperties: false
+            properties:
+                comment:
+                    type: string
+                creation_datetime:
+                    format: date-time
+                    type: string
+                description:
+                    type: string
+                filename:
+                    type: string
+                flags:
+                    items:
+                        type: string
+                    type: array
+                format:
+                    type: string
+                path:
+                    type: string
+                status:
+                    type: string
+                type:
+                    type: string
+                version:
+                    type: integer
+            type: object
+        title: List of legacy FFTs
+        type: array
+    _files:
+        description: |-
+            Used by `invenio-records-files` to store information about the
+            files attached to this record.
+
+            .. note::
+
+                This field is maintained by `invenio-records-files` and should
+                not be edited manually.
+        items:
+            description: |-
+                Describe information needed for files in records.
+            properties:
+                bucket:
+                    type: string
+                checksum:
+                    type: string
+                key:
+                    type: string
+                previewer:
+                    description: |-
+                        Identifier for previewer needed to preview this file.
+                    type: string
+                size:
+                    type: integer
+                type:
+                    description: |-
+                        File type extension.
+                    type: string
+                version_id:
+                    type: string
+            type: object
+        title: '`invenio-records-files` metadata'
+        type: array
+    _private_notes:
+        description: |-
+            These notes are only visible to privileged users, not regular
+            users.
+
+            :MARC: ``595``
+        items:
+            $ref: elements/sourced_value.json
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    abstracts:
+        description: |-
+            :MARC: ``520``
+        items:
+            $ref: elements/sourced_value.json
+        title: List of abstracts
+        type: array
+        uniqueItems: true
+    accelerator_experiments:
+        items:
+            additionalProperties: false
+            properties:
+                accelerator:
+                    description: |-
+                        If present, `institution` should contain the
+                        institution where this accelerator is located.
+
+                        .. note::
+
+                            Currently not used, see `legacy_name`.
+
+                        :MARC: ``693__a``
+                    type: string
+                curated_relation:
+                    default: false
+                    type: boolean
+                experiment:
+                    description: |-
+                        If present, `institution` should contain the
+                        institution where this experiment is located and
+                        `accelerator` may contain the accelerator that this
+                        experiment is using (if appropriate).
+
+                        .. note::
+
+                            Currently not used, see `legacy_name`.
+
+                        :MARC: not present.
+                    type: string
+                institution:
+                    description: |-
+                        .. note::
+
+                            Currently not used, see `legacy_name`.
+
+                        :MARC: not present.
+                    title: Institution hosting the experiment
+                    type: string
+                legacy_name:
+                    description: |-
+                        This field is used when migrating from legacy instead
+                        of separate `institution`, `accelerator` and
+                        `experiment`. In the future, it will be deprecated and
+                        the other fields will be used instead.
+
+                        :example: ``CERN-LHC-CMS``
+                        :MARC: ``693__e``
+                    title: Identifier of the experiment on legacy
+                    type: string
+                record:
+                    $ref: elements/json_reference.json
+            type: object
+        title: List of related accelerators/experiments
+        type: array
+        uniqueItems: true
+    acquisition_source:
+        $ref: elements/acquisition_source.json
+    arxiv_eprints:
+        items:
+            additionalProperties: false
+            description: |-
+                Contains metadata of an arXiv eprint contained in this record.
+
+                .. note::
+
+                    This metadata is copied over from arXiv and should not be
+                    edited manually.
+            properties:
+                categories:
+                    description: |-
+                        The first category in the list has a special meaning:
+                        it is the primary category of the eprint on arXiv.
+
+                        :MARC: first category in ``037__c`` with ``9:arXiv``,
+                            all categories in ``65017a`` with ``2:arXiv``
+                    items:
+                        $ref: elements/arxiv_categories.json
+                    minItems: 1
+                    title: arXiv categories of the eprint
+                    type: array
+                    uniqueItems: true
+                value:
+                    description: |-
+                        :MARC: ``037__a`` with ``9:arXiv``
+                        :example: ``math.DG/0307245``
+                        :example: ``1701.01431``
+                    pattern: ^\d{4}.\d{4,5}|[\w.]+(-[\w.]+)?/\d+$
+                    title: arXiv eprint identifier
+                    type: string
+            required:
+            - categories
+            - value
+            title: arXiv metadata
+            type: object
+        type: array
+        uniqueItems: true
+    authors:
+        description: |-
+            Besides authors, also contains editors and supervisors (see
+            `inspire_roles`).
+
+            :MARC: ``100``, ``700`` and ``701``
+        items:
+            additionalProperties: false
+            properties:
+                affiliations:
+                    items:
+                        additionalProperties: false
+                        properties:
+                            curated_relation:
+                                type: boolean
+                            record:
+                                $ref: elements/json_reference.json
+                            value:
+                                description: |-
+                                    Currently, the old `legacy_ICN` is used
+                                    here. In the future, this will change and
+                                    become the new `ICN`.
+
+                                    :MARC: ``100/700/701__u``
+                                title: ICN of affiliation
+                                type: string
+                        required:
+                        - value
+                        type: object
+                    type: array
+                    uniqueItems: true
+                alternative_names:
+                    items:
+                        description: |-
+                            :MARC: ``100/700/701__q``
+                            :example: ``楼 立洋``
+                            :example: ``Smith, Joe John``
+                        type: string
+                    type: array
+                credit_roles:
+                    items:
+                        description: |-
+                            Role of the author according to the `Contributor
+                            Roles Taxonomy (CRediT)
+                            <http://dictionary.casrai.org/Contributor_Roles>`_
+
+                            :MARC: not present.
+                        enum:
+                        - Conceptualization
+                        - Data curation
+                        - Formal analysis
+                        - Funding acquisition
+                        - Investigation
+                        - Methodology
+                        - Project administration
+                        - Resources
+                        - Software
+                        - Supervision
+                        - Validation
+                        - Visualization
+                        - Writing - original draft
+                        - Writing - review & editing
+                        title: CRedit role of author
+                        type: string
+                    type: array
+                curated_relation:
+                    default: false
+                    type: boolean
+                emails:
+                    description: |-
+                        :MARC: ``100/700/701__m``
+                    items:
+                        format: email
+                        type: string
+                    type: array
+                full_name:
+                    description: |-
+                        Author name in Latin alphabet (may contain diacritics).
+                        Should be of the form 'family names, first names', and,
+                        except for a possible reordering, be exactly as on the
+                        paper.
+
+                        :example: ``Smith Davis, John F.K.``
+                        :MARC: ``100/700/701__a``
+                    title: Author name
+                    type: string
+                ids:
+                    description: |-
+                        :MARC: ``100/700/701__i/j``
+                    items:
+                        $ref: elements/id.json
+                    title: Identifiers of the author
+                    type: array
+                    uniqueItems: true
+                inspire_roles:
+                    items:
+                        default: author
+                        description: |-
+                            ``supervisor``
+                                This person is a thesis supervisor. Should be
+                                used together with the ``thesis``
+                                `document_type`.
+
+                            :MARC: ``701`` is used for supervisor metadata.
+
+                            ``editor``
+                                This person is an editor of the conference
+                                proceedings. Should be used together with the
+                                ``proceedings`` `document_type`.
+
+                            :MARC: ``100/700__e:ed.``
+                        enum:
+                        - author
+                        - supervisor
+                        - editor
+                        type: string
+                    type: array
+                raw_affiliations:
+                    description: |-
+                        List of full affiliations, as written on the paper.
+
+                        :MARC: ``100/700/701__v``
+                    items:
+                        $ref: elements/sourced_value.json
+                    type: array
+                    uniqueItems: true
+                record:
+                    $ref: elements/json_reference.json
+                signature_block:
+                    description: |-
+                        Phonetic representation of the name, needed for author
+                        disambiguation. This field should not be edited
+                        manually.
+                    type: string
+                uuid:
+                    description: |-
+                        Used by the BEARD author disambiguation tool. This
+                        field should not be edited manually.
+                    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                    title: UUID
+                    type: string
+            required:
+            - full_name
+            type: object
+        title: Authors
+        type: array
+        uniqueItems: true
+    book_series:
+        description: |-
+            List of book series in which this record has been published.
+
+            .. note::
+
+                This field should only be present if ``book``, ``thesis`` or
+                ``proceedings`` are among `document_type`.
+
+            :MARC: ``490``
+        items:
+            additionalProperties: false
+            description: |-
+                .. note::
+
+                    If the book series has a Journal record, `publication_info`
+                    should be used instead.
+            properties:
+                title:
+                    description: |-
+                        :MARC: ``490__a``
+                    title: Title of the book series
+                    type: string
+                volume:
+                    description: |-
+                        :MARC: ``490__v``
+                    title: Volume of the book in the series
+                    type: string
+            type: object
+        type: array
+    citeable:
+        description: |-
+            The main effect of setting this field to ``true`` is that the
+            recoord is taken into account in the citation summary.  The need
+            for this field arises because of limitations in the automatic
+            recognition of cited papers in references: a record is flagged as
+            citeable only if the common way to cite this record can be reliably
+            recognized.  Currently, a record is automatically flagged as
+            citeable if it has
+
+            - sufficient information in `publication_info`: `journal_title`,
+              `journal_volume` and (`artid` or `page_start`), *or*
+            - an `arxiv_eprints` field.
+
+            Besides, a record may be manually flagged as citeable by a curator
+            if a user tracks and reports citations to that record.
+
+            :MARC: ``true`` corresponds to ``980__a:Citeable``.
+        title: Whether this record should be considered as citeable
+        type: boolean
+    collaborations:
+        items:
+            additionalProperties: false
+            properties:
+                record:
+                    $ref: elements/json_reference.json
+                value:
+                    description: |-
+                        Collaboration name as it appears on the paper (with the
+                        ``Collaboration`` suffix dropped).
+
+                        :example: ``ATLAS`` instead of ``ATLAS Collaboration``
+                        :example: ``Particle Data Group``
+                        :MARC: ``710__g``
+                    title: Collaboration name
+                    type: string
+            type: object
+        required:
+        - value
+        title: List of collaborations
+        type: array
+        uniqueItems: true
+    control_number:
+        description: |-
+            Read-only field.
+
+            :MARC: ``001``
+        title: ID of current record
+        type: integer
+    copyright:
+        description: |-
+            :MARC: ``542``
+        items:
+            additionalProperties: false
+            properties:
+                holder:
+                    description: |-
+                        :example: ``American Physical Society``
+                        :MARC: ``542__d``
+                    title: Copyright holder
+                    type: string
+                material:
+                    $ref: elements/material.json
+                statement:
+                    description: |-
+                        See `Wikipedia
+                        <https://en.wikipedia.org/wiki/Copyright_notice>`_ for
+                        explanations.
+
+                        Alernatively to this string, a URL to the copyright
+                        notice may be provided in `url`.
+
+                        :example: ``© The Author(s) 2015. Published by Oxford
+                            University Press on behalf of the Physical Society
+                            of Japan.``
+                        :MARC: ``542__f``
+                    title: Copyright notice
+                    type: string
+                url:
+                    format: url
+                    title: Copyright notice URL
+                    type: string
+            type: object
+        title: List of copyrights to documents in this record
+        type: array
+    core:
+        description: |-
+            Inspire ingests metadata and creates records for many documents.
+            Some of them are relevant for High-Energy Physics, wheareas others
+            might be only tangentially related.  In the first case, the record
+            is said to be CORE, whereas in the second case it is non-core.
+            CORE records are manually curated to ensure their metadata are up
+            to Inspire's quality standards, but non-core records only receive
+            automatic treatment.
+
+            .. note::
+
+                If this field is not present or set to ``false``, the record is
+                considered as non-core. The latter is useful to override
+                automatic core assignments based on other properties of the
+                record.
+        title: Whether this record is CORE
+        type: boolean
+    corporate_author:
+        items:
+            description: |-
+                In case the document has not been signed by a real author, but
+                only mentions the name of an organization.
+
+                :example: ``CERN``
+                :MARC: ``110__a``
+            title: List of corporate authors
+            type: string
+        type: array
+        uniqueItems: true
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see `new_record`.
+
+            :MARC: ``981__a``
+        items:
+            $ref: elements/json_reference.json
+        type: array
+    document_type:
+        description: |-
+            Types of document this record represents.
+
+            .. note::
+
+                As a record aggregates information from multiple sources, it
+                can have multiple document types simultaneously.
+
+            `article`
+                An article, whether it is published or only a preprint. In the
+                first case, `publication_info` contains information about the
+                journal in which it was published.
+
+            `book`
+                A monograph that does not fit into any other `document_type`.
+                The `editions`, `imprints`, `isbns` and `book_series` fields
+                may contain specific metadata about this book.
+
+                .. note::
+
+                    A `proceeding` or a `thesis` is not considered as a `book`.
+
+            `book chapter`
+                A chapter in a book. The field `publication_info` contains
+                information about the book of which this record is a chapter.
+
+            `conference paper`
+                A paper that part of a conference proceedings. The field
+                `publication_info` contain information about the conference
+                proceedings. In particular, `cnum` contains the identfier of
+                the conference.
+
+            `note`
+                A note, not meant for publication.
+
+            `proceedings`
+                Proceedings of a conference. The `cnum` field contains the
+                identfier of the conference. If published in a journal,
+                `publication_info` also contains the journal information. If
+                published as a book, the `editions`, `imprints`, `isbns` and
+                `book_series` fields may contain specific metadata about this
+                book.
+
+                .. note::
+
+                    This is not considered as a `book`.
+
+            `report`
+                A report.
+
+            `thesis`
+                A thesis. The `thesis_info` field contains additional
+                information about the thesis. If published as a book, the
+                `editions`, `imprints`, `isbns` and `book_series` fields may
+                contain specific metadata about this book.
+
+                .. note::
+
+                    This is not considered as a `book`.
+
+            :MARC: ``980__a``, with corresponding values.
+        items:
+            default: article
+            enum:
+            - article
+            - book
+            - book chapter
+            - conference paper
+            - note
+            - proceedings
+            - report
+            - thesis
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: true
+    dois:
+        items:
+            additionalProperties: false
+            properties:
+                material:
+                    $ref: elements/material.json
+                source:
+                    $ref: elements/source.json
+                value:
+                    description: |-
+                        :example: ``10.1023/A:1026654312961``
+                        :MARC: ``0247__a``
+                    pattern: ^10\.\d+(\.\d+)?/.+$
+                    title: DOI
+                    type: string
+            required:
+            - value
+            type: object
+        title: List of DOIs
+        type: array
+        uniqueItems: true
+    editions:
+        description: |-
+            :MARC: ``250__a``
+        items:
+            type: string
+        title: List of book editions
+        type: array
+        uniqueItems: true
+    energy_ranges:
+        description: |-
+            Ranges of energies the record refers to.
+
+            :MARC: ``695__e``
+        items:
+            minimum: 0
+            type: integer
+        type: array
+    external_system_identifiers:
+        description: |-
+            List of identifiers of this document on external systems.
+
+            :MARC: ``035``
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    description: |-
+                        Identifies the external system, and allows to interpret
+                        unambiguously the `value`.
+
+                        :example: ``ADS``
+                        :MARC: ``035__9``
+                    type: string
+                value:
+                    description: |-
+                        Identifies the record in the external system specified
+                        by `schema`.
+
+                        :example: ``1999IJTP...38.1113M``
+                        :MARC: ``035__a``
+                    title: External identifier
+                    type: string
+            required:
+            - schema
+            - value
+            type: object
+        type: array
+        uniqueItems: true
+    funding_info:
+        description: |-
+            Information about the sources of funding for the research performed
+            in this record.
+
+            :MARC: ``536``
+        items:
+            additionalProperties: false
+            properties:
+                agency:
+                    description: |-
+                        :MARC: ``536__a``
+                    title: Funding agency
+                    type: string
+                grant_number:
+                    description: |-
+                        :MARC: ``536__c``
+                    title: Grant number
+                    type: string
+                project_number:
+                    description: |-
+                        :MARC: ``536__f``
+                    title: Project number
+                    type: string
+            type: object
+        title: Funding information
+        type: array
+        uniqueItems: true
+    imprints:
+        items:
+            additionalProperties: false
+            description: |-
+                When/where/by whom this record was published.
+
+                :MARC: ``260``
+            properties:
+                date:
+                    description: |-
+                        :MARC: ``260__c``
+                    format: date
+                    title: Date of publication
+                    type: string
+                place:
+                    description: |-
+                        .. note::
+
+                            This field is populated if this record has been
+                            published in a book, i.e. it makes sense if `book`,
+                            `thesis` or `proceedings` are among
+                            `document_type`.
+
+                        :example: ``Paris``
+                        :MARC: ``260__a``
+                    title: Place of publication
+                    type: string
+                publisher:
+                    description: |-
+                        :example: ``Springer``
+                        :MARC: ``260__b``
+                    type: string
+            type: object
+        title: List of imprints
+        type: array
+        uniqueItems: true
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        title: List of Inspire categories
+        type: array
+        uniqueItems: true
+    isbns:
+        description: |-
+            :MARC: ``020``
+        items:
+            additionalProperties: false
+            properties:
+                medium:
+                    description: |-
+                        :MARC: ``020__b``
+                    enum:
+                    - hardcover
+                    - online
+                    - print
+                    - softcover
+                    title: Physical medium to which this ISBN refers
+                    type: string
+                value:
+                    description: |-
+                        :example: ``0201021153``
+                        :MARC: ``020__a``
+                    pattern: ^\d*[0-9X]$
+                    type: string
+            required:
+            - value
+            type: object
+        title: List of ISBNs
+        type: array
+        uniqueItems: true
+    keywords:
+        description: |-
+            Keywords give information about the specific contents of the
+            record, much more precisely than `inspire_categories`.
+
+            :MARC: ``084``, ``6531`` and ``695`` (corresponding to different
+                `schema`)
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    description: |-
+                        Describes to which vocabulary the keyword in `value`
+                        belongs.
+
+                        `INSPIRE`
+                            The keyword has been assigned by Inspire, and
+                            belongs to its vocabulary.
+
+                            :MARC: ``695__2:INSPIRE``
+
+                        `JACOW`
+                            The keyword is part of the `Joint Accelerator
+                            Conference Website (JACoW) vocabulary
+                            <http://jacow.org/Tools/Keywords>`_.
+
+                            :MARC: ``6531_2:JACOW``
+
+                        `PACS`
+                            The keyword is a number from the `Physics and
+                            Astronomy Classification Scheme (PACS)
+                            <https://publishing.aip.org/publishing/pacs/pacs-2010-regular-edition>`_.
+
+                            :MARC: ``084__2:PACS``
+
+                        `PDG`
+                            The keyword is a `PDG Indentifier
+                            <http://pdg.lbl.gov/2016/pdgid/PDGIdentifiers.html>`_.
+
+                            :MARC: ``084__2:PDG``
+
+                        .. note::
+
+                            If not present, the keyword is a free-form keyword,
+                            not necessarily part of any vocabulary.
+                    enum:
+                    - INSPIRE
+                    - JACOW
+                    - PACS
+                    - PDG
+                    title: Keyword vocabulary
+                    type: string
+                source:
+                    $ref: elements/source.json
+                value:
+                    description: |-
+                        It belongs to the vocabulary specified by `schema`.
+
+                        :example: ``black hole: mass`` (for `schema` =
+                            `INSPIRE`)
+                        :example: ``29.27.Fh`` (for `schema` = `PACS`)
+                        :example: ``G033M`` (for `schema` = `PDG`)
+                        :MARC: ``084/6531/695__a`` (depending on `schema`)
+                    title: A keyword
+                    type: string
+            required:
+            - value
+            type: object
+        title: List of keywords
+        type: array
+        uniqueItems: true
+    languages:
+        description: |-
+            Every language is represented by its `ISO 639-1
+            <https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>`_
+            two-letter code.
+
+            .. note::
+
+                If this field is not present, the language of the document is assumed to be English.
+
+            :example: ``el`` for Greek
+            :MARC: ``041__a``
+        items:
+            pattern: ^\w{2}$
+            title: A language
+            type: string
+        title: List of languages of the document
+        type: array
+    legacy_creation_date:
+        description: |-
+            Only present if the record already existed on legacy Inspire.
+
+            :MARC: ``961__x``
+        format: date-time
+        title: Date of record creation on legacy
+        type: string
+    license:
+        description: |-
+            :MARC: ``540``
+        items:
+            additionalProperties: false
+            properties:
+                imposing:
+                    description: |-
+                        :example: ``arXiv``
+                        :MARC: ``540__b``
+                    title: Organization/person imposing the license
+                    type: string
+                license:
+                    description: |-
+                        Either the short name of the license or the full
+                        license statement.
+
+                        :example: ``CC-BY-4.0``
+                        :MARC: ``540__a``
+                    title: License statement
+                    type: string
+                material:
+                    $ref: elements/material.json
+                url:
+                    description: |-
+                        URL where the full license statement may be found, if
+                        only a short name is provided in ``license``.
+
+                        :MARC: ``540__u``
+                    format: url
+                    title: URL of the license
+                    type: string
+            type: object
+        title: List of licenses
+        type: array
+        uniqueItems: true
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            Contains a reference to the record replacing the current one, if it
+            is marked as `deleted`.
+
+            :MARC: ``970__d``
+        title: Record replacing this one
+    number_of_pages:
+        description: |-
+            :MARC: ``300``
+        minimum: 1
+        title: Number of pages of the document
+        type: integer
+    persistent_identifiers:
+        description: |-
+            :MARC: ``0247``
+        items:
+            additionalProperties: false
+            properties:
+                material:
+                    $ref: elements/material.json
+                schema:
+                    description: |-
+                        Currently, the following identifiers are recognized:
+
+                        * `HDL <http://handle.net>`_
+                        * `URN
+                          <https://en.wikipedia.org/wiki/Uniform_Resource_Name>`_
+
+                        .. note::
+
+                            DOIs should be put into `dois`, not here.
+
+                            Although ISBNs can also be mapped to a URN (by
+                            prepending ``urn:isbn:`` to the ISBN), they should
+                            be put in the `isbns` field instead.
+
+                        :MARC: ``0247_2``
+                    enum:
+                    - HDL
+                    - URN
+                    title: Type of identifier
+                    type: string
+                source:
+                    $ref: elements/source.json
+                value:
+                    description: |-
+                        This value gets interpreted as an identfier of the type
+                        specified by `schema`.
+
+                        :example: ``10138/168995`` (when `schema` = `HDL`)
+                        :example: ``urn:nbn:de:hebis:77-diss-1000009520`` (when
+                            `schema` = `URN`)
+                        :MARC: ``0247_a``
+                    title: Persistent identifier
+                    type: string
+            required:
+            - schema
+            - value
+            type: object
+        title: List of persistent identifiers
+        type: array
+        uniqueItems: true
+    preprint_date:
+        description: |-
+            .. note::
+
+                This is only for preprints. For the publication date of
+                published documents, see `imprints`.
+
+            :MARC: ``269__c``
+        format: date
+        title: Preprint release date
+        type: string
+    public_notes:
+        description: |-
+            Any notes about the document that do not fit into another field.
+            For arXiv eprints, also contains the contents of the comment field
+            on arXiv.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see `_hidden_notes`.
+
+            :MARC: ``500``
+        items:
+            $ref: elements/sourced_value.json
+        title: List of public notes
+        type: array
+        uniqueItems: true
+    publication_info:
+        description: |-
+            :MARC: ``773``
+        items:
+            additionalProperties: false
+            properties:
+                artid:
+                    description: |-
+                        For journals which issue IDs for articles instead of
+                        (or in complement to) continuous numbers within a
+                        volume.
+
+                        .. note::
+
+                            On legacy, this was treated as a starting page.
+
+                        :MARC: ``773__c`` (when it contains an ID instead of
+                            starting page or page range).
+                    title: Article ID
+                    type: string
+                cnum:
+                    $ref: elements/cnum.json
+                    description: |-
+                        When `conference paper` or `proceedings` is among
+                        `document_type`, contains the CNUM of the corresponding
+                        conference.
+
+                        :MARC: ``773__w``
+                conf_acronym:
+                    description: |-
+                        :MARC: ``773__q``
+                    title: Conference acronym
+                    type: string
+                conference_record:
+                    $ref: elements/json_reference.json
+                    title: record of the conference
+                curated_relation:
+                    type: boolean
+                journal_issue:
+                    description: |-
+                        :MARC: ``773__n``
+                    type: string
+                journal_record:
+                    $ref: elements/json_reference.json
+                    description: |-
+                        Record of the corresponding Journal
+                journal_title:
+                    description: |-
+                        Journal title abbreviated as in the corresponding entry
+                        in the Journals collection.
+
+                        :example: ``Phys.Rev.``
+                        :MARC: ``773__p``
+                    type: string
+                journal_volume:
+                    description: |-
+                        :MARC: ``773__v``
+                    type: string
+                material:
+                    $ref: elements/material.json
+                page_end:
+                    description: |-
+                        :MARC: last page in ``773__c`` (if present)
+                    title: Last page of document
+                    type: string
+                page_start:
+                    description: |-
+                        :MARC: first page in ``773__c`` (if not an `artid`)
+                    title: First page of document
+                    type: string
+                parent_isbn:
+                    description: |-
+                        ISBN of the book of which this document is a part.
+
+                        :MARC: ``773__z``
+                    pattern: ^(97(8|9))?\d{9}(\d|X)$
+                    type: string
+                parent_record:
+                    $ref: elements/json_reference.json
+                parent_report_number:
+                    description: |-
+                        Report number of the document of which this record is a
+                        part. This applies e.g. for large reports containing
+                        several chapters that have been split into individual
+                        records.
+
+                        :MARC: ``773__r``
+                    type: string
+                pubinfo_freetext:
+                    description: |-
+                        Unstructured text describing the publication
+                        information.
+
+                        .. note::
+
+                            This has been ported over from legacy, but no new
+                            information should be put here.
+
+                        :MARC: ``773__x``
+                    type: string
+                year:
+                    description: |-
+                        :MARC: ``773__y``
+                    maximum: 2050
+                    minimum: 1000
+                    title: Publication year
+                    type: integer
+            type: object
+        title: List of information on publication
+        type: array
+        uniqueItems: true
+    publication_type:
+        items:
+            enum:
+            - introductory
+            - lectures
+            - review
+            type: string
+        type: array
+    refereed:
+        description: |-
+            This asserts that the document is considered as peer reviewed. This
+            assessment might differ from the journal's claim to do peer review.
+            As a consequence, most conference papers are not considered as
+            refereed.
+
+            :MARC: ``true`` corresponds to ``980__a:published``
+        title: Whether the record has been peer reviewed
+        type: boolean
+    references:
+        description: |-
+            :MARC: ``999C5``
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                raw_refs:
+                    description: |-
+                        These references are unparsed and as they appear in the
+                        document.
+
+                        :MARC: not present.
+                    items:
+                        additionalProperties: false
+                        properties:
+                            position:
+                                description: |-
+                                    The position of the reference as it appears
+                                    on the document.
+                                type: string
+                            schema:
+                                description: |-
+                                    :example: ``text``
+                                    :example: ``Elsevier XML``
+                                title: Content type of the raw reference
+                                type: string
+                            source:
+                                $ref: elements/source.json
+                            value:
+                                title: Content of the raw reference
+                                type: string
+                        required:
+                        - value
+                        - schema
+                        type: object
+                    title: List of raw references
+                    type: array
+                record:
+                    $ref: elements/json_reference.json
+                reference:
+                    $ref: elements/reference.json
+            type: object
+        title: List of references
+        type: array
+        uniqueItems: true
+    report_numbers:
+        description: |-
+            :example: ``DESY-17-036``
+            :MARC: ``037``
+        items:
+            additionalProperties: false
+            properties:
+                hidden:
+                    description: |-
+                        Whether this report number should be hidden from the
+                        display. This is appropriate for:
+
+                        * a report number that appears on the document but is
+                          not the one officially assigned;
+                        * a report number that has been assigned by one of the
+                          authors' institutions, but is not displayed on the
+                          document (typically for large collaborations).
+
+                        :MARC: if ``true``, the `value` is in ``037__z``
+                            instead of ``037__a``.
+                    type: boolean
+                source:
+                    $ref: elements/source.json
+                value:
+                    type: string
+            required:
+            - value
+            type: object
+        title: List of report numbers assigned to the record
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+    special_collections:
+        description: |-
+            These collections are used by collaborations to manage their notes.
+            If a record belongs to a special collection, it is not shown in the
+            standard search results.
+
+            :MARC: ``980__a``
+        items:
+            enum:
+            - CDF-INTERNAL-NOTE
+            - CDF-NOTE
+            - D0-INTERNAL-NOTE
+            - D0-PRELIMINARY-NOTE
+            - H1-INTERNAL-NOTE
+            - H1-PRELIMINARY-NOTE
+            - HALHIDDEN
+            - HEPHIDDEN
+            - HERMES-INTERNAL-NOTE
+            - LARSOFT-INTERNAL-NOTE
+            - LARSOFT-NOTE
+            - ZEUS-INTERNAL-NOTE
+            - ZEUS-PRELIMINARY-NOTE
+            type: string
+        title: Special collections to which this record belongs
+        type: array
+        uniqueItems: true
+    succeeding_entry:
+        additionalProperties: false
+        description: |-
+            :MARC: ``78502``
+        properties:
+            isbn:
+                pattern: ^(97(8|9))?\d{9}(\d|X)$
+                type: string
+            record:
+                $ref: elements/json_reference.json
+            relationship_code:
+                type: string
+        title: Reference to a newer version of this record
+        type: object
+    texkeys:
+        description: |-
+            These keys are used to cite this record using TeX/LaTeX/BibTex. The
+            first one is the valid one being shown in the TeX display formats,
+            the others are the obsolete ones which are kept in order to
+            identify this record by those texkeys.
+
+            :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
+        items:
+            type: string
+        title: List of TeX keys
+        type: array
+        uniqueItems: true
+    thesis_info:
+        additionalProperties: false
+        description: |-
+            Information on a thesis (degree, date, university)
+
+            :MARC: ``502``
+        properties:
+            date:
+                description: |-
+                    Publication date of the thesis
+
+                    :MARC: ``502__d``
+                format: date
+                type: string
+            defense_date:
+                description: |-
+                    Date of the thesis defense. On legacy, this was put in the
+                    note field as 'presented on ...'.
+
+                    :MARC: ``500__a``
+                format: date
+                type: string
+            degree_type:
+                $ref: elements/degree_type.json
+                description: |-
+                    :MARC: ``502__b``
+            institutions:
+                description: |-
+                    List of institutions issuing the degree.
+
+                    :MARC: ``502__c``
+                items:
+                    additionalProperties: false
+                    properties:
+                        curated_relation:
+                            type: boolean
+                        name:
+                            type: string
+                        record:
+                            $ref: elements/json_reference.json
+                    type: object
+                type: array
+        type: object
+    title_translations:
+        description: |-
+            Translations of the titles in a language that is not the language
+            of the document (see `languages`).
+            Usually, this is contains an English translation of the title of a
+            non-English paper, but sometimes a native language if the paper is
+            in English but the title has been translated.
+
+            :MARC: ``242``
+        items:
+            additionalProperties: false
+            properties:
+                language:
+                    pattern: ^\w{2}$
+                    type: string
+                source:
+                    $ref: elements/source.json
+                subtitle:
+                    type: string
+                title:
+                    type: string
+            type: object
+        type: array
+        uniqueItems: true
+    titles:
+        description: |-
+            There can be several because the preprint title often differs from
+            the published version. The title should be kept as on the document
+            and in the same language as the document (see `languages`).
+
+            Translations go into `title_translations`.
+
+            :MARC: ``245``
+        items:
+            $ref: elements/title.json
+        title: List of titles
+        type: array
+        uniqueItems: true
+    urls:
+        items:
+            $ref: elements/url.json
+        type: array
+        uniqueItems: true
+    withdrawn:
+        description: |-
+            Whether the paper has been withdrawn (mainly occurs for arXiv
+            preprints). It shouldn't appear in author profiles.
+
+            :MARC: ``true`` corresponds to ``980__a:withdrawn``
+        type: boolean
+required:
+- document_type
+- titles
+title: A record in the Literature collection
+type: object

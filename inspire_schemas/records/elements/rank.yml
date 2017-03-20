@@ -1,0 +1,13 @@
+$schema: http://json-schema.org/schema#
+enum:
+- STAFF
+- SENIOR
+- JUNIOR
+- VISITOR
+- POSTDOC
+- PHD
+- MASTER
+- UNDERGRADUATE
+- OTHER
+title: Rank of academic position
+type: string
