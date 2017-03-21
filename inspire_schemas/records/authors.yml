@@ -131,9 +131,45 @@ properties:
     name:
         additionalProperties: false
         description: |-
-            Contains name information.
+            :MARC: ``100``, ``400``, ``880``
         properties:
+            name_variants:
+                description: |-
+                    Contains other variations (besides `preferred_name`) of the
+                    author name in `value` that are in use.
+
+                    These could be:
+
+                    - other spellings;
+                    - other transliterations from the :ref:`native_names` to the
+                      Latin alphabet;
+                    - other splittings among last names and first names;
+                    - combinations with :ref:`previous_names`.
+
+                    :example: ``Smith-Taylor, Johnny``
+                    :MARC: ``400__a``
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                title: List of name variants
+                type: array
+                uniqueItems: true
+            native_names:
+                description: |-
+                    Native names of the author, not using the Latin alphabet.
+
+                    :example: ``楼 立洋``
+                    :MARC: ``880__a``
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                type: array
+                uniqueItems: true
             numeration:
+                description: |-
+                    :MARC: ``100__b``
                 enum:
                 - Jr.
                 - Sr.
@@ -147,43 +183,62 @@ properties:
                 minLength: 1
                 type: string
             preferred_name:
+                description: |-
+                    differs from the full name in `value`. This should use Latin alphabet.
+
+                    :example: ``Smith, John``
+                    :MARC: ``100__q``
                 minLength: 1
                 type: string
+            previous_names:
+                description: |-
+                    Contains previous names of the author, e.g. the maiden
+                    name.
+
+                    :example: ``Taylor, Jonathan Gerald C.T.``
+                    :MARC: no field for this, was put into ``667__a`` as a note.
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                title: List of previous names
+                type: array
+                uniqueItems: true
             title:
+                description: |-
+                    :MARC: ``100__c``
                 enum:
                 - Sir
                 minLength: 1
                 type: string
             value:
-                format: .+, .+
+                description: |-
+                    Author name in Latin alphabet (may contain diacritics). The
+                    format should be ``last names, first names``. If not all
+                    names are known, initials should be followed by a `.`
+                    without space.
+
+                    .. note::
+
+                        Not all authors have two names, so only one name
+                        without a comma is perfectly valid.
+
+                        :example: ``Jimmy``
+
+                    :example: ``Smith Davis, Jonathan Gerald C.T.``
+                    :MARC: ``100__a``
                 minLength: 1
+                title: Full name of the author
                 type: string
         required:
         - value
+        title: Name information of the author
         type: object
-    native_name:
-        description: |-
-            Stores name in native form.
-        items:
-            minLength: 1
-            type: string
-        minItems: 1
-        type: array
-        uniqueItems: true
     new_record:
         $ref: elements/json_reference.json
         description: |-
             Master record that replaces this record
         title: New record
-    other_names:
-        description: |-
-            Contains other variation of names. Usually a different form of writing the primary name.
-        items:
-            minLength: 1
-            type: string
-        minItems: 1
-        type: array
-        uniqueItems: true
     past_emails_addresses:
         description: |-
             Contains past email addresses
@@ -238,15 +293,6 @@ properties:
                     minLength: 1
                     type: string
             type: object
-        minItems: 1
-        type: array
-        uniqueItems: true
-    previous_names:
-        description: |-
-            Contains a previous name. For example, it can be a maiden's name.
-        items:
-            minLength: 1
-            type: string
         minItems: 1
         type: array
         uniqueItems: true
