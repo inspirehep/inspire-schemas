@@ -346,7 +346,7 @@ class LiteratureBuilder(object):
 
         :type preprint_date: string. A formatted date is required (yyyy-mm-dd)
         """
-        self.record['preprint_date'] = normalize_date_iso(preprint_date)
+        self.record['preprint_date'] = preprint_date
 
     @filter_empty_parameters
     def add_thesis(
