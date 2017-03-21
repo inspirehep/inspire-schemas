@@ -52,6 +52,30 @@ properties:
         minItems: 1
         type: array
         uniqueItems: true
+    awards:
+        description: |-
+            :MARC: ``678__a``
+        items:
+            additionalProperties: false
+            properties:
+                name:
+                    description: |-
+                        :example: ``Nobel Prize in Physics``
+                    minLength: 1
+                    title: Name of the award
+                    type: string
+                url:
+                    $ref: elements/url.json
+                    title: URL of award announcement
+                year:
+                    maximum: 2050
+                    type: integer
+            title: An award
+            type: object
+        minItems: 1
+        title: List of awards received by the author
+        type: array
+        uniqueItems: true
     birth_date:
         description: |-
             Stores birth date
@@ -293,17 +317,6 @@ properties:
                     minLength: 1
                     type: string
             type: object
-        minItems: 1
-        type: array
-        uniqueItems: true
-    prizes:
-        description: |-
-            Contains prize name.t
-        items:
-            description: |-
-                E.g. Nobel Prize Physics 1977, Shaw Prize 2006, Sakurai Prize 1985 FIXME: shall we separate the year?
-            minLength: 1
-            type: string
         minItems: 1
         type: array
         uniqueItems: true
