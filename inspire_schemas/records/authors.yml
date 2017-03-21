@@ -58,14 +58,6 @@ properties:
         format: date
         minLength: 1
         type: string
-    conferences:
-        description: |-
-            Contains information about attended conferences. (their record URIs)
-        items:
-            $ref: elements/json_reference.json
-        minItems: 1
-        type: array
-        uniqueItems: true
     control_number:
         type: integer
     death_date:
@@ -206,9 +198,6 @@ properties:
         items:
             additionalProperties: false
             properties:
-                _rank:
-                    minLength: 1
-                    type: string
                 current:
                     type: boolean
                 emails:
@@ -283,23 +272,6 @@ properties:
         description: |-
             Url of the record itself
         title: Url of the record
-    source:
-        description: |-
-            This is the source of informatio. It is currently a mixed bags of user IDs or provenance information, e.g. arXiv etc. FIXME: we should really discuss about it. E.g. eprint, webform, Rachel.Lumpkin@durham.ac.uk(96), Fermilab, C09-05-04, KYOTOU...
-        items:
-            additionalProperties: false
-            properties:
-                date_verified:
-                    format: date
-                    minLength: 1
-                    type: string
-                name:
-                    minLength: 1
-                    type: string
-            type: object
-        minItems: 1
-        type: array
-        uniqueItems: true
     status:
         description: |-
             The person's status
