@@ -1,0 +1,12 @@
+$schema: http://json-schema.org/schema#
+default: article
+enum:
+- article
+- book
+- book chapter
+- conference paper
+- note
+- proceedings
+- report
+- thesis
+type: string

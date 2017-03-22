@@ -620,17 +620,7 @@ properties:
 
             :MARC: ``980__a``, with corresponding values.
         items:
-            default: article
-            enum:
-            - article
-            - book
-            - book chapter
-            - conference paper
-            - note
-            - proceedings
-            - report
-            - thesis
-            type: string
+            $ref: elements/document_type.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -1168,15 +1158,10 @@ properties:
                         These references are unparsed and as they appear in the
                         document.
 
-                        :MARC: not present.
+                        :MARC: ``999C5x``
                     items:
                         additionalProperties: false
                         properties:
-                            position:
-                                description: |-
-                                    The position of the reference as it appears
-                                    on the document.
-                                type: string
                             schema:
                                 description: |-
                                     :example: ``text``
@@ -1196,6 +1181,8 @@ properties:
                     type: array
                 record:
                     $ref: elements/json_reference.json
+                    description: |-
+                        :MARC: ``999C50``
                 reference:
                     $ref: elements/reference.json
             type: object
