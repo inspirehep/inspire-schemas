@@ -1,6 +1,7 @@
 $schema: http://json-schema.org/schema#
 default: article
 enum:
+- activity report
 - article
 - book
 - book chapter
