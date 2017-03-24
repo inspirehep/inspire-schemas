@@ -181,6 +181,7 @@ properties:
 
                     Title of the parent document, e.g. title of the book if the
                     cited document is a book chapter.
+                type: string
             year:
                 description: |-
                     :MARC: ``999C5y``

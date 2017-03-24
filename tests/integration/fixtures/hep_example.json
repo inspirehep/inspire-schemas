@@ -743,9 +743,7 @@
                     "page_start": "deserunt ut minim Excepteur in",
                     "parent_isbn": "05X",
                     "parent_report_number": "incididunt esse sunt in amet",
-                    "parent_title": {
-                        "description": "Title of the parent document, e.g. title of the book if the\ncited document is a book chapter.\n\n:MARC: ``999C5q``"
-                    },
+                    "parent_title": "lorem ipsum dolor sit amet",
                     "year": 1464
                 },
                 "report_number": {
