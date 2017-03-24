@@ -197,6 +197,7 @@ properties:
 
                 If the cited document is only part of a report, use
                 :ref:`publication_info/properties/parent_report_number` instead.
+        type: string
     texkey:
         description: |-
             :MARC: ``999C5k``

@@ -746,9 +746,7 @@
                     "parent_title": "lorem ipsum dolor sit amet",
                     "year": 1464
                 },
-                "report_number": {
-                    "description": ".. note::\n\n    If the cited document is only part of a report, use\n    :ref:`publication_info/properties/parent_report_number` instead.\n\n:MARC: ``999C5r``"
-                },
+                "report_number": "lorem ipsum dolor sit amet",
                 "texkey": "Duis amet",
                 "title": {
                     "source": "exercitation ad dolor occae",
