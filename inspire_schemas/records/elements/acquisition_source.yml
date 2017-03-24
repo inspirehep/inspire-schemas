@@ -17,6 +17,7 @@ properties:
             :MARC: ``541__d``
         format: date-time
         title: Date on which the metadata was obtained
+        type: string
     email:
         description: |-
             This only gets populated when `method` is `submitter`.

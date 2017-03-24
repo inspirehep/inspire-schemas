@@ -132,11 +132,7 @@
         }
     ],
     "acquisition_source": {
-        "datetime": {
-            "description": "This does not necessarily coincide with the creation date of the\nrecord, as there might be some delay between the moment the\noriginal information is obtained and a record is finally created in\nthe system.\n\n:MARC: ``541__d``",
-            "format": "date-time",
-            "title": "Date on which the metadata was obtained"
-        },
+        "datetime": "lorem ipsum dolor sit amet",
         "email": "6gkREaSn@wLoBzSpv.rsnx",
         "internal_uid": 23693505,
         "method": "oai",
