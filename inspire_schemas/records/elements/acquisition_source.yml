@@ -1,36 +1,36 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
 description: |-
+    :MARC: ``541``
+
     Only the first source is stored: if the record later gets enriched with
     metadata coming from a second source, the `acquisition_source` is not
     updated.
-
-    :MARC: ``541``
 properties:
     datetime:
         description: |-
+            :MARC: ``541__d``
+
             This does not necessarily coincide with the creation date of the
             record, as there might be some delay between the moment the
             original information is obtained and a record is finally created in
             the system.
-
-            :MARC: ``541__d``
         format: date-time
         title: Date on which the metadata was obtained
         type: string
     email:
         description: |-
-            This only gets populated when `method` is `submitter`.
-
             :MARC: ``541__b``
+
+            This only gets populated when `method` is `submitter`.
         format: email
         title: Email address associated to the submitter's account
         type: string
     internal_uid:
         description: |-
-            This only gets populated when `method` is `submitter`.
-
             :MARC: ``541__a`` with ``inspire:uid:`` prefix.
+
+            This only gets populated when `method` is `submitter`.
         title: Inspire user ID of the submitter
         type: integer
     method:
@@ -60,9 +60,9 @@ properties:
         type: string
     orcid:
         description: |-
-            This only gets populated when `method` is `submitter`.
-
             :MARC: ``541__a`` with ``orcid:`` prefix
+
+            This only gets populated when `method` is `submitter`.
         pattern: ^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$
         title: ORCID of the submitter
         type: string
@@ -70,9 +70,9 @@ properties:
         $ref: source.json
     submission_number:
         description: |-
-            This only gets populated when `method` is `submitter`.
-
             :MARC: ``541__e``
+
+            This only gets populated when `method` is `submitter`.
         title: Holding pen record ID of the submission
         type: string
 title: Origin of the metadata in the record

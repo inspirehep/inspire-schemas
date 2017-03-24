@@ -19,10 +19,10 @@ properties:
         type: array
     _desy_bookkeeping:
         description: |-
+            :MARC: ``595_D``
+
             Used by DESY to store information about the keyword-assignment
             process.
-
-            :MARC: ``595_D``
         items:
             additionalProperties: false
             properties:
@@ -44,12 +44,12 @@ properties:
     _export_to:
         additionalProperties: false
         description: |-
+            :MARC: ``595__c``
+
             Flags determining to which foreign databases this record should be
             automatically exported.  Setting one of the keys to ``true`` means
             that the record must be exported to the corresponding system,
             setting it to ``false`` means that it must not be exported.
-
-            :MARC: ``595__c``
         properties:
             CDS:
                 description: |-
@@ -132,10 +132,10 @@ properties:
         type: array
     _private_notes:
         description: |-
+            :MARC: ``595``
+
             These notes are only visible to privileged users, not regular
             users.
-
-            :MARC: ``595``
         items:
             $ref: elements/sourced_value.json
         title: List of private notes
@@ -155,20 +155,22 @@ properties:
             properties:
                 accelerator:
                     description: |-
+                        :MARC: ``693__a``
+
                         If present, :ref:`institution` should contain the
                         institution where this accelerator is located.
 
                         .. note::
 
                             Currently not used, see :ref:`legacy_name`.
-
-                        :MARC: ``693__a``
                     type: string
                 curated_relation:
                     default: false
                     type: boolean
                 experiment:
                     description: |-
+                        :MARC: not present.
+
                         If present, :ref:`institution` should contain the
                         institution where this experiment is located and
                         :ref:`accelerator` may contain the accelerator that this
@@ -177,27 +179,26 @@ properties:
                         .. note::
 
                             Currently not used, see :ref:`legacy_name`.
-
-                        :MARC: not present.
                     type: string
                 institution:
                     description: |-
+                        :MARC: not present.
+
                         .. note::
 
                             Currently not used, see :ref:`legacy_name`.
-
-                        :MARC: not present.
                     title: Institution hosting the experiment
                     type: string
                 legacy_name:
                     description: |-
+                        :MARC: ``693__e``
+
                         This field is used when migrating from legacy instead
                         of separate :ref:`institution`, :ref:`accelerator` and
                         :ref:`experiment`. In the future, it will be deprecated and
                         the other fields will be used instead.
 
                         :example: ``CERN-LHC-CMS``
-                        :MARC: ``693__e``
                     title: Identifier of the experiment on legacy
                     type: string
                 record:
@@ -221,11 +222,11 @@ properties:
             properties:
                 categories:
                     description: |-
-                        The first category in the list has a special meaning:
-                        it is the primary category of the eprint on arXiv.
-
                         :MARC: first category in ``037__c`` with ``9:arXiv``,
                             all categories in ``65017a`` with ``2:arXiv``
+
+                        The first category in the list has a special meaning:
+                        it is the primary category of the eprint on arXiv.
                     items:
                         $ref: elements/arxiv_categories.json
                     minItems: 1
@@ -249,10 +250,10 @@ properties:
         uniqueItems: true
     authors:
         description: |-
+            :MARC: ``100``, ``700`` and ``701``
+
             Besides authors, also contains editors and supervisors (see
             :ref:`hep.json#/properties/authors/items/properties/inspire_roles`).
-
-            :MARC: ``100``, ``700`` and ``701``
         items:
             additionalProperties: false
             properties:
@@ -266,13 +267,13 @@ properties:
                                 $ref: elements/json_reference.json
                             value:
                                 description: |-
+                                    :MARC: ``100/700/701__u``
+
                                     Currently, the old
                                     :ref:`institutions.json#/properties/legacy_ICN`
                                     is used here. In the future, this will
                                     change and become the new
                                     :ref:`institutions.json#/properties/ICN`.
-
-                                    :MARC: ``100/700/701__u``
                                 title: ICN of affiliation
                                 type: string
                         required:
@@ -291,11 +292,11 @@ properties:
                 credit_roles:
                     items:
                         description: |-
+                            :MARC: not present.
+
                             Role of the author according to the `Contributor
                             Roles Taxonomy (CRediT)
                             <http://dictionary.casrai.org/Contributor_Roles>`_
-
-                            :MARC: not present.
                         enum:
                         - Conceptualization
                         - Data curation
@@ -326,13 +327,14 @@ properties:
                     type: array
                 full_name:
                     description: |-
+                        :MARC: ``100/700/701__a``
+
                         Author name in Latin alphabet (may contain diacritics).
                         Should be of the form 'family names, first names', and,
                         except for a possible reordering, be exactly as on the
                         paper.
 
                         :example: ``Smith Davis, John F.K.``
-                        :MARC: ``100/700/701__a``
                     title: Author name
                     type: string
                 ids:
@@ -348,19 +350,19 @@ properties:
                         default: author
                         description: |-
                             ``supervisor``
+                                :MARC: ``701`` is used for supervisor metadata.
+
                                 This person is a thesis supervisor. Should be
                                 used together with the ``thesis``
                                 :ref:`hep.json#/properties/document_type`.
 
-                            :MARC: ``701`` is used for supervisor metadata.
-
                             ``editor``
+                                :MARC: ``100/700__e:ed.``
+
                                 This person is an editor of the conference
                                 proceedings. Should be used together with the
                                 ``proceedings``
                                 :ref:`hep.json#/properties/document_type`.
-
-                            :MARC: ``100/700__e:ed.``
                         enum:
                         - author
                         - supervisor
@@ -369,9 +371,9 @@ properties:
                     type: array
                 raw_affiliations:
                     description: |-
-                        List of full affiliations, as written on the paper.
-
                         :MARC: ``100/700/701__v``
+
+                        List of full affiliations, as written on the paper.
                     items:
                         $ref: elements/sourced_value.json
                     type: array
@@ -399,6 +401,8 @@ properties:
         uniqueItems: true
     book_series:
         description: |-
+            :MARC: ``490``
+
             List of book series in which this record has been published.
 
             .. note::
@@ -406,8 +410,6 @@ properties:
                 This field should only be present if ``book``, ``thesis`` or
                 ``proceedings`` are among
                 :ref:`hep.json#/properties/document_type`.
-
-            :MARC: ``490``
         items:
             additionalProperties: false
             description: |-
@@ -431,6 +433,8 @@ properties:
         type: array
     citeable:
         description: |-
+            :MARC: ``true`` corresponds to ``980__a:Citeable``.
+
             The main effect of setting this field to ``true`` is that the
             recoord is taken into account in the citation summary.  The need
             for this field arises because of limitations in the automatic
@@ -448,8 +452,6 @@ properties:
 
             Besides, a record may be manually flagged as citeable by a curator
             if a user tracks and reports citations to that record.
-
-            :MARC: ``true`` corresponds to ``980__a:Citeable``.
         title: Whether this record should be considered as citeable
         type: boolean
     collaborations:
@@ -460,12 +462,13 @@ properties:
                     $ref: elements/json_reference.json
                 value:
                     description: |-
+                        :MARC: ``710__g``
+
                         Collaboration name as it appears on the paper (with the
                         ``Collaboration`` suffix dropped).
 
                         :example: ``ATLAS`` instead of ``ATLAS Collaboration``
                         :example: ``Particle Data Group``
-                        :MARC: ``710__g``
                     title: Collaboration name
                     type: string
             type: object
@@ -476,9 +479,9 @@ properties:
         uniqueItems: true
     control_number:
         description: |-
-            Read-only field.
-
             :MARC: ``001``
+
+            Read-only field.
         title: ID of current record
         type: integer
     copyright:
@@ -489,14 +492,16 @@ properties:
             properties:
                 holder:
                     description: |-
-                        :example: ``American Physical Society``
                         :MARC: ``542__d``
+                        :example: ``American Physical Society``
                     title: Copyright holder
                     type: string
                 material:
                     $ref: elements/material.json
                 statement:
                     description: |-
+                        :MARC: ``542__f``
+
                         See `Wikipedia
                         <https://en.wikipedia.org/wiki/Copyright_notice>`_ for
                         explanations.
@@ -507,7 +512,6 @@ properties:
                         :example: ``© The Author(s) 2015. Published by Oxford
                             University Press on behalf of the Physical Society
                             of Japan.``
-                        :MARC: ``542__f``
                     title: Copyright notice
                     type: string
                 url:
@@ -538,11 +542,12 @@ properties:
     corporate_author:
         items:
             description: |-
+                :MARC: ``110__a``
+
                 In case the document has not been signed by a real author, but
                 only mentions the name of an organization.
 
                 :example: ``CERN``
-                :MARC: ``110__a``
             title: List of corporate authors
             type: string
         type: array
@@ -554,19 +559,21 @@ properties:
         type: boolean
     deleted_records:
         description: |-
+            :MARC: ``981__a``
+
             List of records that were deleted because they were replaced by
             this one. This typically happens when merging two records: one of
             them gets enriched with the information of the other one, which is
             then superfluous and gets deleted.
 
             For the opposite concept, see :ref:`new_record`.
-
-            :MARC: ``981__a``
         items:
             $ref: elements/json_reference.json
         type: array
     document_type:
         description: |-
+            :MARC: ``980__a``, with corresponding values.
+
             Types of document this record represents.
 
             .. note::
@@ -629,8 +636,6 @@ properties:
                 .. note::
 
                     This is not considered as a ``book``.
-
-            :MARC: ``980__a``, with corresponding values.
         items:
             $ref: elements/document_type.json
         minItems: 1
@@ -646,8 +651,8 @@ properties:
                     $ref: elements/source.json
                 value:
                     description: |-
-                        :example: ``10.1023/A:1026654312961``
                         :MARC: ``0247__a``
+                        :example: ``10.1023/A:1026654312961``
                     pattern: ^10\.\d+(\.\d+)?/.+$
                     title: DOI
                     type: string
@@ -667,36 +672,38 @@ properties:
         uniqueItems: true
     energy_ranges:
         description: |-
-            Ranges of energies the record refers to.
-
             :MARC: ``695__e``
+
+            Ranges of energies the record refers to.
         items:
             minimum: 0
             type: integer
         type: array
     external_system_identifiers:
         description: |-
-            List of identifiers of this document on external systems.
-
             :MARC: ``035``
+
+            List of identifiers of this document on external systems.
         items:
             additionalProperties: false
             properties:
                 schema:
                     description: |-
+                        :MARC: ``035__9``
+
                         Identifies the external system, and allows to interpret
                         unambiguously the :ref:`value`.
 
                         :example: ``ADS``
-                        :MARC: ``035__9``
                     type: string
                 value:
                     description: |-
+                        :MARC: ``035__a``
+
                         Identifies the record in the external system specified
                         by :ref:`schema`.
 
                         :example: ``1999IJTP...38.1113M``
-                        :MARC: ``035__a``
                     title: External identifier
                     type: string
             required:
@@ -707,10 +714,10 @@ properties:
         uniqueItems: true
     funding_info:
         description: |-
+            :MARC: ``536``
+
             Information about the sources of funding for the research performed
             in this record.
-
-            :MARC: ``536``
         items:
             additionalProperties: false
             properties:
@@ -737,9 +744,9 @@ properties:
         items:
             additionalProperties: false
             description: |-
-                When/where/by whom this record was published.
-
                 :MARC: ``260``
+
+                When/where/by whom this record was published.
             properties:
                 date:
                     description: |-
@@ -749,6 +756,8 @@ properties:
                     type: string
                 place:
                     description: |-
+                        :MARC: ``260__a``
+
                         .. note::
 
                             This field is populated if this record has been
@@ -757,13 +766,12 @@ properties:
                             :ref:`hep.json#/properties/document_type`.
 
                         :example: ``Paris``
-                        :MARC: ``260__a``
                     title: Place of publication
                     type: string
                 publisher:
                     description: |-
-                        :example: ``Springer``
                         :MARC: ``260__b``
+                        :example: ``Springer``
                     type: string
             type: object
         title: List of imprints
@@ -793,8 +801,8 @@ properties:
                     type: string
                 value:
                     description: |-
-                        :example: ``0201021153``
                         :MARC: ``020__a``
+                        :example: ``0201021153``
                     pattern: ^\d*[0-9X]$
                     type: string
             required:
@@ -805,11 +813,11 @@ properties:
         uniqueItems: true
     keywords:
         description: |-
-            Keywords give information about the specific contents of the
-            record, much more precisely than :ref:`inspire_categories`.
-
             :MARC: ``084``, ``6531`` and ``695`` (corresponding to different
                 :ref:`keywords/items/properties/schema`)
+
+            Keywords give information about the specific contents of the
+            record, much more precisely than :ref:`inspire_categories`.
         items:
             additionalProperties: false
             properties:
@@ -819,30 +827,30 @@ properties:
                         belongs.
 
                         ``INSPIRE``
+                            :MARC: ``695__2:INSPIRE``
+
                             The keyword has been assigned by Inspire, and
                             belongs to its vocabulary.
 
-                            :MARC: ``695__2:INSPIRE``
-
                         ``JACOW``
+                            :MARC: ``6531_2:JACOW``
+
                             The keyword is part of the `Joint Accelerator
                             Conference Website (JACoW) vocabulary
                             <http://jacow.org/Tools/Keywords>`_.
 
-                            :MARC: ``6531_2:JACOW``
-
                         ``PACS``
+                            :MARC: ``084__2:PACS``
+
                             The keyword is a number from the `Physics and
                             Astronomy Classification Scheme (PACS)
                             <https://publishing.aip.org/publishing/pacs/pacs-2010-regular-edition>`_.
 
-                            :MARC: ``084__2:PACS``
-
                         ``PDG``
+                            :MARC: ``084__2:PDG``
+
                             The keyword is a `PDG Indentifier
                             <http://pdg.lbl.gov/2016/pdgid/PDGIdentifiers.html>`_.
-
-                            :MARC: ``084__2:PDG``
 
                         .. note::
 
@@ -859,13 +867,14 @@ properties:
                     $ref: elements/source.json
                 value:
                     description: |-
+                        :MARC: ``084/6531/695__a`` (depending on :ref:`schema`)
+
                         It belongs to the vocabulary specified by :ref:`schema`.
 
                         :example: ``black hole: mass`` (for :ref:`schema` =
                             ``INSPIRE``)
                         :example: ``29.27.Fh`` (for :ref:`schema` = ``PACS``)
                         :example: ``G033M`` (for :ref:`schema` = ``PDG``)
-                        :MARC: ``084/6531/695__a`` (depending on :ref:`schema`)
                     title: A keyword
                     type: string
             required:
@@ -876,6 +885,8 @@ properties:
         uniqueItems: true
     languages:
         description: |-
+            :MARC: ``041__a``
+
             Every language is represented by its `ISO 639-1
             <https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>`_
             two-letter code.
@@ -885,7 +896,6 @@ properties:
                 If this field is not present, the language of the document is assumed to be English.
 
             :example: ``el`` for Greek
-            :MARC: ``041__a``
         items:
             pattern: ^\w{2}$
             title: A language
@@ -894,9 +904,9 @@ properties:
         type: array
     legacy_creation_date:
         description: |-
-            Only present if the record already existed on legacy Inspire.
-
             :MARC: ``961__x``
+
+            Only present if the record already existed on legacy Inspire.
         format: date-time
         title: Date of record creation on legacy
         type: string
@@ -908,27 +918,28 @@ properties:
             properties:
                 imposing:
                     description: |-
-                        :example: ``arXiv``
                         :MARC: ``540__b``
+                        :example: ``arXiv``
                     title: Organization/person imposing the license
                     type: string
                 license:
                     description: |-
+                        :MARC: ``540__a``
+
                         Either the short name of the license or the full
                         license statement.
 
                         :example: ``CC-BY-4.0``
-                        :MARC: ``540__a``
                     title: License statement
                     type: string
                 material:
                     $ref: elements/material.json
                 url:
                     description: |-
+                        :MARC: ``540__u``
+
                         URL where the full license statement may be found, if
                         only a short name is provided in ``license``.
-
-                        :MARC: ``540__u``
                     format: url
                     title: URL of the license
                     type: string
@@ -939,10 +950,10 @@ properties:
     new_record:
         $ref: elements/json_reference.json
         description: |-
+            :MARC: ``970__d``
+
             Contains a reference to the record replacing the current one, if it
             is marked as :ref:`deleted`.
-
-            :MARC: ``970__d``
         title: Record replacing this one
     number_of_pages:
         description: |-
@@ -960,6 +971,8 @@ properties:
                     $ref: elements/material.json
                 schema:
                     description: |-
+                        :MARC: ``0247_2``
+
                         Currently, the following identifiers are recognized:
 
                         * `HDL <http://handle.net>`_
@@ -973,8 +986,6 @@ properties:
                             Although ISBNs can also be mapped to a URN (by
                             prepending ``urn:isbn:`` to the ISBN), they should
                             be put in the :ref:`hep.json#/properties/isbns` field instead.
-
-                        :MARC: ``0247_2``
                     enum:
                     - HDL
                     - URN
@@ -984,13 +995,14 @@ properties:
                     $ref: elements/source.json
                 value:
                     description: |-
+                        :MARC: ``0247_a``
+
                         This value gets interpreted as an identfier of the type
                         specified by :ref:`schema`.
 
                         :example: ``10138/168995`` (when :ref:`schema` = ``HDL``)
                         :example: ``urn:nbn:de:hebis:77-diss-1000009520`` (when
                             :ref:`schema` = ``URN``)
-                        :MARC: ``0247_a``
                     title: Persistent identifier
                     type: string
             required:
@@ -1002,17 +1014,19 @@ properties:
         uniqueItems: true
     preprint_date:
         description: |-
+            :MARC: ``269__c``
+
             .. note::
 
                 This is only for preprints. For the publication date of
                 published documents, see :ref:`imprints`.
-
-            :MARC: ``269__c``
         format: date
         title: Preprint release date
         type: string
     public_notes:
         description: |-
+            :MARC: ``500``
+
             Any notes about the document that do not fit into another field.
             For arXiv eprints, also contains the contents of the comment field
             on arXiv.
@@ -1021,8 +1035,6 @@ properties:
 
                 These notes are publicly visible. For notes not shown to
                 regular users, see :ref:`_private_notes`.
-
-            :MARC: ``500``
         items:
             $ref: elements/sourced_value.json
         title: List of public notes
@@ -1036,6 +1048,9 @@ properties:
             properties:
                 artid:
                     description: |-
+                        :MARC: ``773__c`` (when it contains an ID instead of
+                            starting page or page range).
+
                         For journals which issue IDs for articles instead of
                         (or in complement to) continuous numbers within a
                         volume.
@@ -1043,19 +1058,16 @@ properties:
                         .. note::
 
                             On legacy, this was treated as a starting page.
-
-                        :MARC: ``773__c`` (when it contains an ID instead of
-                            starting page or page range).
                     title: Article ID
                     type: string
                 cnum:
                     $ref: elements/cnum.json
                     description: |-
+                        :MARC: ``773__w``
+
                         When ``conference` paper` or ``proceedings`` is among
                         :ref:`hep.json#/properties/document_type`, contains the
                         CNUM of the corresponding conference.
-
-                        :MARC: ``773__w``
                 conf_acronym:
                     description: |-
                         :MARC: ``773__q``
@@ -1076,11 +1088,12 @@ properties:
                         Record of the corresponding Journal
                 journal_title:
                     description: |-
+                        :MARC: ``773__p``
+
                         Journal title abbreviated as in the corresponding entry
                         in the Journals collection.
 
                         :example: ``Phys.Rev.``
-                        :MARC: ``773__p``
                     type: string
                 journal_volume:
                     description: |-
@@ -1100,24 +1113,26 @@ properties:
                     type: string
                 parent_isbn:
                     description: |-
-                        ISBN of the book of which this document is a part.
-
                         :MARC: ``773__z``
+
+                        ISBN of the book of which this document is a part.
                     pattern: ^(97(8|9))?\d{9}(\d|X)$
                     type: string
                 parent_record:
                     $ref: elements/json_reference.json
                 parent_report_number:
                     description: |-
+                        :MARC: ``773__r``
+
                         Report number of the document of which this record is a
                         part. This applies e.g. for large reports containing
                         several chapters that have been split into individual
                         records.
-
-                        :MARC: ``773__r``
                     type: string
                 pubinfo_freetext:
                     description: |-
+                        :MARC: ``773__x``
+
                         Unstructured text describing the publication
                         information.
 
@@ -1125,8 +1140,6 @@ properties:
 
                             This has been ported over from legacy, but no new
                             information should be put here.
-
-                        :MARC: ``773__x``
                     type: string
                 year:
                     description: |-
@@ -1149,12 +1162,12 @@ properties:
         type: array
     refereed:
         description: |-
+            :MARC: ``true`` corresponds to ``980__a:published``
+
             This asserts that the document is considered as peer reviewed. This
             assessment might differ from the journal's claim to do peer review.
             As a consequence, most conference papers are not considered as
             refereed.
-
-            :MARC: ``true`` corresponds to ``980__a:published``
         title: Whether the record has been peer reviewed
         type: boolean
     references:
@@ -1167,10 +1180,10 @@ properties:
                     type: boolean
                 raw_refs:
                     description: |-
+                        :MARC: ``999C5x``
+
                         These references are unparsed and as they appear in the
                         document.
-
-                        :MARC: ``999C5x``
                     items:
                         additionalProperties: false
                         properties:
@@ -1203,13 +1216,16 @@ properties:
         uniqueItems: true
     report_numbers:
         description: |-
-            :example: ``DESY-17-036``
             :MARC: ``037``
+            :example: ``DESY-17-036``
         items:
             additionalProperties: false
             properties:
                 hidden:
                     description: |-
+                        :MARC: if ``true``, the :ref:`value` is in ``037__z``
+                            instead of ``037__a``.
+
                         Whether this report number should be hidden from the
                         display. This is appropriate for:
 
@@ -1218,9 +1234,6 @@ properties:
                         * a report number that has been assigned by one of the
                           authors' institutions, but is not displayed on the
                           document (typically for large collaborations).
-
-                        :MARC: if ``true``, the :ref:`value` is in ``037__z``
-                            instead of ``037__a``.
                     type: boolean
                 source:
                     $ref: elements/source.json
@@ -1236,11 +1249,11 @@ properties:
         $ref: elements/json_reference.json
     special_collections:
         description: |-
+            :MARC: ``980__a``
+
             These collections are used by collaborations to manage their notes.
             If a record belongs to a special collection, it is not shown in the
             standard search results.
-
-            :MARC: ``980__a``
         items:
             enum:
             - CDF-INTERNAL-NOTE
@@ -1276,12 +1289,12 @@ properties:
         type: object
     texkeys:
         description: |-
+            :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
+
             These keys are used to cite this record using TeX/LaTeX/BibTex. The
             first one is the valid one being shown in the TeX display formats,
             the others are the obsolete ones which are kept in order to
             identify this record by those texkeys.
-
-            :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
         items:
             type: string
         title: List of TeX keys
@@ -1290,23 +1303,23 @@ properties:
     thesis_info:
         additionalProperties: false
         description: |-
-            Information on a thesis (degree, date, university)
-
             :MARC: ``502``
+
+            Information on a thesis (degree, date, university)
         properties:
             date:
                 description: |-
-                    Publication date of the thesis
-
                     :MARC: ``502__d``
+
+                    Publication date of the thesis
                 format: date
                 type: string
             defense_date:
                 description: |-
+                    :MARC: ``500__a``
+
                     Date of the thesis defense. On legacy, this was put in the
                     note field as 'presented on ...'.
-
-                    :MARC: ``500__a``
                 format: date
                 type: string
             degree_type:
@@ -1315,9 +1328,9 @@ properties:
                     :MARC: ``502__b``
             institutions:
                 description: |-
-                    List of institutions issuing the degree.
-
                     :MARC: ``502__c``
+
+                    List of institutions issuing the degree.
                 items:
                     additionalProperties: false
                     properties:
@@ -1332,13 +1345,13 @@ properties:
         type: object
     title_translations:
         description: |-
+            :MARC: ``242``
+
             Translations of the titles in a language that is not the language
             of the document (see :ref:`languages`).
             Usually, this is contains an English translation of the title of a
             non-English paper, but sometimes a native language if the paper is
             in English but the title has been translated.
-
-            :MARC: ``242``
         items:
             additionalProperties: false
             properties:
@@ -1356,13 +1369,13 @@ properties:
         uniqueItems: true
     titles:
         description: |-
+            :MARC: ``245``
+
             There can be several because the preprint title often differs from
             the published version. The title should be kept as on the document
             and in the same language as the document (see :ref:`languages`).
 
             Translations go into :ref:`title_translations`.
-
-            :MARC: ``245``
         items:
             $ref: elements/title.json
         title: List of titles
@@ -1375,10 +1388,10 @@ properties:
         uniqueItems: true
     withdrawn:
         description: |-
+            :MARC: ``true`` corresponds to ``980__a:withdrawn``
+
             Whether the paper has been withdrawn (mainly occurs for arXiv
             preprints). It shouldn't appear in author profiles.
-
-            :MARC: ``true`` corresponds to ``980__a:withdrawn``
         type: boolean
 required:
 - document_type
