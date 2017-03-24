@@ -155,12 +155,12 @@ properties:
             properties:
                 accelerator:
                     description: |-
-                        If present, `institution` should contain the
+                        If present, :ref:`institution` should contain the
                         institution where this accelerator is located.
 
                         .. note::
 
-                            Currently not used, see `legacy_name`.
+                            Currently not used, see :ref:`legacy_name`.
 
                         :MARC: ``693__a``
                     type: string
@@ -169,14 +169,14 @@ properties:
                     type: boolean
                 experiment:
                     description: |-
-                        If present, `institution` should contain the
+                        If present, :ref:`institution` should contain the
                         institution where this experiment is located and
-                        `accelerator` may contain the accelerator that this
+                        :ref:`accelerator` may contain the accelerator that this
                         experiment is using (if appropriate).
 
                         .. note::
 
-                            Currently not used, see `legacy_name`.
+                            Currently not used, see :ref:`legacy_name`.
 
                         :MARC: not present.
                     type: string
@@ -184,7 +184,7 @@ properties:
                     description: |-
                         .. note::
 
-                            Currently not used, see `legacy_name`.
+                            Currently not used, see :ref:`legacy_name`.
 
                         :MARC: not present.
                     title: Institution hosting the experiment
@@ -192,8 +192,8 @@ properties:
                 legacy_name:
                     description: |-
                         This field is used when migrating from legacy instead
-                        of separate `institution`, `accelerator` and
-                        `experiment`. In the future, it will be deprecated and
+                        of separate :ref:`institution`, :ref:`accelerator` and
+                        :ref:`experiment`. In the future, it will be deprecated and
                         the other fields will be used instead.
 
                         :example: ``CERN-LHC-CMS``
@@ -250,7 +250,7 @@ properties:
     authors:
         description: |-
             Besides authors, also contains editors and supervisors (see
-            `inspire_roles`).
+            :ref:`hep.json#/properties/authors/items/properties/inspire_roles`).
 
             :MARC: ``100``, ``700`` and ``701``
         items:
@@ -266,9 +266,11 @@ properties:
                                 $ref: elements/json_reference.json
                             value:
                                 description: |-
-                                    Currently, the old `legacy_ICN` is used
-                                    here. In the future, this will change and
-                                    become the new `ICN`.
+                                    Currently, the old
+                                    :ref:`institutions.json#/properties/legacy_ICN`
+                                    is used here. In the future, this will
+                                    change and become the new
+                                    :ref:`institutions.json#/properties/ICN`.
 
                                     :MARC: ``100/700/701__u``
                                 title: ICN of affiliation
@@ -348,14 +350,15 @@ properties:
                             ``supervisor``
                                 This person is a thesis supervisor. Should be
                                 used together with the ``thesis``
-                                `document_type`.
+                                :ref:`hep.json#/properties/document_type`.
 
                             :MARC: ``701`` is used for supervisor metadata.
 
                             ``editor``
                                 This person is an editor of the conference
                                 proceedings. Should be used together with the
-                                ``proceedings`` `document_type`.
+                                ``proceedings``
+                                :ref:`hep.json#/properties/document_type`.
 
                             :MARC: ``100/700__e:ed.``
                         enum:
@@ -401,7 +404,8 @@ properties:
             .. note::
 
                 This field should only be present if ``book``, ``thesis`` or
-                ``proceedings`` are among `document_type`.
+                ``proceedings`` are among
+                :ref:`hep.json#/properties/document_type`.
 
             :MARC: ``490``
         items:
@@ -409,8 +413,9 @@ properties:
             description: |-
                 .. note::
 
-                    If the book series has a Journal record, `publication_info`
-                    should be used instead.
+                    If the book series has a Journal record,
+                    `hep.json#/properties/publication_info` should be used
+                    instead.
             properties:
                 title:
                     description: |-
@@ -434,9 +439,12 @@ properties:
             recognized.  Currently, a record is automatically flagged as
             citeable if it has
 
-            - sufficient information in `publication_info`: `journal_title`,
-              `journal_volume` and (`artid` or `page_start`), *or*
-            - an `arxiv_eprints` field.
+            - sufficient information in :ref:`publication_info`:
+                :ref:`publication_info/items/properties/journal_title`,
+                :ref:`publication_info/items/properties/journal_volume` and
+                (:ref:`publication_info/items/properties/artid` or
+                :ref:`publication_info/items/properties/page_start`), *or*
+            - an :ref:`arxiv_eprints` field.
 
             Besides, a record may be manually flagged as citeable by a curator
             if a user tracks and reports citations to that record.
@@ -494,7 +502,7 @@ properties:
                         explanations.
 
                         Alernatively to this string, a URL to the copyright
-                        notice may be provided in `url`.
+                        notice may be provided in :ref:`url`.
 
                         :example: ``© The Author(s) 2015. Published by Oxford
                             University Press on behalf of the Physical Society
@@ -551,7 +559,7 @@ properties:
             them gets enriched with the information of the other one, which is
             then superfluous and gets deleted.
 
-            For the opposite concept, see `new_record`.
+            For the opposite concept, see :ref:`new_record`.
 
             :MARC: ``981__a``
         items:
@@ -566,57 +574,61 @@ properties:
                 As a record aggregates information from multiple sources, it
                 can have multiple document types simultaneously.
 
-            `article`
+            ``article``
                 An article, whether it is published or only a preprint. In the
-                first case, `publication_info` contains information about the
+                first case, :ref:`publication_info` contains information about the
                 journal in which it was published.
 
-            `book`
-                A monograph that does not fit into any other `document_type`.
-                The `editions`, `imprints`, `isbns` and `book_series` fields
-                may contain specific metadata about this book.
+            ``book``
+                A monograph that does not fit into any other
+                :ref:`document_type`.  The :ref:`editions`, :ref:`imprints`,
+                :ref:`isbns` and :ref:`book_series` fields may contain specific
+                metadata about this book.
 
                 .. note::
 
-                    A `proceeding` or a `thesis` is not considered as a `book`.
+                    A ``proceeding`` or a ``thesis`` is not considered as a ``book``.
 
-            `book chapter`
-                A chapter in a book. The field `publication_info` contains
+            ``book chapter``
+                A chapter in a book. The field :ref:`publication_info` contains
                 information about the book of which this record is a chapter.
 
-            `conference paper`
+            ``conference paper``
                 A paper that part of a conference proceedings. The field
-                `publication_info` contain information about the conference
-                proceedings. In particular, `cnum` contains the identfier of
-                the conference.
+                :ref:`publication_info` contain information about the
+                conference proceedings. In particular,
+                :ref:`publication_info/items/properties/cnum` contains the identifier
+                of the conference.
 
-            `note`
+            ``note``
                 A note, not meant for publication.
 
-            `proceedings`
-                Proceedings of a conference. The `cnum` field contains the
+            ``proceedings``
+                Proceedings of a conference. The
+                :ref:`publication_info/items/properties/cnum` field contains the
                 identfier of the conference. If published in a journal,
-                `publication_info` also contains the journal information. If
-                published as a book, the `editions`, `imprints`, `isbns` and
-                `book_series` fields may contain specific metadata about this
-                book.
+                :ref:`publication_info` also contains the journal information.
+                If published as a book, the :ref:`editions`, :ref:`imprints`,
+                :ref:`isbns` and :ref:`book_series` fields may contain specific
+                metadata about this book.
 
                 .. note::
 
-                    This is not considered as a `book`.
+                    This is not considered as a ``book``.
 
-            `report`
+            ``report``
                 A report.
 
-            `thesis`
-                A thesis. The `thesis_info` field contains additional
+            ``thesis``
+                A thesis. The :ref:`thesis_info` field contains additional
                 information about the thesis. If published as a book, the
-                `editions`, `imprints`, `isbns` and `book_series` fields may
-                contain specific metadata about this book.
+                :ref:`editions`, :ref:`imprints`, :ref:`isbns` and
+                :ref:`book_series` fields may contain specific metadata about
+                this book.
 
                 .. note::
 
-                    This is not considered as a `book`.
+                    This is not considered as a ``book``.
 
             :MARC: ``980__a``, with corresponding values.
         items:
@@ -673,7 +685,7 @@ properties:
                 schema:
                     description: |-
                         Identifies the external system, and allows to interpret
-                        unambiguously the `value`.
+                        unambiguously the :ref:`value`.
 
                         :example: ``ADS``
                         :MARC: ``035__9``
@@ -681,7 +693,7 @@ properties:
                 value:
                     description: |-
                         Identifies the record in the external system specified
-                        by `schema`.
+                        by :ref:`schema`.
 
                         :example: ``1999IJTP...38.1113M``
                         :MARC: ``035__a``
@@ -740,9 +752,9 @@ properties:
                         .. note::
 
                             This field is populated if this record has been
-                            published in a book, i.e. it makes sense if `book`,
-                            `thesis` or `proceedings` are among
-                            `document_type`.
+                            published in a book, i.e. it makes sense if ``book``,
+                            ``thesis`` or ``proceedings`` are among
+                            :ref:`hep.json#/properties/document_type`.
 
                         :example: ``Paris``
                         :MARC: ``260__a``
@@ -794,39 +806,39 @@ properties:
     keywords:
         description: |-
             Keywords give information about the specific contents of the
-            record, much more precisely than `inspire_categories`.
+            record, much more precisely than :ref:`inspire_categories`.
 
             :MARC: ``084``, ``6531`` and ``695`` (corresponding to different
-                `schema`)
+                :ref:`keywords/items/properties/schema`)
         items:
             additionalProperties: false
             properties:
                 schema:
                     description: |-
-                        Describes to which vocabulary the keyword in `value`
+                        Describes to which vocabulary the keyword in :ref:`value`
                         belongs.
 
-                        `INSPIRE`
+                        ``INSPIRE``
                             The keyword has been assigned by Inspire, and
                             belongs to its vocabulary.
 
                             :MARC: ``695__2:INSPIRE``
 
-                        `JACOW`
+                        ``JACOW``
                             The keyword is part of the `Joint Accelerator
                             Conference Website (JACoW) vocabulary
                             <http://jacow.org/Tools/Keywords>`_.
 
                             :MARC: ``6531_2:JACOW``
 
-                        `PACS`
+                        ``PACS``
                             The keyword is a number from the `Physics and
                             Astronomy Classification Scheme (PACS)
                             <https://publishing.aip.org/publishing/pacs/pacs-2010-regular-edition>`_.
 
                             :MARC: ``084__2:PACS``
 
-                        `PDG`
+                        ``PDG``
                             The keyword is a `PDG Indentifier
                             <http://pdg.lbl.gov/2016/pdgid/PDGIdentifiers.html>`_.
 
@@ -847,13 +859,13 @@ properties:
                     $ref: elements/source.json
                 value:
                     description: |-
-                        It belongs to the vocabulary specified by `schema`.
+                        It belongs to the vocabulary specified by :ref:`schema`.
 
-                        :example: ``black hole: mass`` (for `schema` =
-                            `INSPIRE`)
-                        :example: ``29.27.Fh`` (for `schema` = `PACS`)
-                        :example: ``G033M`` (for `schema` = `PDG`)
-                        :MARC: ``084/6531/695__a`` (depending on `schema`)
+                        :example: ``black hole: mass`` (for :ref:`schema` =
+                            ``INSPIRE``)
+                        :example: ``29.27.Fh`` (for :ref:`schema` = ``PACS``)
+                        :example: ``G033M`` (for :ref:`schema` = ``PDG``)
+                        :MARC: ``084/6531/695__a`` (depending on :ref:`schema`)
                     title: A keyword
                     type: string
             required:
@@ -928,7 +940,7 @@ properties:
         $ref: elements/json_reference.json
         description: |-
             Contains a reference to the record replacing the current one, if it
-            is marked as `deleted`.
+            is marked as :ref:`deleted`.
 
             :MARC: ``970__d``
         title: Record replacing this one
@@ -956,11 +968,11 @@ properties:
 
                         .. note::
 
-                            DOIs should be put into `dois`, not here.
+                            DOIs should be put into :ref:`hep.json#/properties/dois`, not here.
 
                             Although ISBNs can also be mapped to a URN (by
                             prepending ``urn:isbn:`` to the ISBN), they should
-                            be put in the `isbns` field instead.
+                            be put in the :ref:`hep.json#/properties/isbns` field instead.
 
                         :MARC: ``0247_2``
                     enum:
@@ -973,11 +985,11 @@ properties:
                 value:
                     description: |-
                         This value gets interpreted as an identfier of the type
-                        specified by `schema`.
+                        specified by :ref:`schema`.
 
-                        :example: ``10138/168995`` (when `schema` = `HDL`)
+                        :example: ``10138/168995`` (when :ref:`schema` = ``HDL``)
                         :example: ``urn:nbn:de:hebis:77-diss-1000009520`` (when
-                            `schema` = `URN`)
+                            :ref:`schema` = ``URN``)
                         :MARC: ``0247_a``
                     title: Persistent identifier
                     type: string
@@ -993,7 +1005,7 @@ properties:
             .. note::
 
                 This is only for preprints. For the publication date of
-                published documents, see `imprints`.
+                published documents, see :ref:`imprints`.
 
             :MARC: ``269__c``
         format: date
@@ -1008,7 +1020,7 @@ properties:
             .. note::
 
                 These notes are publicly visible. For notes not shown to
-                regular users, see `_hidden_notes`.
+                regular users, see :ref:`_private_notes`.
 
             :MARC: ``500``
         items:
@@ -1039,9 +1051,9 @@ properties:
                 cnum:
                     $ref: elements/cnum.json
                     description: |-
-                        When `conference paper` or `proceedings` is among
-                        `document_type`, contains the CNUM of the corresponding
-                        conference.
+                        When ``conference` paper` or ``proceedings`` is among
+                        :ref:`hep.json#/properties/document_type`, contains the
+                        CNUM of the corresponding conference.
 
                         :MARC: ``773__w``
                 conf_acronym:
@@ -1083,7 +1095,7 @@ properties:
                     type: string
                 page_start:
                     description: |-
-                        :MARC: first page in ``773__c`` (if not an `artid`)
+                        :MARC: first page in ``773__c`` (if not an :ref:`artid`)
                     title: First page of document
                     type: string
                 parent_isbn:
@@ -1207,7 +1219,7 @@ properties:
                           authors' institutions, but is not displayed on the
                           document (typically for large collaborations).
 
-                        :MARC: if ``true``, the `value` is in ``037__z``
+                        :MARC: if ``true``, the :ref:`value` is in ``037__z``
                             instead of ``037__a``.
                     type: boolean
                 source:
@@ -1321,7 +1333,7 @@ properties:
     title_translations:
         description: |-
             Translations of the titles in a language that is not the language
-            of the document (see `languages`).
+            of the document (see :ref:`languages`).
             Usually, this is contains an English translation of the title of a
             non-English paper, but sometimes a native language if the paper is
             in English but the title has been translated.
@@ -1346,9 +1358,9 @@ properties:
         description: |-
             There can be several because the preprint title often differs from
             the published version. The title should be kept as on the document
-            and in the same language as the document (see `languages`).
+            and in the same language as the document (see :ref:`languages`).
 
-            Translations go into `title_translations`.
+            Translations go into :ref:`title_translations`.
 
             :MARC: ``245``
         items:
