@@ -518,6 +518,12 @@ properties:
                     format: url
                     title: Copyright notice URL
                     type: string
+                year:
+                    description: |-
+                        :MARC: ``542__g``
+                    maximum: 2050
+                    minimum: 1000
+                    type: integer
             type: object
         title: List of copyrights to documents in this record
         type: array
