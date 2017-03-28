@@ -498,6 +498,8 @@ properties:
                     type: string
                 material:
                     $ref: elements/material.json
+                    description: |-
+                        :MARC: ``542__e``
                 statement:
                     description: |-
                         :MARC: ``542__f``
@@ -653,11 +655,15 @@ properties:
             properties:
                 material:
                     $ref: elements/material.json
+                    description: |-
+                        :MARC: ``0247_q``
                 source:
                     $ref: elements/source.json
+                    description: |-
+                        :MARC: ``0247_9``
                 value:
                     description: |-
-                        :MARC: ``0247__a``
+                        :MARC: ``0247_a``
                         :example: ``10.1023/A:1026654312961``
                     pattern: ^10\.\d+(\.\d+)?/.+$
                     title: DOI
@@ -940,6 +946,8 @@ properties:
                     type: string
                 material:
                     $ref: elements/material.json
+                    description: |-
+                        :MARC: ``540__3``
                 url:
                     description: |-
                         :MARC: ``540__u``
@@ -1107,6 +1115,8 @@ properties:
                     type: string
                 material:
                     $ref: elements/material.json
+                    description: |-
+                        :MARC: ``773__m``
                 page_end:
                     description: |-
                         :MARC: last page in ``773__c`` (if present)
