@@ -88,9 +88,6 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         journal_title=input_data_hep['journal_title'],
         journal_volume=input_data_hep['journal_volume']
     )
-    builder.add_imprint_date(
-        imprint_date=input_data_hep['imprint_date']
-    )
     builder.add_preprint_date(
         preprint_date=input_data_hep['preprint_date']
     )
@@ -146,10 +143,24 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.add_publication_type(
         publication_type=input_data_hep['publication_type']
     )
+    builder.add_book_edition(
+        edition=input_data_hep['book_edition']
+    )
+    builder.add_book(
+        publisher=input_data_hep['publisher'],
+        place=input_data_hep['place'],
+        date=input_data_hep['imprint_date']
+    )
+    builder.add_book_series(
+        title=input_data_hep['title'],
+        volume=input_data_hep['book_volume']
+    )
+    builder.add_isbns(
+        isbn=input_data_hep['isbn']
+    )
     builder.set_core(core=input_data_hep['core'])
     builder.set_refereed(refereed=input_data_hep['refereed'])
     builder.set_withdrawn(withdrawn=input_data_hep['withdrawn'])
     builder.set_citeable(citeable=input_data_hep['citeable'])
-
     assert builder.validate_record() is None
     assert builder.record == expected_data_hep

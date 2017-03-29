@@ -153,7 +153,22 @@
    ],
    "imprints":[
       {
-         "date":"2011-09-21T00:00:00"
+         "date":"2011-09-21",
+         "place":"London",
+         "publisher":"Harvard"
       }
+   ],
+   "editions":["Second edition"],
+   "isbns":[
+    {
+      "value":"1254589845",
+      "medium":"online"
+    }
+   ],
+   "book_series":[
+   {
+   "title":"OBSERVACIONS DE DOPPLER EN IMPULSAR CORBES DE LLUM KEPLER",
+   "volume":"Doppler phase 2"
+   }
    ]
 }
