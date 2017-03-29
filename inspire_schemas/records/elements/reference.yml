@@ -88,7 +88,7 @@ properties:
             .. note::
 
                 If the cited document is a book chapter, use
-                :ref:`publication_info/parent_isbn` instead.
+                :ref:`publication_info/properties/parent_isbn` instead.
         pattern: ^\d*[0-9X]$
         type: string
     label:

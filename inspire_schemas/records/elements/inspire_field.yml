@@ -1,12 +1,12 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
 description: |-
+    :MARC: ``65017`` with ``2:INSPIRE``
+
     The Inspire category (also called field category) classifies the subject
     this record is related to.  This classification schema is similar to the
     arXiv one (see `elements/arxiv_categories.json`) and there is a way to map
     from arXiv categories to Inspire categories.
-
-    :MARC: ``65017`` with ``2:INSPIRE``
 properties:
     source:
         enum:
