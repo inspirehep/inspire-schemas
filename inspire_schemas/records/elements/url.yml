@@ -1,9 +1,15 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
+description: |-
+    :MARC: ``8564``
 properties:
     description:
+        description: |-
+            :MARC: ``8654__y``
         type: string
     value:
+        description: |-
+            :MARC: ``8564_u``
         format: url
         type: string
 title: URL of related document
