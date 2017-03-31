@@ -3,6 +3,7 @@ additionalProperties: false
 properties:
     $schema:
         format: uri
+        minLength: 1
         type: string
     _collections:
         description: |-
@@ -35,7 +36,9 @@ properties:
             - Literature
             - ZEUS Internal Notes
             - ZEUS Preliminary Notes
+            minLength: 1
             type: string
+        minItems: 1
         title: Collections to which this record belongs
         type: array
         uniqueItems: true
@@ -51,22 +54,28 @@ properties:
                 date:
                     description: |-
                         :MARC: ``595_Dd``
+                    minLength: 1
                     type: string
                 expert:
                     description: |-
                         :MARC: ``595_Da``
+                    minLength: 1
                     type: string
                 identifier:
                     description: |-
                         :MARC: ``035__z`` when ``035__9`` is ``DESY``
+                    minLength: 1
                     type: string
                 status:
                     description: |-
                         :MARC: ``595_Ds``
+                    minLength: 1
                     type: string
             type: object
+        minItems: 1
         title: DESY keywording information
         type: array
+        uniqueItems: true
     _export_to:
         additionalProperties: false
         description: |-
@@ -100,8 +109,10 @@ properties:
                 not be edited manually.
         items:
             $ref: elements/records-files.json
+        minItems: 1
         title: '`invenio-records-files` metadata'
         type: array
+        uniqueItems: true
     _private_notes:
         description: |-
             :MARC: ``595``, ``595_H`` (when
@@ -111,6 +122,7 @@ properties:
             users.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of private notes
         type: array
         uniqueItems: true
@@ -122,6 +134,7 @@ properties:
             priority.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of abstracts
         type: array
         uniqueItems: true
@@ -139,6 +152,7 @@ properties:
                         .. note::
 
                             Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
                     type: string
                 curated_relation:
                     default: false
@@ -155,6 +169,7 @@ properties:
                         .. note::
 
                             Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
                     type: string
                 institution:
                     description: |-
@@ -163,6 +178,7 @@ properties:
                         .. note::
 
                             Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
                     title: Institution hosting the experiment
                     type: string
                 legacy_name:
@@ -175,11 +191,13 @@ properties:
                         the other fields will be used instead.
 
                         :example: ``CERN-LHC-CMS``
+                    minLength: 1
                     title: Identifier of the experiment on legacy
                     type: string
                 record:
                     $ref: elements/json_reference.json
             type: object
+        minItems: 1
         title: List of related accelerators/experiments
         type: array
         uniqueItems: true
@@ -214,6 +232,7 @@ properties:
                         :MARC: ``037__a`` with ``9:arXiv``
                         :example: ``math/0307245``
                         :example: ``1701.01431``
+                    minLength: 1
                     pattern: ^\d{4}.\d{4,5}|[\w.]+(-[\w.]+)?/\d+$
                     title: arXiv eprint identifier
                     type: string
@@ -222,6 +241,7 @@ properties:
             - value
             title: arXiv metadata
             type: object
+        minItems: 1
         type: array
         uniqueItems: true
     authors:
@@ -250,11 +270,13 @@ properties:
                                     is used here. In the future, this will
                                     change and become the new
                                     :ref:`institutions.json#/properties/ICN`.
+                                minLength: 1
                                 title: ICN of affiliation
                                 type: string
                         required:
                         - value
                         type: object
+                    minItems: 1
                     type: array
                     uniqueItems: true
                 alternative_names:
@@ -263,8 +285,11 @@ properties:
                             :MARC: ``100/700/701__q``
                             :example: ``楼 立洋``
                             :example: ``Smith, Joe John``
+                        minLength: 1
                         type: string
+                    minItems: 1
                     type: array
+                    uniqueItems: true
                 credit_roles:
                     items:
                         description: |-
@@ -288,9 +313,12 @@ properties:
                         - Visualization
                         - Writing - original draft
                         - Writing - review & editing
+                        minLength: 1
                         title: CRedit role of author
                         type: string
+                    minItems: 1
                     type: array
+                    uniqueItems: true
                 curated_relation:
                     default: false
                     type: boolean
@@ -299,8 +327,11 @@ properties:
                         :MARC: ``100/700/701__m``
                     items:
                         format: email
+                        minLength: 1
                         type: string
+                    minItems: 1
                     type: array
+                    uniqueItems: true
                 full_name:
                     description: |-
                         :MARC: ``100/700/701__a``
@@ -311,6 +342,7 @@ properties:
                         paper.
 
                         :example: ``Smith Davis, John F.K.``
+                    minLength: 1
                     title: Author name
                     type: string
                 ids:
@@ -318,6 +350,7 @@ properties:
                         :MARC: ``100/700/701__i/j``
                     items:
                         $ref: elements/id.json
+                    minItems: 1
                     title: Identifiers of the author
                     type: array
                     uniqueItems: true
@@ -343,8 +376,11 @@ properties:
                         - author
                         - supervisor
                         - editor
+                        minLength: 1
                         type: string
+                    minItems: 1
                     type: array
+                    uniqueItems: true
                 raw_affiliations:
                     description: |-
                         :MARC: ``100/700/701__v``
@@ -352,6 +388,7 @@ properties:
                         List of full affiliations, as written on the paper.
                     items:
                         $ref: elements/sourced_value.json
+                    minItems: 1
                     type: array
                     uniqueItems: true
                 record:
@@ -361,17 +398,20 @@ properties:
                         Phonetic representation of the name, needed for author
                         disambiguation. This field should not be edited
                         manually.
+                    minLength: 1
                     type: string
                 uuid:
                     description: |-
                         Used by the BEARD author disambiguation tool. This
                         field should not be edited manually.
+                    minLength: 1
                     pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
                     title: UUID
                     type: string
             required:
             - full_name
             type: object
+        minItems: 1
         title: Authors
         type: array
         uniqueItems: true
@@ -398,17 +438,21 @@ properties:
                 title:
                     description: |-
                         :MARC: ``490__a``
+                    minLength: 1
                     title: Title of the book series
                     type: string
                 volume:
                     description: |-
                         :MARC: ``490__v``
+                    minLength: 1
                     title: Volume of the book in the series
                     type: string
             required:
             - title
             type: object
+        minItems: 1
         type: array
+        uniqueItems: true
     citeable:
         description: |-
             :MARC: ``true`` corresponds to ``980__a:Citeable``.
@@ -447,11 +491,13 @@ properties:
 
                         :example: ``ATLAS`` instead of ``ATLAS Collaboration``
                         :example: ``Particle Data Group``
+                    minLength: 1
                     title: Collaboration name
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         required:
         - value
         title: List of collaborations
@@ -474,6 +520,7 @@ properties:
                     description: |-
                         :MARC: ``542__d``
                         :example: ``American Physical Society``
+                    minLength: 1
                     title: Copyright holder
                     type: string
                 material:
@@ -494,10 +541,12 @@ properties:
                         :example: ``© The Author(s) 2015. Published by Oxford
                             University Press on behalf of the Physical Society
                             of Japan.``
+                    minLength: 1
                     title: Copyright notice
                     type: string
                 url:
                     format: uri
+                    minLength: 1
                     title: Copyright notice URL
                     type: string
                 year:
@@ -507,8 +556,10 @@ properties:
                     minimum: 1000
                     type: integer
             type: object
+        minItems: 1
         title: List of copyrights to documents in this record
         type: array
+        uniqueItems: true
     core:
         description: |-
             Inspire ingests metadata and creates records for many documents.
@@ -536,8 +587,10 @@ properties:
                 only mentions the name of an organization.
 
                 :example: ``CERN``
+            minLength: 1
             title: List of corporate authors
             type: string
+        minItems: 1
         type: array
         uniqueItems: true
     curated:
@@ -568,7 +621,9 @@ properties:
             For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
+        minItems: 1
         type: array
+        uniqueItems: true
     document_type:
         description: |-
             :MARC: ``980__a``, with corresponding values.
@@ -653,6 +708,7 @@ properties:
                         Describes how this document relates to the document that
                         this record represents.
                         :example: ``table of contents``
+                    minLength: 1
                     type: string
                 fulltext:
                     title: Whether this document contains the fulltext
@@ -668,11 +724,13 @@ properties:
                     description: |-
                         Key to the corresponding file, which must match the ``key``
                         in :ref:`hep.json#/properties/_files`.
+                    minLength: 1
                     type: string
                 material:
                     $ref: elements/material.json
                 original_url:
                     format: uri
+                    minLength: 1
                     title: Original URL of the document
                     type: string
                 source:
@@ -686,13 +744,16 @@ properties:
                         the url to download the document from, until actually
                         downloaded.
                     format: uri-reference
+                    minLength: 1
                     type: string
             required:
             - key
             - url
             type: object
+        minItems: 1
         title: List of documents attached to the record
         type: array
+        uniqueItems: true
     dois:
         items:
             additionalProperties: false
@@ -709,12 +770,14 @@ properties:
                     description: |-
                         :MARC: ``0247_a``
                         :example: ``10.1023/A:1026654312961``
+                    minLength: 1
                     pattern: ^10\.\d+(\.\d+)?/.+$
                     title: DOI
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         title: List of DOIs
         type: array
         uniqueItems: true
@@ -722,7 +785,9 @@ properties:
         description: |-
             :MARC: ``250__a``
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: List of book editions
         type: array
         uniqueItems: true
@@ -746,7 +811,9 @@ properties:
             - 300-1000 GeV
             - 1-10 TeV
             - '> 10 TeV'
+            minLength: 1
             type: string
+        minItems: 1
         type: array
         uniqueItems: true
     external_system_identifiers:
@@ -765,6 +832,7 @@ properties:
                         unambiguously the :ref:`value`.
 
                         :example: ``ADS``
+                    minLength: 1
                     type: string
                 value:
                     description: |-
@@ -774,12 +842,14 @@ properties:
                         by :ref:`schema`.
 
                         :example: ``1999IJTP...38.1113M``
+                    minLength: 1
                     title: External identifier
                     type: string
             required:
             - schema
             - value
             type: object
+        minItems: 1
         type: array
         uniqueItems: true
     figures:
@@ -794,15 +864,18 @@ properties:
                 caption:
                     description: |-
                         :MARC: ``8564_y`` (without the five-digit counter)
+                    minLength: 1
                     type: string
                 key:
                     description: |-
                         Key to the corresponding file, which matches a ``key``
                         in :ref:`hep.json#/properties/_files`.
+                    minLength: 1
                     type: string
                 label:
                     description: |-
                         Label used to refer to this figure in the document.
+                    minLength: 1
                     type: string
                 material:
                     $ref: elements/material.json
@@ -818,13 +891,16 @@ properties:
                         Relative URL to the file containing the figure. Its
                         form is ``/files/bucket/key``.
                     format: uri-reference
+                    minLength: 1
                     type: string
             required:
             - key
             - url
             type: object
+        minItems: 1
         title: List of figures attached to the record
         type: array
+        uniqueItems: true
     funding_info:
         description: |-
             :MARC: ``536``
@@ -837,19 +913,23 @@ properties:
                 agency:
                     description: |-
                         :MARC: ``536__a``
+                    minLength: 1
                     title: Funding agency
                     type: string
                 grant_number:
                     description: |-
                         :MARC: ``536__c``
+                    minLength: 1
                     title: Grant number
                     type: string
                 project_number:
                     description: |-
                         :MARC: ``536__f``
+                    minLength: 1
                     title: Project number
                     type: string
             type: object
+        minItems: 1
         title: Funding information
         type: array
         uniqueItems: true
@@ -865,6 +945,7 @@ properties:
                     description: |-
                         :MARC: ``260__c``
                     format: date
+                    minLength: 1
                     title: Date of publication
                     type: string
                 place:
@@ -879,20 +960,24 @@ properties:
                             :ref:`hep.json#/properties/document_type`.
 
                         :example: ``Paris``
+                    minLength: 1
                     title: Place of publication
                     type: string
                 publisher:
                     description: |-
                         :MARC: ``260__b``
                         :example: ``Springer``
+                    minLength: 1
                     type: string
             type: object
+        minItems: 1
         title: List of imprints
         type: array
         uniqueItems: true
     inspire_categories:
         items:
             $ref: elements/inspire_field.json
+        minItems: 1
         title: List of Inspire categories
         type: array
         uniqueItems: true
@@ -910,17 +995,20 @@ properties:
                     - online
                     - print
                     - softcover
+                    minLength: 1
                     title: Physical medium to which this ISBN refers
                     type: string
                 value:
                     description: |-
                         :MARC: ``020__a``
                         :example: ``0201021153``
+                    minLength: 1
                     pattern: ^\d*[0-9X]$
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         title: List of ISBNs
         type: array
         uniqueItems: true
@@ -982,6 +1070,7 @@ properties:
                     - JACOW
                     - PACS
                     - PDG
+                    minLength: 1
                     title: Keyword vocabulary
                     type: string
                 source:
@@ -996,11 +1085,13 @@ properties:
                             ``INSPIRE``)
                         :example: ``29.27.Fh`` (for :ref:`schema` = ``PACS``)
                         :example: ``G033M`` (for :ref:`schema` = ``PDG``)
+                    minLength: 1
                     title: A keyword
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         title: List of keywords
         type: array
         uniqueItems: true
@@ -1013,14 +1104,17 @@ properties:
                 If this field is not present, the language of the document is assumed to be English.
         items:
             $ref: elements/language_code.json
+        minItems: 1
         title: List of languages of the document
         type: array
+        uniqueItems: true
     legacy_creation_date:
         description: |-
             :MARC: ``961__x``
 
             Only present if the record already existed on legacy Inspire.
         format: date
+        minLength: 1
         title: Date of record creation on legacy
         type: string
     license:
@@ -1033,6 +1127,7 @@ properties:
                     description: |-
                         :MARC: ``540__b``
                         :example: ``arXiv``
+                    minLength: 1
                     title: Organization/person imposing the license
                     type: string
                 license:
@@ -1043,6 +1138,7 @@ properties:
                         license statement.
 
                         :example: ``CC-BY-4.0``
+                    minLength: 1
                     title: License statement
                     type: string
                 material:
@@ -1056,9 +1152,11 @@ properties:
                         URL where the full license statement may be found, if
                         only a short name is provided in ``license``.
                     format: uri
+                    minLength: 1
                     title: URL of the license
                     type: string
             type: object
+        minItems: 1
         title: List of licenses
         type: array
         uniqueItems: true
@@ -1104,6 +1202,7 @@ properties:
                     enum:
                     - HDL
                     - URN
+                    minLength: 1
                     title: Type of identifier
                     type: string
                 source:
@@ -1118,12 +1217,14 @@ properties:
                         :example: ``10138/168995`` (when :ref:`schema` = ``HDL``)
                         :example: ``urn:nbn:de:hebis:77-diss-1000009520`` (when
                             :ref:`schema` = ``URN``)
+                    minLength: 1
                     title: Persistent identifier
                     type: string
             required:
             - schema
             - value
             type: object
+        minItems: 1
         title: List of persistent identifiers
         type: array
         uniqueItems: true
@@ -1136,6 +1237,7 @@ properties:
                 This is only for preprints. For the publication date of
                 published documents, see :ref:`imprints`.
         format: date
+        minLength: 1
         title: Preprint release date
         type: string
     public_notes:
@@ -1152,6 +1254,7 @@ properties:
                 regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of public notes
         type: array
         uniqueItems: true
@@ -1173,6 +1276,7 @@ properties:
                         .. note::
 
                             On legacy, this was treated as a starting page.
+                    minLength: 1
                     title: Article ID
                     type: string
                 cnum:
@@ -1186,6 +1290,7 @@ properties:
                 conf_acronym:
                     description: |-
                         :MARC: ``773__q``
+                    minLength: 1
                     title: Conference acronym
                     type: string
                 conference_record:
@@ -1208,6 +1313,7 @@ properties:
                 journal_issue:
                     description: |-
                         :MARC: ``773__n``
+                    minLength: 1
                     type: string
                 journal_record:
                     $ref: elements/json_reference.json
@@ -1221,10 +1327,12 @@ properties:
                         in the Journals collection.
 
                         :example: ``Phys.Rev.``
+                    minLength: 1
                     type: string
                 journal_volume:
                     description: |-
                         :MARC: ``773__v``
+                    minLength: 1
                     type: string
                 material:
                     $ref: elements/material.json
@@ -1233,11 +1341,13 @@ properties:
                 page_end:
                     description: |-
                         :MARC: last page in ``773__c`` (if present)
+                    minLength: 1
                     title: Last page of document
                     type: string
                 page_start:
                     description: |-
                         :MARC: first page in ``773__c`` (if not an :ref:`artid`)
+                    minLength: 1
                     title: First page of document
                     type: string
                 parent_isbn:
@@ -1245,6 +1355,7 @@ properties:
                         :MARC: ``773__z``
 
                         ISBN of the book of which this document is a part.
+                    minLength: 1
                     pattern: ^\d*[0-9X]$
                     type: string
                 parent_record:
@@ -1257,6 +1368,7 @@ properties:
                         part. This applies e.g. for large reports containing
                         several chapters that have been split into individual
                         records.
+                    minLength: 1
                     type: string
                 pubinfo_freetext:
                     description: |-
@@ -1270,6 +1382,7 @@ properties:
                             This field is used when provided with unstructured
                             publication information, e.g. from arXiv. If known,
                             the other fields should be used instead.
+                    minLength: 1
                     type: string
                 year:
                     description: |-
@@ -1279,6 +1392,7 @@ properties:
                     title: Publication year
                     type: integer
             type: object
+        minItems: 1
         title: List of information on publication
         type: array
         uniqueItems: true
@@ -1288,8 +1402,11 @@ properties:
             - introductory
             - lectures
             - review
+            minLength: 1
             type: string
+        minItems: 1
         type: array
+        uniqueItems: true
     record_affiliations:
         description: |-
             :MARC: ``902``
@@ -1319,11 +1436,13 @@ properties:
                         is used here. In the future, this will
                         change and become the new
                         :ref:`institutions.json#/properties/ICN`.
+                    minLength: 1
                     title: ICN of affiliation
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         title: Affiliations not associated to authors
         type: array
         uniqueItems: true
@@ -1366,19 +1485,23 @@ properties:
                                 description: |-
                                     :example: ``text``
                                     :example: ``Elsevier XML``
+                                minLength: 1
                                 title: Content type of the raw reference
                                 type: string
                             source:
                                 $ref: elements/source.json
                             value:
+                                minLength: 1
                                 title: Content of the raw reference
                                 type: string
                         required:
                         - value
                         - schema
                         type: object
+                    minItems: 1
                     title: List of raw references
                     type: array
+                    uniqueItems: true
                 record:
                     $ref: elements/json_reference.json
                     description: |-
@@ -1386,6 +1509,7 @@ properties:
                 reference:
                     $ref: elements/reference.json
             type: object
+        minItems: 1
         title: List of references
         type: array
         uniqueItems: true
@@ -1394,6 +1518,7 @@ properties:
             :MARC: ``78002``, ``78502``, ``78708``
         items:
             $ref: elements/related_record.json
+        minItems: 1
         title: List of related records
         type: array
         uniqueItems: true
@@ -1421,10 +1546,12 @@ properties:
                 source:
                     $ref: elements/source.json
                 value:
+                    minLength: 1
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         title: List of report numbers assigned to the record
         type: array
         uniqueItems: true
@@ -1439,7 +1566,9 @@ properties:
             the others are the obsolete ones which are kept in order to
             identify this record by those texkeys.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: List of TeX keys
         type: array
         uniqueItems: true
@@ -1456,6 +1585,7 @@ properties:
 
                     Publication date of the thesis
                 format: date
+                minLength: 1
                 type: string
             defense_date:
                 description: |-
@@ -1464,6 +1594,7 @@ properties:
                     Date of the thesis defense. On legacy, this was put in the
                     note field as 'presented on ...'.
                 format: date
+                minLength: 1
                 type: string
             degree_type:
                 $ref: elements/degree_type.json
@@ -1480,11 +1611,14 @@ properties:
                         curated_relation:
                             type: boolean
                         name:
+                            minLength: 1
                             type: string
                         record:
                             $ref: elements/json_reference.json
                     type: object
+                minItems: 1
                 type: array
+                uniqueItems: true
         type: object
     title_translations:
         description: |-
@@ -1503,13 +1637,16 @@ properties:
                 source:
                     $ref: elements/source.json
                 subtitle:
+                    minLength: 1
                     type: string
                 title:
+                    minLength: 1
                     type: string
             required:
             - language
             - title
             type: object
+        minItems: 1
         type: array
         uniqueItems: true
     titles:
@@ -1523,6 +1660,7 @@ properties:
             Translations go into :ref:`title_translations`.
         items:
             $ref: elements/title.json
+        minItems: 1
         title: List of titles
         type: array
         uniqueItems: true
@@ -1538,6 +1676,7 @@ properties:
                 :ref:`documents`.
         items:
             $ref: elements/url.json
+        minItems: 1
         type: array
         uniqueItems: true
     withdrawn:

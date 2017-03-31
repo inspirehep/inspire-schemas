@@ -44,6 +44,18 @@
     ],
     "issns": [
         {
+            "medium": "online",
+            "value": "3244-9688"
+        },
+        {
+            "medium": "online",
+            "value": "0125-1058"
+        },
+        {
+            "medium": "online",
+            "value": "7015-2615"
+        },
+        {
             "medium": "print",
             "value": "5409-0986"
         },
@@ -69,7 +81,7 @@
     "new_record": {
         "$ref": "http://1O4Hd"
     },
-    "proceedings": false,
+    "proceedings": true,
     "public_notes": [
         {
             "source": "ut irure et nisi cupidatat",
@@ -92,12 +104,12 @@
         "dolore irure ut sit",
         "ex"
     ],
-    "refereed": false,
+    "refereed": true,
     "related_records": [
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1"
+                "$ref": "http://1GZNwl2"
             },
             "relation": "parent",
             "relation_freetext": "irure nisi nulla dolor id"

@@ -9,5 +9,6 @@ enum:
 - master
 - phd
 - habilitation
+minLength: 1
 title: Academic degree type
 type: string

@@ -5,6 +5,7 @@ description: |-
     :example: The first conference (in order of creation on Inspire) starting
         on December 25, 1987 has CNUM ``C87-12-25`` whereas, say, the third
         one, has CNUM ``C87-12-25.2``
+minLength: 1
 pattern: ^C\d\d-\d\d-\d\d(\.\d+)?$
 title: CNUM identifier of the conference
 type: string

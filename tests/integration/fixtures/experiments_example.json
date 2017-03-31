@@ -86,11 +86,11 @@
     ],
     "institutions": [
         {
-            "curated_relation": false,
+            "curated_relation": true,
             "record": {
                 "$ref": "http://1.K-/"
             },
-            "value": ""
+            "value": "quis"
         },
         {
             "curated_relation": false,
@@ -133,14 +133,16 @@
         "$ref": "http://1sCTg"
     },
     "project_type": [
-        "accelerator",
-        "collaboration",
-        "experiment"
+        "collaboration"
     ],
     "public_notes": [
         {
-            "source": "ea irure",
-            "value": "Excepteur consequat"
+            "source": "ut nisi",
+            "value": "http://1/M|"
+        },
+        {
+            "source": "deserunt",
+            "value": "http://1ybsM8alB[:"
         }
     ],
     "related_records": [

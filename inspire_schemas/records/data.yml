@@ -1,4 +1,5 @@
 $schema: http://json-schema.org/schema#
+additionalProperties: false
 description: |-
     Schema is not yet specified
 title: A data record

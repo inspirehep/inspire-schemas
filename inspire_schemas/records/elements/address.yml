@@ -14,8 +14,10 @@ properties:
         items:
             description: |-
                 :example: ``Geneva``
+            minLength: 1
             title: A city
             type: string
+        minItems: 1
         title: List of cities
         type: array
         uniqueItems: true
@@ -47,6 +49,7 @@ properties:
 
               :MARC: Not present.
               :example: ``U. Libre Brussels``
+        minLength: 1
         type: string
     postal_address:
         description: |-
@@ -59,12 +62,15 @@ properties:
 
                 This is used for Institution records, but not for Conferences.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         type: array
         uniqueItems: false
     postal_code:
         description: |-
             :example: 1050
+        minLength: 1
         title: Postal code of the location
         type: string
     state:
@@ -72,6 +78,7 @@ properties:
             For American states, standard 2-letter codes are used.
 
             :example: TX
+        minLength: 1
         title: State or province of the location
         type: string
 title: Location associated to the record

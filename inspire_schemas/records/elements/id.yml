@@ -8,10 +8,12 @@ anyOf:
         schema:
             enum:
             - INSPIRE ID
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``INSPIRE-12345678``
+            minLength: 1
             pattern: ^INSPIRE-\d{8}$
             type: string
     required:
@@ -39,10 +41,12 @@ anyOf:
         schema:
             enum:
             - INSPIRE BAI
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``A.Einstein.1``
+            minLength: 1
             pattern: ^((\w|\-|\')+\.)+\d+$
             type: string
     required:
@@ -62,10 +66,12 @@ anyOf:
         schema:
             enum:
             - ORCID
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``0000-0012-1234-5647``
+            minLength: 1
             pattern: ^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$
             type: string
     required:
@@ -81,10 +87,12 @@ anyOf:
         schema:
             enum:
             - JACOW
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``JACOW-12345678``
+            minLength: 1
             pattern: ^JACoW-\d{8}$
             type: string
     required:
@@ -100,10 +108,12 @@ anyOf:
         schema:
             enum:
             - KAKEN
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``KAKEN-12345678``
+            minLength: 1
             pattern: ^KAKEN-\d{8}$
             type: string
     required:
@@ -118,10 +128,12 @@ anyOf:
         schema:
             enum:
             - ARXIV
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``warner_s_1``
+            minLength: 1
             pattern: ^\w+_(\w_)?\d+$
             type: string
     required:
@@ -136,10 +148,12 @@ anyOf:
         schema:
             enum:
             - CERN
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``CERN-12345``
+            minLength: 1
             pattern: ^CERN-\d+$
             type: string
     required:
@@ -152,10 +166,12 @@ anyOf:
         schema:
             enum:
             - DESY
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``DESY-15456``
+            minLength: 1
             pattern: ^DESY-\d+$
             type: string
     required:
@@ -168,10 +184,12 @@ anyOf:
         schema:
             enum:
             - GOOGLESCHOLAR
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``AZUAeayXuibs``
+            minLength: 1
             pattern: ^(\w|-){12}$
             type: string
     required:
@@ -187,10 +205,12 @@ anyOf:
         schema:
             enum:
             - VIAF
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``75121530``
+            minLength: 1
             pattern: ^\d{7,9}$
             type: string
     required:
@@ -203,10 +223,12 @@ anyOf:
         schema:
             enum:
             - RESEARCHERID
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``A-1009-2008``
+            minLength: 1
             pattern: ^[A-z]-\d{4}-\d{4}$
             type: string
     required:
@@ -219,10 +241,12 @@ anyOf:
         schema:
             enum:
             - SCOPUS
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``13245678901``
+            minLength: 1
             pattern: ^\d{10,11}$
             type: string
     required:
@@ -237,10 +261,12 @@ anyOf:
         schema:
             enum:
             - SPIRES
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: HEPNAMES-123456
+            minLength: 1
             pattern: ^HEPNAMES-\d+$
             type: string
     required:
@@ -253,6 +279,7 @@ anyOf:
         schema:
             enum:
             - WIKIPEDIA
+            minLength: 1
             type: string
         value:
             description: |-
@@ -264,6 +291,7 @@ anyOf:
                 Non-English Wikipedia pages can be referenced by prepending the language.
 
                 :example: ``it:Fabiola_Gianotti``
+            minLength: 1
             type: string
     required:
     - schema
@@ -275,10 +303,12 @@ anyOf:
         schema:
             enum:
             - SLAC
+            minLength: 1
             type: string
         value:
             description: |-
                 :example: ``SLAC-123456``
+            minLength: 1
             pattern: ^SLAC-\d+$
             type: string
     required:

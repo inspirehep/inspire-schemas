@@ -4,4 +4,5 @@ description: |-
     from and make decisions based on it.
 
     :MARC: Often not present.
+minLength: 1
 type: string

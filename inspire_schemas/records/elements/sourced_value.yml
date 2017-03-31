@@ -6,6 +6,7 @@ properties:
     source:
         $ref: source.json
     value:
+        minLength: 1
         type: string
 required:
 - value

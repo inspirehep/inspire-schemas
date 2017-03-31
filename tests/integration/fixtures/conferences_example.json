@@ -142,7 +142,7 @@
     "opening_date": "1974-09-14",
     "public_notes": [
         {
-            "source": "",
+            "source": "foo",
             "value": "sed Lorem culpa elit proident"
         },
         {

@@ -1,15 +1,20 @@
+additionalProperties: false
 description: |-
     Describe information needed for files in records.
 properties:
     bucket:
+        minLength: 1
         type: string
     checksum:
+        minLength: 1
         type: string
     key:
+        minLength: 1
         type: string
     size:
         type: integer
     version_id:
+        minLength: 1
         type: string
 title: File schema.
 type: object

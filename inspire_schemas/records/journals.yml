@@ -3,11 +3,13 @@ additionalProperties: false
 properties:
     $schema:
         format: uri
+        minLength: 1
         type: string
     _collections:
         items:
             enum:
             - Journals
+            minLength: 1
             type: string
         minItems: 1
         title: Collections to which this record belongs
@@ -29,6 +31,7 @@ properties:
                 enum:
                 - full
                 - partial
+                minLength: 1
                 type: string
             date_last_harvest:
                 description: |-
@@ -43,6 +46,7 @@ properties:
                         no journal update since the previous time, or that the
                         update did not have any relevant effect for Inspire.
                 format: date
+                minLength: 1
                 type: string
             last_seen_item:
                 description: |-
@@ -50,6 +54,7 @@ properties:
 
                     Information about last processed item in the harvest. This
                     item can be a volume, an issue or even a specific article.
+                minLength: 1
                 type: string
             method:
                 description: |-
@@ -73,6 +78,7 @@ properties:
                 - harvest
                 - print
                 - hepcrawl
+                minLength: 1
                 type: string
         type: object
     _private_notes:
@@ -83,6 +89,7 @@ properties:
             users.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of private notes
         type: array
         uniqueItems: true
@@ -106,6 +113,7 @@ properties:
 
             Date of last publication of the journal.
         format: date
+        minLength: 1
         type: string
     date_started:
         description: |-
@@ -113,6 +121,7 @@ properties:
 
             Date of first publication of the journal.
         format: date
+        minLength: 1
         type: string
     deleted:
         description: |-
@@ -131,7 +140,9 @@ properties:
             For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
+        minItems: 1
         type: array
+        uniqueItems: true
     doi_prefixes:
         description: |-
             :MARC: ``677__d``
@@ -143,13 +154,17 @@ properties:
                 This is a list because journals can change publishers, and the
                 new publisher will often assign new DOIs in its own prefix.
         items:
+            minLength: 1
             pattern: ^10\.\d+(\.\d+)?/.*$
             type: string
+        minItems: 1
         title: List of DOI prefixes for this journal
         type: array
+        uniqueItems: true
     inspire_categories:
         items:
             $ref: elements/inspire_field.json
+        minItems: 1
         title: List of Inspire categories
         type: array
         uniqueItems: true
@@ -165,17 +180,20 @@ properties:
                     enum:
                     - online
                     - print
+                    minLength: 1
                     title: Physical medium to which this ISSN refers
                     type: string
                 value:
                     description: |-
                         :MARC: ``022__a``
                         :example: ``0295-5075``
+                    minLength: 1
                     pattern: ^\d{4}-\d{3}[\dX]$
                     type: string
             required:
             - value
             type: object
+        minItems: 1
         title: List of ISSNs
         type: array
         uniqueItems: true
@@ -189,6 +207,7 @@ properties:
 
             Only present if the record already existed on legacy Inspire.
         format: date
+        minLength: 1
         title: Date of record creation on legacy
         type: string
     license:
@@ -204,6 +223,7 @@ properties:
                     license statement.
 
                     :example: ``CC-BY-4.0``
+                minLength: 1
                 title: License statement
                 type: string
             url:
@@ -213,6 +233,7 @@ properties:
                     URL where the full license statement may be found, if
                     only a short name is provided in ``license``.
                 format: uri
+                minLength: 1
                 title: URL of the license
                 type: string
         type: object
@@ -245,6 +266,7 @@ properties:
                 regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of public notes
         type: array
         uniqueItems: true
@@ -257,9 +279,12 @@ properties:
             .. note::
                 This is a list because journals can change publishers.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: List of publishers
         type: array
+        uniqueItems: true
     refereed:
         description: |-
             :MARC: ``690__a:Peer review`` corresponds to ``true``,
@@ -278,6 +303,7 @@ properties:
             :MARC: ``530``
         items:
             $ref: elements/related_record.json
+        minItems: 1
         title: List of related records
         type: array
         uniqueItems: true
@@ -290,6 +316,7 @@ properties:
             Normalized title of the journal
 
             :example: ``Phys.Rev. D``
+        minLength: 1
         type: string
     title_variants:
         description: |-
@@ -300,13 +327,16 @@ properties:
 
             :example: ``PHYS REVIEW``
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: List of journal name variants
         type: array
         uniqueItems: true
     urls:
         items:
             $ref: elements/url.json
+        minItems: 1
         type: array
         uniqueItems: true
 required:

@@ -29,7 +29,7 @@
             "checksum": "reprehenderit dolor ad in",
             "key": "ullamco ",
             "size": -93453234,
-            "version_id": ""
+            "version_id": "reprehenderit"
         },
         {
             "bucket": "esse deserunt",
@@ -187,7 +187,6 @@
             ],
             "credit_roles": [
                 "Conceptualization",
-                "Project administration",
                 "Project administration"
             ],
             "curated_relation": true,
@@ -203,7 +202,6 @@
                 }
             ],
             "inspire_roles": [
-                "supervisor",
                 "editor",
                 "supervisor",
                 "author"
@@ -292,9 +290,7 @@
             ],
             "inspire_roles": [
                 "editor",
-                "editor",
                 "author",
-                "supervisor",
                 "supervisor"
             ],
             "raw_affiliations": [
@@ -337,7 +333,7 @@
                     "value": "in"
                 },
                 {
-                    "curated_relation": true,
+                    "curated_relation": false,
                     "record": {
                         "$ref": "http://170PHP"
                     },
@@ -353,7 +349,7 @@
             "credit_roles": [
                 "Project administration"
             ],
-            "curated_relation": true,
+            "curated_relation": false,
             "emails": [
                 "5NaFqstfgILl@YwkZuB.eag",
                 "T6M5wv2oB@bcPIAehQmzUHDyDGntW.ovdo",
@@ -445,7 +441,7 @@
                 "Data curation",
                 "Writing - review & editing"
             ],
-            "curated_relation": false,
+            "curated_relation": true,
             "emails": [
                 "EXLKVKlJfXetVd@eZjmwEVvAIhPZEovjKVVhvhKUBhuORZ.ki"
             ],
@@ -461,10 +457,6 @@
                 }
             ],
             "inspire_roles": [
-                "author",
-                "author",
-                "author",
-                "author",
                 "author"
             ],
             "raw_affiliations": [
@@ -501,7 +493,6 @@
                 "Visualization",
                 "Resources",
                 "Writing - original draft",
-                "Investigation",
                 "Investigation"
             ],
             "curated_relation": true,
@@ -532,9 +523,6 @@
                 }
             ],
             "inspire_roles": [
-                "author",
-                "author",
-                "editor",
                 "author",
                 "editor"
             ],
@@ -830,7 +818,7 @@
         },
         {
             "imposing": "voluptate commodo nostrud tem",
-            "license": "",
+            "license": "do",
             "material": "preprint",
             "url": "http://1o"
         },
@@ -1218,6 +1206,16 @@
         }
     ],
     "report_numbers": [
+        {
+            "hidden": false,
+            "source": "reprehenderit",
+            "value": "et eiusmod id commodo ex"
+        },
+        {
+            "hidden": true,
+            "source": "eu irure voluptate non",
+            "value": "sit Duis ad occaecat"
+        },
         {
             "hidden": true,
             "source": "ea",

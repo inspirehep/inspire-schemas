@@ -3,6 +3,7 @@ additionalProperties: false
 properties:
     $schema:
         format: uri
+        minLength: 1
         type: string
     ICN:
         description: |-
@@ -18,13 +19,17 @@ properties:
                 mistake in its assignment.  The current one is the first
                 element of the list.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: List of affiliation identifiers
         type: array
+        uniqueItems: true
     _collections:
         items:
             enum:
             - Institutions
+            minLength: 1
             type: string
         minItems: 1
         title: Collections to which this record belongs
@@ -38,6 +43,7 @@ properties:
             users.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of private notes
         type: array
         uniqueItems: true
@@ -50,6 +56,7 @@ properties:
             for institutions distributed on several campuses.
         items:
             $ref: elements/address.json
+        minItems: 1
         title: List of addresses
         type: array
         uniqueItems: true
@@ -82,7 +89,9 @@ properties:
             For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
+        minItems: 1
         type: array
+        uniqueItems: true
     external_system_identifiers:
         description: |-
             :MARC: ``035``, ``970``
@@ -97,10 +106,12 @@ properties:
                             :MARC: ``035__9:HAL``
                         enum:
                         - HAL
+                        minLength: 1
                         type: string
                     value:
                         description: |-
                             :MARC: ``035__a``
+                        minLength: 1
                         pattern: ^\d+$
                         type: string
                 required:
@@ -113,10 +124,12 @@ properties:
                     schema:
                         enum:
                         - SPIRES
+                        minLength: 1
                         type: string
                     value:
                         description: |-
                             :MARC: ``970__a``
+                        minLength: 1
                         pattern: ^INST-\d+$
                         type: string
                 required:
@@ -124,6 +137,7 @@ properties:
                 - value
                 title: SPIRES identifier
                 type: object
+        minItems: 1
         type: array
         uniqueItems: true
     extra_words:
@@ -133,7 +147,9 @@ properties:
             Contains extra words that might be used when searching for this
             record, but that are not contained in the other visible metadata.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: Extra words
         type: array
         uniqueItems: true
@@ -141,9 +157,12 @@ properties:
         description: |-
             :MARC: ``6781_a``
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: Historical information about institution
         type: array
+        uniqueItems: true
     inactive:
         description: |-
             :MARC: ``980:DEAD`` corresponds to ``true``
@@ -154,6 +173,7 @@ properties:
     inspire_categories:
         items:
             $ref: elements/inspire_field.json
+        minItems: 1
         title: List of Inspire categories
         type: array
         uniqueItems: true
@@ -186,12 +206,15 @@ properties:
                 acronym:
                     description: |-
                         :MARC: in parenthesis at the end of ``110_a/b``
+                    minLength: 1
                     type: string
                 name:
                     description: |-
                         :MARC: value in ``110_a/b``, excluding final parenthesis
+                    minLength: 1
                     type: string
             type: object
+        minItems: 1
         type: array
         uniqueItems: true
     institution_type:
@@ -203,13 +226,17 @@ properties:
             - Research Center
             - Company
             - Other
+            minLength: 1
             type: string
+        minItems: 1
         type: array
+        uniqueItems: true
     legacy_ICN:
         description: |-
             :MARC: ``110__u``
 
             This was called simply "ICN" on legacy.
+        minLength: 1
         type: string
     legacy_creation_date:
         description: |-
@@ -217,6 +244,7 @@ properties:
 
             Only present if the record already existed on legacy Inspire.
         format: date
+        minLength: 1
         title: Date of record creation on legacy
         type: string
     name_variants:
@@ -228,6 +256,7 @@ properties:
             is not.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         type: array
         uniqueItems: true
     new_record:
@@ -252,6 +281,7 @@ properties:
                 regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of public notes
         type: array
         uniqueItems: true
@@ -260,6 +290,7 @@ properties:
             :MARC: ``510``
         items:
             $ref: elements/related_record.json
+        minItems: 1
         title: List of related records
         type: array
         uniqueItems: true
@@ -268,6 +299,7 @@ properties:
     urls:
         items:
             $ref: elements/url.json
+        minItems: 1
         type: array
         uniqueItems: true
 required:
