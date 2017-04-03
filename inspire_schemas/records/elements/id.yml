@@ -317,3 +317,38 @@ anyOf:
     - value
     title: SLAC identifier
     type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - TWITTER
+            type: string
+        value:
+            description: |-
+                A twitter handle, often preceded by ``@``.
+
+                :example: ``Prof_S_Hawking``
+            type: string
+    required:
+    - schema
+    - value
+    title: Twitter handle
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - LINKEDIN
+            type: string
+        value:
+            description: |-
+                Identifier of Linkedin profile, i.e. the part after
+                ``linkedin.com/in/`` in the URL.
+
+                :example: ``kylecranmer``
+            type: string
+    required:
+    - schema
+    - value
+    title: LinkedIn profile
+    type: object
