@@ -133,9 +133,31 @@
         }
     ],
     "email_addresses": [
-        "sGL5YZm3fr@yBddPMMkqVBxNGQBEaPqOwRCPraxflBaQ.xja",
-        "GGP9cY@qeDfwgmKXqZfrbsKXWowmZZnTv.gcd",
-        "Ds0@VIGIyllXAakVoXLNnRZHMYSefYcA.xe"
+        {
+            "current": false,
+            "hidden": true,
+            "value": "jh1eODzkDL@AKzwKXUQdjCtfLzMDlCfDIl.yf"
+        },
+        {
+            "current": true,
+            "hidden": true,
+            "value": "VUR3e@wpyAFFXWzuzGKYTMwAABYkz.nsm"
+        },
+        {
+            "current": true,
+            "hidden": true,
+            "value": "rK1tZBUNQQ@mRQxfP.cfey"
+        },
+        {
+            "current": true,
+            "hidden": true,
+            "value": "hMZ0VePfwN7lKl@EZUhLeIeFsIWIhSgZvh.onq"
+        },
+        {
+            "current": true,
+            "hidden": true,
+            "value": "xGxVc1-F@DpkGBmXIVnkkmRbKwJtKmUCznuE.bly"
+        }
     ],
     "experiments": [
         {
@@ -201,61 +223,30 @@
     "new_record": {
         "$ref": "http://1n0ybVuN"
     },
-    "past_emails_addresses": [
-        "ByzIK@bKXtPrWIxhgJIACMuONqafR.woz",
-        "IxnG7xLr5ER@zuEYxnuYjhPbOdylzWxcG.nwd"
-    ],
     "positions": [
         {
             "current": true,
-            "emails": [
-                "erwKtok4ceh@FK.lsp",
-                "u9HG@hmDg.kej",
-                "AwCp2cB@DKovlltXKlTCWGhDxmC.gia",
-                "ieZngC1h@ktAVxbvkXDGWqZqjPzpiKKPPFIqtJM.nvo"
-            ],
             "end_date": "1724-07-20",
-            "institution": {
-                "curated_relation": false,
-                "name": "ipsum veniam fugiat ad qui",
-                "record": {
-                    "$ref": "http://1z.Ic9c7X"
-                }
-            },
-            "old_emails": [
-                "nGlpESLdnqk2Fw@tbgSGgxXOEPRtnbdZG.izww",
-                "fAGSzO@IPlGdRJFHiUbq.nu",
-                "36wtGf4e@XcOtRpxnKWLSgudYpkYVUEwaoxTTDaiSh.gu",
-                "FcwC@tnJQsnNhOHVovwpSovcgWNmJJkt.wsaj"
-            ],
-            "rank": "PHD",
-            "start_date": "1887-06-19"
-        },
-        {
-            "current": false,
-            "emails": [
-                "I1gmiE66DUiS@adDNtmh.tb",
-                "EDI0ENrIk@ENtcbfIvoqJRLVmDMnrUbDvVF.gs",
-                "P7QKg@WR.vj",
-                "8c9bIpuQG9I6n@BDzhTInORXCcA.bk",
-                "ioUdI9SaxZ@DevRWZAwQwAXvHIVNQlKyLVm.yib"
-            ],
-            "end_date": "1899-06-10",
             "institution": {
                 "curated_relation": false,
                 "name": "qui ea pariatur ut nisi",
                 "record": {
                     "$ref": "http://180"
                 }
+            }
+        },
+        {
+            "current": false,
+            "end_date": "1770-04-16",
+            "institution": {
+                "curated_relation": false,
+                "name": "irure",
+                "record": {
+                    "$ref": "http://1"
+                }
             },
-            "old_emails": [
-                "ZVIOVypi99c@QuSp.hjya",
-                "vYr-QDs@XqCgClzSQUWoIVkgeqlHigyVbrGWW.buqd",
-                "TwwqH@WBao.pzyf",
-                "evfxTnT4BSBU@rObTzmYIxYTbZYtNDINJthBDJiFVUkzW.xp"
-            ],
-            "rank": "POSTDOC",
-            "start_date": "2008-10-28"
+            "rank": "UNDERGRADUATE",
+            "start_date": "1820-02-26"
         }
     ],
     "public_notes": [

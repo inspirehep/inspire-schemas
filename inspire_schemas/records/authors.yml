@@ -103,12 +103,35 @@ properties:
         uniqueItems: true
     email_addresses:
         description: |-
-            Contains current email addresses
+            :MARC: ``371__m/o``, ``595__m/o``
         items:
-            format: email
-            minLength: 1
-            type: string
+            additionalProperties: false
+            properties:
+                current:
+                    description: |-
+                        :MARC: if ``true``, the email comes from ``o``, if
+                            ``false``, from ``m``.
+                    title: Whether this address is still in use
+                    type: boolean
+                hidden:
+                    description: |-
+                        :MARC: if ``true``, the email comes from ``371``, if
+                            ``false``, from ``595``.
+
+                        Email addresses might be considered sensitive
+                        information and hidden at the user's request.
+                    title: Whether this address should be hidden
+                    type: boolean
+                value:
+                    format: email
+                    minLength: 1
+                    title: an email address
+                    type: string
+            required:
+            - value
+            type: object
         minItems: 1
+        title: List of email addresses
         type: array
         uniqueItems: true
     experiments:
@@ -263,30 +286,12 @@ properties:
         description: |-
             Master record that replaces this record
         title: New record
-    past_emails_addresses:
-        description: |-
-            Contains past email addresses
-        items:
-            format: email
-            minLength: 1
-            type: string
-        minItems: 1
-        type: array
-        uniqueItems: true
     positions:
         items:
             additionalProperties: false
             properties:
                 current:
                     type: boolean
-                emails:
-                    items:
-                        format: email
-                        minLength: 1
-                        type: string
-                    minItems: 1
-                    type: array
-                    uniqueItems: true
                 end_date:
                     format: date
                     minLength: 1
@@ -302,14 +307,6 @@ properties:
                         record:
                             $ref: elements/json_reference.json
                     type: object
-                old_emails:
-                    items:
-                        format: email
-                        minLength: 1
-                        type: string
-                    minItems: 1
-                    type: array
-                    uniqueItems: true
                 rank:
                     $ref: elements/rank.json
                 start_date:

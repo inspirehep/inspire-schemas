@@ -322,12 +322,14 @@ anyOf:
         schema:
             enum:
             - TWITTER
+            minLength: 1
             type: string
         value:
             description: |-
                 A twitter handle, often preceded by ``@``.
 
                 :example: ``Prof_S_Hawking``
+            minLength: 1
             type: string
     required:
     - schema
@@ -339,6 +341,7 @@ anyOf:
         schema:
             enum:
             - LINKEDIN
+            minLength: 1
             type: string
         value:
             description: |-
@@ -346,6 +349,7 @@ anyOf:
                 ``linkedin.com/in/`` in the URL.
 
                 :example: ``kylecranmer``
+            minLength: 1
             type: string
     required:
     - schema
