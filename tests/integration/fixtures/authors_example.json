@@ -93,7 +93,7 @@
                 "description": "occaecat eiusmod",
                 "value": "http://1w"
             },
-            "year": -95986794
+            "year": 1654
         },
         {
             "name": "amet consectetur aliqua",
@@ -101,7 +101,7 @@
                 "description": "consectetur dolore in",
                 "value": "http://16zOEU"
             },
-            "year": -61158575
+            "year": 2015
         },
         {
             "name": "nisi exe",
@@ -109,7 +109,7 @@
                 "description": "ea culpa",
                 "value": "http://1CIKRtW"
             },
-            "year": -19803031
+            "year": 1877
         },
         {
             "name": "amet magna commodo incididu",
@@ -117,7 +117,7 @@
                 "description": "aliquip ad non nulla",
                 "value": "http://1"
             },
-            "year": -94135887
+            "year": 1657
         }
     ],
     "birth_date": "1485-06-28",
@@ -157,28 +157,6 @@
             "current": true,
             "hidden": true,
             "value": "xGxVc1-F@DpkGBmXIVnkkmRbKwJtKmUCznuE.bly"
-        }
-    ],
-    "experiments": [
-        {
-            "curated_relation": false,
-            "current": false,
-            "end_year": -59887557,
-            "name": "pariatur",
-            "record": {
-                "$ref": "http://1pmlJbh"
-            },
-            "start_year": 87824488
-        },
-        {
-            "curated_relation": false,
-            "current": false,
-            "end_year": -89497884,
-            "name": "veniam nisi officia dolore est",
-            "record": {
-                "$ref": "http://15XGFW/h"
-            },
-            "start_year": -67436812
         }
     ],
     "ids": [
@@ -247,6 +225,28 @@
             },
             "rank": "UNDERGRADUATE",
             "start_date": "1820-02-26"
+        }
+    ],
+    "project_membership": [
+        {
+            "curated_relation": false,
+            "current": false,
+            "end_date": "2016",
+            "name": "pariatur",
+            "record": {
+                "$ref": "http://1pmlJbh"
+            },
+            "start_date": "1984"
+        },
+        {
+            "curated_relation": false,
+            "current": false,
+            "end_date": "1879",
+            "name": "veniam nisi officia dolore est",
+            "record": {
+                "$ref": "http://15XGFW/h"
+            },
+            "start_date": "1788"
         }
     ],
     "public_notes": [

@@ -16,14 +16,22 @@ properties:
         type: array
         uniqueItems: true
     _private_notes:
+        description: |-
+            :MARC: ``595``
+
+            These notes are only visible to privileged users, not regular
+            users.
         items:
             $ref: elements/sourced_value.json
         minItems: 1
+        title: List of private notes
         type: array
         uniqueItems: true
     acquisition_source:
         $ref: elements/acquisition_source.json
     advisors:
+        description: |-
+            :MARC: ``701``
         items:
             additionalProperties: false
             properties:
@@ -31,13 +39,25 @@ properties:
                     type: boolean
                 degree_type:
                     $ref: elements/degree_type.json
+                    description: |-
+                        :MARC: ``701__g``
                 ids:
+                    description: |-
+                        :MARC: ``701__i``
                     items:
                         $ref: elements/id.json
                     minItems: 1
+                    title: List of advisor's IDs
                     type: array
                     uniqueItems: true
                 name:
+                    description: |-
+                        :MARC: ``701__a``
+
+                        The full name of the advisor, written in the
+                        standard ``last names, first names`` form.
+
+                        :example: ``Smith, John P.S.``
                     minLength: 1
                     type: string
                 record:
@@ -46,31 +66,42 @@ properties:
             - name
             type: object
         minItems: 1
+        title: List of advisors
         type: array
         uniqueItems: true
     arxiv_categories:
+        description: |-
+            :MARC: ``65017a`` when it contains an arXiv category.
         items:
             $ref: elements/arxiv_categories.json
         minItems: 1
+        title: List of research areas of author
         type: array
         uniqueItems: true
     awards:
         description: |-
-            :MARC: ``678__a``
+            :MARC: ``678``
         items:
             additionalProperties: false
             properties:
                 name:
                     description: |-
+                        :MARC: ``678__a`` (also contains :ref:`year`).
                         :example: ``Nobel Prize in Physics``
                     minLength: 1
                     title: Name of the award
                     type: string
                 url:
                     $ref: elements/url.json
+                    description: |-
+                        :MARC: ``678__u``
                     title: URL of award announcement
                 year:
+                    description: |-
+                        :MARC: ``678__a`` (also contains :ref:`name`).
                     maximum: 2050
+                    minimum: 1000
+                    title: Year of the award
                     type: integer
             title: An award
             type: object
@@ -80,27 +111,43 @@ properties:
         uniqueItems: true
     birth_date:
         description: |-
-            Stores birth date
+            :MARC: ``100__d`` (first part)
         format: date
         minLength: 1
         type: string
     control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
         type: integer
     death_date:
         description: |-
-            Stores death date (if any)
+            :MARC: ``100__d`` (second part)
+
+            See also :ref:`status` ``deceased``.
         format: date
         minLength: 1
         type: string
     deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
         type: boolean
     deleted_records:
         description: |-
-            List of deleted records referring to this record
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
         minItems: 1
-        title: Deleted Records
         type: array
         uniqueItems: true
     email_addresses:
@@ -127,38 +174,13 @@ properties:
                 value:
                     format: email
                     minLength: 1
-                    title: an email address
+                    title: An email address
                     type: string
             required:
             - value
             type: object
         minItems: 1
         title: List of email addresses
-        type: array
-        uniqueItems: true
-    experiments:
-        description: |-
-            Contains information about experiments.
-        items:
-            additionalProperties: false
-            properties:
-                curated_relation:
-                    type: boolean
-                current:
-                    type: boolean
-                end_year:
-                    type: integer
-                name:
-                    minLength: 1
-                    type: string
-                record:
-                    $ref: elements/json_reference.json
-                    description: |-
-                        URI for the experiment record
-                start_year:
-                    type: integer
-            type: object
-        minItems: 1
         type: array
         uniqueItems: true
     ids:
@@ -286,8 +308,11 @@ properties:
     new_record:
         $ref: elements/json_reference.json
         description: |-
-            Master record that replaces this record
-        title: New record
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
     positions:
         items:
             additionalProperties: false
@@ -317,6 +342,47 @@ properties:
                     type: string
             type: object
         minItems: 1
+        type: array
+        uniqueItems: true
+    project_membership:
+        description: |-
+            :MARC: ``693``
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                current:
+                    title: Whether the author is still involved in it
+                    type: boolean
+                end_date:
+                    description: |-
+                        :MARC: ``693__d``
+
+                        Date the author stopped working on this project.
+                    format: date
+                    minLength: 1
+                    type: string
+                name:
+                    description: |-
+                        Name of the project.
+                    minLength: 1
+                    type: string
+                record:
+                    $ref: elements/json_reference.json
+                    description: |-
+                        URI for the experiment record
+                start_date:
+                    description: |-
+                        :MARC: ``693__s``
+
+                        Date the author started working on this project.
+                    format: date
+                    minLength: 1
+                    type: string
+            type: object
+        minItems: 1
+        title: List of projects on which the author worked
         type: array
         uniqueItems: true
     public_notes:
@@ -351,4 +417,5 @@ properties:
 required:
 - name
 - _collections
+title: A record in the Authors collection
 type: object
