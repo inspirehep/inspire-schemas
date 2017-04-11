@@ -1,97 +1,211 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
+dependencies:
+    project_type:
+        anyOf:
+        -   required:
+            - collaboration
+        -   required:
+            - experiment
+        -   required:
+            - accelerator
+description: |-
+    This record can describe different types of projects, depending on the
+    value of :ref:`experiments.json#/properties/project_type`.
 properties:
     $schema:
         format: url
         type: string
     _collections:
+        description: |-
+            Used by `invenio-collections` to store the collections this record
+            belongs to.
+
+            .. note::
+
+                This field is maintained by `invenio-collections` and should
+                not be edited manually.
         items:
             type: string
+        title: '`invenio-collections` metadata'
         type: array
+    _full_ingestion:
+        title: Whether to ingest all articles written by this project
+        type: boolean
     _private_notes:
+        description: |-
+            :MARC: ``595__a``, ``667__a``
+
+            These notes are only visible to privileged users, not regular
+            users.
         items:
             $ref: elements/sourced_value.json
+        title: List of private notes
         type: array
         uniqueItems: true
     accelerator:
-        title: Accelerator
-        type: string
-    affiliations:
-        items:
-            additionalProperties: false
-            properties:
-                curated_relation:
-                    type: boolean
-                name:
-                    title: Name of the institution
-                    type: string
-                record:
-                    $ref: elements/json_reference.json
-                    title: Record URI of the institution.
-            type: object
-        title: Institutions with which experiment is affiliated.
-        type: array
-        uniqueItems: true
+        additionalProperties: false
+        description: |-
+            - If ``accelerator`` is present in :ref:`project_type`, this field
+              contains information about this accelerator.
+            - If ``experiment`` is present in :ref:`project_type`, this field
+              refers to the accelerator that provides a beam to this experiment.
+        properties:
+            curated_relation:
+                type: boolean
+            record:
+                $ref: elements/json_reference.json
+                description: |-
+                    If ``accelerator`` is not present in
+                    :ref:`experiments.json#/properties/project_type`, this
+                    links to the related accelerator record.
+            value:
+                description: |-
+                    :MARC: ``119__b``
+                    :example: ``LHC``
+                title: Accelerator name
+                type: string
+        required:
+        - value
+        type: object
     collaboration:
-        title: Collaboration
-        type: string
-    collaboration_alternative_names:
-        items:
-            title: Collaboration alternative name
-            type: string
-        title: Collaboration alternative names
-        type: array
-        uniqueItems: true
-    contact_details:
-        items:
-            $ref: elements/contact.json
-        type: array
-        uniqueItems: true
+        additionalProperties: false
+        description: |-
+            :MARC: ``710``
+
+            - If ``collaboration`` is present in :ref:`project_type`, this field
+              contains information about this collaboration.
+            - Otherwise, this field refers to the collaboration that runs this
+              accelerator/experiment.
+        properties:
+            curated_relation:
+                type: boolean
+            record:
+                $ref: elements/json_reference.json
+                description: |-
+                    If ``collaboration`` is not present in
+                    :ref:`experiments.json#/properties/project_type`, this
+                    links to the related collaboration record.
+            subgroup_names:
+                description: |-
+                    :MARC: ``710__q``
+
+                    Sometimes papers are signed not by the full collaboration,
+                    but only by a more focused subgroup. This records the
+                    names of those groups.
+
+                    :example: ``ATLAS TDAQ``
+                items:
+                    type: string
+                title: List of names of subgroups
+                type: array
+                uniqueItems: true
+            value:
+                description: |-
+                    :MARC: ``710__g``
+                    :example: ``D0``
+                title: Collaboration name
+                type: string
+        required:
+        - value
+        type: object
     control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
         type: integer
-    curated_relation:
-        title: Curated relation
+    core:
+        description: |-
+            :MARC: ``980:CORE`` corresponds to ``true``.
+
+            Whether the papers written by this project are generally
+            :ref:`hep.json#/properties/core`.
         type: boolean
     date_approved:
+        description: |-
+            :MARC: ``046__r``
         format: date
-        title: Date approved
+        title: Approval date of experiment/accelerator
         type: string
     date_cancelled:
+        description: |-
+            :MARC: ``046__c``
         format: date
-        title: Date cancelled
+        title: Cancellation date of experiment/accelerator
         type: string
     date_completed:
+        description: |-
+            :MARC: ``046__t``
         format: date
-        title: Date completed
+        title: Completion date of experiment/accelerator
         type: string
     date_proposed:
+        description: |-
+            :MARC: ``046__q``
         format: date
-        title: Date proposed
+        title: Proposal date of experiment/accelerator
         type: string
     date_started:
+        description: |-
+            :MARC: ``046__s``
         format: date
-        title: Date started
+        title: Starting date of experiment/accelerator
         type: string
     deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
         type: boolean
     deleted_records:
         description: |-
-            List of deleted records referring to this record
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
-        title: Deleted Records
         type: array
     description:
-        items:
-            type: string
-        title: Description
-        type: array
-    experiment_names:
-        items:
-            $ref: elements/title.json
-        type: array
-        uniqueItems: true
+        description: |-
+            :MARC: ``520__a``
+
+            This should take the form of a short text.
+        title: Description of the project
+        type: string
+    experiment:
+        additionalProperties: false
+        description: |-
+            If ``experiment`` is present in :ref:`project_type`, this field
+            contains information about this experiment.
+        properties:
+            legacy_name:
+                description: |-
+                    :MARC: ``119__a``
+                    :example: ``CERN-LHC-CMS``
+                type: string
+            short_name:
+                description: |-
+                    :MARC: ``119__d``
+                    :example: ``SHINE``
+                type: string
+            value:
+                description: |-
+                    :MARC: ``119__c``
+                    :example: ``NA61``
+                title: Experiment identifier
+                type: string
+        required:
+        - value
+        type: object
     external_system_identifiers:
+        description: |-
+            List of identifiers of this document on external systems.
         items:
             anyOf:
             -   additionalProperties: false
@@ -101,122 +215,174 @@ properties:
                         - SPIRES
                         type: string
                     value:
+                        description: |-
+                            :MARC: ``970__a``
                         pattern: ^EXPERIMENT-\d+$
                         type: string
                 required:
                 - schema
                 - value
+                title: SPIRES identifier
                 type: object
         type: array
         uniqueItems: true
-    free_keywords:
-        items:
-            title: Free keyword
-            type: string
-        title: Free keywords
-        type: array
-        uniqueItems: true
-    hidden_note:
-        title: Hidden note
-        type: string
     inspire_categories:
         items:
             $ref: elements/inspire_field.json
         type: array
         uniqueItems: true
+    inspire_classification:
+        items:
+            description: |-
+                :MARC: ``372__a``
+
+                Category to which this experiment belongs. The possible values
+                can be found on the `experiment categories
+                page <http://inspirehep.net/info/Experiments/list>`_ on legacy.
+
+                :example: ``3.1.1`` for ``ultra-short baseline, reactor, neutrino
+                    (flavor) experiment``
+            pattern: \d+(\.\d+){0,2}
+            type: string
+        type: array
+        uniqueItems: true
+    institution:
+        additionalProperties: false
+        properties:
+            curated_relation:
+                type: boolean
+            record:
+                $ref: elements/json_reference.json
+                title: Record URI of the institution.
+            value:
+                description: |-
+                    :MARC: ``119__u``
+
+                    Currently, the old
+                    :ref:`institutions.json#/properties/legacy_ICN` is used
+                    here.
+                title: ICN of institution hosting the project
+                type: string
+        title: Host institution
+        type: object
+        uniqueItems: true
     legacy_creation_date:
         format: date-time
         type: string
+    long_name:
+        description: |-
+            :MARC: ``245__a``
+            :example: ``Compact Muon Solenoid``
+        title: long name of the project
+        type: string
+    name_variants:
+        description: |-
+            :MARC: ``419__a``
+        items:
+            type: string
+        title: Name variants of the project
+        type: array
+        uniqueItems: true
     new_record:
         $ref: elements/json_reference.json
         description: |-
-            Master record that replaces this record
-        title: New record
-    other_experiment_names:
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    project_type:
+        description: |-
+            :MARC: Not present, only ``experiments`` had records.
+
+            A project can represent a combination of ``collaboration``, ``accelerator`` and ``experiment``,
+            depending on the contents of this field. Typical cases are:
+
+
+            =================   ==============  =============== ===========
+            ``collaboration``   ``experiment``  ``accelerator`` explanation
+            =================   ==============  =============== ===========
+            present              present         absent          typical case where a collaboration runs a single experiment (e.g. ``ALICE``).
+            present              absent          absent          non-experimental collaboration (e.g. lattice) or experimental collaboration corresponding to several experiments (e.g. ``DO``).
+            absent               present         absent          non-unique experiment among the experiments run by this collaboration (e.g. ``DO Run I``).
+            absent               absent          present         accelerator that is not a collaboration (e.g. ``LHC``).
+            present              absent          present         accelerator that is also a collaboration (e.g. ``CLIC``).
+            =================   ==============  =============== ===========
+
+            - When ``collaboration`` is present, the :ref:`collaboration` field
+              contains information about it. Otherwise, it might refer to the
+              collaboration record corresponding to the current
+              accelerator/experiment.
+            - When ``experiment`` is present, the :ref:`experiment` field
+              contains information about it.
+            - When ``accelerator`` is present, the :ref:`accelerator` field
+              contains information about it. If not, but ``experiment`` is
+              present, it might refer to the accelerator record providing a beam to
+              this experiment.
         items:
-            $ref: elements/title.json
+            enum:
+            - collaboration
+            - experiment
+            - accelerator
+            type: string
+        minLength: 1
+        title: Type of project that this record represents
         type: array
         uniqueItems: true
     public_notes:
+        description: |-
+            :MARC: ``500``
+
+            Any notes about the document that do not fit into another field.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        title: List of public notes
         type: array
         uniqueItems: true
     related_experiments:
+        description: |-
+            :MARC: ``510``
         items:
             additionalProperties: false
             properties:
                 curated_relation:
-                    title: Is the relation curated?
                     type: boolean
-                name:
-                    title: Name of related experiment
-                    type: string
                 record:
                     $ref: elements/json_reference.json
-                    title: URI for the related experiment record
                 relation:
                     description: |-
-                        FIXME: shall we simply store preceeding experiment and generate the symmetric relation automatically?
+                        :MARC: ``510__w``: ``predecessor`` corresponds to
+                            ``a``, ``successor`` to ``b``.
                     enum:
                     - predecessor
                     - successor
                     title: Type of relation
                     type: string
+                value:
+                    description: |-
+                        :MARC: ``510__a``
+                    title: Name of related experiment
+                    type: string
+            required:
+            - value
+            - relation
             type: object
-        title: Related experiments
+        title: List of related experiments
         type: array
         uniqueItems: true
     self:
         $ref: elements/json_reference.json
-        description: |-
-            Url of the record itself
-        title: Url of the record
-    spokespersons:
-        items:
-            additionalProperties: false
-            properties:
-                curated_relation:
-                    title: Is the relation curated?
-                    type: boolean
-                current:
-                    title: Is current Spokesperson?
-                    type: boolean
-                end_date:
-                    format: date
-                    title: End date
-                    type: string
-                ids:
-                    items:
-                        $ref: elements/id.json
-                    type: array
-                    uniqueItems: true
-                name:
-                    title: Name
-                    type: string
-                record:
-                    $ref: elements/json_reference.json
-                    title: URI for the person record
-                start_date:
-                    format: date
-                    title: Start date
-                    type: string
-            required:
-            - name
-            title: Spokesperson
-            type: object
-        title: Spokespersons
-        type: array
-        uniqueItems: true
-    titles:
-        items:
-            $ref: elements/title.json
-        type: array
-        uniqueItems: true
     urls:
         items:
             $ref: elements/url.json
         type: array
         uniqueItems: true
-title: Experiment
+required:
+- project_type
+title: A collaboration/experiment/accelerator record
 type: object
