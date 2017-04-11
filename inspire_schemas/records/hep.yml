@@ -1242,6 +1242,14 @@ properties:
         title: List of references
         type: array
         uniqueItems: true
+    related_records:
+        description: |-
+            :MARC: ``78002``, ``78502``, ``78708``
+        items:
+            $ref: elements/related_record.json
+        title: List of related records
+        type: array
+        uniqueItems: true
     report_numbers:
         description: |-
             :MARC: ``037``
@@ -1301,20 +1309,6 @@ properties:
         title: Special collections to which this record belongs
         type: array
         uniqueItems: true
-    succeeding_entry:
-        additionalProperties: false
-        description: |-
-            :MARC: ``78502``
-        properties:
-            isbn:
-                pattern: ^(97(8|9))?\d{9}(\d|X)$
-                type: string
-            record:
-                $ref: elements/json_reference.json
-            relationship_code:
-                type: string
-        title: Reference to a newer version of this record
-        type: object
     texkeys:
         description: |-
             :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
