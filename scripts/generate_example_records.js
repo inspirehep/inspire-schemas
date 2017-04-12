@@ -4,7 +4,7 @@ var fs = require('fs'),
     jsf = require('json-schema-faker'),
     path = require('path');
 
-jsf.format('date', function(gen, schema){ return gen.randexp('^\d{4}-\d{2}-\d{2}$');});
+jsf.format('date', function(gen, schema){ return gen.randexp('^\\d{4}-\\d{2}-\\d{2}$');});
 jsf.format('url', function(gen, schema){ return gen.randexp('^http://1.*$');});
 jsf.format('.+, .+', function(gen, schema){ return gen.randexp('^.+, .+$');});
 
