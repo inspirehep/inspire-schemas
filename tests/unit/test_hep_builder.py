@@ -25,6 +25,7 @@
 import pytest
 
 from inspire_schemas.builders import is_citeable
+from inspire_schemas.builders import LiteratureBuilder
 
 
 @pytest.mark.parametrize(
@@ -69,3 +70,15 @@ from inspire_schemas.builders import is_citeable
 )
 def test_is_citeable(expected_result, formdata):
     assert is_citeable(formdata) is expected_result
+
+
+def test_append_to():
+    formdata = ''
+    builder = LiteratureBuilder("test")
+    expected_result = None
+    builder._append_to('test_field', formdata)
+    assert builder.record.get('test_field') is expected_result
+    formdata = 'value'
+    expected_result = ['value']
+    builder._append_to('test_field_2', formdata)
+    assert builder.record.get('test_field_2') == expected_result
