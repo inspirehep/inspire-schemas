@@ -1,11 +1,25 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
 properties:
-    city:
+    cities:
         description: |-
-            :example: Geneva
-        title: English name of the city
-        type: string
+            Sometimes conferences and institutes are officially located in a
+            little-known place, but their location is widely known as being in
+            a major neighboring city.  In this way, we can store information
+            about both the technically correct but little-known place and the
+            well-known but technically incorrect place.
+
+            The cities should be ordered from most specific to least specific.
+
+            :example: ``["Batavia", "Chicago"]``
+        items:
+            description: |-
+                :example: ``Geneva``
+            title: A city
+            type: string
+        title: List of cities
+        type: array
+        uniqueItems: true
     country_code:
         $ref: country_code.json
     latitude:
@@ -18,13 +32,37 @@ properties:
             :example: 6.07532
         title: Longitude of the location
         type: number
-    original_address:
+    place_name:
         description: |-
-            FIXME: what is this supposed to contain? the full address string on
-            legacy?
+            Name of the specific place where this is located.
 
-            Original address, entities separeted with a comma
+            - For a Conference record, this could be an institution or a hotel
+              hosting the conference.
+
+              :MARC: ``270__b``
+              :example: ``Dan Panorama hotel``
+
+            - For an Institution record representing an independent institute
+              and not a department, this could be a university where it is
+              located.
+
+              :MARC: Not present.
+              :example: ``U. Libre Brussels``
         type: string
+    postal_address:
+        description: |-
+            Full postal address in the original language, with
+            one element for every line, but excluding the country.
+
+            :example: ``["Notkestraße 85", "22607 Hamburg"]``
+
+            .. note::
+
+                This is used for Institution records, but not for Conferences.
+        items:
+            type: string
+        type: array
+        uniqueItems: false
     postal_code:
         description: |-
             :example: 1050
