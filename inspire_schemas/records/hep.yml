@@ -1092,6 +1092,17 @@ properties:
                     title: record of the conference
                 curated_relation:
                     type: boolean
+                hidden:
+                    description: |-
+                        :MARC: If ``true``, this comes comes from ``7731`` instead
+                            of ``773``.
+
+                        This is useful when:
+                        - there are variants in the way this publication is cited,
+                        - an error was present, has been fixed, but should be preserved
+                            in order to find the record.
+                    title: Whether this `publication_info` should be hidden
+                    type: boolean
                 journal_issue:
                     description: |-
                         :MARC: ``773__n``
