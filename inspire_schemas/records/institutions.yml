@@ -156,31 +156,12 @@ properties:
             $ref: elements/sourced_value.json
         type: array
         uniqueItems: true
-    related_institutes:
+    related_records:
+        description: |-
+            :MARC: ``510``
         items:
-            additionalProperties: false
-            properties:
-                curated_relation:
-                    title: Is the relation curated?
-                    type: boolean
-                name:
-                    title: Name of related institute
-                    type: string
-                record:
-                    $ref: elements/json_reference.json
-                    title: URI for the related institute record
-                relation_type:
-                    enum:
-                    - predecessor
-                    - successor
-                    - parent
-                    - superseded
-                    - other
-                    title: Relation type
-                    type: string
-            title: Related institute
-            type: object
-        title: Related institutes
+            $ref: elements/related_record.json
+        title: List of related records
         type: array
         uniqueItems: true
     self:

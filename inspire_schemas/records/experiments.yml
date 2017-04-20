@@ -344,35 +344,12 @@ properties:
         title: List of public notes
         type: array
         uniqueItems: true
-    related_experiments:
+    related_records:
         description: |-
             :MARC: ``510``
         items:
-            additionalProperties: false
-            properties:
-                curated_relation:
-                    type: boolean
-                record:
-                    $ref: elements/json_reference.json
-                relation:
-                    description: |-
-                        :MARC: ``510__w``: ``predecessor`` corresponds to
-                            ``a``, ``successor`` to ``b``.
-                    enum:
-                    - predecessor
-                    - successor
-                    title: Type of relation
-                    type: string
-                value:
-                    description: |-
-                        :MARC: ``510__a``
-                    title: Name of related experiment
-                    type: string
-            required:
-            - value
-            - relation
-            type: object
-        title: List of related experiments
+            $ref: elements/related_record.json
+        title: List of related records
         type: array
         uniqueItems: true
     self:

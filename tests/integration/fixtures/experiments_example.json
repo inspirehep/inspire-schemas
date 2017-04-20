@@ -1,122 +1,139 @@
 {
     "_collections": [
-        "in exerci",
-        "reprehenderit exercitation",
-        "mollit Lorem sint laborum Exce"
+        "et tempor Excepteur aute",
+        "nostrud ipsum non",
+        "ut culpa sit",
+        "incididunt",
+        "nisi Ut sunt"
     ],
-    "_full_ingestion": true,
+    "_full_ingestion": false,
     "_private_notes": [
         {
-            "source": "quis labore",
-            "value": "in"
+            "source": "velit proident id officia anim",
+            "value": "in magna"
         },
         {
-            "source": "consectetur ",
-            "value": "elit officia non labore"
+            "source": "sed",
+            "value": "fugiat"
+        },
+        {
+            "source": "do",
+            "value": "laborum aliquip labore tempor et"
+        },
+        {
+            "source": "exercitation ut id",
+            "value": "dolore reprehenderit laboris Duis"
+        },
+        {
+            "source": "exercitation cupidatat elit",
+            "value": "adipisicing"
         }
     ],
     "accelerator": {
         "curated_relation": true,
         "record": {
-            "$ref": "http://1apfC{_3&"
+            "$ref": "http://1%w#6QS7 3"
         },
-        "value": "proident"
+        "value": "in laboris ut"
     },
     "collaboration": {
-        "curated_relation": false,
+        "curated_relation": true,
         "record": {
-            "$ref": "http://1weg,"
+            "$ref": "http://1M)H-j"
         },
         "subgroup_names": [
-            "aliquip",
-            "proi",
-            "Duis proident",
-            "in tempo"
+            "qui",
+            "ullamco",
+            "aute occaecat cillum",
+            "magna voluptate"
         ],
-        "value": "minim sit velit dolor ullamco"
+        "value": "ali"
     },
-    "control_number": 52646377,
+    "control_number": 67168215,
     "core": true,
-    "date_approved": "dddd-dd-dd",
-    "date_cancelled": "dddd-dd-dd",
-    "date_completed": "dddd-dd-dd",
-    "date_proposed": "dddd-dd-dd",
-    "date_started": "dddd-dd-dd",
-    "deleted": true,
+    "date_approved": "9433-07-69",
+    "date_cancelled": "0653-71-44",
+    "date_completed": "5802-68-29",
+    "date_proposed": "3219-34-99",
+    "date_started": "2353-10-64",
+    "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://1(Qim"
+            "$ref": "http://1cWuNi0SHv"
         },
         {
-            "$ref": "http://1sP|{$A_"
-        },
-        {
-            "$ref": "http://1PZO1"
-        },
-        {
-            "$ref": "http://1XrH"
+            "$ref": "http://15;YDnm@0V"
         }
     ],
-    "description": "dolore fugiat",
+    "description": "ex officia nostrud irure",
     "experiment": {
-        "legacy_name": "laborum et",
-        "short_name": "dolore officia",
-        "value": "dolor labore"
+        "legacy_name": "laboris",
+        "short_name": "dolore enim et fugiat sed",
+        "value": "eiusmod nisi consectetur"
     },
     "external_system_identifiers": [
         {
             "schema": "SPIRES",
-            "value": "EXPERIMENT-6214242096"
+            "value": "EXPERIMENT-06"
         },
         {
             "schema": "SPIRES",
-            "value": "EXPERIMENT-48545"
+            "value": "EXPERIMENT-00"
         },
         {
             "schema": "SPIRES",
-            "value": "EXPERIMENT-506642071"
+            "value": "EXPERIMENT-3583731183"
+        },
+        {
+            "schema": "SPIRES",
+            "value": "EXPERIMENT-66607"
         }
     ],
     "inspire_categories": [
         {
+            "source": "arxiv",
+            "term": "Gravitation and Cosmology"
+        },
+        {
+            "source": "user",
+            "term": "Gravitation and Cosmology"
+        },
+        {
             "source": "undefined",
-            "term": "Theory-HEP"
+            "term": "Gravitation and Cosmology"
+        },
+        {
+            "source": "curator",
+            "term": "Astrophysics"
         },
         {
             "source": "arxiv",
-            "term": "Phenomenology-HEP"
-        },
-        {
-            "source": "user",
-            "term": "Accelerators"
-        },
-        {
-            "source": "user",
-            "term": "Phenomenology-HEP"
-        },
-        {
-            "source": "arxiv",
-            "term": "Lattice"
+            "term": "Math and Math Physics"
         }
     ],
     "inspire_classification": [
-        "89570589464",
-        "84153362988",
-        "516.50607486890.83957211",
-        "31246",
-        "8984.2556454.24186936075"
+        "2524636.01699231230",
+        "75605498072.9557776807",
+        "2189918480"
     ],
     "institution": {
-        "curated_relation": true,
+        "curated_relation": false,
         "record": {
-            "$ref": "http://1:MH2="
+            "$ref": "http://1qY XaZ@5Y"
         },
-        "value": "laborum amet"
+        "value": "Duis enim eu"
     },
-    "legacy_creation_date": "5073-06-04T00:29:47.271Z",
-    "long_name": "veniam sit eu consectetur",
+    "legacy_creation_date": "3224-06-22T02:25:18.800Z",
+    "long_name": "qui esse",
+    "name_variants": [
+        "et minim",
+        "sunt sit mollit",
+        "tempor",
+        "nulla id",
+        "dolor minim"
+    ],
     "new_record": {
-        "$ref": "http://1\\"
+        "$ref": "http://1pr\">"
     },
     "project_type": [
         "experiment",
@@ -125,55 +142,65 @@
     ],
     "public_notes": [
         {
-            "source": "ad qui nulla magna",
-            "value": "reprehenderit en"
+            "source": "ad",
+            "value": "dolor esse anim"
         }
     ],
-    "related_experiments": [
+    "related_records": [
         {
-            "curated_relation": true,
             "record": {
-                "$ref": "http://1\"3s}1H~hCc"
+                "$ref": "http://1WBK$iU"
             },
-            "relation": "successor",
-            "value": "cillum adipisicing exercitation Lore"
+            "relation": "parent"
         },
         {
-            "curated_relation": false,
             "record": {
-                "$ref": "http://1@"
+                "$ref": "http://1O*"
             },
-            "relation": "predecessor",
-            "value": "voluptate nulla irure"
+            "relation_freetext": "sint in"
         },
         {
-            "curated_relation": true,
             "record": {
-                "$ref": "http://1@gs*ieI"
+                "$ref": "http://1#[^DQr1Nm"
             },
-            "relation": "successor",
-            "value": "sunt culpa"
+            "relation": "parent"
+        },
+        {
+            "record": {
+                "$ref": "http://1^d7I`c6HOG"
+            },
+            "relation_freetext": "aliquip cillum exercitation"
+        },
+        {
+            "record": {
+                "$ref": "http://1"
+            },
+            "relation": "predecessor"
         }
     ],
     "self": {
-        "$ref": "http://1X "
+        "$ref": "http://1~OZ"
     },
     "urls": [
         {
-            "description": "non ut Excepteur nisi in",
-            "value": "http://1_Z9"
+            "description": "cupidatat c",
+            "value": "http://1"
         },
         {
-            "description": "cupidatat",
-            "value": "http://1W"
+            "description": "deserunt",
+            "value": "http://1|@)9Yl"
         },
         {
-            "description": "ex",
-            "value": "http://1FdHI[q0b!"
+            "description": "consectetur non Ut",
+            "value": "http://1Tj"
         },
         {
-            "description": "anim",
-            "value": "http://1uk\"q@r@"
+            "description": "veniam",
+            "value": "http://1~)6!wrA=e<"
+        },
+        {
+            "description": "eu in dolore",
+            "value": "http://1,.}yv"
         }
     ]
 }

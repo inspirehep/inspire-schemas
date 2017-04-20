@@ -100,32 +100,14 @@ properties:
             type: string
         title: Publisher
         type: array
-    relation:
-        additionalProperties: false
-        properties:
-            curated_relation:
-                title: Is the relation curated?
-                type: boolean
-            issn:
-                pattern: ^\d{4}-\d{3}[\dX]$
-                title: ISSN of the related record
-                type: string
-            record:
-                $ref: elements/json_reference.json
-                title: URI for the related record
-            relation:
-                description: |-
-                    FIXME: as usual, shall we capture only superseeded records and derive the symmetric relation automatically?
-                enum:
-                - superseded record
-                - superseeding record
-                title: Type of relation
-                type: string
-        required:
-        - relation
-        - issn
-        title: Relation
-        type: object
+    related_records:
+        description: |-
+            :MARC: ``78002``, ``78502``
+        items:
+            $ref: elements/related_record.json
+        title: List of related records
+        type: array
+        uniqueItems: true
     self:
         $ref: elements/json_reference.json
         description: |-
