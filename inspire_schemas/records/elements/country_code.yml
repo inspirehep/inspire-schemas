@@ -1,4 +1,9 @@
 $schema: http://json-schema.org/schema#
+description: |-
+    Country code according to `ISO 3166-1 alpha-2
+    <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ with a few additions
+    (CS - Czechoslovakia, YU - Yugoslavia, AB - Serbia and Montenegro, AN -
+    Netherlands Antilles, NT - Neutral Zone)
 enum:
 - AB
 - AF
@@ -257,7 +262,5 @@ enum:
 - ZW
 maxLength: 2
 minLength: 2
-title: Country code according to ISO 3166-1-alpha-2 with few additions (CS - Czechoslovakia,
-    YU - Yugoslavia, AB - Serbia and Montenegro, AN - Netherlands Antilles, NT - Neutral
-    Zone)
+title: ISO 3166-1 alpha 2 country code
 type: string
