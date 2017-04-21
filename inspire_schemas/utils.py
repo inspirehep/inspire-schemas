@@ -27,6 +27,7 @@ import datetime
 import json
 import os
 import re
+import warnings
 
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
@@ -154,6 +155,8 @@ def normalize_date_iso(date):
     :return formatted_date: the input date in
     the format (yyyy-mm-ddT00:00:00)
     """
+    warnings.warn("Don't use 'normalize_date_iso'", DeprecationWarning)
+
     try:
         formatted_date = datetime.datetime.\
             strptime(date, '%Y-%m-%d').isoformat()
