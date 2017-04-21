@@ -684,12 +684,26 @@ properties:
         uniqueItems: true
     energy_ranges:
         description: |-
-            :MARC: ``695__e``
+            :MARC: ``695__e:n`` corresponds to the ``n``-th range in the enum,
+                e.g. ``695__e:2`` is `3-10 Gev``.
 
-            Ranges of energies the record refers to.
+            Ranges of energies the record refers to. The ranges are inclusive
+            on the right.
+
+            :example: ``100-300 GeV`` means that ``100 GeV < Energy ≤ 300
+                GeV``.
         items:
-            minimum: 0
-            type: integer
+            enum:
+            - 0-3 GeV
+            - 3-10 GeV
+            - 10-30 GeV
+            - 30-100 GeV
+            - 100-300 GeV
+            - 300-1000 GeV
+            - 1-10 TeV
+            - '> 10 TeV'
+            type: string
+        uniqueItems: true
         type: array
     external_system_identifiers:
         description: |-
