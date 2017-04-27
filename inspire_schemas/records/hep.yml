@@ -1112,6 +1112,7 @@ properties:
                             of ``773``.
 
                         This is useful when:
+
                         - there are variants in the way this publication is cited,
                         - an error was present, has been fixed, but should be preserved
                             in order to find the record.
