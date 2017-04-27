@@ -59,6 +59,18 @@ this part of the documentation is for you.
    api
    utils
 
+
+Schemas Reference
+-------------
+
+Auto-generated documentation for Inspirehep schemas.
+
+.. toctree::
+   :maxdepth: 1
+
+   documentation/index
+
+
 Additional Notes
 ----------------
 

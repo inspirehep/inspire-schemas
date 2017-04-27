@@ -27,6 +27,19 @@ from __future__ import print_function
 import os
 
 from autosemver.packaging import get_changelog, get_current_version
+from jsonschema2rst.parser_runner import run_parser
+from shutil import copy2
+
+def _generate_schemas_doc():
+    schemas_folder = os.path.join(
+        os.pardir,
+        'inspire_schemas'
+    )
+    rst_output = 'documentation'
+    run_parser(schemas_folder, rst_output)
+
+
+_generate_schemas_doc()
 
 if not os.path.exists('_build/html/_static'):
     os.makedirs('_build/html/_static')
@@ -36,6 +49,10 @@ with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
         project_dir='..',
         bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
     ))
+
+copy2('resources/custom.css', '_build/html/_static')
+
+
 
 # -- General configuration ------------------------------------------------
 
@@ -135,6 +152,10 @@ todo_include_todos = False
 # -- Options for HTML output ----------------------------------------------
 html_theme = 'alabaster'
 
+
+# Add any paths that contain custom themes here, relative to this directory.
+# html_theme_path = ['_static']
+
 html_theme_options = {
     'description': 'INSPIREHEP schemas and related tools bundle.',
     'github_user': 'inspirehep',
@@ -154,10 +175,7 @@ html_theme_options = {
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
-
-# Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
+# html_theme_options = {}
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -178,7 +196,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+html_static_path = ['_build/html/_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied

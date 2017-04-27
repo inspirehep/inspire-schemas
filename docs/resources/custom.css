@@ -1,0 +1,55 @@
+
+@import url("alabaster.css");
+
+/* -- page layout ----------------------------------------------------------- */
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-style: bold;
+}
+
+h1 > a {
+    color: #2f4c7c;
+}
+
+h2 > a {
+    color: #53565b;
+}
+
+.title {
+    font-size: 1.25em;
+    color: #4c77b2;
+    font-style: italic;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.sub-title {
+    padding-bottom: 10px;
+    padding-top: 20px;
+    font-size: 1.1em;
+    color: #3b4c84;
+    font-style: italic;
+}
+
+
+h2 {
+    font-style: italic;
+}
+
+
+
+body {counter-reset: h2}
+.body h2 {counter-reset: h3}
+.body h3 {counter-reset: h4}
+.body h4 {counter-reset: h5}
+.body h5 {counter-reset: h6}
+.body h2:before {counter-increment: h2; content: counter(h2) ". "}
+.body h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
+.body h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
+.body h5:before {counter-increment: h5; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "}
+.body h6:before {counter-increment: h6; content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "}
+h2.nocount:before, h3.nocount:before, h4.nocount:before, h5.nocount:before, h6.nocount:before {content: ""; counter-increment: none}
