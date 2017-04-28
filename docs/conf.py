@@ -24,6 +24,7 @@
 
 from __future__ import print_function
 
+import atexit
 import os
 
 from autosemver.packaging import get_changelog, get_current_version
@@ -51,8 +52,11 @@ with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
         bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
     ))
 
-copy2('resources/custom.css', '_build/html/_static')
 
+@atexit.register
+def copy_stylesheet():
+    copy2('resources/custom.css', '_build/html/_static')
+    print("Copied custom.css in _build/html/_static")
 
 
 # -- General configuration ------------------------------------------------
