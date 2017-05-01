@@ -236,7 +236,7 @@ properties:
                 value:
                     description: |-
                         :MARC: ``037__a`` with ``9:arXiv``
-                        :example: ``math.DG/0307245``
+                        :example: ``math/0307245``
                         :example: ``1701.01431``
                     pattern: ^\d{4}.\d{4,5}|[\w.]+(-[\w.]+)?/\d+$
                     title: arXiv eprint identifier
