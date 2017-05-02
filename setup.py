@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016, 2017 CERN.
+# Copyright (C) 2016 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -22,75 +22,44 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
-"""INSPIRE schemas and related tools bundle."""
-from __future__ import absolute_import, division, print_function
-
-import json
-import os
-import six
+"""jsonschema2rst and related tools bundle."""
 
 from setuptools import setup, find_packages
+import pkg_resources
 
+URL = 'https://github.com/inspirehep/jsonschema2rst'
+readme = open('README.rst').read()
 
-URL = 'https://github.com/inspirehep/inspire-schemas'
+test_requires = [
+    "check-manifest>=0.25",
+    "coverage>=4.0",
+    "isort>=4.2.2",
+    "pytest-cache>=1.0",
+    "pytest-cov>=1.8.0",
+    "pytest-pep8>=1.0.6",
+    "pytest>=3.0.3",
+    "mock>=2.0.0",
+]
 
-
-def _yaml2json(yaml_file, json_file):
-    import yaml
-    with open(yaml_file, 'rb') as yaml_fd:
-        raw_data = yaml_fd.read()
-
-    data = yaml.load(raw_data)
-
-    with open(json_file, 'w') as json_fd:
-        json_fd.write(
-            json.dumps(data, indent=4, separators=(',', ': '), sort_keys=True)
-        )
-        json_fd.write('\n')
-
-
-def _find(basepath, extension='.yml'):
-    basepath, dirs, files = six.next(os.walk(basepath))
-    for filename in files:
-        if filename.endswith(extension):
-            yield os.path.join(basepath, filename)
-
-    for dirname in dirs:
-        for filename in _find(
-            basepath=os.path.join(basepath, dirname),
-            extension=extension,
-        ):
-            yield filename
-
-
-def _generate_json_schemas():
-    schemas_dir = os.path.join(
-        os.path.dirname(__file__),
-        'inspire_schemas/records'
-    )
-    for yaml_file in _find(basepath=schemas_dir, extension='.yml'):
-        json_file = yaml_file.rsplit('.', 1)[0] + '.json'
-        _yaml2json(yaml_file=yaml_file, json_file=json_file)
-
-
-def do_setup(url=URL):
-    _generate_json_schemas()
-    setup(
-        author='CERN',
-        author_email='admin@inspirehep.net',
-        description='Inspire JSON schemas and utilities to use them.',
-        install_requires=['autosemver', 'jsonschema', 'idutils', 'pyyaml'],
-        license='GPLv2',
-        name='inspire-schemas',
-        package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
-        packages=find_packages(),
-        setup_requires=['autosemver', 'pyyaml', 'six'],
-        url=URL,
-        bugtracker_url=URL + '/issues/',
-        zip_safe=False,
-        autosemver=True,
-    )
-
-
-if __name__ == '__main__':
-    do_setup()
+setup(
+    name='jsonschema2rst',
+    version='1.0',
+    author='CERN',
+    author_email='admin@inspirehep.net',
+    description='Parser for yaml/json schemas to rst',
+    license='GPLv2',
+    keywords='jsonschema yaml rst parser documentation',
+    packages=find_packages(),
+    install_requires=['pyyaml', 'autosemver', 'pytest'],
+    long_description=readme,
+    extras_require={'tests': test_requires},
+    url=URL,
+    autosemver={'bugtracker_url': URL + '/issues/'},
+    package_data={'': ['CHANGELOG', 'AUTHORS', 'README.rst', 'resources/*']},
+    include_package_data=True,
+    entry_points={
+          'console_scripts': [
+              'jsonschema2rst = jsonschema2rst.parser_runner:cli'
+          ]
+      },
+)
