@@ -34,6 +34,8 @@ from .utils import normalize_author_name_with_comma, validate
 
 EMPTIES = [None, '', [], {}]
 
+EMPTIES = [None, '', [], {}]
+
 
 def filter_empty_parameters(func):
     """Decorator that is filtering empty parameters.
