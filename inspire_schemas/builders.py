@@ -108,7 +108,7 @@ class LiteratureBuilder(object):
     def _append_to(self, field, element):
         """Append the ``element`` to the ``field`` of the record.
 
-        This method is smart: it does nothing if ``field`` is empty and
+        This method is smart: it does nothing if ``element`` is empty and
         creates ``field`` if it does not exit yet.
 
         :param field: the name of the field of the record to append to
@@ -118,6 +118,20 @@ class LiteratureBuilder(object):
         if element not in EMPTIES:
             self.record.setdefault(field, [])
             self.record.get(field).append(element)
+
+    def _prepend_to(self, field, element):
+        """Prepend the ``element`` to the ``field`` of the record.
+
+        This method is smart: it does nothing if ``element`` is empty and
+        creates ``field`` if it does not exit yet.
+
+        :param field: the name of the field of the record to prepend to
+        :type field: string
+        :param element: the element to prepend
+        """
+        if element not in EMPTIES:
+            self.record.setdefault(field, [])
+            self.record.get(field).insert(0, element)
 
     def __str__(self):
         """Print the current record."""
@@ -651,8 +665,6 @@ class LiteratureBuilder(object):
             warnings.warn("Use 'datetime', not 'date'", DeprecationWarning)
             datetime = date
 
-        self.record.setdefault('acquisition_source', {})
-
         acquisition_source = {}
 
         acquisition_source['submission_number'] = str(submission_number)
@@ -661,7 +673,7 @@ class LiteratureBuilder(object):
             if locals()[key] is not None:
                 acquisition_source[key] = locals()[key]
 
-        self.record['acquisition_source'] = acquisition_source
+        self._prepend_to('acquisition_sources', acquisition_source)
 
     @filter_empty_parameters
     def add_document_type(self, document_type):
