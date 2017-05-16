@@ -25,11 +25,12 @@
 import contextlib
 import json
 import os
-import pytest
+
 import mock
+import pytest
 import six
 
-from inspire_schemas import utils, errors
+from inspire_schemas import errors, utils
 
 
 @pytest.mark.parametrize(

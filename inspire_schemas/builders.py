@@ -28,6 +28,7 @@ from __future__ import absolute_import, division, print_function
 
 import warnings
 from functools import wraps
+
 import idutils
 
 from .utils import normalize_author_name_with_comma, validate
@@ -350,7 +351,8 @@ class LiteratureBuilder(object):
         journal_title=None,
         journal_volume=None,
         pubinfo_freetext=None,
-        material=None
+        material=None,
+        parent_record=None,
     ):
         """Add publication info.
 
@@ -387,6 +389,9 @@ class LiteratureBuilder(object):
 
         :param material: material of the article
         :type material: string
+
+        :param parent_record: reference for the parent record
+        :type parent_record: string
         """
         publication_item = {}
         for key in ('cnum', 'artid', 'page_end', 'page_start',
@@ -394,7 +399,9 @@ class LiteratureBuilder(object):
                     'journal_volume', 'year', 'pubinfo_freetext', 'material'):
             if locals()[key] is not None:
                 publication_item[key] = locals()[key]
-
+        if parent_record is not None:
+            parent_item = {'$ref': parent_record}
+            publication_item['parent_record'] = parent_item
         if page_start and page_end:
             try:
                 self.add_number_of_pages(

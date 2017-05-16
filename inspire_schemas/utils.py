@@ -31,12 +31,11 @@ import warnings
 
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
-
 from pkg_resources import resource_filename
+
 from six.moves.urllib.parse import urlsplit
 
 from .errors import SchemaKeyNotFound, SchemaNotFound
-
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 
