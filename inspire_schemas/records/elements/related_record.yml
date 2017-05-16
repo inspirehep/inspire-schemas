@@ -1,12 +1,5 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
-dependencies:
-    record:
-        oneOf:
-        -   required:
-            - relation
-        -   required:
-            - relation_freetext
 description: |-
     :MARC: ``78002``, ``78502``, ``78708```and ``510`` (depending on type of
         record and :ref:`related_record.json#/properties/relation`)
