@@ -130,6 +130,7 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.add_document_type(document_type=input_data_hep['document_type'])
     builder.add_copyright(
         material=input_data_hep['material'],
+        year=input_data_hep['year'],
         holder=input_data_hep['holder'],
         statement=input_data_hep['statement'],
         url=input_data_hep['copyright_url']

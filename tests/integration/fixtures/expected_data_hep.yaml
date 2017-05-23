@@ -68,7 +68,8 @@
          "url":"http://copyright.web.cern.ch/",
          "holder":"cern",
          "statement":"As stated in our Privacy Policy, Cern believes strongly in the values of privacy and transparency",
-         "material":"publication"
+         "material":"publication",
+         "year":2010
       }
    ],
    "inspire_categories":[
