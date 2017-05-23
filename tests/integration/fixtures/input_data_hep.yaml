@@ -63,5 +63,6 @@
       "type_of_isbn":"online"
       }
      ],
-  "book_volume":"Doppler phase 2"
+  "book_volume":"Doppler phase 2",
+  "material":"publication"
 }
