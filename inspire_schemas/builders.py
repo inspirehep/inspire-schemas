@@ -645,7 +645,8 @@ class LiteratureBuilder(object):
         material=None,
         holder=None,
         statement=None,
-        url=None
+        url=None,
+        year=None
     ):
         """Add Copyright.
 
@@ -656,6 +657,8 @@ class LiteratureBuilder(object):
         :type statement: string
 
         :type url: string
+
+        :type year: int
         """
         copyright = {}
         for key in ('holder', 'statement', 'url'):
@@ -664,6 +667,9 @@ class LiteratureBuilder(object):
 
         if material is not None:
             copyright['material'] = material.lower()
+
+        if year is not None:
+            copyright['year'] = int(year)
 
         self._append_to('copyright', copyright)
 
