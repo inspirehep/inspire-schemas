@@ -663,7 +663,7 @@ class LiteratureBuilder(object):
                 copyright[key] = locals()[key]
 
         if material is not None:
-            copyright[key] = material.lower()
+            copyright['material'] = material.lower()
 
         self._append_to('copyright', copyright)
 
