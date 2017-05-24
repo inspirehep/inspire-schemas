@@ -63,6 +63,7 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     )
     builder.add_doi(
         doi=input_data_hep['doi'],
+        material=input_data_hep['material']
     )
     author = builder.make_author(
         full_name=input_data_hep['full_name'],
