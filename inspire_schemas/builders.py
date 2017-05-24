@@ -470,7 +470,13 @@ class LiteratureBuilder(object):
         self._append_to('languages', language)
 
     @filter_empty_parameters
-    def add_license(self, url=None, license=None):
+    def add_license(
+        self,
+        url=None,
+        license=None,
+        material=None,
+        imposing=None
+    ):
         """Add license.
 
         :param url: url for the description of the license
@@ -478,9 +484,15 @@ class LiteratureBuilder(object):
 
         :param license: license type
         :type license: string
+
+        :param material: material type
+        :type material: string
+
+        :param imposing: imposing type
+        :type imposing: string
         """
         hep_license = {}
-        for key in ('url', 'license'):
+        for key in ('url', 'license', 'material', 'imposing'):
             if locals()[key] is not None:
                 hep_license[key] = locals()[key]
 
