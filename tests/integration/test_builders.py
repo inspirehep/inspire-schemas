@@ -87,7 +87,8 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         page_start=input_data_hep['page_start'],
         journal_issue=input_data_hep['journal_issue'],
         journal_title=input_data_hep['journal_title'],
-        journal_volume=input_data_hep['journal_volume']
+        journal_volume=input_data_hep['journal_volume'],
+        material=input_data_hep['material']
     )
     builder.add_preprint_date(
         preprint_date=input_data_hep['preprint_date']
