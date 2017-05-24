@@ -122,7 +122,9 @@
    "license":[
       {
          "url":"https://opensource.org/licenses/MIT",
-         "license":"MIT"
+         "license":"MIT",
+         "material":"publication",
+         "imposing":"arXiv"
       }
    ],
    "collaborations":[

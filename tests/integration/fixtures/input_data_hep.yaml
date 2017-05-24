@@ -64,5 +64,6 @@
       }
      ],
   "book_volume":"Doppler phase 2",
-  "material":"publication"
+  "material":"publication",
+  "license_imposing":"arXiv"
 }
