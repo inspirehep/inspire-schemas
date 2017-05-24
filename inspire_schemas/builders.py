@@ -170,7 +170,7 @@ class LiteratureBuilder(object):
         self.set_citeable(True)
 
     @filter_empty_parameters
-    def add_doi(self, doi, source=None):
+    def add_doi(self, doi, source=None, material=None):
         """Add doi.
 
         :param doi: doi for the current document.
@@ -178,12 +178,21 @@ class LiteratureBuilder(object):
 
         :param source: source for the doi.
         :type source: string
+
+        :param material: material for the doi.
+        :type material: string
         """
-        if idutils.normalize_doi(doi):
-            self._append_to('dois', {
-                'value': doi,
-                'source': self._get_source(source),
-            })
+        if not idutils.normalize_doi(doi):
+            return
+
+        dois = {
+            'value': doi,
+            'source': self._get_source(source)
+        }
+        if material is not None:
+            dois['material'] = material
+
+        self._append_to('dois', dois)
 
     @filter_empty_parameters
     def add_author(self, author):
