@@ -103,7 +103,9 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.add_language(language=input_data_hep['language'])
     builder.add_license(
         url=input_data_hep['license_url'],
-        license=input_data_hep['license']
+        license=input_data_hep['license'],
+        imposing=input_data_hep['license_imposing'],
+        material=input_data_hep['material']
     )
     builder.add_public_note(
         public_note=input_data_hep['public_note']
