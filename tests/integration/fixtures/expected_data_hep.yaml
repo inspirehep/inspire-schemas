@@ -98,6 +98,7 @@
    "withdrawn":true,
    "dois":[
       {
+         "material":"publication",
          "source":"submitter",
          "value":"10.1088/0004-637X/715/1/51"
       }
