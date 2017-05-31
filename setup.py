@@ -71,8 +71,7 @@ def _generate_json_schemas():
         _yaml2json(yaml_file=yaml_file, json_file=json_file)
 
 
-def do_setup(url=URL):
-    _generate_json_schemas()
+def do_setup():
     setup(
         author='CERN',
         author_email='admin@inspirehep.net',
@@ -94,7 +93,7 @@ def do_setup(url=URL):
         zip_safe=False,
         autosemver=True,
     )
-
+    _generate_json_schemas()
 
 if __name__ == '__main__':
     do_setup()
