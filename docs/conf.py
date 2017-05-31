@@ -24,11 +24,13 @@
 
 from __future__ import print_function
 
+import atexit
 import os
+from shutil import copy2
 
 from autosemver.packaging import get_changelog, get_current_version
 from jsonschema2rst.parser_runner import run_parser
-from shutil import copy2
+
 
 def _generate_schemas_doc():
     schemas_folder = os.path.join(
@@ -50,8 +52,11 @@ with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
         bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
     ))
 
-copy2('resources/custom.css', '_build/html/_static')
 
+@atexit.register
+def copy_stylesheet():
+    copy2('docs/resources/custom.css', 'docs/_build/html/_static')
+    print("Copied custom.css in _build/html/_static")
 
 
 # -- General configuration ------------------------------------------------
@@ -176,6 +181,9 @@ html_theme_options = {
 # further.  For a list of options available for each theme, see the
 # documentation.
 # html_theme_options = {}
+
+# Add any paths that contain custom themes here, relative to this directory.
+#html_theme_path = []
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
