@@ -22,10 +22,10 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
-import yaml
 import os
 
 import pytest
+import yaml
 
 from inspire_schemas import api
 
@@ -88,7 +88,8 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         journal_issue=input_data_hep['journal_issue'],
         journal_title=input_data_hep['journal_title'],
         journal_volume=input_data_hep['journal_volume'],
-        material=input_data_hep['material']
+        material=input_data_hep['material'],
+        parent_record=input_data_hep['parent_record']
     )
     builder.add_preprint_date(
         preprint_date=input_data_hep['preprint_date']

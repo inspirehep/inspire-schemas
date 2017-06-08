@@ -65,5 +65,6 @@
      ],
   "book_volume":"Doppler phase 2",
   "material":"publication",
-  "license_imposing":"arXiv"
+  "license_imposing":"arXiv",
+  "parent_record":"http://localhost:5000/api/literature/1498185",
 }

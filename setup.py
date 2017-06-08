@@ -27,10 +27,9 @@ from __future__ import absolute_import, division, print_function
 
 import json
 import os
+
 import six
-
-from setuptools import setup, find_packages
-
+from setuptools import find_packages, setup
 
 URL = 'https://github.com/inspirehep/inspire-schemas'
 

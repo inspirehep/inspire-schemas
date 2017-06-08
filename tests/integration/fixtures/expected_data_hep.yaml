@@ -49,8 +49,11 @@
          "year":2010,
          "page_start":"58",
          "journal_issue":"1",
-         "material":"publication"
+         "material":"publication",
+         "parent_record":{
+         "$ref":"http://localhost:5000/api/literature/1498185"
       }
+    }
    ],
    "title_translations":[
       {

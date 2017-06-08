@@ -28,7 +28,6 @@ import os
 
 from autosemver.packaging import get_changelog, get_current_version
 
-
 if not os.path.exists('_build/html/_static'):
     os.makedirs('_build/html/_static')
 

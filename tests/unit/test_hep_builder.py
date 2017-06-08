@@ -24,8 +24,7 @@
 
 import pytest
 
-from inspire_schemas.builders import is_citeable
-from inspire_schemas.builders import LiteratureBuilder
+from inspire_schemas.builders import LiteratureBuilder, is_citeable
 
 
 @pytest.mark.parametrize(

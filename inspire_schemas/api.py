@@ -27,4 +27,4 @@
 from __future__ import absolute_import, division, print_function
 
 from .builders import LiteratureBuilder  # noqa
-from .utils import load_schema, validate   # noqa
+from .utils import load_schema, validate  # noqa
