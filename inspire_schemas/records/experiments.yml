@@ -246,25 +246,27 @@ properties:
             type: string
         type: array
         uniqueItems: true
-    institution:
-        additionalProperties: false
-        properties:
-            curated_relation:
-                type: boolean
-            record:
-                $ref: elements/json_reference.json
-                title: Record URI of the institution.
-            value:
-                description: |-
-                    :MARC: ``119__u``
+    institutions:
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                record:
+                    $ref: elements/json_reference.json
+                    title: Record URI of the institution.
+                value:
+                    description: |-
+                        :MARC: ``119__u``
 
-                    Currently, the old
-                    :ref:`institutions.json#/properties/legacy_ICN` is used
-                    here.
-                title: ICN of institution hosting the project
-                type: string
-        title: Host institution
-        type: object
+                        Currently, the old
+                        :ref:`institutions.json#/properties/legacy_ICN` is used
+                        here.
+                    title: ICN of institution hosting the project
+                    type: string
+            title: Host institution
+            type: object
+        type: array
         uniqueItems: true
     legacy_creation_date:
         format: date-time

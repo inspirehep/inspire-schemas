@@ -116,13 +116,15 @@
         "75605498072.9557776807",
         "2189918480"
     ],
-    "institution": {
-        "curated_relation": false,
-        "record": {
-            "$ref": "http://1qY XaZ@5Y"
-        },
-        "value": "Duis enim eu"
-    },
+    "institutions": [
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1qY XaZ@5Y"
+            },
+            "value": "Duis enim eu"
+        }
+    ],
     "legacy_creation_date": "3224-06-22T02:25:18.800Z",
     "long_name": "qui esse",
     "name_variants": [
