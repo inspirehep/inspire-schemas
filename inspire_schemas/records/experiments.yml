@@ -200,8 +200,6 @@ properties:
                     :example: ``NA61``
                 title: Experiment identifier
                 type: string
-        required:
-        - value
         type: object
     external_system_identifiers:
         description: |-
