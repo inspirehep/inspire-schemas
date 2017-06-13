@@ -852,6 +852,13 @@ properties:
                         Describes to which vocabulary the keyword in :ref:`value`
                         belongs.
 
+                        ``INIS``
+                            :MARC: ``695__2:INIS``
+
+                            The keyword is part of the `International
+                            Nuclear Information System (INIS)
+                            <https://www.iaea.org/inis/>`_ vocabulary.
+
                         ``INSPIRE``
                             :MARC: ``695__2:INSPIRE``
 
@@ -883,6 +890,7 @@ properties:
                             If not present, the keyword is a free-form keyword,
                             not necessarily part of any vocabulary.
                     enum:
+                    - INIS
                     - INSPIRE
                     - JACOW
                     - PACS
