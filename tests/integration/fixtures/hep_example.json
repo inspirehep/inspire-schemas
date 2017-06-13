@@ -738,7 +738,10 @@
         "ad in sunt"
     ],
     "energy_ranges": [
-        89035181
+        "30-100 GeV",
+        "100-300 GeV",
+        "> 10 TeV",
+        "1-10 TeV"
     ],
     "external_system_identifiers": [
         {
