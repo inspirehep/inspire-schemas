@@ -1301,13 +1301,18 @@ properties:
         description: |-
             :MARC: ``980__a``
 
-            These collections are used by collaborations to manage their notes.
+            These collections are used by different groups to manage records
+            using the Inspire infrastructure, but which do not belong to
+            the Inspire literature collection.
             If a record belongs to a special collection, it is not shown in the
             standard search results.
         items:
             enum:
+            - BABAR-ANALYSIS-DOCUMENT
+            - BABAR-INTERNAL-NOTE
             - CDF-INTERNAL-NOTE
             - CDF-NOTE
+            - CDSHIDDEN
             - D0-INTERNAL-NOTE
             - D0-PRELIMINARY-NOTE
             - H1-INTERNAL-NOTE
