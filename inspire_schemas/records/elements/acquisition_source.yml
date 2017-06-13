@@ -1,11 +1,5 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
-description: |-
-    :MARC: ``541``
-
-    Only the first source is stored: if the record later gets enriched with
-    metadata coming from a second source, the `acquisition_source` is not
-    updated.
 properties:
     datetime:
         description: |-

@@ -40,6 +40,8 @@
    "internal_uid":1,
    "email":"albert.einstein@hep.edu",
    "orcid":"0000-0001-8528-2091",
+   "method2":"hepcrawl",
+   "submission_number2":"13",
    "document_type":"report",
    "material":"visual production",
    "holder":"cern",
