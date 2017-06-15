@@ -124,7 +124,7 @@ properties:
     legacy_ICN:
         type: string
     legacy_creation_date:
-        format: date-time
+        format: date
         type: string
     location:
         additionalProperties: false
