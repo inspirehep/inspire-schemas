@@ -949,7 +949,7 @@ properties:
             :MARC: ``961__x``
 
             Only present if the record already existed on legacy Inspire.
-        format: date-time
+        format: date
         title: Date of record creation on legacy
         type: string
     license:

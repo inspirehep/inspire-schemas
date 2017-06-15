@@ -267,7 +267,7 @@ properties:
         type: array
         uniqueItems: true
     legacy_creation_date:
-        format: date-time
+        format: date
         type: string
     long_name:
         description: |-
