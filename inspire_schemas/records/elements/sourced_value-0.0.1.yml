@@ -4,7 +4,7 @@ description: |-
     came from.
 properties:
     source:
-        $ref: source.json
+        $ref: source-0.0.1.json
     value:
         type: string
 required:

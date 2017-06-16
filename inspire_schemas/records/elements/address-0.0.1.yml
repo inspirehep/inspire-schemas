@@ -21,7 +21,7 @@ properties:
         type: array
         uniqueItems: true
     country_code:
-        $ref: country_code.json
+        $ref: country_code-0.0.1.json
     latitude:
         description: |-
             :example: 50.7736

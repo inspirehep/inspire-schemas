@@ -65,7 +65,7 @@ def change_something(data):
             data[key] = 42
         break
     else:
-        raise Exception('Unable to change anythng on data "%s"' % data)
+        raise Exception('Unable to change anything on data "%s"' % data)
 
     return data
 

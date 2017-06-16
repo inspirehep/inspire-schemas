@@ -9,12 +9,12 @@ dependencies:
             - relation_freetext
 description: |-
     :MARC: ``78002``, ``78502``, ``78708```and ``510`` (depending on type of
-        record and :ref:`related_record.json#/properties/relation`)
+        record and :ref:`related_record-0.0.1.json#/properties/relation`)
 properties:
     curated_relation:
         type: boolean
     record:
-        $ref: json_reference.json
+        $ref: json_reference-0.0.1.json
         description: |-
             :MARC: ``510__0`` (for Institutions and Experiments),
                 ``78002/78502/78708w`` (for Literature and Journals).

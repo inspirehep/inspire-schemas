@@ -17,12 +17,12 @@ properties:
         type: array
     _private_notes:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     address:
         items:
-            $ref: elements/address.json
+            $ref: elements/address-0.0.1.json
         type: array
         uniqueItems: true
     control_number:
@@ -38,7 +38,7 @@ properties:
         description: |-
             List of deleted records referring to this record
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference-0.0.1.json
         title: Deleted Records
         type: array
     department:
@@ -106,7 +106,7 @@ properties:
         type: array
     inspire_categories:
         items:
-            $ref: elements/inspire_field.json
+            $ref: elements/inspire_field-0.0.1.json
         type: array
         uniqueItems: true
     institution:
@@ -143,29 +143,29 @@ properties:
         type: object
     name_variants:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             Master record that replaces this record
         title: New record
     public_notes:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     related_records:
         description: |-
             :MARC: ``510``
         items:
-            $ref: elements/related_record.json
+            $ref: elements/related_record-0.0.1.json
         title: List of related records
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             Url of the record itself
         title: Url of the record
@@ -181,7 +181,7 @@ properties:
         type: string
     urls:
         items:
-            $ref: elements/url.json
+            $ref: elements/url-0.0.1.json
         type: array
         uniqueItems: true
 title: Institution
