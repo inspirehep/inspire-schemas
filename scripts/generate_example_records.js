@@ -49,10 +49,11 @@ function resolve_schema(unresolved_schema, base_path) {
     return resolved_schema
 }
 
-var schemas = ['hep', 'authors', 'conferences', 'experiments', 'institutions', 'jobs', 'journals']
+var schemas = fs.readdirSync('inspire_schemas/records/');
 for (var schema_name of schemas) {
+    if (!schema_name.endsWith('.json')) continue;
     console.log('Generating example for ' + schema_name)
-    var data = fs.readFileSync('inspire_schemas/records/'+schema_name+'.json', 'utf8')
+    var data = fs.readFileSync('inspire_schemas/records/'+schema_name, 'utf8')
     var unresolved_schema = JSON.parse(data)
     var full_schema = resolve_schema(unresolved_schema, "inspire_schemas/records")
     var sample = jsf(full_schema)

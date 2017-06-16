@@ -1,0 +1,218 @@
+{
+    "ICN": [
+        "dolor elit"
+    ],
+    "_collections": [
+        "tempor ",
+        "non consequat"
+    ],
+    "_private_notes": [
+        {
+            "source": "tempor commodo",
+            "value": "eu"
+        },
+        {
+            "source": "non ullamco",
+            "value": "dolore"
+        }
+    ],
+    "address": [
+        {
+            "cities": [
+                "et pariatur culpa Duis",
+                "ut Duis consequat labore",
+                "nulla ullamco dolor",
+                "do elit"
+            ],
+            "country_code": "MT",
+            "latitude": 83778690.71341625,
+            "longitude": -51189890.39473152,
+            "place_name": "anim veniam non eu",
+            "postal_address": [
+                "aliquip",
+                "nulla eu",
+                "qui",
+                "veniam ea Lorem "
+            ],
+            "postal_code": "enim sit minim id",
+            "state": "Lorem"
+        },
+        {
+            "cities": [
+                "qui nulla aliqua aute",
+                "quis",
+                "in"
+            ],
+            "country_code": "NE",
+            "latitude": 85365743.8353006,
+            "longitude": -97951067.40870807,
+            "place_name": "commodo dolor",
+            "postal_address": [
+                "aliqua fugiat magna",
+                "ex"
+            ],
+            "postal_code": "elit in voluptate mollit",
+            "state": "incididunt id anim u"
+        },
+        {
+            "cities": [
+                "ea consequat consectetur",
+                "officia deserunt magna et",
+                "enim"
+            ],
+            "country_code": "CX",
+            "latitude": -19976787.207566187,
+            "longitude": -30187228.26068449,
+            "place_name": "ullamco reprehenderit proident",
+            "postal_address": [
+                "consequat pariatur cupidatat",
+                "ad laborum adipisicing Ut"
+            ],
+            "postal_code": "aliqua ",
+            "state": "incididunt"
+        },
+        {
+            "cities": [
+                "id dolore laborum",
+                "deserunt ullamco dolor"
+            ],
+            "country_code": "GP",
+            "latitude": 80002815.87573889,
+            "longitude": 47671891.98376772,
+            "place_name": "dolor dol",
+            "postal_address": [
+                "sint ex",
+                "labore",
+                "do",
+                "adipisicing cillum ex"
+            ],
+            "postal_code": "culpa sit in",
+            "state": "aute anim"
+        }
+    ],
+    "control_number": -39559348,
+    "core": false,
+    "deleted": true,
+    "deleted_records": [
+        {
+            "$ref": "http://1\"?ZV<w7]H%vs7XZXod!z7D&u}y+%AT+C@7C'!H4ba(c"
+        },
+        {
+            "$ref": "http://12>zP!-/dGf]>6Wwd!.B|3t-&T(RT[$"
+        },
+        {
+            "$ref": "http://1J2'D||thqMq=`x+,6V6u2J=lZ\"jDc50#$e$YK~/|fCVgz0YmRV6>iMy3$x.4lDdLr/V<vjAR*o}}y'h"
+        },
+        {
+            "$ref": "http://18Qe"
+        }
+    ],
+    "department": [
+        "amet ad proident",
+        "Lorem aliquip ex",
+        "reprehenderit proident dolore irure"
+    ],
+    "department_acronym": "ut",
+    "external_system_identifiers": [
+        {
+            "schema": "SPIRES",
+            "value": "INST-54658645779411000531634783277259113680087814158131144188557048791492454442642007381933"
+        }
+    ],
+    "extra_words": [
+        "ullamco sint proident"
+    ],
+    "field_activity": [
+        "Company",
+        "University",
+        "Research Center"
+    ],
+    "historical_data": [
+        "amet eiusmod",
+        "eu do Excepteur"
+    ],
+    "inspire_categories": [
+        {
+            "source": "curator",
+            "term": "Theory-HEP"
+        }
+    ],
+    "institution": [
+        "cillum adipisicing ipsum dolor",
+        "ipsum veniam irure"
+    ],
+    "institution_acronym": "eiusmod",
+    "legacy_ICN": "irure Ut nisi",
+    "legacy_creation_date": "1881-19-16",
+    "location": {
+        "latitude": 77391314.08924931,
+        "longitude": -49386266.61339707
+    },
+    "name_variants": [
+        {
+            "source": "officia",
+            "value": "ullamco incididunt"
+        },
+        {
+            "source": "aliqua Lorem incididunt",
+            "value": "adipisicing dolor"
+        }
+    ],
+    "new_record": {
+        "$ref": "http://17XOvEb9MJ+o*/Wg3]\\;B"
+    },
+    "public_notes": [
+        {
+            "source": "ut fugiat",
+            "value": "Excepteur tempor occaecat"
+        },
+        {
+            "source": "consectetur et aliqua tempor",
+            "value": "Lorem nulla dolor"
+        },
+        {
+            "source": "in dolor nisi labore",
+            "value": "id nostrud fugiat enim"
+        },
+        {
+            "source": "commo",
+            "value": "amet in anim commodo"
+        }
+    ],
+    "related_records": [
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1WD4uOc|+Kj:mpzVWf_JJ(cA?'w/!2AZHgm6Ts 7v~BrR`o7rWfMbTNAf'AIi3Al(BxNHd1,jF8_zk "
+            },
+            "relation": "parent",
+            "relation_freetext": "do"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1XlC;W}MO>_0[B3sLTQtvDya117F2)2otQd-aMD<p.!A~+VLpY;%;s8.u}l/Lugk@z1C|X'H+&g^Uy/t1;b]1ig%ASY];b\\"
+            },
+            "relation": "predecessor",
+            "relation_freetext": "aliquip"
+        }
+    ],
+    "self": {
+        "$ref": "http://1z_|rpf>/H2oX5S\"$b)(0F.\"!o%vdb<^-"
+    },
+    "time_zone": "one",
+    "urls": [
+        {
+            "description": "Lorem",
+            "value": "http://1\"OiRf}(B7$lJ;hPJT|]JdOgel,`R#78@LDaK<z]"
+        },
+        {
+            "description": "dolor deserunt est",
+            "value": "http://1P7ul-Sy(g4jHSD+FLH-OK3!BG\"Ty{xf%\"HROsEjw:{v1tZ>Hs\"_uwcfH1+=poP?"
+        },
+        {
+            "description": "labore proident in cupidatat",
+            "value": "http://19D:_sZ;`KrU}V"
+        }
+    ]
+}

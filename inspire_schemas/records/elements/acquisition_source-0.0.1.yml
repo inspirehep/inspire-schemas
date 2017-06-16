@@ -61,7 +61,7 @@ properties:
         title: ORCID of the submitter
         type: string
     source:
-        $ref: source.json
+        $ref: source-0.0.1.json
     submission_number:
         description: |-
             :MARC: ``541__e``

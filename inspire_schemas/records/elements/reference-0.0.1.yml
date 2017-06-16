@@ -3,7 +3,7 @@ additionalProperties: false
 description: |-
     This is structurally very similar to a Literature record, with unnecessary
     fields removed.  For more information about the meaning of the different
-    fields, see the corresponding field in :ref:`hep.json#/`.
+    fields, see the corresponding field in :ref:`hep-0.0.1.json#/`.
 properties:
     arxiv_eprint:
         description: |-
@@ -22,7 +22,7 @@ properties:
                 full_name:
                     description: |-
                         Should be of the same form as
-                        :ref:`hep.json#/properties/authors/items/properties/full_name`.
+                        :ref:`hep-0.0.1.json#/properties/authors/items/properties/full_name`.
 
                         :example: ``Smith, John G.D.``
                     type: string
@@ -54,7 +54,7 @@ properties:
         type: array
         uniqueItems: true
     document_type:
-        $ref: document_type.json
+        $ref: document_type-0.0.1.json
         description: |-
             :MARC: conceptually similar to ``999C5d``, but allowed values
                 differ.
@@ -135,7 +135,7 @@ properties:
                     :MARC: last part of ``999C5s`` (if not a page)
                 type: string
             cnum:
-                $ref: cnum.json
+                $ref: cnum-0.0.1.json
                 description: |-
                     :MARC: ``999C5b``
             journal_issue:
@@ -151,7 +151,7 @@ properties:
                     :MARC: second part of ``999C5s``
                 type: string
             material:
-                $ref: material.json
+                $ref: material-0.0.1.json
             page_end:
                 description: |-
                     :MARC: Last part of ``999C5s`` (if page-range)
@@ -163,7 +163,7 @@ properties:
             parent_isbn:
                 description: |-
                     :MARC: ``999C5i``, but not distinguished from
-                        the :ref:`reference.json#/properties/isbn` of the
+                        the :ref:`reference-0.0.1.json#/properties/isbn` of the
                         cited document.
 
                     If the cited document is a book chapter, this is the ISBN
@@ -173,7 +173,7 @@ properties:
             parent_report_number:
                 description: |-
                     :MARC: ``999C5r`` but not distinguished from the cited
-                        document :ref:`reference.json#/properties/report_number`.
+                        document :ref:`reference-0.0.1.json#/properties/report_number`.
                 type: string
             parent_title:
                 description: |-
@@ -205,18 +205,18 @@ properties:
             Key that was used for this citation in the document. This may be
             extracted if the document is a PDF generated from a LaTeX, and
             possibly coincides with the one of the
-            :ref:`hep.json#/properties/texkeys` assigned to the cited document
+            :ref:`hep-0.0.1.json#/properties/texkeys` assigned to the cited document
             by Inspire and made visible in the TeX export formats.
 
             :example: ``Maldacena:1997re``
         type: string
     title:
-        $ref: title.json
+        $ref: title-0.0.1.json
         description: |-
             :MARC: ``999C5t``
     urls:
         items:
-            $ref: url.json
+            $ref: url-0.0.1.json
             description: |-
                 :MARC: ``999C5u``
         type: array

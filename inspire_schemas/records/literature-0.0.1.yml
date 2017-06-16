@@ -137,7 +137,7 @@ properties:
             These notes are only visible to privileged users, not regular
             users.
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         title: List of private notes
         type: array
         uniqueItems: true
@@ -145,7 +145,7 @@ properties:
         description: |-
             :MARC: ``520``
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         title: List of abstracts
         type: array
         uniqueItems: true
@@ -202,7 +202,7 @@ properties:
                     title: Identifier of the experiment on legacy
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
             type: object
         title: List of related accelerators/experiments
         type: array
@@ -214,7 +214,7 @@ properties:
             Sources of the metadata in the record, in inverse chronological
             order (i.e. the first element is the latest one).
         items:
-            $ref: elements/acquisition_source.json
+            $ref: elements/acquisition_source-0.0.1.json
         type: array
         uniqueItems: true
     arxiv_eprints:
@@ -236,7 +236,7 @@ properties:
                         The first category in the list has a special meaning:
                         it is the primary category of the eprint on arXiv.
                     items:
-                        $ref: elements/arxiv_categories.json
+                        $ref: elements/arxiv_categories-0.0.1.json
                     minItems: 1
                     title: arXiv categories of the eprint
                     type: array
@@ -261,7 +261,7 @@ properties:
             :MARC: ``100``, ``700`` and ``701``
 
             Besides authors, also contains editors and supervisors (see
-            :ref:`hep.json#/properties/authors/items/properties/inspire_roles`).
+            :ref:`hep-0.0.1.json#/properties/authors/items/properties/inspire_roles`).
         items:
             additionalProperties: false
             properties:
@@ -272,16 +272,16 @@ properties:
                             curated_relation:
                                 type: boolean
                             record:
-                                $ref: elements/json_reference.json
+                                $ref: elements/json_reference-0.0.1.json
                             value:
                                 description: |-
                                     :MARC: ``100/700/701__u``
 
                                     Currently, the old
-                                    :ref:`institutions.json#/properties/legacy_ICN`
+                                    :ref:`institutions-0.0.1.json#/properties/legacy_ICN`
                                     is used here. In the future, this will
                                     change and become the new
-                                    :ref:`institutions.json#/properties/ICN`.
+                                    :ref:`institutions-0.0.1.json#/properties/ICN`.
                                 title: ICN of affiliation
                                 type: string
                         required:
@@ -349,7 +349,7 @@ properties:
                     description: |-
                         :MARC: ``100/700/701__i/j``
                     items:
-                        $ref: elements/id.json
+                        $ref: elements/id-0.0.1.json
                     title: Identifiers of the author
                     type: array
                     uniqueItems: true
@@ -362,7 +362,7 @@ properties:
 
                                 This person is a thesis supervisor. Should be
                                 used together with the ``thesis``
-                                :ref:`hep.json#/properties/document_type`.
+                                :ref:`hep-0.0.1.json#/properties/document_type`.
 
                             ``editor``
                                 :MARC: ``100/700__e:ed.``
@@ -370,7 +370,7 @@ properties:
                                 This person is an editor of the conference
                                 proceedings. Should be used together with the
                                 ``proceedings``
-                                :ref:`hep.json#/properties/document_type`.
+                                :ref:`hep-0.0.1.json#/properties/document_type`.
                         enum:
                         - author
                         - supervisor
@@ -383,11 +383,11 @@ properties:
 
                         List of full affiliations, as written on the paper.
                     items:
-                        $ref: elements/sourced_value.json
+                        $ref: elements/sourced_value-0.0.1.json
                     type: array
                     uniqueItems: true
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                 signature_block:
                     description: |-
                         Phonetic representation of the name, needed for author
@@ -417,14 +417,14 @@ properties:
 
                 This field should only be present if ``book``, ``thesis`` or
                 ``proceedings`` are among
-                :ref:`hep.json#/properties/document_type`.
+                :ref:`hep-0.0.1.json#/properties/document_type`.
         items:
             additionalProperties: false
             description: |-
                 .. note::
 
                     If the book series has a Journal record,
-                    `hep.json#/properties/publication_info` should be used
+                    `hep-0.0.1.json#/properties/publication_info` should be used
                     instead.
             properties:
                 title:
@@ -467,7 +467,7 @@ properties:
             additionalProperties: false
             properties:
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                 value:
                     description: |-
                         :MARC: ``710__g``
@@ -505,7 +505,7 @@ properties:
                     title: Copyright holder
                     type: string
                 material:
-                    $ref: elements/material.json
+                    $ref: elements/material-0.0.1.json
                     description: |-
                         :MARC: ``542__e``
                 statement:
@@ -584,7 +584,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference-0.0.1.json
         type: array
     document_type:
         description: |-
@@ -653,7 +653,7 @@ properties:
 
                     This is not considered as a ``book``.
         items:
-            $ref: elements/document_type.json
+            $ref: elements/document_type-0.0.1.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -662,11 +662,11 @@ properties:
             additionalProperties: false
             properties:
                 material:
-                    $ref: elements/material.json
+                    $ref: elements/material-0.0.1.json
                     description: |-
                         :MARC: ``0247_q``
                 source:
-                    $ref: elements/source.json
+                    $ref: elements/source-0.0.1.json
                     description: |-
                         :MARC: ``0247_9``
                 value:
@@ -797,7 +797,7 @@ properties:
                             This field is populated if this record has been
                             published in a book, i.e. it makes sense if ``book``,
                             ``thesis`` or ``proceedings`` are among
-                            :ref:`hep.json#/properties/document_type`.
+                            :ref:`hep-0.0.1.json#/properties/document_type`.
 
                         :example: ``Paris``
                     title: Place of publication
@@ -813,7 +813,7 @@ properties:
         uniqueItems: true
     inspire_categories:
         items:
-            $ref: elements/inspire_field.json
+            $ref: elements/inspire_field-0.0.1.json
         title: List of Inspire categories
         type: array
         uniqueItems: true
@@ -906,7 +906,7 @@ properties:
                     title: Keyword vocabulary
                     type: string
                 source:
-                    $ref: elements/source.json
+                    $ref: elements/source-0.0.1.json
                 value:
                     description: |-
                         :MARC: ``084/6531/695__a`` (depending on :ref:`schema`)
@@ -975,7 +975,7 @@ properties:
                     title: License statement
                     type: string
                 material:
-                    $ref: elements/material.json
+                    $ref: elements/material-0.0.1.json
                     description: |-
                         :MARC: ``540__3``
                 url:
@@ -992,7 +992,7 @@ properties:
         type: array
         uniqueItems: true
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             :MARC: ``970__d``
 
@@ -1012,7 +1012,7 @@ properties:
             additionalProperties: false
             properties:
                 material:
-                    $ref: elements/material.json
+                    $ref: elements/material-0.0.1.json
                 schema:
                     description: |-
                         :MARC: ``0247_2``
@@ -1025,18 +1025,18 @@ properties:
 
                         .. note::
 
-                            DOIs should be put into :ref:`hep.json#/properties/dois`, not here.
+                            DOIs should be put into :ref:`hep-0.0.1.json#/properties/dois`, not here.
 
                             Although ISBNs can also be mapped to a URN (by
                             prepending ``urn:isbn:`` to the ISBN), they should
-                            be put in the :ref:`hep.json#/properties/isbns` field instead.
+                            be put in the :ref:`hep-0.0.1.json#/properties/isbns` field instead.
                     enum:
                     - HDL
                     - URN
                     title: Type of identifier
                     type: string
                 source:
-                    $ref: elements/source.json
+                    $ref: elements/source-0.0.1.json
                 value:
                     description: |-
                         :MARC: ``0247_a``
@@ -1080,7 +1080,7 @@ properties:
                 These notes are publicly visible. For notes not shown to
                 regular users, see :ref:`_private_notes`.
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         title: List of public notes
         type: array
         uniqueItems: true
@@ -1105,12 +1105,12 @@ properties:
                     title: Article ID
                     type: string
                 cnum:
-                    $ref: elements/cnum.json
+                    $ref: elements/cnum-0.0.1.json
                     description: |-
                         :MARC: ``773__w``
 
                         When ``conference` paper` or ``proceedings`` is among
-                        :ref:`hep.json#/properties/document_type`, contains the
+                        :ref:`hep-0.0.1.json#/properties/document_type`, contains the
                         CNUM of the corresponding conference.
                 conf_acronym:
                     description: |-
@@ -1118,7 +1118,7 @@ properties:
                     title: Conference acronym
                     type: string
                 conference_record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     title: record of the conference
                 curated_relation:
                     type: boolean
@@ -1138,7 +1138,7 @@ properties:
                         :MARC: ``773__n``
                     type: string
                 journal_record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     description: |-
                         Record of the corresponding Journal
                 journal_title:
@@ -1155,7 +1155,7 @@ properties:
                         :MARC: ``773__v``
                     type: string
                 material:
-                    $ref: elements/material.json
+                    $ref: elements/material-0.0.1.json
                     description: |-
                         :MARC: ``773__m``
                 page_end:
@@ -1176,7 +1176,7 @@ properties:
                     pattern: ^(97(8|9))?\d{9}(\d|X)$
                     type: string
                 parent_record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                 parent_report_number:
                     description: |-
                         :MARC: ``773__r``
@@ -1252,7 +1252,7 @@ properties:
                                 title: Content type of the raw reference
                                 type: string
                             source:
-                                $ref: elements/source.json
+                                $ref: elements/source-0.0.1.json
                             value:
                                 title: Content of the raw reference
                                 type: string
@@ -1263,11 +1263,11 @@ properties:
                     title: List of raw references
                     type: array
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     description: |-
                         :MARC: ``999C50``
                 reference:
-                    $ref: elements/reference.json
+                    $ref: elements/reference-0.0.1.json
             type: object
         title: List of references
         type: array
@@ -1276,7 +1276,7 @@ properties:
         description: |-
             :MARC: ``78002``, ``78502``, ``78708``
         items:
-            $ref: elements/related_record.json
+            $ref: elements/related_record-0.0.1.json
         title: List of related records
         type: array
         uniqueItems: true
@@ -1302,7 +1302,7 @@ properties:
                           document (typically for large collaborations).
                     type: boolean
                 source:
-                    $ref: elements/source.json
+                    $ref: elements/source-0.0.1.json
                 value:
                     type: string
             required:
@@ -1312,7 +1312,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
     special_collections:
         description: |-
             :MARC: ``980__a``
@@ -1380,7 +1380,7 @@ properties:
                 format: date
                 type: string
             degree_type:
-                $ref: elements/degree_type.json
+                $ref: elements/degree_type-0.0.1.json
                 description: |-
                     :MARC: ``502__b``
             institutions:
@@ -1396,7 +1396,7 @@ properties:
                         name:
                             type: string
                         record:
-                            $ref: elements/json_reference.json
+                            $ref: elements/json_reference-0.0.1.json
                     type: object
                 type: array
         type: object
@@ -1416,7 +1416,7 @@ properties:
                     pattern: ^\w{2}$
                     type: string
                 source:
-                    $ref: elements/source.json
+                    $ref: elements/source-0.0.1.json
                 subtitle:
                     type: string
                 title:
@@ -1434,13 +1434,13 @@ properties:
 
             Translations go into :ref:`title_translations`.
         items:
-            $ref: elements/title.json
+            $ref: elements/title-0.0.1.json
         title: List of titles
         type: array
         uniqueItems: true
     urls:
         items:
-            $ref: elements/url.json
+            $ref: elements/url-0.0.1.json
         type: array
         uniqueItems: true
     withdrawn:

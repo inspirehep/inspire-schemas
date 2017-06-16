@@ -29,15 +29,18 @@ import os
 import re
 import warnings
 
+import semver
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
-from pkg_resources import resource_filename
+from pkg_resources import resource_filename, resource_listdir
 
 from six.moves.urllib.parse import urlsplit
 
 from .errors import SchemaKeyNotFound, SchemaNotFound
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
+
+_schema_and_revision_re = re.compile(r'^.*?\b(?P<schema>\w+?)(-(?P<revision>\d+\.\d+\.\d+))?\.json$')
 
 
 class LocalRefResolver(RefResolver):
@@ -181,3 +184,26 @@ def normalize_author_name_with_comma(author):
         name[1] = name[1].replace(' ', '')
     name = ', '.join(n_elem.strip() for n_elem in name)
     return name
+
+
+def get_schema_and_revision(schema_string):
+    """Extracts schema and revision from a schema_string."""
+    g = _schema_and_revision_re.match(schema_string).groupdict()
+    schema = g['schema']
+    revision = g['revision'] or '0.0.0'
+    return schema, revision
+
+
+def build_latest_schema_revisions():
+    """Returns the latest revisions for a given schema."""
+    latest_revisions = {}
+    for filename in resource_listdir(__name__, 'records'):
+        if filename.endswith('.json'):
+            schema, revision = get_schema_and_revision(filename)
+            latest_revisions.setdefault(schema, '0.0.0')
+            if semver.compare(revision, latest_revisions[schema], loose=False) > 0:
+                latest_revisions[schema] = revision
+    return latest_revisions
+
+
+LATEST_SCHEMA_REVISIONS = build_latest_schema_revisions()

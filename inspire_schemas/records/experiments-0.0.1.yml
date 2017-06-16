@@ -11,7 +11,7 @@ dependencies:
             - accelerator
 description: |-
     This record can describe different types of projects, depending on the
-    value of :ref:`experiments.json#/properties/project_type`.
+    value of :ref:`experiments-0.0.1.json#/properties/project_type`.
 properties:
     $schema:
         format: url
@@ -39,7 +39,7 @@ properties:
             These notes are only visible to privileged users, not regular
             users.
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         title: List of private notes
         type: array
         uniqueItems: true
@@ -54,10 +54,10 @@ properties:
             curated_relation:
                 type: boolean
             record:
-                $ref: elements/json_reference.json
+                $ref: elements/json_reference-0.0.1.json
                 description: |-
                     If ``accelerator`` is not present in
-                    :ref:`experiments.json#/properties/project_type`, this
+                    :ref:`experiments-0.0.1.json#/properties/project_type`, this
                     links to the related accelerator record.
             value:
                 description: |-
@@ -81,10 +81,10 @@ properties:
             curated_relation:
                 type: boolean
             record:
-                $ref: elements/json_reference.json
+                $ref: elements/json_reference-0.0.1.json
                 description: |-
                     If ``collaboration`` is not present in
-                    :ref:`experiments.json#/properties/project_type`, this
+                    :ref:`experiments-0.0.1.json#/properties/project_type`, this
                     links to the related collaboration record.
             subgroup_names:
                 description: |-
@@ -121,7 +121,7 @@ properties:
             :MARC: ``980:CORE`` corresponds to ``true``.
 
             Whether the papers written by this project are generally
-            :ref:`hep.json#/properties/core`.
+            :ref:`hep-0.0.1.json#/properties/core`.
         type: boolean
     date_approved:
         description: |-
@@ -169,7 +169,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference-0.0.1.json
         type: array
     description:
         description: |-
@@ -226,7 +226,7 @@ properties:
         uniqueItems: true
     inspire_categories:
         items:
-            $ref: elements/inspire_field.json
+            $ref: elements/inspire_field-0.0.1.json
         type: array
         uniqueItems: true
     inspire_classification:
@@ -251,14 +251,14 @@ properties:
                 curated_relation:
                     type: boolean
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     title: Record URI of the institution.
                 value:
                     description: |-
                         :MARC: ``119__u``
 
                         Currently, the old
-                        :ref:`institutions.json#/properties/legacy_ICN` is used
+                        :ref:`institutions-0.0.1.json#/properties/legacy_ICN` is used
                         here.
                     title: ICN of institution hosting the project
                     type: string
@@ -284,7 +284,7 @@ properties:
         type: array
         uniqueItems: true
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             :MARC: ``970__d``
 
@@ -340,7 +340,7 @@ properties:
                 These notes are publicly visible. For notes not shown to
                 regular users, see :ref:`_private_notes`.
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         title: List of public notes
         type: array
         uniqueItems: true
@@ -348,15 +348,15 @@ properties:
         description: |-
             :MARC: ``510``
         items:
-            $ref: elements/related_record.json
+            $ref: elements/related_record-0.0.1.json
         title: List of related records
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
     urls:
         items:
-            $ref: elements/url.json
+            $ref: elements/url-0.0.1.json
         type: array
         uniqueItems: true
 required:
