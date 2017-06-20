@@ -1,0 +1,178 @@
+{
+    "_collections": [
+        "pariatur amet"
+    ],
+    "_full_ingestion": true,
+    "_private_notes": [
+        {
+            "source": "Excepteur ullamco",
+            "value": "consectetur"
+        },
+        {
+            "source": "reprehenderit voluptate",
+            "value": "dolor ut irure"
+        }
+    ],
+    "accelerator": {
+        "curated_relation": true,
+        "record": {
+            "$ref": "http://1@,0r%M5,8I[3\"r$!I%* \\\"oBbUG#,$y+SElZ;w8e=o\\u9h+"
+        },
+        "value": "eiusmod cupidatat lab"
+    },
+    "collaboration": {
+        "curated_relation": true,
+        "record": {
+            "$ref": "http://1CB+kGJPM\"ou{[Jc&\"W{k`Xa2LJRp+^[  V /{oja#TCCjmJrUOpi{0<"
+        },
+        "subgroup_names": [
+            "nulla enim non deserunt"
+        ],
+        "value": "commodo magna"
+    },
+    "control_number": -50558917,
+    "core": true,
+    "date_approved": "4230-83-71",
+    "date_cancelled": "2556-09-44",
+    "date_completed": "9090-79-60",
+    "date_proposed": "4273-32-19",
+    "date_started": "7899-74-67",
+    "deleted": true,
+    "deleted_records": [
+        {
+            "$ref": "http://1a<bi{"
+        },
+        {
+            "$ref": "http://1[+)diYJygtj'X1#]=  @A|vX~OaR|}9m)D6q'mtjMJ'%'H/02"
+        }
+    ],
+    "description": "dolore laborum officia exercitation",
+    "experiment": {
+        "legacy_name": "in non",
+        "short_name": "pariatur magna",
+        "value": "eiusmod consequat non voluptate"
+    },
+    "external_system_identifiers": [
+        {
+            "schema": "SPIRES",
+            "value": "EXPERIMENT-777843460205328863978910442830104778164591262"
+        },
+        {
+            "schema": "SPIRES",
+            "value": "EXPERIMENT-80190852367892979749536386523418127689893800045063770809700775523621484508096674"
+        }
+    ],
+    "inspire_categories": [
+        {
+            "source": "magpie",
+            "term": "Experiment-HEP"
+        },
+        {
+            "source": "curator",
+            "term": "General Physics"
+        },
+        {
+            "source": "undefined",
+            "term": "Experiment-HEP"
+        },
+        {
+            "source": "arxiv",
+            "term": "Computing"
+        }
+    ],
+    "inspire_classification": [
+        "733818903367882949733923008373852510117990369805952742780403391007325054119226714141937486301345",
+        "0485222156563509723697509398507714099780143324017644642918266222450290180185566616353183.15369063028582815553.580449874782891151028328205168070844456842730477094440880161273352378775519869310914290"
+    ],
+    "institutions": [
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1F_OG_-Q=5dhcj\\dQJVV]P:5#[}t6/]e?gsM^0?@B;^-vA!.g@;>PcQ_rip&##lLhU6<^+h4DF:#y&~Gq&\"/sr|w4{c&"
+            },
+            "value": "aliqua dolor"
+        },
+        {
+            "curated_relation": true,
+            "record": {
+                "$ref": "http://1yu|^<A"
+            },
+            "value": "Excepteur deserunt"
+        }
+    ],
+    "legacy_creation_date": "3312-33-18",
+    "long_name": "dolore",
+    "name_variants": [
+        "ullamco aliqua",
+        "nostrud"
+    ],
+    "new_record": {
+        "$ref": "http://1J/5MJb*fYb.z_aU'0yL LYd\"X0\"[})J*PLEL7F7A@"
+    },
+    "project_type": [
+        "collaboration",
+        "accelerator",
+        "experiment"
+    ],
+    "public_notes": [
+        {
+            "source": "laboris in Ut",
+            "value": "laborum nisi irure"
+        },
+        {
+            "source": "consectetur",
+            "value": "sint adipisicing"
+        },
+        {
+            "source": "non veniam",
+            "value": "sed eiusmod do"
+        },
+        {
+            "source": "est Duis sunt",
+            "value": "cul"
+        }
+    ],
+    "related_records": [
+        {
+            "curated_relation": true,
+            "record": {
+                "$ref": "http://1k5!2nd#.`HY[%3FXM+mTefCr;*W\"LgDnRlN}*gSA~n2r_HZ05_PNv>)l~}7>+?C^t;PK/3c;g@h~[-_RU@0.2)g`)~n-Z"
+            },
+            "relation": "predecessor",
+            "relation_freetext": "ea Lorem"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1(W9Zf2hBZq?}H=E5#&u3"
+            },
+            "relation": "parent",
+            "relation_freetext": "laborum cillum commodo in"
+        },
+        {
+            "curated_relation": true,
+            "record": {
+                "$ref": "http://1\"Q97:O]5e{H5OZj\"O`8-i#K_xIJ]xb~_E5P6*_^u~]B8G!1wj3*k="
+            },
+            "relation": "predecessor",
+            "relation_freetext": "consectetur voluptate"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1Hm&aX@oy}iocNGY&>b;(@2&y|j,*B/fPxhGf=\"~p>rL{mW8P&9F=JiVgrN3TwK8}1#zP;Y-gwvuF|4dWDndnSl0^</ZSzc"
+            },
+            "relation": "parent",
+            "relation_freetext": "sit non"
+        }
+    ],
+    "self": {
+        "$ref": "http://16'R;i^s5Xd:AFUkv y~iXlaB0[0x3@>@)l3%LW%RFI 32]]zHkj]./v\"QA!:9pfO~O}!Ll6D!v,zg|ElF"
+    },
+    "urls": [
+        {
+            "description": "dolor voluptate do",
+            "value": "http://1lb@"
+        }
+    ]
+}

@@ -155,3 +155,29 @@ def test_load_schema_without_schema_key(mock_get_schema_path, mock_open):
     loaded_schema = utils.load_schema('And gallantly he chickened out')
 
     assert loaded_schema == {'$schema': myschema}
+
+
+def test_build_latest_schema_revisions():
+    latest_schema_revisions = utils.build_latest_schema_revisions()
+
+    assert 'literature' in latest_schema_revisions
+
+    # Testing journals because the max revision will not change that often
+    assert latest_schema_revisions['journals'] == '0.0.1'
+
+
+def test_get_schema_and_revision():
+    schema, revision = utils.get_schema_and_revision('literature-1.2.3.json')
+    expected_schema, expected_revision = 'literature', '1.2.3'
+    assert schema == expected_schema
+    assert revision == expected_revision
+
+    schema, revision = utils.get_schema_and_revision('http://inspirehep.net/schema/literature-1.2.3.json')
+    expected_schema, expected_revision = 'literature', '1.2.3'
+    assert schema == expected_schema
+    assert revision == expected_revision
+
+    schema, revision = utils.get_schema_and_revision('authors-3.2.1')
+    expected_schema, expected_revision = 'authors', '3.2.1'
+    assert schema == expected_schema
+    assert revision == expected_revision

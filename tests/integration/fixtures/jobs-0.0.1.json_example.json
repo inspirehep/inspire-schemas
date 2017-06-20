@@ -1,0 +1,247 @@
+{
+    "_collections": [
+        "velit ullam",
+        "elit ut Lorem",
+        "aliquip exercitation aute",
+        "anim magna enim laboris"
+    ],
+    "_private_notes": [
+        {
+            "source": "sit eu nisi",
+            "value": "ut"
+        },
+        {
+            "source": "magna dolor adipisicing exercitation",
+            "value": "laborum dolore nisi"
+        },
+        {
+            "source": "cillum irure ex reprehenderit",
+            "value": "sit irure"
+        }
+    ],
+    "address": [
+        {
+            "cities": [
+                "",
+                "officia"
+            ],
+            "country_code": "MN",
+            "latitude": 19152677.952967644,
+            "longitude": -12598066.213908643,
+            "place_name": "s",
+            "postal_address": [
+                "anim",
+                "dolore commodo"
+            ],
+            "postal_code": "et elit",
+            "state": "culpa"
+        },
+        {
+            "cities": [
+                "consectetur",
+                "ex dolore ut",
+                "dolore est nulla occaecat"
+            ],
+            "country_code": "HK",
+            "latitude": -61800528.65717682,
+            "longitude": -89366501.31948878,
+            "place_name": "dolor sint eiusmod",
+            "postal_address": [
+                "fugiat",
+                "aliqua elit mollit",
+                "nisi",
+                ""
+            ],
+            "postal_code": "",
+            "state": "tempor pariatur ipsum id"
+        },
+        {
+            "cities": [
+                "cillum irure",
+                "culpa",
+                "velit minim adipisicing nisi"
+            ],
+            "country_code": "BA",
+            "latitude": -82412825.48233753,
+            "longitude": 75086996.58641541,
+            "place_name": "dolore esse adipisicing",
+            "postal_address": [
+                "aute voluptate qui",
+                "velit ullamco ex",
+                "cupidatat irure et do",
+                "culpa"
+            ],
+            "postal_code": "quis",
+            "state": "sunt nisi Excepteur"
+        },
+        {
+            "cities": [
+                "officia",
+                "fugiat ipsum",
+                "ut",
+                "ut anim pariatur id"
+            ],
+            "country_code": "MG",
+            "latitude": 14212473.639101297,
+            "longitude": -57674645.86701711,
+            "place_name": "",
+            "postal_address": [
+                "amet voluptate ea quis",
+                "ad",
+                "ullamco occaecat incididunt"
+            ],
+            "postal_code": "occaecat fugiat",
+            "state": "eu ipsum et"
+        }
+    ],
+    "closed_date": "2378-94-71",
+    "contact_details": [
+        {
+            "email": "rIzHv8jB@xBsDGsbqHyfqMsLjWfNLBnaLCTJiU.rpnl",
+            "name": "exercitation Exc"
+        },
+        {
+            "email": "hNWblnFHPv8V@QueH.batp",
+            "name": "sit Lorem aliquip"
+        }
+    ],
+    "control_number": 3967347,
+    "deadline_date": "0260-41-66",
+    "deleted": false,
+    "deleted_records": [
+        {
+            "$ref": "http://1)VI-^FRhp7xSYS)@kL-O0@5g*+58XVJ6ZNm]j4j?G92 NSbFsD}\\a02wwp!5/"
+        },
+        {
+            "$ref": "http://1a!W^(RahxS/w5WPgQg[_d'K8D7^V{Aky{%?wi3xkmmaU"
+        }
+    ],
+    "description": "culpa sint",
+    "experiments": [
+        {
+            "curated_relation": true,
+            "name": "incididunt am",
+            "record": {
+                "$ref": "http://1vi^Rk;/QO--4BqE:(9q<k@aXf&Y}>#w~?XB}<nX_Z++~=1LWJ4S1M,0*.o6iQvvO9"
+            }
+        },
+        {
+            "curated_relation": false,
+            "name": "ut amet minim veniam",
+            "record": {
+                "$ref": "http://1q.n~(JsC?(V\"IE1D!1O>2!i~\\y~.j>=@;%0 e/Qq@7|c tH\"0>zFzo1IZeb;e2TFtoV`$upML][&/@v!y@VnzQKSu)]#Wv"
+            }
+        },
+        {
+            "curated_relation": true,
+            "name": "in",
+            "record": {
+                "$ref": "http://1D%/B=53+5}P@=h]*l+]5}Q7zs=7g#j>R5ei1_v0^Y.5(xgd2)0NPnA'.L[x$u4K76{Jsu+neKyLQ~4["
+            }
+        },
+        {
+            "curated_relation": false,
+            "name": "velit non do",
+            "record": {
+                "$ref": "http://1LPSGYe,'KY)25CdQ(CTz0P$'ct\\q+}YAT}T<oQ7T6$"
+            }
+        }
+    ],
+    "external_system_identifiers": [
+        {
+            "schema": "SPIRES",
+            "value": "JOBS-8184234"
+        }
+    ],
+    "inspire_categories": [
+        {
+            "source": "curator",
+            "term": "Instrumentation"
+        },
+        {
+            "source": "magpie",
+            "term": "Instrumentation"
+        },
+        {
+            "source": "user",
+            "term": "Astrophysics"
+        },
+        {
+            "source": "undefined",
+            "term": "Phenomenology-HEP"
+        }
+    ],
+    "institutions": [
+        {
+            "curated_relation": false,
+            "name": "ad",
+            "record": {
+                "$ref": "http://18@syS=Oa'7 p(L5Qc"
+            }
+        },
+        {
+            "curated_relation": true,
+            "name": "exercitation pariatur",
+            "record": {
+                "$ref": "http://1rTOG\"L$jV6Vq~brIp300~M'aME2ZTJqsCmEsykB{BSA-V~qPnmXon 1-V#FcVn ]}\"oyM>UiSHu.d."
+            }
+        },
+        {
+            "curated_relation": false,
+            "name": "v",
+            "record": {
+                "$ref": "http://1?"
+            }
+        },
+        {
+            "curated_relation": true,
+            "name": "est",
+            "record": {
+                "$ref": "http://1.s~>Dz2}3O9pJUP6@$)-j>W!SQ$p+"
+            }
+        }
+    ],
+    "legacy_creation_date": "3922-07-10",
+    "new_record": {
+        "$ref": "http://11d)|7`~639VaZHB0`P33h.4^_7g,Y7?j&F7G)@J4$e\\,C/9!+m?$qc*.XD.lJNp\"E&<"
+    },
+    "position": "magna",
+    "public_notes": [
+        {
+            "source": "in",
+            "value": "magna"
+        },
+        {
+            "source": "sed mollit",
+            "value": "nostrud labore aute proident"
+        }
+    ],
+    "ranks": [
+        "OTHER",
+        "PHD"
+    ],
+    "reference_email": [
+        "DCgkNAEUe5SIH@lCWNPRIozMBEbNwupGMPQnrkPXlYIiC.im",
+        "MMVsu@AxiEHkYvB.getr"
+    ],
+    "regions": [
+        "North America"
+    ],
+    "self": {
+        "$ref": "http://1hrP3nc_>t\\/UH'E)J{XX?flQ4/$n3W!-47xaUbotiVHQTV[G/8k>e;>p#@j{7=t};{a%![FA.agP;y&Jc%:8j/UJr{skqe"
+    },
+    "urls": [
+        {
+            "description": "commodo proident",
+            "value": "http://1{&:Sb`PfqN^kn<>%M1K`\\Ib.[@,c;,U'xH?Xi4:l[BU|8@RLinpm+C->k^cjitVvW"
+        },
+        {
+            "description": "dolor consectetu",
+            "value": "http://11-I_d%7;(;j-'nTD+y&W H{o)fu_Yk1O)5{IX5On5\"uo&z5k{#g\\|d51%F"
+        },
+        {
+            "description": "magna officia",
+            "value": "http://1Pl1ao8Pzco2>a/IG;\"P-KJ6;y-2(s`$4XfAH6/\\<@PG[TdGBni1TtWe>[c)8K8*q(3;}>*y?`B[]zT,Z]B:K 7B,/)\\83*3.lg"
+        }
+    ]
+}

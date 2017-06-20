@@ -10,12 +10,12 @@ properties:
         type: array
     _private_notes:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     address:
         items:
-            $ref: elements/address.json
+            $ref: elements/address-0.0.1.json
         type: array
         uniqueItems: true
     closed_date:
@@ -24,7 +24,7 @@ properties:
         type: string
     contact_details:
         items:
-            $ref: elements/contact.json
+            $ref: elements/contact-0.0.1.json
         type: array
         uniqueItems: true
     control_number:
@@ -39,7 +39,7 @@ properties:
         description: |-
             List of deleted records referring to this record
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference-0.0.1.json
         title: Deleted Records
         type: array
     description:
@@ -55,7 +55,7 @@ properties:
                     title: Experiment name
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     title: Experiment Record URI
             title: Experiments associated with Job
             type: object
@@ -81,7 +81,7 @@ properties:
         uniqueItems: true
     inspire_categories:
         items:
-            $ref: elements/inspire_field.json
+            $ref: elements/inspire_field-0.0.1.json
         type: array
         uniqueItems: true
     institutions:
@@ -94,7 +94,7 @@ properties:
                     title: Institution name
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     title: Institution Record URI
             title: Institution
             type: object
@@ -104,7 +104,7 @@ properties:
         format: date
         type: string
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             Master record that replaces this record
         title: New record
@@ -113,12 +113,12 @@ properties:
         type: string
     public_notes:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     ranks:
         items:
-            $ref: elements/rank.json
+            $ref: elements/rank-0.0.1.json
         type: array
         uniqueItems: true
     reference_email:
@@ -143,13 +143,13 @@ properties:
             type: string
         type: array
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             Url of the record itself
         title: Url of the record
     urls:
         items:
-            $ref: elements/url.json
+            $ref: elements/url-0.0.1.json
         type: array
         uniqueItems: true
 title: HEP Job

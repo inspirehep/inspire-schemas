@@ -10,7 +10,7 @@ properties:
         type: array
     _private_notes:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     acquisition_sources:
@@ -20,7 +20,7 @@ properties:
             Sources of the metadata in the record, in inverse chronological
             order (i.e. the first element is the latest one).
         items:
-            $ref: elements/acquisition_source.json
+            $ref: elements/acquisition_source-0.0.1.json
         type: array
         uniqueItems: true
     advisors:
@@ -30,22 +30,22 @@ properties:
                 curated_relation:
                     type: boolean
                 degree_type:
-                    $ref: elements/degree_type.json
+                    $ref: elements/degree_type-0.0.1.json
                 ids:
                     items:
-                        $ref: elements/id.json
+                        $ref: elements/id-0.0.1.json
                     type: array
                     uniqueItems: true
                 name:
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
             type: object
         type: array
         uniqueItems: true
     arxiv_categories:
         items:
-            $ref: elements/arxiv_categories.json
+            $ref: elements/arxiv_categories-0.0.1.json
         type: array
         uniqueItems: true
     birth_date:
@@ -57,7 +57,7 @@ properties:
         description: |-
             Contains information about attended conferences. (their record URIs)
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference-0.0.1.json
         type: array
         uniqueItems: true
     control_number:
@@ -73,7 +73,7 @@ properties:
         description: |-
             List of deleted records referring to this record
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference-0.0.1.json
         title: Deleted Records
         type: array
     email_addresses:
@@ -99,7 +99,7 @@ properties:
                 name:
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference-0.0.1.json
                     description: |-
                         URI for the experiment record
                 start_year:
@@ -109,12 +109,12 @@ properties:
         uniqueItems: true
     ids:
         items:
-            $ref: elements/id.json
+            $ref: elements/id-0.0.1.json
         type: array
         uniqueItems: true
     inspire_categories:
         items:
-            $ref: elements/inspire_field.json
+            $ref: elements/inspire_field-0.0.1.json
         type: array
         uniqueItems: true
     legacy_creation_date:
@@ -158,7 +158,7 @@ properties:
             type: string
         type: array
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             Master record that replaces this record
         title: New record
@@ -201,7 +201,7 @@ properties:
                         name:
                             type: string
                         record:
-                            $ref: elements/json_reference.json
+                            $ref: elements/json_reference-0.0.1.json
                     type: object
                 old_emails:
                     items:
@@ -209,7 +209,7 @@ properties:
                         type: string
                     type: array
                 rank:
-                    $ref: elements/rank.json
+                    $ref: elements/rank-0.0.1.json
                 start_date:
                     format: date
                     type: string
@@ -234,11 +234,11 @@ properties:
         uniqueItems: true
     public_notes:
         items:
-            $ref: elements/sourced_value.json
+            $ref: elements/sourced_value-0.0.1.json
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference-0.0.1.json
         description: |-
             Url of the record itself
         title: Url of the record
@@ -269,7 +269,7 @@ properties:
         type: boolean
     urls:
         items:
-            $ref: elements/url.json
+            $ref: elements/url-0.0.1.json
         type: array
         uniqueItems: true
 required:
