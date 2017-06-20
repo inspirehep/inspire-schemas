@@ -28,7 +28,6 @@ from __future__ import absolute_import, division, print_function
 import json
 import os
 
-import six
 from setuptools import find_packages, setup
 
 URL = 'https://github.com/inspirehep/inspire-schemas'
@@ -49,7 +48,7 @@ def _yaml2json(yaml_file, json_file):
 
 
 def _find(basepath, extension='.yml'):
-    basepath, dirs, files = six.next(os.walk(basepath))
+    basepath, dirs, files = next(os.walk(basepath))
     for filename in files:
         if filename.endswith(extension):
             yield os.path.join(basepath, filename)
@@ -78,12 +77,18 @@ def do_setup(url=URL):
         author='CERN',
         author_email='admin@inspirehep.net',
         description='Inspire JSON schemas and utilities to use them.',
-        install_requires=['autosemver', 'jsonschema', 'idutils', 'pyyaml'],
+        install_requires=[
+            'autosemver',
+            'jsonschema',
+            'idutils',
+            'pyyaml',
+            'six',
+        ],
         license='GPLv2',
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['autosemver', 'pyyaml', 'six'],
+        setup_requires=['autosemver', 'pyyaml'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,

@@ -22,4 +22,3 @@
 
 autosemver
 pyyaml
-six
