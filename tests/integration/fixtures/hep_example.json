@@ -928,6 +928,29 @@
         "review",
         "review"
     ],
+    "record_affiliations": [
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1S4c~9.B'"
+            },
+            "value": "in id"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1Zk"
+            },
+            "value": "aute laboris culpa"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1FaAU| (t+"
+            },
+            "value": "commodo"
+        }
+    ],
     "refereed": true,
     "references": [
         {

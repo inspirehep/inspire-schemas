@@ -711,8 +711,8 @@ properties:
             - 1-10 TeV
             - '> 10 TeV'
             type: string
-        uniqueItems: true
         type: array
+        uniqueItems: true
     external_system_identifiers:
         description: |-
             :MARC: ``035``
@@ -1218,6 +1218,43 @@ properties:
             - review
             type: string
         type: array
+    record_affiliations:
+        description: |-
+            :MARC: ``902``
+
+            Because of technical limitations, for some older records the
+            affiliations were associated globally to the record instead of its
+            individual authors (using the
+            :ref:`authors/items/properties/affiliations` field).
+
+            .. note::
+
+                This field is present for legacy records and should not be used
+                for new records.
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                record:
+                    $ref: elements/json_reference.json
+                value:
+                    description: |-
+                        :MARC: ``902__a``
+
+                        Currently, the old
+                        :ref:`institutions.json#/properties/legacy_ICN`
+                        is used here. In the future, this will
+                        change and become the new
+                        :ref:`institutions.json#/properties/ICN`.
+                    title: ICN of affiliation
+                    type: string
+            required:
+            - value
+            type: object
+        title: Affiliations not associated to authors
+        type: array
+        uniqueItems: true
     refereed:
         description: |-
             :MARC: ``true`` corresponds to ``980__a:published``
