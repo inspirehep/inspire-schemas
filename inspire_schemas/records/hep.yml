@@ -929,19 +929,11 @@ properties:
         description: |-
             :MARC: ``041__a``
 
-            Every language is represented by its `ISO 639-1
-            <https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes>`_
-            two-letter code.
-
             .. note::
 
                 If this field is not present, the language of the document is assumed to be English.
-
-            :example: ``el`` for Greek
         items:
-            pattern: ^\w{2}$
-            title: A language
-            type: string
+            $ref: elements/language_code.json
         title: List of languages of the document
         type: array
     legacy_creation_date:
@@ -1450,8 +1442,7 @@ properties:
             additionalProperties: false
             properties:
                 language:
-                    pattern: ^\w{2}$
-                    type: string
+                    $ref: elements/language_code.json
                 source:
                     $ref: elements/source.json
                 subtitle:

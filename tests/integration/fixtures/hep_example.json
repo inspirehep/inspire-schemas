@@ -828,9 +828,9 @@
         }
     ],
     "languages": [
-        "qP",
-        "7O",
-        "Kn"
+        "fr",
+        "nl",
+        "el"
     ],
     "legacy_creation_date": "4266-02-18T11:08:41.909Z",
     "license": [
@@ -1370,19 +1370,19 @@
     },
     "title_translations": [
         {
-            "language": "EM",
+            "language": "la",
             "source": "culpa ipsum ut minim sunt",
             "subtitle": "aute",
             "title": "ad reprehenderit aliqua"
         },
         {
-            "language": "O6",
+            "language": "es",
             "source": "nostrud amet",
             "subtitle": "quis",
             "title": "Exc"
         },
         {
-            "language": "Gj",
+            "language": "la",
             "source": "reprehenderit dolor laboris",
             "subtitle": "Lorem ullamco officia do",
             "title": "te"
