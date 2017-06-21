@@ -29,6 +29,7 @@ import os
 from shutil import copy2
 
 from autosemver.packaging import get_changelog, get_current_version
+
 from jsonschema2rst.parser_runner import run_parser
 
 
