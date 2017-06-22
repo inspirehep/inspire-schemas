@@ -24,17 +24,15 @@
             "value": "nulla com"
         }
     ],
-    "acquisition_sources": [
-        {
-            "datetime": "2234-06-08T05:46:05.263Z",
-            "email": "rLmoeWrC4fI6iZ@IBfNPyIlR.vwp",
-            "internal_uid": 76120453,
-            "method": "submitter",
-            "orcid": "8351-4483-7418-2367",
-            "source": "voluptate qui fugiat nulla",
-            "submission_number": "voluptate reprehenderit nisi nostrud elit"
-        }
-    ],
+    "acquisition_source": {
+        "datetime": "2234-06-08T05:46:05.263Z",
+        "email": "rLmoeWrC4fI6iZ@IBfNPyIlR.vwp",
+        "internal_uid": 76120453,
+        "method": "submitter",
+        "orcid": "8351-4483-7418-2367",
+        "source": "voluptate qui fugiat nulla",
+        "submission_number": "voluptate reprehenderit nisi nostrud elit"
+    },
     "advisors": [
         {
             "curated_relation": false,

@@ -116,21 +116,14 @@
          "value":"7892"
       }
    ],
-   "acquisition_sources":[
-      {
-         "submission_number":"13",
-         "source":"submitter",
-         "method":"hepcrawl"
-      },
-      {
-         "email":"albert.einstein@hep.edu",
-         "source":"submitter",
-         "internal_uid":1,
-         "submission_number":"12",
-         "orcid":"0000-0001-8528-2091",
-         "method":"batchuploader"
-      }
-   ],
+   "acquisition_source":{
+      "email":"albert.einstein@hep.edu",
+      "source":"submitter",
+      "internal_uid":1,
+      "submission_number":"12",
+      "orcid":"0000-0001-8528-2091",
+      "method":"batchuploader"
+   },
    "license":[
       {
          "url":"https://opensource.org/licenses/MIT",

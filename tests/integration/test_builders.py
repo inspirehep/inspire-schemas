@@ -132,10 +132,6 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         email=input_data_hep['email'],
         orcid=input_data_hep['orcid']
     )
-    builder.add_acquisition_source(
-        method=input_data_hep['method2'],
-        submission_number=input_data_hep['submission_number2'],
-    )
     builder.add_document_type(document_type=input_data_hep['document_type'])
     builder.add_copyright(
         material=input_data_hep['material'],
