@@ -265,7 +265,6 @@ anyOf:
                 Non-English Wikipedia pages can be referenced by prepending the language.
 
                 :example: ``it:Fabiola_Gianotti``
-            pattern: ^[\w\-':]+$
             type: string
     required:
     - schema
