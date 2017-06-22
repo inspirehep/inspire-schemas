@@ -207,16 +207,8 @@ properties:
         title: List of related accelerators/experiments
         type: array
         uniqueItems: true
-    acquisition_sources:
-        description: |-
-            :MARC: ``541`` (only the earliest source was stored)
-
-            Sources of the metadata in the record, in inverse chronological
-            order (i.e. the first element is the latest one).
-        items:
-            $ref: elements/acquisition_source.json
-        type: array
-        uniqueItems: true
+    acquisition_source:
+        $ref: elements/acquisition_source.json
     arxiv_eprints:
         items:
             additionalProperties: false

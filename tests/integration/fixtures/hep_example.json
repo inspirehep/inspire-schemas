@@ -142,17 +142,15 @@
             }
         }
     ],
-    "acquisition_sources": [
-        {
-            "datetime": "4655-08-10T13:24:39.377Z",
-            "email": "YMD@FNozTaLqsdeiHRpHEe.gmlg",
-            "internal_uid": 33119180,
-            "method": "submitter",
-            "orcid": "7517-2459-3361-8685",
-            "source": "do occaecat voluptate elit veniam",
-            "submission_number": "Lorem ad reprehenderit sed esse"
-        }
-    ],
+    "acquisition_source": {
+        "datetime": "4655-08-10T13:24:39.377Z",
+        "email": "YMD@FNozTaLqsdeiHRpHEe.gmlg",
+        "internal_uid": 33119180,
+        "method": "submitter",
+        "orcid": "7517-2459-3361-8685",
+        "source": "do occaecat voluptate elit veniam",
+        "submission_number": "Lorem ad reprehenderit sed esse"
+    },
     "arxiv_eprints": [
         {
             "categories": [
