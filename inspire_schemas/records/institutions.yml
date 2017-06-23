@@ -6,68 +6,111 @@ properties:
         type: string
     ICN:
         description: |-
-            HEP affiliation following new standards
+            :MARC: ``110__t``
+
+            HEP affiliation unique identifier following the general pattern
+            ``institution name, city, department``. This was called the "new ICN"
+            on legacy.
+
+            .. note::
+
+                This is a list in case the ICN needs to be updated because of a
+                mistake in its assignment.  The current one is the first
+                element of the list.
         items:
             type: string
-        title: New INSPIRE control number
+        title: List of affiliation identifiers
         type: array
     _collections:
+        description: |-
+            Used by `invenio-collections` to store the collections this record
+            belongs to.
+
+            .. note::
+
+                This field is maintained by `invenio-collections` and should
+                not be edited manually.
         items:
             type: string
+        title: '`invenio-collections` metadata'
         type: array
     _private_notes:
+        description: |-
+            :MARC: ``595``, ``667``
+
+            These notes are only visible to privileged users, not regular
+            users.
         items:
             $ref: elements/sourced_value.json
+        title: List of private notes
         type: array
         uniqueItems: true
-    address:
+    addresses:
+        description: |-
+            :MARC: ``371`` (secondary addresses contain an ``x`` subfield)
+
+            The primary address is the first in the list, the secondary
+            addresses, if present, come next. This might happen for instance
+            for institutions distributed on several campuses.
         items:
             $ref: elements/address.json
+        title: List of addresses
         type: array
         uniqueItems: true
     control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
         type: integer
     core:
         description: |-
-            Is this a CORE institution?
-        title: CORE
+            :MARC: ``980:CORE`` corresponds to ``true``.
+        title: Whether this institution is CORE
         type: boolean
     deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
         type: boolean
     deleted_records:
         description: |-
-            List of deleted records referring to this record
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
-        title: Deleted Records
         type: array
-    department:
-        description: |-
-            Subordinate unit in native language
-        items:
-            type: string
-        title: Department
-        type: array
-    department_acronym:
-        description: |-
-            Subordinate unit well-known acronym
-        title: Department acronym
-        type: string
     external_system_identifiers:
+        description: |-
+            :MARC: ``035``, ``970``
+
+            List of identifiers of this institution on external systems.
         items:
             anyOf:
             -   additionalProperties: false
                 properties:
                     schema:
+                        description: |-
+                            :MARC: ``035__9:HAL``
                         enum:
                         - HAL
                         type: string
                     value:
+                        description: |-
+                            :MARC: ``035__a``
                         pattern: ^\d+$
                         type: string
                 required:
                 - schema
                 - value
+                title: HAL identifier
                 type: object
             -   additionalProperties: false
                 properties:
@@ -76,21 +119,88 @@ properties:
                         - SPIRES
                         type: string
                     value:
+                        description: |-
+                            :MARC: ``970__a``
                         pattern: ^INST-\d+$
                         type: string
                 required:
                 - schema
                 - value
+                title: SPIRES identifier
                 type: object
         type: array
         uniqueItems: true
     extra_words:
+        description: |-
+            :MARC: ``410__g``
+
+            Contains extra words that might be used when searching for this
+            record, but that are not contained in the other visible metadata.
         items:
             type: string
         title: Extra words
         type: array
         uniqueItems: true
-    field_activity:
+    historical_data:
+        description: |-
+            :MARC: ``6781_a``
+        items:
+            type: string
+        title: Historical information about institution
+        type: array
+    inactive:
+        description: |-
+            :MARC: ``980:DEAD`` corresponds to ``true``
+
+            Whether this institution is not active any more, and hence authors
+            of recent articles cannot have it as an affiliation.
+        type: boolean
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        title: List of Inspire categories
+        type: array
+        uniqueItems: true
+    institution_hierarchy:
+        description: |-
+            :MARC: ``110__a/b``
+
+            This record can represent a department, or a group within a
+            department, as opposed to a complete institution. To represent that
+            fact, this field contains the names and acronyms of the specific
+            institution that this record represents, followed by its parents,
+            from most specific to least specific.
+
+            :example:
+               .. code-block:: json
+
+                   [
+                       {
+                           "name": "Stanford Synchrotron Radiation Lightsource",
+                           "acronym": "SSRL"
+                       },
+                       {
+                           "name": "SLAC National Accelerator Laboratory",
+                           "acronym": "SLAC"
+                       }
+                   ]
+        items:
+            additionalProperties: false
+            properties:
+                acronym:
+                    description: |-
+                        :MARC: in parenthesis at the end of ``110_a/b``
+                    type: string
+                name:
+                    description: |-
+                        :MARC: value in ``110_a/b``, excluding final parenthesis
+                    type: string
+            type: object
+        type: array
+        uniqueItems: true
+    institution_type:
+        description: |-
+            :MARC: ``372__a``
         items:
             enum:
             - University
@@ -98,50 +208,28 @@ properties:
             - Company
             - Other
             type: string
-        title: Field of activity
         type: array
-    historical_data:
-        items:
-            type: string
-        type: array
-    inspire_categories:
-        items:
-            $ref: elements/inspire_field.json
-        type: array
-        uniqueItems: true
-    institution:
-        description: |-
-            Corporate name in native language
-        items:
-            type: string
-        title: Institution name
-        type: array
-    institution_acronym:
-        description: |-
-            Corporate well-known acronym
-        title: Institution acronym
-        type: string
     legacy_ICN:
+        description: |-
+            :MARC: ``110__u``
+
+            This was called simply "ICN" on legacy.
         type: string
     legacy_creation_date:
+        description: |-
+            :MARC: ``961__x``
+
+            Only present if the record already existed on legacy Inspire.
         format: date
+        title: Date of record creation on legacy
         type: string
-    location:
-        additionalProperties: false
-        properties:
-            latitude:
-                description: |-
-                    FIXME: we can populate this programmatically with Google APIs
-                title: latitude
-                type: number
-            longitude:
-                description: |-
-                    FIXME: we can populate this programmatically with Google APIs
-                title: longitude
-                type: number
-        title: GPS location
-        type: object
     name_variants:
+        description: |-
+            :MARC: ``410__a``
+
+            Variants of the institution name. This is used when alternative
+            names are in common use, possibly in English when the official name
+            is not.
         items:
             $ref: elements/sourced_value.json
         type: array
@@ -149,11 +237,26 @@ properties:
     new_record:
         $ref: elements/json_reference.json
         description: |-
-            Master record that replaces this record
-        title: New record
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
     public_notes:
+        description: |-
+            :MARC: ``680``
+
+            Any notes about the document that do not fit into another field.
+            For arXiv eprints, also contains the contents of the comment field
+            on arXiv.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        title: List of public notes
         type: array
         uniqueItems: true
     related_records:
@@ -166,23 +269,13 @@ properties:
         uniqueItems: true
     self:
         $ref: elements/json_reference.json
-        description: |-
-            Url of the record itself
-        title: Url of the record
-    time_zone:
-        description: |-
-            FIXME: we can populate this programmatically with Google APIs
-        enum:
-        - there
-        - must
-        - be
-        - one
-        title: Time zone
-        type: string
     urls:
         items:
             $ref: elements/url.json
         type: array
         uniqueItems: true
-title: Institution
+required:
+- ICN
+- institution_hierarchy
+title: A record representing an Institution
 type: object
