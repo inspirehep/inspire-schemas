@@ -276,6 +276,5 @@ properties:
         uniqueItems: true
 required:
 - ICN
-- institution_hierarchy
 title: A record representing an Institution
 type: object
