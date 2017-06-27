@@ -1347,6 +1347,7 @@ properties:
         items:
             enum:
             - BABAR-ANALYSIS-DOCUMENT
+            - BABAR-INTERNAL-BAIS
             - BABAR-INTERNAL-NOTE
             - CDF-INTERNAL-NOTE
             - CDF-NOTE
