@@ -184,11 +184,6 @@ properties:
             If ``experiment`` is present in :ref:`project_type`, this field
             contains information about this experiment.
         properties:
-            legacy_name:
-                description: |-
-                    :MARC: ``119__a``
-                    :example: ``CERN-LHC-CMS``
-                type: string
             short_name:
                 description: |-
                     :MARC: ``119__d``
@@ -269,6 +264,12 @@ properties:
     legacy_creation_date:
         format: date
         type: string
+    legacy_name:
+        description: |-
+            :MARC: ``119__a``
+            :example: ``CERN-LHC-CMS``
+        title: project identifier on legacy INSPIRE
+        type: string
     long_name:
         description: |-
             :MARC: ``245__a``
@@ -293,7 +294,8 @@ properties:
         title: Record replacing this one
     project_type:
         description: |-
-            :MARC: Not present, only ``experiments`` had records.
+            :MARC: ``980:ACCELERATOR`` corresponds to an ``accelerator``, otherwise
+                it is an ``experiment``.
 
             A project can represent a combination of ``collaboration``, ``accelerator`` and ``experiment``,
             depending on the contents of this field. Typical cases are:

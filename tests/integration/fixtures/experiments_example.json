@@ -67,7 +67,6 @@
     ],
     "description": "ex officia nostrud irure",
     "experiment": {
-        "legacy_name": "laboris",
         "short_name": "dolore enim et fugiat sed",
         "value": "eiusmod nisi consectetur"
     },
@@ -126,6 +125,7 @@
         }
     ],
     "legacy_creation_date": "3224-06-22T02:25:18.800Z",
+    "legacy_name": "laboris",
     "long_name": "qui esse",
     "name_variants": [
         "et minim",
