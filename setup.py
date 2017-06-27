@@ -71,7 +71,7 @@ def _generate_json_schemas():
         _yaml2json(yaml_file=yaml_file, json_file=json_file)
 
 
-def do_setup(url=URL):
+def do_setup():
     _generate_json_schemas()
     setup(
         author='CERN',
