@@ -3,6 +3,8 @@ notifications:
 sudo: false
 language: python
 matrix:
+  allow_failures:
+    - python: '3.6'
   fast_finish: true
 cache:
   - pip
