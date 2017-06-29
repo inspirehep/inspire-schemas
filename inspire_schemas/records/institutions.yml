@@ -274,7 +274,5 @@ properties:
             $ref: elements/url.json
         type: array
         uniqueItems: true
-required:
-- ICN
 title: A record representing an Institution
 type: object
