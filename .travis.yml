@@ -3,12 +3,14 @@ notifications:
 sudo: false
 language: python
 matrix:
+  allow_failures:
+    - python: '3.6'
   fast_finish: true
 cache:
   - pip
 python:
   - '2.7'
-  - '3.5'
+  - '3.6'
 
 before_install:
   - travis_retry pip install --upgrade pip setuptools py coveralls
