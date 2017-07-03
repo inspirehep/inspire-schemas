@@ -1,14 +1,5 @@
 $schema: http://json-schema.org/schema#
 additionalProperties: false
-dependencies:
-    project_type:
-        anyOf:
-        -   required:
-            - collaboration
-        -   required:
-            - experiment
-        -   required:
-            - accelerator
 description: |-
     This record can describe different types of projects, depending on the
     value of :ref:`experiments.json#/properties/project_type`.
