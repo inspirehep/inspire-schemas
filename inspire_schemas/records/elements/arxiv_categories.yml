@@ -118,6 +118,7 @@ enum:
 - physics
 - physics.acc-ph
 - physics.ao-ph
+- physics.app-ph
 - physics.atm-clus
 - physics.atom-ph
 - physics.bio-ph
