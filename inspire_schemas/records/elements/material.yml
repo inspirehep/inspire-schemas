@@ -6,5 +6,6 @@ enum:
 - erratum
 - addendum
 - translation
+- corrigendum
 title: Material to which the field refers
 type: string
