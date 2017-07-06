@@ -287,3 +287,19 @@ anyOf:
     - value
     title: SLAC identifier
     type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - OSTI
+            type: string
+        value:
+            description: |-
+                :example: ``123456``
+            pattern: ^\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: OSTI identifier
+    type: object
