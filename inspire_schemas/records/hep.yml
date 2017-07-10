@@ -132,7 +132,8 @@ properties:
         type: array
     _private_notes:
         description: |-
-            :MARC: ``595``
+            :MARC: ``595``, ``595_H`` (when
+                :ref:`sourced_value.json#/properties/source` is ``HAL``)
 
             These notes are only visible to privileged users, not regular
             users.
