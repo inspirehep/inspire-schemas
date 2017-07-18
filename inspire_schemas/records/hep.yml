@@ -106,28 +106,7 @@ properties:
                 This field is maintained by `invenio-records-files` and should
                 not be edited manually.
         items:
-            description: |-
-                Describe information needed for files in records.
-            properties:
-                bucket:
-                    type: string
-                checksum:
-                    type: string
-                key:
-                    type: string
-                previewer:
-                    description: |-
-                        Identifier for previewer needed to preview this file.
-                    type: string
-                size:
-                    type: integer
-                type:
-                    description: |-
-                        File type extension.
-                    type: string
-                version_id:
-                    type: string
-            type: object
+            $ref: elements/records-files.json
         title: '`invenio-records-files` metadata'
         type: array
     _private_notes:
@@ -650,6 +629,56 @@ properties:
         minItems: 1
         type: array
         uniqueItems: true
+    documents:
+        description: |-
+            :MARC: ``8564`` (if the URL points to the inspire server)
+        items:
+            additionalProperties: false
+            properties:
+                description:
+                    description: |-
+                        :MARC: ``8564_y``
+
+                        Describes how this document relates to the document that
+                        this record represents.
+                        :example: ``table of contents``
+                    type: string
+                fulltext:
+                    title: Whether this document contains the fulltext
+                    type: boolean
+                hidden:
+                    description: |-
+                        This is ``true`` if a document is attached to the
+                        record for automatic extraction of metadata, but
+                        Inspire is not allowed to make it publicly available.
+                    title: Whether this document is hidden
+                    type: boolean
+                key:
+                    description: |-
+                        Key to the corresponding file, which must match the ``key``
+                        in :ref:`hep.json#/properties/_files`.
+                    type: string
+                material:
+                    $ref: elements/material.json
+                original_url:
+                    format: url
+                    title: Original URL of the document
+                    type: string
+                source:
+                    $ref: elements/source.json
+                url:
+                    description: |-
+                        :MARC: ``8564_u``
+
+                        Relative URL to the file containing the document. Its
+                        form is ``/files/bucket/key``.
+                    format: url
+                    type: string
+            required:
+            - key
+            type: object
+        title: List of documents attached to the record
+        type: array
     dois:
         items:
             additionalProperties: false
@@ -739,6 +768,48 @@ properties:
             type: object
         type: array
         uniqueItems: true
+    figures:
+        description: |-
+            .. note::
+
+                The order in which the figures appear in this list is the same
+                as in the fulltext.
+        items:
+            additionalProperties: false
+            properties:
+                caption:
+                    description: |-
+                        :MARC: ``8564_y`` (without the five-digit counter)
+                    type: string
+                key:
+                    description: |-
+                        Key to the corresponding file, which matches a ``key``
+                        in :ref:`hep.json#/properties/_files`.
+                    type: string
+                label:
+                    description: |-
+                        Label used to refer to this figure in the document.
+                    type: string
+                material:
+                    $ref: elements/material.json
+                    description: |-
+                        :MARC: not present (figures were extracted only from
+                            arXiv preprints)
+                source:
+                    $ref: elements/source.json
+                url:
+                    description: |-
+                        :MARC: ``8564_u``
+
+                        Relative URL to the file containing the figure. Its
+                        form is ``/files/bucket/key``.
+                    format: url
+                    type: string
+            required:
+            - key
+            type: object
+        title: List of figures attached to the record
+        type: array
     funding_info:
         description: |-
             :MARC: ``536``
@@ -1462,6 +1533,15 @@ properties:
         type: array
         uniqueItems: true
     urls:
+        description: |-
+            :MARC: ``8564``
+
+            URLs to external resources related to this record.
+
+            .. note::
+
+                Links to internal resources are found in :ref:`figures` or
+                :ref:`documents`.
         items:
             $ref: elements/url.json
         type: array
