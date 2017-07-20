@@ -24,8 +24,6 @@
     },
     "_fft": [
         {
-            "comment": "fugiat voluptate sit",
-            "creation_datetime": "4432-11-02T03:15:07.947Z",
             "description": "in enim adipisicing consequat minim",
             "filename": "nisi",
             "flags": [
@@ -59,31 +57,25 @@
     ],
     "_files": [
         {
-            "bucket": "eiusmod sint velit amet quis",
-            "checksum": "magna quis tempor sunt",
-            "key": "reprehenderit",
-            "previewer": "consectetur eiusmod sunt dolore",
-            "size": 86389400,
-            "type": "aliquip minim sint quis",
-            "version_id": "in mollit"
+            "bucket": "Duis",
+            "checksum": "fugiat adipisicing ut",
+            "key": "ea est",
+            "size": -65093533,
+            "version_id": "veniam ad irure aliquip"
         },
         {
-            "bucket": "adipisicing in minim velit sunt",
-            "checksum": "laborum magna",
-            "key": "minim aliqua et",
-            "previewer": "commodo qui officia",
-            "size": -47895131,
-            "type": "velit",
-            "version_id": "tempor in id sunt mollit"
+            "bucket": "aute",
+            "checksum": "do cupidatat Ut anim",
+            "key": "id anim sit et sed",
+            "size": 19307699,
+            "version_id": "qui"
         },
         {
-            "bucket": "voluptate consectetur dolor",
-            "checksum": "ad incididunt",
-            "key": "cupidatat nulla veniam in",
-            "previewer": "esse ",
-            "size": 14872151,
-            "type": "ut tempor nostrud",
-            "version_id": "aute nisi sed adipisicing non"
+            "bucket": "Duis",
+            "checksum": "qui eu",
+            "key": "",
+            "size": 35073595,
+            "version_id": "adipisicing sit ut id"
         }
     ],
     "_private_notes": [
@@ -718,6 +710,18 @@
         "book chapter",
         "article"
     ],
+    "documents": [
+        {
+            "description": "Excepteur labore enim",
+            "fulltext": true,
+            "hidden": false,
+            "key": "dolore velit officia",
+            "material": "addendum",
+            "original_url": "http://1b!,P[~ty",
+            "source": "adipisicing proident",
+            "url": "http://1"
+        }
+    ],
     "dois": [
         {
             "material": "addendum",
@@ -751,6 +755,16 @@
         {
             "schema": "sint ea ut pariatur consequat",
             "value": "eu do culpa aut"
+        }
+    ],
+    "figures": [
+        {
+            "caption": "anim amet eli",
+            "key": "aute nostrud exercitation",
+            "label": "enim",
+            "material": "addendum",
+            "source": "in sint",
+            "url": "http://1?"
         }
     ],
     "funding_info": [
