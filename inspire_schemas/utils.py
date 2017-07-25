@@ -145,26 +145,6 @@ def validate(data, schema_name=None):
     )
 
 
-def normalize_date_iso(date):
-    """Normalize date for schema (format yyyy-mm-ddT00:00:00).
-
-    :param date: a generic date
-    :type date: string with the format (yyyy-mm-dd)
-
-    :return formatted_date: the input date in
-    the format (yyyy-mm-ddT00:00:00)
-    """
-    warnings.warn("Don't use 'normalize_date_iso'", DeprecationWarning)
-
-    try:
-        formatted_date = datetime.datetime.\
-            strptime(date, '%Y-%m-%d').isoformat()
-    except (ValueError, Exception):
-        formatted_date = None
-
-    return formatted_date
-
-
 def normalize_author_name_with_comma(author):
     """Normalize author name.
 
