@@ -767,3 +767,62 @@ class LiteratureBuilder(object):
         :type citeable: bool
         """
         self.record['citeable'] = citeable
+
+    @filter_empty_parameters
+    def add_figure(
+        self,
+        key,
+        caption=None,
+        label=None,
+        material=None,
+        source=None,
+        url=None,
+    ):
+        """Add a figure."""
+        figure = {}
+
+        if key:
+            figure['key'] = key
+
+        figure['source'] = self._get_source(source)
+
+        for key in ('caption', 'label', 'material', 'url'):
+            if locals()[key] is not None:
+                figure[key] = locals()[key]
+
+        if figure:
+            self._append_to('figures', figure)
+
+    @filter_empty_parameters
+    def add_document(
+        self,
+        key,
+        description=None,
+        fulltext=None,
+        hidden=None,
+        material=None,
+        original_url=None,
+        source=None,
+        url=None,
+    ):
+        """Add a document."""
+        document = {}
+
+        if key:
+            document['key'] = key
+
+        document['source'] = self._get_source(source)
+
+        for key in (
+            'description',
+            'fulltext',
+            'hidden',
+            'material',
+            'original_url',
+            'url',
+        ):
+            if locals()[key] is not None:
+                document[key] = locals()[key]
+
+        if document:
+            self._append_to('documents', document)
