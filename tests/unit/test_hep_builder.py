@@ -25,6 +25,7 @@
 import pytest
 
 from inspire_schemas.builders import LiteratureBuilder, is_citeable
+from inspire_schemas.utils import load_schema
 
 
 @pytest.mark.parametrize(
@@ -81,3 +82,73 @@ def test_append_to():
     expected_result = ['value']
     builder._append_to('test_field_2', formdata)
     assert builder.record.get('test_field_2') == expected_result
+
+
+def test_add_figure():
+    schema = load_schema('hep')
+    subschema = schema['properties']['figures']
+
+    builder = LiteratureBuilder('test')
+
+    builder.add_figure(
+        'key',
+        caption='caption',
+        label='label',
+        material='material',
+        source='source',
+        url='url',
+    )
+
+    expected = [
+        {
+            'caption': 'caption',
+            'key': 'key',
+            'label': 'label',
+            'material': 'material',
+            'source': 'source',
+            'url': 'url',
+        },
+    ]
+    result = builder.record
+
+    assert expected == result['figures']
+
+    for key in subschema['items']['properties'].keys():
+        assert key in result['figures'][0]
+
+
+def test_add_document():
+    schema = load_schema('hep')
+    subschema = schema['properties']['documents']
+
+    builder = LiteratureBuilder('test')
+
+    builder.add_document(
+        'key',
+        description='description',
+        fulltext=True,
+        hidden=True,
+        material='material',
+        original_url='original_url',
+        source='source',
+        url='url',
+    )
+
+    expected = [
+        {
+            'description': 'description',
+            'fulltext': True,
+            'hidden': True,
+            'key': 'key',
+            'material': 'material',
+            'original_url': 'original_url',
+            'source': 'source',
+            'url': 'url',
+        },
+    ]
+    result = builder.record
+
+    assert expected == result['documents']
+
+    for key in subschema['items']['properties'].keys():
+        assert key in result['documents'][0]
