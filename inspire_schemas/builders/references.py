@@ -20,7 +20,7 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-"""References Processors."""
+"""Reference builder class and related code."""
 
 from __future__ import absolute_import, division, print_function
 
@@ -31,7 +31,7 @@ import idutils
 from isbn import ISBNError
 from isbn.hyphen import ISBNRangeError
 
-from inspirehep.utils.pubnote import split_pubnote
+from ..utils import split_pubnote
 
 
 # Matches any separators for author enumerations.
@@ -232,7 +232,9 @@ class ReferenceBuilder(object):
             self._ensure_reference_field('publication_info', {})
             for idx, key in enumerate(keys):
                 if values[idx]:
-                    self.obj['reference']['publication_info'][key] = values[idx]
+                    self.obj['reference']['publication_info'][key] = (
+                        values[idx]
+                    )
         else:
             self.add_raw_reference(pubnote)
 
@@ -245,7 +247,8 @@ class ReferenceBuilder(object):
         # splitting the report number.
         repno = repno or ''
         if _is_arxiv(repno):
-            self._ensure_reference_field('arxiv_eprint', _normalize_arxiv(repno))
+            self._ensure_reference_field('arxiv_eprint',
+                                         _normalize_arxiv(repno))
         else:
             self._ensure_reference_field('publication_info', {})
             self.obj['reference']['report_number'] = repno
@@ -280,7 +283,8 @@ class ReferenceBuilder(object):
             try:
                 isbn = idutils.normalize_isbn(uid)
                 self._ensure_reference_field('isbn', {})
-                self.obj['reference']['isbn'] = isbn.replace(' ', '').replace('-', '')
+                self.obj['reference']['isbn'] = isbn.replace(' ', '').replace(
+                    '-', '')
             # See https://github.com/nekobcn/isbnid/issues/2 and
             # https://github.com/nekobcn/isbnid/issues/3 for understanding the
             # long exception list.

@@ -22,9 +22,8 @@
 
 from __future__ import absolute_import, division, print_function
 
-from inspire_dojson.utils import get_record_ref, validate
-from inspire_schemas.utils import load_schema
-from inspirehep.modules.references.processors import (
+from inspire_schemas.utils import load_schema, validate
+from inspire_schemas.builders.references import (
     ReferenceBuilder,
     _is_arxiv,
     _normalize_arxiv,
@@ -80,14 +79,14 @@ def test_normalize_arxiv_handles_new_identifiers_without_prefix_or_version():
     assert expected == result
 
 
-def test_normalize_arxiv_handles_new_identifiers_with_prefix_and_without_version():
+def test_normalize_arxiv_handles_new_identifiers_with_prefix_and_wo_version():
     expected = '1501.00001'
     result = _normalize_arxiv('arXiv:1501.00001')
 
     assert expected == result
 
 
-def test_normalize_arxiv_handles_new_identifiers_without_prefix_and_with_version():
+def test_normalize_arxiv_handles_new_identifiers_wo_prefix_and_with_version():
     expected = '1501.00001'
     result = _normalize_arxiv('1501.00001v1')
 
@@ -108,14 +107,14 @@ def test_normalize_arxiv_handles_old_identifiers_without_prefix_or_version():
     assert expected == result
 
 
-def test_normalize_arxiv_handles_old_identifiers_with_prefix_and_without_version():
+def test_normalize_arxiv_handles_old_identifiers_with_prefix_and_wo_version():
     expected = 'math/0309136'
     result = _normalize_arxiv('arXiv:math.GT/0309136')
 
     assert expected == result
 
 
-def test_normalize_arxiv_handles_old_identifiers_without_prefix_and_with_version():
+def test_normalize_arxiv_handles_old_identifiers_wo_prefix_and_with_version():
     expected = 'math/0309136'
     result = _normalize_arxiv('math.GT/0309136v2')
 
@@ -162,7 +161,9 @@ def test_set_record():
     subschema = schema['properties']['references']
 
     builder = ReferenceBuilder()
-    ref = get_record_ref(1226234, 'literature')
+    ref = {
+        '$ref': 'http://localhost:5000/api/literature/1226234',
+    }
 
     builder.set_record(ref)
 
@@ -293,7 +294,8 @@ def test_add_raw_reference():
 
     builder = ReferenceBuilder()
 
-    builder.add_raw_reference('Phys. Rev. C 80 (doi:10.1103/PhysRevC.80.044313)')
+    builder.add_raw_reference('Phys. Rev. C 80 (doi:10.1103/'
+                              'PhysRevC.80.044313)')
 
     expected = [
         {
@@ -301,7 +303,8 @@ def test_add_raw_reference():
                 {
                     'schema': 'text',
                     'source': '',
-                    'value': 'Phys. Rev. C 80 (doi:10.1103/PhysRevC.80.044313)',
+                    'value': 'Phys. Rev. C 80 (doi:10.1103/'
+                             'PhysRevC.80.044313)',
                 },
             ],
         },

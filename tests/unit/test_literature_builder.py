@@ -24,7 +24,7 @@
 
 import pytest
 
-from inspire_schemas.builders import LiteratureBuilder, is_citeable
+from inspire_schemas.builders.literature import LiteratureBuilder, is_citeable
 from inspire_schemas.utils import load_schema
 
 
