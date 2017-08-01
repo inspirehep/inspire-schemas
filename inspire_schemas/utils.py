@@ -23,12 +23,11 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
-import datetime
 import json
 import os
 import re
-import warnings
 
+import six
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from pkg_resources import resource_filename
@@ -114,29 +113,32 @@ def load_schema(schema_name):
     return schema_data
 
 
-def validate(data, schema_name=None):
+def validate(data, schema=None):
     """Validate the given dictionary against the given schema.
 
-    :param data: Dict to validate.
-    :type data: dict
-    :param schema_name: String with the name of the schema to validate, for
-        example, 'authors' or 'jobs'. If `None` passed it will expect for the
-        data to have the schema specified in the `$ref` key.
-    :type schema_name: str
-    :return: None
-    :raises inspire_schemas.errors.SchemaNotFound: if the given schema was not
-        found.
-    :raises inspire_schemas.errors.SchemaKeyNotFound: if the given schema was
-        not found.
-    :raises jsonschema.SchemaError: if the schema is invalid
-    :raises jsonschema.ValidationError: if the data is invalid
+    Args:
+        data (dict): record to validate.
+        schema (Union[dict, str]): schema to validate against. If it is a
+            string, it is intepreted as the name of the schema to load (e.g.
+            ``authors`` or ``jobs``). If it is ``None``, the schema is taken
+            from ``data['$schema']``. If it is a dictionary, it is used
+            directly.
+
+    Raises:
+        SchemaNotFound: if the given schema was not found.
+        SchemaKeyNotFound: if ``schema`` is ``None`` and no ``$schema`` key was
+            found in ``data``.
+        jsonschema.SchemaError: if the schema is invalid.
+        jsonschema.ValidationError: if the data is invalid.
     """
-    if schema_name is None:
+    if schema is None:
         if '$schema' not in data:
             raise SchemaKeyNotFound(data=data)
-        schema_name = data['$schema']
+        schema = data['$schema']
 
-    schema = load_schema(schema_name=schema_name)
+    if isinstance(schema, six.string_types):
+        schema = load_schema(schema_name=schema)
+
     return jsonschema_validate(
         instance=data,
         schema=schema,
@@ -160,4 +162,5 @@ def normalize_author_name_with_comma(author):
     if len(name) > 1 and _verify_author_name_initials(name[1]):
         name[1] = name[1].replace(' ', '')
     name = ', '.join(n_elem.strip() for n_elem in name)
+
     return name

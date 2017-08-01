@@ -77,7 +77,7 @@ def change_something(data):
 )
 def test_schemas_validate(schema_name):
     example_data = load_example(schema_name)
-    api.validate(data=example_data, schema_name=schema_name)
+    api.validate(data=example_data, schema=schema_name)
 
 
 @pytest.mark.parametrize(
@@ -89,4 +89,4 @@ def test_schemas_validate_negative(schema_name):
     example_data = load_example(schema_name)
     example_data = change_something(example_data)
     with pytest.raises(jsonschema.ValidationError):
-        api.validate(data=example_data, schema_name=schema_name)
+        api.validate(data=example_data, schema=schema_name)
