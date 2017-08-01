@@ -31,13 +31,24 @@ from inspire_schemas.builders.references import (
 )
 
 
-def test_split_refextract_authors_str():
+def test_split_refextract_authors_str_initials():
     expected = [
         'Butler, D.',
         'Demarque, P.',
         'Smith, H.A.',
     ]
     authors_input = 'D. Butler, P. Demarque, & H. A. Smith'
+    result = _split_refextract_authors_str(authors_input)
+
+    assert expected == result
+
+
+def test_split_refextract_authors_str_noninitials():
+    expected = [
+        'Klebanov, Igor R.',
+        'Maldacena, Juan Martin'
+    ]
+    authors_input = 'Igor R. Klebanov and Juan Martin Maldacena'
     result = _split_refextract_authors_str(authors_input)
 
     assert expected == result

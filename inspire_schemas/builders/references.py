@@ -87,10 +87,10 @@ def _split_refextract_authors_str(authors_str):
 
 
 def _improve_author(author_names):
-    res = author_names.split(' ')[-1] + ', '
+    res = author_names.split(' ')[-1] + ','
     for name in author_names.split(' ')[0:-1]:
-        res += name
-    return res
+        res += ' ' + name
+    return res.replace('. ', '.')
 
 
 def _is_arxiv(obj):
