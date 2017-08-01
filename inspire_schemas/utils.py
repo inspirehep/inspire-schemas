@@ -38,6 +38,71 @@ from .errors import SchemaKeyNotFound, SchemaNotFound
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 
+_RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.I)
+
+
+def split_page_artid(page_artid):
+    """Split page_artid into page_start/end and artid."""
+    page_start = None
+    page_end = None
+    artid = None
+
+    if not page_artid:
+        return None, None, None
+
+    page_artid_l = force_list(page_artid)
+
+    for page_artid in page_artid_l:
+        if page_artid:
+            if '-' in page_artid:
+                # if it has a dash it's a page range
+                page_range = page_artid.split('-')
+                if len(page_range) == 2:
+                    page_start, page_end = page_range
+                else:
+                    artid = page_artid
+            elif _RE_2_CHARS.search(page_artid):
+                # if it has 2 ore more letters it's an article ID
+                artid = page_artid
+            elif len(page_artid) >= 5:
+                # it it is longer than 5 digits it's an article ID
+                artid = page_artid
+            else:
+                if artid is None:
+                    artid = page_artid
+                if page_start is None:
+                    page_start = page_artid
+
+    return page_start, page_end, artid
+
+
+def split_pubnote(pubnote_str):
+    """Split pubnote into journal information."""
+    title, volume, page_start, page_end, artid = (None, None, None, None, None)
+    parts = pubnote_str.split(',')
+
+    if len(parts) > 2:
+        title = parts[0]
+        volume = parts[1]
+        page_start, page_end, artid = split_page_artid(parts[2:])
+
+    return title, volume, page_start, page_end, artid
+
+
+def build_pubnote(title, volume, page_start, page_end, artid):
+    """Build pubnite string from parts (reverse of split_pubnote)."""
+    pubnote = None
+    if title and volume:
+        pubnote = '{},{}'.format(title, volume)
+        if page_start and page_end:
+            pubnote += ',{}-{}'.format(page_start, page_end)
+        elif page_start:
+            pubnote += ',{}'.format(page_start)
+        if artid and artid != page_start:
+            pubnote += ',{}'.format(artid)
+
+    return pubnote
+
 
 class LocalRefResolver(RefResolver):
     """Simple resolver to handle non-uri relative paths."""
