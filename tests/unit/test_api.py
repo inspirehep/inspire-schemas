@@ -26,6 +26,7 @@ import mock
 import pytest
 
 from inspire_schemas import api, errors, utils
+from jsonschema import ValidationError
 
 
 def test_validate_raises_if_no_schema_key():
@@ -50,13 +51,31 @@ def test_validate_ok_if_schema_key(mock_jsonschema_validate, mock_load_schema,
 @mock.patch('inspire_schemas.utils.LocalRefResolver')
 @mock.patch('inspire_schemas.utils.load_schema')
 @mock.patch('inspire_schemas.utils.jsonschema_validate')
-def test_validate_ok_if_schema_param(mock_jsonschema_validate,
-                                     mock_load_schema, mock_localrefresolver):
+def test_validate_ok_if_schema_str(mock_jsonschema_validate,
+                                   mock_load_schema, mock_localrefresolver):
     mydata = 'The Castle Anthrax'
     schema_name = 'Sir Galad'
     mock_load_schema.side_effect = lambda schema_name: schema_name
 
-    utils.validate(data=mydata, schema_name=schema_name)
+    utils.validate(data=mydata, schema=schema_name)
 
     mock_load_schema.assert_called_with(schema_name=schema_name)
     mock_jsonschema_validate.assert_called()
+
+
+def test_validate_raises_if_invalid_data():
+    data = {
+        'foo': 'bar',
+    }
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'object',
+        'properties': {
+            'foo': {
+                'type': 'integer'
+            }
+        }
+    }
+
+    with pytest.raises(ValidationError):
+        utils.validate(data, schema)

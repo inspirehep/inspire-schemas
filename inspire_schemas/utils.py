@@ -23,12 +23,11 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
-import datetime
 import json
 import os
 import re
-import warnings
 
+import six
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from pkg_resources import resource_filename
@@ -38,6 +37,67 @@ from six.moves.urllib.parse import urlsplit
 from .errors import SchemaKeyNotFound, SchemaNotFound
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
+
+_RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.I)
+
+
+def split_page_artid(page_artid):
+    """Split page_artid into page_start/end and artid."""
+    page_start = None
+    page_end = None
+    artid = None
+
+    if not page_artid:
+        return None, None, None
+
+    if '-' in page_artid:
+        # if it has a dash it's a page range
+        page_range = page_artid.split('-')
+        if len(page_range) == 2:
+            page_start, page_end = page_range
+        else:
+            artid = page_artid
+    elif _RE_2_CHARS.search(page_artid):
+        # if it has 2 ore more letters it's an article ID
+        artid = page_artid
+    elif len(page_artid) >= 5:
+        # it it is longer than 5 digits it's an article ID
+        artid = page_artid
+    else:
+        if artid is None:
+            artid = page_artid
+        if page_start is None:
+            page_start = page_artid
+
+    return page_start, page_end, artid
+
+
+def split_pubnote(pubnote_str):
+    """Split pubnote into journal information."""
+    title, volume, page_start, page_end, artid = (None, None, None, None, None)
+    parts = pubnote_str.split(',')
+
+    if len(parts) > 2:
+        title = parts[0]
+        volume = parts[1]
+        page_start, page_end, artid = split_page_artid(parts[2])
+
+    return title, volume, page_start, page_end, artid
+
+
+def build_pubnote(title, volume, page_start, page_end, artid):
+    """Build pubnote string from parts (reverse of split_pubnote)."""
+    pubnote = None
+    if title and volume:
+        pubnote = '{},{}'.format(title, volume)
+        if page_start and page_end:
+            pubnote += ',{}-{}'.format(page_start, page_end)
+        elif page_start:
+            pubnote += ',{}'.format(page_start)
+        if artid and artid != page_start:
+            pubnote += ',{}'.format(artid)
+
+    return pubnote
 
 
 class LocalRefResolver(RefResolver):
@@ -114,29 +174,32 @@ def load_schema(schema_name):
     return schema_data
 
 
-def validate(data, schema_name=None):
+def validate(data, schema=None):
     """Validate the given dictionary against the given schema.
 
-    :param data: Dict to validate.
-    :type data: dict
-    :param schema_name: String with the name of the schema to validate, for
-        example, 'authors' or 'jobs'. If `None` passed it will expect for the
-        data to have the schema specified in the `$ref` key.
-    :type schema_name: str
-    :return: None
-    :raises inspire_schemas.errors.SchemaNotFound: if the given schema was not
-        found.
-    :raises inspire_schemas.errors.SchemaKeyNotFound: if the given schema was
-        not found.
-    :raises jsonschema.SchemaError: if the schema is invalid
-    :raises jsonschema.ValidationError: if the data is invalid
+    Args:
+        data (dict): record to validate.
+        schema (Union[dict, str]): schema to validate against. If it is a
+            string, it is intepreted as the name of the schema to load (e.g.
+            ``authors`` or ``jobs``). If it is ``None``, the schema is taken
+            from ``data['$schema']``. If it is a dictionary, it is used
+            directly.
+
+    Raises:
+        SchemaNotFound: if the given schema was not found.
+        SchemaKeyNotFound: if ``schema`` is ``None`` and no ``$schema`` key was
+            found in ``data``.
+        jsonschema.SchemaError: if the schema is invalid.
+        jsonschema.ValidationError: if the data is invalid.
     """
-    if schema_name is None:
+    if schema is None:
         if '$schema' not in data:
             raise SchemaKeyNotFound(data=data)
-        schema_name = data['$schema']
+        schema = data['$schema']
 
-    schema = load_schema(schema_name=schema_name)
+    if isinstance(schema, six.string_types):
+        schema = load_schema(schema_name=schema)
+
     return jsonschema_validate(
         instance=data,
         schema=schema,
@@ -160,4 +223,5 @@ def normalize_author_name_with_comma(author):
     if len(name) > 1 and _verify_author_name_initials(name[1]):
         name[1] = name[1].replace(' ', '')
     name = ', '.join(n_elem.strip() for n_elem in name)
+
     return name

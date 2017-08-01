@@ -155,3 +155,39 @@ def test_load_schema_without_schema_key(mock_get_schema_path, mock_open):
     loaded_schema = utils.load_schema('And gallantly he chickened out')
 
     assert loaded_schema == {'$schema': myschema}
+
+
+def test_split_page_artid_page_range():
+    page_string = '451-487'
+    result = utils.split_page_artid(page_string)
+
+    expected = '451', '487', None
+
+    assert expected == result
+
+
+def test_split_page_artid_page_start():
+    page_string = '451'
+    result = utils.split_page_artid(page_string)
+
+    expected = '451', None, '451'
+
+    assert expected == result
+
+
+def test_split_page_artid_artid():
+    page_string = 'CONF546'
+    result = utils.split_page_artid(page_string)
+
+    expected = None, None, 'CONF546'
+
+    assert expected == result
+
+
+def test_split_pubnote():
+    pubnote = 'J.Testing,42,1-45'
+    result = utils.split_pubnote(pubnote)
+
+    expected = 'J.Testing', '42', '1', '45', None
+
+    assert expected == result
