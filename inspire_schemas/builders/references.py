@@ -179,13 +179,16 @@ class ReferenceBuilder(object):
         self._ensure_reference_field('misc', [])
         self.obj['reference']['misc'].append(misc)
 
-    def add_raw_reference(self, raw_reference, source='', ref_format='text'):
-        self._ensure_field('raw_refs', [])
-        self.obj['raw_refs'].append({
+    def add_raw_reference(self, raw_reference, source=None, ref_format='text'):
+        raw_ref = {
             'schema': ref_format,
-            'source': source,
             'value': raw_reference,
-        })
+        }
+        if source:
+            raw_ref['source'] = source
+
+        self._ensure_field('raw_refs', [])
+        self.obj['raw_refs'].append(raw_ref)
 
     def set_year(self, year):
         try:
