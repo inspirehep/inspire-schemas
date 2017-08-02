@@ -299,7 +299,7 @@ def test_add_misc():
     assert expected == result
 
 
-def test_add_raw_reference():
+def test_add_raw_reference_no_source():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
 
@@ -313,7 +313,33 @@ def test_add_raw_reference():
             'raw_refs': [
                 {
                     'schema': 'text',
-                    'source': '',
+                    'value': 'Phys. Rev. C 80 (doi:10.1103/'
+                             'PhysRevC.80.044313)',
+                },
+            ],
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_raw_reference_with_source():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_raw_reference('Phys. Rev. C 80 (doi:10.1103/'
+                              'PhysRevC.80.044313)', 'arXiv')
+
+    expected = [
+        {
+            'raw_refs': [
+                {
+                    'schema': 'text',
+                    'source': 'arXiv',
                     'value': 'Phys. Rev. C 80 (doi:10.1103/'
                              'PhysRevC.80.044313)',
                 },
@@ -514,7 +540,6 @@ def test_set_pubnote_falls_back_to_raw_refs():
             'raw_refs': [
                 {
                     'schema': 'text',
-                    'source': '',
                     'value': 'not-a-valid-pubnote',
                 },
             ],
