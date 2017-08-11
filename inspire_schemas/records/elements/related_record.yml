@@ -9,16 +9,17 @@ properties:
     record:
         $ref: json_reference.json
         description: |-
-            :MARC: ``510__0`` (for Institutions and Experiments),
-                ``78002/78502/78708w`` (for Literature and Journals).
+            :MARC: ``510__0`` (for Institutions and Experiments), ``530__0``
+                (for Journals), ``78002/78502/78708w`` (for Literature).
         title: URL of related record
     relation:
         description: |-
             The possible values are:
 
             ``predecessor``
-                :MARC: ``510__w:a`` (if not a Literature record) or the field
-                    comes from ``78002`` (for Literature).
+                :MARC: ``510__w:a`` (for Institutions and Experiments),
+                    ``530__w:a`` (for Journals) or the field comes from
+                    ``78002`` (for Literature).
 
                 The related record is a predecessor of the current one, i.e.
                 the current record supersedes the related one.
@@ -74,8 +75,8 @@ properties:
         type: string
     relation_freetext:
         description: |-
-            :MARC: ``510__i`` (for Institutions and Experiments) or ``79708i`` (for
-                Literature and Journals).
+            :MARC: ``510__i`` (for Institutions and Experiments), ``530__i``
+                (for Journals) or ``78708i`` (for Literature).
 
             If none of the standard relations in :ref:`relation` fit, a textual
             relation can alternatively be provided here.
