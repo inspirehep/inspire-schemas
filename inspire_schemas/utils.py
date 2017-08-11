@@ -30,6 +30,7 @@ import re
 import six
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
+from nameparser import HumanName
 from pkg_resources import resource_filename
 
 from six.moves.urllib.parse import urlsplit
@@ -208,6 +209,24 @@ def validate(data, schema=None):
     )
 
 
+# def normalize_author_name_with_comma(author):
+#     """Normalize author name.
+
+#     :param author: author name
+#     :type author: string
+
+#     :return name: the name of the author normilized
+#     """
+#     def _verify_author_name_initials(author_name):
+#         return not bool(re.compile(r'[^A-Z. ]').search(author_name))
+
+#     name = author.split(',')
+#     if len(name) > 1 and _verify_author_name_initials(name[1]):
+#         name[1] = name[1].replace(' ', '')
+#     name = ', '.join(n_elem.strip() for n_elem in name)
+
+#     return name
+
 def normalize_author_name_with_comma(author):
     """Normalize author name.
 
@@ -216,12 +235,20 @@ def normalize_author_name_with_comma(author):
 
     :return name: the name of the author normilized
     """
-    def _verify_author_name_initials(author_name):
-        return not bool(re.compile(r'[^A-Z. ]').search(author_name))
+    name = HumanName(author)
 
-    name = author.split(',')
-    if len(name) > 1 and _verify_author_name_initials(name[1]):
-        name[1] = name[1].replace(' ', '')
-    name = ', '.join(n_elem.strip() for n_elem in name)
+    norm_name = name.last + ', '
 
-    return name
+    if name.middle:
+        if len(name.first) > 2 and len(name.middle) > 2:
+            norm_name = norm_name + name.first + ' ' + name.middle
+        elif '.' in name.first and '.' in name.middle:
+            norm_name = norm_name + name.first + name.middle
+        elif '.' in name.first or '.' in name.middle:
+            norm_name = norm_name + name.first + ' ' + name.middle
+        else:
+            norm_name = norm_name + name.first + '.' + name.middle + '.'
+    else:
+        norm_name = norm_name + name.first
+
+    return norm_name
