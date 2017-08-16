@@ -200,3 +200,53 @@ def test_split_pubnote():
     expected = 'J.Testing', '42', '1', '45', None
 
     assert expected == result
+
+
+def test_normalize_author_name_full():
+    expected = 'Smith, John Peter'
+
+    assert expected == utils.normalize_author_name('Smith, John Peter')
+
+
+def test_normalize_author_name_handles_names_with_first_initial():
+    expected = 'Smith, J. Peter'
+
+    assert expected == utils.normalize_author_name('Smith, J Peter')
+    assert expected == utils.normalize_author_name('Smith, J. Peter')
+    assert expected == utils.normalize_author_name('Smith, J. Peter ')
+
+
+def test_normalize_author_name_handles_names_with_middle_initial():
+    expected = 'Smith, John P.'
+
+    assert expected == utils.normalize_author_name('Smith, John P.')
+    assert expected == utils.normalize_author_name('Smith, John P. ')
+    assert expected == utils.normalize_author_name('Smith, John P ')
+
+
+def test_normalize_author_name_handles_names_with_dots_initials():
+    expected = 'Smith, J.P.'
+
+    assert expected == utils.normalize_author_name('Smith, J. P.')
+    assert expected == utils.normalize_author_name('Smith, J.P.')
+    assert expected == utils.normalize_author_name('Smith, J.P. ')
+    assert expected == utils.normalize_author_name('Smith, J. P. ')
+
+
+def test_normalize_author_name_handles_names_with_spaces():
+    expected = 'Smith, J.P.'
+
+    assert expected == utils.normalize_author_name('Smith, J P ')
+    assert expected == utils.normalize_author_name('Smith, J P')
+
+
+def test_normalize_author_name_handles_names_with_several_last_names():
+    expected = 'Smith Davis, J.P.'
+
+    assert expected == utils.normalize_author_name('Smith Davis, J.P.')
+
+
+def test_normalize_author_name_handles_jimmy():  # http://jimmy.pink
+    expected = 'Jimmy'
+
+    assert expected == utils.normalize_author_name('Jimmy')

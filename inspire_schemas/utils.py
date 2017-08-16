@@ -30,6 +30,7 @@ import re
 import six
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
+from nameparser import HumanName
 from pkg_resources import resource_filename
 from unidecode import unidecode
 
@@ -212,7 +213,7 @@ def validate(data, schema=None):
     )
 
 
-def normalize_author_name_with_comma(author):
+def normalize_author_name(author):
     """Normalize author name.
 
     :param author: author name
@@ -220,12 +221,33 @@ def normalize_author_name_with_comma(author):
 
     :return name: the name of the author normilized
     """
-    def _verify_author_name_initials(author_name):
-        return not bool(re.compile(r'[^A-Z. ]').search(author_name))
+    def _is_initial(author_name):
+        return len(author_name) == 1 or '.' in author_name
 
-    name = author.split(',')
-    if len(name) > 1 and _verify_author_name_initials(name[1]):
-        name[1] = name[1].replace(' ', '')
-    name = ', '.join(n_elem.strip() for n_elem in name)
+    def _ensure_dotted_initials(author_name):
+        if _is_initial(author_name) and '.' not in author_name:
+            seq = (author_name, '.')
+            author_name = ''.join(seq)
+        return author_name
 
-    return name
+    name = HumanName(author)
+
+    name.first = _ensure_dotted_initials(name.first)
+    name.middle = _ensure_dotted_initials(name.middle)
+
+    if _is_initial(name.first) and _is_initial(name.middle):
+        normalized_names = '{first_name}{middle_name}'
+    else:
+        normalized_names = '{first_name} {middle_name}'
+
+    normalized_names = normalized_names.format(
+        first_name=name.first,
+        middle_name=name.middle,
+    )
+
+    normalized_names.strip()
+    final_name = ', '.join(
+        part for part in (name.last, normalized_names) if part
+    ).strip()
+
+    return final_name
