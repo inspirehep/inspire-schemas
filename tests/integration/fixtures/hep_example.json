@@ -1032,7 +1032,9 @@
                     "parent_title": "",
                     "year": 1698
                 },
-                "report_number": "tempor nulla adipisicing consectetur",
+                "report_numbers": [
+                    "tempor nulla adipisicing consectetur"
+                ],
                 "texkey": "ullamco dolor esse quis",
                 "title": {
                     "source": "reprehenderit nisi ut non nulla",
@@ -1150,7 +1152,9 @@
                     "parent_title": "exercitation",
                     "year": 1983
                 },
-                "report_number": "dolore et",
+                "report_numbers": [
+                    "dolore et"
+                ],
                 "texkey": "voluptate Excepteur ",
                 "title": {
                     "source": "aliquip incididunt irure",
@@ -1282,7 +1286,9 @@
                     "parent_title": "officia elit magna irure",
                     "year": 1565
                 },
-                "report_number": "commodo",
+                "report_numbers": [
+                    "commodo"
+                ],
                 "texkey": "non laboris do aliqua ullamco",
                 "title": {
                     "source": "dolor",

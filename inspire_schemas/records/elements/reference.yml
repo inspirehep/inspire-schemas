@@ -189,7 +189,7 @@ properties:
                 minimum: 1000
                 type: integer
         type: object
-    report_number:
+    report_numbers:
         description: |-
             :MARC: ``999C5r``
 
@@ -197,7 +197,10 @@ properties:
 
                 If the cited document is only part of a report, use
                 :ref:`publication_info/properties/parent_report_number` instead.
-        type: string
+        items:
+            type: string
+        type: array
+        uniqueItems: true
     texkey:
         description: |-
             :MARC: ``999C5k``
