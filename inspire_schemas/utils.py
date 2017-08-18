@@ -31,6 +31,7 @@ import six
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from pkg_resources import resource_filename
+from unidecode import unidecode
 
 from six.moves.urllib.parse import urlsplit
 
@@ -50,9 +51,12 @@ def split_page_artid(page_artid):
     if not page_artid:
         return None, None, None
 
+    # normalize unicode dashes
+    page_artid = unidecode(six.text_type(page_artid))
+
     if '-' in page_artid:
         # if it has a dash it's a page range
-        page_range = page_artid.split('-')
+        page_range = page_artid.replace('--', '-').split('-')
         if len(page_range) == 2:
             page_start, page_end = page_range
         else:
