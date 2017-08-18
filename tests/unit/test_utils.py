@@ -184,6 +184,15 @@ def test_split_page_artid_artid():
     assert expected == result
 
 
+def test_split_page_artid_unicode_dash():
+    page_string = u'45−47'
+    result = utils.split_page_artid(page_string)
+
+    expected = '45', '47', None
+
+    assert expected == result
+
+
 def test_split_pubnote():
     pubnote = 'J.Testing,42,1-45'
     result = utils.split_pubnote(pubnote)

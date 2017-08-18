@@ -83,6 +83,7 @@ def do_setup():
             'idutils',
             'pyyaml',
             'six',
+            'unidecode',
         ],
         license='GPLv2',
         name='inspire-schemas',
