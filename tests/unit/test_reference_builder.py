@@ -574,6 +574,31 @@ def test_set_publisher():
     assert expected == result
 
 
+def test_add_report_number_handles_several_report_numbers():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_report_number('CMS-B2G-17-001')
+    builder.add_report_number('CERN-EP-2017-184')
+
+    expected = [
+        {
+            'reference': {
+                'report_numbers': [
+                    'CMS-B2G-17-001',
+                    'CERN-EP-2017-184',
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_report_number_handles_arxiv_ids():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
