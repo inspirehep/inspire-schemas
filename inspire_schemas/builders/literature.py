@@ -31,7 +31,7 @@ from functools import wraps
 
 import idutils
 
-from ..utils import normalize_author_name_with_comma, validate
+from ..utils import normalize_author_name, validate
 
 EMPTIES = [None, '', [], {}]
 
@@ -232,7 +232,7 @@ class LiteratureBuilder(object):
 
         author = {}
 
-        author['full_name'] = normalize_author_name_with_comma(full_name)
+        author['full_name'] = normalize_author_name(full_name)
 
         if affiliations is not None:
             author = _add_affiliations(author, affiliations)
