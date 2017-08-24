@@ -226,8 +226,8 @@ def normalize_author_name(author):
 
     def _ensure_dotted_initials(author_name):
         if _is_initial(author_name) and '.' not in author_name:
-            seq = (author_name, '.')
-            author_name = ''.join(seq)
+            seq = (author_name, u'.')
+            author_name = u''.join(seq)
         return author_name
 
     name = HumanName(author)
@@ -236,9 +236,9 @@ def normalize_author_name(author):
     name.middle = _ensure_dotted_initials(name.middle)
 
     if _is_initial(name.first) and _is_initial(name.middle):
-        normalized_names = '{first_name}{middle_name}'
+        normalized_names = u'{first_name}{middle_name}'
     else:
-        normalized_names = '{first_name} {middle_name}'
+        normalized_names = u'{first_name} {middle_name}'
 
     normalized_names = normalized_names.format(
         first_name=name.first,
@@ -246,7 +246,7 @@ def normalize_author_name(author):
     )
 
     normalized_names.strip()
-    final_name = ', '.join(
+    final_name = u', '.join(
         part for part in (name.last, normalized_names) if part
     ).strip()
 

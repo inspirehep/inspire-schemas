@@ -250,3 +250,9 @@ def test_normalize_author_name_handles_jimmy():  # http://jimmy.pink
     expected = 'Jimmy'
 
     assert expected == utils.normalize_author_name('Jimmy')
+
+
+def test_normalize_author_name_handles_unicode():
+    expected = u'蕾拉'
+
+    assert expected == utils.normalize_author_name(u'蕾拉')
