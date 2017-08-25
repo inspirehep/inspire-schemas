@@ -173,7 +173,7 @@ properties:
             parent_report_number:
                 description: |-
                     :MARC: ``999C5r`` but not distinguished from the cited
-                        document :ref:`reference.json#/properties/report_number`.
+                        document :ref:`reference.json#/properties/report_numbers`.
                 type: string
             parent_title:
                 description: |-
