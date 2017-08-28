@@ -253,6 +253,7 @@ def test_normalize_author_name_handles_names_with_several_last_names():
 
 
 def test_normalize_author_name_handles_jimmy():  # http://jimmy.pink
+
     expected = 'Jimmy'
 
     assert expected == utils.normalize_author_name('Jimmy')

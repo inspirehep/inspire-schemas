@@ -32,7 +32,6 @@ from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from nameparser import HumanName
 from nameparser.config import Constants
-from nameparser.config.suffixes import SUFFIX_NOT_ACRONYMS
 from pkg_resources import resource_filename
 from unidecode import unidecode
 
