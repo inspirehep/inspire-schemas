@@ -313,5 +313,8 @@ properties:
             $ref: elements/url.json
         type: array
         uniqueItems: true
+required:
+- journal_title
+- short_title
 title: A record representing a Journal
 type: object
