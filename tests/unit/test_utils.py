@@ -203,14 +203,12 @@ def test_split_pubnote():
 
 
 def test_normalize_author_name_full():
-
     expected = 'Smith, John Peter'
 
     assert expected == utils.normalize_author_name('Smith, John Peter')
 
 
 def test_normalize_author_name_handles_names_with_first_initial():
-
     expected = 'Smith, J. Peter'
 
     assert expected == utils.normalize_author_name('Smith, J Peter')
@@ -219,7 +217,6 @@ def test_normalize_author_name_handles_names_with_first_initial():
 
 
 def test_normalize_author_name_handles_names_with_middle_initial():
-
     expected = 'Smith, John P.'
 
     assert expected == utils.normalize_author_name('Smith, John P.')
@@ -228,7 +225,6 @@ def test_normalize_author_name_handles_names_with_middle_initial():
 
 
 def test_normalize_author_name_handles_names_with_dots_initials():
-
     expected = 'Smith, J.P.'
 
     assert expected == utils.normalize_author_name('Smith, J. P.')
@@ -238,7 +234,6 @@ def test_normalize_author_name_handles_names_with_dots_initials():
 
 
 def test_normalize_author_name_handles_names_with_spaces():
-
     expected = 'Smith, J.P.'
 
     assert expected == utils.normalize_author_name('Smith, J P ')
@@ -246,14 +241,12 @@ def test_normalize_author_name_handles_names_with_spaces():
 
 
 def test_normalize_author_name_handles_names_with_several_last_names():
-
     expected = 'Smith Davis, J.P.'
 
     assert expected == utils.normalize_author_name('Smith Davis, J.P.')
 
 
 def test_normalize_author_name_handles_jimmy():  # http://jimmy.pink
-
     expected = 'Jimmy'
 
     assert expected == utils.normalize_author_name('Jimmy')
@@ -265,32 +258,15 @@ def test_normalize_author_name_handles_unicode():
     assert expected == utils.normalize_author_name(u'蕾拉')
 
 
-def test_normalize_author_name_handles_suffixes():
-
-    expected = 'Smith, John, Jr.'
-
-    assert expected == utils.normalize_author_name('Smith, John Jr')
-    assert expected == utils.normalize_author_name('Smith, John Jr ')
-    assert expected == utils.normalize_author_name('Smith, John Jr.')
-    assert expected == utils.normalize_author_name('Smith, John Jr. ')
-
-    expected = 'Smith, John, III'
-
-    assert expected == utils.normalize_author_name('Smith, John III')
-    assert expected == utils.normalize_author_name('Smith, John III ')
-    assert expected == utils.normalize_author_name('Smith, John iii')
-    assert expected == utils.normalize_author_name('Smith, John iii ')
-
-    expected = 'Smith, John, VIII'
-
-    assert expected == utils.normalize_author_name('Smith, John VIII')
-    assert expected == utils.normalize_author_name('Smith, John VIII ')
-    assert expected == utils.normalize_author_name('Smith, John viii')
-    assert expected == utils.normalize_author_name('Smith, John viii ')
-
-    expected = 'Smith, John, IV'
-
-    assert expected == utils.normalize_author_name('Smith, John IV')
-    assert expected == utils.normalize_author_name('Smith, John IV ')
-    assert expected == utils.normalize_author_name('Smith, John iv')
-    assert expected == utils.normalize_author_name('Smith, John iv ')
+@pytest.mark.parametrize("input_author_name,expected", [
+    ('Smith, John Jr', 'Smith, John, Jr.'),
+    ('Smith, John Jr.', 'Smith, John, Jr.'),
+    ('Smith, John III', 'Smith, John, III'),
+    ('Smith, John iii', 'Smith, John, III'),
+    ('Smith, John VIII', 'Smith, John, VIII'),
+    ('Smith, John viii', 'Smith, John, VIII'),
+    ('Smith, John IV', 'Smith, John, IV'),
+    ('Smith, John iv', 'Smith, John, IV'),
+])
+def test_normalize_author_name_handles_suffixes(input_author_name, expected):
+    assert utils.normalize_author_name(input_author_name) == expected

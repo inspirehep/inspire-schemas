@@ -32,7 +32,6 @@ from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from nameparser import HumanName
 from nameparser.config import Constants
-from nameparser.config.capitalization import CAPITALIZATION_EXCEPTIONS
 from nameparser.config.suffixes import SUFFIX_NOT_ACRONYMS
 from pkg_resources import resource_filename
 from unidecode import unidecode
@@ -230,11 +229,11 @@ def normalize_author_name(author):
     for suff in roman_numeral_suffixes:
         constants.suffix_not_acronyms.add(suff)
 
-    def _is_initial_or_dotted_suffix(author_name):
+    def _is_initial(author_name):
         return len(author_name) == 1 or u'.' in author_name
 
     def _ensure_dotted_initials(author_name):
-        if _is_initial_or_dotted_suffix(author_name)\
+        if _is_initial(author_name)\
                 and u'.' not in author_name:
             seq = (author_name, u'.')
             author_name = u''.join(seq)
@@ -246,20 +245,20 @@ def normalize_author_name(author):
             author_suffix = u''.join(seq)
         return author_suffix
 
-    def _is_roman_numeral(numeral):
+    def _is_roman_numeral(suffix):
         """Controls that the userinput only contains valid roman numerals"""
         validRomanNumerals = [u'M', u'D', u'C', u'L', u'X',
                               u'V', u'I', u'(', u')']
-        return all([letters in validRomanNumerals
-                    for letters in numeral.upper()])
+        return all(letters in validRomanNumerals
+                   for letters in suffix.upper())
 
     name = HumanName(author, constants=constants)
 
     name.first = _ensure_dotted_initials(name.first)
     name.middle = _ensure_dotted_initials(name.middle)
 
-    if _is_initial_or_dotted_suffix(name.first) \
-       and _is_initial_or_dotted_suffix(name.middle):
+    if _is_initial(name.first) \
+       and _is_initial(name.middle):
         normalized_names = u'{first_name}{middle_name}'
     else:
         normalized_names = u'{first_name} {middle_name}'
@@ -277,6 +276,6 @@ def normalize_author_name(author):
     normalized_names.strip()
     final_name = u', '.join(
         part for part in (name.last, normalized_names.rstrip(), suffix)
-        if part).strip()
+        if part)
 
     return final_name
