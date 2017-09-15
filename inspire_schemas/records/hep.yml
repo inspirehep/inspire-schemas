@@ -540,6 +540,17 @@ properties:
             type: string
         type: array
         uniqueItems: true
+    curated:
+        description: |-
+            :MARC: `500__a` containing `*Temporary entry*`, `*Temporary
+                record*` or `*Brief entry*` correspond to `false`, otherwise it
+                is `true`.
+
+            Whether this record has been curated by a human, to ensure the
+            quality standards of Inspire. Records having the :ref:`core` flag
+            are all curated eventually, whereas non-core records are
+            not systematically curated.
+        type: boolean
     deleted:
         description: |-
             :MARC: ``980__a/c:deleted``
