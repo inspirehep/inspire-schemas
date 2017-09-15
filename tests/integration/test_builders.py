@@ -127,7 +127,7 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.add_collaboration(collaboration=input_data_hep['collaboration'])
     builder.add_acquisition_source(
         method=input_data_hep['method'],
-        submission_number=input_data_hep['submission_number'],
+        holdingpen_record=input_data_hep['holdingpen_record'],
         internal_uid=input_data_hep['internal_uid'],
         email=input_data_hep['email'],
         orcid=input_data_hep['orcid']

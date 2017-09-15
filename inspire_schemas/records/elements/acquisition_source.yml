@@ -40,7 +40,7 @@ properties:
             `submitter`
                 when obtained from a user submission. In this case, `orcid`,
                 `internal_uid` and `email` store identifiers of the submitter,
-                and `submission_number` an ID of the submission.
+                and `holdingpen_record` a json_reference to the holdingpen record.
 
             `oai`
                 when obtained by OAI-PMH harvesting.
@@ -68,12 +68,10 @@ properties:
         type: string
     source:
         $ref: source.json
-    submission_number:
+    holdingpen_record:
         description: |-
             :MARC: ``541__e``
-
-            This only gets populated when `method` is `submitter`.
-        title: Holding pen record ID of the submission
+        title: json_reference to the holdingpen record.
         type: string
 title: Origin of the metadata in the record
 type: object
