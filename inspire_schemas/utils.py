@@ -245,9 +245,8 @@ def normalize_author_name(author):
         middle_name=name.middle,
     )
 
-    normalized_names.strip()
     final_name = u', '.join(
-        part for part in (name.last, normalized_names) if part
+        part for part in (name.last, normalized_names.rstrip()) if part
     ).strip()
 
     return final_name
