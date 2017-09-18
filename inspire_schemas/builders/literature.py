@@ -205,21 +205,21 @@ class LiteratureBuilder(object):
         """
         self._append_to('authors', author)
 
-    @staticmethod
-    def make_author(full_name, affiliations=None, roles=None):
-        """Make a dictionary that is representing an author.
+    def make_author(self, full_name, affiliations=None, roles=None,
+                    raw_affiliations=None, source=None):
+        """Make a subrecord representing an author.
 
-        :param full_name: author full name
-        Format: surname, name
-        :type full_name: string
+        Args:
+            full_name(str): full name of the author. If not yet in standard
+                Inspire form, it will be normalized.
+            affiliations(list): Inspire normalized affiliations of the author.
+            roles(list): Inspire roles of the author.
+            raw_affiliations(list): raw affiliation strings of the author.
+            source(str): source for the affiliations when
+                ``affiliations_normalized`` is ``False``.
 
-        :param affiliations: author affiliations
-        :type affiliations: list
-
-        :param roles: it tells the roles of the current author
-        :type roles: list
-
-        :rtype: dict
+        Returns:
+            dict: a schema-compliant subrecord.
         """
         def _add_affiliations(author, affiliations):
             author.setdefault('affiliations', [])
@@ -230,12 +230,25 @@ class LiteratureBuilder(object):
                     })
             return author
 
+        def _add_raw_affiliations(author, raw_affiliations, source):
+            author.setdefault('raw_affiliations', [])
+            for raw_affiliation in raw_affiliations:
+                if raw_affiliation:
+                    author['raw_affiliations'].append({
+                        'value': raw_affiliation,
+                        'source': self._get_source(source),
+                    })
+            return author
+
         author = {}
 
         author['full_name'] = normalize_author_name(full_name)
 
-        if affiliations is not None:
+        if affiliations:
             author = _add_affiliations(author, affiliations)
+
+        if raw_affiliations:
+            author = _add_raw_affiliations(author, raw_affiliations, source)
 
         if isinstance(roles, list):
             author['inspire_roles'] = roles

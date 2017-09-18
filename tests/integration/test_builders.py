@@ -68,7 +68,8 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     author = builder.make_author(
         full_name=input_data_hep['full_name'],
         affiliations=input_data_hep['affiliations'],
-        roles=input_data_hep['roles']
+        roles=input_data_hep['roles'],
+        raw_affiliations=input_data_hep['raw_affiliations'],
     )
     builder.add_author(author)
 
