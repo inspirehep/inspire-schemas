@@ -42,6 +42,8 @@ properties:
                     type: string
                 record:
                     $ref: elements/json_reference.json
+            required:
+            - name
             type: object
         minItems: 1
         type: array
