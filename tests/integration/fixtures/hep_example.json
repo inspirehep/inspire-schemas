@@ -137,11 +137,11 @@
     "acquisition_source": {
         "datetime": "4655-08-10T13:24:39.377Z",
         "email": "YMD@FNozTaLqsdeiHRpHEe.gmlg",
+        "holdingpen_record": "Lorem ad reprehenderit sed esse",
         "internal_uid": 33119180,
         "method": "submitter",
         "orcid": "7517-2459-3361-8685",
-        "source": "do occaecat voluptate elit veniam",
-        "submission_number": "Lorem ad reprehenderit sed esse"
+        "source": "do occaecat voluptate elit veniam"
     },
     "arxiv_eprints": [
         {

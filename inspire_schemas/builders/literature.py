@@ -612,7 +612,7 @@ class LiteratureBuilder(object):
         self,
         method,
         date=None,
-        submission_number=None,
+        holdingpen_record=None,
         internal_uid=None,
         email=None,
         orcid=None,
@@ -621,7 +621,7 @@ class LiteratureBuilder(object):
     ):
         """Add acquisition source.
 
-        :type submission_number: integer
+        :type holdingpen_record: string
 
         :type email: integer
 
@@ -655,7 +655,7 @@ class LiteratureBuilder(object):
 
         acquisition_source = {}
 
-        acquisition_source['submission_number'] = str(submission_number)
+        acquisition_source['holdingpen_record'] = holdingpen_record
         acquisition_source['source'] = self._get_source(source)
         for key in ('datetime', 'email', 'method', 'orcid', 'internal_uid'):
             if locals()[key] is not None:
