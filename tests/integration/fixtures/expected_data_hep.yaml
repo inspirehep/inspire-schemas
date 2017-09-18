@@ -27,6 +27,16 @@
          "inspire_roles":[
             "author",
             "editor"
+         ],
+         "raw_affiliations":[
+            {
+               "value": "Institute of Modern Physics, Chinese Academy of Sciences, 730000 Lanzhou, China",
+               "source": "submitter"
+            },
+            {
+               "value": "University of Chinese Academy of Sciences, 100049 Beijing, China",
+               "source": "submitter"
+            }
          ]
       }
    ],

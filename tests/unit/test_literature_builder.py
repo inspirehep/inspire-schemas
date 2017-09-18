@@ -84,6 +84,44 @@ def test_append_to():
     assert builder.record.get('test_field_2') == expected_result
 
 
+def test_sourced_dict_local_source():
+    builder = LiteratureBuilder('global')
+
+    expected = {
+        'source': 'local',
+        'value': 'foo'
+    }
+
+    result = builder._sourced_dict('local', value='foo')
+
+    assert result == expected
+
+
+def test_sourced_dict_global_source():
+    builder = LiteratureBuilder('global')
+
+    expected = {
+        'source': 'global',
+        'value': 'foo'
+    }
+
+    result = builder._sourced_dict(None, value='foo')
+
+    assert result == expected
+
+
+def test_sourced_dict_no_source():
+    builder = LiteratureBuilder()
+
+    expected = {
+        'value': 'foo'
+    }
+
+    result = builder._sourced_dict(None, value='foo')
+
+    assert result == expected
+
+
 def test_add_figure():
     schema = load_schema('hep')
     subschema = schema['properties']['figures']
