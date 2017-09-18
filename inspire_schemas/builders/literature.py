@@ -90,7 +90,7 @@ def is_citeable(publication_info):
 class LiteratureBuilder(object):
     """Literature record builder."""
 
-    def __init__(self, source, record=None):
+    def __init__(self, source=None, record=None):
         """Init method.
 
         :param source: sets the default value for the 'source' fields
@@ -130,10 +130,14 @@ class LiteratureBuilder(object):
             self.record
         )
 
-    def _get_source(self, source):
-        if source is not None:
-            return source
-        return self.source
+    def _sourced_dict(self, source=None, **kwargs):
+        """Like ``dict(**kwargs)``, but where the ``source`` key is special.
+        """
+        if source:
+            kwargs['source'] = source
+        elif self.source:
+            kwargs['source'] = self.source
+        return kwargs
 
     def validate_record(self):
         """Validate the record in according to the hep schema."""
@@ -149,10 +153,10 @@ class LiteratureBuilder(object):
         :param source: source for the given abstract.
         :type source: string
         """
-        self._append_to('abstracts', {
-            'value': abstract.strip(),
-            'source': self._get_source(source),
-        })
+        self._append_to('abstracts', self._sourced_dict(
+            source,
+            value=abstract.strip(),
+        ))
 
     @filter_empty_parameters
     def add_arxiv_eprint(self, arxiv_id, arxiv_categories):
@@ -186,10 +190,10 @@ class LiteratureBuilder(object):
         if not idutils.normalize_doi(doi):
             return
 
-        dois = {
-            'value': doi,
-            'source': self._get_source(source)
-        }
+        dois = self._sourced_dict(
+            source,
+            value=doi
+        )
         if material is not None:
             dois['material'] = material
 
@@ -234,10 +238,10 @@ class LiteratureBuilder(object):
             author.setdefault('raw_affiliations', [])
             for raw_affiliation in raw_affiliations:
                 if raw_affiliation:
-                    author['raw_affiliations'].append({
-                        'value': raw_affiliation,
-                        'source': self._get_source(source),
-                    })
+                    author['raw_affiliations'].append(self._sourced_dict(
+                        source,
+                        value=raw_affiliation,
+                    ))
             return author
 
         author = {}
@@ -333,8 +337,10 @@ class LiteratureBuilder(object):
         :type source: string
         """
         for category in subject_terms:
-            category_dict = {'term': category,
-                             'source': self._get_source(source)}
+            category_dict = self._sourced_dict(
+                source,
+                term=category,
+            )
             self._append_to('inspire_categories', category_dict)
 
     @filter_empty_parameters
@@ -347,10 +353,10 @@ class LiteratureBuilder(object):
         :param source: source for the given private notes
         :type source: string
         """
-        self._append_to('_private_notes', {
-            'value': private_notes,
-            'source': self._get_source(source),
-        })
+        self._append_to('_private_notes', self._sourced_dict(
+            source,
+            value=private_notes,
+        ))
 
     @filter_empty_parameters
     def add_publication_info(
@@ -541,10 +547,10 @@ class LiteratureBuilder(object):
         :param source: source for the given notes.
         :type source: string
         """
-        self._append_to('public_notes', {
-            'value': public_note,
-            'source': self._get_source(source),
-        })
+        self._append_to('public_notes', self._sourced_dict(
+            source,
+            value=public_note,
+        ))
 
     @filter_empty_parameters
     def add_title(self, title, source=None):
@@ -556,10 +562,10 @@ class LiteratureBuilder(object):
         :param source: source for the given title
         :type source: string
         """
-        self._append_to('titles', {
-            'title': title,
-            'source': self._get_source(source),
-        })
+        self._append_to('titles', self._sourced_dict(
+            source,
+            title=title,
+        ))
 
     @filter_empty_parameters
     def add_title_translation(self, title, language=None, source=None):
@@ -574,10 +580,10 @@ class LiteratureBuilder(object):
         :param source: source for the given title
         :type source: string
         """
-        title_translation = {
-            'title': title,
-            'source': self._get_source(source),
-        }
+        title_translation = self._sourced_dict(
+            source,
+            title=title,
+        )
         if language is not None:
             title_translation['language'] = language
 
@@ -604,10 +610,10 @@ class LiteratureBuilder(object):
         :param source: source for the given report number
         :type source: string
         """
-        self._append_to('report_numbers', {
-            'value': report_number,
-            'source': self._get_source(source),
-        })
+        self._append_to('report_numbers', self._sourced_dict(
+            source,
+            value=report_number,
+        ))
 
     @filter_empty_parameters
     def add_collaboration(self, collaboration):
@@ -664,12 +670,9 @@ class LiteratureBuilder(object):
             warnings.warn("Use 'datetime', not 'date'", DeprecationWarning)
             datetime = date
 
-        self.record.setdefault('acquisition_source', {})
-
-        acquisition_source = {}
+        acquisition_source = self._sourced_dict(source)
 
         acquisition_source['submission_number'] = str(submission_number)
-        acquisition_source['source'] = self._get_source(source)
         for key in ('datetime', 'email', 'method', 'orcid', 'internal_uid'):
             if locals()[key] is not None:
                 acquisition_source[key] = locals()[key]
@@ -792,12 +795,10 @@ class LiteratureBuilder(object):
         url=None,
     ):
         """Add a figure."""
-        figure = {}
+        figure = self._sourced_dict(source)
 
         if key:
             figure['key'] = key
-
-        figure['source'] = self._get_source(source)
 
         for key in ('caption', 'label', 'material', 'url'):
             if locals()[key] is not None:
@@ -819,12 +820,10 @@ class LiteratureBuilder(object):
         url=None,
     ):
         """Add a document."""
-        document = {}
+        document = self._sourced_dict(source)
 
         if key:
             document['key'] = key
-
-        document['source'] = self._get_source(source)
 
         for key in (
             'description',
