@@ -209,53 +209,97 @@ class LiteratureBuilder(object):
         """
         self._append_to('authors', author)
 
-    def make_author(self, full_name, affiliations=None, roles=None,
-                    raw_affiliations=None, source=None):
+    @filter_empty_parameters
+    def make_author(self, full_name,
+                    affiliations=None,
+                    roles=None,
+                    raw_affiliations=None,
+                    source=None,
+                    ids=None,
+                    emails=None,
+                    alternative_names=None):
         """Make a subrecord representing an author.
 
         Args:
             full_name(str): full name of the author. If not yet in standard
                 Inspire form, it will be normalized.
-            affiliations(list): Inspire normalized affiliations of the author.
-            roles(list): Inspire roles of the author.
-            raw_affiliations(list): raw affiliation strings of the author.
+            affiliations(List[str]): Inspire normalized affiliations of the
+                author.
+            roles(List[str]): Inspire roles of the author.
+            raw_affiliations(List[str]): raw affiliation strings of the author.
             source(str): source for the affiliations when
                 ``affiliations_normalized`` is ``False``.
+            ids(List[Tuple[str,str]]): list of ids of the author, whose
+                elements are of the form ``(schema, value)``.
+            emails(List[str]): email addresses of the author.
+            alternative_names(List[str]): alternative names of the author.
 
         Returns:
             dict: a schema-compliant subrecord.
         """
         def _add_affiliations(author, affiliations):
+            if affiliations is None:
+                return
+
             author.setdefault('affiliations', [])
-            for affiliation in affiliations:
-                if affiliation:
-                    author['affiliations'].append({
-                        'value': affiliation
-                    })
-            return author
+            for affiliation in filter(bool, affiliations):
+                author['affiliations'].append({
+                    'value': affiliation
+                })
 
         def _add_raw_affiliations(author, raw_affiliations, source):
+            if raw_affiliations is None:
+                return
+
             author.setdefault('raw_affiliations', [])
-            for raw_affiliation in raw_affiliations:
-                if raw_affiliation:
-                    author['raw_affiliations'].append(self._sourced_dict(
-                        source,
-                        value=raw_affiliation,
-                    ))
-            return author
+            for raw_affiliation in filter(bool, raw_affiliations):
+                author['raw_affiliations'].append(self._sourced_dict(
+                    source,
+                    value=raw_affiliation,
+                ))
+
+        def _add_emails(author, emails):
+            if emails is None:
+                return
+
+            author.setdefault('emails', []).extend(filter(bool, emails))
+
+        def _add_ids(author, ids):
+            if ids is None:
+                return
+
+            author.setdefault('ids', [])
+            for schema, value in ids:
+                if value:
+                    author['ids'].append({
+                        'schema': schema,
+                        'value': value,
+                    })
+
+        def _add_alternative_names(author, alternative_names):
+            if alternative_names is None:
+                return
+
+            author.setdefault('alternative_names', []).extend(
+                filter(bool, alternative_names)
+            )
+
+        def _add_inspire_roles(author, inspire_roles):
+            if inspire_roles is None:
+                return
+
+            author.setdefault('inspire_roles', []).extend(filter(bool, roles))
 
         author = {}
 
         author['full_name'] = normalize_author_name(full_name)
 
-        if affiliations:
-            author = _add_affiliations(author, affiliations)
-
-        if raw_affiliations:
-            author = _add_raw_affiliations(author, raw_affiliations, source)
-
-        if isinstance(roles, list):
-            author['inspire_roles'] = roles
+        _add_affiliations(author, affiliations)
+        _add_raw_affiliations(author, raw_affiliations, source)
+        _add_emails(author, emails)
+        _add_ids(author, ids)
+        _add_alternative_names(author, alternative_names)
+        _add_inspire_roles(author, roles)
 
         return author
 
