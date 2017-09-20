@@ -553,19 +553,26 @@ class LiteratureBuilder(object):
         ))
 
     @filter_empty_parameters
-    def add_title(self, title, source=None):
+    def add_title(self, title, subtitle=None, source=None):
         """Add title.
 
         :param title: title for the current document
         :type title: string
 
+        :param subtitle: subtitle for the current document
+        :type subtitle: string
+
         :param source: source for the given title
         :type source: string
         """
-        self._append_to('titles', self._sourced_dict(
+        title_entry = self._sourced_dict(
             source,
             title=title,
-        ))
+        )
+        if subtitle is not None:
+            title_entry['subtitle'] = subtitle
+
+        self._append_to('titles', title_entry)
 
     @filter_empty_parameters
     def add_title_translation(self, title, language=None, source=None):

@@ -46,7 +46,8 @@
    "titles":[
       {
          "source":"submitter",
-         "title":"OBSERVACIONS DE DOPPLER EN IMPULSAR CORBES DE LLUM KEPLER"
+         "title":"OBSERVACIONS DE DOPPLER EN IMPULSAR CORBES DE LLUM KEPLER",
+         "subtitle":"Aquest subtìtol ha estat introduït manualmentt, no és real."
       }
    ],
    "publication_info":[
