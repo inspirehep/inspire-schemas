@@ -256,3 +256,25 @@ def test_normalize_author_name_handles_unicode():
     expected = u'蕾拉'
 
     assert expected == utils.normalize_author_name(u'蕾拉')
+
+
+@pytest.mark.parametrize("input_author_name,expected", [
+    ('Smith, John Jr', 'Smith, John, Jr.'),
+    ('Smith, John Jr.', 'Smith, John, Jr.'),
+    ('Smith, John III', 'Smith, John, III'),
+    ('Smith, John iii', 'Smith, John, III'),
+    ('Smith, John VIII', 'Smith, John, VIII'),
+    ('Smith, John viii', 'Smith, John, VIII'),
+    ('Smith, John IV', 'Smith, John, IV'),
+    ('Smith, John iv', 'Smith, John, IV'),
+])
+def test_normalize_author_name_handles_suffixes(input_author_name, expected):
+    assert utils.normalize_author_name(input_author_name) == expected
+
+
+@pytest.mark.parametrize("input_author_name,expected", [
+    ('Sir John Smith', 'Smith, John'),
+    ('Bao, Hon', 'Bao, Hon'),
+])
+def test_normalize_author_name_handles_titles(input_author_name, expected):
+    assert utils.normalize_author_name(input_author_name) == expected
