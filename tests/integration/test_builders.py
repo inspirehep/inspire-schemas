@@ -115,7 +115,8 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         public_note=input_data_hep['public_note']
     )
     builder.add_title(
-        title=input_data_hep['title']
+        title=input_data_hep['title'],
+        subtitle=input_data_hep['subtitle'],
     )
     builder.add_title_translation(
         title=input_data_hep['title'],
