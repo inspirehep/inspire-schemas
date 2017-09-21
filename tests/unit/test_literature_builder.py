@@ -25,7 +25,7 @@
 import pytest
 
 from inspire_schemas.builders.literature import LiteratureBuilder, is_citeable
-from inspire_schemas.utils import load_schema
+from inspire_schemas.utils import load_schema, validate
 
 
 @pytest.mark.parametrize(
@@ -132,7 +132,7 @@ def test_add_figure():
         'key',
         caption='caption',
         label='label',
-        material='material',
+        material='publication',
         source='source',
         url='url',
     )
@@ -142,13 +142,14 @@ def test_add_figure():
             'caption': 'caption',
             'key': 'key',
             'label': 'label',
-            'material': 'material',
+            'material': 'publication',
             'source': 'source',
             'url': 'url',
         },
     ]
     result = builder.record
 
+    assert validate(result['figures'], subschema) is None
     assert expected == result['figures']
 
     for key in subschema['items']['properties'].keys():
@@ -166,7 +167,7 @@ def test_add_document():
         description='description',
         fulltext=True,
         hidden=True,
-        material='material',
+        material='preprint',
         original_url='original_url',
         source='source',
         url='url',
@@ -178,7 +179,7 @@ def test_add_document():
             'fulltext': True,
             'hidden': True,
             'key': 'key',
-            'material': 'material',
+            'material': 'preprint',
             'original_url': 'original_url',
             'source': 'source',
             'url': 'url',
@@ -186,7 +187,52 @@ def test_add_document():
     ]
     result = builder.record
 
+    assert validate(result['documents'], subschema) is None
     assert expected == result['documents']
 
     for key in subschema['items']['properties'].keys():
         assert key in result['documents'][0]
+
+
+def test_make_author():
+    schema = load_schema('hep')
+    subschema = schema['properties']['authors']
+    builder = LiteratureBuilder()
+
+    result = builder.make_author(
+        'Smith, John',
+        affiliations=['CERN', 'SLAC'],
+        source='submitter',
+        raw_affiliations=['CERN, 1211 Geneva', 'SLAC, Stanford'],
+        emails=['john.smith@example.org'],
+        ids=[('INSPIRE BAI', 'J.Smith.1')],
+        alternative_names=['Johnny Smith']
+    )
+    expected = {
+        'full_name': 'Smith, John',
+        'affiliations': [
+            {'value': 'CERN'},
+            {'value': 'SLAC'},
+        ],
+        'raw_affiliations': [
+            {
+                'value': 'CERN, 1211 Geneva',
+                'source': 'submitter'
+            },
+            {
+                'value': 'SLAC, Stanford',
+                'source': 'submitter',
+            }
+        ],
+        'emails': ['john.smith@example.org'],
+        'ids': [
+            {
+                'schema': 'INSPIRE BAI',
+                'value': 'J.Smith.1',
+            }
+        ],
+        'alternative_names': ['Johnny Smith'],
+    }
+
+    assert validate([result], subschema) is None
+    assert expected == result
