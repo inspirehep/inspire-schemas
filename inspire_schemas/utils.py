@@ -225,8 +225,10 @@ def normalize_author_name(author):
     constants = Constants()
     roman_numeral_suffixes = [u'v', u'vi', u'vii', u'viii', u'ix', u'x',
                               u'xii', u'xiii', u'xiv', u'xv']
-    for suff in roman_numeral_suffixes:
-        constants.suffix_not_acronyms.add(suff)
+    titles = [u'Dr', u'Prof', u'Professor', u'Sir', u'Editor', u'Ed', u'Mr',
+              u'Mrs', u'Ms', u'Chair', u'Co-Chair', u'Chairs', u'co-Chairs']
+    constants.titles.remove(*constants.titles).add(*titles)
+    constants.suffix_not_acronyms.add(*roman_numeral_suffixes)
 
     def _is_initial(author_name):
         return len(author_name) == 1 or u'.' in author_name
