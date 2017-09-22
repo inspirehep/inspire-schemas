@@ -54,6 +54,7 @@
    "refereed":true,
    "withdrawn":true,
    "citeable":true,
+   "curated":true,
    "publisher":"Harvard",
    "place":"London",
    "book_edition":"Second edition",
