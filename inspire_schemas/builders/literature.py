@@ -102,7 +102,7 @@ class LiteratureBuilder(object):
         record, in order to edit an already existent record
         :type record: dict
         """
-        self.record = {} if record is None else record
+        self.record = {'curated': False} if record is None else record
         self.source = source
 
     def _append_to(self, field, element):
@@ -799,41 +799,41 @@ class LiteratureBuilder(object):
         """
         self._append_to('publication_type', publication_type)
 
-    @filter_empty_parameters
-    def set_core(self, core):
-        """Set core value.
+    def set_core(self, core=True):
+        """Set core flag.
 
         :param core: define a core article
         :type core: bool
         """
         self.record['core'] = core
 
-    @filter_empty_parameters
-    def set_refereed(self, refereed):
-        """Set refereed value.
+    def set_refereed(self, refereed=True):
+        """Set refereed flag.
 
         :param refereed: define a refereed article
         :type refereed: bool
         """
         self.record['refereed'] = refereed
 
-    @filter_empty_parameters
-    def set_withdrawn(self, withdrawn):
-        """Set withdrawn value.
+    def set_withdrawn(self, withdrawn=True):
+        """Set withdrawn flag.
 
         :param withdrawn: define a withdrawn article
         :type withdrawn: bool
         """
         self.record['withdrawn'] = withdrawn
 
-    @filter_empty_parameters
-    def set_citeable(self, citeable):
-        """Set citeable value.
+    def set_citeable(self, citeable=True):
+        """Set citeable flag.
 
         :param citeable: define a citeable article
         :type citeable: bool
         """
         self.record['citeable'] = citeable
+
+    def set_curated(self, curated=True):
+        """Set curated flag."""
+        self.record['curated'] = curated
 
     @filter_empty_parameters
     def add_figure(

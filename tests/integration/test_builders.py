@@ -172,5 +172,6 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.set_refereed(refereed=input_data_hep['refereed'])
     builder.set_withdrawn(withdrawn=input_data_hep['withdrawn'])
     builder.set_citeable(citeable=input_data_hep['citeable'])
+    builder.set_curated(curated=input_data_hep['curated'])
     assert builder.validate_record() is None
     assert builder.record == expected_data_hep

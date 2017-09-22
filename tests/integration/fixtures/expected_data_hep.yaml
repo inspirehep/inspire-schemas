@@ -78,6 +78,7 @@
    ],
    "refereed":true,
    "citeable":true,
+   "curated":true,
    "copyright":[
       {
          "url":"http://copyright.web.cern.ch/",
