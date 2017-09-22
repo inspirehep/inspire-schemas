@@ -22,18 +22,14 @@ properties:
         title: List of affiliation identifiers
         type: array
     _collections:
-        description: |-
-            Used by `invenio-collections` to store the collections this record
-            belongs to.
-
-            .. note::
-
-                This field is maintained by `invenio-collections` and should
-                not be edited manually.
         items:
+            enum:
+            - Institutions
             type: string
-        title: '`invenio-collections` metadata'
+        minItems: 1
+        title: Collections to which this record belongs
         type: array
+        uniqueItems: true
     _private_notes:
         description: |-
             :MARC: ``595``, ``667``
@@ -274,5 +270,7 @@ properties:
             $ref: elements/url.json
         type: array
         uniqueItems: true
+required:
+- _collections
 title: A record representing an Institution
 type: object

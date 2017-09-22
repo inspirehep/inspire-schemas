@@ -8,18 +8,13 @@ properties:
         format: url
         type: string
     _collections:
-        description: |-
-            Used by `invenio-collections` to store the collections this record
-            belongs to.
-
-            .. note::
-
-                This field is maintained by `invenio-collections` and should
-                not be edited manually.
         items:
+            enum:
+            - Experiments
             type: string
-        title: '`invenio-collections` metadata'
+        title: Collections to which this record belongs
         type: array
+        uniqueItems: true
     _full_ingestion:
         title: Whether to ingest all articles written by this project
         type: boolean
@@ -354,5 +349,6 @@ properties:
         uniqueItems: true
 required:
 - project_type
+- _collections
 title: A collaboration/experiment/accelerator record
 type: object

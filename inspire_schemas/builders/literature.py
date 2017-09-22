@@ -102,7 +102,14 @@ class LiteratureBuilder(object):
         record, in order to edit an already existent record
         :type record: dict
         """
-        self.record = {'curated': False} if record is None else record
+        if record is None:
+            self.record = {
+                '_collections': ['Literature'],
+                'curated': False,
+            }
+        else:
+            self.record = record
+
         self.source = source
 
     def _append_to(self, field, element):
@@ -781,13 +788,13 @@ class LiteratureBuilder(object):
         self.record['number_of_pages'] = number_of_pages
 
     @filter_empty_parameters
-    def add_special_collection(self, special_collection):
-        """Add special_collection.
+    def add_collection(self, collection):
+        """Add collection.
 
-        :param special_collection: defines the type of the current document
-        :type special_collection: string
+        :param collection: defines the type of the current document
+        :type collection: string
         """
-        self._append_to('special_collections', special_collection)
+        self._append_to('_collections', collection)
 
     @filter_empty_parameters
     def add_publication_type(self, publication_type):
