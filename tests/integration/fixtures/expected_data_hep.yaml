@@ -1,4 +1,8 @@
 {
+   "_collections":[
+      "Literature",
+      "H1 Preliminary Notes"
+   ],
    "preprint_date":"2013-06-19",
    "thesis_info":{
       "date":"2014-08-11",
@@ -39,9 +43,6 @@
             }
          ]
       }
-   ],
-   "special_collections":[
-      "H1-PRELIMINARY-NOTE"
    ],
    "titles":[
       {

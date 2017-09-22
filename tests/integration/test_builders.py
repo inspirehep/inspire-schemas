@@ -145,8 +145,8 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.add_number_of_pages(
         number_of_pages=input_data_hep['number_of_pages']
     )
-    builder.add_special_collection(
-        special_collection=input_data_hep['special_collection']
+    builder.add_collection(
+        collection=input_data_hep['collection']
     )
     builder.add_publication_type(
         publication_type=input_data_hep['publication_type']

@@ -5,18 +5,14 @@ properties:
         format: url
         type: string
     _collections:
-        description: |-
-            Used by `invenio-collections` to store the collections this record
-            belongs to.
-
-            .. note::
-
-                This field is maintained by `invenio-collections` and should
-                not be edited manually.
         items:
+            enum:
+            - Journals
             type: string
-        title: '`invenio-collections` metadata'
+        minItems: 1
+        title: Collections to which this record belongs
         type: array
+        uniqueItems: true
     _harvesting_info:
         additionalProperties: false
         description: |-
@@ -316,5 +312,6 @@ properties:
 required:
 - journal_title
 - short_title
+- _collections
 title: A record representing a Journal
 type: object

@@ -6,8 +6,13 @@ properties:
         type: string
     _collections:
         items:
+            enum:
+            - Jobs
             type: string
+        minItems: 1
+        title: Collections to which this record belongs
         type: array
+        uniqueItems: true
     _private_notes:
         items:
             $ref: elements/sourced_value.json
@@ -152,5 +157,7 @@ properties:
             $ref: elements/url.json
         type: array
         uniqueItems: true
+required:
+- _collections
 title: HEP Job
 type: object

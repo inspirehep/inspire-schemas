@@ -1,10 +1,9 @@
 {
     "_collections": [
-        "dolor eu incididunt",
-        "in in qui",
-        "consequat sint",
-        "deserunt fugiat eiusmod",
-        "reprehenderit anim aliquip aliqua dolor"
+        "D0 Internal Notes",
+        "HERMES Internal Notes",
+        "BABAR Analysis Documents",
+        "BABAR Internal BAIS"
     ],
     "_desy_bookkeeping": [
         {
@@ -1339,12 +1338,6 @@
     "self": {
         "$ref": "http://1@F|-:(pM&"
     },
-    "special_collections": [
-        "CDF-NOTE",
-        "D0-INTERNAL-NOTE",
-        "LARSOFT-INTERNAL-NOTE",
-        "H1-PRELIMINARY-NOTE"
-    ],
     "texkeys": [
         "velit magna in reprehe",
         "Duis tempor in",

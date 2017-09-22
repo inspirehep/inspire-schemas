@@ -6,8 +6,13 @@ properties:
         type: string
     _collections:
         items:
+            enum:
+            - Authors
             type: string
+        minItems: 1
+        title: Collections to which record belongs
         type: array
+        uniqueItems: true
     _private_notes:
         items:
             $ref: elements/sourced_value.json
@@ -266,4 +271,5 @@ properties:
         uniqueItems: true
 required:
 - name
+- _collections
 type: object

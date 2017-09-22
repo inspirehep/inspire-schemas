@@ -6,17 +6,39 @@ properties:
         type: string
     _collections:
         description: |-
-            Used by `invenio-collections` to store the collections this record
-            belongs to.
+            :MARC: ``980__a`` (``HEP`` maps to ``Literature``)
 
-            .. note::
+            Regular Literature records have collection ``Literature`` only.
 
-                This field is maintained by `invenio-collections` and should
-                not be edited manually.
+            The other collections are used by different groups to manage
+            records using the Inspire infrastructure, but which do not belong
+            to the Inspire literature collection. If a record belongs to one
+            of these collections but not ``Literature``, it is not shown in the
+            standard search results.
         items:
+            enum:
+            - BABAR Analysis Documents
+            - BABAR Internal BAIS
+            - BABAR Internal Notes
+            - CDF Internal Notes
+            - CDF Notes
+            - CDS Hidden
+            - D0 Internal Notes
+            - D0 Preliminary Notes
+            - H1 Internal Notes
+            - H1 Preliminary Notes
+            - HAL Hidden
+            - HEP Hidden
+            - HERMES Internal Notes
+            - LArSoft Internal Notes
+            - LArSoft Notes
+            - Literature
+            - ZEUS Internal Notes
+            - ZEUS Preliminary Notes
             type: string
-        title: '`invenio-collections` metadata'
+        title: Collections to which this record belongs
         type: array
+        uniqueItems: true
     _desy_bookkeeping:
         description: |-
             :MARC: ``595_D``
@@ -1418,38 +1440,6 @@ properties:
         uniqueItems: true
     self:
         $ref: elements/json_reference.json
-    special_collections:
-        description: |-
-            :MARC: ``980__a``
-
-            These collections are used by different groups to manage records
-            using the Inspire infrastructure, but which do not belong to
-            the Inspire literature collection.
-            If a record belongs to a special collection, it is not shown in the
-            standard search results.
-        items:
-            enum:
-            - BABAR-ANALYSIS-DOCUMENT
-            - BABAR-INTERNAL-BAIS
-            - BABAR-INTERNAL-NOTE
-            - CDF-INTERNAL-NOTE
-            - CDF-NOTE
-            - CDSHIDDEN
-            - D0-INTERNAL-NOTE
-            - D0-PRELIMINARY-NOTE
-            - H1-INTERNAL-NOTE
-            - H1-PRELIMINARY-NOTE
-            - HALHIDDEN
-            - HEPHIDDEN
-            - HERMES-INTERNAL-NOTE
-            - LARSOFT-INTERNAL-NOTE
-            - LARSOFT-NOTE
-            - ZEUS-INTERNAL-NOTE
-            - ZEUS-PRELIMINARY-NOTE
-            type: string
-        title: Special collections to which this record belongs
-        type: array
-        uniqueItems: true
     texkeys:
         description: |-
             :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
@@ -1567,5 +1557,6 @@ properties:
 required:
 - document_type
 - titles
+- _collections
 title: A record in the Literature collection
 type: object
