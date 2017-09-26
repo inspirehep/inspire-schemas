@@ -23,11 +23,15 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
+import datetime
+import itertools
 import json
 import os
 import re
 
 import six
+from dateutil.parser import parse as parse_date
+from inspire_utils.helpers import maybe_int
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from nameparser import HumanName
@@ -278,3 +282,90 @@ def normalize_author_name(author):
         if part)
 
     return final_name
+
+
+def format_date(year, month=None, day=None):
+    """Format a (potentially incomplete) date given its numeric components.
+
+    If a component is a numeric `str` or an `int` it will be used, otherwise it
+    will be ignored.
+
+    If parsing of textual data is needed, :func:`normalize_date` should be used
+    instead.
+
+    Returns:
+        str: a formatted date, in the form YYYY-MM-DD, YYYY-MM or YYYY
+            (depending on the information present in the date).
+
+    Raises:
+        ValueError: when year does not contain valid data.
+
+    Examples:
+
+        >>> from inspire_schemas.utils import format_date
+        >>> format_date(year=1686, month=6, day=30)
+        '1686-06-30'
+        >>> format_date(year='1686', month='June', day='30')
+        '1686'
+
+        The following snippet can be used to convert legacy conference dates:
+
+        >>> from inspire_schemas.utils import format_date
+        >>> format_date(*'2014-05-00'.split('-'))
+        '2014-05'
+    """
+    # XXX: 0 is not a valid year/month/day
+    non_empty = itertools.takewhile(
+        bool, (maybe_int(part) for part in (year, month, day))
+    )
+    # XXX: this only handles dates after 1000, which should be sufficient
+    formatted = ('{:02d}'.format(part) for part in non_empty)
+    date = '-'.join(formatted)
+    if not date:
+        raise ValueError('impossible to format a date with no valid year')
+
+    return date
+
+
+def normalize_date(date):
+    """Normalize a date.
+
+    This attempts to normalize the input date, given in an arbitrary format, to
+    the format used internally.
+
+    Args:
+        date(str): date to normalize
+
+    Returns:
+        str: normalized date, in the form ``YYYY-MM-DD``, ``YYYY-MM`` or
+            ``YYYY`` (depending on the information present in the date).
+
+    Raises:
+        ValueError: when the date cannot be parsed or no year is present in
+            it.
+
+    Examples:
+        >>> from inspire_schemas.utils import normalize_date
+        >>> normalize_date('30 Jun 1686')
+        '1686-06-30'
+    """
+    # In order to detect partial dates, parse twice with different defaults
+    # and compare the results.
+    default_date1 = datetime.datetime(1, 1, 1)
+    default_date2 = datetime.datetime(2, 2, 2)
+
+    parsed_date1 = parse_date(date, default=default_date1)
+    parsed_date2 = parse_date(date, default=default_date2)
+
+    has_year = parsed_date1.year == parsed_date2.year
+    has_month = parsed_date1.month == parsed_date2.month
+    has_day = parsed_date1.day == parsed_date2.day
+
+    if has_year:
+        year = parsed_date1.year
+    else:
+        raise ValueError('date does not contain a year')
+    month = parsed_date1.month if has_month else None
+    day = parsed_date1.day if has_day else None
+
+    return format_date(year, month, day)

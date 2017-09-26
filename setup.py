@@ -79,8 +79,10 @@ def do_setup():
         description='Inspire JSON schemas and utilities to use them.',
         install_requires=[
             'autosemver',
+            'python-dateutil',
             'jsonschema',
             'idutils',
+            'inspire_utils',
             'nameparser',
             'pyyaml',
             'six',
