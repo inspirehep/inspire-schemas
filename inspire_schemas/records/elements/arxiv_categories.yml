@@ -7,7 +7,6 @@ description: |-
 
     :example: ``math.FA`` instead of its previous name, ``funct-an``
 enum:
-- alg-geom
 - astro-ph
 - astro-ph.CO
 - astro-ph.EP
@@ -66,7 +65,8 @@ enum:
 - cs.SE
 - cs.SI
 - cs.SY
-- dg-ga
+- econ
+- econ.EM
 - gr-qc
 - hep-ex
 - hep-lat
@@ -114,7 +114,6 @@ enum:
 - nlin.SI
 - nucl-ex
 - nucl-th
-- patt-sol
 - physics
 - physics.acc-ph
 - physics.ao-ph
@@ -138,7 +137,6 @@ enum:
 - physics.pop-ph
 - physics.soc-ph
 - physics.space-ph
-- q-alg
 - q-bio
 - q-bio.BM
 - q-bio.CB
@@ -161,7 +159,6 @@ enum:
 - q-fin.ST
 - q-fin.TR
 - quant-ph
-- solv-int
 - stat
 - stat.AP
 - stat.CO
