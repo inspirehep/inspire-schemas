@@ -67,6 +67,10 @@ enum:
 - cs.SY
 - econ
 - econ.EM
+- eess
+- eess.AS
+- eess.IV
+- eess.SP
 - gr-qc
 - hep-ex
 - hep-lat
