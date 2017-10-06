@@ -1263,7 +1263,7 @@ properties:
                         :MARC: ``773__z``
 
                         ISBN of the book of which this document is a part.
-                    pattern: ^(97(8|9))?\d{9}(\d|X)$
+                    pattern: ^\d*[0-9X]$
                     type: string
                 parent_record:
                     $ref: elements/json_reference.json
