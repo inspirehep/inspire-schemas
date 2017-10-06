@@ -278,18 +278,10 @@ def classify_field(value):
             category, otherwise the corresponding INSPIRE category.
 
     """
-    if not value:
-        return None
-    elif not isinstance(value, six.string_types):
-        return None
-    else:
-        casted_value = value.upper()
+    if isinstance(value, six.string_types):
         for name, category in six.iteritems(ARXIV_TO_INSPIRE_CATEGORY_MAPPING):
-            if name.upper() == casted_value:
+            if value.upper() in [name.upper(), category.upper()]:
                 return category
-            elif category.upper() == casted_value:
-                return category
-        return None
 
 
 def split_page_artid(page_artid):
