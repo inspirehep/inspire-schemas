@@ -33,6 +33,70 @@ import six
 from inspire_schemas import errors, utils
 
 
+def test_classify_field_returns_none_on_falsy_value():
+    assert utils.classify_field('') is None
+
+
+def test_classify_field_returns_none_on_non_string_value():
+    assert utils.classify_field(0) is None
+
+
+def test_classify_field_returns_category_if_found_among_keys():
+    expected = 'Math and Math Physics'
+    result = utils.classify_field('alg-geom')
+
+    assert expected == result
+
+
+def test_classify_field_returns_category_if_found_among_values():
+    expected = 'Astrophysics'
+    result = utils.classify_field('Astrophysics')
+
+    assert expected == result
+
+
+def test_classify_field_ignores_case():
+    expected = 'Astrophysics'
+    result = utils.classify_field('ASTRO-PH.CO')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_category_returns_input_for_correct_category():
+    expected = 'hep-th'
+    result = utils.normalize_arxiv_category('hep-th')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_category_returns_input_for_inexistent_category():
+    expected = u'😃'
+    result = utils.normalize_arxiv_category(u'😃')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_category_returns_existing_category_for_obsolete():
+    expected = 'math.FA'
+    result = utils.normalize_arxiv_category('funct-an')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_category_returns_existing_category_for_wrong_caps():
+    expected = 'hep-th'
+    result = utils.normalize_arxiv_category('HeP-Th')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_category_returns_existing_category_when_dot_is_dash():
+    expected = 'math.FA'
+    result = utils.normalize_arxiv_category('math-fa')
+
+    assert expected == result
+
+
 @pytest.mark.parametrize(
     'schema,expected',
     (
