@@ -25,11 +25,11 @@
 from __future__ import absolute_import, division, print_function
 
 import re
+
 import six
+from isbn import ISBN
 
 import idutils
-from isbn import ISBNError
-from isbn.hyphen import ISBNRangeError
 
 from ..utils import split_pubnote
 
@@ -281,17 +281,12 @@ class ReferenceBuilder(object):
             self._ensure_reference_field('publication_info', {})
             self.obj['reference']['publication_info']['cnum'] = uid
         else:
-            # idutils.is_isbn has a different implementation than normalize
-            # isbn. Better to do it like this.
+            # ``idutils.is_isbn`` is too strict in what it accepts.
             try:
-                isbn = idutils.normalize_isbn(uid)
+                isbn = str(ISBN(uid))
                 self._ensure_reference_field('isbn', {})
-                self.obj['reference']['isbn'] = isbn.replace(' ', '').replace(
-                    '-', '')
-            # See https://github.com/nekobcn/isbnid/issues/2 and
-            # https://github.com/nekobcn/isbnid/issues/3 for understanding the
-            # long exception list.
-            except (ISBNError, ISBNRangeError, UnicodeEncodeError):
+                self.obj['reference']['isbn'] = isbn
+            except Exception:
                 self.add_misc(uid)
 
     def add_collaboration(self, collaboration):
