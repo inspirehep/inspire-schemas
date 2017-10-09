@@ -31,7 +31,7 @@ from functools import wraps
 
 import idutils
 
-from ..utils import normalize_author_name, validate
+from ..utils import normalize_author_name, normalize_date, validate
 
 EMPTIES = [None, '', [], {}]
 
@@ -330,7 +330,10 @@ class LiteratureBuilder(object):
 
         imprint = {}
         if date is not None:
-            imprint['date'] = date
+            try:
+                imprint['date'] = normalize_date(date)
+            except ValueError:
+                pass
         if place is not None:
             imprint['place'] = place
         if publisher is not None:
@@ -491,9 +494,12 @@ class LiteratureBuilder(object):
 
         :type imprint_date: string. A formatted date is required (yyyy-mm-dd)
         """
-        self._append_to('imprints', {
-            'date': imprint_date
-        })
+        try:
+            self._append_to('imprints', {
+                    'date': normalize_date(imprint_date)
+            })
+        except ValueError:
+            pass
 
     @filter_empty_parameters
     def add_preprint_date(self, preprint_date):
@@ -501,7 +507,10 @@ class LiteratureBuilder(object):
 
         :type preprint_date: string. A formatted date is required (yyyy-mm-dd)
         """
-        self.record['preprint_date'] = preprint_date
+        try:
+            self.record['preprint_date'] = normalize_date(preprint_date)
+        except ValueError:
+            pass
 
     @filter_empty_parameters
     def add_thesis(
@@ -530,7 +539,10 @@ class LiteratureBuilder(object):
         thesis_item = {}
         for key in ('defense_date', 'date'):
             if locals()[key] is not None:
-                thesis_item[key] = locals()[key]
+                try:
+                    thesis_item[key] = normalize_date(locals()[key])
+                except ValueError:
+                    pass
 
         if degree_type is not None:
             thesis_item['degree_type'] = degree_type.lower()

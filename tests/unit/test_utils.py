@@ -342,3 +342,50 @@ def test_normalize_author_name_handles_suffixes(input_author_name, expected):
 ])
 def test_normalize_author_name_handles_titles(input_author_name, expected):
     assert utils.normalize_author_name(input_author_name) == expected
+
+
+def test_normalize_date_handles_ISO():
+    expected = '1686-06-30'
+    result = utils.normalize_date('1686-06-30')
+
+    assert expected == result
+
+
+def test_normalize_date_handles_year_only():
+    expected = '1686'
+    result = utils.normalize_date('1686')
+
+    assert expected == result
+
+
+def test_normalize_date_handles_year_month():
+    expected = '1686-06'
+    result = utils.normalize_date('1686-06')
+
+    assert expected == result
+
+
+@pytest.mark.xfail(reason='Output is wrong as year has less than 4 digits')
+def test_normalize_date_handles_default_dates():
+    default_date1 = '0001-01-01'
+    default_date2 = '0002-02-02'
+
+    assert default_date1 == utils.normalize_date('0001-01-01')
+    assert default_date2 == utils.normalize_date('0002-02-02')
+
+
+def test_normalize_date_handles_human_friendly_dates():
+    expected = '1686-06-30'
+    result = utils.normalize_date('Fri June 30 1686')
+
+    assert expected == result
+
+
+def test_normalize_date_raises_on_dates_without_year():
+    with pytest.raises(ValueError):
+        utils.normalize_date('Fri June 30')
+
+
+def test_normalize_date_raises_on_unparseable_dates():
+    with pytest.raises(ValueError):
+        utils.normalize_date('Foo')
