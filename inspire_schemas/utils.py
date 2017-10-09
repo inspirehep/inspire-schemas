@@ -79,7 +79,6 @@ _NEW_CATEGORIES = {
 }
 
 ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
-    'alg-geom': 'Math and Math Physics',
     'astro-ph': 'Astrophysics',
     'astro-ph.CO': 'Astrophysics',
     'astro-ph.EP': 'Astrophysics',
@@ -138,7 +137,6 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'cs.SE': 'Computing',
     'cs.SI': 'Computing',
     'cs.SY': 'Computing',
-    'dg-ga': 'Math and Math Physics',
     'gr-qc': 'Gravitation and Cosmology',
     'hep-ex': 'Experiment-HEP',
     'hep-lat': 'Lattice',
@@ -186,7 +184,6 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'nlin.SI': 'Math and Math Physics',
     'nucl-ex': 'Experiment-Nucl',
     'nucl-th': 'Theory-Nucl',
-    'patt-sol': 'Math and Math Physics',
     'physics': 'General Physics',
     'physics.acc-ph': 'Accelerators',
     'physics.ao-ph': 'General Physics',
@@ -209,37 +206,7 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'physics.pop-ph': 'Other',
     'physics.soc-ph': 'Other',
     'physics.space-ph': 'Astrophysics',
-    'q-alg': 'Math and Math Physics',
-    'q-bio': 'Other',
-    'q-bio.BM': 'Other',
-    'q-bio.CB': 'Other',
-    'q-bio.GN': 'Other',
-    'q-bio.MN': 'Other',
-    'q-bio.NC': 'Other',
-    'q-bio.OT': 'Other',
-    'q-bio.PE': 'Other',
-    'q-bio.QM': 'Other',
-    'q-bio.SC': 'Other',
-    'q-bio.TO': 'Other',
-    'q-fin': 'Other',
-    'q-fin.CP': 'Other',
-    'q-fin.EC': 'Other',
-    'q-fin.GN': 'Other',
-    'q-fin.MF': 'Other',
-    'q-fin.PM': 'Other',
-    'q-fin.PR': 'Other',
-    'q-fin.RM': 'Other',
-    'q-fin.ST': 'Other',
-    'q-fin.TR': 'Other',
     'quant-ph': 'General Physics',
-    'solv-int': 'Math and Math Physics',
-    'stat': 'Other',
-    'stat.AP': 'Other',
-    'stat.CO': 'Other',
-    'stat.ME': 'Other',
-    'stat.ML': 'Other',
-    'stat.OT': 'Other',
-    'stat.TH': 'Other',
 }
 
 
@@ -281,20 +248,29 @@ def valid_arxiv_categories():
 
 
 def classify_field(value):
-    """Translate an arXiv category to the corresponding INSPIRE category.
+    """Normalize ``value`` to an Inspire category.
 
     Args:
-        value: arXiv category to translate
+        value(str): an Inspire category to properly case, or an arXiv category
+            to translate to the corresponding Inspire category.
 
     Returns:
-        str: ``None`` if ``value`` is not a string containing a valid arXiv
-            category, otherwise the corresponding INSPIRE category.
+        str: ``None`` if ``value`` is not a non-empty string,
+            otherwise the corresponding Inspire category.
 
     """
-    if isinstance(value, six.string_types):
-        for name, category in six.iteritems(ARXIV_TO_INSPIRE_CATEGORY_MAPPING):
-            if value.upper() in [name.upper(), category.upper()]:
-                return category
+    if not (isinstance(value, six.string_types) and value):
+        return
+
+    schema = load_schema('elements/inspire_field')
+    inspire_categories = schema['properties']['term']['enum']
+
+    for inspire_category in inspire_categories:
+        if value.upper() == inspire_category.upper():
+            return inspire_category
+
+    category = normalize_arxiv_category(value)
+    return ARXIV_TO_INSPIRE_CATEGORY_MAPPING.get(category, 'Other')
 
 
 def split_page_artid(page_artid):

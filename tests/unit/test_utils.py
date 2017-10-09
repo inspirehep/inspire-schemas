@@ -41,16 +41,30 @@ def test_classify_field_returns_none_on_non_string_value():
     assert utils.classify_field(0) is None
 
 
-def test_classify_field_returns_category_if_found_among_keys():
+def test_classify_field_returns_category_for_arxiv_category():
     expected = 'Math and Math Physics'
-    result = utils.classify_field('alg-geom')
+    result = utils.classify_field('math.AG')
 
     assert expected == result
 
 
-def test_classify_field_returns_category_if_found_among_values():
+def test_classify_field_returns_category_for_inspire_category():
     expected = 'Astrophysics'
     result = utils.classify_field('Astrophysics')
+
+    assert expected == result
+
+
+def test_classify_field_normalizes_arxiv_category():
+    expected = 'Math and Math Physics'
+    result = utils.classify_field('math-dg')
+
+    assert expected == result
+
+
+def test_classify_field_returns_other_if_category_not_found():
+    expected = 'Other'
+    result = utils.classify_field('quant-bio')
 
     assert expected == result
 
