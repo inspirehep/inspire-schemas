@@ -395,6 +395,22 @@ class LiteratureBuilder(object):
             self._append_to('inspire_categories', category_dict)
 
     @filter_empty_parameters
+    def add_keyword(self, keyword, schema=None, source=None):
+        """Add a keyword.
+
+        Args:
+            keyword(str): keyword to add.
+            schema(str): schema to which the keyword belongs.
+            source(str): source for the keyword.
+        """
+        keyword_dict = self._sourced_dict(source, value=keyword)
+
+        if schema is not None:
+            keyword_dict['schema'] = schema
+
+        self._append_to('keywords', keyword_dict)
+
+    @filter_empty_parameters
     def add_private_note(self, private_notes, source=None):
         """Add private notes.
 
