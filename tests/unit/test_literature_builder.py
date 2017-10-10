@@ -236,3 +236,22 @@ def test_make_author():
 
     assert validate([result], subschema) is None
     assert expected == result
+
+
+def test_add_keyword():
+    schema = load_schema('hep')
+    subschema = schema['properties']['keywords']
+    builder = LiteratureBuilder(source='Publisher')
+    builder.add_keyword('29.27.Fh', schema='PACS')
+
+    result = builder.record['keywords']
+    expected = [
+        {
+            'value': '29.27.Fh',
+            'schema': 'PACS',
+            'source': 'Publisher',
+        }
+    ]
+
+    assert validate(result, subschema) is None
+    assert expected == result
