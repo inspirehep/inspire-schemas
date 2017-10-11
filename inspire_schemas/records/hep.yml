@@ -85,39 +85,6 @@ properties:
                     repository.
                 type: boolean
         type: object
-    _fft:
-        description: |-
-            Used to communicate with legacy about files (to be) attached to the
-            record.
-        items:
-            additionalProperties: false
-            properties:
-                comment:
-                    type: string
-                creation_datetime:
-                    format: date-time
-                    type: string
-                description:
-                    type: string
-                filename:
-                    type: string
-                flags:
-                    items:
-                        type: string
-                    type: array
-                format:
-                    type: string
-                path:
-                    type: string
-                status:
-                    type: string
-                type:
-                    type: string
-                version:
-                    type: integer
-            type: object
-        title: List of legacy FFTs
-        type: array
     _files:
         description: |-
             Used by `invenio-records-files` to store information about the

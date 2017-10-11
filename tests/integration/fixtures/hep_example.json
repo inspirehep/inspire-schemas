@@ -21,39 +21,6 @@
         "CDS": true,
         "HAL": true
     },
-    "_fft": [
-        {
-            "description": "in enim adipisicing consequat minim",
-            "filename": "nisi",
-            "flags": [
-                "ullamco",
-                "adipisicing dolor ut aliqua"
-            ],
-            "format": "occaecat minim officia l",
-            "path": "elit dolore dolore est eu",
-            "status": "elit",
-            "type": "dolore fugiat",
-            "version": 79912466
-        },
-        {
-            "comment": "ut labore",
-            "creation_datetime": "2281-06-15T00:39:04.275Z",
-            "description": "adipisicing",
-            "filename": "aliqua irure sit sed",
-            "flags": [
-                "elit eu mollit",
-                "quis Lorem",
-                "elit",
-                "laborum aliquip ex elit adipisicing",
-                "Ex"
-            ],
-            "format": "laborum reprehenderit fugiat consectetur id",
-            "path": "in in",
-            "status": "exercitation tempor cillum",
-            "type": "ut aute voluptate enim ipsum",
-            "version": -84375868
-        }
-    ],
     "_files": [
         {
             "bucket": "Duis",
