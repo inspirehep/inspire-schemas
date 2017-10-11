@@ -48,7 +48,7 @@ def filter_empty_parameters(func):
                      if value not in EMPTIES}
 
         if (
-            list(my_kwargs.keys()) == ['source'] or not list(my_kwargs.keys())
+                {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
         ) and args == ():
             return
         return func(self, *args, **my_kwargs)
