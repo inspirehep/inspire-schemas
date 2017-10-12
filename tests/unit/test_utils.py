@@ -342,3 +342,25 @@ def test_normalize_author_name_handles_suffixes(input_author_name, expected):
 ])
 def test_normalize_author_name_handles_titles(input_author_name, expected):
     assert utils.normalize_author_name(input_author_name) == expected
+
+
+def test_normalize_collaboration_preserves_valid_input():
+    assert utils.normalize_collaboration('ATLAS') == ['ATLAS']
+
+
+def test_normalize_collaboration_handles_none():
+    assert utils.normalize_collaboration(None) == []
+
+
+def test_normalize_collaboration_splits_on_and():
+    assert utils.normalize_collaboration('ATLAS and CMS') == ['ATLAS', 'CMS']
+
+
+def test_normalize_collaboration_removes_fluff():
+    collaboration = 'for the ATLAS Collaboration'
+    assert utils.normalize_collaboration(collaboration) == ['ATLAS']
+
+
+def test_normalize_collaboration_splits_and_removes_fluff():
+    collaboration = 'for the CMS and ATLAS Collaborations'
+    assert utils.normalize_collaboration(collaboration) == ['CMS', 'ATLAS']

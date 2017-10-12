@@ -31,7 +31,7 @@ from functools import wraps
 
 import idutils
 
-from ..utils import normalize_author_name, validate
+from ..utils import normalize_author_name, normalize_collaboration, validate
 
 EMPTIES = [None, '', [], {}]
 
@@ -697,9 +697,11 @@ class LiteratureBuilder(object):
         :param collaboration: collaboration for the current document
         :type collaboration: string
         """
-        self._append_to('collaborations', {
-            'value': collaboration
-        })
+        collaborations = normalize_collaboration(collaboration)
+        for collaboration in collaborations:
+            self._append_to('collaborations', {
+                'value': collaboration
+            })
 
     @filter_empty_parameters
     def add_acquisition_source(

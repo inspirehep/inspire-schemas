@@ -41,7 +41,14 @@ from .errors import SchemaKeyNotFound, SchemaNotFound
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 
-_RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.I)
+_RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.IGNORECASE)
+_RE_AND = re.compile(r'\band\b', re.IGNORECASE)
+_RE_COLLABORATION_LEADING = re.compile(
+    r'^\s*(\b(for|on behalf of|representing)\b)?\s*(\bthe\b)?', re.IGNORECASE
+)
+_RE_COLLABORATION_TRAILING = re.compile(
+    r'\bcollaborations?\s*$', re.IGNORECASE
+)
 
 # list produced from https://arxiv.org/archive/
 _NEW_CATEGORIES = {
@@ -518,3 +525,29 @@ def normalize_author_name(author):
         if part)
 
     return final_name
+
+
+def normalize_collaboration(collaboration):
+    """Normalize collaboration string.
+
+    Args:
+        collaboration: a string containing collaboration(s) or None
+
+    Returns:
+        list: List of extracted and normalized collaborations
+
+    Examples:
+        >>> from inspire_schemas.utils import normalize_collaboration
+        >>> normalize_collaboration('for the CMS and ATLAS Collaborations')
+        ['CMS', 'ATLAS']
+    """
+    if not collaboration:
+        return []
+
+    collaborations = _RE_AND.split(collaboration)
+    collaborations = (_RE_COLLABORATION_LEADING.sub('', collab)
+                      for collab in collaborations)
+    collaborations = (_RE_COLLABORATION_TRAILING.sub('', collab)
+                      for collab in collaborations)
+
+    return [collab.strip() for collab in collaborations]
