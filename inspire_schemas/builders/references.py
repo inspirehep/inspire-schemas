@@ -31,7 +31,7 @@ from isbn import ISBN
 
 import idutils
 
-from ..utils import split_pubnote
+from ..utils import normalize_author_name, split_pubnote
 
 
 # Matches any separators for author enumerations.
@@ -81,16 +81,8 @@ def _split_refextract_authors_str(authors_str):
         lambda a: a.startswith(','),
         lambda a: len(a) == 1
     ]
-    res = [_improve_author(r) for r in res if all(not f(r) for f in filters)]
-
+    res = [r for r in res if all(not f(r) for f in filters)]
     return res
-
-
-def _improve_author(author_names):
-    res = author_names.split(' ')[-1] + ','
-    for name in author_names.split(' ')[0:-1]:
-        res += ' ' + name
-    return res.replace('. ', '.')
 
 
 def _is_arxiv(obj):
@@ -214,12 +206,12 @@ class ReferenceBuilder(object):
         if role is not None:
             inspire_role = 'editor' if role == 'ed.' else role
             self.obj['reference']['authors'].append({
-                'full_name': full_name,
+                'full_name': normalize_author_name(full_name),
                 'inspire_role': inspire_role,
             })
         else:
             self.obj['reference']['authors'].append({
-                'full_name': full_name,
+                'full_name': normalize_author_name(full_name),
             })
 
     def set_pubnote(self, pubnote):
