@@ -262,3 +262,20 @@ def test_field_not_added_when_only_material():
     builder.add_publication_info(material='Publication')
 
     assert 'publication_info' not in builder.record
+
+
+def test_add_doi_normalizes_doi():
+    schema = load_schema('hep')
+    subschema = schema['properties']['dois']
+    builder = LiteratureBuilder()
+    builder.add_doi('doi.org/10.1234/foo')
+
+    result = builder.record['dois']
+    expected = [
+        {
+            'value': '10.1234/foo',
+        }
+    ]
+
+    assert validate(result, subschema) is None
+    assert expected == result
