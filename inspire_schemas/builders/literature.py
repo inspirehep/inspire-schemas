@@ -31,7 +31,7 @@ from functools import wraps
 
 import idutils
 
-from ..utils import normalize_author_name, validate
+from ..utils import normalize_author_name, normalize_collaboration, validate
 
 EMPTIES = [None, '', [], {}]
 
@@ -48,7 +48,7 @@ def filter_empty_parameters(func):
                      if value not in EMPTIES}
 
         if (
-            list(my_kwargs.keys()) == ['source'] or not list(my_kwargs.keys())
+                {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
         ) and args == ():
             return
         return func(self, *args, **my_kwargs)
@@ -194,7 +194,8 @@ class LiteratureBuilder(object):
         :param material: material for the doi.
         :type material: string
         """
-        if not idutils.normalize_doi(doi):
+        doi = idutils.normalize_doi(doi)
+        if not doi:
             return
 
         dois = self._sourced_dict(
@@ -696,9 +697,11 @@ class LiteratureBuilder(object):
         :param collaboration: collaboration for the current document
         :type collaboration: string
         """
-        self._append_to('collaborations', {
-            'value': collaboration
-        })
+        collaborations = normalize_collaboration(collaboration)
+        for collaboration in collaborations:
+            self._append_to('collaborations', {
+                'value': collaboration
+            })
 
     @filter_empty_parameters
     def add_acquisition_source(
