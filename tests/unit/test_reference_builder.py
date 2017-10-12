@@ -31,50 +31,6 @@ from inspire_schemas.builders.references import (
 )
 
 
-def test_split_refextract_authors_str_initials():
-    expected = [
-        'Butler, D.',
-        'Demarque, P.',
-        'Smith, H.A.',
-    ]
-    authors_input = 'D. Butler, P. Demarque, & H. A. Smith'
-    result = _split_refextract_authors_str(authors_input)
-
-    assert expected == result
-
-
-def test_split_refextract_authors_str_noninitials():
-    expected = [
-        'Klebanov, Igor R.',
-        'Maldacena, Juan Martin'
-    ]
-    authors_input = 'Igor R. Klebanov and Juan Martin Maldacena'
-    result = _split_refextract_authors_str(authors_input)
-
-    assert expected == result
-
-
-def test_split_refextract_authors_str_discards_et_al():
-    expected = [
-        'Cenko, S.B.',
-        'Kasliwal, M.M.',
-        'Perley, D.A.',
-    ]
-    authors_input = 'S. B. Cenko, M. M. Kasliwal, D. A. Perley et al.'
-    result = _split_refextract_authors_str(authors_input)
-
-    assert expected == result
-
-
-def test_split_refextract_handles_unicode():
-    expected = [
-        u'Kätlne, J.',
-    ]
-    result = _split_refextract_authors_str('J. Kätlne et al.')
-
-    assert expected == result
-
-
 def test_is_arxiv_new_identifier():
     assert _is_arxiv('arXiv:1501.00001v1')
 
@@ -442,6 +398,82 @@ def test_add_refextract_author_str():
                     {'full_name': 'Frixione, S.'},
                     {'full_name': 'Nason, P.'},
                     {'full_name': 'Oleari, C.'},
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_refextract_authors_str_noninitials():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_refextract_authors_str(
+        'Igor R. Klebanov and Juan Martin Maldacena'
+    )
+
+    expected = [
+        {
+            'reference': {
+                'authors': [
+                    {'full_name': 'Klebanov, Igor R.'},
+                    {'full_name': 'Maldacena, Juan Martin'},
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_refextract_authors_str_discards_et_al():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_refextract_authors_str(
+        'S. B. Cenko, M. M. Kasliwal, D. A. Perley et al.'
+    )
+
+    expected = [
+        {
+            'reference': {
+                'authors': [
+                    {'full_name': 'Cenko, S.B.'},
+                    {'full_name': 'Kasliwal, M.M.'},
+                    {'full_name': 'Perley, D.A.'},
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_refextract_authors_str_unicode():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_refextract_authors_str(u'Kätlne, J.')
+
+    expected = [
+        {
+            'reference': {
+                'authors': [
+                    {'full_name': u'Kätlne, J.'},
                 ],
             },
         },
