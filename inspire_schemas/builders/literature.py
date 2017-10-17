@@ -31,7 +31,10 @@ from functools import wraps
 
 import idutils
 
-from ..utils import normalize_author_name, normalize_collaboration, validate
+from ..utils import (get_license_from_url,
+                     normalize_author_name,
+                     normalize_collaboration,
+                     validate)
 
 EMPTIES = [None, '', [], {}]
 
@@ -599,6 +602,12 @@ class LiteratureBuilder(object):
         :type imposing: string
         """
         hep_license = {}
+
+        try:
+            license = get_license_from_url(url)
+        except ValueError:
+            pass
+
         for key in ('url', 'license', 'material', 'imposing'):
             if locals()[key] is not None:
                 hep_license[key] = locals()[key]

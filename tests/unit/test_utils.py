@@ -364,3 +364,23 @@ def test_normalize_collaboration_removes_fluff():
 def test_normalize_collaboration_splits_and_removes_fluff():
     collaboration = 'for the CMS and ATLAS Collaborations'
     assert utils.normalize_collaboration(collaboration) == ['CMS', 'ATLAS']
+
+
+def test_get_license_from_url_handles_none():
+    assert utils.get_license_from_url(None) is None
+
+
+def test_get_license_from_url_raises_when_unknown_url():
+    with pytest.raises(ValueError):
+        utils.get_license_from_url('http://www.example.com')
+
+
+def test_get_license_from_url_handles_CC():
+    url = 'http://creativecommons.org/licenses/by-nc/4.0/'
+    assert utils.get_license_from_url(url) == 'CC BY-NC 4.0'
+
+
+def test_get_license_from_url_handles_arxiv():
+    expected = 'arXiv nonexclusive-distrib 1.0'
+    url = 'http://arxiv.org/licenses/nonexclusive-distrib/1.0/'
+    assert utils.get_license_from_url(url) == expected
