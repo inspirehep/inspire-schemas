@@ -49,6 +49,10 @@ _RE_COLLABORATION_LEADING = re.compile(
 _RE_COLLABORATION_TRAILING = re.compile(
     r'\bcollaborations?\s*$', re.IGNORECASE
 )
+_RE_LICENSE_URL = re.compile(
+    r'^/licenses/(?P<sublicense>[-\w]*)(?:/(?P<version>[\.\d]*))?'
+)
+
 
 # list produced from https://arxiv.org/archive/
 _NEW_CATEGORIES = {
@@ -551,3 +555,34 @@ def normalize_collaboration(collaboration):
                       for collab in collaborations)
 
     return [collab.strip() for collab in collaborations]
+
+
+def get_license_from_url(url):
+    """Get the license abbreviation from an URL.
+
+    Args:
+        url(str): canonical url of the license.
+
+    Returns:
+        str: the corresponding license abbreviation.
+
+    Raises:
+        ValueError: when the url is not recognized
+    """
+    if not url:
+        return
+
+    split_url = urlsplit(url, scheme='http')
+
+    if split_url.netloc.lower() == 'creativecommons.org':
+        license = ['CC']
+        match = _RE_LICENSE_URL.match(split_url.path)
+        license.extend(part.upper() for part in match.groups() if part)
+    elif split_url.netloc == 'arxiv.org':
+        license = ['arXiv']
+        match = _RE_LICENSE_URL.match(split_url.path)
+        license.extend(part for part in match.groups() if part)
+    else:
+        raise ValueError('Unknown license URL')
+
+    return u' '.join(license)
