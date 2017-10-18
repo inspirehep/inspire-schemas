@@ -604,7 +604,9 @@ class LiteratureBuilder(object):
         hep_license = {}
 
         try:
-            license = get_license_from_url(url)
+            license_from_url = get_license_from_url(url)
+            if license_from_url is not None:
+                license = license_from_url
         except ValueError:
             pass
 
