@@ -279,3 +279,20 @@ def test_add_doi_normalizes_doi():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_add_license_doesnt_overwrite_name_if_no_url():
+    schema = load_schema('hep')
+    subschema = schema['properties']['license']
+    builder = LiteratureBuilder()
+    builder.add_license(license='foo')
+
+    result = builder.record['license']
+    expected = [
+        {
+            'license': 'foo',
+        }
+    ]
+
+    assert validate(result, subschema) is None
+    assert expected == result
