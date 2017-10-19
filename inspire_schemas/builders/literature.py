@@ -135,7 +135,7 @@ class LiteratureBuilder(object):
 
     def __repr__(self):
         """Printable representation of the builder."""
-        return 'LiteratureBuilder(source="{}", record={})'.format(
+        return 'LiteratureBuilder(source={!r}, record={})'.format(
             self.source,
             self.record
         )

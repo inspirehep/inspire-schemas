@@ -296,3 +296,15 @@ def test_add_license_doesnt_overwrite_name_if_no_url():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_repr_handles_source_none():
+    builder = LiteratureBuilder()
+    assert repr(builder).startswith('LiteratureBuilder(source=None, record={')
+
+
+def test_repr_handles_source_present():
+    builder = LiteratureBuilder('publisher')
+    assert repr(builder).startswith(
+        "LiteratureBuilder(source='publisher', record={"
+    )
