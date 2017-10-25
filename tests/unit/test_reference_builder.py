@@ -559,7 +559,7 @@ def test_set_pubnote():
     assert expected == result
 
 
-def test_set_pubnote_falls_back_to_raw_refs():
+def test_set_pubnote_falls_back_to_misc():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
 
@@ -569,12 +569,58 @@ def test_set_pubnote_falls_back_to_raw_refs():
 
     expected = [
         {
-            'raw_refs': [
-                {
-                    'schema': 'text',
-                    'value': 'not-a-valid-pubnote',
+            'reference': {
+                'misc': ['not-a-valid-pubnote'],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_pubnote_does_not_overwrite_pubnote():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_pubnote('Phys.Rev.,D43,124-156')
+    builder.set_pubnote(',12,18')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'Phys.Rev.',
+                    'journal_volume': 'D43',
+                    'page_start': '124',
+                    'page_end': '156',
                 },
-            ],
+                'misc': ['Additional pubnote: ,12,18'],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_pubnote_puts_incomplete_pubnote_in_misc():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_pubnote('Phys.Rev.,D43,')
+
+    expected = [
+        {
+            'reference': {
+                'misc': ['Phys.Rev.,D43,']
+            },
         },
     ]
     result = [builder.obj]

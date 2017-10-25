@@ -131,7 +131,7 @@ class ReferenceBuilder(object):
     """
 
     RE_VALID_CNUM = re.compile(r'C\d{2}-\d{2}-\d{2}(\.\d+)?')
-    RE_VALID_PUBNOTE = re.compile(r'.*,.*,.*(,.*)?')
+    RE_VALID_PUBNOTE = re.compile(r'.+,.+,.+(,.*)?')
 
     def __init__(self):
         self.obj = {}
@@ -216,6 +216,10 @@ class ReferenceBuilder(object):
 
     def set_pubnote(self, pubnote):
         """Parse pubnote and populate correct fields."""
+        if 'publication_info' in self.obj.get('reference', {}):
+            self.add_misc(u'Additional pubnote: {}'.format(pubnote))
+            return
+
         if self.RE_VALID_PUBNOTE.match(pubnote):
             values = split_pubnote(pubnote)
             keys = (
@@ -231,7 +235,7 @@ class ReferenceBuilder(object):
                         values[idx]
                     )
         else:
-            self.add_raw_reference(pubnote)
+            self.add_misc(pubnote)
 
     def set_publisher(self, publisher):
         self._ensure_reference_field('imprint', {})
