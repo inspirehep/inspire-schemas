@@ -42,6 +42,7 @@ from .errors import SchemaKeyNotFound, SchemaNotFound
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 
 _RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.IGNORECASE)
+_RE_CHAR = re.compile(r'[a-z]', re.IGNORECASE)
 _RE_AND = re.compile(r'\band\b', re.IGNORECASE)
 _RE_COLLABORATION_LEADING = re.compile(
     r'^\s*(\b(for|on behalf of|representing)\b)?\s*(\bthe\b)?', re.IGNORECASE
@@ -315,10 +316,10 @@ def split_page_artid(page_artid):
         else:
             artid = page_artid
     elif _RE_2_CHARS.search(page_artid):
-        # if it has 2 ore more letters it's an article ID
+        # if it has 2 or more letters it's an article ID
         artid = page_artid
-    elif len(page_artid) >= 5:
-        # it it is longer than 5 digits it's an article ID
+    elif len(_RE_CHAR.sub('', page_artid)) >= 5:
+        # if there are more than 5 digits it's an article ID
         artid = page_artid
     else:
         if artid is None:

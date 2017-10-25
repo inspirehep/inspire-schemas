@@ -257,6 +257,15 @@ def test_split_page_artid_unicode_dash():
     assert expected == result
 
 
+def test_split_page_artid_long_page_start():
+    page_string = 'B1234'
+    result = utils.split_page_artid(page_string)
+
+    expected = 'B1234', None, 'B1234'
+
+    assert expected == result
+
+
 def test_split_pubnote():
     pubnote = 'J.Testing,42,1-45'
     result = utils.split_pubnote(pubnote)
