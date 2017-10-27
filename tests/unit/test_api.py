@@ -79,3 +79,28 @@ def test_validate_raises_if_invalid_data():
 
     with pytest.raises(ValidationError):
         utils.validate(data, schema)
+
+
+def test_validate_accepts_partial_date():
+    data = '2017-02'
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'date',
+    }
+
+    utils.validate(data, schema)
+
+
+def test_validate_raises_on_invalid_date():
+    data = '2017-42',
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'date',
+    }
+
+    with pytest.raises(ValidationError):
+        utils.validate(data, schema)

@@ -4,92 +4,93 @@
     ],
     "_harvesting_info": {
         "coverage": "partial",
-        "date_last_harvest": "8529-64-08",
-        "last_seen_item": "fugiat ullamco sit",
-        "method": "print"
+        "date_last_harvest": "2019-09-20",
+        "last_seen_item": "quis",
+        "method": "hepcrawl"
     },
     "_private_notes": [
         {
-            "source": "non",
-            "value": "cupidatat ut"
+            "source": "enim eiusmod consectetur",
+            "value": "amet nostrud dolore"
         },
         {
-            "source": "ex sit sed",
-            "value": "aute incididunt velit adipisicing"
-        },
-        {
-            "source": "veniam anim sed exercitation adipisicing",
-            "value": "eu fugiat"
-        },
-        {
-            "source": "qui laborum adipisicing reprehenderit",
-            "value": "irure"
-        },
-        {
-            "source": "quis cupidatat esse",
-            "value": "proident incididunt"
+            "source": "Excepteur",
+            "value": "ex dolore pariatur occaecat veniam"
         }
     ],
     "book_series": false,
-    "control_number": 37182727,
-    "date_ended": "6705-97-36",
-    "date_started": "2970-01-87",
+    "control_number": 35936268,
+    "date_ended": "2007-06-20",
+    "date_started": "2012-02-01",
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://18:R0OU"
+            "$ref": "http://1Q1kG(^qr }"
         },
         {
-            "$ref": "http://1iMc3p~/N(7"
+            "$ref": "http://1JSQu="
         }
     ],
     "doi_prefixes": [
-        "10.0027/dX0bFjrj.S",
-        "10.5053241.8297337446/\">?(z &+X?"
+        "10.0009911/AL0C{",
+        "10.49565959.50/\"z",
+        "10.35748684.54999017860/*Zx,F"
     ],
     "inspire_categories": [
         {
-            "source": "magpie",
-            "term": "General Physics"
+            "source": "arxiv",
+            "term": "Theory-Nucl"
         }
     ],
     "issns": [
         {
             "medium": "print",
-            "value": "8937-6658"
+            "value": "5409-0986"
+        },
+        {
+            "medium": "print",
+            "value": "1094-6289"
+        },
+        {
+            "medium": "online",
+            "value": "0007-4086"
         }
     ],
     "journal_title": {
-        "source": "quis",
-        "subtitle": "est",
-        "title": "irure laborum in labore ut"
+        "source": "anim est ut aliqua dolor",
+        "subtitle": "enim ullamco tempor veniam proident",
+        "title": "Duis"
     },
-    "legacy_creation_date": "0090-21-56",
+    "legacy_creation_date": "1970-01-15",
     "license": {
-        "license": "in exercitation",
-        "url": "http://1U"
+        "license": "consequat culpa ut",
+        "url": "http://1d%Zk;6myt"
     },
     "new_record": {
-        "$ref": "http://1"
+        "$ref": "http://1O`4>;Hd"
     },
     "proceedings": false,
     "public_notes": [
         {
-            "source": "cillum in",
-            "value": "sunt in"
+            "source": "ut irure et nisi cupidatat",
+            "value": "tempo"
         },
         {
-            "source": "culpa sint",
-            "value": "commodo cillum ex minim elit"
+            "source": "pariatur",
+            "value": "culpa"
         },
         {
-            "source": "commodo culpa",
-            "value": "in nostrud"
+            "source": "est id laboris",
+            "value": "non ea dolore"
+        },
+        {
+            "source": "commodo",
+            "value": "nostrud"
         }
     ],
     "publisher": [
-        "fugiat anim ad aliqua labore",
-        "anim qui officia"
+        "dolore irure ut sit",
+        "ex"
     ],
     "refereed": false,
     "related_records": [
@@ -98,24 +99,61 @@
             "record": {
                 "$ref": "http://1"
             },
+            "relation": "parent",
+            "relation_freetext": "irure nisi nulla dolor id"
+        },
+        {
+            "curated_relation": true,
+            "record": {
+                "$ref": "http://1$0"
+            },
+            "relation": "commented",
+            "relation_freetext": "esse"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1xDBp"
+            },
+            "relation": "commented",
+            "relation_freetext": "laboris"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1WH4h"
+            },
+            "relation": "parent",
+            "relation_freetext": "irure laboris eiusmod id"
+        },
+        {
+            "curated_relation": false,
+            "record": {
+                "$ref": "http://1(^L_`9~"
+            },
             "relation": "predecessor",
-            "relation_freetext": "et tempor"
+            "relation_freetext": "Lorem non est ullamco dolor"
         }
     ],
     "self": {
-        "$ref": "http://14\\\\["
+        "$ref": "http://1TC(XA_"
     },
-    "short_title": "irure labore ipsum quis velit",
+    "short_title": "sit aliqua culpa esse ad",
     "title_variants": [
-        "inci",
-        "dolore ea dolore sed",
-        "esse veniam occaecat do incididunt",
-        "amet magna et"
+        "non",
+        "anim occaecat",
+        "culpa",
+        "dolor",
+        "minim veniam tempor"
     ],
     "urls": [
         {
-            "description": "exercitation elit Ut sint magna",
-            "value": "http://1 %6AON5m"
+            "description": "ullamco dolore reprehenderit anim ipsum",
+            "value": "http://1"
+        },
+        {
+            "description": "id esse ut culpa",
+            "value": "http://1,%!mT.s\\~"
         }
     ]
 }

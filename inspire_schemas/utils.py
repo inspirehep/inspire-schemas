@@ -28,6 +28,7 @@ import os
 import re
 
 import six
+from inspire_utils.date import PartialDate
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
 from nameparser import HumanName
@@ -432,6 +433,10 @@ def load_schema(schema_name):
     return schema_data
 
 
+inspire_format_checker = draft4_format_checker
+inspire_format_checker.checks('date', raises=ValueError)(PartialDate.loads)
+
+
 def validate(data, schema=None):
     """Validate the given dictionary against the given schema.
 
@@ -462,7 +467,7 @@ def validate(data, schema=None):
         instance=data,
         schema=schema,
         resolver=LocalRefResolver.from_schema(schema),
-        format_checker=draft4_format_checker,
+        format_checker=inspire_format_checker,
     )
 
 

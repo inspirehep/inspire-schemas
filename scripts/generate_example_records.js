@@ -1,10 +1,15 @@
 #!/usr/bin/env node
-//requires the json-schema-faker npm package installed
 var fs = require('fs'),
     jsf = require('json-schema-faker'),
+    moment = require('moment'),
     path = require('path');
 
-jsf.format('date', function(gen, schema){ return gen.randexp('^\\d{4}-\\d{2}-\\d{2}$');});
+jsf.format('date', function(gen, schema){
+    var max = moment('2020-12-31', 'YYYY-MM-DD').unix()
+    var timestamp = Math.floor(Math.random() * max);
+    var date = moment.unix(timestamp);
+    return date.format('YYYY-MM-DD');
+});
 jsf.format('url', function(gen, schema){ return gen.randexp('^http://1.*$');});
 jsf.format('.+, .+', function(gen, schema){ return gen.randexp('^.+, .+$');});
 
