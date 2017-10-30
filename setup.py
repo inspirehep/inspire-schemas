@@ -82,6 +82,7 @@ def do_setup():
             'jsonschema',
             'idutils',
             'inspire-utils',
+            'isodate',
             'nameparser',
             'pyyaml',
             'six',

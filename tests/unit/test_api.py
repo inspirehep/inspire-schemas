@@ -104,3 +104,16 @@ def test_validate_raises_on_invalid_date():
 
     with pytest.raises(ValidationError):
         utils.validate(data, schema)
+
+
+def test_validate_raises_on_invalid_date_time():
+    data = '2017-42-12T12:34:56',
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'date-time',
+    }
+
+    with pytest.raises(ValidationError):
+        utils.validate(data, schema)
