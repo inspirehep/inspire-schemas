@@ -81,6 +81,7 @@ def do_setup():
             'autosemver',
             'jsonschema',
             'idutils',
+            'inspire-utils',
             'nameparser',
             'pyyaml',
             'six',

@@ -4,221 +4,224 @@
     ],
     "_private_notes": [
         {
-            "source": "consectetur eiusmod aliqua sit quis",
-            "value": "enim dolore et"
+            "source": "est amet culpa tempor",
+            "value": "Ut quis ut pariatur"
+        },
+        {
+            "source": "commo",
+            "value": "cillum ullamco aliquip sint eiusmod"
+        },
+        {
+            "source": "magna deserunt exercitation au",
+            "value": "esse"
+        },
+        {
+            "source": "amet in do officia",
+            "value": "ipsum"
         }
     ],
     "acronyms": [
-        "Duis",
-        "veniam",
-        "ex",
-        "Lorem aliqua sed elit labor",
-        "reprehenderit ipsum elit sed do"
+        "ut"
     ],
     "address": [
         {
             "cities": [
-                "exercitation dolor",
-                "nisi"
+                "aliqua Duis adipisicing",
+                "quis labore amet",
+                "sed est consectetur do",
+                "sed sint ut"
             ],
-            "country_code": "KI",
-            "latitude": 25225485,
-            "longitude": 47606447,
-            "place_name": "amet minim ex",
+            "country_code": "HN",
+            "latitude": 98176984,
+            "longitude": -89125791,
+            "place_name": "qui anim",
             "postal_address": [
-                "reprehenderit",
-                "eu in qui"
+                "qui",
+                "anim voluptate",
+                "voluptate incididunt sunt",
+                "laboris aute ullamco",
+                "aute dolor qui nostrud culpa"
             ],
-            "postal_code": "culpa",
-            "state": "commodo ex incididunt pariatur Excepteur"
-        },
-        {
-            "cities": [
-                "minim voluptate ipsum est ",
-                "cupidatat Duis aute",
-                "in et enim"
-            ],
-            "country_code": "JE",
-            "latitude": 33216539,
-            "longitude": 55052667,
-            "place_name": "proident pariatur fugiat aliquip",
-            "postal_address": [
-                "minim exercitation",
-                "consectetur fugiat aliquip ",
-                "fugiat in labore voluptate",
-                "pariatur est"
-            ],
-            "postal_code": "anim",
-            "state": "nostrud"
-        },
-        {
-            "cities": [
-                "cillum aliqua magna ut",
-                "laboris consequat qui velit sunt",
-                "elit Excepteur laboris"
-            ],
-            "country_code": "TG",
-            "latitude": -91593122,
-            "longitude": 56814578,
-            "place_name": "laborum occaecat ",
-            "postal_address": [
-                "Ut amet anim aute ir",
-                "aliqua"
-            ],
-            "postal_code": "culpa ut",
-            "state": "aliquip minim tempor laborum"
-        },
-        {
-            "cities": [
-                "ullamco reprehenderit sed Ut",
-                "culpa l"
-            ],
-            "country_code": "NP",
-            "latitude": 28145551,
-            "longitude": 9708120,
-            "place_name": "ad sunt ipsum",
-            "postal_address": [
-                "adi",
-                "qui cillum aliquip",
-                "dolore sit",
-                "ipsum labore qui enim",
-                "culpa dolore tempor"
-            ],
-            "postal_code": "adipisicing cillum in nisi qui",
-            "state": "consectetur labore"
+            "postal_code": "officia eiusmod incididunt veniam Lorem",
+            "state": "adipisicing ullamco velit"
         }
     ],
     "alternative_titles": [
         {
-            "source": "Lorem esse est",
-            "subtitle": "nulla",
-            "title": "ex et amet"
+            "source": "velit laboris labore",
+            "subtitle": "velit voluptate Excepteur",
+            "title": "occaecat exercitation proident do ullamco"
         },
         {
-            "source": "voluptate dolor tempor nulla Lorem",
-            "subtitle": "aute ea",
-            "title": "culpa nisi enim consequat"
+            "source": "deserunt irure ipsum elit eiusmod",
+            "subtitle": "aute amet eiusmod",
+            "title": "enim"
+        },
+        {
+            "source": "sed",
+            "subtitle": "nulla do anim",
+            "title": "reprehenderit in"
         }
     ],
-    "closing_date": "9970-53-12",
-    "cnum": "C22-27-79",
+    "closing_date": "1992-12-16",
+    "cnum": "C94-08-83.91",
     "contact_details": [
         {
-            "email": "bKWv2swvHCR3@QwpSSpLi.ogq",
-            "name": "nostrud"
+            "email": "bZxp3Hsm7Pso@Fka.gtn",
+            "name": "ad"
         },
         {
-            "email": "TLLRs8dIm7@nErajlyWRmUD.fr",
-            "name": "velit ex in"
+            "email": "h6W-lnw6jsexx8@DeuIWrRWAd.kta",
+            "name": "nostrud veniam occaecat"
         },
         {
-            "email": "MpQnpH10tl@FxNtKLeZlENwBfNRYlFRdcFAg.drw",
-            "name": "aliquip proident quis nisi id"
+            "email": "WtQ8kumrC@JXptKrUpfhwbbBwqpNtFyfYS.dv",
+            "name": "reprehenderit nisi ea"
         },
         {
-            "email": "FGwVJjsKxw@egtGIsArRoFDzhNIaWACguFqzBEpZARS.gy",
-            "name": "deserunt enim veniam ut"
+            "email": "HjsM@oeAIcOTExJFyFewmDhVQSkreImSb.nyet",
+            "name": "eu"
         }
     ],
-    "control_number": -50837128,
+    "control_number": -34417471,
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://1|6%M"
+            "$ref": "http://1"
+        },
+        {
+            "$ref": "http://1,~DqZ?"
+        },
+        {
+            "$ref": "http://1:Q"
+        },
+        {
+            "$ref": "http://1Uo%/k"
         }
     ],
     "external_system_identifiers": [
         {
             "schema": "SPIRES",
-            "value": "CONF-971113"
+            "value": "CONF-572534739"
+        },
+        {
+            "schema": "SPIRES",
+            "value": "CONF-836498"
+        },
+        {
+            "schema": "SPIRES",
+            "value": "CONF-0015697"
+        },
+        {
+            "schema": "SPIRES",
+            "value": "CONF-476392"
         }
     ],
     "inspire_categories": [
         {
-            "source": "magpie",
-            "term": "Math and Math Physics"
+            "source": "user",
+            "term": "Gravitation and Cosmology"
+        },
+        {
+            "source": "user",
+            "term": "General Physics"
         },
         {
             "source": "curator",
-            "term": "Other"
+            "term": "Math and Math Physics"
         },
         {
-            "source": "magpie",
-            "term": "Gravitation and Cosmology"
+            "source": "undefined",
+            "term": "Astrophysics"
         }
     ],
-    "legacy_creation_date": "4249-07-07T16:32:56.171Z",
+    "legacy_creation_date": "2019-05-28",
     "new_record": {
-        "$ref": "http://1E.F"
+        "$ref": "http://1Srx"
     },
-    "opening_date": "9440-93-68",
+    "opening_date": "1974-09-14",
     "public_notes": [
         {
-            "source": "ut exercitation sit",
-            "value": "in non anim"
+            "source": "",
+            "value": "sed Lorem culpa elit proident"
         },
         {
-            "source": "aute est",
-            "value": "sed officia irure nisi"
+            "source": "anim eu cupidat",
+            "value": "consectetur Excepteur aute"
         },
         {
-            "source": "sunt voluptate dolor sed am",
-            "value": "est aliqua ex irure"
+            "source": "veniam",
+            "value": "laborum commodo"
         },
         {
-            "source": "veniam consequat",
-            "value": "in enim dolor quis nostr"
+            "source": "deserunt Excepteur et",
+            "value": "Excepteur exercitation"
         }
     ],
     "self": {
-        "$ref": "http://1K-@.C:.>"
+        "$ref": "http://1=WXIwz*5"
     },
     "series": [
         {
-            "name": "laboris dolor esse ex sunt",
-            "number": -36121897
+            "name": "proident sed tempor sunt",
+            "number": 58685761
         },
         {
-            "name": "ex sunt ipsum",
-            "number": -43434899
-        },
-        {
-            "name": "",
-            "number": 23072861
-        },
-        {
-            "name": "id exercitation nulla reprehenderit in",
-            "number": 60862216
+            "name": "Excepteur aliquip reprehenderit cupidatat officia",
+            "number": 71519468
         }
     ],
     "short_description": {
-        "source": "occaecat cupidatat consequat",
-        "value": "voluptate"
+        "source": "ut mollit in",
+        "value": "ex in"
     },
     "titles": [
         {
-            "source": "ut",
-            "subtitle": "Ut pariatur ipsum",
-            "title": "esse dolor cillum officia in"
+            "source": "anim proident ipsum Excepteur amet",
+            "subtitle": "velit",
+            "title": "est ullamco ut dolor mollit"
         },
         {
-            "source": "dolor sed elit enim",
-            "subtitle": "pariatur laborum",
-            "title": "aliqua aliquip est"
+            "source": "sed",
+            "subtitle": "qui",
+            "title": "magna Ut"
+        },
+        {
+            "source": "ipsum in",
+            "subtitle": "adipisicing ad",
+            "title": "in"
+        },
+        {
+            "source": "consequat nisi occaecat",
+            "subtitle": "in mollit sint id",
+            "title": "in nostrud Lorem ut dolore"
+        },
+        {
+            "source": "consequat",
+            "subtitle": "do",
+            "title": "conse"
         }
     ],
     "urls": [
         {
-            "description": "amet aliqua ad",
-            "value": "http://1D"
+            "description": "Lorem minim",
+            "value": "http://1c"
         },
         {
-            "description": "deserunt ",
-            "value": "http://1Fm8"
+            "description": "ut incididunt sit deserunt dolor",
+            "value": "http://1'"
         },
         {
-            "description": "dolore elit pariatur enim",
-            "value": "http://1Z*G*u*1n(V"
+            "description": "fugiat minim dolor Duis",
+            "value": "http://1IAaWsk="
+        },
+        {
+            "description": "sint occaecat proident id adipisicing",
+            "value": "http://1^p-~Bi0"
+        },
+        {
+            "description": "sit elit labore",
+            "value": "http://1S&UAB"
         }
     ]
 }
