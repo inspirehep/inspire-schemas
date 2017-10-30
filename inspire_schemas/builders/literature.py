@@ -876,21 +876,27 @@ class LiteratureBuilder(object):
     def add_figure(
         self,
         key,
+        url,
         caption=None,
         label=None,
         material=None,
         source=None,
-        url=None,
     ):
         """Add a figure."""
         figure = self._sourced_dict(source)
 
         if key:
             figure['key'] = key
+        else:
+            raise TypeError("Required argument 'key' should not be 'falsey'.")
+        if url:
+            figure['url'] = url
+        else:
+            raise TypeError("Required argument 'url' should not be 'falsey'.")
 
-        for key in ('caption', 'label', 'material', 'url'):
-            if locals()[key] is not None:
-                figure[key] = locals()[key]
+        for dict_key in ('caption', 'label', 'material'):
+            if locals()[dict_key] is not None:
+                figure[dict_key] = locals()[dict_key]
 
         if figure:
             self._append_to('figures', figure)
@@ -899,21 +905,27 @@ class LiteratureBuilder(object):
     def add_document(
         self,
         key,
+        url,
         description=None,
         fulltext=None,
         hidden=None,
         material=None,
         original_url=None,
         source=None,
-        url=None,
     ):
         """Add a document."""
         document = self._sourced_dict(source)
 
         if key:
             document['key'] = key
+        else:
+            raise TypeError("Required argument 'key' should not be 'falsey'.")
+        if url:
+            document['url'] = url
+        else:
+            raise TypeError("Required argument 'url' should not be 'falsey'.")
 
-        for key in (
+        for dict_key in (
             'description',
             'fulltext',
             'hidden',
@@ -921,8 +933,8 @@ class LiteratureBuilder(object):
             'original_url',
             'url',
         ):
-            if locals()[key] is not None:
-                document[key] = locals()[key]
+            if locals()[dict_key] is not None:
+                document[dict_key] = locals()[dict_key]
 
         if document:
             self._append_to('documents', document)
