@@ -671,11 +671,14 @@ properties:
                         :MARC: ``8564_u``
 
                         Relative URL to the file containing the document. Its
-                        form is ``/files/bucket/key``.
+                        form is ``/files/bucket/key``. It can temprorarily be
+                        the url to download the document from, until actually
+                        downloaded.
                     format: url
                     type: string
             required:
             - key
+            - url
             type: object
         title: List of documents attached to the record
         type: array
@@ -807,6 +810,7 @@ properties:
                     type: string
             required:
             - key
+            - url
             type: object
         title: List of figures attached to the record
         type: array
