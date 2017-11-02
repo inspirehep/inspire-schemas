@@ -6,4 +6,6 @@ properties:
         type: string
     title:
         type: string
+required:
+- title
 type: object
