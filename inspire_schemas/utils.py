@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016 CERN.
+# Copyright (C) 2016, 2017 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -23,6 +23,8 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
+
+import copy
 import json
 import os
 import re
@@ -53,6 +55,15 @@ _RE_COLLABORATION_TRAILING = re.compile(
 )
 _RE_LICENSE_URL = re.compile(
     r'^/licenses/(?P<sublicense>[-\w]*)(?:/(?P<version>[\.\d]*))?'
+)
+_RE_VOLUME_STARTS_WITH_A_LETTER = re.compile(
+    r'^(?P<letter>[A-Z])(?P<volume>\d+)', re.IGNORECASE
+)
+_RE_VOLUME_ENDS_WITH_A_LETTER = re.compile(
+    r'(?P<volume>\d+)(?P<letter>[A-Z])$', re.IGNORECASE
+)
+_RE_TITLE_ENDS_WITH_A_LETTER = re.compile(
+    r'(?P<title>.+(\.| ))(?P<letter>[A-Z])$', re.IGNORECASE
 )
 
 
@@ -207,6 +218,58 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'physics.soc-ph': 'Other',
     'physics.space-ph': 'Astrophysics',
     'quant-ph': 'General Physics',
+}
+
+_JOURNALS_ALREADY_ENDING_WITH_A_LETTER = set([
+    'Acta Cryst.A',
+    'Acta Cryst.B',
+    'Acta Cryst.D',
+    'Acta Cryst.F',
+    'Adv.Phys.X',
+    'Annales Soc.Sci.Bruxelles A',
+    'Appl.Catal.A',
+    'Appl.Sci.Res.,Sect.A',
+    'Bull.Okayama Univ.Sci.A',
+    'Can.J.Res.A',
+    'Cesk.Cas.Fys.A',
+    'Chin.Ann.Math.B',
+    'Colloids Surf.A',
+    'Commun.Dublin Inst.Ser.A',
+    'Concepts Magn.Reson.Part A',
+    'Concepts Magn.Reson.Part B',
+    'Global J.Sci.Front.Res.A',
+    'ITB J.Sci.A',
+    'Indian J.Phys.A',
+    'Indian J.Phys.B',
+    'Indian J.Statist.A',
+    'Iran.J.Sci.Technol.A',
+    'J.Chromatogr.A',
+    'J.Mol.Catal.A',
+    'J.Opt.A',
+    'J.Opt.B',
+    'J.Polymer Sci.B',
+    'J.Res.Natl.Bur.Stand.A',
+    'J.Res.Natl.Bur.Stand.B',
+    'Kumamoto J.Sci.Ser.A',
+    'NATO Sci.Peace Secur.B',
+    'NATO Sci.Ser.B',
+    'NATO Sci.Ser.C',
+    'NATO Sci.Ser.F',
+    'Nucl.Data Sheets A',
+    'Nucl.Data Sheets B',
+    'Nucl.Sci.Appl.A',
+    'Phil.Trans.Roy.Soc.Lond.B',
+    'Polymer Sci.B',
+    'Proc.Rom.Acad.A',
+    'Rev.Univ.Nac.Tucuman, Ser.A',
+    'Sci.Rep.Nat Tsing Hua Univ.Ser.A',
+    'Spectrochim.Acta A',
+    'Tellus A',
+    'Trans.Int.Astron.Union A',
+])
+
+_JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE = {
+    'Phys.Lett.B': set(str(el) for el in range(24, 171)),
 }
 
 
@@ -568,3 +631,121 @@ def get_license_from_url(url):
         raise ValueError('Unknown license URL')
 
     return u' '.join(license)
+
+
+def convert_old_publication_info_to_new(publication_infos):
+    """Convert a ``publication_info`` value from the old format to the new.
+
+    On Legacy different series of the same journal were modeled by adding the
+    letter part of the name to the journal volume. For example, a paper published
+    in Physical Review D contained::
+
+        {
+            'publication_info': [
+                {
+                    'journal_title': 'Phys.Rev.',
+                    'journal_volume': 'D43',
+                },
+            ],
+        }
+
+    On Labs we instead represent each series with a different journal record. As
+    a consequence, the above example becomes::
+
+        {
+            'publication_info': [
+                {
+                    'journal_title': 'Phys.Rev.D',
+                    'journal_volume': '43',
+                },
+            ],
+        }
+
+    This function handles this translation from the old format to the new. Please
+    also see the tests for various edge cases that this function also handles.
+
+    Args:
+        publication_infos: a ``publication_info`` in the old format.
+
+    Returns:
+        list(dict): a ``publication_info`` in the new format.
+
+    """
+    result = []
+    hidden_publication_infos = []
+
+    for publication_info in publication_infos:
+        _publication_info = copy.deepcopy(publication_info)
+
+        journal_title = _publication_info.get('journal_title')
+        journal_volume = _publication_info.get('journal_volume')
+        if journal_title and journal_volume:
+            volume_starts_with_a_letter = _RE_VOLUME_STARTS_WITH_A_LETTER.match(journal_volume)
+            volume_ends_with_a_letter = _RE_VOLUME_ENDS_WITH_A_LETTER.match(journal_volume)
+            match = volume_starts_with_a_letter or volume_ends_with_a_letter
+            if match:
+                _publication_info.pop('journal_record', None)
+                _publication_info['journal_title'] = ''.join([
+                    journal_title,
+                    '' if journal_title.endswith('.') else ' ',
+                    match.group('letter'),
+                ])
+                _publication_info['journal_volume'] = match.group('volume')
+
+        hidden = _publication_info.pop('hidden', None)
+        if hidden:
+            hidden_publication_infos.append(_publication_info)
+        else:
+            result.append(_publication_info)
+
+    for publication_info in hidden_publication_infos:
+        if publication_info not in result:
+            publication_info['hidden'] = True
+            result.append(publication_info)
+
+    return result
+
+
+def convert_new_publication_info_to_old(publication_infos):
+    """Convert back a ``publication_info`` value from the new format to the old.
+
+    Does the inverse transformation of :func:`convert_old_publication_info_to_new`,
+    to be used whenever we are sending back records from Labs to Legacy.
+
+    Args:
+        publication_infos: a ``publication_info`` in the new format.
+
+    Returns:
+        list(dict): a ``publication_info`` in the old format.
+
+    """
+    def _needs_a_hidden_pubnote(journal_title, journal_volume):
+        return (
+            journal_title in _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE and
+            journal_volume in _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE[journal_title]
+        )
+
+    result = []
+
+    for publication_info in publication_infos:
+        _publication_info = copy.deepcopy(publication_info)
+
+        journal_title = _publication_info.get('journal_title')
+        journal_volume = _publication_info.get('journal_volume')
+        if journal_title and journal_volume:
+            match = _RE_TITLE_ENDS_WITH_A_LETTER.match(journal_title)
+            if match and _needs_a_hidden_pubnote(journal_title, journal_volume):
+                _publication_info['journal_title'] = match.group('title')
+                _publication_info['journal_volume'] = journal_volume + match.group('letter')
+                result.append(_publication_info)
+                _publication_info = copy.deepcopy(publication_info)
+                _publication_info['hidden'] = True
+                _publication_info['journal_title'] = match.group('title')
+                _publication_info['journal_volume'] = match.group('letter') + journal_volume
+            elif match and journal_title not in _JOURNALS_ALREADY_ENDING_WITH_A_LETTER:
+                _publication_info['journal_title'] = match.group('title')
+                _publication_info['journal_volume'] = match.group('letter') + journal_volume
+
+        result.append(_publication_info)
+
+    return result
