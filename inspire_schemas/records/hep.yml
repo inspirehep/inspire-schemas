@@ -398,6 +398,8 @@ properties:
                         :MARC: ``490__v``
                     title: Volume of the book in the series
                     type: string
+            required:
+            - title
             type: object
         type: array
     citeable:
@@ -440,6 +442,8 @@ properties:
                         :example: ``Particle Data Group``
                     title: Collaboration name
                     type: string
+            required:
+            - value
             type: object
         required:
         - value
@@ -1487,6 +1491,9 @@ properties:
                     type: string
                 title:
                     type: string
+            required:
+            - language
+            - title
             type: object
         type: array
         uniqueItems: true

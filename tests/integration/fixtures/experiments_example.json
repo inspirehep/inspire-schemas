@@ -69,16 +69,12 @@
     ],
     "inspire_categories": [
         {
-            "source": "undefined",
+            "source": "magpie",
             "term": "Gravitation and Cosmology"
-        },
-        {
-            "source": "undefined",
-            "term": "General Physics"
         },
         {
             "source": "magpie",
-            "term": "Gravitation and Cosmology"
+            "term": "General Physics"
         }
     ],
     "inspire_classification": [

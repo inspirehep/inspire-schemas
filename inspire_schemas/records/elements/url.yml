@@ -12,5 +12,7 @@ properties:
             :MARC: ``8564_u``
         format: url
         type: string
+required:
+- value
 title: URL of related document
 type: object
