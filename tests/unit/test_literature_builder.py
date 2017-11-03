@@ -264,6 +264,14 @@ def test_field_not_added_when_only_material():
     assert 'publication_info' not in builder.record
 
 
+def test_add_doi_handles_none():
+    builder = LiteratureBuilder()
+    builder.add_doi(None)
+
+    result = builder.record
+    assert 'dois' not in result
+
+
 def test_add_doi_normalizes_doi():
     schema = load_schema('hep')
     subschema = schema['properties']['dois']
