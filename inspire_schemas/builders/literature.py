@@ -197,6 +197,8 @@ class LiteratureBuilder(object):
         :param material: material for the doi.
         :type material: string
         """
+        if doi is None:
+            return
         doi = idutils.normalize_doi(doi)
         if not doi:
             return
