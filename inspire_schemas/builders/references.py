@@ -31,7 +31,7 @@ from isbn import ISBN
 
 import idutils
 
-from ..utils import normalize_author_name, split_pubnote
+from ..utils import convert_old_publication_info_to_new, normalize_author_name, split_pubnote
 
 
 # Matches any separators for author enumerations.
@@ -221,19 +221,9 @@ class ReferenceBuilder(object):
             return
 
         if self.RE_VALID_PUBNOTE.match(pubnote):
-            values = split_pubnote(pubnote)
-            keys = (
-                'journal_title',
-                'journal_volume',
-                'page_start',
-                'page_end',
-                'artid')
-            self._ensure_reference_field('publication_info', {})
-            for idx, key in enumerate(keys):
-                if values[idx]:
-                    self.obj['reference']['publication_info'][key] = (
-                        values[idx]
-                    )
+            pubnote = split_pubnote(pubnote)
+            pubnote = convert_old_publication_info_to_new([pubnote])[0]
+            self._ensure_reference_field('publication_info', pubnote)
         else:
             self.add_misc(pubnote)
 

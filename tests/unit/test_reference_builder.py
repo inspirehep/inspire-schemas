@@ -546,8 +546,8 @@ def test_set_pubnote():
             'reference': {
                 'publication_info': {
                     'artid': '362',
-                    'journal_title': 'Nucl.Phys.',
-                    'journal_volume': 'B360',
+                    'journal_title': 'Nucl.Phys.B',
+                    'journal_volume': '360',
                     'page_start': '362',
                 },
             },
@@ -593,8 +593,8 @@ def test_set_pubnote_does_not_overwrite_pubnote():
         {
             'reference': {
                 'publication_info': {
-                    'journal_title': 'Phys.Rev.',
-                    'journal_volume': 'D43',
+                    'journal_title': 'Phys.Rev.D',
+                    'journal_volume': '43',
                     'page_start': '124',
                     'page_end': '156',
                 },
