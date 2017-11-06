@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016 CERN.
+# Copyright (C) 2016, 2017 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -167,7 +167,8 @@ def test_local_ref_resolver_proxied(mock_super, mock_resolve_remote):
         LocalRefResolver without having to instantiate it on both python2 and
         3 as they handle the unbound methods differently.
         """
-        def __init__(self): pass
+        def __init__(self):
+            pass
 
     result = MockResolver().resolve_remote('some path')
     assert result == 'some path'
@@ -189,7 +190,8 @@ def test_local_ref_resolver_adapted(mock_get_schema_path, mock_super,
         LocalRefResolver without having to instantiate it on both python2 and
         3 as they handle the unbound methods differently.
         """
-        def __init__(self): pass
+        def __init__(self):
+            pass
 
     mock_resolve_remote.side_effect = _mocked_resolve_remote
     mock_super.side_effect = lambda *x: utils.RefResolver
@@ -407,3 +409,237 @@ def test_get_license_from_url_handles_arxiv():
     expected = 'arXiv nonexclusive-distrib 1.0'
     url = 'http://arxiv.org/licenses/nonexclusive-distrib/1.0/'
     assert utils.get_license_from_url(url) == expected
+
+
+def test_convert_old_publication_info_to_new():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1214516',
+            },
+            'journal_title': 'Phys.Rev.',
+            'journal_volume': 'C48',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Phys.Rev.C',
+            'journal_volume': '48',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_old_publication_info_to_new_handles_journal_titles_not_ending_with_a_dot():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1214745',
+            },
+            'journal_title': 'Fizika',
+            'journal_volume': 'B19',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Fizika B',
+            'journal_volume': '19',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_old_publication_info_to_new_handles_journal_titles_with_already_a_letter():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1213787',
+            },
+            'journal_title': 'Kumamoto J.Sci.Ser.A',
+            'journal_volume': '13',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1213787',
+            },
+            'journal_title': 'Kumamoto J.Sci.Ser.A',
+            'journal_volume': '13',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_old_publication_info_to_new_handles_hidden_with_volume_variations():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1214521',
+            },
+            'journal_title': 'Phys.Lett.',
+            'journal_volume': '72B',
+        },
+        {
+            'hidden': True,
+            'journal_title': 'Phys.Lett.',
+            'journal_volume': 'B72',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Phys.Lett.B',
+            'journal_volume': '72',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_old_publication_info_to_new_handles_hidden_without_volume_variations():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'artid': 'R10587',
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1214516',
+            },
+            'journal_title': 'Phys.Rev.',
+            'journal_volume': 'B61',
+        },
+        {
+            'artid': '10587',
+            'hidden': True,
+            'journal_title': 'Phys.Rev.',
+            'journal_volume': 'B61',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'artid': 'R10587',
+            'journal_title': 'Phys.Rev.B',
+            'journal_volume': '61',
+        },
+        {
+            'artid': '10587',
+            'hidden': True,
+            'journal_title': 'Phys.Rev.B',
+            'journal_volume': '61',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_new_publication_info_to_old():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_title': 'Phys.Rev.C',
+            'journal_volume': '48',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Phys.Rev.',
+            'journal_volume': 'C48',
+        },
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_new_publication_info_to_old_handles_journals_with_already_a_letter():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_title': 'Kumamoto J.Sci.Ser.A',
+            'journal_volume': '13',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Kumamoto J.Sci.Ser.A',
+            'journal_volume': '13',
+        },
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_new_publication_info_to_old_handles_phys_lett_b():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_title': 'Phys.Lett.B',
+            'journal_volume': '72',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Phys.Lett.',
+            'journal_volume': '72B',
+        },
+        {
+            'hidden': True,
+            'journal_title': 'Phys.Lett.',
+            'journal_volume': 'B72',
+        },
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
