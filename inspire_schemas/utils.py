@@ -372,15 +372,15 @@ def split_page_artid(page_artid):
 
 def split_pubnote(pubnote_str):
     """Split pubnote into journal information."""
-    title, volume, page_start, page_end, artid = (None, None, None, None, None)
+    pubnote = {}
     parts = pubnote_str.split(',')
 
     if len(parts) > 2:
-        title = parts[0]
-        volume = parts[1]
-        page_start, page_end, artid = split_page_artid(parts[2])
+        pubnote['journal_title'] = parts[0]
+        pubnote['journal_volume'] = parts[1]
+        pubnote['page_start'], pubnote['page_end'], pubnote['artid'] = split_page_artid(parts[2])
 
-    return title, volume, page_start, page_end, artid
+    return {key: val for (key, val) in six.iteritems(pubnote) if val is not None}
 
 
 def build_pubnote(title, volume, page_start, page_end, artid):

@@ -286,7 +286,12 @@ def test_split_pubnote():
     pubnote = 'J.Testing,42,1-45'
     result = utils.split_pubnote(pubnote)
 
-    expected = 'J.Testing', '42', '1', '45', None
+    expected = {
+        'journal_title': 'J.Testing',
+        'journal_volume': '42',
+        'page_start': '1',
+        'page_end': '45',
+    }
 
     assert expected == result
 
