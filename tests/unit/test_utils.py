@@ -167,7 +167,8 @@ def test_local_ref_resolver_proxied(mock_super, mock_resolve_remote):
         LocalRefResolver without having to instantiate it on both python2 and
         3 as they handle the unbound methods differently.
         """
-        def __init__(self): pass
+        def __init__(self):
+            pass
 
     result = MockResolver().resolve_remote('some path')
     assert result == 'some path'
@@ -189,7 +190,8 @@ def test_local_ref_resolver_adapted(mock_get_schema_path, mock_super,
         LocalRefResolver without having to instantiate it on both python2 and
         3 as they handle the unbound methods differently.
         """
-        def __init__(self): pass
+        def __init__(self):
+            pass
 
     mock_resolve_remote.side_effect = _mocked_resolve_remote
     mock_super.side_effect = lambda *x: utils.RefResolver
