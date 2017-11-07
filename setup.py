@@ -150,7 +150,6 @@ def do_setup():
             'idutils',
             'inspire-utils',
             'isodate',
-            'nameparser',
             'pyyaml',
             'six',
             'unidecode',

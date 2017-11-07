@@ -33,8 +33,6 @@ import six
 from inspire_utils.date import PartialDate
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
-from nameparser import HumanName
-from nameparser.config import Constants
 from pkg_resources import resource_filename
 from unidecode import unidecode
 
@@ -545,72 +543,6 @@ def validate(data, schema=None):
         resolver=LocalRefResolver.from_schema(schema),
         format_checker=inspire_format_checker,
     )
-
-
-def normalize_author_name(author):
-    """Normalize author name.
-
-    :param author: author name
-    :type author: string
-
-    :return name: the name of the author normilized
-    """
-    constants = Constants()
-    roman_numeral_suffixes = [u'v', u'vi', u'vii', u'viii', u'ix', u'x',
-                              u'xii', u'xiii', u'xiv', u'xv']
-    titles = [u'Dr', u'Prof', u'Professor', u'Sir', u'Editor', u'Ed', u'Mr',
-              u'Mrs', u'Ms', u'Chair', u'Co-Chair', u'Chairs', u'co-Chairs']
-    constants.titles.remove(*constants.titles).add(*titles)
-    constants.suffix_not_acronyms.add(*roman_numeral_suffixes)
-
-    def _is_initial(author_name):
-        return len(author_name) == 1 or u'.' in author_name
-
-    def _ensure_dotted_initials(author_name):
-        if _is_initial(author_name)\
-                and u'.' not in author_name:
-            seq = (author_name, u'.')
-            author_name = u''.join(seq)
-        return author_name
-
-    def _ensure_dotted_suffixes(author_suffix):
-        if u'.' not in author_suffix:
-            seq = (author_suffix, u'.')
-            author_suffix = u''.join(seq)
-        return author_suffix
-
-    def _is_roman_numeral(suffix):
-        """Controls that the userinput only contains valid roman numerals"""
-        valid_roman_numerals = [u'M', u'D', u'C', u'L', u'X',
-                                u'V', u'I', u'(', u')']
-        return all(letters in valid_roman_numerals
-                   for letters in suffix.upper())
-
-    name = HumanName(author, constants=constants)
-
-    name.first = _ensure_dotted_initials(name.first)
-    name.middle = _ensure_dotted_initials(name.middle)
-
-    if _is_initial(name.first) and _is_initial(name.middle):
-        normalized_names = u'{first_name}{middle_name}'
-    else:
-        normalized_names = u'{first_name} {middle_name}'
-
-    normalized_names = normalized_names.format(
-        first_name=name.first,
-        middle_name=name.middle,
-    )
-
-    if _is_roman_numeral(name.suffix):
-        suffix = name.suffix.upper()
-    else:
-        suffix = _ensure_dotted_suffixes(name.suffix)
-
-    final_name = u', '.join(
-        part for part in (name.last, normalized_names.strip(), suffix)
-        if part)
-
-    return final_name
 
 
 def normalize_collaboration(collaboration):

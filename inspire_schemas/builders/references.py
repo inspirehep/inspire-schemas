@@ -27,11 +27,12 @@ from __future__ import absolute_import, division, print_function
 import re
 
 import six
+from inspire_utils.name import normalize_name
 from isbn import ISBN
 
 import idutils
 
-from ..utils import convert_old_publication_info_to_new, normalize_author_name, split_pubnote
+from ..utils import convert_old_publication_info_to_new, split_pubnote
 
 
 # Matches any separators for author enumerations.
@@ -211,12 +212,12 @@ class ReferenceBuilder(object):
         if role is not None:
             inspire_role = 'editor' if role == 'ed.' else role
             self.obj['reference']['authors'].append({
-                'full_name': normalize_author_name(full_name),
+                'full_name': normalize_name(full_name),
                 'inspire_role': inspire_role,
             })
         else:
             self.obj['reference']['authors'].append({
-                'full_name': normalize_author_name(full_name),
+                'full_name': normalize_name(full_name),
             })
 
     def set_pubnote(self, pubnote):
