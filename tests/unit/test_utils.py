@@ -601,6 +601,36 @@ def test_convert_old_publication_info_to_new_handles_renamed_journals():
     assert expected == result
 
 
+def test_convert_old_publication_info_to_new_handles_year_added_to_volumes():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'artid': '137',
+            'journal_title': 'JHEP',
+            'journal_volume': '1709',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'artid': '137',
+            'journal_title': 'JHEP',
+            'journal_volume': '09',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_new_publication_info_to_old():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
@@ -698,6 +728,36 @@ def test_convert_new_publication_info_to_old_handles_renamed_journals():
             'journal_title': 'Nucl.Phys.Proc.Suppl.',
             'journal_volume': '118',
             'page_start': '525',
+        }
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_new_publication_info_to_old_handles_year_added_to_volumes():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'artid': '137',
+            'journal_title': 'JHEP',
+            'journal_volume': '09',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'artid': '137',
+            'journal_title': 'JHEP',
+            'journal_volume': '1709',
+            'year': 2017,
+            'page_start': '137',
         }
     ]
     result = utils.convert_new_publication_info_to_old(publication_info)
