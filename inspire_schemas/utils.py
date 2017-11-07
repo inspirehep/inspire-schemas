@@ -220,7 +220,7 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'quant-ph': 'General Physics',
 }
 
-_JOURNALS_ALREADY_ENDING_WITH_A_LETTER = set([
+_JOURNALS_ALREADY_ENDING_WITH_A_LETTER = {
     'Acta Cryst.A',
     'Acta Cryst.B',
     'Acta Cryst.D',
@@ -266,10 +266,30 @@ _JOURNALS_ALREADY_ENDING_WITH_A_LETTER = set([
     'Spectrochim.Acta A',
     'Tellus A',
     'Trans.Int.Astron.Union A',
-])
+}
 
 _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE = {
     'Phys.Lett.B': set(str(el) for el in range(24, 171)),
+}
+
+_JOURNALS_RENAMED_OLD_TO_NEW = {
+    'Ann.Inst.H.Poincare Anal.Non Lineaire': 'Ann.Inst.H.Poincare C Anal.Non Lineaire',
+    'Annales Soc.Sci.Brux.Ser.I Sci.Math.Astron.Phys.': 'Annales Soc.Sci.Bruxelles.I',
+    'Annales Soc.Sci.Bruxelles Ser.B Sci.Phys.Nat.': 'Annales Soc.Sci.Bruxelles B',
+    'Diss.Abstr.Int.': 'Diss.Abstr.Int.B',
+    'J.Comb.Theory Ser.': 'J.Comb.Theor.A',
+    'J.Vac.Sci.Technol.A Vac.Surf.Films': 'J.Vac.Sci.Technol.A',
+    'J.Vac.Sci.Technol.B Microelectron.Nanometer Struct.': 'J.Vac.Sci.Technol.B',
+    'Nucl.Phys.Proc.Suppl.': 'Nucl.Phys.B Proc.Suppl.',
+    'Proc.Roy.Irish Acad.(Sect.A)': 'Proc.Roy.Irish Acad.A',
+    'Proc.Roy.Soc.Lond.': 'Proc.Roy.Soc.Lond.A',
+    'Univ.Politech.Bucharest Sci.Bull.': 'Univ.Politech.Bucharest Sci.Bull.A',
+}
+_JOURNALS_RENAMED_NEW_TO_OLD = {v: k for (k, v) in six.iteritems(_JOURNALS_RENAMED_OLD_TO_NEW)}
+
+_JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
+    'JHEP',
+    'JCAP',
 }
 
 
@@ -676,9 +696,23 @@ def convert_old_publication_info_to_new(publication_infos):
 
     for publication_info in publication_infos:
         _publication_info = copy.deepcopy(publication_info)
-
         journal_title = _publication_info.get('journal_title')
+
+        try:
+            journal_title = _JOURNALS_RENAMED_OLD_TO_NEW[journal_title]
+            _publication_info['journal_title'] = journal_title
+            result.append(_publication_info)
+            continue
+        except KeyError:
+            pass
+
         journal_volume = _publication_info.get('journal_volume')
+
+        if journal_title in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and journal_volume and len(journal_volume) == 4:
+            _publication_info['journal_volume'] = journal_volume[2:]
+            result.append(_publication_info)
+            continue
+
         if journal_title and journal_volume:
             volume_starts_with_a_letter = _RE_VOLUME_STARTS_WITH_A_LETTER.match(journal_volume)
             volume_ends_with_a_letter = _RE_VOLUME_ENDS_WITH_A_LETTER.match(journal_volume)
@@ -729,9 +763,26 @@ def convert_new_publication_info_to_old(publication_infos):
 
     for publication_info in publication_infos:
         _publication_info = copy.deepcopy(publication_info)
-
         journal_title = _publication_info.get('journal_title')
+
+        try:
+            journal_title = _JOURNALS_RENAMED_NEW_TO_OLD[journal_title]
+            _publication_info['journal_title'] = journal_title
+            result.append(_publication_info)
+            continue
+        except KeyError:
+            pass
+
         journal_volume = _publication_info.get('journal_volume')
+        year = _publication_info.get('year')
+
+        if (journal_title in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and year and
+                journal_volume and len(journal_volume) == 2):
+            two_digit_year = str(year)[2:]
+            _publication_info['journal_volume'] = ''.join([two_digit_year, journal_volume])
+            result.append(_publication_info)
+            continue
+
         if journal_title and journal_volume:
             match = _RE_TITLE_ENDS_WITH_A_LETTER.match(journal_title)
             if match and _needs_a_hidden_pubnote(journal_title, journal_volume):
