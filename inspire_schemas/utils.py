@@ -272,6 +272,21 @@ _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE = {
     'Phys.Lett.B': set(str(el) for el in range(24, 171)),
 }
 
+_JOURNALS_RENAMED_OLD_TO_NEW = {
+    'Univ.Politech.Bucharest Sci.Bull.': 'Univ.Politech.Bucharest Sci.Bull.A',
+    'Annales Soc.Sci.Bruxelles Ser.B Sci.Phys.Nat.': 'Annales Soc.Sci.Bruxelles B',
+    'Annales Soc.Sci.Brux.Ser.I Sci.Math.Astron.Phys.': 'Annales Soc.Sci.Bruxelles.I',
+    'Proc.Roy.Irish Acad.(Sect.A)': 'Proc.Roy.Irish Acad.A',
+    'Proc.Roy.Soc.Lond.': 'Proc.Roy.Soc.Lond.A',
+    'Nucl.Phys.Proc.Suppl.': 'Nucl.Phys.B Proc.Suppl.',
+    'Diss.Abstr.Int.': 'Diss.Abstr.Int.B',
+    'J.Comb.Theory Ser.': 'J.Comb.Theor.A',
+    'Ann.Inst.H.Poincare Anal.Non Lineaire': 'Ann.Inst.H.Poincare C Anal.Non Lineaire',
+    'J.Vac.Sci.Technol.A Vac.Surf.Films': 'J.Vac.Sci.Technol.A',
+    'J.Vac.Sci.Technol.B Microelectron.Nanometer Struct.': 'J.Vac.Sci.Technol.B',
+}
+_JOURNALS_RENAMED_NEW_TO_OLD = {v: k for (k, v) in six.iteritems(_JOURNALS_RENAMED_OLD_TO_NEW)}
+
 
 def normalize_arxiv_category(category):
     """Normalize arXiv category to be schema compliant.
@@ -676,8 +691,16 @@ def convert_old_publication_info_to_new(publication_infos):
 
     for publication_info in publication_infos:
         _publication_info = copy.deepcopy(publication_info)
-
         journal_title = _publication_info.get('journal_title')
+
+        try:
+            journal_title = _JOURNALS_RENAMED_OLD_TO_NEW[journal_title]
+            _publication_info['journal_title'] = journal_title
+            result.append(_publication_info)
+            continue
+        except KeyError:
+            pass
+
         journal_volume = _publication_info.get('journal_volume')
         if journal_title and journal_volume:
             volume_starts_with_a_letter = _RE_VOLUME_STARTS_WITH_A_LETTER.match(journal_volume)
@@ -729,8 +752,16 @@ def convert_new_publication_info_to_old(publication_infos):
 
     for publication_info in publication_infos:
         _publication_info = copy.deepcopy(publication_info)
-
         journal_title = _publication_info.get('journal_title')
+
+        try:
+            journal_title = _JOURNALS_RENAMED_NEW_TO_OLD[journal_title]
+            _publication_info['journal_title'] = journal_title
+            result.append(_publication_info)
+            continue
+        except KeyError:
+            pass
+
         journal_volume = _publication_info.get('journal_volume')
         if journal_title and journal_volume:
             match = _RE_TITLE_ENDS_WITH_A_LETTER.match(journal_title)
