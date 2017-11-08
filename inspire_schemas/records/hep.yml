@@ -771,7 +771,7 @@ properties:
                         :MARC: ``0247_a``
                         :example: ``10.1023/A:1026654312961``
                     minLength: 1
-                    pattern: ^10\.\d+(\.\d+)?/.+$
+                    pattern: ^10\.\d+(\.\d+)?/\S+$
                     title: DOI
                     type: string
             required:
@@ -833,6 +833,7 @@ properties:
 
                         :example: ``ADS``
                     minLength: 1
+                    pattern: ^\w+$
                     type: string
                 value:
                     description: |-
@@ -843,6 +844,7 @@ properties:
 
                         :example: ``1999IJTP...38.1113M``
                     minLength: 1
+                    pattern: ^\S+$
                     title: External identifier
                     type: string
             required:
@@ -1218,6 +1220,7 @@ properties:
                         :example: ``urn:nbn:de:hebis:77-diss-1000009520`` (when
                             :ref:`schema` = ``URN``)
                     minLength: 1
+                    pattern: ^\S+$
                     title: Persistent identifier
                     type: string
             required:
