@@ -28,6 +28,7 @@ import os
 
 from autosemver.packaging import get_changelog, get_current_version
 from jsonschema2rst.parser_runner import run_parser
+import shutil
 
 
 def _generate_schemas_doc():
@@ -37,6 +38,8 @@ def _generate_schemas_doc():
     )
     rst_output = 'schemas'
     run_parser(schemas_folder, rst_output)
+    dir = os.path.dirname(__file__)
+    shutil.rmtree(os.path.join(dir, 'schemas/resolved_records'))
 
 
 _generate_schemas_doc()

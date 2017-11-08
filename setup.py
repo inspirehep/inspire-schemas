@@ -30,19 +30,47 @@ import os
 
 from setuptools import find_packages, setup
 
+import yaml
+
 URL = 'https://github.com/inspirehep/inspire-schemas'
 
 
+def _resolve_json_schema(json_schema, path):
+    if isinstance(json_schema, list):
+        json_schema = [_resolve_json_schema(item, path) for item in json_schema]
+    elif isinstance(json_schema, dict):
+        for key in json_schema:
+            if key == '$ref' and not isinstance(json_schema[key], dict):
+                subschema_path = os.path.join(path, json_schema[key])
+                subschema_path = os.path.splitext(subschema_path)[0]
+                with open(subschema_path+'.yml', 'rb') as yaml_fd:
+                    raw_data = yaml_fd.read()
+                data = yaml.load(raw_data)
+                return data
+            else:
+                json_schema[key] = _resolve_json_schema(json_schema[key], path)
+
+    return json_schema
+
+
 def _yaml2json(yaml_file, json_file):
-    import yaml
     with open(yaml_file, 'rb') as yaml_fd:
         raw_data = yaml_fd.read()
-
     data = yaml.load(raw_data)
-
     with open(json_file, 'w') as json_fd:
-        json_fd.write(
-            json.dumps(data, indent=4, separators=(',', ': '), sort_keys=True)
+        json.dump(
+            data, json_fd, indent=4, separators=(',', ': '), sort_keys=True
+        )
+        json_fd.write('\n')
+
+    path = os.path.dirname(yaml_file)
+    resolved_json_object = _resolve_json_schema(data, path)
+    resolved_record = json_file.replace('records', 'resolved_records')
+    if not os.path.isdir(os.path.dirname(resolved_record)):
+        os.mkdir(os.path.dirname(resolved_record))
+    with open(resolved_record, 'w') as json_fd:
+        json.dump(
+            resolved_json_object, json_fd, indent=4, separators=(',', ': '), sort_keys=True
         )
         json_fd.write('\n')
 
