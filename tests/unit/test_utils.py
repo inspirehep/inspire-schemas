@@ -140,6 +140,14 @@ def test_get_schema_path_positive(schema, expected):
     assert schema_path == os.path.join(utils._schema_root_path, expected)
 
 
+@mock.patch('os.path.exists')
+def test_get_resolved_schema_path(mock_exists):
+    schema_path = utils.get_schema_path(schema='hep.json', resolved=True)
+    mock_exists.side_effect = \
+        lambda x: x == os.path.join(utils._resolved_schema_root_path, 'hep.json')
+    assert schema_path == os.path.join(utils._resolved_schema_root_path, 'hep.json')
+
+
 @pytest.mark.parametrize(
     'schema',
     (
@@ -214,7 +222,7 @@ def test_load_schema_with_schema_key(mock_get_schema_path, mock_open):
     mock_open.side_effect = \
         lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
     mock_get_schema_path.side_effect = \
-        lambda x: 'And his nostrils ripped and his bottom burned off'
+        lambda x, y: 'And his nostrils ripped and his bottom burned off'
 
     loaded_schema = utils.load_schema('And gallantly he chickened out')
 
@@ -230,7 +238,7 @@ def test_load_schema_without_schema_key(mock_get_schema_path, mock_open):
     mock_open.side_effect = \
         lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
     mock_get_schema_path.side_effect = \
-        lambda x: 'And his nostrils ripped and his bottom burned off'
+        lambda x, y: 'And his nostrils ripped and his bottom burned off'
 
     loaded_schema = utils.load_schema('And gallantly he chickened out')
 
