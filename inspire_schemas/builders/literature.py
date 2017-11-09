@@ -940,3 +940,12 @@ class LiteratureBuilder(object):
 
         if document:
             self._append_to('documents', document)
+
+    @filter_empty_parameters
+    def add_reference(self, reference):
+        """Add reference to references field.
+
+        :param reference: reference dictionary, see :class:`.ReferenceBuilder`
+        :type reference: dict
+        """
+        self._append_to('references', reference)

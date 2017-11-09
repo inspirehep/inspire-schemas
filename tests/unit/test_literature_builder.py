@@ -316,3 +316,22 @@ def test_repr_handles_source_present():
     assert repr(builder).startswith(
         "LiteratureBuilder(source='publisher', record={"
     )
+
+
+def test_add_reference():
+    builder = LiteratureBuilder()
+    reference = {
+        "reference": {
+            "authors": [
+                {
+                    "full_name": "Smith, J."
+                }
+            ],
+            "label": "1",
+            "publication_info": {
+                "year": 1996
+            }
+        }
+    }
+    builder.add_reference(reference)
+    assert builder.record['references'] == [reference]

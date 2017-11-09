@@ -175,3 +175,17 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     builder.set_curated(curated=input_data_hep['curated'])
     assert builder.validate_record() is None
     assert builder.record == expected_data_hep
+
+
+def test_literature_and_reference_builder():
+    hep_builder = api.LiteratureBuilder()
+    hep_builder.add_document_type('article')
+    hep_builder.add_title('Work Title')
+
+    ref_builder = api.ReferenceBuilder()
+    ref_builder.add_title('Cited Work')
+    ref_builder.add_author('Smith, J.', 'author')
+
+    hep_builder.add_reference(ref_builder.obj)
+
+    assert hep_builder.validate_record() is None
