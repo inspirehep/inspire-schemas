@@ -856,3 +856,120 @@ def test_add_collaboration():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_set_journal_title():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_journal_title('Phys. Rev. D')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'Phys. Rev. D'
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_journal_issue():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_journal_issue('12')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_issue': '12'
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_journal_volume():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_journal_volume('2016')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_volume': '2016'
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_page_artid():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_page_artid('12', '13', '014568')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'page_start': '12',
+                    'page_end': '13',
+                    'artid': '014568',
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_page_artid_none():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_page_artid(None, None, '014568')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'artid': '014568',
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result

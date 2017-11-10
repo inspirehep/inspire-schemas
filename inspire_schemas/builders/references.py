@@ -146,6 +146,11 @@ class ReferenceBuilder(object):
         if field_name not in self.obj['reference']:
             self.obj['reference'][field_name] = value
 
+    def _set_publication_info_field(self, field_name, value):
+        """Put a value in the publication info of the reference."""
+        self._ensure_reference_field('publication_info', {})
+        self.obj['reference']['publication_info'][field_name] = value
+
     def set_label(self, label):
         self._ensure_reference_field('label', label)
 
@@ -278,3 +283,32 @@ class ReferenceBuilder(object):
     def add_collaboration(self, collaboration):
         self._ensure_reference_field('collaborations', [])
         self.obj['reference']['collaborations'].append(collaboration)
+
+    def set_journal_title(self, journal_title):
+        """Add journal title."""
+        self._set_publication_info_field('journal_title', journal_title)
+
+    def set_journal_issue(self, journal_issue):
+        """Add journal issue."""
+        self._set_publication_info_field('journal_issue', journal_issue)
+
+    def set_journal_volume(self, journal_volume):
+        """Add journal volume."""
+        self._set_publication_info_field('journal_volume', journal_volume)
+
+    def set_page_artid(self, page_start, page_end, artid):
+        """Add artid, start, end pages to publication info of a reference.
+
+        Args:
+            page_start(Optional[string]): value for the field page_start
+            page_end(Optional[string]): value for the field page_end
+            artid(Optional[string]): value for the field artid
+        """
+        self._ensure_reference_field('publication_info', {})
+        publication_info = self.obj['reference']['publication_info']
+        if page_start:
+            publication_info['page_start'] = page_start
+        if page_end:
+            publication_info['page_end'] = page_end
+        if artid:
+            publication_info['artid'] = artid
