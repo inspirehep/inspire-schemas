@@ -25,6 +25,7 @@
 from __future__ import print_function
 
 import os
+from io import open
 
 from autosemver.packaging import get_changelog, get_current_version
 from jsonschema2rst.parser_runner import run_parser
