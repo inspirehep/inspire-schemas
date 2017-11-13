@@ -29,15 +29,43 @@ import json
 import os
 
 from setuptools import find_packages, setup
+from setuptools.command import develop, install, sdist
 
-import yaml
 
 URL = 'https://github.com/inspirehep/inspire-schemas'
 
 
+class CustomSdist(sdist.sdist):
+
+    def run(self, *args, **kwargs):
+        _generate_json_schemas()
+        # sdist is not a new class object, we can't use super
+        return sdist.sdist.run(self, *args, **kwargs)
+
+
+class CustomInstall(install.install):
+
+    def run(self, *args, **kwargs):
+        _generate_json_schemas()
+        # install is not a new class object, we can't use super
+        return install.install.run(self, *args, **kwargs)
+
+
+class CustomDevelop(develop.develop):
+
+    def run(self, *args, **kwargs):
+        _generate_json_schemas()
+        # develop is not a new class object, we can't use super
+        return develop.develop.run(self, *args, **kwargs)
+
+
 def _resolve_json_schema(json_schema, path):
+    import yaml
+
     if isinstance(json_schema, list):
-        json_schema = [_resolve_json_schema(item, path) for item in json_schema]
+        json_schema = [
+            _resolve_json_schema(item, path) for item in json_schema
+        ]
     elif isinstance(json_schema, dict):
         for key in json_schema:
             if key == '$ref' and not isinstance(json_schema[key], dict):
@@ -54,6 +82,8 @@ def _resolve_json_schema(json_schema, path):
 
 
 def _yaml2json(yaml_file, json_file):
+    import yaml
+
     with open(yaml_file, 'rb') as yaml_fd:
         raw_data = yaml_fd.read()
     data = yaml.load(raw_data)
@@ -70,7 +100,11 @@ def _yaml2json(yaml_file, json_file):
         os.mkdir(os.path.dirname(resolved_record))
     with open(resolved_record, 'w') as json_fd:
         json.dump(
-            resolved_json_object, json_fd, indent=4, separators=(',', ': '), sort_keys=True
+            resolved_json_object,
+            json_fd,
+            indent=4,
+            separators=(',', ': '),
+            sort_keys=True,
         )
         json_fd.write('\n')
 
@@ -100,10 +134,15 @@ def _generate_json_schemas():
 
 
 def do_setup():
-    _generate_json_schemas()
+
     setup(
         author='CERN',
         author_email='admin@inspirehep.net',
+        cmdclass={
+            'sdist': CustomSdist,
+            'install': CustomInstall,
+            'develop': CustomDevelop,
+        },
         description='Inspire JSON schemas and utilities to use them.',
         install_requires=[
             'autosemver',
