@@ -296,14 +296,20 @@ class ReferenceBuilder(object):
         """Add journal volume."""
         self._set_publication_info_field('journal_volume', journal_volume)
 
-    def set_page_artid(self, page_start, page_end, artid):
+    def set_page_artid(self, page_start=None, page_end=None, artid=None):
         """Add artid, start, end pages to publication info of a reference.
 
         Args:
             page_start(Optional[string]): value for the field page_start
             page_end(Optional[string]): value for the field page_end
             artid(Optional[string]): value for the field artid
+
+        Raises:
+            ValueError: when no start_page given for an end_page
         """
+        if page_end and not page_start:
+            raise ValueError('End_page provided without start_page')
+
         self._ensure_reference_field('publication_info', {})
         publication_info = self.obj['reference']['publication_info']
         if page_start:
