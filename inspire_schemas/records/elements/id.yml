@@ -71,6 +71,7 @@ anyOf:
         value:
             description: |-
                 :example: ``0000-0012-1234-5647``
+            format: orcid
             minLength: 1
             pattern: ^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$
             type: string
