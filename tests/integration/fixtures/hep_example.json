@@ -1065,6 +1065,7 @@
     "references": [
         {
             "curated_relation": true,
+            "legacy_curated": false,
             "raw_refs": [
                 {
                     "schema": "ex",

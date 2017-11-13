@@ -1334,6 +1334,14 @@ properties:
             properties:
                 curated_relation:
                     type: boolean
+                legacy_curated:
+                    description: |-
+                        :MARC: ``999C59:CURATOR`` corresponds to ``True``
+
+                        Whether the reference has been modified be a curator to
+                        correct errors in reference extraction from the
+                        document.
+                    type: boolean
                 raw_refs:
                     description: |-
                         :MARC: ``999C5x``
