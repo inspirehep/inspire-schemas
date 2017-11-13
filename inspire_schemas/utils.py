@@ -43,6 +43,7 @@ from six.moves.urllib.parse import urlsplit
 from .errors import SchemaKeyNotFound, SchemaNotFound
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
+_resolved_schema_root_path = os.path.abspath(resource_filename(__name__, 'resolved_records'))
 
 _RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.IGNORECASE)
 _RE_CHAR = re.compile(r'[a-z]', re.IGNORECASE)
@@ -431,15 +432,22 @@ class LocalRefResolver(RefResolver):
             )
 
 
-def get_schema_path(schema):
+def get_schema_path(schema, resolved=False):
     """Retrieve the installed path for the given schema.
 
-    :param schema: String with the (relative or absolute) url of the
-        schema to validate, for example, 'records/authors.json' or 'jobs.json',
-        or by just the name like 'jobs'.
-    :type schema: str
-    :return: The path or the given schema name.
-    :rtype: str
+    Args:
+        schema(str): relative or absolute url of the schema to validate, for
+            example, 'records/authors.json' or 'jobs.json', or just the name of the
+            schema, like 'jobs'.
+        resolved(bool): if True, the returned path points to a fully resolved
+            schema, that is to the schema with all `$ref` replaced by their
+            targets.
+
+    Returns:
+        str: path to the given schema name.
+
+    Raises:
+        SchemaNotFound: if no schema could be found.
     """
     def _strip_first_path_elem(path):
         """Pass doctests.
@@ -468,7 +476,10 @@ def get_schema_path(schema):
 
     path = _schema_to_normalized_path(schema)
     while path:
-        schema_path = os.path.abspath(os.path.join(_schema_root_path, path))
+        if resolved:
+            schema_path = os.path.abspath(os.path.join(_resolved_schema_root_path, path))
+        else:
+            schema_path = os.path.abspath(os.path.join(_schema_root_path, path))
         if os.path.exists(schema_path):
             return os.path.abspath(schema_path)
 
@@ -477,13 +488,19 @@ def get_schema_path(schema):
     raise SchemaNotFound(schema=schema)
 
 
-def load_schema(schema_name):
+def load_schema(schema_name, resolved=False):
     """Load the given schema from wherever it's installed.
 
-    :param schema_name: Name of the schema to load, for example 'authors'.
+    Args:
+        schema_name(str): Name of the schema to load, for example 'authors'.
+        resolved(bool): If True will return the resolved schema, that is with
+            all the $refs replaced by their targets.
+
+    Returns:
+        dict: the schema with the given name.
     """
     schema_data = ''
-    with open(get_schema_path(schema_name)) as schema_fd:
+    with open(get_schema_path(schema_name, resolved)) as schema_fd:
         schema_data = json.loads(schema_fd.read())
 
     if '$schema' not in schema_data:
