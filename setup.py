@@ -96,8 +96,6 @@ def _yaml2json(yaml_file, json_file):
     path = os.path.dirname(yaml_file)
     resolved_json_object = _resolve_json_schema(data, path)
     resolved_record = json_file.replace('records', 'resolved_records')
-    if not os.path.isdir(os.path.dirname(resolved_record)):
-        os.mkdir(os.path.dirname(resolved_record))
     with open(resolved_record, 'w') as json_fd:
         json.dump(
             resolved_json_object,
