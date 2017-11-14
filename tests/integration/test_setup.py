@@ -39,3 +39,10 @@ def test_load_resolved_schema():
         raw_data = json_fd.read()
     schema = json.loads(raw_data)
     assert '$ref' not in schema['properties']['urls']['items']
+
+
+def test_load_resolved_schema():
+    with open('inspire_schemas/resolved_records/elements/sourced_value.json', 'rb') as json_fd:
+        raw_data = json_fd.read()
+    schema = json.loads(raw_data)
+    assert '$ref' not in schema['properties']['source']

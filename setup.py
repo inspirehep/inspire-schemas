@@ -74,10 +74,10 @@ def _resolve_json_schema(json_schema, path):
                 with open(subschema_path+'.yml', 'rb') as yaml_fd:
                     raw_data = yaml_fd.read()
                 data = yaml.load(raw_data)
+                data = _resolve_json_schema(data, os.path.join(path, os.path.dirname(json_schema[key])))
                 return data
             else:
                 json_schema[key] = _resolve_json_schema(json_schema[key], path)
-
     return json_schema
 
 
