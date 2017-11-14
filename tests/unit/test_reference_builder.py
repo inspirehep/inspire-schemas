@@ -43,6 +43,10 @@ def test_is_arxiv_new_with_class():
     assert _is_arxiv('arXiv:hep-th/1601.07616')
 
 
+def test_is_arxiv_new_with_class_wo_prefix():
+    assert _is_arxiv('hep-th/1601.07616')
+
+
 def test_normalize_arxiv_handles_new_identifiers_without_prefix_or_version():
     expected = '1501.00001'
     result = _normalize_arxiv('1501.00001')
@@ -123,6 +127,13 @@ def test_normalize_arxiv_handles_new_identifiers_with_class_and_version():
 def test_normalize_arxiv_handles_new_identifiers_with_cls_prefix_and_wo_ver():
     expected = '1501.00001'
     result = _normalize_arxiv('arXiv:hep-th.GT/1501.00001')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_cls_and_wo_prefix_ver():
+    expected = '1501.00001'
+    result = _normalize_arxiv('hep-th.GT/1501.00001')
 
     assert expected == result
 

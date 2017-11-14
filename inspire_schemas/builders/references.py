@@ -44,7 +44,7 @@ RE_INITIALS_ONLY = re.compile(r'^\s*-?[A-Z]((\.|\s)\s*-?[A-Z])*\.?\s*$',
 # Matches new style arXiv ID, with an old-style class specification
 # (Malformed, but appears in APS records)
 RE_ARXIV_POST_2007_CLASS = re.compile(
-    "(arxiv:)(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
+    "(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
     flags=re.I
 )
 
