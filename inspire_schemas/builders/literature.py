@@ -30,9 +30,9 @@ import warnings
 from functools import wraps
 
 import idutils
+from inspire_utils.name import normalize_name
 
 from ..utils import (get_license_from_url,
-                     normalize_author_name,
                      normalize_collaboration,
                      validate)
 
@@ -305,7 +305,7 @@ class LiteratureBuilder(object):
 
         author = {}
 
-        author['full_name'] = normalize_author_name(full_name)
+        author['full_name'] = normalize_name(full_name)
 
         _add_affiliations(author, affiliations)
         _add_raw_affiliations(author, raw_affiliations, source)
