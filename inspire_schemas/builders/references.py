@@ -41,6 +41,12 @@ RE_SPLIT_AUTH = re.compile(r',?\s+and\s|,?\s*&|,|et al\.?|\(?eds?\.\)?',
 # Matches any stream of initials (A. B C D. -E F).
 RE_INITIALS_ONLY = re.compile(r'^\s*-?[A-Z]((\.|\s)\s*-?[A-Z])*\.?\s*$',
                               re.U)
+# Matches new style arXiv ID, with an old-style class specification
+# (Malformed, but appears in APS records)
+RE_ARXIV_POST_2007_CLASS = re.compile(
+    "(arxiv:)(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
+    flags=re.I
+)
 
 
 def _split_refextract_authors_str(authors_str):
@@ -97,7 +103,8 @@ def _is_arxiv(obj):
     arxiv_test = obj.split()
     if not arxiv_test:
         return False
-    return idutils.is_arxiv(arxiv_test[0])
+    return idutils.is_arxiv(arxiv_test[0]) \
+        or RE_ARXIV_POST_2007_CLASS.match(arxiv_test[0])
 
 
 def _normalize_arxiv(obj):
@@ -114,7 +121,7 @@ def _normalize_arxiv(obj):
     if m:
         return ''.join(m.group(2, 4, 5))
 
-    m = idutils.is_arxiv_post_2007(obj)
+    m = idutils.is_arxiv_post_2007(obj) or RE_ARXIV_POST_2007_CLASS.match(obj)
     if m:
         return '.'.join(m.group(2, 3))
 
