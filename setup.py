@@ -149,7 +149,7 @@ tests_require = [
 ]
 
 docs_require = [
-    'jsonschema2rst',
+    'jsonschema2rst>=0.0.8',
     'Sphinx',
 ]
 
