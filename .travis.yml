@@ -14,11 +14,10 @@ python:
 
 before_install:
   - travis_retry pip install --upgrade pip setuptools py coveralls
-  - travis_retry pip install -r requirements-test.txt
   - pip freeze
 
 install:
-  - travis_retry pip install -e .
+  - travis_retry pip install -e .[tests,docs]
 
 script:
   - "./run-tests.sh"
