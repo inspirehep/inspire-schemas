@@ -38,7 +38,7 @@ def _generate_schemas_doc():
         'inspire_schemas'
     )
     rst_output = 'schemas'
-    run_parser(schemas_folder, rst_output)
+    run_parser(schemas_folder, rst_output, yaml_only=True)
     dir = os.path.dirname(__file__)
     shutil.rmtree(os.path.join(dir, 'schemas/resolved_records'))
 

@@ -131,6 +131,34 @@ def _generate_json_schemas():
         _yaml2json(yaml_file=yaml_file, json_file=json_file)
 
 
+build_requires = [
+    'autosemver',
+    'pyyaml',
+]
+
+tests_require = [
+    'check-manifest',
+    'coverage',
+    'isort',
+    'pytest-cache',
+    'pytest-cov',
+    'pytest-pep8',
+    'pytest',
+    'mock',
+    'idutils',
+]
+
+docs_require = [
+    'jsonschema2rst>=0.0.8',
+    'Sphinx',
+]
+
+extras_require = {
+    'docs': docs_require,
+    'tests': tests_require,
+}
+
+
 def do_setup():
 
     setup(
@@ -152,6 +180,9 @@ def do_setup():
             'six',
             'unidecode',
         ],
+        tests_require=tests_require,
+        extras_require=extras_require,
+        build_requires=build_requires,
         license='GPLv2',
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
