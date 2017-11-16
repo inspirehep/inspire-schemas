@@ -335,3 +335,22 @@ def test_add_reference():
     }
     builder.add_reference(reference)
     assert builder.record['references'] == [reference]
+
+
+def test_publication_info_public_note():
+    schema = load_schema('hep')
+    subschema = schema['properties']['public_notes']
+    builder = LiteratureBuilder(source="APS")
+    builder.add_publication_info(journal_title="Phys. Rev. B")
+
+    expected = [
+        {
+            'source': 'APS',
+            'value': 'Submitted to Phys. Rev. B',
+        }
+    ]
+    result = builder.record['public_notes']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+    assert 'publication_info' not in builder.record
