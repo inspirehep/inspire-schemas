@@ -485,6 +485,15 @@ class LiteratureBuilder(object):
         :param parent_record: reference for the parent record
         :type parent_record: string
         """
+
+        # If only journal title is present, and no other fields, assume the
+        # paper was submitted, but not yet published
+        if journal_title and all(
+                not field for field in (cnum, artid, journal_issue,
+                                        journal_volume, page_start, page_end)):
+            self.add_public_note('Submitted to {}'.format(journal_title))
+            return
+
         publication_item = {}
         for key in ('cnum', 'artid', 'page_end', 'page_start',
                     'journal_issue', 'journal_title',
