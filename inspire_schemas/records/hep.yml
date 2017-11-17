@@ -113,6 +113,9 @@ properties:
     abstracts:
         description: |-
             :MARC: ``520``
+
+            The first abstract is the preferred one, to be displayed in
+            priority.
         items:
             $ref: elements/sourced_value.json
         title: List of abstracts
