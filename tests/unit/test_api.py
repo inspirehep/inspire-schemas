@@ -117,3 +117,28 @@ def test_validate_raises_on_invalid_date_time():
 
     with pytest.raises(ValidationError):
         utils.validate(data, schema)
+
+
+def test_validate_accepts_valid_orcid():
+    data = '0000-0002-3151-4077'
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'orcid',
+    }
+
+    utils.validate(data, schema)
+
+
+def test_validate_raises_on_invalid_orcid():
+    data = '0000-0012-1234-5647'
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'orcid',
+    }
+
+    with pytest.raises(ValidationError):
+        utils.validate(data, schema)

@@ -10,6 +10,21 @@ jsf.format('date', function(gen, schema){
     var date = moment.unix(timestamp);
     return date.format('YYYY-MM-DD');
 });
+jsf.format('orcid', function(gen, schema){
+    var almost_orcid = gen.randexp(/0000-0002-\d{4}-\d{3}/)
+    var input = almost_orcid.replace(/-/g,'')
+    var r = 0
+    for (i = 0; i < input.length; i++) {
+        r = (r + parseInt(input.split('')[i]))*2
+    }
+    var ck = (12 - r % 11) % 11
+    if (ck == 10) {
+        ck = 'X'
+    } else {
+        ck = String(ck)
+    }
+    return almost_orcid + ck
+});
 jsf.format('url', function(gen, schema){ return gen.randexp('^http://1.*$');});
 jsf.format('.+, .+', function(gen, schema){ return gen.randexp('^.+, .+$');});
 
