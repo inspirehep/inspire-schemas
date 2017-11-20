@@ -4,7 +4,7 @@ properties:
     $ref:
         description: |-
             URL to the referenced resource
-        format: url
+        format: uri
         type: string
 required:
 - $ref

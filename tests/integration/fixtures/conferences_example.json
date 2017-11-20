@@ -90,13 +90,13 @@
             "$ref": "http://1"
         },
         {
-            "$ref": "http://1,~DqZ?"
+            "$ref": "http://1DqZ"
         },
         {
-            "$ref": "http://1:Q"
+            "$ref": "http://1Q"
         },
         {
-            "$ref": "http://1Uo%/k"
+            "$ref": "http://1Uok"
         }
     ],
     "external_system_identifiers": [
@@ -159,7 +159,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1=WXIwz*5"
+        "$ref": "http://1WXIwz5"
     },
     "series": [
         {
@@ -213,15 +213,15 @@
         },
         {
             "description": "fugiat minim dolor Duis",
-            "value": "http://1IAaWsk="
+            "value": "http://1IAaWsk"
         },
         {
             "description": "sint occaecat proident id adipisicing",
-            "value": "http://1^p-~Bi0"
+            "value": "http://1pBi0"
         },
         {
             "description": "sit elit labore",
-            "value": "http://1S&UAB"
+            "value": "http://1SUAB"
         }
     ]
 }

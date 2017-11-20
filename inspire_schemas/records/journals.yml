@@ -2,7 +2,7 @@ $schema: http://json-schema.org/schema#
 additionalProperties: false
 properties:
     $schema:
-        format: url
+        format: uri
         type: string
     _collections:
         items:
@@ -212,7 +212,7 @@ properties:
 
                     URL where the full license statement may be found, if
                     only a short name is provided in ``license``.
-                format: url
+                format: uri
                 title: URL of the license
                 type: string
         type: object

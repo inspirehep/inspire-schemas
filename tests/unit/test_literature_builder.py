@@ -168,7 +168,7 @@ def test_add_document():
         fulltext=True,
         hidden=True,
         material='preprint',
-        original_url='original_url',
+        original_url='http://www.example.com/original_url',
         source='source',
         url='url',
     )
@@ -180,7 +180,7 @@ def test_add_document():
             'hidden': True,
             'key': 'key',
             'material': 'preprint',
-            'original_url': 'original_url',
+            'original_url': 'http://www.example.com/original_url',
             'source': 'source',
             'url': 'url',
         },

@@ -177,6 +177,7 @@ def do_setup():
             'inspire-utils',
             'isodate',
             'pyyaml',
+            'rfc3987',
             'six',
             'unidecode',
         ],

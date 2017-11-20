@@ -25,10 +25,10 @@
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://1Q1kG(^qr }"
+            "$ref": "http://1Q1kGqr"
         },
         {
-            "$ref": "http://1JSQu="
+            "$ref": "http://1JSQu"
         }
     ],
     "doi_prefixes": [
@@ -64,10 +64,10 @@
     "legacy_creation_date": "1970-01-15",
     "license": {
         "license": "consequat culpa ut",
-        "url": "http://1d%Zk;6myt"
+        "url": "http://1dZk6myt"
     },
     "new_record": {
-        "$ref": "http://1O`4>;Hd"
+        "$ref": "http://1O4Hd"
     },
     "proceedings": false,
     "public_notes": [
@@ -105,7 +105,7 @@
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1$0"
+                "$ref": "http://10"
             },
             "relation": "commented",
             "relation_freetext": "esse"
@@ -129,14 +129,14 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1(^L_`9~"
+                "$ref": "http://1L9"
             },
             "relation": "predecessor",
             "relation_freetext": "Lorem non est ullamco dolor"
         }
     ],
     "self": {
-        "$ref": "http://1TC(XA_"
+        "$ref": "http://1TCXA_"
     },
     "short_title": "sit aliqua culpa esse ad",
     "title_variants": [
@@ -153,7 +153,7 @@
         },
         {
             "description": "id esse ut culpa",
-            "value": "http://1,%!mT.s\\~"
+            "value": "http://1mT.s"
         }
     ]
 }

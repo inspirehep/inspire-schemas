@@ -20,14 +20,14 @@
     "accelerator": {
         "curated_relation": true,
         "record": {
-            "$ref": "http://1PK7LC\\,L6$"
+            "$ref": "http://1PK7LCL6"
         },
         "value": "occaecat enim veniam incididunt fugiat"
     },
     "collaboration": {
         "curated_relation": false,
         "record": {
-            "$ref": "http://1h=fzx^="
+            "$ref": "http://1hfzx"
         },
         "subgroup_names": [
             "mollit Lorem quis",
@@ -46,10 +46,10 @@
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://1Ou$(?Pqa1/"
+            "$ref": "http://1OuPqa1/"
         },
         {
-            "$ref": "http://1Vf'fg"
+            "$ref": "http://1Vffg"
         }
     ],
     "description": "consequat dolore in quis",
@@ -92,7 +92,7 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1.K_ #-/"
+                "$ref": "http://1.K-/"
             },
             "value": ""
         },
@@ -106,7 +106,7 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1{VG-Aj@Yv"
+                "$ref": "http://1VG-AjYv"
             },
             "value": "laboris in"
         },
@@ -120,7 +120,7 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1\\"
+                "$ref": "http://1"
             },
             "value": "dolore"
         }
@@ -151,23 +151,23 @@
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1E=y}"
+                "$ref": "http://1Ey"
             },
             "relation": "commented",
             "relation_freetext": "mollit"
         }
     ],
     "self": {
-        "$ref": "http://1rk1AKe[& m"
+        "$ref": "http://1rk1AKem"
     },
     "urls": [
         {
             "description": "ut nisi",
-            "value": "http://1/M|"
+            "value": "http://1/M"
         },
         {
             "description": "deserunt",
-            "value": "http://1ybsM8alB[:"
+            "value": "http://1ybsM8alB"
         }
     ]
 }

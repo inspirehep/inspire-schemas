@@ -101,7 +101,7 @@
             ],
             "name": "ea voluptate esse commodo",
             "record": {
-                "$ref": "http://1X!1}>p\""
+                "$ref": "http://example.com"
             }
         },
         {
@@ -123,7 +123,7 @@
             ],
             "name": "minim",
             "record": {
-                "$ref": "http://1.e2T.9)>"
+                "$ref": "http://1.e2T.9"
             }
         }
     ],
@@ -136,16 +136,16 @@
     "birth_date": "1991-10-21",
     "conferences": [
         {
-            "$ref": "http://1]| cswr%"
+            "$ref": "http://1cswr"
         },
         {
             "$ref": "http://1iS3Rnw"
         },
         {
-            "$ref": "http://1F%|'$!;Q{"
+            "$ref": "http://1FQ"
         },
         {
-            "$ref": "http://1jpRGM^a"
+            "$ref": "http://1jpRGMa"
         }
     ],
     "control_number": 51954716,
@@ -153,16 +153,16 @@
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://1qI7O!"
+            "$ref": "http://1qI7O"
         },
         {
             "$ref": "http://1Dh"
         },
         {
-            "$ref": "http://1w7a<p"
+            "$ref": "http://1w7ap"
         },
         {
-            "$ref": "http://1m4iwA7GCY|"
+            "$ref": "http://1m4iwA7GCY"
         },
         {
             "$ref": "http://12mRGx6"
@@ -180,7 +180,7 @@
             "end_year": -19766966,
             "name": "amet dolore in voluptate",
             "record": {
-                "$ref": "http://1;zWS[a"
+                "$ref": "http://1zWSa"
             },
             "start_year": -4478687
         },
@@ -190,7 +190,7 @@
             "end_year": -42706407,
             "name": "anim",
             "record": {
-                "$ref": "http://1Ql!C"
+                "$ref": "http://1QlC"
             },
             "start_year": 65829453
         },
@@ -220,7 +220,7 @@
             "end_year": 39168632,
             "name": "sed et id sit",
             "record": {
-                "$ref": "http://1>=6r>I"
+                "$ref": "http://16rI"
             },
             "start_year": 24393456
         }
@@ -280,7 +280,7 @@
         "Duis voluptate eu"
     ],
     "new_record": {
-        "$ref": "http://1/^}vZW'"
+        "$ref": "http://1/vZW'"
     },
     "other_names": [
         "ut adipisicing quis proident",
@@ -302,7 +302,7 @@
                 "curated_relation": false,
                 "name": "quis",
                 "record": {
-                    "$ref": "http://1p>w|)"
+                    "$ref": "http://1pw)"
                 }
             },
             "old_emails": [
@@ -340,7 +340,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1~\""
+        "$ref": "http://1"
     },
     "source": [
         {
@@ -361,19 +361,19 @@
     "urls": [
         {
             "description": "et ipsum",
-            "value": "http://1("
+            "value": "http://1"
         },
         {
             "description": "id s",
-            "value": "http://1C<"
+            "value": "http://1C"
         },
         {
             "description": "commodo non ",
-            "value": "http://17c>x@;zb["
+            "value": "http://17cx@zb"
         },
         {
             "description": "adipisicing labore ipsum commodo Duis",
-            "value": "http://1~,w?"
+            "value": "http://1w"
         }
     ]
 }

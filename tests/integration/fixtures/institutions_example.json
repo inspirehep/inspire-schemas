@@ -111,7 +111,7 @@
             "$ref": "http://1k'lNb_e"
         },
         {
-            "$ref": "http://1?\\i"
+            "$ref": "http://1i"
         },
         {
             "$ref": "http://1O"
@@ -215,7 +215,7 @@
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1v3[%l"
+                "$ref": "http://1v3l"
             },
             "relation": "commented",
             "relation_freetext": "occaecat pariatur dolor laborum"
@@ -223,7 +223,7 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1[M"
+                "$ref": "http://1M"
             },
             "relation": "commented",
             "relation_freetext": "esse ullamco"
@@ -239,19 +239,19 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1GU}312,j"
+                "$ref": "http://1GU312j"
             },
             "relation": "commented",
             "relation_freetext": "sed pariatur ut et ullamco"
         }
     ],
     "self": {
-        "$ref": "http://1d.P{sX%`"
+        "$ref": "http://1d.PsX"
     },
     "urls": [
         {
             "description": "voluptate consequat Duis non minim",
-            "value": "http://1Q2P-)Y;IH8"
+            "value": "http://1Q2P-YIH8"
         },
         {
             "description": "aliquip incididunt",
