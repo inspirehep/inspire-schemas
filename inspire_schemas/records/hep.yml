@@ -2,7 +2,7 @@ $schema: http://json-schema.org/schema#
 additionalProperties: false
 properties:
     $schema:
-        format: url
+        format: uri
         type: string
     _collections:
         description: |-
@@ -489,7 +489,7 @@ properties:
                     title: Copyright notice
                     type: string
                 url:
-                    format: url
+                    format: uri
                     title: Copyright notice URL
                     type: string
                 year:
@@ -664,7 +664,7 @@ properties:
                 material:
                     $ref: elements/material.json
                 original_url:
-                    format: url
+                    format: uri
                     title: Original URL of the document
                     type: string
                 source:
@@ -677,7 +677,7 @@ properties:
                         form is ``/files/bucket/key``. It can temprorarily be
                         the url to download the document from, until actually
                         downloaded.
-                    format: url
+                    format: uri-reference
                     type: string
             required:
             - key
@@ -809,7 +809,7 @@ properties:
 
                         Relative URL to the file containing the figure. Its
                         form is ``/files/bucket/key``.
-                    format: url
+                    format: uri-reference
                     type: string
             required:
             - key
@@ -1047,7 +1047,7 @@ properties:
 
                         URL where the full license statement may be found, if
                         only a short name is provided in ``license``.
-                    format: url
+                    format: uri
                     title: URL of the license
                     type: string
             type: object

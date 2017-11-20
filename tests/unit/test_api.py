@@ -117,3 +117,28 @@ def test_validate_raises_on_invalid_date_time():
 
     with pytest.raises(ValidationError):
         utils.validate(data, schema)
+
+
+def test_validate_accepts_valid_uri_reference():
+    data = '/foo/bar'
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'uri-reference',
+    }
+
+    utils.validate(data, schema)
+
+
+def test_validate_raises_on_invalid_uri_reference():
+    data = '@[]'
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'uri-reference',
+    }
+
+    with pytest.raises(ValidationError):
+        utils.validate(data, schema)

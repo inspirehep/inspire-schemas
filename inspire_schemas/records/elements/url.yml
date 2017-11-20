@@ -10,7 +10,7 @@ properties:
     value:
         description: |-
             :MARC: ``8564_u``
-        format: url
+        format: uri
         type: string
 title: URL of related document
 type: object

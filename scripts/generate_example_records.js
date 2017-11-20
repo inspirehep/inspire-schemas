@@ -10,7 +10,7 @@ jsf.format('date', function(gen, schema){
     var date = moment.unix(timestamp);
     return date.format('YYYY-MM-DD');
 });
-jsf.format('url', function(gen, schema){ return gen.randexp('^http://1.*$');});
+jsf.format('uri-reference', function(gen, schema){ return gen.randexp('^(https?://)?[\\w.]+/[\\w]+[\\w/]+$');});
 jsf.format('.+, .+', function(gen, schema){ return gen.randexp('^.+, .+$');});
 
 function resolve_schema(unresolved_schema, base_path) {
