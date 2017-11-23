@@ -54,3 +54,30 @@ class SchemaKeyNotFound(InspireSchemasException):
         """
         message = 'Unable to find "$schema" key in "{}".'.format(data)
         super(SchemaKeyNotFound, self).__init__(message)
+
+
+class SchemaUIDConflict(InspireSchemasException):
+    """Exception raised when a UID is not matching provided schema."""
+
+    def __init__(self, schema, uid):
+        """Exception raised when a UID is not matching provided schema.
+
+        Args:
+            schema (string): given schema
+            uid (string): UID which conflicts the schema
+        """
+        message = 'UID "{}" is not of the schema "{}".'.format(uid, schema)
+        super(SchemaUIDConflict, self).__init__(message)
+
+
+class UnknownUIDSchema(InspireSchemasException):
+    """Exception raised when a schema of a UID is unknown."""
+
+    def __init__(self, uid):
+        """Exception raised when a schema of a UID is unknown.
+
+        Args:
+            uid (string): given UID
+        """
+        message = 'Schema of UID "{}" is unrecognized.'.format(uid)
+        super(UnknownUIDSchema, self).__init__(message)

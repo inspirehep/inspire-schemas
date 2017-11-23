@@ -28,3 +28,4 @@ from __future__ import absolute_import, division, print_function
 
 from .literature import LiteratureBuilder  # noqa
 from .references import ReferenceBuilder  # noqa
+from .signatures import SignatureBuilder  # noqa
