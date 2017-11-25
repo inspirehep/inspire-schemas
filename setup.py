@@ -174,7 +174,7 @@ def do_setup():
             'autosemver',
             'jsonschema',
             'idutils',
-            'inspire-utils',
+            'inspire-utils~=1.0,>=1.0.0',
             'isodate',
             'pyyaml',
             'rfc3987',
