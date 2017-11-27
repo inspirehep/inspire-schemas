@@ -41,7 +41,7 @@ properties:
         uniqueItems: true
     _desy_bookkeeping:
         description: |-
-            :MARC: ``595_D``
+            :MARC: ``595_D``, ``035__9:DESY``
 
             Used by DESY to store information about the keyword-assignment
             process.
@@ -55,6 +55,10 @@ properties:
                 expert:
                     description: |-
                         :MARC: ``595_Da``
+                    type: string
+                identifier:
+                    description: |-
+                        :MARC: ``035__z`` when ``035__a`` is ``DESY``
                     type: string
                 status:
                     description: |-
