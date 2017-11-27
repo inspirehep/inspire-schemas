@@ -156,6 +156,29 @@ def test_add_figure():
         assert key in result['figures'][0]
 
 
+def test_add_figure_fails_on_duplicated_key():
+    builder = LiteratureBuilder('test')
+
+    builder.add_figure(
+        'key',
+        caption='caption',
+        label='label',
+        material='publication',
+        source='source',
+        url='url',
+    )
+
+    with pytest.raises(ValueError):
+        builder.add_figure(
+            'key',
+            caption='caption',
+            label='label',
+            material='publication',
+            source='source',
+            url='url',
+        )
+
+
 def test_add_document():
     schema = load_schema('hep')
     subschema = schema['properties']['documents']
@@ -192,6 +215,32 @@ def test_add_document():
 
     for key in subschema['items']['properties'].keys():
         assert key in result['documents'][0]
+
+
+def test_add_document_fails_on_existing_key():
+    builder = LiteratureBuilder('test')
+    builder.add_document(
+        'key',
+        description='description',
+        fulltext=True,
+        hidden=True,
+        material='preprint',
+        original_url='http://www.example.com/original_url',
+        source='source',
+        url='url',
+    )
+
+    with pytest.raises(ValueError):
+        builder.add_document(
+            'key',
+            description='description',
+            fulltext=True,
+            hidden=True,
+            material='preprint',
+            original_url='http://www.example.com/original_url',
+            source='source',
+            url='url',
+        )
 
 
 def test_make_author():
