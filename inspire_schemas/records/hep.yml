@@ -58,7 +58,7 @@ properties:
                     type: string
                 identifier:
                     description: |-
-                        :MARC: ``035__z`` when ``035__a`` is ``DESY``
+                        :MARC: ``035__z`` when ``035__9`` is ``DESY``
                     type: string
                 status:
                     description: |-
