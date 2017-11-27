@@ -1,4 +1,3 @@
-$schema: http://json-schema.org/schema#
 description: |-
     The `other` value means that the degree type is not known or is not among
     the more specific values.

@@ -1,4 +1,3 @@
-$schema: http://json-schema.org/schema#
 additionalProperties: false
 description: |-
     This is structurally very similar to a Literature record, with unnecessary

@@ -229,22 +229,6 @@ def test_load_schema_with_schema_key(mock_get_schema_path, mock_open):
     assert loaded_schema == myschema
 
 
-@mock.patch('inspire_schemas.utils.open')
-@mock.patch('inspire_schemas.utils.get_schema_path')
-def test_load_schema_without_schema_key(mock_get_schema_path, mock_open):
-    myschema = {
-        'Sir Robin': 'The fleeing brave',
-    }
-    mock_open.side_effect = \
-        lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
-    mock_get_schema_path.side_effect = \
-        lambda x, y: 'And his nostrils ripped and his bottom burned off'
-
-    loaded_schema = utils.load_schema('And gallantly he chickened out')
-
-    assert loaded_schema == {'$schema': myschema}
-
-
 def test_split_page_artid_page_range():
     page_string = '451-487'
     result = utils.split_page_artid(page_string)
