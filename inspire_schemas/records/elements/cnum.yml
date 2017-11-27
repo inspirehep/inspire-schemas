@@ -1,4 +1,3 @@
-$schema: http://json-schema.org/schema#
 description: |-
     The CNUM is based on the starting day of the conference, with an extra
     number appended to distinguish conferences starting on the first day.

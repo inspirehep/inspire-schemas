@@ -1,4 +1,3 @@
-$schema: http://json-schema.org/schema#
 default: article
 enum:
 - activity report

@@ -1,4 +1,3 @@
-$schema: http://json-schema.org/schema#
 description: |-
     Describe information needed for files in records.
 properties:

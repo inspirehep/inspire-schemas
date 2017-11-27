@@ -1,4 +1,3 @@
-$schema: http://json-schema.org/schema#
 description: |-
     A category that currently exists on arXiv. Note that some categories have
     been renamed and are not in this list.  These are taken from the `arXiv API

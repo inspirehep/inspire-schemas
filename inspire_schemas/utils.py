@@ -503,9 +503,6 @@ def load_schema(schema_name, resolved=False):
     with open(get_schema_path(schema_name, resolved)) as schema_fd:
         schema_data = json.loads(schema_fd.read())
 
-    if '$schema' not in schema_data:
-        schema_data = {'$schema': schema_data}
-
     return schema_data
 
 
