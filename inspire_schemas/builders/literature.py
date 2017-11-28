@@ -27,36 +27,15 @@
 from __future__ import absolute_import, division, print_function
 
 import warnings
-from functools import wraps
 
 import idutils
-from inspire_utils.name import normalize_name
 
 from ..utils import (get_license_from_url,
                      normalize_collaboration,
-                     validate)
-
-EMPTIES = [None, '', [], {}]
-
-
-def filter_empty_parameters(func):
-    """Decorator that is filtering empty parameters.
-
-    :param func: function that you want wrapping
-    :type func: function
-    """
-    @wraps(func)
-    def func_wrapper(self, *args, **kwargs):
-        my_kwargs = {key: value for key, value in kwargs.items()
-                     if value not in EMPTIES}
-
-        if (
-                {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
-        ) and args == ():
-            return
-        return func(self, *args, **my_kwargs)
-
-    return func_wrapper
+                     validate,
+                     filter_empty_parameters,
+                     EMPTIES)
+from .signatures import SignatureBuilder
 
 
 def is_citeable(publication_info):
@@ -224,13 +203,13 @@ class LiteratureBuilder(object):
 
     @filter_empty_parameters
     def make_author(self, full_name,
-                    affiliations=None,
-                    roles=None,
-                    raw_affiliations=None,
+                    affiliations=(),
+                    roles=(),
+                    raw_affiliations=(),
                     source=None,
-                    ids=None,
-                    emails=None,
-                    alternative_names=None):
+                    ids=(),
+                    emails=(),
+                    alternative_names=()):
         """Make a subrecord representing an author.
 
         Args:
@@ -250,71 +229,28 @@ class LiteratureBuilder(object):
         Returns:
             dict: a schema-compliant subrecord.
         """
-        def _add_affiliations(author, affiliations):
-            if affiliations is None:
-                return
+        builder = SignatureBuilder()
+        builder.set_full_name(full_name)
 
-            author.setdefault('affiliations', [])
-            for affiliation in filter(bool, affiliations):
-                author['affiliations'].append({
-                    'value': affiliation
-                })
+        for affiliation in affiliations:
+            builder.add_affiliation(affiliation)
 
-        def _add_raw_affiliations(author, raw_affiliations, source):
-            if raw_affiliations is None:
-                return
+        for role in roles:
+            builder.add_inspire_role(role)
 
-            author.setdefault('raw_affiliations', [])
-            for raw_affiliation in filter(bool, raw_affiliations):
-                author['raw_affiliations'].append(self._sourced_dict(
-                    source,
-                    value=raw_affiliation,
-                ))
+        for raw_affiliation in raw_affiliations:
+            builder.add_raw_affiliation(raw_affiliation, source or self.source)
 
-        def _add_emails(author, emails):
-            if emails is None:
-                return
+        for id_schema, id_value in ids:
+            builder.set_uid(id_value, schema=id_schema)
 
-            author.setdefault('emails', []).extend(filter(bool, emails))
+        for email in emails:
+            builder.add_email(email)
 
-        def _add_ids(author, ids):
-            if ids is None:
-                return
+        for alternative_name in alternative_names:
+            builder.add_alternative_name(alternative_name)
 
-            author.setdefault('ids', [])
-            for schema, value in ids:
-                if value:
-                    author['ids'].append({
-                        'schema': schema,
-                        'value': value,
-                    })
-
-        def _add_alternative_names(author, alternative_names):
-            if alternative_names is None:
-                return
-
-            author.setdefault('alternative_names', []).extend(
-                filter(bool, alternative_names)
-            )
-
-        def _add_inspire_roles(author, inspire_roles):
-            if inspire_roles is None:
-                return
-
-            author.setdefault('inspire_roles', []).extend(filter(bool, roles))
-
-        author = {}
-
-        author['full_name'] = normalize_name(full_name)
-
-        _add_affiliations(author, affiliations)
-        _add_raw_affiliations(author, raw_affiliations, source)
-        _add_emails(author, emails)
-        _add_ids(author, ids)
-        _add_alternative_names(author, alternative_names)
-        _add_inspire_roles(author, roles)
-
-        return author
+        return builder.obj
 
     @filter_empty_parameters
     def add_book(self, publisher=None, place=None, date=None):

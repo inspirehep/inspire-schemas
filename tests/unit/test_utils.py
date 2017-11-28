@@ -678,3 +678,38 @@ def test_convert_new_publication_info_to_old_handles_year_added_to_volumes():
 
     assert utils.validate(result, subschema) is None
     assert expected == result
+
+
+@pytest.mark.parametrize('uid,explicit_schema,expected_uid,expected_schema', [
+    ('0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),
+    ('http://orcid.org/0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),
+    ('12345', 'CERN', 'CERN-12345', 'CERN'),
+    ('A.Einstein.1', 'INSPIRE BAI', 'A.Einstein.1', 'INSPIRE BAI'),
+    ('12345678', 'INSPIRE ID', 'INSPIRE-12345678', 'INSPIRE ID'),
+    ('12345678', 'JACOW', 'JACoW-12345678', 'JACOW'),
+    ('123456', 'SLAC', 'SLAC-123456', 'SLAC'),
+    ('123456', 'DESY', 'DESY-123456', 'DESY'),
+    ('0000-0002-1825-0097', None, '0000-0002-1825-0097', 'ORCID'),
+    ('http://orcid.org/0000-0002-1825-0097', None, '0000-0002-1825-0097', 'ORCID'),
+    ('CERN-12345', None, 'CERN-12345', 'CERN'),
+    ('A.Einstein.1', None, 'A.Einstein.1', 'INSPIRE BAI'),
+    ('INSPIRE-12345678', None, 'INSPIRE-12345678', 'INSPIRE ID'),
+    ('JACoW-12345678', None, 'JACoW-12345678', 'JACOW'),
+    ('SLAC-123456', None, 'SLAC-123456', 'SLAC'),
+    ('DESY-123456', None, 'DESY-123456', 'DESY'),
+])
+def test_author_id_normalize_and_schema(
+        uid, explicit_schema, expected_uid, expected_schema):
+    normalized_uid, guessed_schema = utils.author_id_normalize_and_schema(uid, explicit_schema)
+    assert guessed_schema == expected_schema
+    assert normalized_uid == expected_uid
+
+
+def test_author_id_normalize_and_schema_unknown():
+    with pytest.raises(errors.UnknownUIDSchema):
+        utils.author_id_normalize_and_schema('UNKNOWN-123', None)
+
+
+def test_author_id_normalize_and_schema_conflict():
+    with pytest.raises(errors.SchemaUIDConflict):
+        utils.author_id_normalize_and_schema('SLAC-123456', 'CERN')

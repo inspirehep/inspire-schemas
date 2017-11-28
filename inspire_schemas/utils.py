@@ -28,8 +28,9 @@ import copy
 import json
 import os
 import re
-from functools import partial
+from functools import partial, wraps
 
+import idutils
 import rfc3987
 import six
 from inspire_utils.date import PartialDate
@@ -40,7 +41,8 @@ from unidecode import unidecode
 
 from six.moves.urllib.parse import urlsplit
 
-from .errors import SchemaKeyNotFound, SchemaNotFound
+from .errors import (SchemaKeyNotFound, SchemaNotFound, SchemaUIDConflict,
+                     UnknownUIDSchema)
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 _resolved_schema_root_path = os.path.abspath(resource_filename(__name__, 'resolved_records'))
@@ -66,6 +68,15 @@ _RE_VOLUME_ENDS_WITH_A_LETTER = re.compile(
 _RE_TITLE_ENDS_WITH_A_LETTER = re.compile(
     r'(?P<title>.+(\.| ))(?P<letter>[A-Z])$', re.IGNORECASE
 )
+
+_RE_AUTHORS_UID = {
+    'CERN': (re.compile(r'^(CCID-|CERN-)?(?P<uid>\d+)$', flags=re.I), 'CERN-{}'),
+    'JACOW': (re.compile(r'^(JACOW-)?(?P<uid>\d{8})$', flags=re.I), 'JACoW-{}'),
+    'SLAC': (re.compile(r'^(SLAC-)?(?P<uid>\d+)$', flags=re.I), 'SLAC-{}'),
+    'DESY': (re.compile(r'^(DESY-)?(?P<uid>\d+)$', flags=re.I), 'DESY-{}'),
+    'INSPIRE ID': (re.compile(r'^(INSPIRE-)?(?P<uid>\d{8})$', flags=re.I), 'INSPIRE-{}'),
+    'INSPIRE BAI': (re.compile(r'^(?P<uid>((\w|\-|\')+\.)+\d+)$'), '{}'),
+}
 
 
 # list produced from https://arxiv.org/archive/
@@ -292,6 +303,81 @@ _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
     'JHEP',
     'JCAP',
 }
+
+EMPTIES = [None, '', [], {}]
+
+
+def filter_empty_parameters(func):
+    """Decorator that is filtering empty parameters.
+
+    :param func: function that you want wrapping
+    :type func: function
+    """
+    @wraps(func)
+    def func_wrapper(self, *args, **kwargs):
+        my_kwargs = {key: value for key, value in kwargs.items()
+                     if value not in EMPTIES}
+
+        if (
+                {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
+        ) and args == ():
+            return
+        return func(self, *args, **my_kwargs)
+
+    return func_wrapper
+
+
+def author_id_normalize_and_schema(uid, schema=None):
+    """Detect and normalize an author UID schema.
+
+    Args:
+        uid (string): a UID string
+        schema (string): try to resolve to schema
+
+    Returns:
+        Tuple[string, string]: a tuple (uid, schema) where:
+        - uid: the UID normalized to comply with the id.json schema
+        - schema: a schema of the UID or *None* if not recognised
+
+    Raise:
+        UnknownUIDSchema: if UID is too little to definitively guess the schema
+        SchemaUIDConflict: if specified schema is not matching the given UID
+    """
+    def _get_uid_normalized_in_schema(_uid, _schema):
+        regex, template = _RE_AUTHORS_UID[_schema]
+        match = regex.match(_uid)
+        if match:
+            return template.format(match.group('uid'))
+
+    if idutils.is_orcid(uid) and schema in (None, 'ORCID'):
+        return idutils.normalize_orcid(uid), 'ORCID'
+
+    if schema and schema not in _RE_AUTHORS_UID:
+        # Schema explicitly specified, but this function can't handle it
+        raise UnknownUIDSchema(uid)
+
+    if schema:
+        normalized_uid = _get_uid_normalized_in_schema(uid, schema)
+        if normalized_uid:
+            return normalized_uid, schema
+        else:
+            raise SchemaUIDConflict(schema, uid)
+
+    match_schema, normalized_uid = None, None
+    for candidate_schema in _RE_AUTHORS_UID:
+        candidate_uid = _get_uid_normalized_in_schema(uid, candidate_schema)
+        if candidate_uid:
+            if match_schema:
+                # Valid against more than one candidate schema, ambiguous
+                raise UnknownUIDSchema(uid)
+            match_schema = candidate_schema
+            normalized_uid = candidate_uid
+
+    if match_schema:
+        return normalized_uid, match_schema
+
+    # No guessess have been found
+    raise UnknownUIDSchema(uid)
 
 
 def normalize_arxiv_category(category):
