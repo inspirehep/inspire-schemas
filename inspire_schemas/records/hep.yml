@@ -414,7 +414,7 @@ properties:
         minItems: 1
         title: Authors
         type: array
-        uniqueItems: true
+        uniqueItems: false
     book_series:
         description: |-
             :MARC: ``490``
