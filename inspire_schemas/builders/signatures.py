@@ -115,9 +115,12 @@ class SignatureBuilder(object):
         be overwritten, otherwise it will be appended to the record.
 
         Args:
-            uid (string): unique identifier
+            uid (string): unique identifier.
+            schema (Optional[string]): schema of the unique identifier. If
+                ``None``, the schema will be guessed based on the shape of
+                ``uid``.
 
-        Rises:
+        Raises:
             SchemaUIDConflict: it UID and schema are not matching
         """
         try:
@@ -129,7 +132,7 @@ class SignatureBuilder(object):
             pass
 
         self._ensure_field('ids', [])
-        self.obj['ids'] = filter(lambda uid: uid.get('schema') != schema, self.obj['ids'])
+        self.obj['ids'] = [id_ for id_ in self.obj['ids'] if id_.get('schema') != schema]
         self._add_uid(uid, schema)
 
     @filter_empty_parameters
