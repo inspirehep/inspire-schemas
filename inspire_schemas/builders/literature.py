@@ -69,6 +69,14 @@ def is_citeable(publication_info):
     return has_pub_info and has_page_or_artid
 
 
+def key_already_there(element, elements):
+    """Checks if the given element existng by using the key `key`."""
+    for existing_element in elements:
+        if element['key'] == existing_element['key']:
+            return True
+    return False
+
+
 class LiteratureBuilder(object):
     """Literature record builder."""
 
@@ -845,8 +853,13 @@ class LiteratureBuilder(object):
             if locals()[dict_key] is not None:
                 figure[dict_key] = locals()[dict_key]
 
-        if figure:
-            self._append_to('figures', figure)
+        if key_already_there(figure, self.record.get('figures', ())):
+            raise ValueError(
+                'There\'s already a figure with the key %s.'
+                % figure['key']
+            )
+
+        self._append_to('figures', figure)
 
     @filter_empty_parameters
     def add_document(
@@ -883,8 +896,13 @@ class LiteratureBuilder(object):
             if locals()[dict_key] is not None:
                 document[dict_key] = locals()[dict_key]
 
-        if document:
-            self._append_to('documents', document)
+        if key_already_there(document, self.record.get('documents', ())):
+            raise ValueError(
+                'There\'s already a document with the key %s.'
+                % document['key']
+            )
+
+        self._append_to('documents', document)
 
     @filter_empty_parameters
     def add_reference(self, reference):
