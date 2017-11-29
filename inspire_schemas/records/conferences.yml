@@ -3,11 +3,13 @@ additionalProperties: false
 properties:
     $schema:
         format: uri
+        minLength: 1
         type: string
     _collections:
         items:
             enum:
             - Conferences
+            minLength: 1
             type: string
         minItems: 1
         title: Collections to which this record belongs
@@ -21,6 +23,7 @@ properties:
             users.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of private notes
         type: array
         uniqueItems: true
@@ -29,10 +32,13 @@ properties:
             description: |-
                 :MARC: ``111__e``
                 :example: ``SUSY 2018``
+            minLength: 1
             title: Conference acronym
             type: string
+        minItems: 1
         title: List of acronyms of the conference
         type: array
+        uniqueItems: true
     address:
         description: |-
             :MARC: ``111__c`` (in the form ``city, country``), ``270__b``
@@ -46,6 +52,7 @@ properties:
                 be provided for a conference.
         items:
             $ref: elements/address.json
+        minItems: 1
         title: List of locations of the conference
         type: array
         uniqueItems: true
@@ -66,6 +73,7 @@ properties:
                 used to boost search results.
         items:
             $ref: elements/title.json
+        minItems: 1
         title: List of alternative titles
         type: array
         uniqueItems: true
@@ -73,6 +81,7 @@ properties:
         description: |-
             ``111__y``
         format: date
+        minLength: 1
         title: Conference closing date
         type: string
     cnum:
@@ -83,6 +92,7 @@ properties:
             :MARC: ``270``
         items:
             $ref: elements/contact.json
+        minItems: 1
         title: Contact information
         type: array
         uniqueItems: true
@@ -110,7 +120,9 @@ properties:
             For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
+        minItems: 1
         type: array
+        uniqueItems: true
     external_system_identifiers:
         description: |-
             List of identifiers of this document on external systems.
@@ -121,25 +133,30 @@ properties:
                     schema:
                         enum:
                         - SPIRES
+                        minLength: 1
                         type: string
                     value:
                         description: |-
                             :MARC: ``970__a``
+                        minLength: 1
                         pattern: ^CONF-\d+$
                         type: string
                 required:
                 - schema
                 - value
                 type: object
+        minItems: 1
         type: array
         uniqueItems: true
     inspire_categories:
         items:
             $ref: elements/inspire_field.json
+        minItems: 1
         type: array
         uniqueItems: true
     legacy_creation_date:
         format: date
+        minLength: 1
         type: string
     new_record:
         $ref: elements/json_reference.json
@@ -153,6 +170,7 @@ properties:
         description: |-
             :MARC: ``111__x``
         format: date
+        minLength: 1
         title: Conference opening date
         type: string
     public_notes:
@@ -167,6 +185,7 @@ properties:
                 regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of public notes
         type: array
         uniqueItems: true
@@ -181,6 +200,7 @@ properties:
                 name:
                     description: |-
                         ``411__a``
+                    minLength: 1
                     title: Name of the conference series
                     type: string
                 number:
@@ -191,6 +211,7 @@ properties:
             required:
             - name
             type: object
+        minItems: 1
         title: Conference series that this is part of
         type: array
         uniqueItems: true
@@ -201,12 +222,14 @@ properties:
             :MARC: ``111__a/b``
         items:
             $ref: elements/title.json
+        minItems: 1
         title: List of titles of the conference
         type: array
         uniqueItems: true
     urls:
         items:
             $ref: elements/url.json
+        minItems: 1
         type: array
         uniqueItems: true
 required:

@@ -33,5 +33,6 @@ enum:
 - publication
 - reprint
 - translation
+minLength: 1
 title: Material to which the field refers
 type: string

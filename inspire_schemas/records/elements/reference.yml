@@ -8,6 +8,7 @@ properties:
         description: |-
             :MARC: ``999C5r`` with ``arXiv:`` prefix
             :example: ``1703.07274``
+        minLength: 1
         pattern: ^\d{4}.\d{4,5}|[\w.]+(-[\w.]+)?/\d+$
         title: arXiv eprint number
         type: string
@@ -24,6 +25,7 @@ properties:
                         :ref:`hep.json#/properties/authors/items/properties/full_name`.
 
                         :example: ``Smith, John G.D.``
+                    minLength: 1
                     type: string
                 inspire_role:
                     description: |-
@@ -32,8 +34,10 @@ properties:
                     - author
                     - supervisor
                     - editor
+                    minLength: 1
                     type: string
             type: object
+        minItems: 1
         title: List of authors
         type: array
         uniqueItems: true
@@ -41,15 +45,19 @@ properties:
         additionalProperties: false
         properties:
             title:
+                minLength: 1
                 type: string
             volume:
+                minLength: 1
                 type: string
         type: object
     collaborations:
         items:
             description: |-
                 :MARC: ``999C5c``
+            minLength: 1
             type: string
+        minItems: 1
         type: array
         uniqueItems: true
     document_type:
@@ -61,8 +69,10 @@ properties:
         items:
             description: |-
                 :MARC: ``999C5a`` with prefix ``doi:``
+            minLength: 1
             pattern: ^10\.\d+(\.\d+)?/.+$
             type: string
+        minItems: 1
         type: array
         uniqueItems: true
     imprint:
@@ -70,12 +80,15 @@ properties:
         properties:
             date:
                 format: date
+                minLength: 1
                 type: string
             place:
+                minLength: 1
                 type: string
             publisher:
                 description: |-
                     :MARC: ``999C5p``
+                minLength: 1
                 type: string
         type: object
     isbn:
@@ -88,6 +101,7 @@ properties:
 
                 If the cited document is a book chapter, use
                 :ref:`publication_info/properties/parent_isbn` instead.
+        minLength: 1
         pattern: ^\d*[0-9X]$
         type: string
     label:
@@ -101,6 +115,7 @@ properties:
 
             :example: ``42``
             :example: ``Jones1995c``
+        minLength: 1
         type: string
     misc:
         description: |-
@@ -108,8 +123,11 @@ properties:
 
             Unrecognized information from the reference.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         type: array
+        uniqueItems: true
     persistent_identifiers:
         description: |-
             :MARC: ``999C5a`` (with prefix ``hdl:`` or ``urn:``)
@@ -120,10 +138,13 @@ properties:
                     enum:
                     - HDL
                     - URN
+                    minLength: 1
                     type: string
                 value:
+                    minLength: 1
                     type: string
             type: object
+        minItems: 1
         type: array
         uniqueItems: true
     publication_info:
@@ -132,6 +153,7 @@ properties:
             artid:
                 description: |-
                     :MARC: last part of ``999C5s`` (if not a page)
+                minLength: 1
                 type: string
             cnum:
                 $ref: cnum.json
@@ -140,24 +162,29 @@ properties:
             journal_issue:
                 description: |-
                     :MARC: ``999C5n``
+                minLength: 1
                 type: string
             journal_title:
                 description: |-
                     :MARC: first part of ``999C5s``
+                minLength: 1
                 type: string
             journal_volume:
                 description: |-
                     :MARC: second part of ``999C5s``
+                minLength: 1
                 type: string
             material:
                 $ref: material.json
             page_end:
                 description: |-
                     :MARC: Last part of ``999C5s`` (if page-range)
+                minLength: 1
                 type: string
             page_start:
                 description: |-
                     :MARC: Last part of ``999C5s`` (if not article ID)
+                minLength: 1
                 type: string
             parent_isbn:
                 description: |-
@@ -167,12 +194,14 @@ properties:
 
                     If the cited document is a book chapter, this is the ISBN
                     of the book.
+                minLength: 1
                 pattern: ^\d*[0-9X]$
                 type: string
             parent_report_number:
                 description: |-
                     :MARC: ``999C5r`` but not distinguished from the cited
                         document :ref:`reference.json#/properties/report_numbers`.
+                minLength: 1
                 type: string
             parent_title:
                 description: |-
@@ -180,6 +209,7 @@ properties:
 
                     Title of the parent document, e.g. title of the book if the
                     cited document is a book chapter.
+                minLength: 1
                 type: string
             year:
                 description: |-
@@ -197,7 +227,9 @@ properties:
                 If the cited document is only part of a report, use
                 :ref:`publication_info/properties/parent_report_number` instead.
         items:
+            minLength: 1
             type: string
+        minItems: 1
         type: array
         uniqueItems: true
     texkey:
@@ -211,6 +243,7 @@ properties:
             by Inspire and made visible in the TeX export formats.
 
             :example: ``Maldacena:1997re``
+        minLength: 1
         type: string
     title:
         $ref: title.json
@@ -221,6 +254,7 @@ properties:
             $ref: url.json
             description: |-
                 :MARC: ``999C5u``
+        minItems: 1
         type: array
         uniqueItems: true
 title: A reference to a cited document

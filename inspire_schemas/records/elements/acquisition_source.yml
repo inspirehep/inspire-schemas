@@ -15,6 +15,7 @@ properties:
             original information is obtained and a record is finally created in
             the system.
         format: date-time
+        minLength: 1
         title: Date on which the metadata was obtained
         type: string
     email:
@@ -23,6 +24,7 @@ properties:
 
             This only gets populated when `method` is `submitter`.
         format: email
+        minLength: 1
         title: Email address associated to the submitter's account
         type: string
     internal_uid:
@@ -55,6 +57,7 @@ properties:
         - oai
         - batchuploader
         - hepcrawl
+        minLength: 1
         title: How the medata was obtained
         type: string
     orcid:
@@ -62,6 +65,7 @@ properties:
             :MARC: ``541__a`` with ``orcid:`` prefix
 
             This only gets populated when `method` is `submitter`.
+        minLength: 1
         pattern: ^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$
         title: ORCID of the submitter
         type: string
@@ -72,6 +76,7 @@ properties:
             :MARC: ``541__e``
 
             This only gets populated when `method` is `submitter`.
+        minLength: 1
         title: Holding pen record ID of the submission
         type: string
 title: Origin of the metadata in the record

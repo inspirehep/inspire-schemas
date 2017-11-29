@@ -29,7 +29,7 @@
             "checksum": "reprehenderit dolor ad in",
             "key": "ullamco ",
             "size": -93453234,
-            "version_id": ""
+            "version_id": "reprehenderit"
         },
         {
             "bucket": "esse deserunt",
@@ -187,7 +187,6 @@
             ],
             "credit_roles": [
                 "Conceptualization",
-                "Project administration",
                 "Project administration"
             ],
             "curated_relation": true,
@@ -203,7 +202,6 @@
                 }
             ],
             "inspire_roles": [
-                "supervisor",
                 "editor",
                 "supervisor",
                 "author"
@@ -292,9 +290,7 @@
             ],
             "inspire_roles": [
                 "editor",
-                "editor",
                 "author",
-                "supervisor",
                 "supervisor"
             ],
             "raw_affiliations": [
@@ -337,7 +333,7 @@
                     "value": "in"
                 },
                 {
-                    "curated_relation": true,
+                    "curated_relation": false,
                     "record": {
                         "$ref": "http://170PHP"
                     },
@@ -353,7 +349,7 @@
             "credit_roles": [
                 "Project administration"
             ],
-            "curated_relation": true,
+            "curated_relation": false,
             "emails": [
                 "5NaFqstfgILl@YwkZuB.eag",
                 "T6M5wv2oB@bcPIAehQmzUHDyDGntW.ovdo",
@@ -445,7 +441,7 @@
                 "Data curation",
                 "Writing - review & editing"
             ],
-            "curated_relation": false,
+            "curated_relation": true,
             "emails": [
                 "EXLKVKlJfXetVd@eZjmwEVvAIhPZEovjKVVhvhKUBhuORZ.ki"
             ],
@@ -461,10 +457,6 @@
                 }
             ],
             "inspire_roles": [
-                "author",
-                "author",
-                "author",
-                "author",
                 "author"
             ],
             "raw_affiliations": [
@@ -501,7 +493,6 @@
                 "Visualization",
                 "Resources",
                 "Writing - original draft",
-                "Investigation",
                 "Investigation"
             ],
             "curated_relation": true,
@@ -532,9 +523,6 @@
                 }
             ],
             "inspire_roles": [
-                "author",
-                "author",
-                "editor",
                 "author",
                 "editor"
             ],
@@ -687,24 +675,20 @@
     ],
     "external_system_identifiers": [
         {
-            "schema": "ut quis ipsum",
-            "value": "ut laboris sint"
+            "schema": "umwGkhFi0Ru",
+            "value": "UI*"
         },
         {
-            "schema": "sunt ut laboris nostrud reprehenderit",
-            "value": "nulla qui eu aliqua"
+            "schema": "yN7V1Hs8RQI",
+            "value": "Y*s_k?AwwA"
         },
         {
-            "schema": "adipisicing dolor quis ut est",
-            "value": "ad magna aute officia"
+            "schema": "i4ICQG4F",
+            "value": "bPL)Z"
         },
         {
-            "schema": "cupidatat aute",
-            "value": "sit dolor ex"
-        },
-        {
-            "schema": "occaecat incididunt",
-            "value": "cillum dolore Excepteur eiusmod culpa"
+            "schema": "wD_HejOBddC",
+            "value": "E"
         }
     ],
     "figures": [
@@ -759,7 +743,7 @@
             "term": "Other"
         },
         {
-            "source": "undefined",
+            "source": "magpie",
             "term": "Phenomenology-HEP"
         },
         {
@@ -767,7 +751,7 @@
             "term": "Gravitation and Cosmology"
         },
         {
-            "source": "undefined",
+            "source": "magpie",
             "term": "Experiment-Nucl"
         }
     ],
@@ -830,7 +814,7 @@
         },
         {
             "imposing": "voluptate commodo nostrud tem",
-            "license": "",
+            "license": "do",
             "material": "preprint",
             "url": "http://1o"
         },
@@ -854,15 +838,9 @@
     "persistent_identifiers": [
         {
             "material": "reprint",
-            "schema": "URN",
-            "source": "dolor occaecat",
-            "value": "incididunt voluptate"
-        },
-        {
-            "material": "editorial note",
             "schema": "HDL",
-            "source": "amet in",
-            "value": "consectetur est"
+            "source": "non laborum aute",
+            "value": "@{"
         }
     ],
     "preprint_date": "1984-04-30",
@@ -1218,6 +1196,16 @@
         }
     ],
     "report_numbers": [
+        {
+            "hidden": false,
+            "source": "reprehenderit",
+            "value": "et eiusmod id commodo ex"
+        },
+        {
+            "hidden": true,
+            "source": "eu irure voluptate non",
+            "value": "sit Duis ad occaecat"
+        },
         {
             "hidden": true,
             "source": "ea",

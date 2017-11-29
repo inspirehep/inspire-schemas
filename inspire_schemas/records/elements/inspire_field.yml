@@ -13,7 +13,7 @@ properties:
         - magpie
         - arxiv
         - user
-        - undefined
+        minLength: 1
         type: string
     term:
         enum:
@@ -32,6 +32,9 @@ properties:
         - Phenomenology-HEP
         - Theory-HEP
         - Theory-Nucl
+        minLength: 1
         type: string
+required:
+- term
 title: Inspire category
 type: object

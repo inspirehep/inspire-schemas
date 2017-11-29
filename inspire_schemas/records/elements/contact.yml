@@ -6,9 +6,11 @@ properties:
         description: |-
             Contact person's e-mail
         format: email
+        minLength: 1
         type: string
     name:
         description: |-
             Contact person's name
+        minLength: 1
         type: string
 type: object

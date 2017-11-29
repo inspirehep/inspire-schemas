@@ -70,6 +70,7 @@ properties:
         - predecessor
         - parent
         - commented
+        minLength: 1
         title: Relation of the linked record to this one
         type: string
     relation_freetext:
@@ -79,6 +80,7 @@ properties:
 
             If none of the standard relations in :ref:`relation` fit, a textual
             relation can alternatively be provided here.
+        minLength: 1
         type: string
 required:
 - record

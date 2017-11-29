@@ -169,4 +169,5 @@ enum:
 - stat.ML
 - stat.OT
 - stat.TH
+minLength: 1
 type: string

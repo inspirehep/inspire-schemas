@@ -6,12 +6,15 @@ description: |-
 properties:
     $schema:
         format: uri
+        minLength: 1
         type: string
     _collections:
         items:
             enum:
             - Experiments
+            minLength: 1
             type: string
+        minItems: 1
         title: Collections to which this record belongs
         type: array
         uniqueItems: true
@@ -26,6 +29,7 @@ properties:
             users.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of private notes
         type: array
         uniqueItems: true
@@ -49,6 +53,7 @@ properties:
                 description: |-
                     :MARC: ``119__b``
                     :example: ``LHC``
+                minLength: 1
                 title: Accelerator name
                 type: string
         required:
@@ -82,7 +87,9 @@ properties:
 
                     :example: ``ATLAS TDAQ``
                 items:
+                    minLength: 1
                     type: string
+                minItems: 1
                 title: List of names of subgroups
                 type: array
                 uniqueItems: true
@@ -90,6 +97,7 @@ properties:
                 description: |-
                     :MARC: ``710__g``
                     :example: ``D0``
+                minLength: 1
                 title: Collaboration name
                 type: string
         required:
@@ -113,30 +121,35 @@ properties:
         description: |-
             :MARC: ``046__r``
         format: date
+        minLength: 1
         title: Approval date of experiment/accelerator
         type: string
     date_cancelled:
         description: |-
             :MARC: ``046__c``
         format: date
+        minLength: 1
         title: Cancellation date of experiment/accelerator
         type: string
     date_completed:
         description: |-
             :MARC: ``046__t``
         format: date
+        minLength: 1
         title: Completion date of experiment/accelerator
         type: string
     date_proposed:
         description: |-
             :MARC: ``046__q``
         format: date
+        minLength: 1
         title: Proposal date of experiment/accelerator
         type: string
     date_started:
         description: |-
             :MARC: ``046__s``
         format: date
+        minLength: 1
         title: Starting date of experiment/accelerator
         type: string
     deleted:
@@ -156,12 +169,15 @@ properties:
             For the opposite concept, see :ref:`new_record`.
         items:
             $ref: elements/json_reference.json
+        minItems: 1
         type: array
+        uniqueItems: true
     description:
         description: |-
             :MARC: ``520__a``
 
             This should take the form of a short text.
+        minLength: 1
         title: Description of the project
         type: string
     experiment:
@@ -174,11 +190,13 @@ properties:
                 description: |-
                     :MARC: ``119__d``
                     :example: ``SHINE``
+                minLength: 1
                 type: string
             value:
                 description: |-
                     :MARC: ``119__c``
                     :example: ``NA61``
+                minLength: 1
                 title: Experiment identifier
                 type: string
         type: object
@@ -192,10 +210,12 @@ properties:
                     schema:
                         enum:
                         - SPIRES
+                        minLength: 1
                         type: string
                     value:
                         description: |-
                             :MARC: ``970__a``
+                        minLength: 1
                         pattern: ^EXPERIMENT-\d+$
                         type: string
                 required:
@@ -203,11 +223,13 @@ properties:
                 - value
                 title: SPIRES identifier
                 type: object
+        minItems: 1
         type: array
         uniqueItems: true
     inspire_categories:
         items:
             $ref: elements/inspire_field.json
+        minItems: 1
         type: array
         uniqueItems: true
     inspire_classification:
@@ -221,8 +243,10 @@ properties:
 
                 :example: ``3.1.1`` for ``ultra-short baseline, reactor, neutrino
                     (flavor) experiment``
+            minLength: 1
             pattern: \d+(\.\d+){0,2}
             type: string
+        minItems: 1
         type: array
         uniqueItems: true
     institutions:
@@ -241,32 +265,39 @@ properties:
                         Currently, the old
                         :ref:`institutions.json#/properties/legacy_ICN` is used
                         here.
+                    minLength: 1
                     title: ICN of institution hosting the project
                     type: string
             title: Host institution
             type: object
+        minItems: 1
         type: array
         uniqueItems: true
     legacy_creation_date:
         format: date
+        minLength: 1
         type: string
     legacy_name:
         description: |-
             :MARC: ``119__a``
             :example: ``CERN-LHC-CMS``
+        minLength: 1
         title: project identifier on legacy INSPIRE
         type: string
     long_name:
         description: |-
             :MARC: ``245__a``
             :example: ``Compact Muon Solenoid``
+        minLength: 1
         title: long name of the project
         type: string
     name_variants:
         description: |-
             :MARC: ``419__a``
         items:
+            minLength: 1
             type: string
+        minItems: 1
         title: Name variants of the project
         type: array
         uniqueItems: true
@@ -312,7 +343,9 @@ properties:
             - collaboration
             - experiment
             - accelerator
+            minLength: 1
             type: string
+        minItems: 1
         minLength: 1
         title: Type of project that this record represents
         type: array
@@ -329,6 +362,7 @@ properties:
                 regular users, see :ref:`_private_notes`.
         items:
             $ref: elements/sourced_value.json
+        minItems: 1
         title: List of public notes
         type: array
         uniqueItems: true
@@ -337,6 +371,7 @@ properties:
             :MARC: ``510``
         items:
             $ref: elements/related_record.json
+        minItems: 1
         title: List of related records
         type: array
         uniqueItems: true
@@ -345,6 +380,7 @@ properties:
     urls:
         items:
             $ref: elements/url.json
+        minItems: 1
         type: array
         uniqueItems: true
 required:

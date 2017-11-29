@@ -33,6 +33,7 @@ from functools import partial, wraps
 import idutils
 import rfc3987
 import six
+from idutils import is_orcid
 from inspire_utils.date import PartialDate
 from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
@@ -597,6 +598,7 @@ inspire_format_checker.checks('date', raises=ValueError)(PartialDate.loads)
 inspire_format_checker.checks('uri-reference', raises=ValueError)(
     partial(rfc3987.parse, rule='URI_reference')
 )
+inspire_format_checker.checks('orcid')(is_orcid)
 
 
 def validate(data, schema=None):

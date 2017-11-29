@@ -8,5 +8,6 @@ enum:
 - MASTER
 - UNDERGRADUATE
 - OTHER
+minLength: 1
 title: Rank of academic position
 type: string

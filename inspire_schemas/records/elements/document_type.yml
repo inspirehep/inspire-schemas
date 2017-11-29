@@ -9,4 +9,5 @@ enum:
 - proceedings
 - report
 - thesis
+minLength: 1
 type: string
