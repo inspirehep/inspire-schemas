@@ -318,10 +318,11 @@ def filter_empty_parameters(func):
     def func_wrapper(self, *args, **kwargs):
         my_kwargs = {key: value for key, value in kwargs.items()
                      if value not in EMPTIES}
+        my_args = [arg for arg in args if arg not in EMPTIES]
 
         if (
                 {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
-        ) and args == ():
+        ) and not my_args:
             return
         return func(self, *args, **my_kwargs)
 
