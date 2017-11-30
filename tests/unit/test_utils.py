@@ -713,3 +713,20 @@ def test_author_id_normalize_and_schema_unknown():
 def test_author_id_normalize_and_schema_conflict():
     with pytest.raises(errors.SchemaUIDConflict):
         utils.author_id_normalize_and_schema('SLAC-123456', 'CERN')
+
+
+@pytest.mark.parametrize('arg1,arg2,source,material', [
+    ('value', 'another', None, None),
+    ('value', None, None, None),
+    ('', [], None, None),
+    (None, None, 'source', None),
+    (None, None, None, 'material'),
+])
+def test_filter_empty_parameters(arg1, arg2, source, material):
+    @utils.filter_empty_parameters
+    def function_no_empty_args(arg1, arg2, source=None, material=None):
+        if arg1 or arg2:
+            return
+        assert False
+
+    function_no_empty_args(arg1, arg2, source=source, material=material)
