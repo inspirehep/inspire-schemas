@@ -109,7 +109,7 @@ properties:
                 not be edited manually.
         items:
             $ref: elements/records-files.json
-        minItems: 1
+        minItems: 0
         title: '`invenio-records-files` metadata'
         type: array
         uniqueItems: true
