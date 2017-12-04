@@ -609,7 +609,7 @@ class LiteratureBuilder(object):
         self._append_to('titles', title_entry)
 
     @filter_empty_parameters
-    def add_title_translation(self, title, language=None, source=None):
+    def add_title_translation(self, title, language, source=None):
         """Add title translation.
 
         :param title: translated title
@@ -624,9 +624,8 @@ class LiteratureBuilder(object):
         title_translation = self._sourced_dict(
             source,
             title=title,
+            language=language,
         )
-        if language is not None:
-            title_translation['language'] = language
 
         self._append_to('title_translations', title_translation)
 
