@@ -9,9 +9,10 @@ description: |-
 properties:
     source:
         enum:
-        - curator
-        - magpie
         - arxiv
+        - curator
+        - cds
+        - magpie
         - user
         minLength: 1
         type: string
