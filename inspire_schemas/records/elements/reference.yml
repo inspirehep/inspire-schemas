@@ -40,7 +40,7 @@ properties:
         minItems: 1
         title: List of authors
         type: array
-        uniqueItems: true
+        uniqueItems: false
     book_series:
         additionalProperties: false
         properties:
