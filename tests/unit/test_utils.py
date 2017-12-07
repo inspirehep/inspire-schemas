@@ -315,7 +315,7 @@ def test_normalize_collaboration_handles_parentheses():
     assert utils.normalize_collaboration(collaboration) == ['ATLAS']
 
 
-def test_normalize_collaboration_handles_parentheses():
+def test_normalize_collaboration_handles_parentheses_splits_and_removes_fluff():
     collaboration = '(for the CMS and ATLAS Collaborations)'
     assert utils.normalize_collaboration(collaboration) == ['CMS', 'ATLAS']
 
