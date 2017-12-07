@@ -4,6 +4,13 @@ description: |-
     ``addendum``
         for a document extending the main publication.
 
+    ``additional material``
+        for additional material attached to the main publication, that is
+        neither the more specific ``data`` or ``software``.
+
+    ``data``
+        for data related to the main publication.
+
     ``erratum``
         for a document correcting errors in the content of the main
         publication. When the errors are not in the content but in the
@@ -23,15 +30,21 @@ description: |-
     ``reprint``
         for a reprint of the main publication.
 
+    ``software``
+        for software related to the main publication.
+
     ``translation``
         for a translation of the main publication.
 enum:
 - addendum
+- additional material
+- data
 - erratum
 - editorial note
 - preprint
 - publication
 - reprint
+- software
 - translation
 minLength: 1
 title: Material to which the field refers
