@@ -1404,6 +1404,7 @@ properties:
             enum:
             - introductory
             - lectures
+            - manual
             - review
             minLength: 1
             type: string
