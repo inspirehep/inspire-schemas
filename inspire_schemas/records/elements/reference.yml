@@ -251,9 +251,20 @@ properties:
             :MARC: ``999C5t``
     urls:
         items:
-            $ref: url.json
+            additionalProperties: false
             description: |-
                 :MARC: ``999C5u``
+            properties:
+                description:
+                    minLength: 1
+                    type: string
+                value:
+                    minLength: 1
+                    type: string
+            required:
+            - value
+            title: URL of related document
+            type: object
         minItems: 1
         type: array
         uniqueItems: true
