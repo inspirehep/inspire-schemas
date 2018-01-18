@@ -695,6 +695,52 @@ def test_set_publisher():
     assert expected == result
 
 
+def test_set_imprint_date():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_imprint_date('23/12/2015')
+
+    expected = [
+        {
+            'reference': {
+                'imprint': {
+                    'date': '2015-12-23',
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_set_imprint_place():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.set_imprint_place('New York')
+
+    expected = [
+        {
+            'reference': {
+                'imprint': {
+                    'place': 'New York',
+                },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_report_number_handles_several_report_numbers():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
