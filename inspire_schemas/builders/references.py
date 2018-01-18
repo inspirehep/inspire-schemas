@@ -27,6 +27,7 @@ from __future__ import absolute_import, division, print_function
 import re
 
 import six
+from inspire_utils.date import normalize_date
 from inspire_utils.name import normalize_name
 from isbn import ISBN
 
@@ -243,6 +244,14 @@ class ReferenceBuilder(object):
     def set_publisher(self, publisher):
         self._ensure_reference_field('imprint', {})
         self.obj['reference']['imprint']['publisher'] = publisher
+
+    def set_imprint_date(self, date):
+        self._ensure_reference_field('imprint', {})
+        self.obj['reference']['imprint']['date'] = normalize_date(date)
+
+    def set_imprint_place(self, place):
+        self._ensure_reference_field('imprint', {})
+        self.obj['reference']['imprint']['place'] = place
 
     def add_report_number(self, repno):
         # For some reason we get more recall by trying the first part in
