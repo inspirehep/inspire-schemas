@@ -28,6 +28,7 @@ import re
 
 import six
 from inspire_utils.name import normalize_name
+from inspire_utils.date import normalize_date
 from isbn import ISBN
 
 import idutils
@@ -240,9 +241,14 @@ class ReferenceBuilder(object):
         else:
             self.add_misc(pubnote)
 
-    def set_publisher(self, publisher):
+    def set_publisher(self, publisher, place=None, date=None):
         self._ensure_reference_field('imprint', {})
-        self.obj['reference']['imprint']['publisher'] = publisher
+        imprint = self.obj['reference']['imprint']
+        imprint['publisher'] = publisher
+        if place:
+            imprint['place'] = place
+        if date:
+            imprint['date'] = normalize_date(date)
 
     def add_report_number(self, repno):
         # For some reason we get more recall by trying the first part in
