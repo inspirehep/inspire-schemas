@@ -35,12 +35,11 @@ import rfc3987
 import six
 from idutils import is_orcid
 from inspire_utils.date import PartialDate
-from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
+from jsonschema import validate as jsonschema_validate
 from pkg_resources import resource_filename
-from unidecode import unidecode
-
 from six.moves.urllib.parse import urlsplit
+from unidecode import unidecode
 
 from .errors import (SchemaKeyNotFound, SchemaNotFound, SchemaUIDConflict,
                      UnknownUIDSchema)
