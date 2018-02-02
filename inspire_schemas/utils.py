@@ -35,12 +35,11 @@ import rfc3987
 import six
 from idutils import is_orcid
 from inspire_utils.date import PartialDate
-from jsonschema import validate as jsonschema_validate
 from jsonschema import RefResolver, draft4_format_checker
+from jsonschema import validate as jsonschema_validate
 from pkg_resources import resource_filename
-from unidecode import unidecode
-
 from six.moves.urllib.parse import urlsplit
+from unidecode import unidecode
 
 from .errors import (SchemaKeyNotFound, SchemaNotFound, SchemaUIDConflict,
                      UnknownUIDSchema)
@@ -56,6 +55,9 @@ _RE_COLLABORATION_LEADING = re.compile(
 )
 _RE_COLLABORATION_TRAILING = re.compile(
     r'\bcollaborations?\s*$', re.IGNORECASE
+)
+_RE_PUBLIC_DOMAIN_URL = re.compile(
+    r'^/publicdomain/zero(?:/(?P<version>[\.\d]*))?'
 )
 _RE_LICENSE_URL = re.compile(
     r'^/licenses/(?P<sublicense>[-\w]*)(?:/(?P<version>[\.\d]*))?'
@@ -684,9 +686,14 @@ def get_license_from_url(url):
     split_url = urlsplit(url, scheme='http')
 
     if split_url.netloc.lower() == 'creativecommons.org':
-        license = ['CC']
-        match = _RE_LICENSE_URL.match(split_url.path)
-        license.extend(part.upper() for part in match.groups() if part)
+        if 'publicdomain' in split_url.path:
+            license = ['CC0']
+            match = _RE_PUBLIC_DOMAIN_URL.match(split_url.path)
+            license.extend(part for part in match.groups() if part)
+        else:
+            license = ['CC']
+            match = _RE_LICENSE_URL.match(split_url.path)
+            license.extend(part.upper() for part in match.groups() if part)
     elif split_url.netloc == 'arxiv.org':
         license = ['arXiv']
         match = _RE_LICENSE_URL.match(split_url.path)

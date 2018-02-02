@@ -139,7 +139,7 @@ build_requires = [
 tests_require = [
     'check-manifest',
     'coverage',
-    'isort',
+    'isort~=4.0,>=4.3.0',
     'pytest-cache',
     'pytest-cov',
     'pytest-pep8',
