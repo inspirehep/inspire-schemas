@@ -589,6 +589,34 @@ def test_convert_old_publication_info_to_new_deduces_year_from_volume():
     assert expected == result
 
 
+def test_convert_old_publication_info_to_new_does_not_raise_when_deducing_year_from_malformed_volume():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'artid': '159',
+            'journal_title': 'JHEP',
+            'journal_volume': 'S160',
+            'page_start': '159',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'artid': '159',
+            'journal_title': 'JHEP',
+            'journal_volume': 'S160',
+            'page_start': '159',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_new_publication_info_to_old():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
