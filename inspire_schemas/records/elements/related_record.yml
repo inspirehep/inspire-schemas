@@ -36,6 +36,27 @@ properties:
                   a project that finished and was superseded by the one in this
                   record (e.g. two successive runs of an experiment).
 
+            ``successor``
+                :MARC: ``510__w:b`` (for Institutions and Experiments),
+                    ``530__w:b`` (for Journals) or the field comes from
+                    ``78502`` (for Literature).
+
+                The related record is a successor of the current one, i.e.
+                the current record is superseded by the related one.
+
+                - For a Literature record, this is typically the case if the
+                  current record is a preliminary note and the related record is the
+                  final version.
+                - For a Journal record, this happens when the journal has
+                  changed name: the current record has the previous name and
+                  the related one the new name.
+                - For an Institution record, this means that the current record
+                  represents an institution that does no longer exist and has
+                  become the one represented by the related record.
+                - For a Project record, this happens when the current record is
+                  a project that finished and was superseded by the related
+                  record (e.g. two successive runs of an experiment).
+
             ``parent``
                 :MARC: ``510__w:t`` (for an Institution record)
 
@@ -68,6 +89,7 @@ properties:
                 ``78502`` is currently discarded.
         enum:
         - predecessor
+        - successor
         - parent
         - commented
         minLength: 1
