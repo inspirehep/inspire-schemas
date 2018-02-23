@@ -238,7 +238,6 @@ properties:
                     title: arXiv eprint identifier
                     type: string
             required:
-            - categories
             - value
             title: arXiv metadata
             type: object
