@@ -46,6 +46,29 @@ properties:
         minItems: 1
         type: array
         uniqueItems: true
+    dois:
+        items:
+            additionalProperties: false
+            properties:
+                source:
+                    $ref: elements/source.json
+                    description: |-
+                        :MARC: ``0247_9``
+                value:
+                    description: |-
+                        :MARC: ``0247_a``
+                        :example: ``10.1023/A:1026654312961``
+                    minLength: 1
+                    pattern: ^10\.\d+(\.\d+)?/\S+$
+                    title: DOI
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of DOIs
+        type: array
+        uniqueItems: true
     new_record:
         $ref: elements/json_reference.json
         description: |-
