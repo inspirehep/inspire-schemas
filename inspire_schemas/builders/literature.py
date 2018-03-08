@@ -30,6 +30,8 @@ import warnings
 
 import idutils
 
+from inspire_utils.date import normalize_date
+
 from ..utils import (get_license_from_url,
                      normalize_collaboration,
                      validate,
@@ -272,15 +274,16 @@ class LiteratureBuilder(object):
         :param place: place of publication
         :type place: string
 
-        :param date: the date of publication
-        :type date: date
+        :param date: A (partial) date in any format.
+            The date should contain at least a year
+        :type date: string
 
         :rtype: dict
         """
 
         imprint = {}
         if date is not None:
-            imprint['date'] = date
+            imprint['date'] = normalize_date(date)
         if place is not None:
             imprint['place'] = place
         if publisher is not None:
@@ -464,19 +467,21 @@ class LiteratureBuilder(object):
     def add_imprint_date(self, imprint_date):
         """Add imprint date.
 
-        :type imprint_date: string. A formatted date is required (yyyy-mm-dd)
+        :type imprint_date: string. A (partial) date in any format.
+            The date should contain at least a year
         """
         self._append_to('imprints', {
-            'date': imprint_date
+            'date': normalize_date(imprint_date)
         })
 
     @filter_empty_parameters
     def add_preprint_date(self, preprint_date):
         """Add preprint date.
 
-        :type preprint_date: string. A formatted date is required (yyyy-mm-dd)
+        :type preprint_date: string. A (partial) date in any format.
+            The date should contain at least a year
         """
-        self.record['preprint_date'] = preprint_date
+        self.record['preprint_date'] = normalize_date(preprint_date)
 
     @filter_empty_parameters
     def add_thesis(

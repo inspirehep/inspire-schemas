@@ -403,3 +403,44 @@ def test_publication_info_public_note():
     assert validate(result, subschema) is None
     assert expected == result
     assert 'publication_info' not in builder.record
+
+
+def test_preprint_date_normalizes_date():
+    builder = LiteratureBuilder()
+    builder.add_preprint_date('12 April 2010')
+
+    result = builder.record['preprint_date']
+
+    expected = '2010-04-12'
+
+    assert expected == result
+
+
+def test_imprint_date_normalizes_date():
+    builder = LiteratureBuilder()
+    builder.add_imprint_date('19 September 2005')
+
+    result = builder.record['imprints']
+
+    expected = [
+        {
+            'date': '2005-09-19'
+        }
+    ]
+
+    assert expected == result
+
+
+def test_add_book_normalizes_date():
+    builder = LiteratureBuilder()
+    builder.add_book(date='9 November 1990')
+
+    result = builder.record['imprints']
+
+    expected = [
+        {
+            'date': '1990-11-09'
+        }
+    ]
+
+    assert expected == result
