@@ -752,6 +752,30 @@ def test_convert_new_publication_info_to_old_handles_year_added_to_volumes():
     assert expected == result
 
 
+def test_draft_validate():
+    schema = utils.load_schema('hep')
+
+    record = {
+        '_collections': [
+            'Literature',
+        ],
+        'document_type': [
+            'article',
+        ],
+        'titles': [
+            {'title': 'A title'},
+        ],
+        'preprint_date': 'Jessica Jones'
+    }
+    expected = 'Jessica Jones'
+    result = utils.get_validation_errors(record, schema)
+    error = next(result)
+
+    assert expected in error.message
+    with pytest.raises(StopIteration):
+        error = next(result)
+
+
 @pytest.mark.parametrize('uid,explicit_schema,expected_uid,expected_schema', [
     ('0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),
     ('http://orcid.org/0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),

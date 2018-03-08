@@ -35,7 +35,7 @@ import rfc3987
 import six
 from idutils import is_orcid
 from inspire_utils.date import PartialDate
-from jsonschema import RefResolver, draft4_format_checker
+from jsonschema import Draft4Validator, RefResolver, draft4_format_checker
 from jsonschema import validate as jsonschema_validate
 from pkg_resources import resource_filename
 from six.moves.urllib.parse import urlsplit
@@ -604,6 +604,32 @@ inspire_format_checker.checks('uri-reference', raises=ValueError)(
 inspire_format_checker.checks('orcid')(is_orcid)
 
 
+def _load_schema_for_record(data, schema=None):
+    """Load the schema from a given record.
+
+    Args:
+        data (dict): record data.
+        schema (Union[dict, str]): schema to validate against.
+
+    Returns:
+        dict: the loaded schema.
+
+    Raises:
+        SchemaNotFound: if the given schema was not found.
+        SchemaKeyNotFound: if ``schema`` is ``None`` and no ``$schema`` key was
+            found in ``data``.
+        jsonschema.SchemaError: if the schema is invalid.
+    """
+    if schema is None:
+        if '$schema' not in data:
+            raise SchemaKeyNotFound(data=data)
+        schema = data['$schema']
+
+    if isinstance(schema, six.string_types):
+        schema = load_schema(schema_name=schema)
+    return schema
+
+
 def validate(data, schema=None):
     """Validate the given dictionary against the given schema.
 
@@ -622,13 +648,7 @@ def validate(data, schema=None):
         jsonschema.SchemaError: if the schema is invalid.
         jsonschema.ValidationError: if the data is invalid.
     """
-    if schema is None:
-        if '$schema' not in data:
-            raise SchemaKeyNotFound(data=data)
-        schema = data['$schema']
-
-    if isinstance(schema, six.string_types):
-        schema = load_schema(schema_name=schema)
+    schema = _load_schema_for_record(data, schema)
 
     return jsonschema_validate(
         instance=data,
@@ -636,6 +656,35 @@ def validate(data, schema=None):
         resolver=LocalRefResolver.from_schema(schema),
         format_checker=inspire_format_checker,
     )
+
+
+def get_validation_errors(data, schema=None):
+    """Validation errors for a given record.
+
+    Args:
+        data (dict): record to validate.
+        schema (Union[dict, str]): schema to validate against. If it is a
+            string, it is intepreted as the name of the schema to load (e.g.
+            ``authors`` or ``jobs``). If it is ``None``, the schema is taken
+            from ``data['$schema']``. If it is a dictionary, it is used
+            directly.
+    Yields:
+        jsonschema.exceptions.ValidationError: validation errors.
+
+    Raises:
+        SchemaNotFound: if the given schema was not found.
+        SchemaKeyNotFound: if ``schema`` is ``None`` and no ``$schema`` key was
+            found in ``data``.
+        jsonschema.SchemaError: if the schema is invalid.
+    """
+    schema = _load_schema_for_record(data, schema)
+
+    errors = Draft4Validator(
+        schema,
+        resolver=LocalRefResolver.from_schema(schema),
+        format_checker=inspire_format_checker
+    )
+    return errors.iter_errors(data)
 
 
 def normalize_collaboration(collaboration):
