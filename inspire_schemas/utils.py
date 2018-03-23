@@ -906,3 +906,51 @@ def convert_new_publication_info_to_old(publication_infos):
         result.append(_publication_info)
 
     return result
+
+
+def contains_bars_instead_of_slashes(string):
+    """Checking if the error of replacing ``/`` with ``|`` is present"""
+    return string[:7] == 'http:||' or string[:8] == 'https:||'
+
+
+def convert_bars_to_slashes(string):
+    """A common error in urls is that all ``/`` has been changed for ``|``, we fix that in this function"""
+    return string.replace('|', '/')
+
+
+def is_http_missing(string):
+    """Check if the given url is missing the starting ``http``"""
+    return string[:3] == 'www'
+
+
+def add_http(string):
+    """Add the starting ``http`` to a url that is missing it"""
+    return 'http://' + string
+
+
+def replace_tilde(string):
+    """Replace unicode characters by their working equivalent"""
+    string = string.replace('\u223c', '~')
+    return string.replace('\u02dc', '~')
+
+
+def fix_url(url):
+    """Return a url in a correct format.
+
+    Used to parse an incorect url to try to fix it
+    with the most common ocurrences for errors.
+    If the fixed url is still incorrect, it returns ``None``.
+    """
+    if contains_bars_instead_of_slashes:
+        url = convert_bars_to_slashes(url)
+
+    if is_http_missing(url):
+        url = add_http(url)
+
+    url = replace_tilde(url)
+
+    try:
+        rfc3987.parse(url, rule="URI")
+        return url
+    except ValueError:
+        return None

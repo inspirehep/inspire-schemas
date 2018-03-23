@@ -826,3 +826,27 @@ def test_filter_empty_parameters(arg1, arg2, source, material):
         assert False
 
     function_no_empty_args(arg1, arg2, source=source, material=material)
+
+
+def test_fix_url_add_http():
+    url_string = 'www.google.com/'
+    result = utils.fix_url(url_string)
+    expected = 'http://www.google.com/'
+
+    assert expected == result
+
+
+def test_fix_url_change_bars_with_slashes():
+    url_string = 'http:||www.google.com|'
+    result = utils.fix_url(url_string)
+    expected = 'http://www.google.com/'
+
+    assert expected == result
+
+
+def test_fix_url_substitute_tilde():
+    url_string = 'www.google.com/\u223c'
+    result = utils.fix_url(url_string)
+    expected = 'http://www.google.com/~'
+
+    assert expected == result

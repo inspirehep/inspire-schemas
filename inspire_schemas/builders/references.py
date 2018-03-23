@@ -33,7 +33,7 @@ from isbn import ISBN
 
 import idutils
 
-from ..utils import convert_old_publication_info_to_new, split_pubnote
+from ..utils import convert_old_publication_info_to_new, split_pubnote, fix_url
 
 
 # Matches any separators for author enumerations.
@@ -206,8 +206,18 @@ class ReferenceBuilder(object):
             self.obj['reference']['publication_info']['year'] = year
 
     def add_url(self, url):
+        if self._is_uid(url):
+            self._add_uid(url)
+        else:
+            self._add_url(url)
+
+    def _add_url(self, url):
+        fixed_url = fix_url(url)
         self._ensure_reference_field('urls', [])
-        self.obj['reference']['urls'].append({'value': url})
+        if fixed_url is not None:
+            self.obj['reference']['urls'].append({'value': fixed_url})
+        else:
+            self.obj['reference']['urls'].append({'value': url})
 
     def add_refextract_authors_str(self, authors_str):
         """Parses individual authors from refextracted authors string."""
@@ -264,7 +274,31 @@ class ReferenceBuilder(object):
             self._ensure_reference_field('report_numbers', [])
             self.obj['reference']['report_numbers'].append(repno)
 
+    def _is_uid(self, string):
+        """Return ``True`` if ``string`` is identified as a kind of uid. Return false otherwise.
+
+        We don't check if it's a handle because urls can be easily misinterpreted as handles.
+        """
+        # We might add None values from wherever. Kill them here.
+        string = string or ''
+        if _is_arxiv(string):
+            return True
+        elif idutils.is_doi(string):
+            return True
+        elif idutils.is_urn(string):
+            return True
+        elif self.RE_VALID_CNUM.match(string):
+            return True
+        else:
+            return False
+
     def add_uid(self, uid):
+        try:
+            self._add_uid(uid)
+        except Exception:
+            self.add_misc(uid)
+
+    def _add_uid(self, uid):
         """Add unique identifier in correct field."""
         # We might add None values from wherever. Kill them here.
         uid = uid or ''
@@ -290,12 +324,9 @@ class ReferenceBuilder(object):
             self.obj['reference']['publication_info']['cnum'] = uid
         else:
             # ``idutils.is_isbn`` is too strict in what it accepts.
-            try:
-                isbn = str(ISBN(uid))
-                self._ensure_reference_field('isbn', {})
-                self.obj['reference']['isbn'] = isbn
-            except Exception:
-                self.add_misc(uid)
+            isbn = str(ISBN(uid))
+            self._ensure_reference_field('isbn', {})
+            self.obj['reference']['isbn'] = isbn
 
     def add_collaboration(self, collaboration):
         self._ensure_reference_field('collaborations', [])

@@ -426,6 +426,52 @@ def test_add_url():
     assert expected == result
 
 
+def test_add_url_uses_fix_url():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_url('www.muonsinc.com')
+
+    expected = [
+        {
+            'reference': {
+                'urls': [
+                    {'value': 'http://www.muonsinc.com'},
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_url_adds_uid():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_url('10.1109/NSSMIC.2005.1596597')
+
+    expected = [
+        {
+            'reference': {
+                'dois': [
+                    '10.1109/NSSMIC.2005.1596597'
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_refextract_author_str():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
