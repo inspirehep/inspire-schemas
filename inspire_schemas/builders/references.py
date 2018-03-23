@@ -206,9 +206,9 @@ class ReferenceBuilder(object):
             self.obj['reference']['publication_info']['year'] = year
 
     def add_url(self, url):
-        if self._is_uid(url):
-            self._add_uid(url)
-        else:
+        try:
+            self._add_uid(url, False)
+        except ValueError:
             self._add_url(url)
 
     def _add_url(self, url):
@@ -274,32 +274,18 @@ class ReferenceBuilder(object):
             self._ensure_reference_field('report_numbers', [])
             self.obj['reference']['report_numbers'].append(repno)
 
-    def _is_uid(self, string):
-        """Return ``True`` if ``string`` is identified as a kind of uid. Return false otherwise.
-
-        We don't check if it's a handle because urls can be easily misinterpreted as handles.
-        """
-        # We might add None values from wherever. Kill them here.
-        string = string or ''
-        if _is_arxiv(string):
-            return True
-        elif idutils.is_doi(string):
-            return True
-        elif idutils.is_urn(string):
-            return True
-        elif self.RE_VALID_CNUM.match(string):
-            return True
-        else:
-            return False
-
     def add_uid(self, uid):
         try:
             self._add_uid(uid)
-        except Exception:
+        except ValueError:
             self.add_misc(uid)
 
-    def _add_uid(self, uid):
-        """Add unique identifier in correct field."""
+    def _add_uid(self, uid, check_handle=True):
+        """Add unique identifier in correct field.
+
+        The ``check_handle`` flag is used when adding a uid through the add_url function
+        since urls can be easily confused with handle elements.
+        """
         # We might add None values from wherever. Kill them here.
         uid = uid or ''
         if _is_arxiv(uid):
@@ -307,7 +293,7 @@ class ReferenceBuilder(object):
         elif idutils.is_doi(uid):
             self._ensure_reference_field('dois', [])
             self.obj['reference']['dois'].append(idutils.normalize_doi(uid))
-        elif idutils.is_handle(uid):
+        elif idutils.is_handle(uid) and check_handle:
             self._ensure_reference_field('persistent_identifiers', [])
             self.obj['reference']['persistent_identifiers'].append({
                 'schema': 'HDL',
@@ -324,9 +310,12 @@ class ReferenceBuilder(object):
             self.obj['reference']['publication_info']['cnum'] = uid
         else:
             # ``idutils.is_isbn`` is too strict in what it accepts.
-            isbn = str(ISBN(uid))
-            self._ensure_reference_field('isbn', {})
-            self.obj['reference']['isbn'] = isbn
+            try:
+                isbn = str(ISBN(uid))
+                self._ensure_reference_field('isbn', {})
+                self.obj['reference']['isbn'] = isbn
+            except Exception:
+                raise ValueError('Unrecognized uid type')
 
     def add_collaboration(self, collaboration):
         self._ensure_reference_field('collaborations', [])
