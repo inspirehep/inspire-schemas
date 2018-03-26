@@ -906,3 +906,45 @@ def convert_new_publication_info_to_old(publication_infos):
         result.append(_publication_info)
 
     return result
+
+
+def fix_url_bars_instead_of_slashes(string):
+    """A common error in urls is that all ``/`` have been changed for ``|``, we fix that in this function"""
+    if string[:7] == 'http:||' or string[:8] == 'https:||':
+        string = string.replace('|', '/')
+    return string
+
+
+def fix_url_add_http_if_missing(string):
+    """Add the starting ``http`` to a url that is missing it"""
+    if string[:3] == 'www':
+        string = 'http://' + string
+    return string
+
+
+def fix_url_replace_tilde(string):
+    """Replace unicode characters by their working equivalent"""
+    string = string.replace('\u223c', '~')
+    return string.replace('\u02dc', '~')
+
+
+def fix_reference_url(url):
+    """Used to parse an incorect url to try to fix it with the most common ocurrences for errors.
+    If the fixed url is still incorrect, it returns ``None``.
+
+    Returns:
+        String containing the fixed url or the original one if it could not be fixed.
+    """
+    new_url = url
+
+    new_url = fix_url_bars_instead_of_slashes(new_url)
+
+    new_url = fix_url_add_http_if_missing(new_url)
+
+    new_url = fix_url_replace_tilde(new_url)
+
+    try:
+        rfc3987.parse(new_url, rule="URI")
+        return new_url
+    except ValueError:
+        return url

@@ -33,7 +33,7 @@ from isbn import ISBN
 
 import idutils
 
-from ..utils import convert_old_publication_info_to_new, split_pubnote
+from ..utils import convert_old_publication_info_to_new, split_pubnote, fix_reference_url
 
 
 # Matches any separators for author enumerations.
@@ -206,8 +206,15 @@ class ReferenceBuilder(object):
             self.obj['reference']['publication_info']['year'] = year
 
     def add_url(self, url):
+        try:
+            self._add_uid(url, True)
+        except ValueError:
+            self._add_url(url)
+
+    def _add_url(self, url):
+        fixed_url = fix_reference_url(url)
         self._ensure_reference_field('urls', [])
-        self.obj['reference']['urls'].append({'value': url})
+        self.obj['reference']['urls'].append({'value': fixed_url})
 
     def add_refextract_authors_str(self, authors_str):
         """Parses individual authors from refextracted authors string."""
@@ -265,7 +272,17 @@ class ReferenceBuilder(object):
             self.obj['reference']['report_numbers'].append(repno)
 
     def add_uid(self, uid):
-        """Add unique identifier in correct field."""
+        try:
+            self._add_uid(uid)
+        except ValueError:
+            self.add_misc(uid)
+
+    def _add_uid(self, uid, skip_handle=False):
+        """Add unique identifier in correct field.
+
+        The ``check_handle`` flag is used when adding a uid through the add_url function
+        since urls can be easily confused with handle elements.
+        """
         # We might add None values from wherever. Kill them here.
         uid = uid or ''
         if _is_arxiv(uid):
@@ -273,7 +290,7 @@ class ReferenceBuilder(object):
         elif idutils.is_doi(uid):
             self._ensure_reference_field('dois', [])
             self.obj['reference']['dois'].append(idutils.normalize_doi(uid))
-        elif idutils.is_handle(uid):
+        elif idutils.is_handle(uid) and not skip_handle:
             self._ensure_reference_field('persistent_identifiers', [])
             self.obj['reference']['persistent_identifiers'].append({
                 'schema': 'HDL',
@@ -295,7 +312,7 @@ class ReferenceBuilder(object):
                 self._ensure_reference_field('isbn', {})
                 self.obj['reference']['isbn'] = isbn
             except Exception:
-                self.add_misc(uid)
+                raise ValueError('Unrecognized uid type')
 
     def add_collaboration(self, collaboration):
         self._ensure_reference_field('collaborations', [])
