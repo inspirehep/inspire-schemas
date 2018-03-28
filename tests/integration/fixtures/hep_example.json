@@ -1085,6 +1085,12 @@
                     "10.13.61577737/Et=&}?",
                     "10.185276750/Z^R"
                 ],
+                "external_system_identifiers": [
+                    {
+                        "schema": "CDS",
+                        "value": "2310832"
+                    }
+                ],
                 "imprint": {
                     "date": "1992-10-19",
                     "place": "proident pariatur officia irure ut",

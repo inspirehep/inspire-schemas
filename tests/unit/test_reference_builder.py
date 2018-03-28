@@ -926,6 +926,54 @@ def test_add_uid_handles_cnums():
     assert expected == result
 
 
+def test_add_url_handles_ads_ids():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_url('http://adsabs.harvard.edu/abs/2018ApJ...853...70U')
+
+    expected = [
+        {
+            'reference': {
+                'external_system_identifiers': [{
+                    'schema': 'ADS',
+                    'value': '2018ApJ...853...70U',
+                }],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_url_handles_cds_ids():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_url('http://cds.cern.ch/record/2310556?ln=en')
+
+    expected = [
+        {
+            'reference': {
+                'external_system_identifiers': [{
+                    'schema': 'CDS',
+                    'value': '2310556',
+                }],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_uid_falls_back_to_isbn():
     schema = load_schema('hep')
     subschema = schema['properties']['references']

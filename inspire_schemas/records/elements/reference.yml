@@ -75,6 +75,39 @@ properties:
         minItems: 1
         type: array
         uniqueItems: true
+    external_system_identifiers:
+        description: |-
+            :MARC: ``035``
+            List of identifiers of this document on external systems.
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    description: |-
+                        :MARC: ``035__9``
+                        Identifies the external system, and allows to interpret
+                        unambiguously the :ref:`value`.
+                        :example: ``ADS``
+                    minLength: 1
+                    pattern: ^\w+$
+                    type: string
+                value:
+                    description: |-
+                        :MARC: ``035__a``
+                        Identifies the record in the external system specified
+                        by :ref:`schema`.
+                        :example: ``1999IJTP...38.1113M``
+                    minLength: 1
+                    pattern: ^\S+$
+                    title: External identifier
+                    type: string
+            required:
+            - schema
+            - value
+            type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
     imprint:
         additionalProperties: false
         properties:
@@ -264,39 +297,6 @@ properties:
             required:
             - value
             title: URL of related document
-            type: object
-        minItems: 1
-        type: array
-        uniqueItems: true
-    external_system_identifiers:
-        description: |-
-            :MARC: ``035``
-            List of identifiers of this document on external systems.
-        items:
-            additionalProperties: false
-            properties:
-                schema:
-                    description: |-
-                        :MARC: ``035__9``
-                        Identifies the external system, and allows to interpret
-                        unambiguously the :ref:`value`.
-                        :example: ``ADS``
-                    minLength: 1
-                    pattern: ^\w+$
-                    type: string
-                value:
-                    description: |-
-                        :MARC: ``035__a``
-                        Identifies the record in the external system specified
-                        by :ref:`schema`.
-                        :example: ``1999IJTP...38.1113M``
-                    minLength: 1
-                    pattern: ^\S+$
-                    title: External identifier
-                    type: string
-            required:
-            - schema
-            - value
             type: object
         minItems: 1
         type: array
