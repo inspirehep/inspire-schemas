@@ -77,14 +77,14 @@ properties:
         uniqueItems: true
     external_system_identifiers:
         description: |-
-            :MARC: ``035``
+            :MARC: ``999C5f``
             List of identifiers of this document on external systems.
         items:
             additionalProperties: false
             properties:
                 schema:
                     description: |-
-                        :MARC: ``035__9``
+                        :MARC: ``999C5f`` (part before ``:``)
                         Identifies the external system, and allows to interpret
                         unambiguously the :ref:`value`.
                         :example: ``ADS``
@@ -93,7 +93,7 @@ properties:
                     type: string
                 value:
                     description: |-
-                        :MARC: ``035__a``
+                        :MARC: ``999C5f`` (part after ``:``)
                         Identifies the record in the external system specified
                         by :ref:`schema`.
                         :example: ``1999IJTP...38.1113M``
