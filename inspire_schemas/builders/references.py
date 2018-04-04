@@ -49,6 +49,16 @@ RE_ARXIV_POST_2007_CLASS = re.compile(
     flags=re.I
 )
 
+# Matches CDS urls for id extraction
+CDS_MATCHER = re.compile(
+    r'^(https?://)?cds(web)?\.cern\.ch/record/(\d*)',
+    flags=re.I)
+
+# Matches ADS urls for id extraction
+ADS_MATCHER = re.compile(
+    r'^(https?://)?adsabs\.harvard\.edu/abs/(.*)',
+    flags=re.I)
+
 
 def _split_refextract_authors_str(authors_str):
     """Extract author names out of refextract authors output."""
@@ -125,6 +135,26 @@ def _normalize_arxiv(obj):
     m = idutils.is_arxiv_post_2007(obj) or RE_ARXIV_POST_2007_CLASS.match(obj)
     if m:
         return '.'.join(m.group(2, 3))
+
+
+def is_cds_url(uid):
+    """Check if ``uid`` corresponds to a CDS id"""
+    return CDS_MATCHER.match(uid) is not None
+
+
+def is_ads_url(uid):
+    """Check if ``uid`` corresponds to an ADS id"""
+    return ADS_MATCHER.match(uid) is not None
+
+
+def extract_cds_id(uid):
+    """Extract CDS id from a CDS url"""
+    return CDS_MATCHER.match(uid).group(3)
+
+
+def extract_ads_id(uid):
+    """Extract ADS id from a ADS url"""
+    return ADS_MATCHER.match(uid).group(2)
 
 
 class ReferenceBuilder(object):
@@ -280,7 +310,7 @@ class ReferenceBuilder(object):
     def _add_uid(self, uid, skip_handle=False):
         """Add unique identifier in correct field.
 
-        The ``check_handle`` flag is used when adding a uid through the add_url function
+        The ``skip_handle`` flag is used when adding a uid through the add_url function
         since urls can be easily confused with handle elements.
         """
         # We might add None values from wherever. Kill them here.
@@ -305,6 +335,18 @@ class ReferenceBuilder(object):
         elif self.RE_VALID_CNUM.match(uid):
             self._ensure_reference_field('publication_info', {})
             self.obj['reference']['publication_info']['cnum'] = uid
+        elif is_cds_url(uid):
+            self._ensure_reference_field('external_system_identifiers', [])
+            self.obj['reference']['external_system_identifiers'].append({
+                'schema': 'CDS',
+                'value': extract_cds_id(uid),
+            })
+        elif is_ads_url(uid):
+            self._ensure_reference_field('external_system_identifiers', [])
+            self.obj['reference']['external_system_identifiers'].append({
+                'schema': 'ADS',
+                'value': extract_ads_id(uid),
+            })
         else:
             # ``idutils.is_isbn`` is too strict in what it accepts.
             try:
