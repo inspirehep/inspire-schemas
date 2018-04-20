@@ -34,6 +34,7 @@ from inspire_utils.date import normalize_date
 
 from ..utils import (get_license_from_url,
                      normalize_collaboration,
+                     normalize_isbn,
                      validate,
                      filter_empty_parameters,
                      EMPTIES)
@@ -299,7 +300,7 @@ class LiteratureBuilder(object):
         """
         isbn_dict = {}
         if isbn is not None:
-            isbn_dict['value'] = isbn
+            isbn_dict['value'] = normalize_isbn(isbn)
         if medium is not None:
             isbn_dict['medium'] = medium
 
@@ -455,7 +456,7 @@ class LiteratureBuilder(object):
             parent_item = {'$ref': parent_record}
             publication_item['parent_record'] = parent_item
         if parent_isbn is not None:
-            publication_item['parent_isbn'] = parent_isbn
+            publication_item['parent_isbn'] = normalize_isbn(parent_isbn)
         if page_start and page_end:
             try:
                 self.add_number_of_pages(

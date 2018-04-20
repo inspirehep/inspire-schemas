@@ -35,6 +35,7 @@ import rfc3987
 import six
 from idutils import is_orcid
 from inspire_utils.date import PartialDate
+from isbn import ISBN
 from jsonschema import Draft4Validator, RefResolver, draft4_format_checker
 from jsonschema import validate as jsonschema_validate
 from pkg_resources import resource_filename
@@ -948,3 +949,11 @@ def fix_reference_url(url):
         return new_url
     except ValueError:
         return url
+
+
+def normalize_isbn(isbn):
+    """Normalize an ISBN in order to be schema-compliant."""
+    try:
+        return str(ISBN(isbn))
+    except Exception:
+        return isbn

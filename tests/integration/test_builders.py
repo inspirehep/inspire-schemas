@@ -90,7 +90,8 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         journal_title=input_data_hep['journal_title'],
         journal_volume=input_data_hep['journal_volume'],
         material=input_data_hep['material'],
-        parent_record=input_data_hep['parent_record']
+        parent_record=input_data_hep['parent_record'],
+        parent_isbn=input_data_hep['parent_isbn'],
     )
     builder.add_preprint_date(
         preprint_date=input_data_hep['preprint_date']
