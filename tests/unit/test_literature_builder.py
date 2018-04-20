@@ -444,3 +444,33 @@ def test_add_book_normalizes_date():
     ]
 
     assert expected == result
+
+
+def test_add_isbn_normalizes_isbn():
+    builder = LiteratureBuilder()
+    builder.add_isbn(isbn='978-3-642-23908-3')
+
+    result = builder.record['isbns']
+
+    expected = [
+        {
+            'value': '9783642239083'
+        }
+    ]
+
+    assert expected == result
+
+
+def test_add_parent_isbn_normalizes_isbn():
+    builder = LiteratureBuilder()
+    builder.add_publication_info(parent_isbn='978-3-642-23908-3')
+
+    result = builder.record['publication_info']
+
+    expected = [
+        {
+            'parent_isbn': '9783642239083'
+        }
+    ]
+
+    assert expected == result

@@ -70,4 +70,5 @@
   "material":"publication",
   "license_imposing":"arXiv",
   "parent_record":"http://localhost:5000/api/literature/1498185",
+  "parent_isbn":"2321061939"
 }

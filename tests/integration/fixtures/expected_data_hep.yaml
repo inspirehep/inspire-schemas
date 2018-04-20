@@ -63,8 +63,9 @@
          "journal_issue":"1",
          "material":"publication",
          "parent_record":{
-         "$ref":"http://localhost:5000/api/literature/1498185"
-      }
+            "$ref":"http://localhost:5000/api/literature/1498185"
+         },
+         "parent_isbn":"2321061939",
     }
    ],
    "title_translations":[
