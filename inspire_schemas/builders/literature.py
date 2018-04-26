@@ -253,7 +253,8 @@ class LiteratureBuilder(object):
             builder.add_raw_affiliation(raw_affiliation, source or self.source)
 
         for id_schema, id_value in ids:
-            builder.set_uid(id_value, schema=id_schema)
+            if id_schema and id_value:
+                builder.set_uid(id_value, schema=id_schema)
 
         for email in emails:
             builder.add_email(email)

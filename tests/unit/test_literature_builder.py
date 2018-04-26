@@ -474,3 +474,37 @@ def test_add_parent_isbn_normalizes_isbn():
     ]
 
     assert expected == result
+
+
+def test_make_author_handles_none_in_id_value():
+    schema = load_schema('hep')
+    subschema = schema['properties']['authors']
+    builder = LiteratureBuilder()
+
+    result = builder.make_author(
+        'Smith, John',
+        ids=[('INSPIRE BAI', None)],
+    )
+    expected = {
+        'full_name': 'Smith, John',
+    }
+
+    assert validate([result], subschema) is None
+    assert expected == result
+
+
+def test_make_author_handles_none_in_id_schema():
+    schema = load_schema('hep')
+    subschema = schema['properties']['authors']
+    builder = LiteratureBuilder()
+
+    result = builder.make_author(
+        'Smith, John',
+        ids=[(None, 'J.Smith.1')],
+    )
+    expected = {
+        'full_name': 'Smith, John',
+    }
+
+    assert validate([result], subschema) is None
+    assert expected == result
