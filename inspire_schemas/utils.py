@@ -394,7 +394,7 @@ def normalize_arxiv_category(category):
 
     Example:
         >>> from inspire_schemas.utils import normalize_arxiv_category
-        >>> normalize_arxiv_category('funct-an')
+        >>> normalize_arxiv_category('funct-an')  # doctest: +SKIP
         u'math.FA'
 
     """
