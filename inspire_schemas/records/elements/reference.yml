@@ -160,7 +160,7 @@ properties:
             type: string
         minItems: 1
         type: array
-        uniqueItems: true
+        uniqueItems: false
     persistent_identifiers:
         description: |-
             :MARC: ``999C5a`` (with prefix ``hdl:`` or ``urn:``)
