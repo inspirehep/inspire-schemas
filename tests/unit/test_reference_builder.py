@@ -298,6 +298,31 @@ def test_add_misc():
     assert expected == result
 
 
+def test_add_misc_with_dupes():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_misc('[Erratum:')
+    builder.add_misc('[Erratum:')
+
+    expected = [
+        {
+            'reference': {
+                'misc': [
+                    '[Erratum:',
+                    '[Erratum:',
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_raw_reference_no_source():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
