@@ -33,7 +33,7 @@ from isbn import ISBN
 
 import idutils
 
-from ..utils import convert_old_publication_info_to_new, split_pubnote, fix_reference_url
+from ..utils import convert_old_publication_info_to_new, split_pubnote, fix_reference_url, is_arxiv, normalize_arxiv
 
 
 # Matches any separators for author enumerations.
@@ -42,12 +42,6 @@ RE_SPLIT_AUTH = re.compile(r',?\s+and\s|,?\s*&|,|et al\.?|\(?eds?\.\)?',
 # Matches any stream of initials (A. B C D. -E F).
 RE_INITIALS_ONLY = re.compile(r'^\s*-?[A-Z]((\.|\s)\s*-?[A-Z])*\.?\s*$',
                               re.U)
-# Matches new style arXiv ID, with an old-style class specification
-# (Malformed, but appears in APS records)
-RE_ARXIV_POST_2007_CLASS = re.compile(
-    "(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
-    flags=re.I
-)
 
 # Matches CDS urls for id extraction
 CDS_MATCHER = re.compile(
@@ -101,40 +95,6 @@ def _split_refextract_authors_str(authors_str):
     ]
     res = [r for r in res if all(not f(r) for f in filters)]
     return res
-
-
-def _is_arxiv(obj):
-    """Return ``True`` if ``obj`` contains an arXiv identifier.
-
-    The ``idutils`` library only handles arXiv identifiers, e.g. strings
-    of the form ``arXiv:yymm.xxxxx``, but we sometimes have to deal with
-    arXiv references, which might contain more information separated by
-    a space. Therefore this helper wraps ``idutils`` to support this case.
-    """
-    arxiv_test = obj.split()
-    if not arxiv_test:
-        return False
-    return idutils.is_arxiv(arxiv_test[0]) \
-        or RE_ARXIV_POST_2007_CLASS.match(arxiv_test[0])
-
-
-def _normalize_arxiv(obj):
-    """Return a normalized arXiv identfier.
-
-    As in ``_is_arxiv``, we need to handle arXiv references as well
-    as arXiv identifiers. We also need to return a simpler arXiv
-    identifier than what ``idutils`` would output, so we use some
-    of its helpers instead of ``normalize_arxiv``.
-    """
-    obj = obj.split()[0]
-
-    m = idutils.is_arxiv_pre_2007(obj)
-    if m:
-        return ''.join(m.group(2, 4, 5))
-
-    m = idutils.is_arxiv_post_2007(obj) or RE_ARXIV_POST_2007_CLASS.match(obj)
-    if m:
-        return '.'.join(m.group(2, 3))
 
 
 def is_cds_url(uid):
@@ -294,9 +254,9 @@ class ReferenceBuilder(object):
         # For some reason we get more recall by trying the first part in
         # splitting the report number.
         repno = repno or ''
-        if _is_arxiv(repno):
+        if is_arxiv(repno):
             self._ensure_reference_field('arxiv_eprint',
-                                         _normalize_arxiv(repno))
+                                         normalize_arxiv(repno))
         else:
             self._ensure_reference_field('report_numbers', [])
             self.obj['reference']['report_numbers'].append(repno)
@@ -315,8 +275,8 @@ class ReferenceBuilder(object):
         """
         # We might add None values from wherever. Kill them here.
         uid = uid or ''
-        if _is_arxiv(uid):
-            self._ensure_reference_field('arxiv_eprint', _normalize_arxiv(uid))
+        if is_arxiv(uid):
+            self._ensure_reference_field('arxiv_eprint', normalize_arxiv(uid))
         elif idutils.is_doi(uid):
             self._ensure_reference_field('dois', [])
             self.obj['reference']['dois'].append(idutils.normalize_doi(uid))

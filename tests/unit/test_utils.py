@@ -850,3 +850,155 @@ def test_fix_reference_url_substitute_tilde():
     expected = 'http://www.example.com/~'
 
     assert expected == result
+
+
+def test_is_arxiv_new_identifier():
+    assert utils.is_arxiv('arXiv:1501.00001v1')
+
+
+def test_is_arxiv_old_identifier():
+    assert utils.is_arxiv('hep-th/0603001')
+
+
+def test_is_arxiv_new_with_class():
+    assert utils.is_arxiv('arXiv:hep-th/1601.07616')
+
+
+def test_is_arxiv_new_with_class_wo_prefix():
+    assert utils.is_arxiv('hep-th/1601.07616')
+
+
+def test_normalize_arxiv_handles_new_identifiers_without_prefix_or_version():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('1501.00001')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_prefix_and_wo_version():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('arXiv:1501.00001')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_wo_prefix_and_with_version():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('1501.00001v1')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_prefix_and_version():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('arXiv:1501.00001v1')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_old_identifiers_without_prefix_or_version():
+    expected = 'math/0309136'
+    result = utils.normalize_arxiv('math.GT/0309136')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_old_identifiers_with_prefix_and_wo_version():
+    expected = 'math/0309136'
+    result = utils.normalize_arxiv('arXiv:math.GT/0309136')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_old_identifiers_wo_prefix_and_with_version():
+    expected = 'math/0309136'
+    result = utils.normalize_arxiv('math.GT/0309136v2')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_old_identifiers_with_prefix_and_version():
+    expected = 'math/0309136'
+    result = utils.normalize_arxiv('arXiv:math.GT/0309136v2')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_solv_int():
+    expected = 'solv-int/9611008'
+    result = utils.normalize_arxiv('solv-int/9611008')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_class_and_wo_version():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('arXiv:hep-th/1501.00001')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_class_and_version():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('arXiv:hep-th/1501.00001v1')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_cls_prefix_and_wo_ver():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('arXiv:hep-th.GT/1501.00001')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_cls_and_wo_prefix_ver():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('hep-th.GT/1501.00001')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_new_identifiers_with_cls_prefix_and_ver():
+    expected = '1501.00001'
+    result = utils.normalize_arxiv('arXiv:hep-th.GT/1501.00001v1')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_uppercase():
+    expected = 'math/0312059'
+    result = utils.normalize_arxiv('MATH/0312059')
+
+    assert expected == result
+
+
+def test_normalize_arxiv_handles_uppercase_with_cls():
+    expected = 'math/0312059'
+    result = utils.normalize_arxiv('MatH.AC/0312059')
+
+    assert expected == result
+
+
+def test_is_arxiv_handles_uppercase():
+    assert utils.is_arxiv('MATH/0312059')
+
+
+def test_is_arxiv_handles_uppercase_with_cls():
+    assert utils.is_arxiv('MatH.AC/0312059')
+
+
+def test_is_arxiv_accepts_valid_categories_only():
+    assert utils.is_arxiv('CBO/9780511') is False
+
+
+def test_is_arxiv_accepts_valid_categories_only():
+    assert utils.is_arxiv('maths/0312059') is False
+
+
+def test_is_arxiv_accepts_valid_categories_only():
+    assert utils.is_arxiv('math.ACS/0312059') is False
+
+
+def test_is_arxiv_accepts_valid_categories_only():
+    assert utils.is_arxiv('math/0312.059758') is False
