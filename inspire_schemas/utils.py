@@ -82,6 +82,17 @@ _RE_AUTHORS_UID = {
     'INSPIRE BAI': (re.compile(r'^(?P<uid>((\w|\-|\')+\.)+\d+)$'), '{}'),
 }
 
+# Matches new style arXiv ID, with an old-style class specification
+# (Malformed, but appears in APS records)
+RE_ARXIV_POST_2007_CLASS = re.compile(
+    "(arxiv:)?((?P<category>(?:[a-z\-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?$",
+    flags=re.I
+)
+
+RE_ARXIV_PRE_2007_CLASS = re.compile(
+    "(arxiv:)?(?P<category>(?P<extraidentifier>[a-z\-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?$",
+    flags=re.I
+)
 
 # list produced from https://arxiv.org/archive/
 _NEW_CATEGORIES = {
@@ -957,3 +968,43 @@ def normalize_isbn(isbn):
         return str(ISBN(isbn))
     except Exception:
         return isbn
+
+
+def is_arxiv(obj):
+    """Return ``True`` if ``obj`` contains an arXiv identifier.
+
+    The ``idutils`` library's ``is_arxiv`` function has been
+    modified here to work with two regular expressions instead
+    of three and adding a check for valid arxiv categories only"""
+    arxiv_test = obj.split()
+    if not arxiv_test:
+        return False
+
+    matched_arxiv = (RE_ARXIV_PRE_2007_CLASS.match(arxiv_test[0]) or
+                     RE_ARXIV_POST_2007_CLASS.match(arxiv_test[0]))
+
+    if not matched_arxiv:
+        return False
+
+    if not matched_arxiv.group('category'):
+        return True
+
+    valid_arxiv_categories_lower = [category.lower() for category in valid_arxiv_categories()]
+    category = matched_arxiv.group('category').lower()
+    return (category in valid_arxiv_categories_lower or
+            category.replace('-', '.') in valid_arxiv_categories_lower)
+
+
+def normalize_arxiv(obj):
+    """Return a normalized arXiv identifier from ``obj``."""
+    obj = obj.split()[0]
+
+    matched_arxiv_pre = RE_ARXIV_PRE_2007_CLASS.match(obj)
+    if matched_arxiv_pre:
+        return ('/'.join(matched_arxiv_pre.group("extraidentifier", "identifier"))).lower()
+
+    matched_arxiv_post = RE_ARXIV_POST_2007_CLASS.match(obj)
+    if matched_arxiv_post:
+        return matched_arxiv_post.group("identifier")
+
+    return None

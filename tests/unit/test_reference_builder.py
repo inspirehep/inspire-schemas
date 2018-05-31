@@ -25,124 +25,8 @@ from __future__ import absolute_import, division, print_function
 from inspire_schemas.utils import load_schema, validate
 from inspire_schemas.builders.references import (
     ReferenceBuilder,
-    _is_arxiv,
-    _normalize_arxiv,
     _split_refextract_authors_str,
 )
-
-
-def test_is_arxiv_new_identifier():
-    assert _is_arxiv('arXiv:1501.00001v1')
-
-
-def test_is_arxiv_old_identifier():
-    assert _is_arxiv('hep-th/0603001')
-
-
-def test_is_arxiv_new_with_class():
-    assert _is_arxiv('arXiv:hep-th/1601.07616')
-
-
-def test_is_arxiv_new_with_class_wo_prefix():
-    assert _is_arxiv('hep-th/1601.07616')
-
-
-def test_normalize_arxiv_handles_new_identifiers_without_prefix_or_version():
-    expected = '1501.00001'
-    result = _normalize_arxiv('1501.00001')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_prefix_and_wo_version():
-    expected = '1501.00001'
-    result = _normalize_arxiv('arXiv:1501.00001')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_wo_prefix_and_with_version():
-    expected = '1501.00001'
-    result = _normalize_arxiv('1501.00001v1')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_prefix_and_version():
-    expected = '1501.00001'
-    result = _normalize_arxiv('arXiv:1501.00001v1')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_old_identifiers_without_prefix_or_version():
-    expected = 'math/0309136'
-    result = _normalize_arxiv('math.GT/0309136')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_old_identifiers_with_prefix_and_wo_version():
-    expected = 'math/0309136'
-    result = _normalize_arxiv('arXiv:math.GT/0309136')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_old_identifiers_wo_prefix_and_with_version():
-    expected = 'math/0309136'
-    result = _normalize_arxiv('math.GT/0309136v2')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_old_identifiers_with_prefix_and_version():
-    expected = 'math/0309136'
-    result = _normalize_arxiv('arXiv:math.GT/0309136v2')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_solv_int():
-    expected = 'solv-int/9611008'
-    result = _normalize_arxiv('solv-int/9611008')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_class_and_wo_version():
-    expected = '1501.00001'
-    result = _normalize_arxiv('arXiv:hep-th/1501.00001')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_class_and_version():
-    expected = '1501.00001'
-    result = _normalize_arxiv('arXiv:hep-th/1501.00001v1')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_cls_prefix_and_wo_ver():
-    expected = '1501.00001'
-    result = _normalize_arxiv('arXiv:hep-th.GT/1501.00001')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_cls_and_wo_prefix_ver():
-    expected = '1501.00001'
-    result = _normalize_arxiv('hep-th.GT/1501.00001')
-
-    assert expected == result
-
-
-def test_normalize_arxiv_handles_new_identifiers_with_cls_prefix_and_ver():
-    expected = '1501.00001'
-    result = _normalize_arxiv('arXiv:hep-th.GT/1501.00001v1')
-
-    assert expected == result
 
 
 def test_set_label():
@@ -1174,6 +1058,32 @@ def test_set_page_artid_none():
                 'publication_info': {
                     'artid': '014568',
                 },
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_is_arxiv_matches_valid_categories():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_uid('BF/0234502')
+    builder.add_uid('math/0311149')
+
+    expected = [
+        {
+            'reference': {
+                'persistent_identifiers': [{
+                    'value': 'BF/0234502',
+                    'schema': 'HDL',
+                }],
+                'arxiv_eprint': 'math/0311149'
             },
         },
     ]
