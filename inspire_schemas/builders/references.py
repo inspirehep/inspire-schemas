@@ -45,12 +45,12 @@ RE_INITIALS_ONLY = re.compile(r'^\s*-?[A-Z]((\.|\s)\s*-?[A-Z])*\.?\s*$',
 
 # Matches CDS urls for id extraction
 CDS_MATCHER = re.compile(
-    r'^(https?://)?cds(web)?\.cern\.ch/record/(\d*)',
+    r'^(https?://)?cds(web)?\.cern\.ch/record/(\d+)',
     flags=re.I)
 
 # Matches ADS urls for id extraction
 ADS_MATCHER = re.compile(
-    r'^(https?://)?adsabs\.harvard\.edu/abs/(.*)',
+    r'^(https?://)?adsabs\.harvard\.edu/abs/(.+)',
     flags=re.I)
 
 

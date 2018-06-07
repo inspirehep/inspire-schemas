@@ -1091,3 +1091,49 @@ def test_is_arxiv_matches_valid_categories():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_add_url_rejects_empty_cds_id():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_url('https://cds.cern.ch/record/')
+
+    expected = [
+        {
+            'reference': {
+                'urls': [{
+                    'value': 'https://cds.cern.ch/record/'
+                }],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_url_rejects_empty_ads_id():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_url('http://adsabs.harvard.edu/abs/')
+
+    expected = [
+        {
+            'reference': {
+                'urls': [{
+                    'value': 'http://adsabs.harvard.edu/abs/'
+                }],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result
