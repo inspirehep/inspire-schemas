@@ -288,6 +288,58 @@ def test_split_pubnote():
     assert expected == result
 
 
+def test_build_pubnote_title_volume():
+    title = 'J.Testing'
+    volume = '42'
+
+    expected = 'J.Testing,42'
+
+    assert utils.build_pubnote(title, volume) == expected
+
+
+def test_build_pubnote_title_volume_page_start():
+    title = 'J.Testing'
+    volume = '42'
+    page_start = '123'
+
+    expected = 'J.Testing,42,123'
+
+    assert utils.build_pubnote(title, volume, page_start) == expected
+
+
+def test_build_pubnote_title_volume_page_start_page_end():
+    title = 'J.Testing'
+    volume = '42'
+    page_start = '123'
+    page_end = '125'
+
+    expected = 'J.Testing,42,123-125'
+
+    assert utils.build_pubnote(title, volume, page_start, page_end) == expected
+
+
+def test_build_pubnote_title_volume_page_start_artid():
+    title = 'J.Testing'
+    volume = '42'
+    page_start = '123'
+    page_end = None
+    artid = '0123'
+
+    expected = 'J.Testing,42,0123'
+
+    assert utils.build_pubnote(title, volume, page_start, page_end, artid) == expected
+
+
+def test_build_pubnote_handles_unicode():
+    title = u'J.Tëstíng'
+    volume = '42'
+    page_start = '123'
+
+    expected = u'J.Tëstíng,42,123'
+
+    assert utils.build_pubnote(title, volume, page_start) == expected
+
+
 def test_normalize_collaboration_preserves_valid_input():
     assert utils.normalize_collaboration('ATLAS') == ['ATLAS']
 
