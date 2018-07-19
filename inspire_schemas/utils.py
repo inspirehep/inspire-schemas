@@ -506,19 +506,22 @@ def split_pubnote(pubnote_str):
     return {key: val for (key, val) in six.iteritems(pubnote) if val is not None}
 
 
-def build_pubnote(title, volume, page_start, page_end, artid):
+def build_pubnote(title, volume, page_start=None, page_end=None, artid=None):
     """Build pubnote string from parts (reverse of split_pubnote)."""
-    pubnote = None
-    if title and volume:
-        pubnote = '{},{}'.format(title, volume)
-        if page_start and page_end:
-            pubnote += ',{}-{}'.format(page_start, page_end)
-        elif page_start:
-            pubnote += ',{}'.format(page_start)
-        if artid and artid != page_start:
-            pubnote += ',{}'.format(artid)
+    if title and volume and artid and artid != page_start:
+        pubnote_format = u'{title},{volume},{artid}'
+    elif title and volume and page_start and page_end:
+        pubnote_format = u'{title},{volume},{page_start}-{page_end}'
+    elif title and volume and page_start:
+        pubnote_format = u'{title},{volume},{page_start}'
+    elif title and volume:
+        pubnote_format = u'{title},{volume}'
+    else:
+        return None
 
-    return pubnote
+    return pubnote_format.format(
+        title=title, volume=volume, page_start=page_start, page_end=page_end, artid=artid
+    )
 
 
 class LocalRefResolver(RefResolver):
