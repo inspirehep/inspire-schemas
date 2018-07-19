@@ -108,7 +108,7 @@ _NEW_CATEGORIES = {
     'comp-gas': 'nlin.CG',
     'dg-ga': 'math.DG',
     'funct-an': 'math.FA',
-    'mtrl-th': 'cont-mat.mtrl-sci',
+    'mtrl-th': 'cond-mat.mtrl-sci',
     'patt-sol': 'nlin.PS',
     'plasm-ph': 'physics.plasm-ph',
     'q-alg': 'math.QA',
