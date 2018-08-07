@@ -1137,3 +1137,27 @@ def test_add_url_rejects_empty_ads_id():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_add_report_number_rejects_duplicates():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    builder.add_report_number('ATL-TDR-19')
+    builder.add_report_number('ATL-TDR-19')
+
+    expected = [
+        {
+            'reference': {
+                'report_numbers': [
+                    'ATL-TDR-19',
+                ],
+            },
+        },
+    ]
+    result = [builder.obj]
+
+    assert validate(result, subschema) is None
+    assert expected == result

@@ -259,7 +259,8 @@ class ReferenceBuilder(object):
                                          normalize_arxiv(repno))
         else:
             self._ensure_reference_field('report_numbers', [])
-            self.obj['reference']['report_numbers'].append(repno)
+            if repno not in self.obj['reference']['report_numbers']:
+                self.obj['reference']['report_numbers'].append(repno)
 
     def add_uid(self, uid):
         try:
