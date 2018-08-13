@@ -314,32 +314,44 @@ properties:
             is marked as :ref:`deleted`.
         title: Record replacing this one
     positions:
+        description: |-
+            :MARC: ``371``
         items:
             additionalProperties: false
             properties:
+                curated_relation:
+                    type: boolean
                 current:
+                    description: |-
+                        :MARC: ``371__z:current`` corresponds to ``true``
                     type: boolean
                 end_date:
+                    description: |-
+                        :MARC: ``371__t``
                     format: date
                     minLength: 1
                     type: string
                 institution:
-                    additionalProperties: false
-                    properties:
-                        curated_relation:
-                            type: boolean
-                        name:
-                            minLength: 1
-                            type: string
-                        record:
-                            $ref: elements/json_reference.json
-                    type: object
+                    description: |-
+                        :MARC: ``371__a``
+                    minLength: 1
+                    type: string
                 rank:
                     $ref: elements/rank.json
+                    description: |-
+                        :MARC: ``371__r``
+                record:
+                    $ref: elements/json_reference.json
+                    description: |-
+                        URI for the institution record
                 start_date:
+                    description: |-
+                        :MARC: ``371__s``
                     format: date
                     minLength: 1
                     type: string
+            required:
+            - institution
             type: object
         minItems: 1
         type: array
@@ -353,6 +365,8 @@ properties:
                 curated_relation:
                     type: boolean
                 current:
+                    description: |-
+                        :MARC: ``693__z`` corresponds to ``true``
                     title: Whether the author is still involved in it
                     type: boolean
                 end_date:
@@ -365,6 +379,8 @@ properties:
                     type: string
                 name:
                     description: |-
+                        :MARC: ``693__e``
+
                         Name of the project.
                     minLength: 1
                     type: string
@@ -380,6 +396,8 @@ properties:
                     format: date
                     minLength: 1
                     type: string
+            required:
+            - name
             type: object
         minItems: 1
         title: List of projects on which the author worked

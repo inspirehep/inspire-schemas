@@ -203,27 +203,23 @@
     },
     "positions": [
         {
+            "curated_relation": false,
             "current": true,
             "end_date": "1724-07-20",
-            "institution": {
-                "curated_relation": false,
-                "name": "qui ea pariatur ut nisi",
-                "record": {
-                    "$ref": "http://180"
-                }
+            "institution": "qui ea pariatur ut nisi",
+            "record": {
+                "$ref": "http://180"
             }
         },
         {
+            "curated_relation": false,
             "current": false,
             "end_date": "1770-04-16",
-            "institution": {
-                "curated_relation": false,
-                "name": "irure",
-                "record": {
-                    "$ref": "http://1"
-                }
-            },
+            "institution": "irure",
             "rank": "UNDERGRADUATE",
+            "record": {
+                "$ref": "http://1"
+            },
             "start_date": "1820-02-26"
         }
     ],

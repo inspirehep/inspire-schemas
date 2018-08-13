@@ -76,9 +76,8 @@ properties:
         type: array
         uniqueItems: true
     external_system_identifiers:
-        description: |-
-            :MARC: ``999C5u`` (as url) 
-            List of identifiers of this document on external systems.
+        description: ":MARC: ``999C5u`` (as url) \nList of identifiers of this document\
+            \ on external systems."
         items:
             additionalProperties: false
             properties:
