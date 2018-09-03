@@ -26,7 +26,6 @@ jsf.format('orcid', function(gen, schema){
     }
     return almost_orcid + ck
 });
-jsf.format('.+, .+', function(gen, schema){ return gen.randexp('^.+, .+$');});
 
 function resolve_schema(unresolved_schema, base_path) {
     var keys = [];
