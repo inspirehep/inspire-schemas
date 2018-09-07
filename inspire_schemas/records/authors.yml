@@ -158,8 +158,8 @@ properties:
             properties:
                 current:
                     description: |-
-                        :MARC: if ``true``, the email comes from ``o``, if
-                            ``false``, from ``m``.
+                        :MARC: if ``true``, the email comes from ``m``, if
+                            ``false``, from ``o``.
                     title: Whether this address is still in use
                     type: boolean
                 hidden:
