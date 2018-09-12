@@ -300,12 +300,12 @@ def test_add_twitter():
     assert expected == result
 
 
-def test_add_research_field():
+def test_add_arxiv_category():
     schema = load_schema('authors')
     subschema = schema['properties']['arxiv_categories']
 
     author = AuthorBuilder()
-    author.add_research_field('math.CV')
+    author.add_arxiv_category('math.CV')
 
     expected = [
         "math.CV"
@@ -316,14 +316,14 @@ def test_add_research_field():
     assert expected == result
 
 
-def test_add_research_field_accepts_multiple_categories():
+def test_add_arxiv_category_accepts_multiple_categories():
     schema = load_schema('authors')
     subschema = schema['properties']['arxiv_categories']
 
     author = AuthorBuilder()
-    author.add_research_field('math.CV')
-    author.add_research_field('astro-ph.HE')
-    author.add_research_field('econ.EM')
+    author.add_arxiv_category('math.CV')
+    author.add_arxiv_category('astro-ph.HE')
+    author.add_arxiv_category('econ.EM')
 
     expected = [
         "math.CV",
@@ -478,13 +478,13 @@ def test_add_institution_normalizes_end_date():
     assert expected == result
 
 
-def test_add_comment():
+def test_add_private_note():
     schema = load_schema('authors')
     subschema = schema['properties']['_private_notes']
 
     author = AuthorBuilder()
-    author.add_comment(comment='this is an example',
-                       source='curator')
+    author.add_private_note(note='this is an example',
+                            source='curator')
 
     expected = [{
         "value": 'this is an example',
@@ -496,12 +496,12 @@ def test_add_comment():
     assert expected == result
 
 
-def test_add_comment_without_source():
+def test_add_private_note_without_source():
     schema = load_schema('authors')
     subschema = schema['properties']['_private_notes']
 
     author = AuthorBuilder()
-    author.add_comment('this is an example')
+    author.add_private_note('this is an example')
 
     expected = [{
         "value": 'this is an example'

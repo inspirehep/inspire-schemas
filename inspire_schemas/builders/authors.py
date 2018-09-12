@@ -28,7 +28,7 @@ from inspire_utils.date import normalize_date
 from inspire_utils.helpers import force_list
 from inspire_utils.name import normalize_name
 
-from ..utils import EMPTIES
+from ..utils import EMPTIES, filter_empty_parameters
 
 
 class AuthorBuilder(object):
@@ -59,25 +59,18 @@ class AuthorBuilder(object):
             self.obj.setdefault(field, [])
             self.obj.get(field).append(element)
 
-    def set_name(self, value):
+    @filter_empty_parameters
+    def set_name(self, name):
         """Set the name for the author.
 
         Args:
-            :param value: should be the family name, the given names, or both, and at least one is required.
-            :type value: string
+            :param name: should be the family name, the given names, or both, and at least one is required.
+            :type name: string
         """
         self._ensure_field('name', {})
-        self.obj['name']['value'] = normalize_name(value)
+        self.obj['name']['value'] = normalize_name(name)
 
-    def add_collection(self, collection):
-        """Add collection.
-
-        Args:
-            :param collection: defines the type of the current document
-            :type collection: string
-        """
-        self._append_to('_collections', collection)
-
+    @filter_empty_parameters
     def set_display_name(self, name):
         """Set the preferred name for the author.
 
@@ -88,6 +81,7 @@ class AuthorBuilder(object):
         self._ensure_field('name', {})
         self.obj['name']['preferred_name'] = name
 
+    @filter_empty_parameters
     def add_native_name(self, name):
         """Add native name.
 
@@ -96,11 +90,9 @@ class AuthorBuilder(object):
             :type name: string
         """
         self._ensure_field('name', {})
-        if 'native_names' in self.obj['name']:
-            self.obj['name']['native_names'].append(name)
-        else:
-            self.obj['name']['native_names'] = [name]
+        self.obj['name'].setdefault('native_names', []).append(name)
 
+    @filter_empty_parameters
     def add_email_address(self, email):
         """Add email address.
 
@@ -112,6 +104,7 @@ class AuthorBuilder(object):
             "value": email
         })
 
+    @filter_empty_parameters
     def set_status(self, status):
         """Set the person's status.
 
@@ -121,23 +114,25 @@ class AuthorBuilder(object):
         """
         self.obj['status'] = status
 
-    def add_url(self, value, description=None):
+    @filter_empty_parameters
+    def add_url(self, url, description=None):
         """Add a personal website.
 
         Args:
-            :param value: url to the person's website.
-            :type value: string
+            :param url: url to the person's website.
+            :type url: string
 
             :param description: short description of the website.
             :type description: string
         """
         url = {
-            'value': value,
+            'value': url,
         }
         if description:
             url['description'] = description
         self._append_to('urls', url)
 
+    @filter_empty_parameters
     def add_blog(self, url):
         """Add a personal website as blog.
 
@@ -147,6 +142,7 @@ class AuthorBuilder(object):
         """
         self.add_url(url, description='blog')
 
+    @filter_empty_parameters
     def add_linkedin(self, id_):
         """Add a linkedIn id.
 
@@ -159,6 +155,7 @@ class AuthorBuilder(object):
             'schema': 'LINKEDIN',
         })
 
+    @filter_empty_parameters
     def add_twitter(self, id_):
         """Add a Twitter id.
 
@@ -171,7 +168,8 @@ class AuthorBuilder(object):
             'schema': 'TWITTER',
         })
 
-    def add_research_field(self, category):
+    @filter_empty_parameters
+    def add_arxiv_category(self, category):
         """Add a field of research.
 
         Args:
@@ -180,6 +178,7 @@ class AuthorBuilder(object):
         """
         self._append_to('arxiv_categories', category)
 
+    @filter_empty_parameters
     def add_institution(self, institution, start_date=None, end_date=None, rank=None, record=None, curated=False, current=False):
         """Add an institution where the person works/worked.
 
@@ -219,6 +218,7 @@ class AuthorBuilder(object):
         new_institution['current'] = current
         self._append_to('positions', new_institution)
 
+    @filter_empty_parameters
     def add_project(self, name, record=None, start_date=None, end_date=None, curated=False, current=False):
         """Add an experiment that the person worked on.
 
@@ -253,6 +253,7 @@ class AuthorBuilder(object):
         new_experiment['current'] = current
         self._append_to('project_membership', new_experiment)
 
+    @filter_empty_parameters
     def add_advisor(self, name, ids=None, degree_type=None, record=None, curated=False):
         """Add an advisor.
 
@@ -283,8 +284,9 @@ class AuthorBuilder(object):
         new_advisor['curated_relation'] = curated
         self._append_to('advisors', new_advisor)
 
-    def add_comment(self, comment, source=None):
-        """Add a private comment.
+    @filter_empty_parameters
+    def add_private_note(self, note, source=None):
+        """Add a private note.
 
         Args:
             :param comment: comment about the author.
@@ -294,7 +296,7 @@ class AuthorBuilder(object):
             :type source: string
         """
         note = {
-            'value': comment,
+            'value': note,
         }
         if source:
             note['source'] = source
