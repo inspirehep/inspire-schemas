@@ -284,6 +284,14 @@ properties:
         minLength: 1
         title: project identifier on legacy INSPIRE
         type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
     long_name:
         description: |-
             :MARC: ``245__a``
