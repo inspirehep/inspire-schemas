@@ -69,6 +69,14 @@ properties:
         title: List of DOIs
         type: array
         uniqueItems: true
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
     new_record:
         $ref: elements/json_reference.json
         description: |-

@@ -247,6 +247,14 @@ properties:
         minLength: 1
         title: Date of record creation on legacy
         type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
     name_variants:
         description: |-
             :MARC: ``410__a``
