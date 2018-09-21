@@ -577,3 +577,28 @@ def test_add_advisor_normalizes_name():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_add_acquisition_source():
+    schema = load_schema('authors')
+    subschema = schema['properties']['acquisition_source']
+    author = AuthorBuilder()
+    author.add_acquisition_source(
+        method='submitter',
+        submission_number='12',
+        internal_uid=1,
+        email='albert.einstein@hep.edu',
+        orcid='0000-0001-8528-2091',
+    )
+
+    expected = {
+        'method': 'submitter',
+        'submission_number': '12',
+        'internal_uid': 1,
+        'email': 'albert.einstein@hep.edu',
+        'orcid': '0000-0001-8528-2091',
+    }
+    result = author.obj['acquisition_source']
+
+    assert validate(result, subschema) is None
+    assert expected == result

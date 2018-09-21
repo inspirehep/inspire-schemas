@@ -33,16 +33,25 @@ from ..utils import EMPTIES, filter_empty_parameters
 
 class AuthorBuilder(object):
     """Author record builder."""
-    def __init__(self, author=None):
+    def __init__(self, author=None, source=None):
         if author is None:
             author = {
                 '_collections': ['Authors'],
             }
         self.obj = author
+        self.source = source
 
     def _ensure_field(self, field_name, value):
         if field_name not in self.obj:
             self.obj[field_name] = value
+
+    def _sourced_dict(self, source=None, **kwargs):
+        """Like ``dict(**kwargs)``, but where the ``source`` key is special."""
+        if source:
+            kwargs['source'] = source
+        elif self.source:
+            kwargs['source'] = self.source
+        return kwargs
 
     def _append_to(self, field, element):
         """Append the ``element`` to the ``field`` of the record.
@@ -301,3 +310,43 @@ class AuthorBuilder(object):
         if source:
             note['source'] = source
         self._append_to('_private_notes', note)
+
+    @filter_empty_parameters
+    def add_acquisition_source(
+        self,
+        method,
+        submission_number=None,
+        internal_uid=None,
+        email=None,
+        orcid=None,
+        source=None,
+        datetime=None,
+    ):
+        """Add acquisition source.
+
+        :type submission_number: integer
+
+        :type email: integer
+
+        :type source: string
+
+        :param method: method of acquisition for the suggested document
+        :type method: string
+
+        :param orcid: orcid of the user that is creating the record
+        :type orcid: string
+
+        :param internal_uid: id of the user that is creating the record
+        :type internal_uid: string
+
+        :param datetime: UTC datetime in ISO 8601 format
+        :type datetime: string
+        """
+        acquisition_source = self._sourced_dict(source)
+
+        acquisition_source['submission_number'] = str(submission_number)
+        for key in ('datetime', 'email', 'method', 'orcid', 'internal_uid'):
+            if locals()[key] is not None:
+                acquisition_source[key] = locals()[key]
+
+        self.obj['acquisition_source'] = acquisition_source
