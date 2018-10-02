@@ -178,6 +178,19 @@ class AuthorBuilder(object):
         })
 
     @filter_empty_parameters
+    def add_orcid(self, id_):
+        """Add a ORCID identifier.
+
+        Args:
+            :param id_: The ORCID identifier.
+            :type id_: string
+        """
+        self._append_to('ids', {
+            'value': id_,
+            'schema': 'ORCID',
+        })
+
+    @filter_empty_parameters
     def add_arxiv_category(self, category):
         """Add a field of research.
 
