@@ -300,6 +300,23 @@ def test_add_twitter():
     assert expected == result
 
 
+def test_add_orcid():
+    schema = load_schema('authors')
+    subschema = schema['properties']['ids']
+
+    author = AuthorBuilder()
+    author.add_orcid('0000-0002-7638-5686')
+
+    expected = [{
+        "value": "0000-0002-7638-5686",
+        "schema": "ORCID"
+    }]
+    result = author.obj['ids']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_arxiv_category():
     schema = load_schema('authors')
     subschema = schema['properties']['arxiv_categories']
