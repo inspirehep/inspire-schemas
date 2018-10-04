@@ -365,7 +365,7 @@ def test_add_institution():
                            record={
                                 "$ref": "http://180"
                            },
-                           curated=True,
+                           curated_relation=True,
                            current=False)
 
     expected = [{
@@ -436,7 +436,7 @@ def test_add_project():
                        record={
                             "$ref": "http://180"
                        },
-                       curated=True,
+                       curated_relation=True,
                        current=True)
 
     expected = [{
@@ -551,7 +551,7 @@ def test_add_advisor():
                        record={
                            "$ref": "http://180"
                        },
-                       curated=True)
+                       curated_relation=True)
 
     expected = [{
         "name": 'Torres, Riccardo',
