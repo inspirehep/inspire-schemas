@@ -201,7 +201,7 @@ class AuthorBuilder(object):
         self._append_to('arxiv_categories', category)
 
     @filter_empty_parameters
-    def add_institution(self, institution, start_date=None, end_date=None, rank=None, record=None, curated=False, current=False):
+    def add_institution(self, institution, start_date=None, end_date=None, rank=None, record=None, curated_relation=False, current=False):
         """Add an institution where the person works/worked.
 
         Args:
@@ -220,8 +220,8 @@ class AuthorBuilder(object):
             :param record: URI for the institution record.
             :type record: string
 
-            :param curated: if the institution has been curated i.e. has been verified.
-            :type curated: boolean
+            :param curated_relation: if the institution has been curated i.e. has been verified.
+            :type curated_relation: boolean
 
             :param current: if the person is currently associated with this institution.
             :type current: boolean
@@ -236,12 +236,12 @@ class AuthorBuilder(object):
             new_institution['rank'] = rank
         if record:
             new_institution['record'] = record
-        new_institution['curated_relation'] = curated
+        new_institution['curated_relation'] = curated_relation
         new_institution['current'] = current
         self._append_to('positions', new_institution)
 
     @filter_empty_parameters
-    def add_project(self, name, record=None, start_date=None, end_date=None, curated=False, current=False):
+    def add_project(self, name, record=None, start_date=None, end_date=None, curated_relation=False, current=False):
         """Add an experiment that the person worked on.
 
         Args:
@@ -257,8 +257,8 @@ class AuthorBuilder(object):
             :param record: URI for the experiment record.
             :type record: string
 
-            :param curated: if the experiment has been curated i.e. has been verified.
-            :type curated: boolean
+            :param curated_relation: if the experiment has been curated i.e. has been verified.
+            :type curated_relation: boolean
 
             :param current: if the person is currently working on this experiment.
             :type current: boolean
@@ -271,12 +271,12 @@ class AuthorBuilder(object):
             new_experiment['end_date'] = normalize_date(end_date)
         if record:
             new_experiment['record'] = record
-        new_experiment['curated_relation'] = curated
+        new_experiment['curated_relation'] = curated_relation
         new_experiment['current'] = current
         self._append_to('project_membership', new_experiment)
 
     @filter_empty_parameters
-    def add_advisor(self, name, ids=None, degree_type=None, record=None, curated=False):
+    def add_advisor(self, name, ids=None, degree_type=None, record=None, curated_relation=False):
         """Add an advisor.
 
         Args:
@@ -292,8 +292,8 @@ class AuthorBuilder(object):
             :param record: URI for the advisor.
             :type record: string
 
-            :param curated: if the advisor relation has been curated i.e. has been verified.
-            :type curated: boolean
+            :param curated_relation: if the advisor relation has been curated i.e. has been verified.
+            :type curated_relation: boolean
         """
         new_advisor = {}
         new_advisor['name'] = normalize_name(name)
@@ -303,7 +303,7 @@ class AuthorBuilder(object):
             new_advisor['degree_type'] = degree_type
         if record:
             new_advisor['record'] = record
-        new_advisor['curated_relation'] = curated
+        new_advisor['curated_relation'] = curated_relation
         self._append_to('advisors', new_advisor)
 
     @filter_empty_parameters
