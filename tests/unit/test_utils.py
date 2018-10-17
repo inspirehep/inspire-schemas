@@ -669,6 +669,33 @@ def test_convert_old_publication_info_to_new_does_not_raise_when_deducing_year_f
     assert expected == result
 
 
+def test_convert_old_publication_info_to_new_handles_volumes_with_letters_in_the_middle():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/725825',
+            },
+            'journal_title': 'Eur.Phys.J.',
+            'journal_volume': 'A28S1',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Eur.Phys.J.A',
+            'journal_volume': '28S1',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_new_publication_info_to_old():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
@@ -797,6 +824,30 @@ def test_convert_new_publication_info_to_old_handles_year_added_to_volumes():
             'year': 2017,
             'page_start': '137',
         }
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_new_publication_info_to_old_handles_volumes_with_letters_in_the_middle():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_title': 'Eur.Phys.J.A',
+            'journal_volume': '28S1',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Eur.Phys.J.',
+            'journal_volume': 'A28S1',
+        },
     ]
     result = utils.convert_new_publication_info_to_old(publication_info)
 
