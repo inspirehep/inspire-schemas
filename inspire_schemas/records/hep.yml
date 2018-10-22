@@ -35,6 +35,7 @@ properties:
             - LArSoft Internal Notes
             - LArSoft Notes
             - Literature
+            - SLAC
             - ZEUS Internal Notes
             - ZEUS Preliminary Notes
             minLength: 1
