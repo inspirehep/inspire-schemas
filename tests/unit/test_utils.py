@@ -676,7 +676,7 @@ def test_convert_old_publication_info_to_new_handles_volumes_with_letters_in_the
     publication_info = [
         {
             'journal_record': {
-                '$ref': 'http://localhost:5000/api/journals/725825',
+                '$ref': 'http://localhost:5000/api/journals/1214764',
             },
             'journal_title': 'Eur.Phys.J.',
             'journal_volume': 'A28S1',
@@ -688,6 +688,36 @@ def test_convert_old_publication_info_to_new_handles_volumes_with_letters_in_the
         {
             'journal_title': 'Eur.Phys.J.A',
             'journal_volume': '28S1',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_old_publication_info_to_new_excludes_specific_journal_titles():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1213107',
+            },
+            'journal_title': 'eConf',
+            'journal_volume': 'C16',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1213107',
+            },
+            'journal_title': 'eConf',
+            'journal_volume': 'C16',
         },
     ]
     result = utils.convert_old_publication_info_to_new(publication_info)

@@ -94,6 +94,11 @@ RE_ARXIV_PRE_2007_CLASS = re.compile(
     flags=re.I
 )
 
+JOURNALS_IGNORED_IN_OLD_TO_NEW = [
+    'econf',
+]
+
+
 # list produced from https://arxiv.org/archive/
 _NEW_CATEGORIES = {
     'acc-phys': 'physics.acc-ph',
@@ -834,7 +839,7 @@ def convert_old_publication_info_to_new(publication_infos):
             result.append(_publication_info)
             continue
 
-        if journal_title and journal_volume:
+        if journal_title and journal_volume and journal_title.lower() not in JOURNALS_IGNORED_IN_OLD_TO_NEW:
             volume_starts_with_a_letter = _RE_VOLUME_STARTS_WITH_A_LETTER.match(journal_volume)
             volume_ends_with_a_letter = _RE_VOLUME_ENDS_WITH_A_LETTER.match(journal_volume)
             match = volume_starts_with_a_letter or volume_ends_with_a_letter
