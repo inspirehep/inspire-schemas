@@ -385,6 +385,153 @@ def test_add_institution():
     assert expected == result
 
 
+def test_add_institution_sorts_by_current():
+    schema = load_schema('authors')
+    subschema = schema['properties']['positions']
+
+    author = AuthorBuilder()
+    author.add_institution(institution='Colgate University',
+                           start_date='1994-02-01')
+    author.add_institution(institution='First University',
+                           start_date='1950-02-01',
+                           current=True)
+
+    expected = [
+        {
+            "institution": 'First University',
+            "start_date": u'1950-02-01',
+            "curated_relation": False,
+            "current": True
+        },
+        {
+            "institution": 'Colgate University',
+            "start_date": u'1994-02-01',
+            "curated_relation": False,
+            "current": False
+        },
+    ]
+    result = author.obj['positions']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_institution_sorts_by_start_date():
+    schema = load_schema('authors')
+    subschema = schema['properties']['positions']
+
+    author = AuthorBuilder()
+    author.add_institution(institution='First University',
+                           start_date='1950-02-01')
+    author.add_institution(institution='Colgate University',
+                           start_date='1994-02-01')
+
+    expected = [
+        {
+            "institution": 'Colgate University',
+            "start_date": u'1994-02-01',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'First University',
+            "start_date": u'1950-02-01',
+            "curated_relation": False,
+            "current": False
+        }
+    ]
+    result = author.obj['positions']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_institution_sorts_by_rank():
+    schema = load_schema('authors')
+    subschema = schema['properties']['positions']
+
+    author = AuthorBuilder()
+    author.add_institution(institution='Colgate University',
+                           rank='MASTER')
+    author.add_institution(institution='Colgate University',
+                           rank='PHD')
+    author.add_institution(institution='Colgate University',
+                           rank='VISITOR')
+    author.add_institution(institution='Colgate University',
+                           rank='STAFF')
+    author.add_institution(institution='Colgate University',
+                           rank='SENIOR')
+    author.add_institution(institution='Colgate University',
+                           rank='OTHER')
+    author.add_institution(institution='Colgate University',
+                           rank='UNDERGRADUATE')
+    author.add_institution(institution='Colgate University',
+                           rank='POSTDOC')
+    author.add_institution(institution='Colgate University',
+                           rank='JUNIOR')
+
+    expected = [
+        {
+            "institution": 'Colgate University',
+            "rank": 'STAFF',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'SENIOR',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'JUNIOR',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'VISITOR',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'POSTDOC',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'PHD',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'MASTER',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'UNDERGRADUATE',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
+            "rank": 'OTHER',
+            "curated_relation": False,
+            "current": False
+        },
+    ]
+    result = author.obj['positions']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_institution_normalizes_start_date():
     schema = load_schema('authors')
     subschema = schema['properties']['positions']
@@ -449,6 +596,67 @@ def test_add_project():
         "curated_relation": True,
         "current": True
     }]
+    result = author.obj['project_membership']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_project_sorts_by_current():
+    schema = load_schema('authors')
+    subschema = schema['properties']['project_membership']
+
+    author = AuthorBuilder()
+    author.add_project(name='pariatur',
+                       start_date='1997-05-01')
+    author.add_project(name='current one',
+                       start_date='1949-05-01',
+                       current=True)
+
+    expected = [
+        {
+            'name': 'current one',
+            'start_date': '1949-05-01',
+            'curated_relation': False,
+            'current': True,
+        },
+        {
+            'name': 'pariatur',
+            'start_date': u'1997-05-01',
+            'curated_relation': False,
+            'current': False,
+        }
+    ]
+    result = author.obj['project_membership']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_project_sorts_by_start_date():
+    schema = load_schema('authors')
+    subschema = schema['properties']['project_membership']
+
+    author = AuthorBuilder()
+    author.add_project(name='earliest one',
+                       start_date='1949-05-01')
+    author.add_project(name='pariatur',
+                       start_date='1997-05-01')
+
+    expected = [
+        {
+            'name': 'pariatur',
+            'start_date': u'1997-05-01',
+            'curated_relation': False,
+            'current': False,
+        },
+        {
+            'name': 'earliest one',
+            'start_date': '1949-05-01',
+            'curated_relation': False,
+            'current': False,
+        },
+    ]
     result = author.obj['project_membership']
 
     assert validate(result, subschema) is None
