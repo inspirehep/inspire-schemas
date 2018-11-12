@@ -103,6 +103,26 @@ properties:
                 properties:
                     schema:
                         description: |-
+                            :MARC: ``035__9:GRID``
+                        enum:
+                        - GRID
+                        minLength: 1
+                        type: string
+                    value:
+                        description: |-
+                            :MARC: ``035__a``
+                        minLength: 1
+                        pattern: ^grid\.\d+\.\w+$
+                        type: string
+                required:
+                - schema
+                - value
+                title: GRID identifier
+                type: object
+            -   additionalProperties: false
+                properties:
+                    schema:
+                        description: |-
                             :MARC: ``035__9:HAL``
                         enum:
                         - HAL
