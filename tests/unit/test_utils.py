@@ -726,6 +726,30 @@ def test_convert_old_publication_info_to_new_excludes_specific_journal_titles():
     assert expected == result
 
 
+def test_convert_old_publication_info_to_new_does_not_double_letters():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_title': 'Proc.Roy.Soc.Lond.A',
+            'journal_volume': 'A120',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Proc.Roy.Soc.Lond.A',
+            'journal_volume': '120',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_new_publication_info_to_old():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']

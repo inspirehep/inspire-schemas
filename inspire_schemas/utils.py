@@ -845,11 +845,14 @@ def convert_old_publication_info_to_new(publication_infos):
             match = volume_starts_with_a_letter or volume_ends_with_a_letter
             if match:
                 _publication_info.pop('journal_record', None)
-                _publication_info['journal_title'] = ''.join([
-                    journal_title,
-                    '' if journal_title.endswith('.') else ' ',
-                    match.group('letter'),
-                ])
+                if journal_title in _JOURNALS_RENAMED_OLD_TO_NEW.values():
+                    _publication_info['journal_title'] = journal_title
+                else:
+                    _publication_info['journal_title'] = ''.join([
+                        journal_title,
+                        '' if journal_title.endswith('.') else ' ',
+                        match.group('letter'),
+                    ])
                 _publication_info['journal_volume'] = match.group('volume')
 
         hidden = _publication_info.pop('hidden', None)
