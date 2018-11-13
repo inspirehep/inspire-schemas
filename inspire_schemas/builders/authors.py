@@ -24,11 +24,16 @@
 
 from __future__ import absolute_import, division, print_function
 
-from inspire_utils.date import normalize_date
+
+from inspire_utils.date import normalize_date, PartialDate
 from inspire_utils.helpers import force_list
 from inspire_utils.name import normalize_name
 
-from ..utils import EMPTIES, filter_empty_parameters
+from ..utils import EMPTIES, filter_empty_parameters, load_schema
+
+
+RANKS = load_schema('elements/rank')['enum']
+INSTITUTION_RANK_TO_PRIORITY = {rank: -idx for (idx, rank) in enumerate(RANKS)}
 
 
 class AuthorBuilder(object):
@@ -239,6 +244,13 @@ class AuthorBuilder(object):
         new_institution['curated_relation'] = curated
         new_institution['current'] = current
         self._append_to('positions', new_institution)
+        self.obj['positions'].sort(key=self._get_institution_priority_tuple, reverse=True)
+
+    @staticmethod
+    def _get_institution_priority_tuple(institution):
+        return AuthorBuilder._get_work_priority_tuple(institution) + (
+            INSTITUTION_RANK_TO_PRIORITY.get(institution.get('rank')),
+        )
 
     @filter_empty_parameters
     def add_project(self, name, record=None, start_date=None, end_date=None, curated=False, current=False):
@@ -274,6 +286,15 @@ class AuthorBuilder(object):
         new_experiment['curated_relation'] = curated
         new_experiment['current'] = current
         self._append_to('project_membership', new_experiment)
+        self.obj['project_membership'].sort(key=self._get_work_priority_tuple, reverse=True)
+
+    @staticmethod
+    def _get_work_priority_tuple(work):
+        start_date = work.get('start_date')
+        return (
+            work.get('current'),
+            PartialDate.parse(start_date) if start_date else None,
+        )
 
     @filter_empty_parameters
     def add_advisor(self, name, ids=None, degree_type=None, record=None, curated=False):
