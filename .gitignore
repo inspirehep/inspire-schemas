@@ -30,6 +30,12 @@ __pycache__/
 # Idea software family
 .idea/
 
+# vscode
+.vscode
+
+# MacOS
+.DS_Store
+
 # C extensions
 *.so
 
