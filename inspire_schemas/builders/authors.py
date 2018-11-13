@@ -28,6 +28,7 @@ from __future__ import absolute_import, division, print_function
 from inspire_utils.date import normalize_date, PartialDate
 from inspire_utils.helpers import force_list
 from inspire_utils.name import normalize_name
+from inspire_utils.record import get_value
 
 from ..utils import EMPTIES, filter_empty_parameters, load_schema
 
@@ -114,9 +115,11 @@ class AuthorBuilder(object):
             :param email: public email of the author.
             :type email: string
         """
-        self._append_to('email_addresses', {
-            "value": email
-        })
+        existing_emails = get_value(self.obj, 'email_addresses.value', [])
+        if email not in existing_emails:
+            self._append_to('email_addresses', {
+                "value": email
+            })
 
     @filter_empty_parameters
     def set_status(self, status):

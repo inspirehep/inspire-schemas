@@ -202,6 +202,23 @@ def test_add_multiple_email_addresses():
     assert expected == result
 
 
+def test_add_email_addresses_skips_duplicate_ones():
+    schema = load_schema('authors')
+    subschema = schema['properties']['email_addresses']
+
+    author = AuthorBuilder()
+    author.add_email_address('example@test.com')
+    author.add_email_address('example@test.com')
+
+    expected = [{
+        "value": 'example@test.com'
+    }]
+    result = author.obj['email_addresses']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_set_status():
     schema = load_schema('authors')
     subschema = schema['properties']['status']
