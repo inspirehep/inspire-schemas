@@ -34,7 +34,9 @@ from ..utils import EMPTIES, filter_empty_parameters, load_schema
 
 
 RANKS = load_schema('elements/rank')['enum']
+RANKS.append(None)
 INSTITUTION_RANK_TO_PRIORITY = {rank: -idx for (idx, rank) in enumerate(RANKS)}
+EARLIEST_DATE = PartialDate.loads('1000')
 
 
 class AuthorBuilder(object):
@@ -296,7 +298,7 @@ class AuthorBuilder(object):
         start_date = work.get('start_date')
         return (
             work.get('current'),
-            PartialDate.parse(start_date) if start_date else None,
+            PartialDate.parse(start_date) if start_date else EARLIEST_DATE,
         )
 
     @filter_empty_parameters

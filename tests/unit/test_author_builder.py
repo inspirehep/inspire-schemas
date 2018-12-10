@@ -440,6 +440,7 @@ def test_add_institution_sorts_by_start_date():
     author = AuthorBuilder()
     author.add_institution(institution='First University',
                            start_date='1950-02-01')
+    author.add_institution(institution='Dateless University')
     author.add_institution(institution='Colgate University',
                            start_date='1994-02-01')
 
@@ -453,6 +454,11 @@ def test_add_institution_sorts_by_start_date():
         {
             "institution": 'First University',
             "start_date": u'1950-02-01',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Dateless University',
             "curated_relation": False,
             "current": False
         }
@@ -482,6 +488,7 @@ def test_add_institution_sorts_by_rank():
                            rank='OTHER')
     author.add_institution(institution='Colgate University',
                            rank='UNDERGRADUATE')
+    author.add_institution(institution='Colgate University')
     author.add_institution(institution='Colgate University',
                            rank='POSTDOC')
     author.add_institution(institution='Colgate University',
@@ -539,6 +546,11 @@ def test_add_institution_sorts_by_rank():
         {
             "institution": 'Colgate University',
             "rank": 'OTHER',
+            "curated_relation": False,
+            "current": False
+        },
+        {
+            "institution": 'Colgate University',
             "curated_relation": False,
             "current": False
         },
