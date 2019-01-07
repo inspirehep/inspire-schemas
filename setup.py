@@ -141,7 +141,7 @@ tests_require = [
     'coverage',
     'isort~=4.0,>=4.3.0',
     'pytest-cache',
-    'pytest-cov',
+    'pytest-cov~=2.6,<=2.6.0',
     'pytest-pep8',
     'pytest',
     'mock',
