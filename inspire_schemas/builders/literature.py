@@ -189,7 +189,12 @@ class LiteratureBuilder(object):
         """
         if doi is None:
             return
-        doi = idutils.normalize_doi(doi)
+
+        try:
+            doi = idutils.normalize_doi(doi)
+        except AttributeError:
+            return
+
         if not doi:
             return
 
