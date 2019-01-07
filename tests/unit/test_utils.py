@@ -391,6 +391,11 @@ def test_get_license_from_url_handles_CC_public_domain():
     assert utils.get_license_from_url(url) == 'CC0 1.0'
 
 
+def test_get_license_from_url_handles_CC_public_domain_no_match():
+    url = 'http://creativecommons.org/publicdomain/nomatch'
+    assert utils.get_license_from_url(url) == 'public domain'
+
+
 def test_get_license_from_url_handles_arxiv():
     expected = 'arXiv nonexclusive-distrib 1.0'
     url = 'http://arxiv.org/licenses/nonexclusive-distrib/1.0/'
