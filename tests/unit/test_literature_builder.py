@@ -338,6 +338,14 @@ def test_add_doi_normalizes_doi():
     assert expected == result
 
 
+def test_add_doi_with_invalid_value():
+    builder = LiteratureBuilder()
+    builder.add_doi('invalid doi value, ignore me')
+
+    result = builder.record
+    assert 'dois' not in result
+
+
 def test_add_license_doesnt_overwrite_name_if_no_url():
     schema = load_schema('hep')
     subschema = schema['properties']['license']
