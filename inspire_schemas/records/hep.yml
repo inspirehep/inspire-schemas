@@ -280,6 +280,35 @@ properties:
                     minItems: 1
                     type: array
                     uniqueItems: true
+                affiliations_identifiers:
+                    description: |-
+                        :MARC: ``100/700/701__t``
+
+                        List of identifiers of this institution on external systems.
+                    items:
+                        additionalProperties: false
+                        properties:
+                            schema:
+                                description: |-
+                                    :MARC: first part of ``100/700/701__t`` before the :
+                                enum:
+                                - GRID
+                                minLength: 1
+                                type: string
+                            value:
+                                description: |-
+                                    :MARC: last part of ``100/700/701__t`` after the :
+                                minLength: 1
+                                pattern: ^grid\.\d+\.\w+$
+                                type: string
+                        required:
+                        - schema
+                        - value
+                        title: GRID identifier
+                        type: object
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
                 alternative_names:
                     items:
                         description: |-

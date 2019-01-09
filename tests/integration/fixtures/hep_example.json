@@ -179,6 +179,12 @@
                     "value": "adipisicin"
                 }
             ],
+            "affiliations_identifiers": [
+                {
+                    "schema": "GRID",
+                    "value": "grid.440804.c"
+                }
+            ],
             "alternative_names": [
                 "qui do nisi proident deserunt",
                 "sint",
