@@ -505,6 +505,19 @@ def test_add_author():
     assert expected == result
 
 
+def test_add_author_regression():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+
+    # StopIteration Excepton
+    builder.add_author('Professor.M.')
+    builder.add_author('Belvedere, G., Ed')
+    builder.add_author('O. Madelung, M. Schulz, H. Weiss, Editor.')
+    builder.add_author('ˇ Sirˇ')
+
+
 def test_add_author_handles_inspire_role():
     schema = load_schema('hep')
     subschema = schema['properties']['references']
