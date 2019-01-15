@@ -201,6 +201,19 @@ class AuthorBuilder(object):
         })
 
     @filter_empty_parameters
+    def add_bai(self, id_):
+        """Add an inspire  BAI identifier.
+
+        Args:
+            :param id_: The BAI.
+            :type id_: string
+        """
+        self._append_to('ids', {
+            'value': id_,
+            'schema': 'INSPIRE BAI',
+        })
+
+    @filter_empty_parameters
     def add_arxiv_category(self, category):
         """Add a field of research.
 
