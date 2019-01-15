@@ -856,3 +856,20 @@ def test_add_acquisition_source():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_add_bai():
+    schema = load_schema('authors')
+    subschema = schema['properties']['ids']
+
+    author = AuthorBuilder()
+    author.add_bai('T.Zivko.1')
+
+    expected = [{
+        "value": "T.Zivko.1",
+        "schema": "INSPIRE BAI"
+    }]
+    result = author.obj['ids']
+
+    assert validate(result, subschema) is None
+    assert expected == result
