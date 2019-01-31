@@ -400,6 +400,7 @@ class LiteratureBuilder(object):
         material=None,
         parent_record=None,
         parent_isbn=None,
+        parent_title=None,
     ):
         """Add publication info.
 
@@ -442,6 +443,9 @@ class LiteratureBuilder(object):
 
         :param parent_isbn: isbn for the parent record
         :type parent_isbn: string
+
+        :param parent_title: title for the parent record
+        :type parent_title: string
         """
 
         # If only journal title is present, and no other fields, assume the
@@ -463,6 +467,8 @@ class LiteratureBuilder(object):
             publication_item['parent_record'] = parent_item
         if parent_isbn is not None:
             publication_item['parent_isbn'] = normalize_isbn(parent_isbn)
+        if parent_title is not None:
+            publication_item['parent_title'] = parent_title
         if page_start and page_end:
             try:
                 self.add_number_of_pages(
@@ -486,6 +492,33 @@ class LiteratureBuilder(object):
         self._append_to('imprints', {
             'date': normalize_date(imprint_date)
         })
+
+    @filter_empty_parameters
+    def add_imprint(self, date=None, publisher=None, place=None):
+        """Add imprint.
+
+        :param date: date of an imprint. A (partial) date in any format.
+            The date should contain at least a year
+        :type date: string
+
+        :param publisher: date of an imprint
+        :type publisher: string
+
+        :param place: place of an imprint
+        :type place: string
+        """
+        imprint = {}
+        if date is not None:
+            imprint['date'] = normalize_date(date)
+
+        if publisher is not None:
+            imprint['publisher'] = publisher
+
+        if place is not None:
+            imprint['place'] = place
+
+        if imprint:
+            self._append_to('imprints', imprint)
 
     @filter_empty_parameters
     def add_preprint_date(self, preprint_date):

@@ -439,6 +439,34 @@ def test_imprint_date_normalizes_date():
     assert expected == result
 
 
+def test_add_imprint():
+    builder = LiteratureBuilder()
+    builder.add_imprint(
+        date='19 September 2005',
+        publisher='CERN',
+        place='Switzerland',
+    )
+
+    result = builder.record['imprints']
+
+    expected = [
+        {
+            'date': '2005-09-19',
+            'publisher': 'CERN',
+            'place': 'Switzerland'
+        }
+    ]
+
+    assert expected == result
+
+
+def test_add_imprint_does_not_add_if_nothing_is_provided():
+    builder = LiteratureBuilder()
+    builder.add_imprint(date=None)
+
+    assert 'imprints' not in builder.record
+
+
 def test_add_book_normalizes_date():
     builder = LiteratureBuilder()
     builder.add_book(date='9 November 1990')
