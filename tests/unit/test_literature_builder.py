@@ -135,6 +135,9 @@ def test_add_figure():
         material='publication',
         source='source',
         url='url',
+        description='description',
+        filename='filename',
+        original_url='http://www.example.com/original_url'
     )
 
     expected = [
@@ -145,6 +148,8 @@ def test_add_figure():
             'material': 'publication',
             'source': 'source',
             'url': 'url',
+            'filename': 'filename',
+            'original_url': 'http://www.example.com/original_url'
         },
     ]
     result = builder.record
@@ -166,6 +171,9 @@ def test_add_figure_fails_on_duplicated_key():
         material='publication',
         source='source',
         url='url',
+        description='description',
+        filename='filename',
+        original_ur='original_url'
     )
 
     with pytest.raises(ValueError):
@@ -176,6 +184,9 @@ def test_add_figure_fails_on_duplicated_key():
             material='publication',
             source='source',
             url='url',
+            description='description',
+            filename='filename',
+            original_ur='original_url'
         )
 
 
@@ -194,6 +205,7 @@ def test_add_document():
         original_url='http://www.example.com/original_url',
         source='source',
         url='url',
+        filename='filename'
     )
 
     expected = [
@@ -206,6 +218,7 @@ def test_add_document():
             'original_url': 'http://www.example.com/original_url',
             'source': 'source',
             'url': 'url',
+            'filename': 'filename'
         },
     ]
     result = builder.record
@@ -228,6 +241,7 @@ def test_add_document_fails_on_existing_key():
         original_url='http://www.example.com/original_url',
         source='source',
         url='url',
+        filename='filename'
     )
 
     with pytest.raises(ValueError):
@@ -240,6 +254,7 @@ def test_add_document_fails_on_existing_key():
             original_url='http://www.example.com/original_url',
             source='source',
             url='url',
+            filename='filename'
         )
 
 

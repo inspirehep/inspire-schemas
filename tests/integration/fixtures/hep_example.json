@@ -625,6 +625,7 @@
     "documents": [
         {
             "description": "nisi velit fugiat",
+            "filename": "lima_nomen_eius.pdf",
             "fulltext": true,
             "hidden": true,
             "key": "aliqua labore amet Ut pariatur",
@@ -700,9 +701,11 @@
     "figures": [
         {
             "caption": "in voluptate dolore sunt eiusmod",
+            "filename": "aliquam_nomen_figure.png",
             "key": "fugiat consectetur sed adipisicing cillum",
             "label": "ad eiusmod est",
             "material": "erratum",
+            "original_url": "http://4rU9s",
             "source": "deserunt eu id",
             "url": "http://1v2ETQ"
         },

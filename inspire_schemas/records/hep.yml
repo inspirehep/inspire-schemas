@@ -776,6 +776,11 @@ properties:
                     format: uri-reference
                     minLength: 1
                     type: string
+                filename:
+                    description: Proper name of the file
+                    title: Filename
+                    type: string
+                    minLength: 1
             required:
             - key
             - url
@@ -924,6 +929,16 @@ properties:
                         form is ``/files/bucket/key``.
                     format: uri-reference
                     minLength: 1
+                    type: string
+                filename:
+                    description: Proper name of the file
+                    title: Filename
+                    type: string
+                    minLength: 1
+                original_url:
+                    format: uri
+                    minLength: 1
+                    title: Original URL of the document
                     type: string
             required:
             - key
