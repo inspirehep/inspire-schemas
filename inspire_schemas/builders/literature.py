@@ -862,6 +862,7 @@ class LiteratureBuilder(object):
     @filter_empty_parameters
     def add_figure(self, key, url, **kwargs):
         """Add a figure.
+
         Args:
             key (string): document key
             url (string): document url
@@ -872,7 +873,7 @@ class LiteratureBuilder(object):
             original_url (string): original url
             filename (string): current url
 
-        Returns:
+        Returns: None
 
         """
         figure = self._check_metadata_for_file(key=key, url=url, **kwargs)

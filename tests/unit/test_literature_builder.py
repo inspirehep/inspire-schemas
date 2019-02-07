@@ -161,6 +161,40 @@ def test_add_figure():
         assert key in result['figures'][0]
 
 
+def test_add_figure_inspire_next():
+    schema = load_schema('hep')
+    subschema = schema['properties']['figures']
+
+    builder = LiteratureBuilder('test')
+
+    builder.add_figure(
+        'key',
+        caption='caption',
+        label='label',
+        material='publication',
+        source='source',
+        url='url',
+        description='description',
+        original_url='http://www.example.com/original_url'
+    )
+
+    expected = [
+        {
+            'caption': 'caption',
+            'key': 'key',
+            'label': 'label',
+            'material': 'publication',
+            'source': 'source',
+            'url': 'url',
+            'original_url': 'http://www.example.com/original_url'
+        },
+    ]
+    result = builder.record
+
+    assert validate(result['figures'], subschema) is None
+    assert expected == result['figures']
+
+
 def test_add_figure_fails_on_duplicated_key():
     builder = LiteratureBuilder('test')
 
@@ -228,6 +262,41 @@ def test_add_document():
 
     for key in subschema['items']['properties'].keys():
         assert key in result['documents'][0]
+
+
+def test_add_document_inspire_next():
+    schema = load_schema('hep')
+    subschema = schema['properties']['documents']
+
+    builder = LiteratureBuilder('test')
+
+    builder.add_document(
+        'key',
+        description='description',
+        fulltext=True,
+        hidden=True,
+        material='preprint',
+        original_url='http://www.example.com/original_url',
+        source='source',
+        url='url',
+    )
+
+    expected = [
+        {
+            'description': 'description',
+            'fulltext': True,
+            'hidden': True,
+            'key': 'key',
+            'material': 'preprint',
+            'original_url': 'http://www.example.com/original_url',
+            'source': 'source',
+            'url': 'url',
+        },
+    ]
+    result = builder.record
+
+    assert validate(result['documents'], subschema) is None
+    assert expected == result['documents']
 
 
 def test_add_document_fails_on_existing_key():
