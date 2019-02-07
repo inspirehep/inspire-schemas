@@ -111,6 +111,91 @@ def test_collaborations():
     assert expected == result
 
 
+def test_document_types():
+    schema = load_schema('hep')
+    subschema = schema['properties']['document_type']
+
+    record = {
+        'document_type': [
+            'article',
+        ],
+    }
+    assert validate(record['document_type'], subschema) is None
+
+    expected = ['article']
+    result = LiteratureReader(record).document_types
+
+    assert expected == result
+
+
+def test_doi():
+    schema = load_schema('hep')
+    subschema = schema['properties']['dois']
+
+    record = {
+        'dois': [
+            {'value': '10.1016/0029-5582(61)90469-2'},
+        ],
+    }
+    assert validate(record['dois'], subschema) is None
+
+    expected = '10.1016/0029-5582(61)90469-2'
+    result = LiteratureReader(record).doi
+
+    assert expected == result
+
+
+def test_journal_issue():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'journal_issue': '5'},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '5'
+    result = LiteratureReader(record).journal_issue
+
+    assert expected == result
+
+
+def test_journal_title():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'journal_title': 'Phys.Part.Nucl.Lett.'},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = 'Phys.Part.Nucl.Lett.'
+    result = LiteratureReader(record).journal_title
+
+    assert expected == result
+
+
+def test_journal_volume():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'journal_volume': 'D94'},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = 'D94'
+    result = LiteratureReader(record).journal_volume
+
+    assert expected == result
+
+
 def test_inspire_categories():
     schema = load_schema('hep')
     subschema = schema['properties']['inspire_categories']
@@ -124,6 +209,32 @@ def test_inspire_categories():
 
     expected = ['Experiment-HEP']
     result = LiteratureReader(record).inspire_categories
+
+    assert expected == result
+
+
+def test_language():
+    schema = load_schema('hep')
+    subschema = schema['properties']['languages']
+
+    record = {
+        'languages': [
+            'it',
+        ],
+    }
+    assert validate(record['languages'], subschema) is None
+
+    expected = 'it'
+    result = LiteratureReader(record).language
+
+    assert expected == result
+
+
+def test_language_falls_back_to_english():
+    record = {}
+
+    expected = 'en'
+    result = LiteratureReader(record).language
 
     assert expected == result
 
@@ -164,6 +275,92 @@ def test_method():
     result = LiteratureReader(record).method
 
     assert expected == result
+
+
+def test_page_artid_handles_artid():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'artid': '054021'},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '054021'
+    result = LiteratureReader(record).get_page_artid()
+
+    assert expected == result
+
+
+def test_get_page_artid_handles_page_range():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {
+                'page_end': '588',
+                'page_start': '579',
+            },
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '579-588'
+    result = LiteratureReader(record).get_page_artid()
+
+    assert expected == result
+
+
+def test_peer_reviewed():
+    schema = load_schema('hep')
+    subschema = schema['properties']['refereed']
+
+    record = {'refereed': True}
+    assert validate(record['refereed'], subschema) is None
+
+    expected = 1
+    result = LiteratureReader(record).peer_reviewed
+
+    assert expected == result
+
+
+def test_publication_date():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'year': 2017},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '2017'
+    result = LiteratureReader(record).publication_date
+
+    assert expected == result
+
+
+def test_is_published():
+    schema = load_schema('hep')
+    dois_schema = schema['properties']['dois']
+    publication_info_schema = schema['properties']['publication_info']
+
+    record = {
+        'dois': [
+            {'value': '10.1016/0029-5582(61)90469-2'},
+        ],
+        'publication_info': [
+            {'journal_title': 'Nucl.Phys.'},
+        ],
+    }
+    assert validate(record['dois'], dois_schema) is None
+    assert validate(record['publication_info'], publication_info_schema) is None
+
+    assert LiteratureReader(record).is_published
 
 
 def test_source():
@@ -220,5 +417,42 @@ def test_title():
 
     expected = 'The General Theory of Relativity'
     result = LiteratureReader(record).title
+
+    assert expected == result
+
+
+def test_page_artid_handles_artid():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'artid': '054021'},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '054021'
+    result = LiteratureReader(record).get_page_artid()
+
+    assert expected == result
+
+
+def test_get_page_artid_handles_page_range():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {
+                'page_end': '588',
+                'page_start': '579',
+            },
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '579-588'
+    result = LiteratureReader(record).get_page_artid()
 
     assert expected == result
