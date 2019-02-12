@@ -135,6 +135,9 @@ def test_add_figure():
         material='publication',
         source='source',
         url='url',
+        description='description',
+        filename='filename',
+        original_url='http://www.example.com/original_url'
     )
 
     expected = [
@@ -145,6 +148,8 @@ def test_add_figure():
             'material': 'publication',
             'source': 'source',
             'url': 'url',
+            'filename': 'filename',
+            'original_url': 'http://www.example.com/original_url'
         },
     ]
     result = builder.record
@@ -154,6 +159,40 @@ def test_add_figure():
 
     for key in subschema['items']['properties'].keys():
         assert key in result['figures'][0]
+
+
+def test_add_figure_inspire_next():
+    schema = load_schema('hep')
+    subschema = schema['properties']['figures']
+
+    builder = LiteratureBuilder('test')
+
+    builder.add_figure(
+        'key',
+        caption='caption',
+        label='label',
+        material='publication',
+        source='source',
+        url='url',
+        description='description',
+        original_url='http://www.example.com/original_url'
+    )
+
+    expected = [
+        {
+            'caption': 'caption',
+            'key': 'key',
+            'label': 'label',
+            'material': 'publication',
+            'source': 'source',
+            'url': 'url',
+            'original_url': 'http://www.example.com/original_url'
+        },
+    ]
+    result = builder.record
+
+    assert validate(result['figures'], subschema) is None
+    assert expected == result['figures']
 
 
 def test_add_figure_fails_on_duplicated_key():
@@ -166,6 +205,9 @@ def test_add_figure_fails_on_duplicated_key():
         material='publication',
         source='source',
         url='url',
+        description='description',
+        filename='filename',
+        original_ur='original_url'
     )
 
     with pytest.raises(ValueError):
@@ -176,10 +218,53 @@ def test_add_figure_fails_on_duplicated_key():
             material='publication',
             source='source',
             url='url',
+            description='description',
+            filename='filename',
+            original_ur='original_url'
         )
 
 
 def test_add_document():
+    schema = load_schema('hep')
+    subschema = schema['properties']['documents']
+
+    builder = LiteratureBuilder('test')
+
+    builder.add_document(
+        'key',
+        description='description',
+        fulltext=True,
+        hidden=True,
+        material='preprint',
+        original_url='http://www.example.com/original_url',
+        source='source',
+        url='url',
+        filename='filename'
+    )
+
+    expected = [
+        {
+            'description': 'description',
+            'fulltext': True,
+            'hidden': True,
+            'key': 'key',
+            'material': 'preprint',
+            'original_url': 'http://www.example.com/original_url',
+            'source': 'source',
+            'url': 'url',
+            'filename': 'filename'
+        },
+    ]
+    result = builder.record
+
+    assert validate(result['documents'], subschema) is None
+    assert expected == result['documents']
+
+    for key in subschema['items']['properties'].keys():
+        assert key in result['documents'][0]
+
+
+def test_add_document_inspire_next():
     schema = load_schema('hep')
     subschema = schema['properties']['documents']
 
@@ -213,9 +298,6 @@ def test_add_document():
     assert validate(result['documents'], subschema) is None
     assert expected == result['documents']
 
-    for key in subschema['items']['properties'].keys():
-        assert key in result['documents'][0]
-
 
 def test_add_document_fails_on_existing_key():
     builder = LiteratureBuilder('test')
@@ -228,6 +310,7 @@ def test_add_document_fails_on_existing_key():
         original_url='http://www.example.com/original_url',
         source='source',
         url='url',
+        filename='filename'
     )
 
     with pytest.raises(ValueError):
@@ -240,6 +323,7 @@ def test_add_document_fails_on_existing_key():
             original_url='http://www.example.com/original_url',
             source='source',
             url='url',
+            filename='filename'
         )
 
 

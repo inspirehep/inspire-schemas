@@ -32,12 +32,14 @@ import idutils
 
 from inspire_utils.date import normalize_date
 
-from ..utils import (get_license_from_url,
-                     normalize_collaboration,
-                     normalize_isbn,
-                     validate,
-                     filter_empty_parameters,
-                     EMPTIES)
+from ..utils import (
+    get_license_from_url,
+    normalize_collaboration,
+    normalize_isbn,
+    validate,
+    filter_empty_parameters,
+    EMPTIES
+)
 from .signatures import SignatureBuilder
 
 
@@ -48,6 +50,7 @@ def is_citeable(publication_info):
     already populated
     :type publication_info: list
     """
+
     def _item_has_pub_info(item):
         return all(
             key in item for key in (
@@ -447,8 +450,8 @@ class LiteratureBuilder(object):
         # If only journal title is present, and no other fields, assume the
         # paper was submitted, but not yet published
         if journal_title and all(
-                not field for field in (cnum, artid, journal_issue,
-                                        journal_volume, page_start, page_end)):
+            not field for field in (cnum, artid, journal_issue,
+                                    journal_volume, page_start, page_end)):
             self.add_public_note('Submitted to {}'.format(journal_title))
             return
 
@@ -844,31 +847,47 @@ class LiteratureBuilder(object):
         """Set curated flag."""
         self.record['curated'] = curated
 
-    @filter_empty_parameters
-    def add_figure(
-        self,
-        key,
-        url,
-        caption=None,
-        label=None,
-        material=None,
-        source=None,
-    ):
-        """Add a figure."""
-        figure = self._sourced_dict(source)
-
-        if key:
-            figure['key'] = key
+    def _check_metadata_for_file(self, **kwargs):
+        file = self._sourced_dict(kwargs.get('source'))
+        if kwargs.get('key'):
+            file['key'] = kwargs['key']
         else:
             raise TypeError("Required argument 'key' should not be 'falsey'.")
-        if url:
-            figure['url'] = url
+        if kwargs.get('url'):
+            file['url'] = kwargs['url']
         else:
             raise TypeError("Required argument 'url' should not be 'falsey'.")
+        return file
 
-        for dict_key in ('caption', 'label', 'material'):
-            if locals()[dict_key] is not None:
-                figure[dict_key] = locals()[dict_key]
+    @filter_empty_parameters
+    def add_figure(self, key, url, **kwargs):
+        """Add a figure.
+
+        Args:
+            key (string): document key
+            url (string): document url
+        Keyword Args:
+            caption (string): simple description
+            label (string):
+            material (string):
+            original_url (string): original url
+            filename (string): current url
+
+        Returns: None
+
+        """
+        figure = self._check_metadata_for_file(key=key, url=url, **kwargs)
+
+        for dict_key in (
+            'caption',
+            'label',
+            'material',
+            'filename',
+            'url',
+            'original_url',
+        ):
+            if kwargs.get(dict_key) is not None:
+                figure[dict_key] = kwargs[dict_key]
 
         if key_already_there(figure, self.record.get('figures', ())):
             raise ValueError(
@@ -877,30 +896,28 @@ class LiteratureBuilder(object):
             )
 
         self._append_to('figures', figure)
+        self.add_document
 
     @filter_empty_parameters
-    def add_document(
-        self,
-        key,
-        url,
-        description=None,
-        fulltext=None,
-        hidden=None,
-        material=None,
-        original_url=None,
-        source=None,
-    ):
-        """Add a document."""
-        document = self._sourced_dict(source)
+    def add_document(self, key, url, **kwargs):
+        """
+        Adds document to record
+        Args:
+            key (string): document key
+            url (string): document url
+        Keyword Args:
+            description (string): simple description
+            fulltext (bool): mark if this is a full text
+            hidden (bool): is document should be hidden
+            material (string):
+            original_url (string): original url
+            filename (string): current url
 
-        if key:
-            document['key'] = key
-        else:
-            raise TypeError("Required argument 'key' should not be 'falsey'.")
-        if url:
-            document['url'] = url
-        else:
-            raise TypeError("Required argument 'url' should not be 'falsey'.")
+
+        Returns: None
+
+        """
+        document = self._check_metadata_for_file(key=key, url=url, **kwargs)
 
         for dict_key in (
             'description',
@@ -909,9 +926,10 @@ class LiteratureBuilder(object):
             'material',
             'original_url',
             'url',
+            'filename',
         ):
-            if locals()[dict_key] is not None:
-                document[dict_key] = locals()[dict_key]
+            if kwargs.get(dict_key):
+                document[dict_key] = kwargs[dict_key]
 
         if key_already_there(document, self.record.get('documents', ())):
             raise ValueError(

@@ -94,7 +94,7 @@ def test_validate_accepts_partial_date():
 
 
 def test_validate_raises_on_invalid_date():
-    data = '2017-42',
+    data = '2017-42'
 
     schema = {
         '$schema': 'http://json-schema.org/schema#',
