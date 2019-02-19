@@ -49,6 +49,30 @@ def test_city():
     assert expected == result
 
 
+def test_city_when_no_city_in_first_address():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['address']
+
+    record = {
+        'address': [
+            {
+                'place_name': 'Lido di Venezia',
+            },
+            {
+                'cities': [
+                    'Venice',
+                ],
+            },
+        ],
+    }
+    assert validate(record['address'], subschema) is None
+
+    expected = 'Venice'
+    result = ConferenceReader(record).city
+
+    assert expected == result
+
+
 def test_country():
     schema = load_schema('conferences')
     subschema = schema['properties']['address']
