@@ -44,7 +44,7 @@ class ConferenceReader(object):
             'Tokyo'
 
         """
-        return get_value(self.record, 'address[0].cities[0]', default='')
+        return get_value(self.record, 'address.cities[0][0]', default='')
 
     @property
     def country(self):
