@@ -173,7 +173,7 @@ def do_setup():
         install_requires=[
             'Unidecode~=1.0,>=1.0.22',
             'autosemver',
-            'jsonschema',
+            'jsonschema~=2.0,>=2.6.0',
             'idutils',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
