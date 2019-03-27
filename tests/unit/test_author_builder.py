@@ -219,6 +219,59 @@ def test_add_email_addresses_skips_duplicate_ones():
     assert expected == result
 
 
+def test_add_email_addresses_with_hidden_parameter():
+    schema = load_schema('authors')
+    subschema = schema['properties']['email_addresses']
+
+    author = AuthorBuilder()
+    author.add_email_address('example@test.com', hidden=True)
+
+    expected = [{
+        "value": 'example@test.com',
+        "hidden": True,
+    }]
+    result = author.obj['email_addresses']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_email_addresses_with_hidden_parameter_only_updates_hidden_field():
+    schema = load_schema('authors')
+    subschema = schema['properties']['email_addresses']
+
+    author = AuthorBuilder()
+    author.add_email_address('example@test.com')
+    author.add_email_address('example@test.com', hidden=False)
+
+    expected = [{
+        "value": 'example@test.com',
+        "hidden": False,
+    }]
+    result = author.obj['email_addresses']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_email_addresses_without_hidden_parameter_skip_updates_hidden_field():
+    schema = load_schema('authors')
+    subschema = schema['properties']['email_addresses']
+
+    author = AuthorBuilder()
+    author.add_email_address('example@test.com', hidden=True)
+    author.add_email_address('example@test.com')
+
+    expected = [{
+        "value": 'example@test.com',
+        "hidden": True,
+    }]
+    result = author.obj['email_addresses']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_set_status():
     schema = load_schema('authors')
     subschema = schema['properties']['status']

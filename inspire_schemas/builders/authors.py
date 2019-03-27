@@ -110,18 +110,28 @@ class AuthorBuilder(object):
         self.obj['name'].setdefault('native_names', []).append(name)
 
     @filter_empty_parameters
-    def add_email_address(self, email):
+    def add_email_address(self, email, hidden=None):
         """Add email address.
 
         Args:
-            :param email: public email of the author.
+            :param email: email of the author.
             :type email: string
+
+            :param hidden: if email is public or not.
+            :type hidden: boolean
         """
-        existing_emails = get_value(self.obj, 'email_addresses.value', [])
-        if email not in existing_emails:
-            self._append_to('email_addresses', {
-                "value": email
-            })
+        existing_emails = get_value(self.obj, 'email_addresses', [])
+        found_email = next(
+            (existing_email for existing_email in existing_emails if existing_email.get('value') == email),
+            None
+        )
+        if found_email is None:
+            new_email = {'value': email}
+            if hidden is not None:
+                new_email['hidden'] = hidden
+            self._append_to('email_addresses', new_email)
+        elif hidden is not None:
+            found_email['hidden'] = hidden
 
     @filter_empty_parameters
     def set_status(self, status):
