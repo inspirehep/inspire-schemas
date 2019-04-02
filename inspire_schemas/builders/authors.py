@@ -110,6 +110,17 @@ class AuthorBuilder(object):
         self.obj['name'].setdefault('native_names', []).append(name)
 
     @filter_empty_parameters
+    def add_previous_name(self, name):
+        """Add previous name.
+
+        Args:
+            :param name: previous name for the current author.
+            :type name: string
+        """
+        self._ensure_field('name', {})
+        self.obj['name'].setdefault('previous_names', []).append(name)
+
+    @filter_empty_parameters
     def add_email_address(self, email, hidden=None):
         """Add email address.
 
