@@ -142,6 +142,26 @@ def test_add_native_name():
     assert expected == result
 
 
+def test_add_previous_name():
+    schema = load_schema('authors')
+    subschema = schema['properties']['name']
+
+    author = AuthorBuilder()
+    author.set_name('Bannanje Sripath Acharya')
+    author.add_previous_name('Do not confuse with Acharya, Bobby Samir')
+
+    expected = {
+        'value': 'Acharya, Bannanje Sripath',
+        'previous_names': [
+            'Do not confuse with Acharya, Bobby Samir'
+        ]
+    }
+    result = author.obj['name']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_multiple_native_names():
     schema = load_schema('authors')
     subschema = schema['properties']['name']
