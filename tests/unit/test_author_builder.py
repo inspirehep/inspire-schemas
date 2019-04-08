@@ -122,6 +122,29 @@ def test_set_display_name_can_be_called_multiple_times():
     assert expected == result
 
 
+def test_add_name_variant():
+    schema = load_schema('authors')
+    subschema = schema['properties']['name']
+
+    author = AuthorBuilder()
+    author.set_name('Abad, Francisco Jose Garcia')
+    author.add_native_name('Garcia Abad')
+    author.add_native_name('Francisco Jose')
+    # record 1653906
+
+    expected = {
+        'value': 'Abad, Francisco Jose Garcia',
+        'native_names': [
+            'Garcia Abad',
+            'Francisco Jose'
+        ]
+    }
+    result = author.obj['name']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_native_name():
     schema = load_schema('authors')
     subschema = schema['properties']['name']
