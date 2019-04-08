@@ -99,6 +99,17 @@ class AuthorBuilder(object):
         self.obj['name']['preferred_name'] = name
 
     @filter_empty_parameters
+    def add_name_variant(self, name):
+        """Add name variant.
+
+        Args:
+            :param name: name variant for the current author.
+            :type name: string
+        """
+        self._ensure_field('name', {})
+        self.obj['name'].setdefault('name_variants', []).append(name)
+
+    @filter_empty_parameters
     def add_native_name(self, name):
         """Add native name.
 
