@@ -25,6 +25,7 @@
 """Literature builder class and related code."""
 
 from __future__ import absolute_import, division, print_function
+from six import string_types
 
 import warnings
 
@@ -228,7 +229,8 @@ class LiteratureBuilder(object):
                     source=None,
                     ids=(),
                     emails=(),
-                    alternative_names=()):
+                    alternative_names=(),
+                    record=None):
         """Make a subrecord representing an author.
 
         Args:
@@ -244,12 +246,13 @@ class LiteratureBuilder(object):
                 elements are of the form ``(schema, value)``.
             emails(List[str]): email addresses of the author.
             alternative_names(List[str]): alternative names of the author.
-
+            record(dict): reference to the author record
         Returns:
             dict: a schema-compliant subrecord.
         """
         builder = SignatureBuilder()
         builder.set_full_name(full_name)
+        builder.set_record(record)
 
         for affiliation in affiliations:
             builder.add_affiliation(affiliation)
@@ -403,6 +406,8 @@ class LiteratureBuilder(object):
         material=None,
         parent_record=None,
         parent_isbn=None,
+        journal_record=None,
+        conference_record=None,
     ):
         """Add publication info.
 
@@ -441,10 +446,16 @@ class LiteratureBuilder(object):
         :type material: string
 
         :param parent_record: reference for the parent record
-        :type parent_record: string
+        :type parent_record: dict/string
 
         :param parent_isbn: isbn for the parent record
         :type parent_isbn: string
+
+        :param journal_record: reference for the journal record
+        :type journal_record: dict
+
+        :param conference_record: reference for the conference record
+        :type conference_record: dict
         """
 
         # If only journal title is present, and no other fields, assume the
@@ -458,12 +469,15 @@ class LiteratureBuilder(object):
         publication_item = {}
         for key in ('cnum', 'artid', 'page_end', 'page_start',
                     'journal_issue', 'journal_title',
-                    'journal_volume', 'year', 'pubinfo_freetext', 'material'):
+                    'journal_volume', 'year', 'pubinfo_freetext', 'material',
+                    'journal_record', 'conference_record'):
             if locals()[key] is not None:
                 publication_item[key] = locals()[key]
         if parent_record is not None:
-            parent_item = {'$ref': parent_record}
-            publication_item['parent_record'] = parent_item
+            # TODO: remove `if string` check [BREAKING] while bumping major version
+            if isinstance(parent_record, string_types):
+                parent_record = {'$ref': parent_record}
+            publication_item['parent_record'] = parent_record
         if parent_isbn is not None:
             publication_item['parent_isbn'] = normalize_isbn(parent_isbn)
         if page_start and page_end:
@@ -545,6 +559,22 @@ class LiteratureBuilder(object):
         self._append_to('accelerator_experiments', {
             'legacy_name': legacy_name
         })
+
+    @filter_empty_parameters
+    def add_accelerator_experiment(self, legacy_name, record=None):
+        """Add legacy name in accelerator experiment.
+
+        :type legacy_name: string
+
+        :param record: reference to the experiment record
+        :type record: dict
+        """
+        experiment = {'legacy_name': legacy_name}
+
+        if record is not None:
+            experiment['record'] = record
+
+        self._append_to('accelerator_experiments', experiment)
 
     @filter_empty_parameters
     def add_language(self, language):
