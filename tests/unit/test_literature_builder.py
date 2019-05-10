@@ -478,6 +478,18 @@ def test_add_reference():
     assert builder.record['references'] == [reference]
 
 
+def test_add_accelerator_experiment():
+    builder = LiteratureBuilder()
+
+    legacy_name = 'FNAL-E-0900'
+    experiment_record = {'$ref': 'http://url/api/experiments/123'}
+    builder.add_accelerator_experiment('FNAL-E-0900', record=experiment_record)
+    assert builder.record['accelerator_experiments'] == [{
+        'legacy_name': legacy_name,
+        'record': experiment_record
+    }]
+
+
 def test_publication_info_public_note():
     schema = load_schema('hep')
     subschema = schema['properties']['public_notes']
@@ -579,6 +591,24 @@ def test_make_author_handles_none_in_id_value():
     )
     expected = {
         'full_name': 'Smith, John',
+    }
+
+    assert validate([result], subschema) is None
+    assert expected == result
+
+
+def test_make_author_sets_record():
+    schema = load_schema('hep')
+    subschema = schema['properties']['authors']
+    builder = LiteratureBuilder()
+    author_record = {'$ref': 'http://url/api/authors/1234'}
+    result = builder.make_author(
+        'Smith, John',
+        record=author_record,
+    )
+    expected = {
+        'full_name': 'Smith, John',
+        'record': author_record,
     }
 
     assert validate([result], subschema) is None
