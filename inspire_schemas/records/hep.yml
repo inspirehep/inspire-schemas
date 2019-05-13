@@ -740,6 +740,12 @@ properties:
                         :example: ``table of contents``
                     minLength: 1
                     type: string
+                filename:
+                    description: |-
+                        Proper name of the file
+                    minLength: 1
+                    title: Filename
+                    type: string
                 fulltext:
                     title: Whether this document contains the fulltext
                     type: boolean
@@ -776,11 +782,6 @@ properties:
                     format: uri-reference
                     minLength: 1
                     type: string
-                filename:
-                    description: Proper name of the file
-                    title: Filename
-                    type: string
-                    minLength: 1
             required:
             - key
             - url
@@ -903,6 +904,12 @@ properties:
                         :MARC: ``8564_y`` (without the five-digit counter)
                     minLength: 1
                     type: string
+                filename:
+                    description: |-
+                        Proper name of the file
+                    minLength: 1
+                    title: Filename
+                    type: string
                 key:
                     description: |-
                         Key to the corresponding file, which matches a ``key``
@@ -919,6 +926,11 @@ properties:
                     description: |-
                         :MARC: not present (figures were extracted only from
                             arXiv preprints)
+                original_url:
+                    format: uri
+                    minLength: 1
+                    title: Original URL of the document
+                    type: string
                 source:
                     $ref: elements/source.json
                 url:
@@ -929,16 +941,6 @@ properties:
                         form is ``/files/bucket/key``.
                     format: uri-reference
                     minLength: 1
-                    type: string
-                filename:
-                    description: Proper name of the file
-                    title: Filename
-                    type: string
-                    minLength: 1
-                original_url:
-                    format: uri
-                    minLength: 1
-                    title: Original URL of the document
                     type: string
             required:
             - key

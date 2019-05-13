@@ -8,15 +8,15 @@ properties:
     checksum:
         minLength: 1
         type: string
+    filename:
+        minLength: 1
+        type: string
     key:
         minLength: 1
         type: string
     size:
         type: integer
     version_id:
-        minLength: 1
-        type: string
-    filename:
         minLength: 1
         type: string
 title: File schema.

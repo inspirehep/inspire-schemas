@@ -77,8 +77,8 @@ properties:
         uniqueItems: true
     external_system_identifiers:
         description: |-
-            :MARC: ``999C5u`` (as url) 
-            
+            :MARC: ``999C5u`` (as url)
+
             List of identifiers of this document on external systems.
         items:
             additionalProperties: false
