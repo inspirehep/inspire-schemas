@@ -1164,3 +1164,10 @@ def test_is_arxiv_accepts_valid_categories_only():
 
 def test_is_arxiv_accepts_valid_categories_only():
     assert utils.is_arxiv('math/0312.059758') is False
+
+
+def test_sanitize_html():
+    expected = 'Some text <em>emphasized</em> linking to <a href="http://example.com">http://example.com</a>'
+    result = utils.sanitize_html('<div>Some text <em class="shiny">emphasized</em> linking to http://example.com</div>')
+
+    assert expected == result
