@@ -33,6 +33,8 @@ from functools import partial, wraps
 import idutils
 import rfc3987
 import six
+from bleach.linkifier import LinkifyFilter
+from bleach.sanitizer import Cleaner
 from idutils import is_orcid
 from inspire_utils.date import PartialDate
 from isbn import ISBN
@@ -325,6 +327,14 @@ _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
 }
 
 EMPTIES = [None, '', [], {}]
+
+_BLEACH_CONFIG = {
+    'tags': ['a', 'b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
+    'attributes': {'a': ['href', 'title']},
+    'strip': True,
+    'filters': [LinkifyFilter],
+}
+_bleach_cleaner = Cleaner(**_BLEACH_CONFIG)
 
 
 def filter_empty_parameters(func):
@@ -1022,3 +1032,10 @@ def normalize_arxiv(obj):
         return matched_arxiv_post.group("identifier")
 
     return None
+
+
+def sanitize_html(text):
+    """Sanitize HTML for use inside records fields.
+
+    This strips most of the tags and attributes, only allowing a safe whitelisted subset."""
+    return _bleach_cleaner.clean(text)
