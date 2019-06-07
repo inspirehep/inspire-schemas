@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016 CERN.
+# Copyright (C) 2016-2019 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -24,10 +24,12 @@
 
 import os
 
+import json
 import pytest
 import yaml
 
 from inspire_schemas import api
+from inspire_schemas.builders import JobBuilder
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -40,6 +42,14 @@ def load_file(file_name):
     return data
 
 
+def load_json_file(file_name):
+    path = os.path.join(FIXTURES_PATH, file_name)
+    with open(path) as input_data:
+        data = json.load(input_data)
+
+    return data
+
+
 @pytest.fixture('module')
 def expected_data_hep():
     return load_file('expected_data_hep.yaml')
@@ -48,6 +58,11 @@ def expected_data_hep():
 @pytest.fixture('module')
 def input_data_hep():
     return load_file('input_data_hep.yaml')
+
+
+@pytest.fixture('module')
+def job_data():
+    return load_json_file('jobs_example.json')
 
 
 def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
@@ -190,3 +205,102 @@ def test_literature_and_reference_builder():
     hep_builder.add_reference(ref_builder.obj)
 
     assert hep_builder.validate_record() is None
+
+
+def test_job_builder(job_data):
+    start_data = {
+        '_collections': ['Jobs'],
+        'control_number': job_data['control_number'],
+        'deleted': job_data['deleted'],
+        'deleted_records': job_data['deleted_records'],
+        'legacy_creation_date': job_data['legacy_creation_date'],
+        'legacy_version': job_data['legacy_version'],
+        'new_record': job_data['new_record'],
+        'public_notes': job_data['public_notes'],
+        'self': job_data['self']
+    }
+    builder = JobBuilder(start_data)
+
+    private_note = job_data['_private_notes']
+    builder.add_private_note(**private_note[0])
+    assert builder.record['_private_notes'] == private_note
+
+    experiments = job_data['accelerator_experiments']
+    builder.add_accelerator_experiment(**experiments[0])
+    builder.add_accelerator_experiment(**experiments[1])
+    assert builder.record['accelerator_experiments'] == experiments
+
+    acquisition_source = job_data['acquisition_source']
+    builder.add_acquisition_source(**acquisition_source)
+    assert builder.record['acquisition_source'] == acquisition_source
+
+    arxiv = job_data['arxiv_categories']
+    builder.add_arxiv_category(arxiv[0])
+    builder.add_arxiv_category(arxiv[1])
+    builder.add_arxiv_category(arxiv[2])
+    assert builder.record['arxiv_categories'] == arxiv
+
+    contact_details = job_data['contact_details']
+    builder.add_contact(**contact_details[0])
+    builder.add_contact(**contact_details[1])
+    builder.add_contact(**contact_details[2])
+    assert builder.record['contact_details'] == contact_details
+
+    deadline = job_data['deadline_date']
+    builder.set_deadline(deadline)
+    assert builder.record['deadline_date'] == deadline
+
+    description = job_data['description']
+    builder.set_description(description)
+    assert builder.record['description'] == description
+
+    external_job_id = job_data['external_job_identifier']
+    builder.set_external_job_identifier(external_job_id)
+    assert builder.record['external_job_identifier'] == external_job_id
+
+    external_system_id = job_data['external_system_identifiers']
+    builder.add_external_system_identifiers(**external_system_id[0])
+    assert builder.record['external_system_identifiers'] == external_system_id
+
+    institutions = job_data['institutions']
+    builder.add_institution(**institutions[0])
+    builder.add_institution(**institutions[1])
+    assert builder.record['institutions'] == institutions
+
+    position = job_data['position']
+    builder.set_title(position)
+    assert builder.record['position'] == position
+
+    ranks = job_data['ranks']
+    builder.add_rank(ranks[0])
+    assert builder.record['ranks'] == ranks
+
+    ref_letters = job_data['reference_letters']
+    builder.add_reference_email(ref_letters['emails'][0])
+    builder.add_reference_email(ref_letters['emails'][1])
+    builder.add_reference_url(**ref_letters['urls'][0])
+    builder.add_reference_url(**ref_letters['urls'][1])
+    builder.add_reference_url(**ref_letters['urls'][2])
+    builder.add_reference_url(**ref_letters['urls'][3])
+    builder.add_reference_url(**ref_letters['urls'][4])
+    assert builder.record['reference_letters'] == ref_letters
+
+    regions = job_data['regions']
+    builder.add_region(regions[0])
+    builder.add_region(regions[1])
+    builder.add_region(regions[2])
+    builder.add_region(regions[3])
+    assert builder.record['regions'] == regions
+
+    status = job_data['status']
+    builder.set_status(status)
+    assert builder.record['status'] == status
+
+    urls = job_data['urls']
+    builder.add_url(**urls[0])
+    builder.add_url(**urls[1])
+    assert builder.record['urls'] == urls
+
+    assert builder.record == job_data
+
+    builder.validate_record()
