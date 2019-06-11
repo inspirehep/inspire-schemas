@@ -187,7 +187,7 @@ class JobBuilder(object):
         Args:
             category (str)
         """
-        if category is not 'other':
+        if category != 'other':
             self._append_to('arxiv_categories', category)
 
     @filter_empty_parameters
