@@ -363,6 +363,8 @@ def test_add_arxiv_category():
     builder = JobBuilder()
     builder.add_arxiv_category('cat1')
     builder.add_arxiv_category('cat2')
+    builder.add_arxiv_category('other')
+    builder.add_arxiv_category(''.join(list('other')))
 
     assert builder.record == expected
 
