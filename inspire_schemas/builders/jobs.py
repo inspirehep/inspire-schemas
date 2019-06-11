@@ -209,6 +209,7 @@ class JobBuilder(object):
             record=record,
         )
 
+    @filter_empty_parameters
     def add_external_system_identifiers(self, value, schema):
         """Add external job identifier to ``external_system_identifiers`` field.
 
@@ -312,6 +313,7 @@ class JobBuilder(object):
         entry = self._prepare_url(value, description)
         self._append_to('urls', entry)
 
+    @filter_empty_parameters
     def set_deadline(self, deadline):
         """Save normalized date of the deadline to ``deadline_date`` field
 
@@ -319,6 +321,7 @@ class JobBuilder(object):
         """
         self.record['deadline_date'] = normalize_date(deadline)
 
+    @filter_empty_parameters
     def set_external_job_identifier(self, identifier):
         """Set external job identifier in ``external_job_identifier`` field
         Args:
@@ -326,6 +329,7 @@ class JobBuilder(object):
         """
         self.record['external_job_identifier'] = identifier
 
+    @filter_empty_parameters
     def set_description(self, description):
         """Set description of job
 
@@ -334,6 +338,7 @@ class JobBuilder(object):
         """
         self.record['description'] = description
 
+    @filter_empty_parameters
     def set_status(self, status):
         """Set status to the job.
 
@@ -342,6 +347,7 @@ class JobBuilder(object):
         """
         self.record['status'] = status
 
+    @filter_empty_parameters
     def set_title(self, title):
         """Set title for the job to ``position`` field
 
