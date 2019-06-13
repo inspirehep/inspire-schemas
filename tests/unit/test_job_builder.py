@@ -588,3 +588,26 @@ def test_set_title():
 
     builder.set_title(expected2)
     assert builder.record['position'] == expected2
+
+
+def test_process_reference_contact_list():
+    contacts = [
+        "some.email@cern.ch",
+        "http://some-url.com/other/?url=1&part=2",
+        "other@email.com"
+    ]
+
+    builder = JobBuilder()
+    builder.add_reference_contacts(contacts)
+
+    expected_data = {
+        'emails': [
+            'some.email@cern.ch',
+            'other@email.com'
+        ],
+        'urls': [
+            {'value': 'http://some-url.com/other/?url=1&part=2'}
+        ]
+    }
+
+    assert builder.record['reference_letters'] == expected_data

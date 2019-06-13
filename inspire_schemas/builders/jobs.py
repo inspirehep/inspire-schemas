@@ -25,6 +25,7 @@
 """Jobs builder class and related code."""
 import logging
 import six
+from jsonschema._format import is_email
 
 from inspire_schemas.utils import validate, filter_empty_parameters, EMPTIES
 from inspire_utils.date import normalize_date
@@ -291,6 +292,20 @@ class JobBuilder(object):
         reference_url = self._prepare_url(value, description)
         self._ensure_list_field(url_key, obj=self.record[main_key])
         self.record[main_key][url_key].append(reference_url)
+
+    @filter_empty_parameters
+    def add_reference_contacts(self, contacts):
+        """Add reference contacts from list of strings where urls and emails
+        can be mixed together
+
+        Args:
+            contacts (list): List of strings containing emails and urls
+        """
+        for input in contacts:
+            if is_email(input):
+                self.add_reference_email(input)
+            else:
+                self.add_reference_url(input)
 
     @filter_empty_parameters
     def add_region(self, region):
