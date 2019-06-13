@@ -611,3 +611,14 @@ def test_process_reference_contact_list():
     }
 
     assert builder.record['reference_letters'] == expected_data
+
+
+def test_sanitization_of_description():
+    expected = 'Some text <em>emphasized</em> linking to <a href="http://example.com">'\
+        'http://example.com</a>'
+    description = '<div>Some text <em class="shiny">emphasized</em> linking to '\
+        'http://example.com</div>'
+    builder = JobBuilder()
+    builder.set_description(description)
+
+    assert builder.record['description'] == expected

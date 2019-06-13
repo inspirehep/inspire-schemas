@@ -27,7 +27,10 @@ import logging
 import six
 from jsonschema._format import is_email
 
-from inspire_schemas.utils import validate, filter_empty_parameters, EMPTIES
+from inspire_schemas.utils import (
+    validate, filter_empty_parameters, EMPTIES,
+    sanitize_html
+)
 from inspire_utils.date import normalize_date
 
 
@@ -351,7 +354,7 @@ class JobBuilder(object):
         Args:
             description (str): Job description
         """
-        self.record['description'] = description
+        self.record['description'] = sanitize_html(description)
 
     @filter_empty_parameters
     def set_status(self, status):
