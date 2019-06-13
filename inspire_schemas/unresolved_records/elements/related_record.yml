@@ -1,0 +1,110 @@
+additionalProperties: false
+description: |-
+    :MARC: ``78002``, ``78502``, ``78708```and ``510`` (depending on type of
+        record and :ref:`related_record.json#/properties/relation`)
+properties:
+    curated_relation:
+        type: boolean
+    record:
+        $ref: json_reference.json
+        description: |-
+            :MARC: ``510__0`` (for Institutions and Experiments), ``530__0``
+                (for Journals), ``78002/78502/78708w`` (for Literature).
+        title: URL of related record
+    relation:
+        description: |-
+            The possible values are:
+
+            ``predecessor``
+                :MARC: ``510__w:a`` (for Institutions and Experiments),
+                    ``530__w:a`` (for Journals) or the field comes from
+                    ``78002`` (for Literature).
+
+                The related record is a predecessor of the current one, i.e.
+                the current record supersedes the related one.
+
+                - For a Literature record, this is typically the case if the
+                  related record is a preliminary note and this record is the
+                  final version.
+                - For a Journal record, this happens when the journal has
+                  changed name: the related record has the previous name and
+                  this one the new name.
+                - For an Institution record, this means that the related record
+                  represents an institution that does no longer exist and has
+                  become the one represented by this record.
+                - For a Project record, this happens when the related record is
+                  a project that finished and was superseded by the one in this
+                  record (e.g. two successive runs of an experiment).
+
+            ``successor``
+                :MARC: ``510__w:b`` (for Institutions and Experiments),
+                    ``530__w:b`` (for Journals) or the field comes from
+                    ``78502`` (for Literature).
+
+                The related record is a successor of the current one, i.e.
+                the current record is superseded by the related one.
+
+                - For a Literature record, this is typically the case if the
+                  current record is a preliminary note and the related record is the
+                  final version.
+                - For a Journal record, this happens when the journal has
+                  changed name: the current record has the previous name and
+                  the related one the new name.
+                - For an Institution record, this means that the current record
+                  represents an institution that does no longer exist and has
+                  become the one represented by the related record.
+                - For a Project record, this happens when the current record is
+                  a project that finished and was superseded by the related
+                  record (e.g. two successive runs of an experiment).
+
+            ``parent``
+                :MARC: ``510__w:t`` (for an Institution record)
+
+                The related record is the parent of the current one, i.e. the
+                current record is a child of the related one.
+
+                - For an Institution record, this means that the related record
+                  represents a parent institution (e.g. a university if this
+                  record is a department).
+
+            ``commented``
+                :MARC: ``78708i:commented`` (for a Literature record)
+
+                The related record has been commented by the current one, i.e.
+                the current record is a comment on the related one.
+
+                .. note::
+
+                   This only makes sense for a Literature record.
+
+
+            If none of the relations apply, a free textual relation can be
+            provided in :ref:`relation_freetext`.
+
+            .. note::
+
+                Only one directional links are currently allowed for technical
+                reasons, but this should change in the future when Inspire can
+                handle atomic updates of the two directions. For example,
+                ``78502`` is currently discarded.
+        enum:
+        - predecessor
+        - successor
+        - parent
+        - commented
+        minLength: 1
+        title: Relation of the linked record to this one
+        type: string
+    relation_freetext:
+        description: |-
+            :MARC: ``510__i`` (for Institutions and Experiments), ``530__i``
+                (for Journals) or ``78708i`` (for Literature).
+
+            If none of the standard relations in :ref:`relation` fit, a textual
+            relation can alternatively be provided here.
+        minLength: 1
+        type: string
+required:
+- record
+title: Decorated link to a related record
+type: object

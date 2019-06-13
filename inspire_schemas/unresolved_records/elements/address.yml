@@ -1,0 +1,85 @@
+additionalProperties: false
+properties:
+    cities:
+        description: |-
+            Sometimes conferences and institutes are officially located in a
+            little-known place, but their location is widely known as being in
+            a major neighboring city.  In this way, we can store information
+            about both the technically correct but little-known place and the
+            well-known but technically incorrect place.
+
+            The cities should be ordered from most specific to least specific.
+
+            :example: ``["Batavia", "Chicago"]``
+        items:
+            description: |-
+                :example: ``Geneva``
+            minLength: 1
+            title: A city
+            type: string
+        minItems: 1
+        title: List of cities
+        type: array
+        uniqueItems: true
+    country_code:
+        $ref: country_code.json
+    latitude:
+        description: |-
+            :example: 50.7736
+        title: Latitude of the location
+        type: number
+    longitude:
+        description: |-
+            :example: 6.07532
+        title: Longitude of the location
+        type: number
+    place_name:
+        description: |-
+            Name of the specific place where this is located.
+
+            - For a Conference record, this could be an institution or a hotel
+              hosting the conference.
+
+              :MARC: ``270__b``
+              :example: ``Dan Panorama hotel``
+
+            - For an Institution record representing an independent institute
+              and not a department, this could be a university where it is
+              located.
+
+              :MARC: Not present.
+              :example: ``U. Libre Brussels``
+        minLength: 1
+        type: string
+    postal_address:
+        description: |-
+            Full postal address in the original language, with
+            one element for every line, but excluding the country.
+
+            :example: ``["Notkestraße 85", "22607 Hamburg"]``
+
+            .. note::
+
+                This is used for Institution records, but not for Conferences.
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: false
+    postal_code:
+        description: |-
+            :example: 1050
+        minLength: 1
+        title: Postal code of the location
+        type: string
+    state:
+        description: |-
+            For American states, standard 2-letter codes are used.
+
+            :example: TX
+        minLength: 1
+        title: State or province of the location
+        type: string
+title: Location associated to the record
+type: object

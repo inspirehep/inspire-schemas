@@ -1,0 +1,41 @@
+additionalProperties: false
+description: |-
+    :MARC: ``65017`` with ``2:INSPIRE``
+
+    The Inspire category (also called field category) classifies the subject
+    this record is related to.  This classification schema is similar to the
+    arXiv one (see `elements/arxiv_categories.json`) and there is a way to map
+    from arXiv categories to Inspire categories.
+properties:
+    source:
+        enum:
+        - arxiv
+        - curator
+        - cds
+        - magpie
+        - user
+        minLength: 1
+        type: string
+    term:
+        enum:
+        - Accelerators
+        - Astrophysics
+        - Computing
+        - Data Analysis and Statistics
+        - Experiment-HEP
+        - Experiment-Nucl
+        - General Physics
+        - Gravitation and Cosmology
+        - Instrumentation
+        - Lattice
+        - Math and Math Physics
+        - Other
+        - Phenomenology-HEP
+        - Theory-HEP
+        - Theory-Nucl
+        minLength: 1
+        type: string
+required:
+- term
+title: Inspire category
+type: object

@@ -1,0 +1,246 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        items:
+            enum:
+            - Conferences
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which this record belongs
+        type: array
+        uniqueItems: true
+    _private_notes:
+        description: |-
+            :MARC: ``595``
+
+            These notes are only visible to privileged users, not regular
+            users.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    acronyms:
+        items:
+            description: |-
+                :MARC: ``111__e``
+                :example: ``SUSY 2018``
+            minLength: 1
+            title: Conference acronym
+            type: string
+        minItems: 1
+        title: List of acronyms of the conference
+        type: array
+        uniqueItems: true
+    address:
+        description: |-
+            :MARC: ``111__c`` (in the form ``city, country``), ``270__b``
+
+            This field is a list because a conference can sometimes be split among
+            several cities.
+
+            .. note::
+
+                The :ref:`address.json#/properties/postal_address` should not
+                be provided for a conference.
+        items:
+            $ref: elements/address.json
+        minItems: 1
+        title: List of locations of the conference
+        type: array
+        uniqueItems: true
+    alternative_titles:
+        description: |-
+            :MARC: ``711``
+
+            Sometimes conferences are known by several titles/acronyms. These
+            name variants can be provided here.
+
+            .. note::
+
+                If a conference has several titles or acronyms, it is more
+                appropriate to use :ref:`titles` or :`acronyms`.
+
+                This field is meant mainly to port information from legacy, that
+                was not categorized well into title/acronym variants and was
+                used to boost search results.
+        items:
+            $ref: elements/title.json
+        minItems: 1
+        title: List of alternative titles
+        type: array
+        uniqueItems: true
+    closing_date:
+        description: |-
+            ``111__y``
+        format: date
+        minLength: 1
+        title: Conference closing date
+        type: string
+    cnum:
+        $ref: elements/cnum.json
+        title: CNUM of the conference
+    contact_details:
+        description: |-
+            :MARC: ``270``
+        items:
+            $ref: elements/contact.json
+        minItems: 1
+        title: Contact information
+        type: array
+        uniqueItems: true
+    control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
+        type: integer
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    external_system_identifiers:
+        description: |-
+            List of identifiers of this document on external systems.
+        items:
+            anyOf:
+            -   additionalProperties: false
+                properties:
+                    schema:
+                        enum:
+                        - SPIRES
+                        minLength: 1
+                        type: string
+                    value:
+                        description: |-
+                            :MARC: ``970__a``
+                        minLength: 1
+                        pattern: ^CONF-\d+$
+                        type: string
+                required:
+                - schema
+                - value
+                type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    legacy_creation_date:
+        format: date
+        minLength: 1
+        type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    opening_date:
+        description: |-
+            :MARC: ``111__x``
+        format: date
+        minLength: 1
+        title: Conference opening date
+        type: string
+    public_notes:
+        description: |-
+            :MARC: ``500``
+
+            Any notes about the document that do not fit into another field.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of public notes
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+    series:
+        description: |-
+            :MARC: ``411``
+        items:
+            additionalProperties: false
+            properties:
+                name:
+                    description: |-
+                        ``411__a``
+                    minLength: 1
+                    title: Name of the conference series
+                    type: string
+                number:
+                    description: |-
+                        ``411__n``
+                    title: Number of the conference in the series
+                    type: integer
+            required:
+            - name
+            type: object
+        minItems: 1
+        title: Conference series that this is part of
+        type: array
+        uniqueItems: true
+    short_description:
+        $ref: elements/sourced_value.json
+    titles:
+        description: |-
+            :MARC: ``111__a/b``
+        items:
+            $ref: elements/title.json
+        minItems: 1
+        title: List of titles of the conference
+        type: array
+        uniqueItems: true
+    urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+required:
+- _collections
+title: Conference
+type: object

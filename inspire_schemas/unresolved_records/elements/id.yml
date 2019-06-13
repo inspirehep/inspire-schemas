@@ -1,0 +1,358 @@
+anyOf:
+-   additionalProperties: false
+    description: |-
+        This identifier is assigned to any curated author record (HEPNAMES on
+        legacy).  It is mainly used by large collaborations (providing an
+        `authors.xml` file) to uniquely identify the authors of their articles.
+    properties:
+        schema:
+            enum:
+            - INSPIRE ID
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``INSPIRE-12345678``
+            minLength: 1
+            pattern: ^INSPIRE-\d{8}$
+            type: string
+    required:
+    - schema
+    - value
+    title: Inspire ID
+    type: object
+-   additionalProperties: false
+    description: |-
+        The BAI (BibAuthorID) is based on the name of the author and is used as
+        a human-friendly unique identifier. Its general form is a
+        ``firstnames.lastnames.number``, where ``firstnames`` is a list of
+        first names (or initials) separated by dots, and similarly for
+        ``lastnames``. Only ASCII letters (without diacritics), numbers, dashes
+        and apostrophes are allowed in the names. By default, only initials of
+        first names are used, but this may be changed at a cataloguer's
+        discretion in order to disambiguate otherwise homonymous authors.
+
+        .. note::
+
+            This identifier is not persistent, as it can be renamed to become
+            more explicit (e.g. transforming an initial into a full name), or
+            disappear when merging two different authors.
+    properties:
+        schema:
+            enum:
+            - INSPIRE BAI
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``A.Einstein.1``
+            minLength: 1
+            pattern: ^((\w|\-|\')+\.)+\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: Inspire BAI
+    type: object
+-   additionalProperties: false
+    description: |-
+        `ORCID <http://orcid.org>`_ provides an identifier for individuals to
+        use with their name as they engage in research, scholarship, and
+        innovation activities.
+
+        The ORCID identifier can be resolved by prepending ``http://orcid.org``
+        to the `value`, in order to get the ORCID record of the person.
+    properties:
+        schema:
+            enum:
+            - ORCID
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``0000-0012-1234-5647``
+            format: orcid
+            minLength: 1
+            pattern: ^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$
+            type: string
+    required:
+    - schema
+    - value
+    title: ORCID
+    type: object
+-   additionalProperties: false
+    description: |-
+        Author identfier assigned by the Joint Accelerator Conferences Website
+        (`JACoW <http://jacow.org>`_).
+    properties:
+        schema:
+            enum:
+            - JACOW
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``JACOW-12345678``
+            minLength: 1
+            pattern: ^JACoW-\d{8}$
+            type: string
+    required:
+    - schema
+    - value
+    title: JACoW ID
+    type: object
+-   additionalProperties: false
+    description: |-
+        Author identifier assigned by the Japanese `KAKEN
+        <http://kaken.nii.ac.jp>`_ grants database.
+    properties:
+        schema:
+            enum:
+            - KAKEN
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``KAKEN-12345678``
+            minLength: 1
+            pattern: ^KAKEN-\d{8}$
+            type: string
+    required:
+    - schema
+    - value
+    title: KAKEN ID
+    type: object
+-   additionalProperties: false
+    description: |-
+        More info at `arXiv <https://arxiv.org/help/author_identifiers>`_.
+    properties:
+        schema:
+            enum:
+            - ARXIV
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``warner_s_1``
+            minLength: 1
+            pattern: ^\w+_(\w_)?\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: arXiv author identifier
+    type: object
+-   additionalProperties: false
+    description: |-
+        Also called CCID (e.g. on legacy).
+    properties:
+        schema:
+            enum:
+            - CERN
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``CERN-12345``
+            minLength: 1
+            pattern: ^CERN-\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: CERN institutional ID
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - DESY
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``DESY-15456``
+            minLength: 1
+            pattern: ^DESY-\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: DESY identifier
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - GOOGLESCHOLAR
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``AZUAeayXuibs``
+            minLength: 1
+            pattern: ^(\w|-){12}$
+            type: string
+    required:
+    - schema
+    - value
+    title: Google Scholar profile identifier
+    type: object
+-   additionalProperties: false
+    description: |-
+        Record ID in the Virtual International Authority File (`VIAF
+        <http://viaf.org>`_).
+    properties:
+        schema:
+            enum:
+            - VIAF
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``75121530``
+            minLength: 1
+            pattern: ^\d{7,9}$
+            type: string
+    required:
+    - schema
+    - value
+    title: VIAF record ID
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - RESEARCHERID
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``A-1009-2008``
+            minLength: 1
+            pattern: ^[A-z]-\d{4}-\d{4}$
+            type: string
+    required:
+    - schema
+    - value
+    title: ResearcherID
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - SCOPUS
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``13245678901``
+            minLength: 1
+            pattern: ^\d{10,11}$
+            type: string
+    required:
+    - schema
+    - value
+    title: SCOPUS author identifier
+    type: object
+-   additionalProperties: false
+    description: |-
+        HEPNAMES entry in the old SPIRES system.
+    properties:
+        schema:
+            enum:
+            - SPIRES
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: HEPNAMES-123456
+            minLength: 1
+            pattern: ^HEPNAMES-\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: SPIRES HEPNAMES ID
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - WIKIPEDIA
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                A page name on the English Wikipedia, i.e. the ``Page_name``
+                part in http://en.wikipedia.org/wiki/Page_name.
+
+                :example: ``Albert_Einstein``
+
+                Non-English Wikipedia pages can be referenced by prepending the language.
+
+                :example: ``it:Fabiola_Gianotti``
+            minLength: 1
+            type: string
+    required:
+    - schema
+    - value
+    title: Wikipedia Page_name of the person
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - SLAC
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                :example: ``SLAC-123456``
+            minLength: 1
+            pattern: ^SLAC-\d+$
+            type: string
+    required:
+    - schema
+    - value
+    title: SLAC identifier
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - TWITTER
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                A twitter handle, often preceded by ``@``.
+
+                :example: ``Prof_S_Hawking``
+            minLength: 1
+            type: string
+    required:
+    - schema
+    - value
+    title: Twitter handle
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - LINKEDIN
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                Identifier of Linkedin profile, i.e. the part after
+                ``linkedin.com/in/`` in the URL.
+
+                :example: ``kylecranmer``
+            minLength: 1
+            type: string
+    required:
+    - schema
+    - value
+    title: LinkedIn profile
+    type: object

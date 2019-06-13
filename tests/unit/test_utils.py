@@ -144,8 +144,8 @@ def test_get_schema_path_positive(schema, expected):
 def test_get_resolved_schema_path(mock_exists):
     schema_path = utils.get_schema_path(schema='hep.json', resolved=True)
     mock_exists.side_effect = \
-        lambda x: x == os.path.join(utils._resolved_schema_root_path, 'hep.json')
-    assert schema_path == os.path.join(utils._resolved_schema_root_path, 'hep.json')
+        lambda x: x == os.path.join(utils._schema_root_path, 'hep.json')
+    assert schema_path == os.path.join(utils._schema_root_path, 'hep.json')
 
 
 @pytest.mark.parametrize(

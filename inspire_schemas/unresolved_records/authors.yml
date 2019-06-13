@@ -1,0 +1,447 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        items:
+            enum:
+            - Authors
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which record belongs
+        type: array
+        uniqueItems: true
+    _private_notes:
+        description: |-
+            :MARC: ``595``
+
+            These notes are only visible to privileged users, not regular
+            users.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    acquisition_source:
+        $ref: elements/acquisition_source.json
+    advisors:
+        description: |-
+            :MARC: ``701``
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                degree_type:
+                    $ref: elements/degree_type.json
+                    description: |-
+                        :MARC: ``701__g``
+                ids:
+                    description: |-
+                        :MARC: ``701__i``
+                    items:
+                        $ref: elements/id.json
+                    minItems: 1
+                    title: List of advisor's IDs
+                    type: array
+                    uniqueItems: true
+                name:
+                    description: |-
+                        :MARC: ``701__a``
+
+                        The full name of the advisor, written in the
+                        standard ``last names, first names`` form.
+
+                        :example: ``Smith, John P.S.``
+                    minLength: 1
+                    type: string
+                record:
+                    $ref: elements/json_reference.json
+            required:
+            - name
+            type: object
+        minItems: 1
+        title: List of advisors
+        type: array
+        uniqueItems: true
+    arxiv_categories:
+        description: |-
+            :MARC: ``65017a`` when it contains an arXiv category.
+        items:
+            $ref: elements/arxiv_categories.json
+        minItems: 1
+        title: List of research areas of author
+        type: array
+        uniqueItems: true
+    awards:
+        description: |-
+            :MARC: ``678``
+        items:
+            additionalProperties: false
+            properties:
+                name:
+                    description: |-
+                        :MARC: ``678__a`` (also contains :ref:`year`).
+                        :example: ``Nobel Prize in Physics``
+                    minLength: 1
+                    title: Name of the award
+                    type: string
+                url:
+                    $ref: elements/url.json
+                    description: |-
+                        :MARC: ``678__u``
+                    title: URL of award announcement
+                year:
+                    description: |-
+                        :MARC: ``678__a`` (also contains :ref:`name`).
+                    maximum: 2050
+                    minimum: 1000
+                    title: Year of the award
+                    type: integer
+            title: An award
+            type: object
+        minItems: 1
+        title: List of awards received by the author
+        type: array
+        uniqueItems: true
+    birth_date:
+        description: |-
+            :MARC: ``100__d`` (first part)
+        format: date
+        minLength: 1
+        type: string
+    control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
+        type: integer
+    death_date:
+        description: |-
+            :MARC: ``100__d`` (second part)
+
+            See also :ref:`status` ``deceased``.
+        format: date
+        minLength: 1
+        type: string
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    email_addresses:
+        description: |-
+            :MARC: ``371__m/o``, ``595__m/o``
+        items:
+            additionalProperties: false
+            properties:
+                current:
+                    description: |-
+                        :MARC: if ``true``, the email comes from ``m``, if
+                            ``false``, from ``o``.
+                    title: Whether this address is still in use
+                    type: boolean
+                hidden:
+                    description: |-
+                        :MARC: if ``true``, the email comes from ``371``, if
+                            ``false``, from ``595``.
+
+                        Email addresses might be considered sensitive
+                        information and hidden at the user's request.
+                    title: Whether this address should be hidden
+                    type: boolean
+                value:
+                    format: email
+                    minLength: 1
+                    title: An email address
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of email addresses
+        type: array
+        uniqueItems: true
+    ids:
+        items:
+            $ref: elements/id.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    legacy_creation_date:
+        format: date
+        minLength: 1
+        type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
+    name:
+        additionalProperties: false
+        description: |-
+            :MARC: ``100``, ``400``, ``880``
+        properties:
+            name_variants:
+                description: |-
+                    Contains other variations (besides `preferred_name`) of the
+                    author name in `value` that are in use.
+
+                    These could be:
+
+                    - other spellings;
+                    - other transliterations from the :ref:`native_names` to the
+                      Latin alphabet;
+                    - other splittings among last names and first names;
+                    - combinations with :ref:`previous_names`.
+
+                    :example: ``Smith-Taylor, Johnny``
+                    :MARC: ``400__a``
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                title: List of name variants
+                type: array
+                uniqueItems: true
+            native_names:
+                description: |-
+                    Native names of the author, not using the Latin alphabet.
+
+                    :example: ``楼 立洋``
+                    :MARC: ``880__a``
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                type: array
+                uniqueItems: true
+            numeration:
+                description: |-
+                    :MARC: ``100__b``
+                enum:
+                - Jr.
+                - Sr.
+                - I
+                - II
+                - III
+                - IV
+                - VI
+                - VII
+                - VIII
+                minLength: 1
+                type: string
+            preferred_name:
+                description: |-
+                    differs from the full name in `value`. This should use Latin alphabet.
+
+                    :example: ``Smith, John``
+                    :MARC: ``100__q``
+                minLength: 1
+                type: string
+            previous_names:
+                description: |-
+                    Contains previous names of the author, e.g. the maiden
+                    name.
+
+                    :example: ``Taylor, Jonathan Gerald C.T.``
+                    :MARC: no field for this, was put into ``667__a`` as a note.
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                title: List of previous names
+                type: array
+                uniqueItems: true
+            title:
+                description: |-
+                    :MARC: ``100__c``
+                enum:
+                - Sir
+                minLength: 1
+                type: string
+            value:
+                description: |-
+                    Author name in Latin alphabet (may contain diacritics). The
+                    format should be ``last names, first names``. If not all
+                    names are known, initials should be followed by a `.`
+                    without space.
+
+                    .. note::
+
+                        Not all authors have two names, so only one name
+                        without a comma is perfectly valid.
+
+                        :example: ``Jimmy``
+
+                    :example: ``Smith Davis, Jonathan Gerald C.T.``
+                    :MARC: ``100__a``
+                minLength: 1
+                title: Full name of the author
+                type: string
+        required:
+        - value
+        title: Name information of the author
+        type: object
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    positions:
+        description: |-
+            :MARC: ``371``
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                current:
+                    description: |-
+                        :MARC: ``371__z:current`` corresponds to ``true``
+                    type: boolean
+                end_date:
+                    description: |-
+                        :MARC: ``371__t``
+                    format: date
+                    minLength: 1
+                    type: string
+                institution:
+                    description: |-
+                        :MARC: ``371__a``
+                    minLength: 1
+                    type: string
+                rank:
+                    $ref: elements/rank.json
+                    description: |-
+                        :MARC: ``371__r``
+                record:
+                    $ref: elements/json_reference.json
+                    description: |-
+                        URI for the institution record
+                start_date:
+                    description: |-
+                        :MARC: ``371__s``
+                    format: date
+                    minLength: 1
+                    type: string
+            required:
+            - institution
+            type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    project_membership:
+        description: |-
+            :MARC: ``693``
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                current:
+                    description: |-
+                        :MARC: ``693__z`` corresponds to ``true``
+                    title: Whether the author is still involved in it
+                    type: boolean
+                end_date:
+                    description: |-
+                        :MARC: ``693__d``
+
+                        Date the author stopped working on this project.
+                    format: date
+                    minLength: 1
+                    type: string
+                name:
+                    description: |-
+                        :MARC: ``693__e``
+
+                        Name of the project.
+                    minLength: 1
+                    type: string
+                record:
+                    $ref: elements/json_reference.json
+                    description: |-
+                        URI for the experiment record
+                start_date:
+                    description: |-
+                        :MARC: ``693__s``
+
+                        Date the author started working on this project.
+                    format: date
+                    minLength: 1
+                    type: string
+            required:
+            - name
+            type: object
+        minItems: 1
+        title: List of projects on which the author worked
+        type: array
+        uniqueItems: true
+    public_notes:
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+        description: |-
+            Url of the record itself
+        title: Url of the record
+    status:
+        description: |-
+            The person's status
+        enum:
+        - active
+        - deceased
+        - departed
+        - retired
+        minLength: 1
+        type: string
+    stub:
+        type: boolean
+    urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+required:
+- name
+- _collections
+title: A record in the Authors collection
+type: object

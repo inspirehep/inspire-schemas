@@ -1,0 +1,300 @@
+additionalProperties: false
+description: |-
+    This is structurally very similar to a Literature record, with unnecessary
+    fields removed.  For more information about the meaning of the different
+    fields, see the corresponding field in :ref:`hep.json#/`.
+properties:
+    arxiv_eprint:
+        description: |-
+            :MARC: ``999C5r`` with ``arXiv:`` prefix
+            :example: ``1703.07274``
+        minLength: 1
+        pattern: ^\d{4}.\d{4,5}|[\w.]+(-[\w.]+)?/\d+$
+        title: arXiv eprint number
+        type: string
+    authors:
+        description: |-
+            :MARC: ``999C5h`` contains a comma-separated string with all
+                authors, in ``first_name last_name`` order.
+        items:
+            additionalProperties: false
+            properties:
+                full_name:
+                    description: |-
+                        Should be of the same form as
+                        :ref:`hep.json#/properties/authors/items/properties/full_name`.
+
+                        :example: ``Smith, John G.D.``
+                    minLength: 1
+                    type: string
+                inspire_role:
+                    description: |-
+                        :MARC: ``999C5e`` for ``editor``
+                    enum:
+                    - author
+                    - supervisor
+                    - editor
+                    minLength: 1
+                    type: string
+            type: object
+        minItems: 1
+        title: List of authors
+        type: array
+        uniqueItems: false
+    book_series:
+        additionalProperties: false
+        properties:
+            title:
+                minLength: 1
+                type: string
+            volume:
+                minLength: 1
+                type: string
+        type: object
+    collaborations:
+        items:
+            description: |-
+                :MARC: ``999C5c``
+            minLength: 1
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: true
+    document_type:
+        $ref: document_type.json
+        description: |-
+            :MARC: conceptually similar to ``999C5d``, but allowed values
+                differ.
+    dois:
+        items:
+            description: |-
+                :MARC: ``999C5a`` with prefix ``doi:``
+            minLength: 1
+            pattern: ^10\.\d+(\.\d+)?/.+$
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: true
+    external_system_identifiers:
+        description: |-
+            :MARC: ``999C5u`` (as url)
+
+            List of identifiers of this document on external systems.
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    description: |-
+                        :MARC: ``999C5u`` (as url)
+                    minLength: 1
+                    pattern: ^\w+$
+                    type: string
+                value:
+                    description: |-
+                        :MARC: ``999C5u`` (as url)
+                    minLength: 1
+                    pattern: ^\S+$
+                    title: External identifier
+                    type: string
+            required:
+            - schema
+            - value
+            type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    imprint:
+        additionalProperties: false
+        properties:
+            date:
+                format: date
+                minLength: 1
+                type: string
+            place:
+                minLength: 1
+                type: string
+            publisher:
+                description: |-
+                    :MARC: ``999C5p``
+                minLength: 1
+                type: string
+        type: object
+    isbn:
+        description: |-
+            :MARC: ``999C5i``
+
+            ISBN if the cited document is a book.
+
+            .. note::
+
+                If the cited document is a book chapter, use
+                :ref:`publication_info/properties/parent_isbn` instead.
+        minLength: 1
+        pattern: ^\d*[0-9X]$
+        type: string
+    label:
+        description: |-
+            :MARC: ``999C5o``
+
+            Label used to refer to the reference in the main text, and put in
+            front of the reference in the reference list. Often, this is a
+            number, found in square brackets. These brackets (or parentheses),
+            if present, should not be put here.
+
+            :example: ``42``
+            :example: ``Jones1995c``
+        minLength: 1
+        type: string
+    misc:
+        description: |-
+            :MARC: ``999C5m``
+
+            Unrecognized information from the reference.
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: false
+    persistent_identifiers:
+        description: |-
+            :MARC: ``999C5a`` (with prefix ``hdl:`` or ``urn:``)
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    enum:
+                    - HDL
+                    - URN
+                    minLength: 1
+                    type: string
+                value:
+                    minLength: 1
+                    type: string
+            type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    publication_info:
+        additionalProperties: false
+        properties:
+            artid:
+                description: |-
+                    :MARC: last part of ``999C5s`` (if not a page)
+                minLength: 1
+                type: string
+            cnum:
+                $ref: cnum.json
+                description: |-
+                    :MARC: ``999C5b``
+            journal_issue:
+                description: |-
+                    :MARC: ``999C5n``
+                minLength: 1
+                type: string
+            journal_title:
+                description: |-
+                    :MARC: first part of ``999C5s``
+                minLength: 1
+                type: string
+            journal_volume:
+                description: |-
+                    :MARC: second part of ``999C5s``
+                minLength: 1
+                type: string
+            material:
+                $ref: material.json
+            page_end:
+                description: |-
+                    :MARC: Last part of ``999C5s`` (if page-range)
+                minLength: 1
+                type: string
+            page_start:
+                description: |-
+                    :MARC: Last part of ``999C5s`` (if not article ID)
+                minLength: 1
+                type: string
+            parent_isbn:
+                description: |-
+                    :MARC: ``999C5i``, but not distinguished from
+                        the :ref:`reference.json#/properties/isbn` of the
+                        cited document.
+
+                    If the cited document is a book chapter, this is the ISBN
+                    of the book.
+                minLength: 1
+                pattern: ^\d*[0-9X]$
+                type: string
+            parent_report_number:
+                description: |-
+                    :MARC: ``999C5r`` but not distinguished from the cited
+                        document :ref:`reference.json#/properties/report_numbers`.
+                minLength: 1
+                type: string
+            parent_title:
+                description: |-
+                    :MARC: ``999C5q``
+
+                    Title of the parent document, e.g. title of the book if the
+                    cited document is a book chapter.
+                minLength: 1
+                type: string
+            year:
+                description: |-
+                    :MARC: ``999C5y``
+                maximum: 2050
+                minimum: 1000
+                type: integer
+        type: object
+    report_numbers:
+        description: |-
+            :MARC: ``999C5r``
+
+            .. note::
+
+                If the cited document is only part of a report, use
+                :ref:`publication_info/properties/parent_report_number` instead.
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: true
+    texkey:
+        description: |-
+            :MARC: ``999C5k``
+
+            Key that was used for this citation in the document. This may be
+            extracted if the document is a PDF generated from a LaTeX, and
+            possibly coincides with the one of the
+            :ref:`hep.json#/properties/texkeys` assigned to the cited document
+            by Inspire and made visible in the TeX export formats.
+
+            :example: ``Maldacena:1997re``
+        minLength: 1
+        type: string
+    title:
+        $ref: title.json
+        description: |-
+            :MARC: ``999C5t``
+    urls:
+        items:
+            additionalProperties: false
+            description: |-
+                :MARC: ``999C5u``
+            properties:
+                description:
+                    minLength: 1
+                    type: string
+                value:
+                    minLength: 1
+                    type: string
+            required:
+            - value
+            title: URL of related document
+            type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+title: A reference to a cited document
+type: object

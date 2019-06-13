@@ -1,0 +1,91 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+description: |-
+    Schema is not yet specified
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        description: |-
+            :MARC: ``980__a``
+        items:
+            enum:
+            - Data
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which record belongs
+        type: array
+        uniqueItems: true
+    control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
+        type: integer
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    dois:
+        items:
+            additionalProperties: false
+            properties:
+                source:
+                    $ref: elements/source.json
+                    description: |-
+                        :MARC: ``0247_9``
+                value:
+                    description: |-
+                        :MARC: ``0247_a``
+                        :example: ``10.1023/A:1026654312961``
+                    minLength: 1
+                    pattern: ^10\.\d+(\.\d+)?/\S+$
+                    title: DOI
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of DOIs
+        type: array
+        uniqueItems: true
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    self:
+        $ref: elements/json_reference.json
+title: A data record
+type: object

@@ -1,0 +1,13 @@
+default: article
+enum:
+- activity report
+- article
+- book
+- book chapter
+- conference paper
+- note
+- proceedings
+- report
+- thesis
+minLength: 1
+type: string

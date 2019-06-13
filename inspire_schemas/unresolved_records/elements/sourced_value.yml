@@ -1,0 +1,13 @@
+additionalProperties: false
+description: |-
+    This is used to add, besides the `value`, the `source` where this value
+    came from.
+properties:
+    source:
+        $ref: source.json
+    value:
+        minLength: 1
+        type: string
+required:
+- value
+type: object

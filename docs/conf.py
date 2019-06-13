@@ -35,12 +35,11 @@ from jsonschema2rst.parser_runner import run_parser
 def _generate_schemas_doc():
     schemas_folder = os.path.join(
         os.pardir,
-        'inspire_schemas'
+        'inspire_schemas',
+        'unresolved_records'
     )
     rst_output = 'schemas'
     run_parser(schemas_folder, rst_output, yaml_only=True)
-    dir = os.path.dirname(__file__)
-    shutil.rmtree(os.path.join(dir, 'schemas/resolved_records'))
 
 
 _generate_schemas_doc()

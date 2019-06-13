@@ -1,0 +1,8 @@
+description: |-
+    Source of the information in this field. As several records can be merged,
+    this information allows us to remember where every bit of metadata came
+    from and make decisions based on it.
+
+    :MARC: Often not present.
+minLength: 1
+type: string

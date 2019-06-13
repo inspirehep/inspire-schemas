@@ -1,0 +1,359 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        items:
+            enum:
+            - Jobs
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which this record belongs
+        type: array
+        uniqueItems: true
+    _private_notes:
+        description: |-
+            :MARC: ``595``
+
+            These notes are only visible to privileged users, not regular
+            users.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    accelerator_experiments:
+        items:
+            additionalProperties: false
+            properties:
+                accelerator:
+                    description: |-
+                        :MARC: ``693__a``
+
+                        If present, :ref:`institution` should contain the
+                        institution where this accelerator is located.
+
+                        .. note::
+
+                            Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
+                    type: string
+                curated_relation:
+                    default: false
+                    type: boolean
+                experiment:
+                    description: |-
+                        :MARC: not present.
+
+                        If present, :ref:`institution` should contain the
+                        institution where this experiment is located and
+                        :ref:`accelerator` may contain the accelerator that this
+                        experiment is using (if appropriate).
+
+                        .. note::
+
+                            Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
+                    type: string
+                institution:
+                    description: |-
+                        :MARC: not present.
+
+                        .. note::
+
+                            Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
+                    title: Institution hosting the experiment
+                    type: string
+                legacy_name:
+                    description: |-
+                        :MARC: ``693__e``
+
+                        This field is used when migrating from legacy instead
+                        of separate :ref:`institution`, :ref:`accelerator` and
+                        :ref:`experiment`. In the future, it will be deprecated and
+                        the other fields will be used instead.
+
+                        :example: ``CERN-LHC-CMS``
+                    minLength: 1
+                    title: Identifier of the experiment on legacy
+                    type: string
+                record:
+                    $ref: elements/json_reference.json
+            type: object
+        minItems: 1
+        title: List of related accelerators/experiments
+        type: array
+        uniqueItems: true
+    acquisition_source:
+        $ref: elements/acquisition_source.json
+    arxiv_categories:
+        description: |-
+            :MARC: ``65017a`` when it contains an arXiv category.
+        items:
+            $ref: elements/arxiv_categories.json
+        minItems: 1
+        title: List of research areas for the job
+        type: array
+        uniqueItems: true
+    contact_details:
+        description: |-
+            :MARC: ``270__m/p``
+
+            Contact information for questions from applicants regarding the job opening.
+        items:
+            $ref: elements/contact.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
+        type: integer
+    deadline_date:
+        description: |-
+            :MARC: ``046__i``
+        format: date
+        minLength: 1
+        title: Application deadline
+        type: string
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    description:
+        description: |-
+            :MARC: ``520__a``
+
+            This may contain rich text in a subset of HTML.
+        minLength: 1
+        title: Job description
+        type: string
+    external_job_identifier:
+        description: |-
+            :MARC: ``245__a`` (in parentheses)
+
+            Identifier used for the job posting.
+
+            :example: ``TH-SP-2019-LD``
+        minLength: 1
+        type: string
+    external_system_identifiers:
+        items:
+            anyOf:
+            -   additionalProperties: false
+                properties:
+                    schema:
+                        enum:
+                        - SPIRES
+                        minLength: 1
+                        type: string
+                    value:
+                        minLength: 1
+                        pattern: ^JOBS-\d+$
+                        type: string
+                required:
+                - schema
+                - value
+                type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    institutions:
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                record:
+                    $ref: elements/json_reference.json
+                value:
+                    description: |-
+                        :MARC: ``110__a``
+
+                        Currently, the old
+                        :ref:`institutions.json#/properties/legacy_ICN`
+                        is used here. In the future, this will
+                        change and become the new
+                        :ref:`institutions.json#/properties/ICN`.
+                    minLength: 1
+                    title: ICN of institution
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: Institutions opening a position
+        type: array
+        uniqueItems: true
+    legacy_creation_date:
+        description: |-
+            :MARC: ``961__x``
+
+            Only present if the record already existed on legacy Inspire.
+        format: date
+        minLength: 1
+        title: Date of record creation on legacy
+        type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    position:
+        description: |-
+            :MARC: ``245__a``
+        minLength: 1
+        title: Position title
+        type: string
+    public_notes:
+        description: |-
+            :MARC: ``500``
+
+            Any notes about the document that do not fit into another field.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of public notes
+        type: array
+        uniqueItems: true
+    ranks:
+        description: |-
+            :MARC: ``656__a``
+
+            Ranks at which the successful applicant may be hired.
+        items:
+            $ref: elements/rank.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    reference_letters:
+        additionalProperties: false
+        properties:
+            emails:
+                description: |-
+                    :MARC: ``270__o`` (if email address)
+
+                    Email addresses where reference letters should be sent.
+                items:
+                    format: email
+                    minLength: 1
+                    type: string
+                minItems: 1
+                type: array
+                uniqueItems: true
+            urls:
+                description: |-
+                    :MARC: ``270__o`` (if URL)
+
+                    URLs to websites where the reference letters should be uploaded.
+                items:
+                    $ref: elements/url.json
+                minItems: 1
+                type: array
+                uniqueItems: true
+        title: Where to send the reference letters
+        type: object
+    regions:
+        description: |-
+            :MARC: ``043__a``
+
+            World regions where the position is located.
+        items:
+            enum:
+            - Africa
+            - Australasia
+            - Asia
+            - Europe
+            - Middle East
+            - North America
+            - South America
+            minLength: 1
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+        description: |-
+            Url of the record itself
+        title: Url of the record
+    status:
+        description: |-
+            :MARC: Not present
+
+            Status of the current job posting. This can be:
+
+            ``open``
+                The job posting is open and welcomes applications.
+
+            ``closed``
+                The job posting is closed and it is not possible to apply.
+
+            ``pending``
+                The job posting has been submitted to INSPIRE and needs to be approved for display.
+        enum:
+        - closed
+        - open
+        - pending
+        minLength: 1
+        type: string
+    urls:
+        description: |-
+            :MARC: ``8564``
+
+            URLs of web pages related to this job posting.
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+required:
+- _collections
+- deadline_date
+- description
+- position
+- regions
+- status
+title: A record in the Jobs collection
+type: object

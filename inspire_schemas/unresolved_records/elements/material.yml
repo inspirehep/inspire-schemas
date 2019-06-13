@@ -1,0 +1,51 @@
+description: |-
+    The possible values are:
+
+    ``addendum``
+        for a document extending the main publication.
+
+    ``additional material``
+        for additional material attached to the main publication, that is
+        neither the more specific ``data`` or ``software``.
+
+    ``data``
+        for data related to the main publication.
+
+    ``erratum``
+        for a document correcting errors in the content of the main
+        publication. When the errors are not in the content but in the
+        publication process, it is considered as an ``editorial note`` instead.
+
+    ``editorial note``
+        for a document correcting errors in the metadata of the publication but
+        not its content. Otherwise, it is an ``erratum``.
+
+    ``preprint``
+        for a document that is made public (typically on `arXiv
+        <http://arxiv.org>`_) but not yet published formally.
+
+    ``publication``
+        for the main publication. If it's not published, it's a ``preprint``.
+
+    ``reprint``
+        for a reprint of the main publication.
+
+    ``software``
+        for software related to the main publication.
+
+    ``translation``
+        for a translation of the main publication.
+enum:
+- addendum
+- additional material
+- data
+- erratum
+- editorial note
+- preprint
+- publication
+- reprint
+- software
+- translation
+minLength: 1
+title: Material to which the field refers
+type: string

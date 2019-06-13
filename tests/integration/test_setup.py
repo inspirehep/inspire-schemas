@@ -35,14 +35,14 @@ def test_json_files_are_created_from_yml_files():
 
 
 def test_load_resolved_schema():
-    with open('inspire_schemas/resolved_records/hep.json', 'rb') as json_fd:
+    with open('inspire_schemas/records/hep.json', 'rb') as json_fd:
         raw_data = json_fd.read()
     schema = json.loads(raw_data)
     assert '$ref' not in schema['properties']['urls']['items']
 
 
 def test_load_resolved_schema():
-    with open('inspire_schemas/resolved_records/elements/sourced_value.json', 'rb') as json_fd:
+    with open('inspire_schemas/records/elements/sourced_value.json', 'rb') as json_fd:
         raw_data = json_fd.read()
     schema = json.loads(raw_data)
     assert '$ref' not in schema['properties']['source']

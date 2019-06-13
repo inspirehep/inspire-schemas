@@ -1,0 +1,398 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+description: |-
+    This record can describe different types of projects, depending on the
+    value of :ref:`experiments.json#/properties/project_type`.
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        items:
+            enum:
+            - Experiments
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which this record belongs
+        type: array
+        uniqueItems: true
+    _full_ingestion:
+        title: Whether to ingest all articles written by this project
+        type: boolean
+    _private_notes:
+        description: |-
+            :MARC: ``595__a``, ``667__a``
+
+            These notes are only visible to privileged users, not regular
+            users.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    accelerator:
+        additionalProperties: false
+        description: |-
+            - If ``accelerator`` is present in :ref:`project_type`, this field
+              contains information about this accelerator.
+            - If ``experiment`` is present in :ref:`project_type`, this field
+              refers to the accelerator that provides a beam to this experiment.
+        properties:
+            curated_relation:
+                type: boolean
+            record:
+                $ref: elements/json_reference.json
+                description: |-
+                    If ``accelerator`` is not present in
+                    :ref:`experiments.json#/properties/project_type`, this
+                    links to the related accelerator record.
+            value:
+                description: |-
+                    :MARC: ``119__b``
+                    :example: ``LHC``
+                minLength: 1
+                title: Accelerator name
+                type: string
+        required:
+        - value
+        type: object
+    collaboration:
+        additionalProperties: false
+        description: |-
+            :MARC: ``710``
+
+            - If ``collaboration`` is present in :ref:`project_type`, this field
+              contains information about this collaboration.
+            - Otherwise, this field refers to the collaboration that runs this
+              accelerator/experiment.
+        properties:
+            curated_relation:
+                type: boolean
+            record:
+                $ref: elements/json_reference.json
+                description: |-
+                    If ``collaboration`` is not present in
+                    :ref:`experiments.json#/properties/project_type`, this
+                    links to the related collaboration record.
+            subgroup_names:
+                description: |-
+                    :MARC: ``710__q``
+
+                    Sometimes papers are signed not by the full collaboration,
+                    but only by a more focused subgroup. This records the
+                    names of those groups.
+
+                    :example: ``ATLAS TDAQ``
+                items:
+                    minLength: 1
+                    type: string
+                minItems: 1
+                title: List of names of subgroups
+                type: array
+                uniqueItems: true
+            value:
+                description: |-
+                    :MARC: ``710__g``
+                    :example: ``D0``
+                minLength: 1
+                title: Collaboration name
+                type: string
+        required:
+        - value
+        type: object
+    control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
+        type: integer
+    core:
+        description: |-
+            :MARC: ``980:CORE`` corresponds to ``true``.
+
+            Whether the papers written by this project are generally
+            :ref:`hep.json#/properties/core`.
+        type: boolean
+    date_approved:
+        description: |-
+            :MARC: ``046__r``
+        format: date
+        minLength: 1
+        title: Approval date of experiment/accelerator
+        type: string
+    date_cancelled:
+        description: |-
+            :MARC: ``046__c``
+        format: date
+        minLength: 1
+        title: Cancellation date of experiment/accelerator
+        type: string
+    date_completed:
+        description: |-
+            :MARC: ``046__t``
+        format: date
+        minLength: 1
+        title: Completion date of experiment/accelerator
+        type: string
+    date_proposed:
+        description: |-
+            :MARC: ``046__q``
+        format: date
+        minLength: 1
+        title: Proposal date of experiment/accelerator
+        type: string
+    date_started:
+        description: |-
+            :MARC: ``046__s``
+        format: date
+        minLength: 1
+        title: Starting date of experiment/accelerator
+        type: string
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    description:
+        description: |-
+            :MARC: ``520__a``
+
+            This should take the form of a short text.
+        minLength: 1
+        title: Description of the project
+        type: string
+    experiment:
+        additionalProperties: false
+        description: |-
+            If ``experiment`` is present in :ref:`project_type`, this field
+            contains information about this experiment.
+        properties:
+            short_name:
+                description: |-
+                    :MARC: ``119__d``
+                    :example: ``SHINE``
+                minLength: 1
+                type: string
+            value:
+                description: |-
+                    :MARC: ``119__c``
+                    :example: ``NA61``
+                minLength: 1
+                title: Experiment identifier
+                type: string
+        type: object
+    external_system_identifiers:
+        description: |-
+            List of identifiers of this document on external systems.
+        items:
+            anyOf:
+            -   additionalProperties: false
+                properties:
+                    schema:
+                        enum:
+                        - SPIRES
+                        minLength: 1
+                        type: string
+                    value:
+                        description: |-
+                            :MARC: ``970__a``
+                        minLength: 1
+                        pattern: ^EXPERIMENT-\d+$
+                        type: string
+                required:
+                - schema
+                - value
+                title: SPIRES identifier
+                type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    inspire_classification:
+        items:
+            description: |-
+                :MARC: ``372__a``
+
+                Category to which this experiment belongs. The possible values
+                can be found on the `experiment categories
+                page <http://inspirehep.net/info/Experiments/list>`_ on legacy.
+
+                :example: ``3.1.1`` for ``ultra-short baseline, reactor, neutrino
+                    (flavor) experiment``
+            minLength: 1
+            pattern: \d+(\.\d+){0,2}
+            type: string
+        minItems: 1
+        type: array
+        uniqueItems: true
+    institutions:
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                record:
+                    $ref: elements/json_reference.json
+                    title: Record URI of the institution.
+                value:
+                    description: |-
+                        :MARC: ``119__u``
+
+                        Currently, the old
+                        :ref:`institutions.json#/properties/legacy_ICN` is used
+                        here.
+                    minLength: 1
+                    title: ICN of institution hosting the project
+                    type: string
+            title: Host institution
+            type: object
+        minItems: 1
+        type: array
+        uniqueItems: true
+    legacy_creation_date:
+        format: date
+        minLength: 1
+        type: string
+    legacy_name:
+        description: |-
+            :MARC: ``119__a``
+            :example: ``CERN-LHC-CMS``
+        minLength: 1
+        title: project identifier on legacy INSPIRE
+        type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
+    long_name:
+        description: |-
+            :MARC: ``245__a``
+            :example: ``Compact Muon Solenoid``
+        minLength: 1
+        title: long name of the project
+        type: string
+    name_variants:
+        description: |-
+            :MARC: ``419__a``
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Name variants of the project
+        type: array
+        uniqueItems: true
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    project_type:
+        description: |-
+            :MARC: ``980:ACCELERATOR`` corresponds to an ``accelerator``, otherwise
+                it is an ``experiment``.
+
+            A project can represent a combination of ``collaboration``, ``accelerator`` and ``experiment``,
+            depending on the contents of this field. Typical cases are:
+
+
+            =================   ==============  =============== ===========
+            ``collaboration``   ``experiment``  ``accelerator`` explanation
+            =================   ==============  =============== ===========
+            present              present         absent          typical case where a collaboration runs a single experiment (e.g. ``ALICE``).
+            present              absent          absent          non-experimental collaboration (e.g. lattice) or experimental collaboration corresponding to several experiments (e.g. ``DO``).
+            absent               present         absent          non-unique experiment among the experiments run by this collaboration (e.g. ``DO Run I``).
+            absent               absent          present         accelerator that is not a collaboration (e.g. ``LHC``).
+            present              absent          present         accelerator that is also a collaboration (e.g. ``CLIC``).
+            =================   ==============  =============== ===========
+
+            - When ``collaboration`` is present, the :ref:`collaboration` field
+              contains information about it. Otherwise, it might refer to the
+              collaboration record corresponding to the current
+              accelerator/experiment.
+            - When ``experiment`` is present, the :ref:`experiment` field
+              contains information about it.
+            - When ``accelerator`` is present, the :ref:`accelerator` field
+              contains information about it. If not, but ``experiment`` is
+              present, it might refer to the accelerator record providing a beam to
+              this experiment.
+        items:
+            enum:
+            - collaboration
+            - experiment
+            - accelerator
+            minLength: 1
+            type: string
+        minItems: 1
+        minLength: 1
+        title: Type of project that this record represents
+        type: array
+        uniqueItems: true
+    public_notes:
+        description: |-
+            :MARC: ``500``
+
+            Any notes about the document that do not fit into another field.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of public notes
+        type: array
+        uniqueItems: true
+    related_records:
+        description: |-
+            :MARC: ``510``
+        items:
+            $ref: elements/related_record.json
+        minItems: 1
+        title: List of related records
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+    urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+required:
+- project_type
+- _collections
+title: A collaboration/experiment/accelerator record
+type: object

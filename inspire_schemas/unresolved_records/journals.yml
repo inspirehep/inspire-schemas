@@ -1,0 +1,355 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        items:
+            enum:
+            - Journals
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which this record belongs
+        type: array
+        uniqueItems: true
+    _harvesting_info:
+        additionalProperties: false
+        description: |-
+            :MARC: ``583``
+
+            Metadata about the harvesting process of this journal.
+        properties:
+            coverage:
+                description: |-
+                    :MARC: ``583__a``
+
+                    Whether all articles are automatically added to Inspire
+                    (``full``) or a selection is made (``partial``).
+                enum:
+                - full
+                - partial
+                minLength: 1
+                type: string
+            date_last_harvest:
+                description: |-
+                    :MARC: ``583__c``
+
+                    Date on which the most recent harvest was performed.
+
+                    .. note::
+
+                        This date does not necessarily mean that any records
+                        were created on that day. This can happen if there was
+                        no journal update since the previous time, or that the
+                        update did not have any relevant effect for Inspire.
+                format: date
+                minLength: 1
+                type: string
+            last_seen_item:
+                description: |-
+                    :MARC: ``583__3``
+
+                    Information about last processed item in the harvest. This
+                    item can be a volume, an issue or even a specific article.
+                minLength: 1
+                type: string
+            method:
+                description: |-
+                    :MARC: ``583__i``
+
+                    How the harvesting is performed. Possible values are:
+
+                    ``feed``
+                        Inspire receives a feed with publisher updates.
+
+                    ``harvest``
+                        harvesting is done through webscraping.
+
+                    ``print``
+                        articles are picked manually from the printed journal.
+
+                    ``hepcrawl``
+                        harvesting is done through a native ``hepcrawl`` spider.
+                enum:
+                - feed
+                - harvest
+                - print
+                - hepcrawl
+                minLength: 1
+                type: string
+        type: object
+    _private_notes:
+        description: |-
+            :MARC: ``595__a``, ``667__x``
+
+            These notes are only visible to privileged users, not regular
+            users.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    book_series:
+        description: |-
+            :MARC: ``980__a:BookSeries`` corresponds to ``true``
+
+            Whether this “journal” is actually a serial whose volumes are
+            books, i.e. a book series.
+        type: boolean
+    control_number:
+        description: |-
+            :MARC: ``001``
+
+            Read-only field.
+        title: ID of current record
+        type: integer
+    date_ended:
+        description: |-
+            :MARC: Not present.
+
+            Date of last publication of the journal.
+        format: date
+        minLength: 1
+        type: string
+    date_started:
+        description: |-
+            :MARC: Not present.
+
+            Date of first publication of the journal.
+        format: date
+        minLength: 1
+        type: string
+    deleted:
+        description: |-
+            :MARC: ``980__a/c:deleted``
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            :MARC: ``981__a``
+
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    doi_prefixes:
+        description: |-
+            :MARC: ``677__d``
+
+            This DOI prefix is the common start of DOIs in this journals, that
+            all articles share.
+
+            .. note::
+                This is a list because journals can change publishers, and the
+                new publisher will often assign new DOIs in its own prefix.
+        items:
+            minLength: 1
+            pattern: ^10\.\d+(\.\d+)?/.*$
+            type: string
+        minItems: 1
+        title: List of DOI prefixes for this journal
+        type: array
+        uniqueItems: true
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        minItems: 1
+        title: List of Inspire categories
+        type: array
+        uniqueItems: true
+    issns:
+        description: |-
+            :MARC: ``022``
+        items:
+            additionalProperties: false
+            properties:
+                medium:
+                    description: |-
+                        :MARC: ``022__b``
+                    enum:
+                    - online
+                    - print
+                    minLength: 1
+                    title: Physical medium to which this ISSN refers
+                    type: string
+                value:
+                    description: |-
+                        :MARC: ``022__a``
+                        :example: ``0295-5075``
+                    minLength: 1
+                    pattern: ^\d{4}-\d{3}[\dX]$
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of ISSNs
+        type: array
+        uniqueItems: true
+    journal_title:
+        $ref: elements/title.json
+        description: |-
+            :MARC: ``130``
+    legacy_creation_date:
+        description: |-
+            :MARC: ``961__x``
+
+            Only present if the record already existed on legacy Inspire.
+        format: date
+        minLength: 1
+        title: Date of record creation on legacy
+        type: string
+    legacy_version:
+        description: |-
+            :MARC: ``005``
+
+            Used to indicate the version of the record on legacy.
+        minLength: 1
+        title: Last record update
+        type: string
+    license:
+        additionalProperties: false
+        description: |-
+            :MARC: ``540``
+        properties:
+            license:
+                description: |-
+                    :MARC: ``540__a``
+
+                    Either the short name of the license or the full
+                    license statement.
+
+                    :example: ``CC-BY-4.0``
+                minLength: 1
+                title: License statement
+                type: string
+            url:
+                description: |-
+                    :MARC: ``540__u``
+
+                    URL where the full license statement may be found, if
+                    only a short name is provided in ``license``.
+                format: uri
+                minLength: 1
+                title: URL of the license
+                type: string
+        type: object
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            :MARC: ``970__d``
+
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    proceedings:
+        description: |-
+            :MARC: ``690__a:Proceedings`` corresponds to ``true``
+
+            Whether this journal publishes conference proceedings. If it
+            publishes both conference proceedings and peer reviewed articles
+            (depending on issue), both this field and :ref:`refereed` are
+            ``true``.
+        type: boolean
+    public_notes:
+        description: |-
+            :MARC: ``500__a``, ``640__a``, ``680__i``
+
+            Any notes about the document that do not fit into another field.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of public notes
+        type: array
+        uniqueItems: true
+    publisher:
+        description: |-
+            :MARC: ``643__b``
+
+            The first element of the list is the current publisher of the journal.
+
+            .. note::
+                This is a list because journals can change publishers.
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        title: List of publishers
+        type: array
+        uniqueItems: true
+    refereed:
+        description: |-
+            :MARC: ``690__a:Peer review`` corresponds to ``true``,
+                ``690__a:NON-PUBLISHED`` to ``false``
+
+            Whether this journal is considered to perform peer review. This
+            assessment might differ from the journal's.
+
+            If the journal does not publish proceedings :ref:`proceedings`, all
+            articles in it are flagged as :ref:`hep.json#/properties/refereed`.
+            Otherwise, it is only the case if the article is not a ``conference
+            paper``.
+        type: boolean
+    related_records:
+        description: |-
+            :MARC: ``530``
+        items:
+            $ref: elements/related_record.json
+        minItems: 1
+        title: List of related records
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+    short_title:
+        description: |-
+            :MARC: ``711__a``
+
+            Normalized title of the journal
+
+            :example: ``Phys.Rev. D``
+        minLength: 1
+        type: string
+    title_variants:
+        description: |-
+            :MARC: ``730__a``
+
+            These name variants appear in references and are used to properly
+            recognize citations.
+
+            :example: ``PHYS REVIEW``
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        title: List of journal name variants
+        type: array
+        uniqueItems: true
+    urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+required:
+- journal_title
+- short_title
+- _collections
+title: A record representing a Journal
+type: object
