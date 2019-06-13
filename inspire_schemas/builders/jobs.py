@@ -195,7 +195,7 @@ class JobBuilder(object):
             self._append_to('arxiv_categories', category)
 
     @filter_empty_parameters
-    def add_contact(self, name, email, curated_relation=None, record=None):
+    def add_contact(self, name=None, email=None, curated_relation=None, record=None):
         """Add contact object to list of ``contact_details.``
 
         Args:

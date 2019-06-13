@@ -380,6 +380,12 @@ def test_add_contact():
         {
             'name': 'name2',
             'email': 'email2'
+        },
+        {
+            'name': 'name3',
+        },
+        {
+            'email': 'email3'
         }
     ]
 
@@ -391,9 +397,8 @@ def test_add_contact():
         name='name2',
         email='email2'
     )
-    with pytest.raises(TypeError):
-        builder.add_contact('only_name')
-
+    builder.add_contact(name='name3')
+    builder.add_contact(email='email3')
     assert builder.record['contact_details'] == expected
 
 
