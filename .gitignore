@@ -21,7 +21,8 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 # JSON files, generated from YAML
 inspire_schemas/records/**/*.json
-inspire_schemas/resolved_records/**/*.json
+inspire_schemas/unresolved_records/**/*.json
+inspire_schemas/unresolved_records/**/*.yml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

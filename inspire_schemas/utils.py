@@ -48,7 +48,6 @@ from .errors import (SchemaKeyNotFound, SchemaNotFound, SchemaUIDConflict,
                      UnknownUIDSchema)
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
-_resolved_schema_root_path = os.path.abspath(resource_filename(__name__, 'resolved_records'))
 
 _RE_2_CHARS = re.compile(r'[a-z].*[a-z]', re.IGNORECASE)
 _RE_CHAR = re.compile(r'[a-z]', re.IGNORECASE)
@@ -597,7 +596,7 @@ def get_schema_path(schema, resolved=False):
     path = _schema_to_normalized_path(schema)
     while path:
         if resolved:
-            schema_path = os.path.abspath(os.path.join(_resolved_schema_root_path, path))
+            schema_path = os.path.abspath(os.path.join(_schema_root_path, path))
         else:
             schema_path = os.path.abspath(os.path.join(_schema_root_path, path))
         if os.path.exists(schema_path):
