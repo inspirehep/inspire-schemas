@@ -27,6 +27,7 @@ from __future__ import absolute_import, division, print_function
 
 import json
 import os
+import shutil
 
 from setuptools import find_packages, setup
 from setuptools.command import develop, install, sdist
@@ -95,8 +96,13 @@ def _yaml2json(yaml_file, json_file):
 
     path = os.path.dirname(yaml_file)
     resolved_json_object = _resolve_json_schema(data, path)
-    resolved_record = json_file.replace('records', 'resolved_records')
-    with open(resolved_record, 'w') as json_fd:
+    shutil.copy(
+        json_file, json_file.replace('records', 'unresolved_records')
+    )
+    shutil.copy(
+        yaml_file, yaml_file.replace('records', 'unresolved_records')
+    )
+    with open(json_file, 'w') as json_fd:
         json.dump(
             resolved_json_object,
             json_fd,
