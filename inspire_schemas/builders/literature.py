@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2017 CERN.
+# Copyright (C) 2017, 2019 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -689,6 +689,21 @@ class LiteratureBuilder(object):
         """
         self._append_to('urls', {
             'value': url
+        })
+
+    @filter_empty_parameters
+    def add_external_system_identifier(self, extid, schema):
+        """Add external system identifier to ``external_system_identifiers``.
+
+        :param extid: external system identifier for the current document
+        :type extid: string
+
+        :param schema: identifies the external system for the given identifier
+        :type schema: string
+        """
+        self._append_to('external_system_identifiers', {
+            'schema': schema,
+            'value': extid,
         })
 
     @filter_empty_parameters

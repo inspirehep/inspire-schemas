@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016 CERN.
+# Copyright (C) 2016, 2019 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -630,3 +630,69 @@ def test_make_author_handles_none_in_id_schema():
 
     assert validate([result], subschema) is None
     assert expected == result
+
+
+def test_add_external_system_identifier():
+    schema = load_schema('hep')
+    subschema = schema['properties']['external_system_identifiers']
+    builder = LiteratureBuilder()
+    builder.add_external_system_identifier('12345', 'osti')
+
+    result = builder.record['external_system_identifiers']
+    expected = [
+        {
+            'value': '12345',
+            'schema': 'osti',
+        }
+    ]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_many_external_system_identifier():
+    schema = load_schema('hep')
+    subschema = schema['properties']['external_system_identifiers']
+    builder = LiteratureBuilder()
+    builder.add_external_system_identifier('5758037', 'osti')
+    builder.add_external_system_identifier('1992PhRvD..45..124K', 'ADS')
+
+    result = builder.record['external_system_identifiers']
+    expected = [
+        {
+            'value': '5758037',
+            'schema': 'osti',
+        },
+        {
+            'value': '1992PhRvD..45..124K',
+            'schema': 'ADS',
+        },
+    ]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_external_system_identifier_kwargs():
+    schema = load_schema('hep')
+    subschema = schema['properties']['external_system_identifiers']
+    builder = LiteratureBuilder()
+    builder.add_external_system_identifier(schema='osti', extid='12345')
+
+    result = builder.record['external_system_identifiers']
+    expected = [
+        {
+            'value': '12345',
+            'schema': 'osti',
+        }
+    ]
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_external_system_identifier_empty_kwargs():
+    builder = LiteratureBuilder()
+    builder.add_external_system_identifier(schema='', extid='')
+
+    assert 'external_system_identifiers' not in builder.record
