@@ -25,7 +25,7 @@
 """Literature builder class and related code."""
 
 from __future__ import absolute_import, division, print_function
-from six import string_types
+from six import python_2_unicode_compatible, string_types, text_type
 
 import warnings
 
@@ -84,6 +84,7 @@ def key_already_there(element, elements):
     return False
 
 
+@python_2_unicode_compatible
 class LiteratureBuilder(object):
     """Literature record builder."""
 
@@ -125,11 +126,11 @@ class LiteratureBuilder(object):
 
     def __str__(self):
         """Print the current record."""
-        return str(self.record)
+        return text_type(self.record)
 
     def __repr__(self):
         """Printable representation of the builder."""
-        return 'LiteratureBuilder(source={!r}, record={})'.format(
+        return u'LiteratureBuilder(source={!r}, record={})'.format(
             self.source,
             self.record
         )
@@ -463,7 +464,7 @@ class LiteratureBuilder(object):
         if journal_title and all(
             not field for field in (cnum, artid, journal_issue,
                                     journal_volume, page_start, page_end)):
-            self.add_public_note('Submitted to {}'.format(journal_title))
+            self.add_public_note(u'Submitted to {}'.format(journal_title))
             return
 
         publication_item = {}
