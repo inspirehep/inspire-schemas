@@ -19,5 +19,8 @@ properties:
     version_id:
         minLength: 1
         type: string
+    file_id:
+        minLength: 1
+        type: string
 title: File schema.
 type: object

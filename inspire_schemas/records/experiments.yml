@@ -8,6 +8,16 @@ properties:
         format: uri
         minLength: 1
         type: string
+    _bucket:
+        description: |-
+            Used by `invenio-records-files` to store information about the
+            bucket attached to this record.
+
+            .. note::
+
+                This field is maintained by `invenio-records-files` and should
+                not be edited manually.
+        type: string
     _collections:
         items:
             enum:
