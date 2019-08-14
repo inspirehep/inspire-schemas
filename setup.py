@@ -190,8 +190,8 @@ def do_setup():
             'pyyaml',
             'rfc3987',
             'six',
-            # requests requires a urllib3 version of 1.23, we pin it down here to solve dependency problems
-            'urllib3==1.23',
+            # requests requires a urllib3 version <1.26 but not 1.25.0 and 1.25.1 we pin it down here to solve dependency problems
+            'urllib3>=1.21.1,<1.26,!=1.25.0,!=1.25.1',
         ],
         tests_require=tests_require,
         extras_require=extras_require,
