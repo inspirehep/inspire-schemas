@@ -17,6 +17,7 @@ properties:
 
                 This field is maintained by `invenio-records-files` and should
                 not be edited manually.
+        minLength: 1
         type: string
     _collections:
         items:
