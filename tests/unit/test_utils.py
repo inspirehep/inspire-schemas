@@ -890,6 +890,36 @@ def test_convert_new_publication_info_to_old_handles_year_added_to_volumes():
     assert expected == result
 
 
+def test_convert_new_publication_info_to_old_handles_journal_titles_without_dots():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'artid': '30',
+            'journal_title': 'Physica D',
+            'journal_volume': '231',
+            'page_start': '30',
+            'year': 2017,
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'artid': '30',
+            'journal_title': 'Physica',
+            'journal_volume': 'D231',
+            'page_start': '30',
+            'year': 2017,
+        },
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_new_publication_info_to_old_handles_volumes_with_letters_in_the_middle():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']

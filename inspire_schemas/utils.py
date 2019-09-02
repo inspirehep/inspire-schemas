@@ -927,15 +927,15 @@ def convert_new_publication_info_to_old(publication_infos):
         if journal_title and journal_volume:
             match = _RE_TITLE_ENDS_WITH_A_LETTER.match(journal_title)
             if match and _needs_a_hidden_pubnote(journal_title, journal_volume):
-                _publication_info['journal_title'] = match.group('title')
+                _publication_info['journal_title'] = match.group('title').strip()
                 _publication_info['journal_volume'] = journal_volume + match.group('letter')
                 result.append(_publication_info)
                 _publication_info = copy.deepcopy(publication_info)
                 _publication_info['hidden'] = True
-                _publication_info['journal_title'] = match.group('title')
+                _publication_info['journal_title'] = match.group('title').strip()
                 _publication_info['journal_volume'] = match.group('letter') + journal_volume
             elif match and journal_title not in _JOURNALS_ALREADY_ENDING_WITH_A_LETTER:
-                _publication_info['journal_title'] = match.group('title')
+                _publication_info['journal_title'] = match.group('title').strip()
                 _publication_info['journal_volume'] = match.group('letter') + journal_volume
 
         result.append(_publication_info)
