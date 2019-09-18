@@ -153,6 +153,26 @@ properties:
             -   additionalProperties: false
                 properties:
                     schema:
+                        description: |-
+                            :MARC: ``035__9:ROR``
+                        enum:
+                        - ROR
+                        minLength: 1
+                        type: string
+                    value:
+                        description: |-
+                            :MARC: ``035__a``
+                        minLength: 1
+                        pattern: ^https://ror\.org/0\w{6}\d{2}$
+                        type: string
+                required:
+                - schema
+                - value
+                title: ROR identifier
+                type: object
+            -   additionalProperties: false
+                properties:
+                    schema:
                         enum:
                         - SPIRES
                         minLength: 1

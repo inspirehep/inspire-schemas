@@ -183,6 +183,10 @@
                 {
                     "schema": "GRID",
                     "value": "grid.440804.c"
+                },
+                {
+                    "schema": "ROR",
+                    "value": "https://ror.org/03yrm5c26"
                 }
             ],
             "alternative_names": [

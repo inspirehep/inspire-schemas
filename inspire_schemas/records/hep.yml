@@ -297,26 +297,47 @@ properties:
 
                         List of identifiers of this institution on external systems.
                     items:
-                        additionalProperties: false
-                        properties:
-                            schema:
-                                description: |-
-                                    :MARC: first part of ``100/700/701__t`` before the :
-                                enum:
-                                - GRID
-                                minLength: 1
-                                type: string
-                            value:
-                                description: |-
-                                    :MARC: last part of ``100/700/701__t`` after the :
-                                minLength: 1
-                                pattern: ^grid\.\d+\.\w+$
-                                type: string
-                        required:
-                        - schema
-                        - value
-                        title: GRID identifier
-                        type: object
+                        anyOf:
+                        -   additionalProperties: false
+                            properties:
+                                schema:
+                                    description: |-
+                                        :MARC: first part of ``100/700/701__t`` before the :
+                                    enum:
+                                    - GRID
+                                    minLength: 1
+                                    type: string
+                                value:
+                                    description: |-
+                                        :MARC: last part of ``100/700/701__t`` after the :
+                                    minLength: 1
+                                    pattern: ^grid\.\d+\.\w+$
+                                    type: string
+                            required:
+                            - schema
+                            - value
+                            title: GRID identifier
+                            type: object
+                        -   additionalProperties: false
+                            properties:
+                                schema:
+                                    description: |-
+                                        :MARC: first part of ``100/700/701__t`` before the :
+                                    enum:
+                                    - ROR
+                                    minLength: 1
+                                    type: string
+                                value:
+                                    description: |-
+                                        :MARC: last part of ``100/700/701__t`` after the :
+                                    minLength: 1
+                                    pattern: ^https://ror\.org/0\w{6}\d{2}$
+                                    type: string
+                            required:
+                            - schema
+                            - value
+                            title: ROR identifier
+                            type: object
                     minItems: 1
                     type: array
                     uniqueItems: true
