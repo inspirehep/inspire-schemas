@@ -52,11 +52,15 @@ properties:
             `hepcrawl`
                 when obtained from a hepcrawl crawler. In this case, `source`
                 stores the publisher or the repository that was crawled.
+
+            `beard`
+                when created after author disambiguation
         enum:
         - submitter
         - oai
         - batchuploader
         - hepcrawl
+        - beard
         minLength: 1
         title: How the medata was obtained
         type: string
