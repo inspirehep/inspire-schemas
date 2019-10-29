@@ -84,6 +84,7 @@
         }
     ],
     "control_number": -34417471,
+    "core": true,
     "deleted": false,
     "deleted_records": [
         {
@@ -133,6 +134,17 @@
         {
             "source": "magpie",
             "term": "Astrophysics"
+        }
+    ],
+    "keywords": [
+        {
+            "schema": "INSPIRE",
+            "source": "submitter",
+            "value": "electron"
+        },
+        {
+            "source": "submitter",
+            "value": "SUSY"
         }
     ],
     "legacy_creation_date": "2019-05-28",

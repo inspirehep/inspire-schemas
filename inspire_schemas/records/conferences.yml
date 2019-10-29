@@ -114,6 +114,11 @@ properties:
             Read-only field.
         title: ID of current record
         type: integer
+    core:
+        description: |-
+            :MARC: ``980:CORE`` corresponds to ``true``
+        title: Whether this record is CORE
+        type: boolean
     deleted:
         description: |-
             :MARC: ``980__a/c:deleted``
@@ -163,6 +168,55 @@ properties:
         items:
             $ref: elements/inspire_field.json
         minItems: 1
+        type: array
+        uniqueItems: true
+    keywords:
+        description: |-
+            :MARC: ``6531`` and ``695`` (depending on presence of :ref:`keywords/items/properties/schema`)
+
+            Keywords give information about the specific contents of the
+            record, much more precisely than :ref:`inspire_categories`.
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    description: |-
+                        Describes to which vocabulary the keyword in :ref:`value`
+                        belongs.
+
+                        ``INSPIRE``
+                            :MARC: ``695__2:INSPIRE``
+
+                            The keyword has been assigned by Inspire, and
+                            belongs to its vocabulary.
+
+                        .. note::
+
+                            If not present, the keyword is a free-form keyword,
+                            not necessarily part of any vocabulary.
+                    enum:
+                    - INSPIRE
+                    minLength: 1
+                    title: Keyword vocabulary
+                    type: string
+                source:
+                    $ref: elements/source.json
+                value:
+                    description: |-
+                        :MARC: ``6531__a`` (depending on :ref:`schema`)
+
+                        It belongs to the vocabulary specified by :ref:`schema`.
+
+                        :example: ``black hole: mass`` (for :ref:`schema` =
+                            ``INSPIRE``)
+                    minLength: 1
+                    title: A keyword
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of keywords
         type: array
         uniqueItems: true
     legacy_creation_date:
