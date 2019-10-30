@@ -328,7 +328,7 @@ _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
 EMPTIES = [None, '', [], {}]
 
 _BLEACH_CONFIG = {
-    'tags': ['a', 'b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
+    'tags': ['a', 'b', 'br', 'div', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
     'attributes': {'a': ['href', 'title']},
     'strip': True,
     'filters': [LinkifyFilter],
