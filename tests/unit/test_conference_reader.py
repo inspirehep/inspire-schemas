@@ -30,10 +30,10 @@ from inspire_schemas.readers.conference import ConferenceReader
 
 def test_city():
     schema = load_schema('conferences')
-    subschema = schema['properties']['address']
+    subschema = schema['properties']['addresses']
 
     record = {
-        'address': [
+        'addresses': [
             {
                 'cities': [
                     'Tokyo',
@@ -41,7 +41,7 @@ def test_city():
             },
         ],
     }
-    assert validate(record['address'], subschema) is None
+    assert validate(record['addresses'], subschema) is None
 
     expected = 'Tokyo'
     result = ConferenceReader(record).city
@@ -51,10 +51,10 @@ def test_city():
 
 def test_city_when_no_city_in_first_address():
     schema = load_schema('conferences')
-    subschema = schema['properties']['address']
+    subschema = schema['properties']['addresses']
 
     record = {
-        'address': [
+        'addresses': [
             {
                 'place_name': 'Lido di Venezia',
             },
@@ -65,7 +65,7 @@ def test_city_when_no_city_in_first_address():
             },
         ],
     }
-    assert validate(record['address'], subschema) is None
+    assert validate(record['addresses'], subschema) is None
 
     expected = 'Venice'
     result = ConferenceReader(record).city
@@ -75,14 +75,14 @@ def test_city_when_no_city_in_first_address():
 
 def test_country():
     schema = load_schema('conferences')
-    subschema = schema['properties']['address']
+    subschema = schema['properties']['addresses']
 
     record = {
-        'address': [
+        'addresses': [
             {'country_code': 'JP'},
         ],
     }
-    assert validate(record['address'], subschema) is None
+    assert validate(record['addresses'], subschema) is None
 
     expected = 'jp'
     result = ConferenceReader(record).country
