@@ -50,7 +50,7 @@ properties:
         title: List of acronyms of the conference
         type: array
         uniqueItems: true
-    address:
+    addresses:
         description: |-
             :MARC: ``111__c`` (in the form ``city, country``), ``270__b``
 

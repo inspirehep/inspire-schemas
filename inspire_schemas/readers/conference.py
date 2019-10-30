@@ -39,12 +39,12 @@ class ConferenceReader(object):
             string: the first city of the Conference record.
 
         Examples:
-            >>> record = {'address': [{'cities': ['Tokyo']}]}
+            >>> record = {'addresses': [{'cities': ['Tokyo']}]}
             >>> ConferenceReader(record).city
             'Tokyo'
 
         """
-        return get_value(self.record, 'address.cities[0][0]', default='')
+        return get_value(self.record, 'addresses.cities[0][0]', default='')
 
     @property
     def country(self):
@@ -61,7 +61,7 @@ class ConferenceReader(object):
         """
         return get_value(
             self.record,
-            'address.country_code[0]',
+            'addresses.country_code[0]',
             default=''
         ).lower()
 
