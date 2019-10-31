@@ -83,23 +83,7 @@
             "name": "eu"
         }
     ],
-    "control_number": -34417471,
     "core": true,
-    "deleted": false,
-    "deleted_records": [
-        {
-            "$ref": "http://1"
-        },
-        {
-            "$ref": "http://1DqZ"
-        },
-        {
-            "$ref": "http://1Q"
-        },
-        {
-            "$ref": "http://1Uok"
-        }
-    ],
     "external_system_identifiers": [
         {
             "schema": "SPIRES",
@@ -147,11 +131,6 @@
             "value": "SUSY"
         }
     ],
-    "legacy_creation_date": "2019-05-28",
-    "legacy_version": "19981219200540.0",
-    "new_record": {
-        "$ref": "http://1Srx"
-    },
     "opening_date": "1974-09-14",
     "public_notes": [
         {
@@ -171,9 +150,6 @@
             "value": "Excepteur exercitation"
         }
     ],
-    "self": {
-        "$ref": "http://1WXIwz5"
-    },
     "series": [
         {
             "name": "proident sed tempor sunt",

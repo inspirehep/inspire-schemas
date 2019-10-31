@@ -44,7 +44,7 @@ class JobBuilder(object):
         """Initialize builder with provided source and/or job record
 
         Args:
-            source (string): sets the default value for the source fields of the curent
+            source (string): sets the default value for the source fields of the current
             job record, which captures where the information that the builder populates
             comes from
             record (dict): sets the default value for the the current record, in order

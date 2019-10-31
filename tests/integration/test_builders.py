@@ -29,7 +29,7 @@ import pytest
 import yaml
 
 from inspire_schemas import api
-from inspire_schemas.builders import JobBuilder
+from inspire_schemas.builders import JobBuilder, ConferenceBuilder
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -63,6 +63,11 @@ def input_data_hep():
 @pytest.fixture('module')
 def job_data():
     return load_json_file('jobs_example.json')
+
+
+@pytest.fixture('module')
+def conference_data():
+    return load_json_file('conferences_example.json')
 
 
 def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
@@ -304,3 +309,74 @@ def test_job_builder(job_data):
     assert builder.record == job_data
 
     builder.validate_record()
+
+
+def test_conference_builder(conference_data):
+    builder = ConferenceBuilder()
+
+    private_notes = conference_data['_private_notes']
+    builder.add_private_note(**private_notes[0])
+    builder.add_private_note(**private_notes[1])
+    builder.add_private_note(**private_notes[2])
+    builder.add_private_note(**private_notes[3])
+
+    builder.add_acronym(conference_data['acronyms'][0])
+
+    builder.add_address(**conference_data['addresses'][0])
+
+    alternative_titles = conference_data['alternative_titles']
+    builder.add_alternative_title(**alternative_titles[0])
+    builder.add_alternative_title(**alternative_titles[1])
+    builder.add_alternative_title(**alternative_titles[2])
+
+    builder.set_cnum(cnum=conference_data['cnum'])
+
+    contact_details = conference_data['contact_details']
+    builder.add_contact(**contact_details[0])
+    builder.add_contact(**contact_details[1])
+    builder.add_contact(**contact_details[2])
+    builder.add_contact(**contact_details[3])
+
+    builder.set_core(conference_data['core'])
+
+    external_ids = conference_data['external_system_identifiers']
+    builder.add_external_system_identifier(**external_ids[0])
+    builder.add_external_system_identifier(**external_ids[1])
+    builder.add_external_system_identifier(**external_ids[2])
+    builder.add_external_system_identifier(**external_ids[3])
+
+    inspire_cats = ["Gravitation and Cosmology", "General Physics"]
+    builder.add_inspire_categories(subject_terms=inspire_cats, source="user")
+    builder.add_inspire_categories(subject_terms=["Math and Math Physics"], source="curator")
+    builder.add_inspire_categories(subject_terms=["Astrophysics"], source="magpie")
+
+    keywords = conference_data['keywords']
+    builder.add_keyword(**keywords[0])
+    builder.add_keyword(**keywords[1])
+
+    public_notes = conference_data['public_notes']
+    builder.add_public_note(**public_notes[0])
+    builder.add_public_note(**public_notes[1])
+    builder.add_public_note(**public_notes[2])
+    builder.add_public_note(**public_notes[3])
+
+    series = conference_data['series']
+    builder.add_series(**series[0])
+    builder.add_series(**series[1])
+
+    builder.set_short_description(**conference_data['short_description'])
+
+    builder.set_closing_date(conference_data['closing_date'])
+    builder.set_opening_date(conference_data['opening_date'])
+
+    titles = conference_data['titles']
+    for title in titles:
+        builder.add_title(**title)
+
+    urls = conference_data['urls']
+    for url in urls:
+        builder.add_url(**url)
+
+    builder.validate_record()
+
+    assert builder.record == conference_data
