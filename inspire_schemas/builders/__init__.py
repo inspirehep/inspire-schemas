@@ -31,3 +31,4 @@ from .references import ReferenceBuilder  # noqa
 from .signatures import SignatureBuilder  # noqa
 from .authors import AuthorBuilder  # noqa
 from .jobs import JobBuilder  # noqa
+from .conferences import ConferenceBuilder  # noqa
