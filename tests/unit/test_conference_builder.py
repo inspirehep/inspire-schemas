@@ -580,3 +580,14 @@ def test_set_short_description_with_source():
     builder.set_short_description('lorem ipsum')
 
     assert builder.record == expected
+
+
+def test_sanitization_of_short_description():
+    expected = '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'\
+        'http://example.com</a></div>'
+    description = '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '\
+        'http://example.com</div>'
+    builder = ConferenceBuilder()
+    builder.set_short_description(description)
+
+    assert builder.record['short_description']['value'] == expected
