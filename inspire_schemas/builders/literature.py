@@ -25,23 +25,23 @@
 """Literature builder class and related code."""
 
 from __future__ import absolute_import, division, print_function
-from six import python_2_unicode_compatible, string_types, text_type
 
 import warnings
 
 import idutils
+from six import python_2_unicode_compatible, string_types, text_type
 
-from inspire_utils.date import normalize_date
-
-from ..utils import (
+from inspire_schemas.builders.builder import RecordBuilder
+from inspire_schemas.builders.signatures import SignatureBuilder
+from inspire_schemas.utils import (
+    EMPTIES,
+    filter_empty_parameters,
     get_license_from_url,
     normalize_collaboration,
     normalize_isbn,
     validate,
-    filter_empty_parameters,
-    EMPTIES
 )
-from .signatures import SignatureBuilder
+from inspire_utils.date import normalize_date
 
 
 def is_citeable(publication_info):
@@ -85,64 +85,19 @@ def key_already_there(element, elements):
 
 
 @python_2_unicode_compatible
-class LiteratureBuilder(object):
+class LiteratureBuilder(RecordBuilder):
     """Literature record builder."""
 
+    _collections = ['Literature']
+
     def __init__(self, source=None, record=None):
-        """Init method.
-
-        :param source: sets the default value for the 'source' fields
-         of the current record, which captures where the information
-         that the builder populates comes from
-        :type source: string
-
-        :param record: sets the default value for the the current
-        record, in order to edit an already existent record
-        :type record: dict
-        """
+        super(LiteratureBuilder, self).__init__(record, source)
         if record is None:
-            self.record = {
-                '_collections': ['Literature'],
-                'curated': False,
-            }
-        else:
-            self.record = record
-
-        self.source = source
-
-    def _append_to(self, field, element):
-        """Append the ``element`` to the ``field`` of the record.
-
-        This method is smart: it does nothing if ``element`` is empty and
-        creates ``field`` if it does not exit yet.
-
-        :param field: the name of the field of the record to append to
-        :type field: string
-        :param element: the element to append
-        """
-        if element not in EMPTIES:
-            self.record.setdefault(field, [])
-            self.record.get(field).append(element)
+            self.record['curated'] = False
 
     def __str__(self):
         """Print the current record."""
         return text_type(self.record)
-
-    def __repr__(self):
-        """Printable representation of the builder."""
-        return u'LiteratureBuilder(source={!r}, record={})'.format(
-            self.source,
-            self.record
-        )
-
-    def _sourced_dict(self, source=None, **kwargs):
-        """Like ``dict(**kwargs)``, but where the ``source`` key is special.
-        """
-        if source:
-            kwargs['source'] = source
-        elif self.source:
-            kwargs['source'] = self.source
-        return kwargs
 
     def validate_record(self):
         """Validate the record in according to the hep schema."""
