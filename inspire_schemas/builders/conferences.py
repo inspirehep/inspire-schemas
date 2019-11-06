@@ -26,7 +26,7 @@
 import six
 
 from inspire_schemas.utils import (
-    validate, filter_empty_parameters, EMPTIES,
+    validate, filter_empty_parameters, EMPTIES, sanitize_html
 )
 from inspire_utils.date import normalize_date
 
@@ -358,5 +358,5 @@ class ConferenceBuilder(object):
         """
         self.record['short_description'] = self._sourced_dict(
             source=source,
-            value=value
+            value=sanitize_html(value)
         )
