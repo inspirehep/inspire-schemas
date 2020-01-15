@@ -21,6 +21,8 @@
 # or submit itself to any jurisdiction.
 
 from __future__ import absolute_import, division, print_function
+import pytest
+import jsonschema
 
 from inspire_schemas.api import load_schema, validate
 from inspire_schemas.builders.authors import AuthorBuilder
@@ -40,6 +42,16 @@ def test_author_builder_copy_constructor():
     result = AuthorBuilder({'name': {'value': 'Torre, Riccardo'}})
 
     assert expected == result.obj
+
+
+def test_author_builder_name_does_not_allow_more_than_two_commas():
+    schema = load_schema('authors')
+    subschema = schema['properties']['name']
+
+    assert validate({'value': 'Torre Bianchi, Riccardo, Jr'}, subschema) is None
+
+    with pytest.raises(jsonschema.exceptions.ValidationError):
+        validate({'value': 'Torre, Bianchi, Riccardo, Jr'}, subschema)
 
 
 def test_author_builder_set_name():
@@ -808,7 +820,7 @@ def test_add_project_normalizes_start_date():
     assert expected == result
 
 
-def test_add_institution_normalizes_end_date():
+def test_add_project_normalizes_end_date():
     schema = load_schema('authors')
     subschema = schema['properties']['project_membership']
 
