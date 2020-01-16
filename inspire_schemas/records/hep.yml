@@ -407,6 +407,7 @@ properties:
                     minLength: 1
                     title: Author name
                     type: string
+                    pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
                 ids:
                     description: |-
                         :MARC: ``100/700/701__i/j``
