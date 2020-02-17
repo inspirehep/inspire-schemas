@@ -1161,3 +1161,164 @@ def test_add_report_number_rejects_duplicates():
 
     assert validate(result, subschema) is None
     assert expected == result
+
+
+def test_pop_additional_pubnotes_no_misc():
+    builder = ReferenceBuilder()
+
+    expected = []
+    result = list(builder.pop_additional_pubnotes())
+
+    assert expected == result
+
+
+def test_pop_additional_pubnotes_no_additional_pubnote():
+    builder = ReferenceBuilder()
+    builder.add_misc("No additional pubnote")
+
+    expected = []
+    result = list(builder.pop_additional_pubnotes())
+
+    assert expected == result
+
+
+def test_pop_additional_pubnotes_single_pubnote():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+    builder.add_misc("Additional pubnote: J.Testing,42,R477")
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Testing',
+                    'journal_volume': '42',
+                    'page_start': 'R477',
+                    'artid': 'R477'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+            },
+        },
+    ]
+    result = list(builder.pop_additional_pubnotes())
+
+    assert validate(result, subschema) is None
+    assert expected == result
+    assert 'misc' not in builder.obj['reference']
+
+
+def test_pop_additional_pubnotes_several_pubnotes():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+    builder.add_misc("Additional pubnote: J.Improbable Testing,453,42-47 / some other stuff")
+    builder.add_misc("Additional pubnote: J.Testing,42,R477")
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Improbable Testing',
+                    'journal_volume': '453',
+                    'page_start': '42',
+                    'page_end': '47'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+            },
+        },
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Testing',
+                    'journal_volume': '42',
+                    'page_start': 'R477',
+                    'artid': 'R477'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+            },
+        },
+    ]
+    result = list(builder.pop_additional_pubnotes())
+
+    assert validate(result, subschema) is None
+    assert expected == result
+    assert builder.obj['reference']['misc'] == ['some other stuff']
+
+
+def test_pop_additional_pubnotes_includes_label():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+    builder.add_misc("Additional pubnote: J.Testing,42,R477")
+    builder.set_label('Hello')
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Testing',
+                    'journal_volume': '42',
+                    'page_start': 'R477',
+                    'artid': 'R477'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+                'label': 'Hello',
+            },
+        },
+    ]
+    result = list(builder.pop_additional_pubnotes())
+
+    assert validate(result, subschema) is None
+    assert expected == result
+    assert 'misc' not in builder.obj['reference']
+    assert builder.obj['reference']['label'] == 'Hello'
+
+
+def test_pop_additional_pubnotes_includes_raw_ref():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+    builder.add_misc("Additional pubnote: J.Testing,42,R477")
+    builder.add_raw_reference("A raw ref")
+
+    expected_raw_refs = [
+        {
+            'schema': 'text',
+            'value': 'A raw ref'
+        },
+    ]
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Testing',
+                    'journal_volume': '42',
+                    'page_start': 'R477',
+                    'artid': 'R477'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+            },
+            'raw_refs': expected_raw_refs,
+        },
+    ]
+    result = list(builder.pop_additional_pubnotes())
+
+    assert validate(result, subschema) is None
+    assert expected == result
+    assert 'misc' not in builder.obj['reference']
+    assert builder.obj['raw_refs'] == expected_raw_refs
