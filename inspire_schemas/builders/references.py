@@ -29,6 +29,7 @@ import re
 import six
 from inspire_utils.date import normalize_date
 from inspire_utils.name import normalize_name
+from inspire_utils.record import get_value
 from isbn import ISBN
 
 import idutils
@@ -131,6 +132,10 @@ class ReferenceBuilder(object):
 
     RE_VALID_CNUM = re.compile(r'C\d{2}-\d{2}-\d{2}(\.\d+)?')
     RE_VALID_PUBNOTE = re.compile(r'.+,.+,.+(,.*)?')
+    RE_ADDITIONAL_PUBNOTE = re.compile(
+        r'Additional pubnote: ([\w\s\.-]+,[\w\.-]+,[\w\.-]+(?:,[\w\.-]+)?)\s*(?:/)?\s*',
+        re.UNICODE
+    )
 
     def __init__(self):
         self.obj = {}
@@ -355,3 +360,41 @@ class ReferenceBuilder(object):
             publication_info['page_end'] = page_end
         if artid:
             publication_info['artid'] = artid
+
+    def pop_additional_pubnotes(self):
+        """Remove and yield additional pubnotes.
+
+        This method iterates on additional pubnotes in the misc field and
+        remove and yield each of them so they can be added as an extra
+        reference.
+
+        It should be called after the reference has been built.
+
+        Yields:
+            dict: a schema-compliant reference element for each additional
+            pubnote.
+        """
+        miscs = get_value(self.obj, 'reference.misc', [])
+        if not miscs:
+            return
+
+        for (index, misc) in enumerate(miscs[:]):
+            pubnotes = self.RE_ADDITIONAL_PUBNOTE.findall(misc)
+            if not pubnotes:
+                continue
+            for pubnote in pubnotes:
+                rb = ReferenceBuilder()
+                rb.set_pubnote(pubnote)
+                rb.add_misc("Additional pubnote split from previous reference")
+                if 'raw_refs' in self.obj:
+                    rb.obj['raw_refs'] = self.obj['raw_refs']
+                if 'label' in self.obj.get('reference', {}):
+                    rb.set_label(get_value(self.obj, 'reference.label'))
+                yield rb.obj
+            remaining = self.RE_ADDITIONAL_PUBNOTE.sub("", misc).strip()
+            if remaining:
+                miscs[index] = remaining
+            else:
+                del miscs[index]
+        if not miscs:
+            del self.obj['reference']['misc']
