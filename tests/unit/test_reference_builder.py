@@ -1254,6 +1254,49 @@ def test_pop_additional_pubnotes_several_pubnotes():
     assert builder.obj['reference']['misc'] == ['some other stuff']
 
 
+def test_pop_additional_pubnotes_several_pubnotes_without_remaining_misc():
+    schema = load_schema('hep')
+    subschema = schema['properties']['references']
+
+    builder = ReferenceBuilder()
+    builder.add_misc("Additional pubnote: J.Improbable Testing,453,42-47")
+    builder.add_misc("Additional pubnote: J.Testing,42,R477")
+
+    expected = [
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Improbable Testing',
+                    'journal_volume': '453',
+                    'page_start': '42',
+                    'page_end': '47'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+            },
+        },
+        {
+            'reference': {
+                'publication_info': {
+                    'journal_title': 'J.Testing',
+                    'journal_volume': '42',
+                    'page_start': 'R477',
+                    'artid': 'R477'
+                },
+                'misc': [
+                    'Additional pubnote split from previous reference',
+                ],
+            },
+        },
+    ]
+    result = list(builder.pop_additional_pubnotes())
+
+    assert validate(result, subschema) is None
+    assert expected == result
+    assert 'misc' not in builder.obj['reference']
+
+
 def test_pop_additional_pubnotes_includes_label():
     schema = load_schema('hep')
     subschema = schema['properties']['references']

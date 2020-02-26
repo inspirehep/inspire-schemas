@@ -392,9 +392,7 @@ class ReferenceBuilder(object):
                     rb.set_label(get_value(self.obj, 'reference.label'))
                 yield rb.obj
             remaining = self.RE_ADDITIONAL_PUBNOTE.sub("", misc).strip()
-            if remaining:
-                miscs[index] = remaining
-            else:
-                del miscs[index]
+            miscs[index] = remaining
+        miscs[:] = [misc for misc in miscs if misc]
         if not miscs:
             del self.obj['reference']['misc']
