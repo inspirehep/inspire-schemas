@@ -65,7 +65,7 @@ _RE_LICENSE_URL = re.compile(
     r'^/licenses/(?P<sublicense>[-\w]*)(?:/(?P<version>[\.\d]*))?'
 )
 _RE_VOLUME_STARTS_WITH_A_LETTER = re.compile(
-    r'^(?P<letter>[A-Z])(?P<volume>\d[\dA-Z]*$)', re.IGNORECASE
+    r'^(?P<letter>[A-Z])(?P<volume>\d[\dA-Z-]*$)', re.IGNORECASE
 )
 _RE_VOLUME_ENDS_WITH_A_LETTER = re.compile(
     r'(?P<volume>\d+)(?P<letter>[A-Z])$', re.IGNORECASE
