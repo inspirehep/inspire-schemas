@@ -65,7 +65,7 @@ _RE_LICENSE_URL = re.compile(
     r'^/licenses/(?P<sublicense>[-\w]*)(?:/(?P<version>[\.\d]*))?'
 )
 _RE_VOLUME_STARTS_WITH_A_LETTER = re.compile(
-    r'^(?P<letter>[A-Z])(?P<volume>\d[\dA-Z]*$)', re.IGNORECASE
+    r'^(?P<letter>[A-Z])(?P<volume>\d[\dA-Z-]*$)', re.IGNORECASE
 )
 _RE_VOLUME_ENDS_WITH_A_LETTER = re.compile(
     r'(?P<volume>\d+)(?P<letter>[A-Z])$', re.IGNORECASE
@@ -86,12 +86,12 @@ _RE_AUTHORS_UID = {
 # Matches new style arXiv ID, with an old-style class specification
 # (Malformed, but appears in APS records)
 RE_ARXIV_POST_2007_CLASS = re.compile(
-    "(arxiv:)?((?P<category>(?:[a-z\-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?$",
+    r"(arxiv:)?((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?$",
     flags=re.I
 )
 
 RE_ARXIV_PRE_2007_CLASS = re.compile(
-    "(arxiv:)?(?P<category>(?P<extraidentifier>[a-z\-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?$",
+    r"(arxiv:)?(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?$",
     flags=re.I
 )
 

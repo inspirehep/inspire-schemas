@@ -701,6 +701,33 @@ def test_convert_old_publication_info_to_new_handles_volumes_with_letters_in_the
     assert expected == result
 
 
+def test_convert_old_publication_info_to_new_handles_volumes_with_dashes():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_record': {
+                '$ref': 'http://localhost:5000/api/journals/1214551',
+            },
+            'journal_title': 'Nucl.Instrum.Meth.',
+            'journal_volume': 'A626-627',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Nucl.Instrum.Meth.A',
+            'journal_volume': '626-627',
+        },
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_old_publication_info_to_new_excludes_specific_journal_titles():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
