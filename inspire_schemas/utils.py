@@ -840,7 +840,8 @@ def convert_old_publication_info_to_new(publication_infos):
 
         journal_volume = _publication_info.get('journal_volume')
 
-        if journal_title in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and journal_volume and len(journal_volume) == 4:
+        if journal_title.upper() in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and \
+                journal_volume and len(journal_volume) == 4:
             try:
                 was_last_century = int(journal_volume[:2]) > 50
             except ValueError:
@@ -917,7 +918,7 @@ def convert_new_publication_info_to_old(publication_infos):
         journal_volume = _publication_info.get('journal_volume')
         year = _publication_info.get('year')
 
-        if (journal_title in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and year and
+        if (journal_title.upper() in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and year and
                 journal_volume and len(journal_volume) == 2):
             two_digit_year = str(year)[2:]
             _publication_info['journal_volume'] = ''.join([two_digit_year, journal_volume])
