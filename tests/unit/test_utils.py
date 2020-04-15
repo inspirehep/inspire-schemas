@@ -617,6 +617,36 @@ def test_convert_old_publication_info_to_new_handles_year_added_to_volumes():
     assert expected == result
 
 
+def test_convert_old_publication_info_to_new_handles_year_added_to_volumes_when_journal_title_lowercase():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'artid': '137',
+            'journal_title': 'jhep',
+            'journal_volume': '1709',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'artid': '137',
+            'journal_title': 'jhep',
+            'journal_volume': '09',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
+    result = utils.convert_old_publication_info_to_new(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
 def test_convert_old_publication_info_to_new_deduces_year_from_volume():
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
