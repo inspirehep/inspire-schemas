@@ -26,6 +26,9 @@ jsf.format('orcid', function(gen, schema){
     }
     return almost_orcid + ck
 });
+jsf.format('timezone', function(gen, schema){
+    return gen.randexp(/Europe\/Zurich|US\/Eastern|Asia\/Shanghai/)
+});
 
 function resolve_schema(unresolved_schema, base_path) {
     var keys = [];
@@ -68,7 +71,7 @@ function resolve_schema(unresolved_schema, base_path) {
     return resolved_schema
 }
 
-var schemas = ['hep', 'authors', 'conferences', 'data', 'experiments', 'institutions', 'jobs', 'journals']
+var schemas = ['hep', 'authors', 'conferences', 'data', 'experiments', 'institutions', 'jobs', 'journals', 'seminars']
 for (var schema_name of schemas) {
     console.log('Generating example for ' + schema_name)
     var data = fs.readFileSync('inspire_schemas/records/'+schema_name+'.json', 'utf8')

@@ -1,0 +1,270 @@
+{
+    "_collections": [
+        "Seminars"
+    ],
+    "_private_notes": [
+        {
+            "source": "fugiat",
+            "value": "cillum sunt"
+        },
+        {
+            "source": "amet culpa consectetur tempor",
+            "value": "proident Ut"
+        }
+    ],
+    "abstract": {
+        "source": "dolore",
+        "value": "eiusmod elit"
+    },
+    "acquisition_source": {
+        "datetime": "4852-01-02T15:19:23.876Z",
+        "email": "bAK@oSaYosxmgsyKUiuwgBpDjO.iu",
+        "internal_uid": -71464718,
+        "method": "hepcrawl",
+        "orcid": "5544-5406-5372-448X",
+        "source": "esse quis",
+        "submission_number": "laboris consectetur proident reprehenderit incididunt"
+    },
+    "address": {
+        "cities": [
+            "commodo nisi eu irure nulla",
+            "Ut laboris",
+            "mollit magna"
+        ],
+        "country_code": "DK",
+        "latitude": 42002729,
+        "longitude": -69156711,
+        "place_name": "et tempor Lorem mollit esse",
+        "postal_address": [
+            "nisi consectetur eu",
+            "sit",
+            "cupidatat consectetur",
+            "et mollit adipisicing est",
+            "qui aliquip anim cupidatat"
+        ],
+        "postal_code": "Ut",
+        "state": "sed d"
+    },
+    "contact_details": [
+        {
+            "curated_relation": false,
+            "email": "sTeU4uXiHV@yFUpwL.jaka",
+            "name": "ea proident esse exercitation",
+            "record": {
+                "$ref": "http://kJ8L"
+            }
+        },
+        {
+            "curated_relation": false,
+            "email": "bosFkoQXWoYNP@nGWvyPjRUYfMAOaHFrtdHNLzDqqrB.rymq",
+            "name": "incididunt laborum",
+            "record": {
+                "$ref": "http://RL6ID-qDt"
+            }
+        },
+        {
+            "curated_relation": true,
+            "email": "Frf2GekB@vmcpxAEInzzqts.fp",
+            "name": "ut elit culpa",
+            "record": {
+                "$ref": "http://CohKuGfGc"
+            }
+        }
+    ],
+    "control_number": -3613092,
+    "core": true,
+    "deleted": false,
+    "deleted_records": [
+        {
+            "$ref": "http://FuP6de.mh"
+        },
+        {
+            "$ref": "http://RiIN-"
+        },
+        {
+            "$ref": "http://s27.FP9m"
+        },
+        {
+            "$ref": "http://pd"
+        },
+        {
+            "$ref": "http://q28b"
+        }
+    ],
+    "end_datetime": "5034-08-24T02:46:02.429Z",
+    "inspire_categories": [
+        {
+            "source": "user",
+            "term": "Accelerators"
+        },
+        {
+            "source": "cds",
+            "term": "Math and Math Physics"
+        }
+    ],
+    "join_urls": [
+        {
+            "description": "ex officia aliqua anim ad",
+            "value": "http://pMI5F2dP"
+        }
+    ],
+    "keywords": [
+        {
+            "schema": "INSPIRE",
+            "source": "voluptate dolor in",
+            "value": "magna laboris"
+        },
+        {
+            "schema": "INSPIRE",
+            "source": "quis aute",
+            "value": "culpa elit"
+        },
+        {
+            "schema": "INSPIRE",
+            "source": "labore dolor",
+            "value": "ex amet Excepteur magna"
+        },
+        {
+            "schema": "INSPIRE",
+            "source": "nulla",
+            "value": "nostrud"
+        },
+        {
+            "schema": "INSPIRE",
+            "source": "commodo labore aute in dolore",
+            "value": "consectetur id"
+        }
+    ],
+    "new_record": {
+        "$ref": "http://RdMs5"
+    },
+    "public_notes": [
+        {
+            "source": "nulla",
+            "value": "laborum laboris quis"
+        },
+        {
+            "source": "labo",
+            "value": "cupidatat"
+        },
+        {
+            "source": "ut incididunt aliquip dolore quis",
+            "value": "amet laboris esse"
+        },
+        {
+            "source": "non",
+            "value": "nostrud"
+        },
+        {
+            "source": "nisi minim mollit in",
+            "value": "sed culpa est"
+        }
+    ],
+    "self": {
+        "$ref": "http://fmyglyHN2"
+    },
+    "series": [
+        {
+            "name": "est dolore ea",
+            "number": -14983530
+        },
+        {
+            "name": "et Lorem",
+            "number": -24105681
+        },
+        {
+            "name": "dolor exercitation tempor",
+            "number": 91965915
+        },
+        {
+            "name": "sit reprehenderit id sint",
+            "number": -9579484
+        }
+    ],
+    "speakers": [
+        {
+            "affiliations": [
+                {
+                    "curated_relation": false,
+                    "record": {
+                        "$ref": "http://jAQ"
+                    },
+                    "value": "Excepteur esse"
+                },
+                {
+                    "curated_relation": false,
+                    "record": {
+                        "$ref": "http://oVa2wm2egE"
+                    },
+                    "value": "nulla ex deserunt"
+                }
+            ],
+            "curated_relation": false,
+            "ids": [
+                {
+                    "schema": "SPIRES",
+                    "value": "HEPNAMES-73543"
+                },
+                {
+                    "schema": "SPIRES",
+                    "value": "HEPNAMES-368925"
+                },
+                {
+                    "schema": "SPIRES",
+                    "value": "HEPNAMES-51"
+                },
+                {
+                    "schema": "SPIRES",
+                    "value": "HEPNAMES-5578139057"
+                }
+            ],
+            "name": "n,#hs",
+            "record": {
+                "$ref": "http://I9I80ju"
+            }
+        },
+        {
+            "affiliations": [
+                {
+                    "curated_relation": true,
+                    "record": {
+                        "$ref": "http://aRvZ.dV"
+                    },
+                    "value": "sit laborum ea"
+                }
+            ],
+            "curated_relation": true,
+            "ids": [
+                {
+                    "schema": "SPIRES",
+                    "value": "HEPNAMES-6"
+                },
+                {
+                    "schema": "SPIRES",
+                    "value": "HEPNAMES-591413785"
+                }
+            ],
+            "name": "O/N>_=j,ZR(uIs{",
+            "record": {
+                "$ref": "http://Z2S"
+            }
+        }
+    ],
+    "start_datetime": "4254-10-11T22:18:22.063Z",
+    "timezone": "Europe/Zurich",
+    "title": {
+        "source": "sed",
+        "subtitle": "reprehenderit ",
+        "title": "id"
+    },
+    "urls": [
+        {
+            "description": "incididunt proident",
+            "value": "http://toKkay9"
+        },
+        {
+            "description": "aliquip velit in sunt id",
+            "value": "http://dokVS"
+        }
+    ]
+}

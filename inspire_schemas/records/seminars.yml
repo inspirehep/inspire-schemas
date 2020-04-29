@@ -1,0 +1,252 @@
+$schema: http://json-schema.org/schema#
+additionalProperties: false
+properties:
+    $schema:
+        format: uri
+        minLength: 1
+        type: string
+    _collections:
+        items:
+            enum:
+            - Seminars
+            minLength: 1
+            type: string
+        minItems: 1
+        title: Collections to which this record belongs
+        type: array
+        uniqueItems: true
+    _private_notes:
+        description: |-
+            These notes are only visible to privileged users, not regular
+            users.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of private notes
+        type: array
+        uniqueItems: true
+    abstract:
+        $ref: elements/sourced_value.json
+    acquisition_source:
+        $ref: elements/acquisition_source.json
+    address:
+        $ref: elements/address.json
+        minItems: 1
+        title: Location of the seminar
+        type: array
+        uniqueItems: true
+    contact_details:
+        items:
+            $ref: elements/contact.json
+        minItems: 1
+        title: Contact information
+        type: array
+        uniqueItems: true
+    control_number:
+        description: |-
+            Read-only field.
+        title: ID of current record
+        type: integer
+    core:
+        title: Whether this record is CORE
+        type: boolean
+    deleted:
+        title: Whether this record has been deleted
+        type: boolean
+    deleted_records:
+        description: |-
+            List of records that were deleted because they were replaced by
+            this one. This typically happens when merging two records: one of
+            them gets enriched with the information of the other one, which is
+            then superfluous and gets deleted.
+
+            For the opposite concept, see :ref:`new_record`.
+        items:
+            $ref: elements/json_reference.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    end_datetime:
+        format: date-time
+        minLength: 1
+        title: Seminar end datetime in UTC
+        type: string
+    inspire_categories:
+        items:
+            $ref: elements/inspire_field.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+    join_urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        title: List of URLs to attend the seminar remotely
+        type: array
+        uniqueItems: true
+    keywords:
+        description: |-
+            Keywords give information about the specific contents of the
+            record, much more precisely than :ref:`inspire_categories`.
+        items:
+            additionalProperties: false
+            properties:
+                schema:
+                    description: |-
+                        Describes to which vocabulary the keyword in :ref:`value`
+                        belongs.
+
+                        ``INSPIRE``
+                            The keyword has been assigned by Inspire, and
+                            belongs to its vocabulary.
+
+                        .. note::
+
+                            If not present, the keyword is a free-form keyword,
+                            not necessarily part of any vocabulary.
+                    enum:
+                    - INSPIRE
+                    minLength: 1
+                    title: Keyword vocabulary
+                    type: string
+                source:
+                    $ref: elements/source.json
+                value:
+                    description: |-
+                        It belongs to the vocabulary specified by :ref:`schema`.
+
+                        :example: ``black hole: mass`` (for :ref:`schema` =
+                            ``INSPIRE``)
+                    minLength: 1
+                    title: A keyword
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of keywords
+        type: array
+        uniqueItems: true
+    new_record:
+        $ref: elements/json_reference.json
+        description: |-
+            Contains a reference to the record replacing the current one, if it
+            is marked as :ref:`deleted`.
+        title: Record replacing this one
+    public_notes:
+        description: |-
+            Any notes about the document that do not fit into another field.
+
+            .. note::
+
+                These notes are publicly visible. For notes not shown to
+                regular users, see :ref:`_private_notes`.
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of public notes
+        type: array
+        uniqueItems: true
+    self:
+        $ref: elements/json_reference.json
+    series:
+        items:
+            additionalProperties: false
+            properties:
+                name:
+                    minLength: 1
+                    title: Name of the seminar series
+                    type: string
+                number:
+                    title: Number of the seminar in the series
+                    type: integer
+            required:
+            - name
+            type: object
+        minItems: 1
+        title: Seminar series that this is part of
+        type: array
+        uniqueItems: true
+    speakers:
+        items:
+            additionalProperties: false
+            properties:
+                affiliations:
+                    items:
+                        additionalProperties: false
+                        properties:
+                            curated_relation:
+                                type: boolean
+                            record:
+                                $ref: elements/json_reference.json
+                            value:
+                                description: |-
+                                    Currently, the old
+                                    :ref:`institutions.json#/properties/legacy_ICN`
+                                    is used here. In the future, this will
+                                    change and become the new
+                                    :ref:`institutions.json#/properties/ICN`.
+                                minLength: 1
+                                title: ICN of affiliation
+                                type: string
+                        required:
+                        - value
+                        type: object
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                curated_relation:
+                    type: boolean
+                ids:
+                    items:
+                        $ref: elements/id.json
+                    minItems: 1
+                    title: List of speaker's IDs
+                    type: array
+                    uniqueItems: true
+                name:
+                    description: |-
+                        The full name of the speaker, written in the
+                        standard ``last names, first names`` form.
+
+                        :example: ``Smith, John P.S.``
+                    minLength: 1
+                    pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
+                    type: string
+                record:
+                    $ref: elements/json_reference.json
+            required:
+            - name
+            type: object
+        minItems: 1
+        title: List of speakers
+        type: array
+        uniqueItems: true
+    start_datetime:
+        format: date-time
+        minLength: 1
+        title: Seminar start date time in UTC
+        type: string
+    timezone:
+        format: timezone
+        minLength: 1
+        title: Timezone in which the seminar takes place
+        type: string
+    title:
+        $ref: elements/title.json
+        title: Title of the seminar
+    urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
+required:
+- _collections
+- end_datetime
+- inspire_categories
+- speakers
+- start_datetime
+- timezone
+title: Seminar
+type: object

@@ -36,6 +36,7 @@ import os
 import warnings
 
 import yaml
+from six import text_type
 from yaml.representer import SafeRepresenter
 
 # -----------------------------------------------
@@ -53,7 +54,7 @@ SCALAR_STYLE = '|'
 # -----------------------------------------------
 
 
-class DescriptionContent(unicode):
+class DescriptionContent(str):
     '''Class to tag the value of ``description``s'''
     pass
 
@@ -68,7 +69,7 @@ def change_style(style, representer):
 
 
 represent_description_content = change_style(SCALAR_STYLE,
-                                             SafeRepresenter.represent_unicode)
+                                             SafeRepresenter.represent_str)
 yaml.add_representer(DescriptionContent, represent_description_content)
 
 
@@ -91,7 +92,7 @@ def process_tree(value, key=None, parent_key=None):
         return dictionary
 
     def _ensure_values_have_types(properties, parent_key):
-        for key, val in properties.iteritems():
+        for key, val in properties.items():
             if not val.get('type') and not val.get('$ref'):
                 warnings.warn(
                     u'"{}" field of "{}" does not have a type'.format(
@@ -101,7 +102,7 @@ def process_tree(value, key=None, parent_key=None):
 
     def _is_leaf(value):
         return (not isinstance(value, collections.Container)
-                or isinstance(value, basestring))
+                or isinstance(value, str))
 
     if _is_leaf(value):
         return _process_leaf(value, key, parent_key)
@@ -113,7 +114,7 @@ def process_tree(value, key=None, parent_key=None):
         value = _enforce_strict_types(value)
         if key == 'properties':
             _ensure_values_have_types(value, parent_key)
-        return {k: process_tree(v, k, key) for k, v in value.iteritems()}
+        return {k: process_tree(v, k, key) for k, v in value.items()}
 
     else:
         raise TypeError(u"'{}' has unexpected type: {}".format(

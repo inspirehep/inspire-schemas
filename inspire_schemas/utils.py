@@ -41,6 +41,7 @@ from isbn import ISBN
 from jsonschema import Draft4Validator, RefResolver, draft4_format_checker
 from jsonschema import validate as jsonschema_validate
 from pkg_resources import resource_filename
+from pytz import UnknownTimeZoneError, timezone
 from six.moves.urllib.parse import urlsplit
 from unidecode import unidecode
 
@@ -631,6 +632,7 @@ inspire_format_checker.checks('uri-reference', raises=ValueError)(
     partial(rfc3987.parse, rule='URI_reference')
 )
 inspire_format_checker.checks('orcid')(is_orcid)
+inspire_format_checker.checks('timezone', raises=UnknownTimeZoneError)(timezone)
 
 
 def _load_schema_for_record(data, schema=None):
