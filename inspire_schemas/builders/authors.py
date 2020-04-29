@@ -24,14 +24,12 @@
 
 from __future__ import absolute_import, division, print_function
 
-
+from inspire_schemas.builders.builder import RecordBuilder
+from inspire_schemas.utils import filter_empty_parameters, load_schema
 from inspire_utils.date import normalize_date, PartialDate
 from inspire_utils.helpers import force_list
 from inspire_utils.name import normalize_name
 from inspire_utils.record import get_value
-
-from ..utils import EMPTIES, filter_empty_parameters, load_schema
-
 
 RANKS = load_schema('elements/rank')['enum']
 RANKS.append(None)
@@ -39,42 +37,14 @@ INSTITUTION_RANK_TO_PRIORITY = {rank: -idx for (idx, rank) in enumerate(RANKS)}
 EARLIEST_DATE = PartialDate.loads('1000')
 
 
-class AuthorBuilder(object):
+class AuthorBuilder(RecordBuilder):
     """Author record builder."""
+
+    _collections = ['Authors']
+
     def __init__(self, author=None, source=None):
-        if author is None:
-            author = {
-                '_collections': ['Authors'],
-            }
-        self.obj = author
-        self.source = source
-
-    def _ensure_field(self, field_name, value):
-        if field_name not in self.obj:
-            self.obj[field_name] = value
-
-    def _sourced_dict(self, source=None, **kwargs):
-        """Like ``dict(**kwargs)``, but where the ``source`` key is special."""
-        if source:
-            kwargs['source'] = source
-        elif self.source:
-            kwargs['source'] = self.source
-        return kwargs
-
-    def _append_to(self, field, element):
-        """Append the ``element`` to the ``field`` of the record.
-
-        This method is smart: it does nothing if ``element`` is empty and
-        creates ``field`` if it does not exit yet.
-
-        Args:
-            :param field: the name of the field of the record to append to
-            :type field: string
-            :param element: the element to append
-        """
-        if element not in EMPTIES:
-            self.obj.setdefault(field, [])
-            self.obj.get(field).append(element)
+        super(AuthorBuilder, self).__init__(author, source)
+        self.obj = self.record
 
     @filter_empty_parameters
     def set_name(self, name):

@@ -23,85 +23,24 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Conferences builder class and related code."""
+
+from __future__ import absolute_import, division, print_function
+
 import six
 
+from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.utils import (
-    validate, filter_empty_parameters, EMPTIES, sanitize_html
+    filter_empty_parameters,
+    sanitize_html,
+    validate,
 )
 from inspire_utils.date import normalize_date
 
 
-class ConferenceBuilder(object):
+class ConferenceBuilder(RecordBuilder):
     """Conference record builder."""
 
-    def __init__(self, record=None, source=None):
-        """Initialize builder with provided source and/or conference record.
-
-        Args:
-            record (dict): sets the default value for the the current record,
-            in order to edit an already existent record.
-            source (string): sets the default value for the source fields of the
-            current job record, which captures where the information that the
-            builder populates comes from.
-        """
-        if record is None:
-            record = {
-                '_collections': ['Conferences'],
-            }
-        self.record = record
-        self.source = source
-
-    def _ensure_field(self, field_name, default_value, obj=None):
-        if obj is None:
-            obj = self.record
-        if field_name not in obj:
-            obj.update({field_name: default_value})
-
-    def _ensure_list_field(self, field_name, default_value=None, obj=None):
-        if default_value is None:
-            default_value = []
-        self._ensure_field(field_name, default_value, obj)
-
-    def _ensure_dict_field(self, field_name, default_value=None, obj=None):
-        if default_value is None:
-            default_value = {}
-        self._ensure_field(field_name, default_value, obj)
-
-    def _sourced_dict(self, source=None, **kwargs):
-        """Like ``dict(**kwargs)``, but where the ``source`` key is special."""
-        if source:
-            kwargs['source'] = source
-        elif self.source:
-            kwargs['source'] = self.source
-        return kwargs
-
-    @filter_empty_parameters
-    def _append_to(self, field, element=None, default_list=None, **kwargs):
-        """Append the ``element`` to the ``field`` of the record.
-
-        This method is ``smart``: it does nothing if ``element`` is empty and
-        creates ``field`` if it does not exit yet.
-
-        Args:
-            field (string): the name of the field of the record to append to
-            element: the element to append
-            default_list (list): Default list which should be sert when field is missing
-
-        Kwargs:
-            Arguments from which a dictionary will be built if element is empty
-        """
-        if default_list is None:
-            default_list = []
-        if element not in EMPTIES:
-            self._ensure_list_field(field, default_list)
-            if element not in self.record[field]:
-                self.record[field].append(element)
-        elif kwargs:
-            if 'record' in kwargs and isinstance(kwargs['record'], six.string_types):
-                kwargs['record'] = {'$ref': kwargs['record']}
-            self._ensure_list_field(field, default_list)
-            if kwargs not in self.record[field]:
-                self.record[field].append(kwargs)
+    _collections = ['Conferences']
 
     @staticmethod
     def _prepare_url(value, description=None):
