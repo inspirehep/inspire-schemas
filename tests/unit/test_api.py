@@ -167,3 +167,28 @@ def test_validate_raises_on_invalid_orcid():
 
     with pytest.raises(ValidationError):
         utils.validate(data, schema)
+
+
+def test_validate_accepts_valid_timezone():
+    data = "Europe/Zurich"
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'timezone',
+    }
+
+    utils.validate(data, schema)
+
+
+def test_validate_raises_on_invalid_timezone():
+    data = "SevenKingdoms/KingsLanding"
+
+    schema = {
+        '$schema': 'http://json-schema.org/schema#',
+        'type': 'string',
+        'format': 'timezone',
+    }
+
+    with pytest.raises(ValidationError):
+        utils.validate(data, schema)

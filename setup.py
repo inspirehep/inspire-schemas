@@ -188,6 +188,7 @@ def do_setup():
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
             'pyyaml',
+            'pytz',
             'rfc3987',
             'six',
             # requests requires a urllib3 version <1.26 but not 1.25.0 and 1.25.1 we pin it down here to solve dependency problems

@@ -70,8 +70,8 @@ properties:
 
                         :example: ``Smith, John P.S.``
                     minLength: 1
-                    type: string
                     pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
+                    type: string
                 record:
                     $ref: elements/json_reference.json
             required:
@@ -243,10 +243,10 @@ properties:
                     minLength: 1
                     type: string
                 minItems: 1
+                pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
                 title: List of name variants
                 type: array
                 uniqueItems: true
-                pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
             native_names:
                 description: |-
                     Native names of the author, not using the Latin alphabet.
@@ -293,10 +293,10 @@ properties:
                     minLength: 1
                     type: string
                 minItems: 1
+                pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
                 title: List of previous names
                 type: array
                 uniqueItems: true
-                pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
             title:
                 description: |-
                     :MARC: ``100__c``
@@ -321,9 +321,9 @@ properties:
                     :example: ``Smith Davis, Jonathan Gerald C.T.``
                     :MARC: ``100__a``
                 minLength: 1
+                pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
                 title: Full name of the author
                 type: string
-                pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
         required:
         - value
         title: Name information of the author
