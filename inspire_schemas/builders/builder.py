@@ -84,4 +84,5 @@ class RecordBuilder(object):
             kwargs['source'] = source
         elif self.source:
             kwargs['source'] = self.source
-        return kwargs
+
+        return {key: value for key, value in kwargs.items() if value not in EMPTIES}

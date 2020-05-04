@@ -29,7 +29,7 @@ import pytest
 import yaml
 
 from inspire_schemas import api
-from inspire_schemas.builders import JobBuilder, ConferenceBuilder
+from inspire_schemas.builders import JobBuilder, ConferenceBuilder, SeminarBuilder
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -68,6 +68,11 @@ def job_data():
 @pytest.fixture('module')
 def conference_data():
     return load_json_file('conferences_example.json')
+
+
+@pytest.fixture('module')
+def seminar_data():
+    return load_json_file('seminars_example.json')
 
 
 def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
@@ -380,3 +385,67 @@ def test_conference_builder(conference_data):
     builder.validate_record()
 
     assert builder.record == conference_data
+
+
+def test_seminar_builder(seminar_data):
+    start_data = {
+        '_collections': seminar_data['_collections'],
+        '_private_notes': seminar_data['_private_notes'],
+        'control_number': seminar_data['control_number'],
+        'deleted': seminar_data['deleted'],
+        'core': seminar_data['core'],
+        'deleted_records': seminar_data['deleted_records'],
+        'acquisition_source': seminar_data['acquisition_source'],
+        'new_record': seminar_data['new_record'],
+        'public_notes': seminar_data['public_notes'],
+        'self': seminar_data['self']
+    }
+    builder = SeminarBuilder(start_data)
+
+    address = seminar_data['address']
+    builder.set_address(**address)
+
+    contact_details = seminar_data['contact_details']
+    for contact in contact_details:
+        builder.add_contact(**contact)
+
+    inspire_categories = seminar_data['inspire_categories']
+    for category in inspire_categories:
+        builder.add_inspire_categories(subject_terms=[category['term']], source=category.get('source'))
+
+    keywords = seminar_data['keywords']
+    for keyword in keywords:
+        builder.add_keyword(**keyword)
+
+    speakers = seminar_data['speakers']
+    for speaker in speakers:
+        builder.add_speaker(**speaker)
+
+    public_notes = seminar_data['public_notes']
+    for note in public_notes:
+        builder.add_public_note(**note)
+
+    series = seminar_data['series']
+    for serie in series:
+        builder.add_series(**serie)
+
+    builder.set_abstract(**seminar_data['abstract'])
+
+    builder.set_end_datetime(seminar_data['end_datetime'])
+    builder.set_start_datetime(seminar_data['start_datetime'])
+    builder.set_timezone(seminar_data['timezone'])
+
+    title = seminar_data['title']
+    builder.set_title(**title)
+
+    urls = seminar_data['urls']
+    for url in urls:
+        builder.add_url(**url)
+
+    join_urls = seminar_data['join_urls']
+    for url in join_urls:
+        builder.add_join_url(**url)
+
+    builder.validate_record()
+
+    assert builder.record == seminar_data
