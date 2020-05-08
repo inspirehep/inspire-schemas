@@ -31,10 +31,7 @@ properties:
         $ref: elements/acquisition_source.json
     address:
         $ref: elements/address.json
-        minItems: 1
         title: Location of the seminar
-        type: array
-        uniqueItems: true
     contact_details:
         items:
             $ref: elements/contact.json
