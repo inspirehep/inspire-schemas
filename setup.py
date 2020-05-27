@@ -96,12 +96,6 @@ def _yaml2json(yaml_file, json_file):
 
     path = os.path.dirname(yaml_file)
     resolved_json_object = _resolve_json_schema(data, path)
-    shutil.copy(
-        json_file, json_file.replace('records', 'unresolved_records')
-    )
-    shutil.copy(
-        yaml_file, yaml_file.replace('records', 'unresolved_records')
-    )
     with open(json_file, 'w') as json_fd:
         json.dump(
             resolved_json_object,
@@ -155,7 +149,7 @@ tests_require = [
 ]
 
 docs_require = [
-    'jsonschema2rst>=0.0.8',
+    'jsonschema2rst>=0.1',
     'Sphinx',
 ]
 
