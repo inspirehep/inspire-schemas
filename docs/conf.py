@@ -36,7 +36,7 @@ def _generate_schemas_doc():
     schemas_folder = os.path.join(
         os.pardir,
         'inspire_schemas',
-        'unresolved_records',
+        'records',
     )
     rst_output = 'schemas'
     run_parser(schemas_folder, rst_output, yaml_only=True)
