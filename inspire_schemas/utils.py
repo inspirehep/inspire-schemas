@@ -337,6 +337,48 @@ _BLEACH_CONFIG = {
 _bleach_cleaner = Cleaner(**_BLEACH_CONFIG)
 
 
+def _load_countries_data(filename):
+    path = resource_filename(__name__, 'countries')
+    with open(os.path.join(path, filename)) as json_fd:
+        return json.load(json_fd)
+
+
+def _get_country_name(country):
+    return country.get("common_name") or country["name"]
+
+
+# https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/master/data/iso_3166-1.json
+COUNTRY_NAME_TO_CODE_ISO_3166_1 = _load_countries_data('iso_3166-1.json')['3166-1']
+# https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/master/data/iso_3166-3.json
+COUNTRY_NAME_TO_CODE_ISO_3166_3 = _load_countries_data('iso_3166-3.json')['3166-3']
+
+COUNTRY_NAME_TO_CODE = {
+    _get_country_name(country): country['alpha_2']
+    for country in COUNTRY_NAME_TO_CODE_ISO_3166_1 + COUNTRY_NAME_TO_CODE_ISO_3166_3
+}
+
+COUNTRY_CODE_TO_NAME = {
+    value: key
+    for key, value in COUNTRY_NAME_TO_CODE.items()
+}
+
+
+def country_code_to_name(code):
+    """The country's name for the given code.
+
+    :param code: needs to be `alpha_2` country code.
+    """
+    return COUNTRY_CODE_TO_NAME[code]
+
+
+def country_name_to_code(name):
+    """The country's code for the given name.
+
+    :param name: needs to be an `ISO 3166-1` or `ISO 3166-3` country name.
+    """
+    return COUNTRY_NAME_TO_CODE[name]
+
+
 def filter_empty_parameters(func):
     """Decorator that is filtering empty parameters.
 

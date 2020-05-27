@@ -121,11 +121,43 @@ def _find(basepath, extension='.yml'):
             yield filename
 
 
+def _generate_country_file():
+    import json
+    from inspire_schemas.utils import COUNTRY_CODE_TO_NAME
+
+    schemas_js_dir = os.path.join(
+        os.path.dirname(__file__),
+        'js'
+    )
+    with open(os.path.join(schemas_js_dir, 'countryCodeToName.json'), 'w+') as json_fd:
+        json.dump(COUNTRY_CODE_TO_NAME, json_fd)
+
+def _generate_country_code(base_path):
+    import yaml
+    from inspire_schemas.utils import COUNTRY_CODE_TO_NAME
+
+    countries_code_path = os.path.join(base_path, 'elements', 'country_code.yml')
+    data = {
+        'maxLength': 2,
+        'minLength': 2,
+        'title': 'ISO 3166-1 or 3166-3 alpha 2 country code',
+        'type': 'string',
+        'enum': list(COUNTRY_CODE_TO_NAME.keys())
+    }
+
+    with open(countries_code_path, 'w') as yaml_fd:
+        yaml.dump(data, yaml_fd)
+
+
 def _generate_json_schemas():
+    _generate_country_file()
     schemas_dir = os.path.join(
         os.path.dirname(__file__),
         'inspire_schemas/records'
     )
+
+    _generate_country_code(schemas_dir)
+
     for yaml_file in _find(basepath=schemas_dir, extension='.yml'):
         json_file = yaml_file.rsplit('.', 1)[0] + '.json'
         _yaml2json(yaml_file=yaml_file, json_file=json_file)

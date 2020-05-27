@@ -1,6 +1,6 @@
 #!/bin/bash
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016, 2017 CERN.
+# Copyright (C) 2020 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -20,16 +20,8 @@
 # In applying this license, CERN does not
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
+TAG="${TRAVIS_TAG:-$(git describe --always --tags)}"
 
-isort -rc -c --skip docs/conf.py -df **/*.py && \
-pytest \
-    --pep8 \
-    --cov=inspire_schemas \
-    --cov-report=term-missing \
-    --capture=sys \
-    -vv \
-    "$@" \
-    tests \
-    inspire_schemas && \
-sphinx-build -qnN docs docs/_build/html && \
-sphinx-build -qnN -b doctest docs docs/_build/doctest
+sed -i '' "s/0\.0\.1a/$TAG/g" package.json
+npm install --dev
+npm run build

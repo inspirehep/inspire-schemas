@@ -1,0 +1,21 @@
+!build/
+npm pack
+inspire_schemas/
+tests/
+dist/
+.vscode/
+.pytest_cache/
+.eggs/
+inspire_schemas.egg-info/
+docs/
+scripts/
+
+.coverage*
+*.py
+*.pyc
+*.rst
+*.txt
+*.cfg
+*.sh
+*.in
+.travis.yml
