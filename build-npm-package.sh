@@ -22,8 +22,10 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 TAG="${TRAVIS_TAG:-$(git describe --always --tags | sed 's/\(.*\)-.*/\1/' | sed 's/\-/\./')}"
+pip install -e .
 
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+
 npm version $TAG
 npm install --global rollup
 npm install --dev
