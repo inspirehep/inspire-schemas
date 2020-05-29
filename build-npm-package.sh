@@ -23,12 +23,12 @@
 
 TAG="${TRAVIS_TAG:-$(git describe --always --tags | sed 's/\(.*\)-.*/\1/' | sed 's/\-/\./')}"
 
-echo $(TAG)
+echo $TAG
 ls -la
 less package.json
 ls  -la js/
 npm version $TAG
-echo $(TAG)
+echo $TAG
 ls -la
 less package.json
 ls  -la js/

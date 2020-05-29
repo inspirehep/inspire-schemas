@@ -2,7 +2,9 @@ notifications:
   email: false
 sudo: false
 language: python
-node_js: 10.14.0
+
+node_js:
+  - 10
 
 env:
   global:
