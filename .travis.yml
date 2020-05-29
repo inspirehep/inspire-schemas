@@ -42,6 +42,7 @@ deploy:
       branch: master
       python: '2.7'
   - provider: scirpt
+    skip_cleanup: true
     script: cd $TRAVIS_BUILD_DIR; ./build-npm-package.sh
     on:
       branch: master
