@@ -22,7 +22,7 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 TAG="${TRAVIS_TAG:-$(git describe --always --tags | sed 's/\(.*\)-.*/\1/' | sed 's/\-/\./')}"
-echo $(pwd)
+echo $(ls -la)
 pip install -e .
 
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
