@@ -1,4 +1,5 @@
-!build/
+!js/build/
+build/
 npm pack
 inspire_schemas/
 tests/

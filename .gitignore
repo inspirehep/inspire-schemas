@@ -25,6 +25,7 @@ inspire_schemas/records/elements/country_code.yml
 inspire_schemas/unresolved_records/**/*.json
 inspire_schemas/unresolved_records/**/*.yml
 
+js/build
 js/**/*.json
 
 # Byte-compiled / optimized / DLL files
