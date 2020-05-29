@@ -23,6 +23,7 @@
 
 TAG="${TRAVIS_TAG:-$(git describe --always --tags)}"
 
+echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 sed -i '' "s/0\.0\.1a/$TAG/g" package.json
 npm install --dev
 npm run build

@@ -6,7 +6,8 @@ node_js: 10.14.0
 
 env:
   global:
-    - secure: "QmLvyqDSvYQpHOB4f3G5LANH2o+OmIkaesHAwNvWlqpgffM7lavqzEvSBsaDXKEvY6Gykkg2HLfNl8l89FlZAkNFgjHvUcplHlpHBTOBmwq+LrLPpOpfcCOHHQNwBNji200LR7/dDxKKRdT7HvFgCICcePSf6uUSPZPpW6xpWAIl8yIWuq4tHWNNzqvo0YEUmGvdytMEOfenyygD1Hq3FWJm4zQbnh3z/TZjvYV0BbSIyuiHImD/xxYyOnvgkbWVWta26s4J4S1cJaTUTgqRzaQiyK8qcNakZGHFx/SQ73QVr6w9292zH+x3shGRvgSWpzxf3NXGfkuZHsmEXT5EWgNoZA4RdVKCdAnABfXGbnIw8lfr//siwMkHO62H3NWDis1nzQJYV5DqpdNQFnPjyXG3cNdCFg1Hd4ZVPHLTuVKmGI22ZDr/ET+psnmkfK2+LzHMffzaDKwl511EQVZ3xfT4N0Bn0FpfnUmutfxWcwvcop1QSty0IZwFmxxv6OjNaulD/WscJJYwc/vKU/znPtopX94LfaSHCFBY1iAFIfNFAf4z7LGU0An6pH7sf1Xoi1WF45vZuFr1XuCQdJE0S9O3QEiCoq/2SJow7tz0H1NLNsZlRwH3U5ElzyWYJrGTMYKd5fLl7zrNk6sMvm/CZwLytJJ7fbsUGuJBZbbgh74="
+    secure: DrMGVqxKBFNHqQfxqtEw8qKXDkTDqbSj1PMWBtAoLJ9fnJtRoh6wqjUCy3RWbKu9KiQeKGOjQ/kAqKO1/otiL8+62WNxPYs4TocRSo8FQJXquMZupNaC/gLZ33jMM0E84kww2ba47QbxOXb/vCMFxNbOt2rbFI6JysIE2WxqPMnj72atL1AjSOkOnXTunhTU/b8DPhJTtmevWxqJVO1Q01X8KwoJARuDAXEamhP91qJtFU5/lx6wvUkn38V0jh3Am0gv5gtpxZi/J5e2Np4bVeXdCu/VlVsagE5HHUUyGnAZyFuWMdeX1qMsZAzWMYPmXWm2ZNaqo/EkAO6RuEbyLlGdoAYKAPp9+TcN1ymTexp9QmPrVvsfu5lnNiKZtZFpPUoJN7elgFWmBavA/rjM9VpRxWcSNrpW4lVEwHcsPGP4UAU8wOd9J9ERb1JC3jHozmzAJiF8z9QIvVqgH73OyTGB6+5JtvCQoR8D0qEAhg9/yrJvApKeQxk6cdkz/fN/k+YyGU5Q50kv2zxT+bAZAQyeAbYPoct0kco/MnA29SImRxTz3Pv2RAfgYfrkdrDRXn8Y7c7nQavs6zzvjvtlCTjixkzTrFFONNJqplotQeK0UGpEsrQ54AZO7OSCrodZYd212ie24qswLgsbQehHbNenfr/eiFiQA13OdC4koyU=
+
 
 matrix:
   allow_failures:
@@ -40,9 +41,8 @@ deploy:
     on:
       branch: master
       python: '2.7'
-  - provider: script
-    script: cd $TRAVIS_BUILD_DIR; ./build-npm-package.sh
-    skip_cleanup: true
+  - provider: scirpt
+    script: ./build-npm-package.sh
     on:
       branch: master
       python: '2.7'
