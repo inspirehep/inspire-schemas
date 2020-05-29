@@ -24,6 +24,7 @@ python:
 before_install:
   - travis_retry pip install --upgrade pip setuptools py coveralls
   - pip freeze
+  - npm install --global rollup
 
 install:
   - travis_retry pip install -e .[tests,docs]

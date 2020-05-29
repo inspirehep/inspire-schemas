@@ -35,10 +35,6 @@ ls  -la js/
 
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
-npm install --global rollup
-
-
-
 npm install --dev
 npm run build
 npm publish
