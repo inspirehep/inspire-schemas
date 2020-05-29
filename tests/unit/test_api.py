@@ -25,8 +25,8 @@
 import mock
 import pytest
 
-from inspire_schemas import api, errors, utils
 from jsonschema import ValidationError
+from inspire_schemas import api, errors, utils
 
 
 def test_validate_raises_if_no_schema_key():

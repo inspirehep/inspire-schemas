@@ -1282,3 +1282,27 @@ def test_sanitize_html():
     result = utils.sanitize_html('<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to http://example.com</div>')
 
     assert expected == result
+
+
+@pytest.mark.parametrize("country_name,expected", [("Greece", "GR"), ("Monaco", "MC"), ("New Hebrides", "NH")])
+def test_name_to_code(country_name, expected):
+    assert utils.country_name_to_code(country_name) == expected
+
+
+@pytest.mark.parametrize(
+    "country_name,expected", [("Taiwan", "TW"), ("Venezuela", "VE")]
+)
+def test_name_to_code_with_common_name(country_name, expected):
+    assert utils.country_name_to_code(country_name) == expected
+
+
+@pytest.mark.parametrize("country_code,expected", [("GR", "Greece"), ("MC", "Monaco"), ("NH", "New Hebrides")])
+def test_code_to_name(country_code, expected):
+    assert utils.country_code_to_name(country_code) == expected
+
+
+@pytest.mark.parametrize(
+    "country_code,expected", [("TW", "Taiwan"), ("VE", "Venezuela")]
+)
+def test_code_to_name_with_common_name(country_code, expected):
+    assert utils.country_code_to_name(country_code) == expected

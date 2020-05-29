@@ -1,6 +1,24 @@
 {
+    "name": "inspire-schemas",
+    "version": "0.0.1a",
+    "description": "Inspire schemas.",
+    "main": "build/index.js",
+    "module": "build/index.es.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup --config"
+    },
+    "author": "Inspire",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
     "dependencies": {
         "json-schema-faker": "^0.4.1",
         "moment": "^2.19.1"
+    },
+    "devDependencies": {
+        "@rollup/plugin-json": "^4.0.3",
+        "rollup": "^2.11.2"
     }
 }
