@@ -42,7 +42,7 @@ deploy:
       branch: master
       python: '2.7'
   - provider: scirpt
-    script: ./build-npm-package.sh
+    script: cd $TRAVIS_BUILD_DIR; ./build-npm-package.sh
     on:
       branch: master
       python: '2.7'
