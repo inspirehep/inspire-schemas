@@ -4,6 +4,10 @@ sudo: false
 language: python
 node_js: 10.14.0
 
+env:
+  global:
+    - secure: "QmLvyqDSvYQpHOB4f3G5LANH2o+OmIkaesHAwNvWlqpgffM7lavqzEvSBsaDXKEvY6Gykkg2HLfNl8l89FlZAkNFgjHvUcplHlpHBTOBmwq+LrLPpOpfcCOHHQNwBNji200LR7/dDxKKRdT7HvFgCICcePSf6uUSPZPpW6xpWAIl8yIWuq4tHWNNzqvo0YEUmGvdytMEOfenyygD1Hq3FWJm4zQbnh3z/TZjvYV0BbSIyuiHImD/xxYyOnvgkbWVWta26s4J4S1cJaTUTgqRzaQiyK8qcNakZGHFx/SQ73QVr6w9292zH+x3shGRvgSWpzxf3NXGfkuZHsmEXT5EWgNoZA4RdVKCdAnABfXGbnIw8lfr//siwMkHO62H3NWDis1nzQJYV5DqpdNQFnPjyXG3cNdCFg1Hd4ZVPHLTuVKmGI22ZDr/ET+psnmkfK2+LzHMffzaDKwl511EQVZ3xfT4N0Bn0FpfnUmutfxWcwvcop1QSty0IZwFmxxv6OjNaulD/WscJJYwc/vKU/znPtopX94LfaSHCFBY1iAFIfNFAf4z7LGU0An6pH7sf1Xoi1WF45vZuFr1XuCQdJE0S9O3QEiCoq/2SJow7tz0H1NLNsZlRwH3U5ElzyWYJrGTMYKd5fLl7zrNk6sMvm/CZwLytJJ7fbsUGuJBZbbgh74="
+
 matrix:
   allow_failures:
     - python: '3.6'
@@ -27,9 +31,6 @@ script:
 after_success:
   - coveralls
 
-before_deploy:
-  - cd $TRAVIS_BUILD_DIR; ./build-npm-package.sh
-
 deploy:
   - provider: pypi
     user: inspirehep
@@ -39,11 +40,9 @@ deploy:
     on:
       branch: master
       python: '2.7'
-  - provider: npm
+  - provider: script
+    script: cd $TRAVIS_BUILD_DIR; ./build-npm-package.sh
     skip_cleanup: true
-    email: admin@inspirehep.net
-    api_key:
-      secure: E9hl2EiAUmDwYSFiirjJU4rnbR+XlvvAKp31j+wSxsWunQOhuGNrnHXWlHm0HdMpsRKUebEmhAAuc8r0bVAsVlZ5IdmNmOnkVPLW7b1bFiqBoxlz7H3qk35FXnD6ViB5uiNzo+c8EhttlfynyMbuQ9jgV+G0rF1my5WPkJtUgADsY2vMyOT74EsXUG5hb0SRyG/RKCJ2lDfjdlh+7mYzUe3thmeMVgKXahZklinQLZz0IclB8jj42vPHxBTlDSjHwhWQ8iRwqgbGvuE3knzgX18GEKagvnanLK/JP6wolsXYzMlKBfA8LjWJN+ZUrbNY1pt4e7dml3tM1uX3ur9JzEjg9kp+GRzloh1PogpSAmbYIrN8SzTqicw87fROldJaOCr5wWuPUhn3OXW7Ond59KT+Bwf+VbWtFdcJiGIyuJdORMP3ethtKM5ZXyHQE7uaNGwODjQoJKHR7Iilf9K1Ks8U1yZEy5YroNzpQwFRQx98+AghHFkDQOceCKx8dkclJuplYYPHVy8FVDJhVAWx6Rb0LSHuLTcXQ35qybZj7dtkBXahst3o0Rmo1VZPUSgf7rw9z1GBn8vqPCBMjLVd5g8jMIIH43GnqbCw07kqU6xCpYzbNb8uIPNIUZn9tXlUXFtBjUiI4u0lAvbJt90hvyGGLDWnXX5sMNIqgaUo52g=
     on:
       branch: master
       python: '2.7'
