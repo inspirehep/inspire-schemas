@@ -21,20 +21,9 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
-TAG="${TRAVIS_TAG:-$(git describe --always --tags | sed 's/\(.*\)-.*/\1/' | sed 's/\-/\./')}"
-
-echo $TAG
-ls -la
-less package.json
-ls  -la js/
-npm version $TAG
-echo $TAG
-ls -la
-less package.json
-ls  -la js/
+npm version $TRAVIS_TAG
 
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-
 npm install --dev
 npm run build
 npm publish
