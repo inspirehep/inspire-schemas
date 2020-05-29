@@ -26,6 +26,8 @@ script:
 
 after_success:
   - coveralls
+
+before_deploy:
   - ./build-npm-package.sh
 
 deploy:
