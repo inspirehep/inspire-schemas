@@ -22,7 +22,6 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 TAG="${TRAVIS_TAG:-$(git describe --always --tags)}"
 
-pip install -e .
 sed -i '' "s/0\.0\.1a/$TAG/g" package.json
 npm install --dev
 npm run build

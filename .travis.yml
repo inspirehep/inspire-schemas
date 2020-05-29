@@ -28,7 +28,7 @@ after_success:
   - coveralls
 
 before_deploy:
-  - ./build-npm-package.sh
+  - cd $TRAVIS_BUILD_DIR; ./build-npm-package.sh
 
 deploy:
   - provider: pypi
