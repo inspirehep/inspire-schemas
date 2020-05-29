@@ -23,17 +23,21 @@
 
 TAG="${TRAVIS_TAG:-$(git describe --always --tags | sed 's/\(.*\)-.*/\1/' | sed 's/\-/\./')}"
 
+echo $(TAG)
 ls -la
 less package.json
 ls  -la js/
-
-pip install -e .
+npm version $TAG
+echo $(TAG)
+ls -la
+less package.json
+ls  -la js/
 
 echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 
 npm install --global rollup
 
-npm version $TAG
+
 
 npm install --dev
 npm run build
