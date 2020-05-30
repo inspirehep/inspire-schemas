@@ -20,8 +20,12 @@
 # In applying this license, CERN does not
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
+
 TAG="${TRAVIS_TAG:-$(git describe --always --tags)}"
 
-sed -i '' "s/0\.0\.1a/$TAG/g" package.json
+npm version $TAG
+
+echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
 npm install --dev
 npm run build
+npm publish

@@ -2,7 +2,13 @@ notifications:
   email: false
 sudo: false
 language: python
-node_js: 10.14.0
+
+node_js:
+  - 10
+
+env:
+  global:
+    secure: DrMGVqxKBFNHqQfxqtEw8qKXDkTDqbSj1PMWBtAoLJ9fnJtRoh6wqjUCy3RWbKu9KiQeKGOjQ/kAqKO1/otiL8+62WNxPYs4TocRSo8FQJXquMZupNaC/gLZ33jMM0E84kww2ba47QbxOXb/vCMFxNbOt2rbFI6JysIE2WxqPMnj72atL1AjSOkOnXTunhTU/b8DPhJTtmevWxqJVO1Q01X8KwoJARuDAXEamhP91qJtFU5/lx6wvUkn38V0jh3Am0gv5gtpxZi/J5e2Np4bVeXdCu/VlVsagE5HHUUyGnAZyFuWMdeX1qMsZAzWMYPmXWm2ZNaqo/EkAO6RuEbyLlGdoAYKAPp9+TcN1ymTexp9QmPrVvsfu5lnNiKZtZFpPUoJN7elgFWmBavA/rjM9VpRxWcSNrpW4lVEwHcsPGP4UAU8wOd9J9ERb1JC3jHozmzAJiF8z9QIvVqgH73OyTGB6+5JtvCQoR8D0qEAhg9/yrJvApKeQxk6cdkz/fN/k+YyGU5Q50kv2zxT+bAZAQyeAbYPoct0kco/MnA29SImRxTz3Pv2RAfgYfrkdrDRXn8Y7c7nQavs6zzvjvtlCTjixkzTrFFONNJqplotQeK0UGpEsrQ54AZO7OSCrodZYd212ie24qswLgsbQehHbNenfr/eiFiQA13OdC4koyU=
 
 matrix:
   allow_failures:
@@ -17,6 +23,10 @@ python:
 before_install:
   - travis_retry pip install --upgrade pip setuptools py coveralls
   - pip freeze
+  - nvm install 10.14.0
+  - npm --version
+  - node --version
+  - npm install --global rollup
 
 install:
   - travis_retry pip install -e .[tests,docs]
@@ -26,23 +36,19 @@ script:
 
 after_success:
   - coveralls
-  - ./build-npm-package.sh
 
 deploy:
   - provider: pypi
     user: inspirehep
-    skip_cleanup: true
     distribution: sdist
     password:
       secure: "s/iLKjmKO6hkA4N/gex7anTU5EZh3Ct/JMa+s6YSWBrDOubkDAeEuRGaYTulUi9G0zmqA6mMRjS7ppgRY57owI+inmBROZx1y77VmjmrxpkK77bo8goZSmQrtZsi0oewN9Fws9AufFmyNfeuVgaaDSbSHFt5WpWzJbtNIPnWwlqS+rS+YXxGV1I509oVGW0DU2LD95TlmJ0pX5FVbEbC7lQE6FrQpIfe0H6lmsLyi5zEh8UFxI//Yp4q3GdkkKIkY9YrqDW1srgod5Sd7/u+2xtdFo5IJCePfPtwlQ3JbMdaXSWVTJlxEFb4rM1i2RgfKYWAzS8hnAHenJIC7axo7mD8zqDMigA/XAnKDZCo4KIZSLSt3fYQ3nqEx87smUsRAUirW0/TNERh/UM15zxsY8R0Et1n3R/qUMD8LI2wXm92lu4AIbkg4CLdXGFH+pxej2FfiGvEGF3eprlkI6rm2tJlVGbdtAOaID4WdJNR9X3knQXbcob8sijxbve9Q7m4FLb485gsO/VRWgsz9JcMmmn/5L2E7HAYQynD9H119+RLP+9wtf0V8d2pPE9VqeFDLWWiBXty7AnB/nQb5rOjU9QfVT2SMcbsAIMQe9xj3WV2DxQ5qaYBZ6nuf6/LN5S1a+mxMEbz5leHiQrMSsPYBR1Zn+Bn/FvpzpBEb5oJ5Ro="
     on:
       branch: master
       python: '2.7'
-  - provider: npm
+  - provider: script
+    script: ./build-npm-package.sh
     skip_cleanup: true
-    email: admin@inspirehep.net
-    api_key:
-      secure: E9hl2EiAUmDwYSFiirjJU4rnbR+XlvvAKp31j+wSxsWunQOhuGNrnHXWlHm0HdMpsRKUebEmhAAuc8r0bVAsVlZ5IdmNmOnkVPLW7b1bFiqBoxlz7H3qk35FXnD6ViB5uiNzo+c8EhttlfynyMbuQ9jgV+G0rF1my5WPkJtUgADsY2vMyOT74EsXUG5hb0SRyG/RKCJ2lDfjdlh+7mYzUe3thmeMVgKXahZklinQLZz0IclB8jj42vPHxBTlDSjHwhWQ8iRwqgbGvuE3knzgX18GEKagvnanLK/JP6wolsXYzMlKBfA8LjWJN+ZUrbNY1pt4e7dml3tM1uX3ur9JzEjg9kp+GRzloh1PogpSAmbYIrN8SzTqicw87fROldJaOCr5wWuPUhn3OXW7Ond59KT+Bwf+VbWtFdcJiGIyuJdORMP3ethtKM5ZXyHQE7uaNGwODjQoJKHR7Iilf9K1Ks8U1yZEy5YroNzpQwFRQx98+AghHFkDQOceCKx8dkclJuplYYPHVy8FVDJhVAWx6Rb0LSHuLTcXQ35qybZj7dtkBXahst3o0Rmo1VZPUSgf7rw9z1GBn8vqPCBMjLVd5g8jMIIH43GnqbCw07kqU6xCpYzbNb8uIPNIUZn9tXlUXFtBjUiI4u0lAvbJt90hvyGGLDWnXX5sMNIqgaUo52g=
     on:
       branch: master
       python: '2.7'
