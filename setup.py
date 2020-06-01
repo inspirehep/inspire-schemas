@@ -55,6 +55,7 @@ class CustomInstall(install.install):
 class CustomDevelop(develop.develop):
 
     def run(self, *args, **kwargs):
+        _generate_country_js_file()
         _generate_json_schemas()
         # develop is not a new class object, we can't use super
         return develop.develop.run(self, *args, **kwargs)
@@ -121,7 +122,7 @@ def _find(basepath, extension='.yml'):
             yield filename
 
 
-def _generate_country_file():
+def _generate_country_js_file():
     import json
     from inspire_schemas.utils import COUNTRY_CODE_TO_NAME
 
@@ -131,6 +132,7 @@ def _generate_country_file():
     )
     with open(os.path.join(schemas_js_dir, 'countryCodeToName.json'), 'w+') as json_fd:
         json.dump(COUNTRY_CODE_TO_NAME, json_fd)
+
 
 def _generate_country_code(base_path):
     import yaml
@@ -150,7 +152,6 @@ def _generate_country_code(base_path):
 
 
 def _generate_json_schemas():
-    _generate_country_file()
     schemas_dir = os.path.join(
         os.path.dirname(__file__),
         'inspire_schemas/records'

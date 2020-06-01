@@ -2,8 +2,8 @@
     "name": "inspire-schemas",
     "version": "0.0.1a",
     "description": "Inspire schemas.",
-    "main": "build/index.js",
-    "module": "build/index.es.js",
+    "main": "js/build/index.js",
+    "module": "js/build/index.es.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "rollup --config"

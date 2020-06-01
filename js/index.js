@@ -1,4 +1,4 @@
-import * as countryCodeToName from './countryCodeToName.json';
+import countryCodeToName from './countryCodeToName.json';
 
 export {
     countryCodeToName,

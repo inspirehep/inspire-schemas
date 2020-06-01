@@ -14,5 +14,8 @@ export default {
       sourcemap: true
     }
 ],
-  plugins: [ json() ]
+  plugins: [json({
+    preferConst: true,
+    namedExports: false
+  })]
 };
