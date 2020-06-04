@@ -50,3 +50,9 @@ deploy:
     on:
       branch: master
       python: '2.7'
+  - provider: script
+    script: ./build-npm-package.sh
+    skip_cleanup: true
+    on:
+      tags: true
+      python: '2.7'
