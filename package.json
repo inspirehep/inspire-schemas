@@ -13,12 +13,10 @@
     "publishConfig": {
         "access": "public"
     },
-    "dependencies": {
-        "json-schema-faker": "^0.4.1",
-        "moment": "^2.19.1"
-    },
     "devDependencies": {
         "@rollup/plugin-json": "^4.0.3",
-        "rollup": "^2.11.2"
+        "rollup": "^2.11.2",
+        "json-schema-faker": "^0.4.1",
+        "moment": "^2.19.1"
     }
 }
