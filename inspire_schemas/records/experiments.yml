@@ -245,17 +245,13 @@ properties:
         uniqueItems: true
     inspire_classification:
         items:
+            $ref: elements/inspire_experiment_classification.json
             description: |-
                 :MARC: ``372__a``
 
-                Category to which this experiment belongs. The possible values
-                can be found on the `experiment categories
-                page <http://inspirehep.net/info/Experiments/list>`_ on legacy.
+                Category to which this experiment belongs.
 
-                :example: ``3.1.1`` for ``ultra-short baseline, reactor, neutrino
-                    (flavor) experiment``
             minLength: 1
-            pattern: \d+(\.\d+){0,2}
             type: string
         minItems: 1
         type: array

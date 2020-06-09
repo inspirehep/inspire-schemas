@@ -1,0 +1,68 @@
+description: |-
+  An INSPIRE experiment category. This is a hierarchical classification, with `|` used as a separator.
+enum:
+  - Collider Experiments
+  - Collider Experiments|Hadrons
+  - Collider Experiments|Hadrons|p anti-p
+  - Collider Experiments|Hadrons|p p
+  - Collider Experiments|e+ e-
+  - Collider Experiments|e p
+  - Collider Experiments|Heavy Flavor Factory
+  - Collider Experiments|Heavy ion
+  - Collider Experiments|Detector development
+  - Fixed Target Experiments
+  - Fixed Target Experiments|High-momentum transfer
+  - Fixed Target Experiments|Hadron Spectroscopy
+  - Fixed Target Experiments|Deep inelastic scattering
+  - Fixed Target Experiments|Drell-Yan/Dilepton production
+  - Fixed Target Experiments|Flavor physics
+  - Fixed Target Experiments|Lepton precision experiments
+  - Fixed Target Experiments|Neutron/proton precision experiments
+  - Neutrino (flavor) experiments
+  - Neutrino (flavor) experiments|Accelerator
+  - Neutrino (flavor) experiments|Accelerator|short-baseline
+  - Neutrino (flavor) experiments|Accelerator|long-baseline
+  - Neutrino (flavor) experiments|Reactor
+  - Neutrino (flavor) experiments|Reactor|ultra-short-baseline
+  - Neutrino (flavor) experiments|Reactor|longer baselines
+  - Neutrino (flavor) experiments|Non terrestrial
+  - Neutrino (flavor) experiments|Non terrestrial|Atmospheric
+  - Neutrino (flavor) experiments|Non terrestrial|Solar
+  - Neutrino (flavor) experiments|Non terrestrial|Cosmic
+  - Neutrino (flavor) experiments|Neutrinoless double beta decay
+  - Neutrino (flavor) experiments|Neutrino mass
+  - Dark matter search experiments
+  - Dark matter search experiments|Non-accelerator
+  - Dark matter search experiments|Axion search experiments
+  - Dark matter search experiments|Dark Forces
+  - Cosmic ray/Gamma ray experiments
+  - Cosmic ray/Gamma ray experiments|Ground array
+  - Cosmic ray/Gamma ray experiments|Cerenkov array
+  - Cosmic ray/Gamma ray experiments|Satellite
+  - Cosmic ray/Gamma ray experiments|Balloon
+  - Other Rare-process/exotic experiments
+  - Other Rare-process/exotic experiments|Proton decay
+  - Other Rare-process/exotic experiments|Modified gravity and space-time
+  - Other Rare-process/exotic experiments|Magnetic monopoles
+  - Other Rare-process/exotic experiments|Fractionally charged particles
+  - Accelerator Test Facility Experiments
+  - Accelerator Test Facility Experiments|Electron and positron beams
+  - Accelerator Test Facility Experiments|Muon beams
+  - Accelerator Test Facility Experiments|Proton beams
+  - Accelerator Test Facility Experiments|Neutrino beams
+  - Astronomy experiments
+  - Astronomy experiments|CMB
+  - Astronomy experiments|Survey
+  - Astronomy experiments|Supernovae
+  - Astronomy experiments|Gravitational waves
+  - Astronomy experiments|Gravitational lensing/Dark matter
+  - Non-experimental
+  - Non-experimental|Data Analysis
+  - Non-experimental|Simulation tools
+  - Non-experimental|Simulation tools|Detector Simulation
+  - Non-experimental|Simulation tools|Event Simulation
+  - Non-experimental|Parton Distribution Fits
+  - Non-experimental|Lattice Gauge Theory
+  - Non-experimental|Neutrino Physics
+minLength: 1
+type: string
