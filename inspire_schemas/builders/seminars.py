@@ -144,6 +144,20 @@ class SeminarBuilder(RecordBuilder):
         )
 
     @filter_empty_parameters
+    def add_literature_record(self, record, curated_relation=None):
+        """
+        Args:
+            record (dict): dictionary with ``$ref`` pointing to proper record.
+            If string, then will be converted to proper dict.
+            curated_relation (bool): mark if relation is curated [NOT REQUIRED]
+        """
+        self._append_to(
+            'literature_records',
+            record=record,
+            curated_relation=curated_relation,
+        )
+
+    @filter_empty_parameters
     def add_join_url(self, value, description=None):
         """Add url dict to ``urls`` list.
 

@@ -219,6 +219,21 @@ properties:
         title: List of speakers
         type: array
         uniqueItems: true
+    literature_records:
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                record:
+                    $ref: elements/json_reference.json
+            required:
+                - record
+            type: object
+        minItems: 1
+        title: List of literature records related to the seminar
+        type: array
+        uniqueItems: true
     start_datetime:
         format: date-time
         minLength: 1
