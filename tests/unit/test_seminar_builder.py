@@ -506,3 +506,25 @@ def test_add_speaker():
     )
     builder.add_speaker(name='some guy')
     assert builder.record['speakers'] == expected
+
+
+def test_add_literature_record():
+    expected = [
+        {
+            'record': {'$ref': 'http://literature/1'}
+        },
+        {
+            'record': {'$ref': 'http://literature/another'},
+            'curated_relation': True
+        },
+    ]
+
+    builder = SeminarBuilder()
+    builder.add_literature_record(
+        record={'$ref': 'http://literature/1'}
+    )
+    builder.add_literature_record(
+        record={'$ref': 'http://literature/another'},
+        curated_relation=True
+    )
+    assert builder.record['literature_records'] == expected
