@@ -391,6 +391,7 @@ def test_seminar_builder(seminar_data):
     start_data = {
         '_collections': seminar_data['_collections'],
         '_private_notes': seminar_data['_private_notes'],
+        'captioned': seminar_data["captioned"],
         'control_number': seminar_data['control_number'],
         'deleted': seminar_data['deleted'],
         'core': seminar_data['core'],
@@ -445,6 +446,10 @@ def test_seminar_builder(seminar_data):
     join_urls = seminar_data['join_urls']
     for url in join_urls:
         builder.add_join_url(**url)
+
+    material_urls = seminar_data["material_urls"]
+    for url in material_urls:
+        builder.add_material_url(**url)
 
     builder.validate_record()
 
