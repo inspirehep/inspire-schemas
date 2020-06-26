@@ -45,6 +45,7 @@
         "postal_code": "Ut",
         "state": "sed d"
     },
+    "captioned": true,
     "contact_details": [
         {
             "curated_relation": false,
@@ -133,6 +134,16 @@
             "schema": "INSPIRE",
             "source": "commodo labore aute in dolore",
             "value": "consectetur id"
+        }
+    ],
+    "material_urls": [
+        {
+            "description": "slides",
+            "value": "http://slides"
+        },
+        {
+            "description": "book mentioned",
+            "value": "http://book"
         }
     ],
     "new_record": {

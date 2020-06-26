@@ -267,6 +267,17 @@ def test_set_address():
     assert builder.record == expected
 
 
+def test_set_captioned():
+    expected = {
+        '_collections': ['Seminars'],
+        'captioned': True
+    }
+    builder = SeminarBuilder()
+    builder.set_captioned(True)
+
+    assert builder.record == expected
+
+
 def test_add_contact():
     expected = [
         {
@@ -401,6 +412,20 @@ def test_add_join_url():
         '_collections': ['Seminars'],
         'join_urls': [
             {'value': 'http://www.example.com/calls/join/seminar'},
+        ],
+    }
+
+    assert builder.record == expected
+
+
+def test_add_material_url():
+    builder = SeminarBuilder()
+    builder.add_material_url('http://www.example.com/slides')
+
+    expected = {
+        '_collections': ['Seminars'],
+        'material_urls': [
+            {'value': 'http://www.example.com/slides'},
         ],
     }
 

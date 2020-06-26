@@ -32,6 +32,9 @@ properties:
     address:
         $ref: elements/address.json
         title: Location of the seminar
+    captioned:
+        title: Whether this seminar contains captions
+        type: boolean
     contact_details:
         items:
             $ref: elements/contact.json
@@ -130,6 +133,12 @@ properties:
             Contains a reference to the record replacing the current one, if it
             is marked as :ref:`deleted`.
         title: Record replacing this one
+    material_urls:
+        items:
+            $ref: elements/url.json
+        title: Links to related material such as slides.
+        type: array 
+        uniqueItems: true               
     public_notes:
         description: |-
             Any notes about the document that do not fit into another field.

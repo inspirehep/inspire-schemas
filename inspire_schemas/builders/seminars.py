@@ -197,6 +197,17 @@ class SeminarBuilder(RecordBuilder):
         self._append_to('keywords', keyword_dict)
 
     @filter_empty_parameters
+    def add_material_url(self, value, description=None):
+        """Add url of material to list.
+
+        Args:
+            value (str): url of the material.
+            description (str): description of the url.
+        """
+        entry = self._prepare_url(value, description)
+        self._append_to('material_urls', entry)
+
+    @filter_empty_parameters
     def add_public_note(self, value, source=None):
         """Add public note.
 
@@ -246,6 +257,14 @@ class SeminarBuilder(RecordBuilder):
         """
         entry = self._prepare_url(value, description)
         self._append_to('urls', entry)
+
+    def set_captioned(self, captioned=None):
+        """
+        Args:
+            captioned (boolean)
+        """
+        if captioned is not None:
+            self.record['captioned'] = captioned
 
     def set_end_datetime(self, date=None):
         """
