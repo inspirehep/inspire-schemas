@@ -877,8 +877,6 @@ def convert_old_publication_info_to_new(publication_infos):
         try:
             journal_title = _JOURNALS_RENAMED_OLD_TO_NEW[journal_title]
             _publication_info['journal_title'] = journal_title
-            result.append(_publication_info)
-            continue
         except KeyError:
             pass
 
