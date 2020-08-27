@@ -1265,6 +1265,13 @@ def test_normalize_arxiv_handles_new_identifiers_with_cls_prefix_and_ver():
     assert expected == result
 
 
+def test_normalize_arxiv_handles_category_in_brackets():
+    expected = '1406.1599'
+    result = utils.normalize_arxiv('arXiv:1406.1599v2[physics.ins-det]')
+
+    assert expected == result
+
+
 def test_normalize_arxiv_handles_uppercase():
     expected = 'math/0312059'
     result = utils.normalize_arxiv('MATH/0312059')
@@ -1301,6 +1308,10 @@ def test_is_arxiv_accepts_valid_categories_only():
 
 def test_is_arxiv_accepts_valid_categories_only():
     assert utils.is_arxiv('math/0312.059758') is False
+
+
+def test_is_arxiv_accepts_valid_category_in_brackets():
+    assert utils.is_arxiv('arXiv:1406.1599v2[physics.ins-det]')
 
 
 def test_sanitize_html():

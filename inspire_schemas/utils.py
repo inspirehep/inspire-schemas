@@ -87,12 +87,12 @@ _RE_AUTHORS_UID = {
 # Matches new style arXiv ID, with an old-style class specification
 # (Malformed, but appears in APS records)
 RE_ARXIV_POST_2007_CLASS = re.compile(
-    r"(arxiv:)?((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?$",
+    r"(arxiv:)?((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$",
     flags=re.I
 )
 
 RE_ARXIV_PRE_2007_CLASS = re.compile(
-    r"(arxiv:)?(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?$",
+    r"(arxiv:)?(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$",
     flags=re.I
 )
 
