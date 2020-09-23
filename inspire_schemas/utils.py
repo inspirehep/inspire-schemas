@@ -316,7 +316,6 @@ _JOURNALS_RENAMED_OLD_TO_NEW = {
     'J.Vac.Sci.Technol.B Microelectron.Nanometer Struct.': 'J.Vac.Sci.Technol.B',
     'Nucl.Phys.Proc.Suppl.': 'Nucl.Phys.B Proc.Suppl.',
     'Proc.Roy.Irish Acad.(Sect.A)': 'Proc.Roy.Irish Acad.A',
-    'Proc.Roy.Soc.Lond.': 'Proc.Roy.Soc.Lond.A',
     'Univ.Politech.Bucharest Sci.Bull.': 'Univ.Politech.Bucharest Sci.Bull.A',
 }
 _JOURNALS_RENAMED_NEW_TO_OLD = {v: k for (k, v) in six.iteritems(_JOURNALS_RENAMED_OLD_TO_NEW)}
@@ -332,7 +331,7 @@ _BLEACH_CONFIG = {
     'tags': ['a', 'b', 'br', 'div', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
     'attributes': {'a': ['href', 'title']},
     'strip': True,
-    'filters': [LinkifyFilter],
+    'filters': [partial(LinkifyFilter, callbacks=[])],
 }
 _bleach_cleaner = Cleaner(**_BLEACH_CONFIG)
 
