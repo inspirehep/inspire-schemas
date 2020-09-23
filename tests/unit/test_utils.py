@@ -818,7 +818,7 @@ def test_convert_old_publication_info_to_new_does_not_double_letters():
 
     publication_info = [
         {
-            'journal_title': 'Proc.Roy.Soc.Lond.A',
+            'journal_title': 'Nucl.Phys.Proc.Suppl.',
             'journal_volume': 'A120',
         },
     ]
@@ -827,7 +827,7 @@ def test_convert_old_publication_info_to_new_does_not_double_letters():
 
     expected = [
         {
-            'journal_title': 'Proc.Roy.Soc.Lond.A',
+            'journal_title': 'Nucl.Phys.B Proc.Suppl.',
             'journal_volume': '120',
         },
     ]
@@ -843,8 +843,8 @@ def test_convert_old_publication_info_to_new_does_not_double_letters_when_letter
 
     publication_info = [
         {
-            'journal_title': 'Proc.Roy.Soc.Lond.',
-            'journal_volume': 'A120',
+            'journal_title': 'Nucl.Phys.Proc.Suppl.',
+            'journal_volume': 'B120',
         },
     ]
 
@@ -852,7 +852,7 @@ def test_convert_old_publication_info_to_new_does_not_double_letters_when_letter
 
     expected = [
         {
-            'journal_title': 'Proc.Roy.Soc.Lond.A',
+            'journal_title': 'Nucl.Phys.B Proc.Suppl.',
             'journal_volume': '120',
         },
     ]
@@ -1043,6 +1043,30 @@ def test_convert_new_publication_info_to_old_handles_volumes_with_letters_in_the
         {
             'journal_title': 'Eur.Phys.J.',
             'journal_volume': 'A28S1',
+        },
+    ]
+    result = utils.convert_new_publication_info_to_old(publication_info)
+
+    assert utils.validate(result, subschema) is None
+    assert expected == result
+
+
+def test_convert_new_publication_info_to_old_handles_the_letter_in_proc_roy_soc_lond():
+    schema = utils.load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    publication_info = [
+        {
+            'journal_title': 'Proc.Roy.Soc.Lond.A',
+            'journal_volume': '110',
+        },
+    ]
+    assert utils.validate(publication_info, subschema) is None
+
+    expected = [
+        {
+            'journal_title': 'Proc.Roy.Soc.Lond.',
+            'journal_volume': 'A110',
         },
     ]
     result = utils.convert_new_publication_info_to_old(publication_info)
