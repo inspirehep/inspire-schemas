@@ -332,7 +332,7 @@ _BLEACH_CONFIG = {
     'tags': ['a', 'b', 'br', 'div', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
     'attributes': {'a': ['href', 'title']},
     'strip': True,
-    'filters': [LinkifyFilter],
+    'filters': [partial(LinkifyFilter, callbacks=[])],
 }
 _bleach_cleaner = Cleaner(**_BLEACH_CONFIG)
 

@@ -207,7 +207,7 @@ def do_setup():
         },
         description='Inspire JSON schemas and utilities to use them.',
         install_requires=[
-            'bleach~=3.0,>=3.1.0',
+            'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
             'autosemver',
             'jsonschema~=2.0,>=2.6.0',
