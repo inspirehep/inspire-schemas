@@ -351,14 +351,13 @@ COUNTRY_NAME_TO_CODE_ISO_3166_1 = _load_countries_data('iso_3166-1.json')['3166-
 # https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/master/data/iso_3166-3.json
 COUNTRY_NAME_TO_CODE_ISO_3166_3 = _load_countries_data('iso_3166-3.json')['3166-3']
 
-COUNTRY_NAME_TO_CODE = {
-    _get_country_name(country): country['alpha_2']
-    for country in COUNTRY_NAME_TO_CODE_ISO_3166_1 + COUNTRY_NAME_TO_CODE_ISO_3166_3
-}
-
 COUNTRY_CODE_TO_NAME = {
+    country['alpha_2']: _get_country_name(country)
+    for country in COUNTRY_NAME_TO_CODE_ISO_3166_3 + COUNTRY_NAME_TO_CODE_ISO_3166_1
+}
+COUNTRY_NAME_TO_CODE = {
     value: key
-    for key, value in COUNTRY_NAME_TO_CODE.items()
+    for key, value in COUNTRY_CODE_TO_NAME.items()
 }
 
 

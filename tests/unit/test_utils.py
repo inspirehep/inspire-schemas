@@ -1367,3 +1367,7 @@ def test_code_to_name(country_code, expected):
 )
 def test_code_to_name_with_common_name(country_code, expected):
     assert utils.country_code_to_name(country_code) == expected
+
+
+def test_code_to_name_uses_prefers_current_country_over_old_country():
+    assert utils.country_code_to_name("SK") == "Slovakia"
