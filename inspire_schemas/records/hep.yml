@@ -812,7 +812,8 @@ properties:
                         form is ``/files/bucket/key``. It can temprorarily be
                         the url to download the document from, until actually
                         downloaded.
-                    format: uri-reference
+                    format: 'uri-references'
+                    pattern: ^(https?://|/api/files/).*
                     minLength: 1
                     type: string
             required:
@@ -972,7 +973,8 @@ properties:
 
                         Relative URL to the file containing the figure. Its
                         form is ``/files/bucket/key``.
-                    format: uri-reference
+                    format: 'uri-reference'
+                    pattern: ^(https?://|/api/files/).*
                     minLength: 1
                     type: string
             required:
