@@ -23,6 +23,7 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 import pytest
+from jsonschema import ValidationError
 
 from inspire_schemas.builders.literature import LiteratureBuilder, is_citeable
 from inspire_schemas.utils import load_schema, validate
@@ -134,7 +135,7 @@ def test_add_figure():
         label='label',
         material='publication',
         source='source',
-        url='url',
+        url='https://www.example.com/url',
         description='description',
         filename='filename',
         original_url='http://www.example.com/original_url'
@@ -147,7 +148,7 @@ def test_add_figure():
             'label': 'label',
             'material': 'publication',
             'source': 'source',
-            'url': 'url',
+            'url': 'https://www.example.com/url',
             'filename': 'filename',
             'original_url': 'http://www.example.com/original_url'
         },
@@ -173,7 +174,7 @@ def test_add_figure_inspire_next():
         label='label',
         material='publication',
         source='source',
-        url='url',
+        url='/api/files/a1/123',
         description='description',
         original_url='http://www.example.com/original_url'
     )
@@ -185,7 +186,7 @@ def test_add_figure_inspire_next():
             'label': 'label',
             'material': 'publication',
             'source': 'source',
-            'url': 'url',
+            'url': '/api/files/a1/123',
             'original_url': 'http://www.example.com/original_url'
         },
     ]
@@ -224,6 +225,27 @@ def test_add_figure_fails_on_duplicated_key():
         )
 
 
+def test_add_figure_fails_on_non_file_api_relative_url():
+    schema = load_schema('hep')
+    subschema = schema['properties']['figures']
+
+    builder = LiteratureBuilder('test')
+
+    with pytest.raises(ValidationError):
+        builder.add_figure(
+            'key',
+            caption='caption',
+            label='label',
+            material='publication',
+            source='source',
+            url='/not/api/url/for/files',
+            description='description',
+            original_url='http://www.example.com/original_url'
+        )
+        result = builder.record
+        validate(result['figures'], subschema)
+
+
 def test_add_document():
     schema = load_schema('hep')
     subschema = schema['properties']['documents']
@@ -238,7 +260,7 @@ def test_add_document():
         material='preprint',
         original_url='http://www.example.com/original_url',
         source='source',
-        url='url',
+        url='https://www.example.com/url',
         filename='filename'
     )
 
@@ -251,7 +273,7 @@ def test_add_document():
             'material': 'preprint',
             'original_url': 'http://www.example.com/original_url',
             'source': 'source',
-            'url': 'url',
+            'url': 'https://www.example.com/url',
             'filename': 'filename'
         },
     ]
@@ -278,7 +300,7 @@ def test_add_document_inspire_next():
         material='preprint',
         original_url='http://www.example.com/original_url',
         source='source',
-        url='url',
+        url='/api/files/a1/123',
     )
 
     expected = [
@@ -290,7 +312,7 @@ def test_add_document_inspire_next():
             'material': 'preprint',
             'original_url': 'http://www.example.com/original_url',
             'source': 'source',
-            'url': 'url',
+            'url': '/api/files/a1/123',
         },
     ]
     result = builder.record
@@ -325,6 +347,28 @@ def test_add_document_fails_on_existing_key():
             url='url',
             filename='filename'
         )
+
+
+def test_add_document_fails_on_non_file_api_relative_url():
+    schema = load_schema('hep')
+    subschema = schema['properties']['documents']
+
+    builder = LiteratureBuilder('test')
+
+    with pytest.raises(ValidationError):
+        builder.add_document(
+            'key',
+            description='description',
+            fulltext=True,
+            hidden=True,
+            material='preprint',
+            original_url='http://www.example.com/original_url',
+            source='source',
+            url='/not/api/url/for/files',
+            filename='filename'
+        )
+        result = builder.record
+        validate(result['documents'], subschema)
 
 
 def test_make_author():

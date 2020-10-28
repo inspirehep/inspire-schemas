@@ -103,6 +103,9 @@ AUTHORS
 
 node_modules
 
+# pipenv
+.python-version
+
 # Backup files
 *~
 
