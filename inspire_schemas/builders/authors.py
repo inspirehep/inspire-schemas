@@ -226,7 +226,17 @@ class AuthorBuilder(RecordBuilder):
         self._append_to('arxiv_categories', category)
 
     @filter_empty_parameters
-    def add_institution(self, institution, start_date=None, end_date=None, rank=None, record=None, curated=False, current=False):
+    def add_institution(
+        self,
+        institution,
+        start_date=None,
+        end_date=None,
+        rank=None,
+        record=None,
+        curated=False,
+        current=False,
+        hidden=False,
+    ):
         """Add an institution where the person works/worked.
 
         Args:
@@ -250,6 +260,9 @@ class AuthorBuilder(RecordBuilder):
 
             :param current: if the person is currently associated with this institution.
             :type current: boolean
+
+            :param hidden: if the institution should be visible
+            :type hidden: boolean
         """
         new_institution = {}
         new_institution['institution'] = institution
@@ -261,6 +274,7 @@ class AuthorBuilder(RecordBuilder):
             new_institution['rank'] = rank
         if record:
             new_institution['record'] = record
+        new_institution["hidden"] = hidden
         new_institution['curated_relation'] = curated
         new_institution['current'] = current
         self._append_to('positions', new_institution)
@@ -273,7 +287,10 @@ class AuthorBuilder(RecordBuilder):
         )
 
     @filter_empty_parameters
-    def add_project(self, name, record=None, start_date=None, end_date=None, curated=False, current=False):
+    def add_project(
+            self, name, record=None, start_date=None, end_date=None, curated=False,
+            current=False, hidden=False
+    ):
         """Add an experiment that the person worked on.
 
         Args:
@@ -294,6 +311,9 @@ class AuthorBuilder(RecordBuilder):
 
             :param current: if the person is currently working on this experiment.
             :type current: boolean
+
+            :param hidden: if the project should be visible
+            :type hidden: boolean
         """
         new_experiment = {}
         new_experiment['name'] = name
@@ -303,6 +323,7 @@ class AuthorBuilder(RecordBuilder):
             new_experiment['end_date'] = normalize_date(end_date)
         if record:
             new_experiment['record'] = record
+        new_experiment["hidden"] = hidden
         new_experiment['curated_relation'] = curated
         new_experiment['current'] = current
         self._append_to('project_membership', new_experiment)
@@ -317,7 +338,7 @@ class AuthorBuilder(RecordBuilder):
         )
 
     @filter_empty_parameters
-    def add_advisor(self, name, ids=None, degree_type=None, record=None, curated=False):
+    def add_advisor(self, name, ids=None, degree_type=None, record=None, curated=False, hidden=False):
         """Add an advisor.
 
         Args:
@@ -335,6 +356,9 @@ class AuthorBuilder(RecordBuilder):
 
             :param curated: if the advisor relation has been curated i.e. has been verified.
             :type curated: boolean
+
+            :param hidden: if advisor should be visible
+            :type hidden: boolean
         """
         new_advisor = {}
         new_advisor['name'] = normalize_name(name)
@@ -344,6 +368,7 @@ class AuthorBuilder(RecordBuilder):
             new_advisor['degree_type'] = degree_type
         if record:
             new_advisor['record'] = record
+        new_advisor["hidden"] = hidden
         new_advisor['curated_relation'] = curated
         self._append_to('advisors', new_advisor)
 
