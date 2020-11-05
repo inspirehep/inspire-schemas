@@ -812,7 +812,7 @@ properties:
                         form is ``/files/bucket/key``. It can temprorarily be
                         the url to download the document from, until actually
                         downloaded.
-                    format: 'uri-references'
+                    format: 'uri-reference'
                     pattern: ^(https?://|/api/files/).*
                     minLength: 1
                     type: string
