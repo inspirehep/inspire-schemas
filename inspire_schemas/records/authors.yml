@@ -48,6 +48,9 @@ properties:
             properties:
                 curated_relation:
                     type: boolean
+                hidden:
+                    type: boolean
+                    description: Whether this advisor should be hidden
                 degree_type:
                     $ref: elements/degree_type.json
                     description: |-
@@ -348,6 +351,9 @@ properties:
                     description: |-
                         :MARC: ``371__z:current`` corresponds to ``true``
                     type: boolean
+                hidden:
+                    type: boolean
+                    description: Whether this position should be hidden
                 end_date:
                     description: |-
                         :MARC: ``371__t``
@@ -392,6 +398,9 @@ properties:
                         :MARC: ``693__z`` corresponds to ``true``
                     title: Whether the author is still involved in it
                     type: boolean
+                hidden:
+                    type: boolean
+                    description: Whether this project should be hidden
                 end_date:
                     description: |-
                         :MARC: ``693__d``

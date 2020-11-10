@@ -502,7 +502,8 @@ def test_add_institution():
             "$ref": "http://180"
         },
         "curated_relation": True,
-        "current": False
+        "current": False,
+        "hidden": False
     }]
     result = author.obj['positions']
 
@@ -526,13 +527,15 @@ def test_add_institution_sorts_by_current():
             "institution": 'First University',
             "start_date": u'1950-02-01',
             "curated_relation": False,
-            "current": True
+            "current": True,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "start_date": u'1994-02-01',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
     ]
     result = author.obj['positions']
@@ -550,25 +553,29 @@ def test_add_institution_sorts_by_start_date():
                            start_date='1950-02-01')
     author.add_institution(institution='Dateless University')
     author.add_institution(institution='Colgate University',
-                           start_date='1994-02-01')
+                           start_date='1994-02-01',
+                           hidden=True)
 
     expected = [
         {
             "institution": 'Colgate University',
             "start_date": u'1994-02-01',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": True
         },
         {
             "institution": 'First University',
             "start_date": u'1950-02-01',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Dateless University',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         }
     ]
     result = author.obj['positions']
@@ -607,60 +614,71 @@ def test_add_institution_sorts_by_rank():
             "institution": 'Colgate University',
             "rank": 'STAFF',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'SENIOR',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'JUNIOR',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
+
         },
         {
             "institution": 'Colgate University',
             "rank": 'VISITOR',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'POSTDOC',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'PHD',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'MASTER',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'UNDERGRADUATE',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'OTHER',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "curated_relation": False,
-            "current": False
+            "current": False,
+            "hidden": False
         },
     ]
     result = author.obj['positions']
@@ -681,7 +699,8 @@ def test_add_institution_normalizes_start_date():
         "institution": 'Colgate University',
         "start_date": u'1994-02-01',
         "curated_relation": False,
-        "current": False
+        "current": False,
+        "hidden": False
     }]
     result = author.obj['positions']
 
@@ -701,7 +720,8 @@ def test_add_institution_normalizes_end_date():
         "institution": 'Colgate University',
         "end_date": u'2005-01-31',
         "curated_relation": False,
-        "current": False
+        "current": False,
+        "hidden": False
     }]
     result = author.obj['positions']
 
@@ -731,7 +751,8 @@ def test_add_project():
             "$ref": "http://180"
         },
         "curated_relation": True,
-        "current": True
+        "current": True,
+        "hidden": False
     }]
     result = author.obj['project_membership']
 
@@ -756,12 +777,14 @@ def test_add_project_sorts_by_current():
             'start_date': '1949-05-01',
             'curated_relation': False,
             'current': True,
+            'hidden': False
         },
         {
             'name': 'pariatur',
             'start_date': u'1997-05-01',
             'curated_relation': False,
             'current': False,
+            'hidden': False
         }
     ]
     result = author.obj['project_membership']
@@ -786,12 +809,14 @@ def test_add_project_sorts_by_start_date():
             'start_date': u'1997-05-01',
             'curated_relation': False,
             'current': False,
+            'hidden': False
         },
         {
             'name': 'earliest one',
             'start_date': '1949-05-01',
             'curated_relation': False,
             'current': False,
+            'hidden': False
         },
     ]
     result = author.obj['project_membership']
@@ -812,7 +837,8 @@ def test_add_project_normalizes_start_date():
         "name": 'pariatur',
         "start_date": u'1999-02',
         "curated_relation": False,
-        "current": False
+        "current": False,
+        "hidden": False
     }]
     result = author.obj['project_membership']
 
@@ -832,7 +858,8 @@ def test_add_project_normalizes_end_date():
         "name": 'pariatur',
         "end_date": u'2016-01-05',
         "curated_relation": False,
-        "current": False
+        "current": False,
+        "hidden": False
     }]
     result = author.obj['project_membership']
 
@@ -896,7 +923,8 @@ def test_add_advisor():
                        record={
                            "$ref": "http://180"
                        },
-                       curated=True)
+                       curated=True,
+                       hidden=True)
 
     expected = [{
         "name": 'Torres, Riccardo',
@@ -916,7 +944,8 @@ def test_add_advisor():
         "record": {
             "$ref": "http://180"
         },
-        "curated_relation": True
+        "curated_relation": True,
+        "hidden": True
     }]
     result = author.obj['advisors']
 
@@ -933,7 +962,8 @@ def test_add_advisor_normalizes_name():
 
     expected = [{
         "name": 'Torres, Riccardo, Jr.',
-        "curated_relation": False
+        "curated_relation": False,
+        "hidden": False
     }]
     result = author.obj['advisors']
 
