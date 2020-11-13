@@ -165,7 +165,7 @@ def _generate_json_schemas():
 
 
 build_requires = [
-    'autosemver',
+    'autosemver==0.5.5',
     'pyyaml',
 ]
 
@@ -209,7 +209,7 @@ def do_setup():
         install_requires=[
             'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
-            'autosemver',
+            'autosemver==0.5.5',
             'jsonschema~=2.0,>=2.6.0',
             'idutils',
             'inspire-utils~=3.0,>=3.0.0',
@@ -228,7 +228,7 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['autosemver', 'pyyaml'],
+        setup_requires=['autosemver==0.5.5', 'pyyaml'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
