@@ -108,19 +108,19 @@
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://1k'lNb_e"
+            "$ref": "http://1k'lNb_e/api/institutions/111"
         },
         {
-            "$ref": "http://1i"
+            "$ref": "http://1i/api/institutions/1112"
         },
         {
-            "$ref": "http://1O"
+            "$ref": "http://1O/api/institutions/1115"
         },
         {
-            "$ref": "http://1,4g"
+            "$ref": "http://1,4g/api/institutions/1116"
         },
         {
-            "$ref": "http://11'O"
+            "$ref": "http://11'O/api/institutions/1117"
         }
     ],
     "external_system_identifiers": [
@@ -199,7 +199,7 @@
         }
     ],
     "new_record": {
-        "$ref": "http://1"
+        "$ref": "http://1/api/institutions/111"
     },
     "public_notes": [
         {
@@ -250,7 +250,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1d.PsX"
+        "$ref": "http://1d.PsX/api/institutions/2"
     },
     "urls": [
         {

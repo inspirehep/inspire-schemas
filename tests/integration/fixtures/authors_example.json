@@ -37,7 +37,7 @@
             ],
             "name": "occaecat qui sint in id",
             "record": {
-                "$ref": "http://1js40iZ"
+                "$ref": "http://1js40iZ/api/authors/1212"
             }
         },
         {
@@ -51,7 +51,7 @@
             ],
             "name": "deserunt nisi in",
             "record": {
-                "$ref": "http://12XQ"
+                "$ref": "http://12XQ/api/authors/1112"
             }
         },
         {
@@ -77,7 +77,7 @@
             ],
             "name": "deseru",
             "record": {
-                "$ref": "http://1U/_cD"
+                "$ref": "http://1U/_cD/api/authors/111"
             }
         }
     ],
@@ -126,10 +126,10 @@
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://1Ib"
+            "$ref": "http://1Ib/api/authors/111"
         },
         {
-            "$ref": "http://1v/M"
+            "$ref": "http://1v/M/api/authors/111"
         }
     ],
     "email_addresses": [
@@ -200,7 +200,7 @@
         "value": "qui "
     },
     "new_record": {
-        "$ref": "http://1n0ybVuN"
+        "$ref": "http://1n0ybVuN/api/authors/111"
     },
     "positions": [
         {
@@ -209,7 +209,7 @@
             "end_date": "1724-07-20",
             "institution": "qui ea pariatur ut nisi",
             "record": {
-                "$ref": "http://180"
+                "$ref": "http://180/api/institutions/1221"
             }
         },
         {
@@ -219,7 +219,7 @@
             "institution": "irure",
             "rank": "UNDERGRADUATE",
             "record": {
-                "$ref": "http://1"
+                "$ref": "http://1/api/institutions/1221"
             },
             "start_date": "1820-02-26"
         }
@@ -231,7 +231,7 @@
             "end_date": "2016",
             "name": "pariatur",
             "record": {
-                "$ref": "http://1pmlJbh"
+                "$ref": "http://1pmlJbh/api/experiments/1221"
             },
             "start_date": "1984"
         },
@@ -241,7 +241,7 @@
             "end_date": "1879",
             "name": "veniam nisi officia dolore est",
             "record": {
-                "$ref": "http://15XGFW/h"
+                "$ref": "http://15XGFW/h/api/experiments/1121"
             },
             "start_date": "1788"
         }
@@ -269,7 +269,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1MJ_/6g"
+        "$ref": "http://1MJ_/6g/api/authors/1121"
     },
     "status": "deceased",
     "stub": false,

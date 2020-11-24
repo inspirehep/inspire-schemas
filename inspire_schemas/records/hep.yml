@@ -208,7 +208,7 @@ properties:
                     title: Identifier of the experiment on legacy
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/experiment.json
             type: object
         minItems: 1
         title: List of related accelerators/experiments
@@ -272,7 +272,7 @@ properties:
                             curated_relation:
                                 type: boolean
                             record:
-                                $ref: elements/json_reference.json
+                                $ref: elements/json_reference/institution.json
                             value:
                                 description: |-
                                     :MARC: ``100/700/701__u``
@@ -455,7 +455,7 @@ properties:
                     type: array
                     uniqueItems: true
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/author.json
                 signature_block:
                     description: |-
                         Phonetic representation of the name, needed for author
@@ -544,7 +544,7 @@ properties:
             additionalProperties: false
             properties:
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/experiment.json
                 value:
                     description: |-
                         :MARC: ``710__g``
@@ -683,7 +683,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/literature.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -1253,7 +1253,7 @@ properties:
         type: array
         uniqueItems: true
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/literature.json
         description: |-
             :MARC: ``970__d``
 
@@ -1387,7 +1387,7 @@ properties:
                     title: Conference acronym
                     type: string
                 conference_record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/conference.json
                     title: record of the conference
                 curated_relation:
                     type: boolean
@@ -1409,7 +1409,7 @@ properties:
                     minLength: 1
                     type: string
                 journal_record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/journal.json
                     description: |-
                         Record of the corresponding Journal
                 journal_title:
@@ -1452,7 +1452,7 @@ properties:
                     pattern: ^\d*[0-9X]$
                     type: string
                 parent_record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/literature.json
                 parent_report_number:
                     description: |-
                         :MARC: ``773__r``
@@ -1520,7 +1520,7 @@ properties:
                 curated_relation:
                     type: boolean
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/institution.json
                 value:
                     description: |-
                         :MARC: ``902__a``
@@ -1597,7 +1597,7 @@ properties:
                     type: array
                     uniqueItems: true
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/literature.json
                     description: |-
                         :MARC: ``999C50``
                 reference:
@@ -1650,7 +1650,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/literature.json
     texkeys:
         description: |-
             :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
@@ -1708,7 +1708,7 @@ properties:
                             minLength: 1
                             type: string
                         record:
-                            $ref: elements/json_reference.json
+                            $ref: elements/json_reference/institution.json
                     type: object
                 minItems: 1
                 type: array

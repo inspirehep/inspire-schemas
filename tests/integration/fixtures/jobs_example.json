@@ -16,7 +16,7 @@
             "institution": "amet eiusmod quis occaecat",
             "legacy_name": "Duis ipsum",
             "record": {
-                "$ref": "http://Hd"
+                "$ref": "http://Hd/api/experiments/2"
             }
         },
         {
@@ -26,7 +26,7 @@
             "institution": "eiusmod Ut sint labore",
             "legacy_name": "sint culpa",
             "record": {
-                "$ref": "http://j0ZtuD"
+                "$ref": "http://j0ZtuD/api/experiments/23"
             }
         }
     ],
@@ -50,7 +50,7 @@
             "email": "Fm1je3Aqtrq9@plcsYGqwkreEE.im",
             "name": "proident",
             "record": {
-                "$ref": "http://MSrgIUnGZP"
+                "$ref": "http://MSrgIUnGZP/api/authors/2"
             }
         },
         {
@@ -58,7 +58,7 @@
             "email": "CRtnLgS5HPPcE@XywWwNnKrJlWPumlJBmelmSX.upgq",
             "name": "occaecat",
             "record": {
-                "$ref": "http://FuG"
+                "$ref": "http://FuG/api/authors/23"
             }
         },
         {
@@ -66,7 +66,7 @@
             "email": "JKR9Bbdmq7G-m@RpsmwFlApFoFKxOanSNdWuaJxpl.qohz",
             "name": "irure ullamco",
             "record": {
-                "$ref": "http://xhMuAtQ"
+                "$ref": "http://xhMuAtQ/api/authors/223"
             }
         }
     ],
@@ -75,7 +75,7 @@
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://j"
+            "$ref": "http://j/api/jobs/12"
         }
     ],
     "description": "sed ex tempor officia sint",
@@ -90,14 +90,14 @@
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://YX9"
+                "$ref": "http://YX9/api/institutions/1"
             },
             "value": "cillum aute in"
         },
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://p0m0MRVHf"
+                "$ref": "http://p0m0MRVHf/api/institutions/13"
             },
             "value": "dolor"
         }
@@ -105,7 +105,7 @@
     "legacy_creation_date": "1983-08-15",
     "legacy_version": "ut officia culpa qui",
     "new_record": {
-        "$ref": "http://lCjknl"
+        "$ref": "http://lCjknl/api/jobs/1"
     },
     "position": "non voluptate veniam adipisicing cupidatat",
     "public_notes": [
@@ -152,7 +152,7 @@
         "Middle East"
     ],
     "self": {
-        "$ref": "http://3Et"
+        "$ref": "http://3Et/api/jobs/33"
     },
     "status": "pending",
     "urls": [

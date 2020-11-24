@@ -1,0 +1,13 @@
+additionalProperties: false
+properties:
+    $ref:
+        description: |-
+            journals record
+        format: uri
+        minLength: 1
+        type: string
+        pattern: ".*/api/journals/\\d+$"
+required:
+- $ref
+title: Reference to journal record
+type: object

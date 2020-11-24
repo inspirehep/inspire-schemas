@@ -25,10 +25,10 @@
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://1Q1kGqr"
+            "$ref": "http://1Q1kGqr/api/journals/111"
         },
         {
-            "$ref": "http://1JSQu"
+            "$ref": "http://1JSQu/api/journals/22"
         }
     ],
     "doi_prefixes": [
@@ -80,7 +80,7 @@
         "url": "http://1dZk6myt"
     },
     "new_record": {
-        "$ref": "http://1O4Hd"
+        "$ref": "http://1O4Hd/api/journals/2232"
     },
     "proceedings": true,
     "public_notes": [
@@ -149,7 +149,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1TCXA_"
+        "$ref": "http://1TCXA_/api/journals/222"
     },
     "short_title": "sit aliqua culpa esse ad",
     "title_variants": [

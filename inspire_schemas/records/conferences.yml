@@ -135,7 +135,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/conference.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -232,7 +232,7 @@ properties:
         title: Last record update
         type: string
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/conference.json
         description: |-
             :MARC: ``970__d``
 
@@ -263,7 +263,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/conference.json
     series:
         description: |-
             :MARC: ``411``

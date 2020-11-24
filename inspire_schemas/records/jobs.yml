@@ -95,7 +95,7 @@ properties:
                     title: Identifier of the experiment on legacy
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/experiment.json
             type: object
         minItems: 1
         title: List of related accelerators/experiments
@@ -152,7 +152,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/job.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -201,7 +201,7 @@ properties:
                 curated_relation:
                     type: boolean
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/institution.json
                 value:
                     description: |-
                         :MARC: ``110__a``
@@ -239,7 +239,7 @@ properties:
         title: Last record update
         type: string
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/job.json
         description: |-
             :MARC: ``970__d``
 
@@ -325,7 +325,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/job.json
         description: |-
             Url of the record itself
         title: Url of the record

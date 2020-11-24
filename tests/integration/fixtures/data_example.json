@@ -6,10 +6,10 @@
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://mYRPu"
+            "$ref": "http://mYRPu/api/data/2"
         },
         {
-            "$ref": "http://V"
+            "$ref": "http://V/api/data/2"
         }
     ],
     "dois": [
@@ -28,9 +28,9 @@
     ],
     "legacy_version": "19901212121212.0",
     "new_record": {
-        "$ref": "http://H34fYq-6"
+        "$ref": "http://H34fYq-6/api/data/12"
     },
     "self": {
-        "$ref": "http://z"
+        "$ref": "http://z/api/data/222"
     }
 }

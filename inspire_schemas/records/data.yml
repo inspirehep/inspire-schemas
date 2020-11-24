@@ -53,7 +53,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/data.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -89,7 +89,7 @@ properties:
         title: Last record update
         type: string
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/data.json
         description: |-
             :MARC: ``970__d``
 
@@ -97,6 +97,6 @@ properties:
             is marked as :ref:`deleted`.
         title: Record replacing this one
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/data.json
 title: A data record
 type: object

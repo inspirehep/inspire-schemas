@@ -55,7 +55,7 @@ properties:
             curated_relation:
                 type: boolean
             record:
-                $ref: elements/json_reference.json
+                $ref: elements/json_reference/experiment.json
                 description: |-
                     If ``accelerator`` is not present in
                     :ref:`experiments.json#/properties/project_type`, this
@@ -83,7 +83,7 @@ properties:
             curated_relation:
                 type: boolean
             record:
-                $ref: elements/json_reference.json
+                $ref: elements/json_reference/experiment.json
                 description: |-
                     If ``collaboration`` is not present in
                     :ref:`experiments.json#/properties/project_type`, this
@@ -179,7 +179,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/experiment.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -263,7 +263,7 @@ properties:
                 curated_relation:
                     type: boolean
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/institution.json
                     title: Record URI of the institution.
                 value:
                     description: |-
@@ -317,7 +317,7 @@ properties:
         type: array
         uniqueItems: true
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/experiment.json
         description: |-
             :MARC: ``970__d``
 
@@ -391,7 +391,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/experiment.json
     urls:
         items:
             $ref: elements/url.json

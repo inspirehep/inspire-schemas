@@ -16,5 +16,5 @@ properties:
         minLength: 1
         type: string
     record:
-        $ref: json_reference.json
+        $ref: json_reference/author.json
 type: object

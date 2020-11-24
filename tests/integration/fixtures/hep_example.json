@@ -89,7 +89,7 @@
             "institution": "culpa esse in",
             "legacy_name": "aliquip sint nisi",
             "record": {
-                "$ref": "http://1Q"
+                "$ref": "http://1Q/api/experiments/2202"
             }
         },
         {
@@ -99,7 +99,7 @@
             "institution": "nostrud enim esse",
             "legacy_name": "laboris Ut",
             "record": {
-                "$ref": "http://1P9qA"
+                "$ref": "http://1P9qA/api/experiments/2203"
             }
         },
         {
@@ -109,7 +109,7 @@
             "institution": "occaecat",
             "legacy_name": "enim cupidatat",
             "record": {
-                "$ref": "http://1B-EQuc"
+                "$ref": "http://1B-EQuc/api/experiments/2232"
             }
         },
         {
@@ -119,7 +119,7 @@
             "institution": "sint proident",
             "legacy_name": "ad",
             "record": {
-                "$ref": "http://10D"
+                "$ref": "http://10D/api/experiments/2201"
             }
         },
         {
@@ -129,7 +129,7 @@
             "institution": "Lorem sint",
             "legacy_name": "ullamco laboris ex",
             "record": {
-                "$ref": "http://1_"
+                "$ref": "http://1_/api/experiments/1202"
             }
         }
     ],
@@ -174,7 +174,7 @@
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1h"
+                        "$ref": "http://1h/api/institutions/1111"
                     },
                     "value": "adipisicin"
                 }
@@ -239,7 +239,7 @@
                 }
             ],
             "record": {
-                "$ref": "http://1DRh."
+                "$ref": "http://1DRh/api/authors/2333"
             },
             "signature_block": "proident ut commodo irure nostrud",
             "uuid": "5c2e01fd-6924-ce9f-10d3-0c44c07e55f4"
@@ -249,14 +249,14 @@
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1Jl"
+                        "$ref": "http://1Jl/api/institutions/2202"
                     },
                     "value": "velit"
                 },
                 {
                     "curated_relation": true,
                     "record": {
-                        "$ref": "http://1zU88K"
+                        "$ref": "http://1zU88K/api/institutions/2202"
                     },
                     "value": "nisi sunt voluptate veniam proident"
                 }
@@ -314,7 +314,7 @@
                 }
             ],
             "record": {
-                "$ref": "http://130"
+                "$ref": "http://130/api/authors/2202"
             },
             "signature_block": "Lorem",
             "uuid": "14bf6b45-00f9-a980-2a7f-5390ee0b721a"
@@ -324,28 +324,28 @@
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1B/43F"
+                        "$ref": "http://1B/43F/api/institutions/2202"
                     },
                     "value": "ipsum elit"
                 },
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1MVGcA3"
+                        "$ref": "http://1MVGcA3/api/institutions/202"
                     },
                     "value": "sunt sint nulla"
                 },
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1qwr8BDw"
+                        "$ref": "http://1qwr8BDw/api/institutions/3202"
                     },
                     "value": "in"
                 },
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://170PHP"
+                        "$ref": "http://170PHP/api/institutions/2202"
                     },
                     "value": "in fugiat ut"
                 }
@@ -410,7 +410,7 @@
                 }
             ],
             "record": {
-                "$ref": "http://1--J"
+                "$ref": "http://1--J/api/authors/2224"
             },
             "signature_block": "adipisicing",
             "uuid": "e093e62d-aaec-6ac7-5654-f9da71e163d1"
@@ -420,21 +420,21 @@
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://1m"
+                        "$ref": "http://1m/api/institutions/2223"
                     },
                     "value": "aute voluptate sed laboris"
                 },
                 {
                     "curated_relation": true,
                     "record": {
-                        "$ref": "http://1p8L"
+                        "$ref": "http://1p8L/api/institutions/2223"
                     },
                     "value": "dolor in d"
                 },
                 {
                     "curated_relation": true,
                     "record": {
-                        "$ref": "http://1g7Zzk"
+                        "$ref": "http://1g7Zzk/api/institutions/2223"
                     },
                     "value": "sit nulla aliquip labor"
                 }
@@ -480,7 +480,7 @@
                 }
             ],
             "record": {
-                "$ref": "http://1v60L2M6-O"
+                "$ref": "http://1v60L2M6-O/api/authors/2226"
             },
             "signature_block": "est",
             "uuid": "ae5afd4c-c5c2-df10-298a-6ea187577de8"
@@ -490,7 +490,7 @@
                 {
                     "curated_relation": true,
                     "record": {
-                        "$ref": "http://118"
+                        "$ref": "http://118/api/institutions/2223"
                     },
                     "value": "proident eiusmod"
                 }
@@ -543,7 +543,7 @@
                 }
             ],
             "record": {
-                "$ref": "http://1qov/"
+                "$ref": "http://1qov/api/authors/222"
             },
             "signature_block": "do temp",
             "uuid": "adfd51c0-e7da-9016-9919-b9843ab279e3"
@@ -563,19 +563,19 @@
     "collaborations": [
         {
             "record": {
-                "$ref": "http://1o"
+                "$ref": "http://1o/api/experiments/13"
             },
             "value": "cupidatat"
         },
         {
             "record": {
-                "$ref": "http://1cHd22RCpb"
+                "$ref": "http://1cHd22RCpb/api/experiments/132"
             },
             "value": "dolore"
         },
         {
             "record": {
-                "$ref": "http://12tNn4e"
+                "$ref": "http://12tNn4e/api/experiments/1432"
             },
             "value": "ea Ut"
         }
@@ -613,13 +613,13 @@
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://1x"
+            "$ref": "http://1x/api/literature/1212"
         },
         {
-            "$ref": "http://1X"
+            "$ref": "http://1X/api/literature/1212"
         },
         {
-            "$ref": "http://1wi-"
+            "$ref": "http://1wi-/api/literature/1212"
         }
     ],
     "document_type": [
@@ -846,7 +846,7 @@
         }
     ],
     "new_record": {
-        "$ref": "http://179.Kpmg"
+        "$ref": "http://179.Kpmg/api/literature/11"
     },
     "number_of_pages": 30699287,
     "persistent_identifiers": [
@@ -874,13 +874,13 @@
             "cnum": "C64-30-40",
             "conf_acronym": "sit id proident non",
             "conference_record": {
-                "$ref": "http://1a"
+                "$ref": "http://1a/api/conferences/4334"
             },
             "curated_relation": true,
             "hidden": true,
             "journal_issue": "eiusmod consectetur velit labore",
             "journal_record": {
-                "$ref": "http://1jLUvMS"
+                "$ref": "http://1jLUvMS/api/journals/1212"
             },
             "journal_title": "consequat",
             "journal_volume": "irure Ut",
@@ -889,7 +889,7 @@
             "page_start": "incididunt sit consectetur sunt Lore",
             "parent_isbn": "2321061939",
             "parent_record": {
-                "$ref": "http://17.MB"
+                "$ref": "http://17.MB/api/literature/2112"
             },
             "parent_report_number": "eiusmod",
             "pubinfo_freetext": "nostrud",
@@ -900,13 +900,13 @@
             "cnum": "C78-99-06.93726",
             "conf_acronym": "esse",
             "conference_record": {
-                "$ref": "http://1sqvcM"
+                "$ref": "http://1sqvcM/api/conferences/1213"
             },
             "curated_relation": true,
             "hidden": true,
             "journal_issue": "deserunt Ut nulla aute",
             "journal_record": {
-                "$ref": "http://154"
+                "$ref": "http://154/api/journals/112"
             },
             "journal_title": "consequat sunt sit",
             "journal_volume": "do qui exercitation Lorem Ut",
@@ -915,7 +915,7 @@
             "page_start": "veniam",
             "parent_isbn": "92348907",
             "parent_record": {
-                "$ref": "http://1VUX"
+                "$ref": "http://1VUX/api/literature/1212"
             },
             "parent_report_number": "esse dolore",
             "pubinfo_freetext": "reprehende",
@@ -926,13 +926,13 @@
             "cnum": "C77-94-88",
             "conf_acronym": "voluptate est qui in",
             "conference_record": {
-                "$ref": "http://1"
+                "$ref": "http://1/api/conferences/1213"
             },
             "curated_relation": false,
             "hidden": false,
             "journal_issue": "sunt deserunt cupid",
             "journal_record": {
-                "$ref": "http://1W"
+                "$ref": "http://1W/api/journals/112"
             },
             "journal_title": "anim ullamco nulla labore",
             "journal_volume": "sed aliqua dolore",
@@ -941,7 +941,7 @@
             "page_start": "esse dolor non anim",
             "parent_isbn": "41",
             "parent_record": {
-                "$ref": "http://1VP"
+                "$ref": "http://1VP/api/literature/111"
             },
             "parent_report_number": "elit dolor Ut consectetur eiusmod",
             "pubinfo_freetext": "cupidatat veniam lab",
@@ -952,13 +952,13 @@
             "cnum": "C27-90-97",
             "conf_acronym": "ut",
             "conference_record": {
-                "$ref": "http://1zQO"
+                "$ref": "http://1zQO/api/conferences/212"
             },
             "curated_relation": true,
             "hidden": true,
             "journal_issue": "consectetur commodo esse labore in",
             "journal_record": {
-                "$ref": "http://1A0"
+                "$ref": "http://1A0/api/journals/111"
             },
             "journal_title": "reprehenderit",
             "journal_volume": "ea enim",
@@ -967,7 +967,7 @@
             "page_start": "cillum sit culpa labore",
             "parent_isbn": "89142",
             "parent_record": {
-                "$ref": "http://1siN9Hx"
+                "$ref": "http://1siN9Hx/api/literature/1212"
             },
             "parent_report_number": "adipisicing",
             "pubinfo_freetext": "Lorem Duis Excepteur",
@@ -978,13 +978,13 @@
             "cnum": "C71-40-75.5773136826",
             "conf_acronym": "id nulla sit reprehenderit",
             "conference_record": {
-                "$ref": "http://15xf"
+                "$ref": "http://15xf/api/conferences/1212"
             },
             "curated_relation": false,
             "hidden": true,
             "journal_issue": "do",
             "journal_record": {
-                "$ref": "http://1CDLqvz/3b"
+                "$ref": "http://1CDLqvz/3b/api/journals/122"
             },
             "journal_title": "consectetur ",
             "journal_volume": "pariatur veniam nisi id in",
@@ -993,7 +993,7 @@
             "page_start": "cupidatat",
             "parent_isbn": "55632402009",
             "parent_record": {
-                "$ref": "http://1p9"
+                "$ref": "http://1p9/api/literature/112"
             },
             "parent_report_number": "incididunt non",
             "pubinfo_freetext": "eiusmod labore aute cillum",
@@ -1008,28 +1008,28 @@
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1KF9"
+                "$ref": "http://1KF9/api/institutions/11"
             },
             "value": "id anim tempor aliqua"
         },
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1I4ODt"
+                "$ref": "http://1I4ODt/api/institutions/11"
             },
             "value": "es"
         },
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1nO"
+                "$ref": "http://1nO/api/institutions/11"
             },
             "value": "officia esse qui"
         },
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1"
+                "$ref": "http://1/api/institutions/11"
             },
             "value": "labore"
         }
@@ -1067,7 +1067,7 @@
                 }
             ],
             "record": {
-                "$ref": "http://13"
+                "$ref": "http://13/api/literature/1111"
             },
             "reference": {
                 "arxiv_eprint": "5336^74160",
@@ -1254,7 +1254,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1Fc"
+        "$ref": "http://1Fc/api/literature/111"
     },
     "texkeys": [
         "incid",
@@ -1269,7 +1269,7 @@
                 "curated_relation": false,
                 "name": "velit commodo do",
                 "record": {
-                    "$ref": "http://1lx."
+                    "$ref": "http://1lx./api/institutions/1212"
                 }
             }
         ]

@@ -28,6 +28,7 @@ import copy
 import json
 import os
 import re
+from collections import defaultdict
 from functools import partial, wraps
 
 import idutils
@@ -334,6 +335,17 @@ _BLEACH_CONFIG = {
     'filters': [partial(LinkifyFilter, callbacks=[])],
 }
 _bleach_cleaner = Cleaner(**_BLEACH_CONFIG)
+
+SCHEMAS = [
+    "hep",
+    "authors",
+    "experiments",
+    "institutions",
+    "conferences",
+    "seminars",
+    "jobs",
+    "journals",
+]
 
 
 def _load_countries_data(filename):
@@ -1079,3 +1091,40 @@ def sanitize_html(text):
 
     This strips most of the tags and attributes, only allowing a safe whitelisted subset."""
     return _bleach_cleaner.clean(text)
+
+
+def get_paths(schema, previous_node=None):
+    for key, val in schema.items():
+        if isinstance(val, dict):
+            for subkey in get_paths(val, key):
+                if key in ["properties", "items", "description"]:
+                    yield subkey
+                else:
+                    nodes_list = [key]
+                    nodes_list.extend(subkey)
+                    yield nodes_list
+
+        else:
+            if key == "description" and previous_node == "$ref":
+                yield [val]
+
+
+def get_refs_to_schemas(references=defaultdict(list)):
+    """ For every schema return path and index name for every referenced record
+        Returns:
+            dict(list(tuple)): index and path to the referenced record
+    """
+    if references:
+        return references
+    for schema_name in SCHEMAS:
+        schema = load_schema(schema_name=schema_name)
+        for reference_field in get_paths(schema):
+            if reference_field[0] in {"deleted_records", "self", "new_record"}:
+                continue
+            index_name = reference_field.pop().split(" ")[0]
+            reference_search_path = '.'.join(reference_field)
+            if reference_field[0] == "related_records":
+                references[schema_name].append((schema_name, reference_search_path))
+            else:
+                references[index_name].append((schema_name, reference_search_path))
+    return references

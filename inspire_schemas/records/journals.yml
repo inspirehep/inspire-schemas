@@ -150,7 +150,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/journal.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -257,7 +257,7 @@ properties:
                 type: string
         type: object
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/journal.json
         description: |-
             :MARC: ``970__d``
 
@@ -327,7 +327,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/journal.json
     short_title:
         description: |-
             :MARC: ``711__a``

@@ -76,7 +76,7 @@ properties:
                     pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/author.json
             required:
             - name
             type: object
@@ -161,7 +161,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/author.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -332,7 +332,7 @@ properties:
         title: Name information of the author
         type: object
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/author.json
         description: |-
             :MARC: ``970__d``
 
@@ -370,7 +370,7 @@ properties:
                     description: |-
                         :MARC: ``371__r``
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/institution.json
                     description: |-
                         URI for the institution record
                 start_date:
@@ -417,7 +417,7 @@ properties:
                     minLength: 1
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/experiment.json
                     description: |-
                         URI for the experiment record
                 start_date:
@@ -442,7 +442,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/author.json
         description: |-
             Url of the record itself
         title: Url of the record

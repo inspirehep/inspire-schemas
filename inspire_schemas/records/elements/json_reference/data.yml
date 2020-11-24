@@ -1,0 +1,13 @@
+additionalProperties: false
+properties:
+    $ref:
+        description: |-
+            data record
+        format: uri
+        minLength: 1
+        type: string
+        pattern: ".*/api/data/\\d+$"
+required:
+- $ref
+title: Reference to data record
+type: object

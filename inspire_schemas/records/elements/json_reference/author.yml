@@ -1,0 +1,13 @@
+additionalProperties: false
+properties:
+    $ref:
+        description: |-
+            authors record
+        format: uri
+        minLength: 1
+        type: string
+        pattern: ".*/api/authors/\\d+$"
+required:
+- $ref
+title: Reference to author record
+type: object

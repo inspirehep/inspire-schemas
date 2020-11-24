@@ -112,14 +112,14 @@ def test_add_affiliation(subschema):
                 'value': 'Institution',
                 'curated_relation': True,
                 'record': {
-                    '$ref': 'http://reference'
+                    '$ref': 'http://reference/api/institutions/123'
                 },
             },
         ],
     }
 
     builder = SignatureBuilder()
-    builder.add_affiliation('Institution', True, {'$ref': 'http://reference'})
+    builder.add_affiliation('Institution', True, {'$ref': 'http://reference/api/institutions/123'})
 
     assert_field_valid(expected, builder.obj, 'affiliations', subschema)
 
