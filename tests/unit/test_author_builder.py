@@ -488,7 +488,7 @@ def test_add_institution():
                            end_date='1995-01-31',
                            rank='PHD',
                            record={
-                                "$ref": "http://180"
+                                "$ref": "http://180/api/institutions/113"
                            },
                            curated=True,
                            current=False)
@@ -499,7 +499,7 @@ def test_add_institution():
         "end_date": u'1995-01-31',
         "rank": 'PHD',
         "record": {
-            "$ref": "http://180"
+            "$ref": "http://180/api/institutions/113"
         },
         "curated_relation": True,
         "current": False,
@@ -738,7 +738,7 @@ def test_add_project():
                        start_date='1997-05-01',
                        end_date='2001-12-31',
                        record={
-                            "$ref": "http://180"
+                            "$ref": "http://180/api/experiments/1324"
                        },
                        curated=True,
                        current=True)
@@ -748,7 +748,7 @@ def test_add_project():
         "start_date": u'1997-05-01',
         "end_date": u'2001-12-31',
         "record": {
-            "$ref": "http://180"
+            "$ref": "http://180/api/experiments/1324"
         },
         "curated_relation": True,
         "current": True,
@@ -921,7 +921,7 @@ def test_add_advisor():
                             }],
                        degree_type='bachelor',
                        record={
-                           "$ref": "http://180"
+                           "$ref": "http://180/api/authors/1212"
                        },
                        curated=True,
                        hidden=True)
@@ -942,7 +942,7 @@ def test_add_advisor():
         }],
         "degree_type": 'bachelor',
         "record": {
-            "$ref": "http://180"
+            "$ref": "http://180/api/authors/1212"
         },
         "curated_relation": True,
         "hidden": True

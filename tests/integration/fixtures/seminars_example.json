@@ -52,7 +52,7 @@
             "email": "sTeU4uXiHV@yFUpwL.jaka",
             "name": "ea proident esse exercitation",
             "record": {
-                "$ref": "http://kJ8L"
+                "$ref": "http://kJ8L/api/authors/1"
             }
         },
         {
@@ -60,7 +60,7 @@
             "email": "bosFkoQXWoYNP@nGWvyPjRUYfMAOaHFrtdHNLzDqqrB.rymq",
             "name": "incididunt laborum",
             "record": {
-                "$ref": "http://RL6ID-qDt"
+                "$ref": "http://RL6ID-qDt/api/authors/12"
             }
         },
         {
@@ -68,7 +68,7 @@
             "email": "Frf2GekB@vmcpxAEInzzqts.fp",
             "name": "ut elit culpa",
             "record": {
-                "$ref": "http://CohKuGfGc"
+                "$ref": "http://CohKuGfGc/api/authors/15"
             }
         }
     ],
@@ -77,19 +77,19 @@
     "deleted": false,
     "deleted_records": [
         {
-            "$ref": "http://FuP6de.mh"
+            "$ref": "http://FuP6de.mh/api/seminars/112"
         },
         {
-            "$ref": "http://RiIN-"
+            "$ref": "http://RiIN-/api/seminars/1222"
         },
         {
-            "$ref": "http://s27.FP9m"
+            "$ref": "http://s27.FP9m/api/seminars/111"
         },
         {
-            "$ref": "http://pd"
+            "$ref": "http://pd/api/seminars/444"
         },
         {
-            "$ref": "http://q28b"
+            "$ref": "http://q28b/api/seminars/555"
         }
     ],
     "end_datetime": "5034-08-24T02:46:02.429Z",
@@ -147,7 +147,7 @@
         }
     ],
     "new_record": {
-        "$ref": "http://RdMs5"
+        "$ref": "http://RdMs5/api/seminars/111"
     },
     "public_notes": [
         {
@@ -172,7 +172,7 @@
         }
     ],
     "self": {
-        "$ref": "http://fmyglyHN2"
+        "$ref": "http://fmyglyHN2/api/seminars/1"
     },
     "series": [
         {
@@ -198,14 +198,14 @@
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://jAQ"
+                        "$ref": "http://jAQ/api/institutions/111"
                     },
                     "value": "Excepteur esse"
                 },
                 {
                     "curated_relation": false,
                     "record": {
-                        "$ref": "http://oVa2wm2egE"
+                        "$ref": "http://oVa2wm2egE/api/institutions/111"
                     },
                     "value": "nulla ex deserunt"
                 }
@@ -231,7 +231,7 @@
             ],
             "name": "Urhan, Harun",
             "record": {
-                "$ref": "http://I9I80ju"
+                "$ref": "http://I9I80ju/api/authors/222"
             }
         },
         {
@@ -239,7 +239,7 @@
                 {
                     "curated_relation": true,
                     "record": {
-                        "$ref": "http://aRvZ.dV"
+                        "$ref": "http://aRvZ.dV/api/institutions/2"
                     },
                     "value": "sit laborum ea"
                 }
@@ -257,7 +257,7 @@
             ],
             "name": "Urhan, Ahmet",
             "record": {
-                "$ref": "http://Z2S"
+                "$ref": "http://Z2S/api/authors/2"
             }
         }
     ],

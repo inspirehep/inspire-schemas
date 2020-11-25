@@ -1,0 +1,13 @@
+additionalProperties: false
+properties:
+    $ref:
+        description: |-
+            hep record
+        format: uri
+        minLength: 1
+        type: string
+        pattern: ".*/api/literature/\\d+$"
+required:
+- $ref
+title: Reference to literature record
+type: object

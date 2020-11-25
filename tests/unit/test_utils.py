@@ -31,6 +31,7 @@ import pytest
 import six
 
 from inspire_schemas import errors, utils
+from inspire_utils.query import ordered
 
 
 def test_classify_field_returns_none_on_falsy_value():
@@ -1371,3 +1372,49 @@ def test_code_to_name_with_common_name(country_code, expected):
 
 def test_code_to_name_uses_prefers_current_country_over_old_country():
     assert utils.country_code_to_name("SK") == "Slovakia"
+
+
+def test_get_references_for_schema_returns_proper_schemas():
+    expected = {
+        u"experiments": [
+            ("hep", u"collaborations.record.$ref"),
+            ("hep", u"accelerator_experiments.record.$ref"),
+            ("authors", u"project_membership.record.$ref"),
+            ("experiments", u"accelerator.record.$ref"),
+            ("experiments", u"related_records.record.$ref"),
+            ("experiments", u"collaboration.record.$ref"),
+            ("jobs", u"accelerator_experiments.record.$ref"),
+        ],
+        u"hep": [
+            ("hep", u"references.record.$ref"),
+            ("hep", u"publication_info.parent_record.$ref"),
+            ("hep", u"related_records.record.$ref"),
+            ("seminars", u"literature_records.record.$ref"),
+        ],
+        u"conferences": [("hep", u"publication_info.conference_record.$ref")],
+        u"authors": [
+            ("hep", u"authors.record.$ref"),
+            ("authors", u"advisors.record.$ref"),
+            ("conferences", u"contact_details.record.$ref"),
+            ("seminars", u"speakers.record.$ref"),
+            ("seminars", u"contact_details.record.$ref"),
+            ("jobs", u"contact_details.record.$ref"),
+        ],
+        u"journals": [
+            ("hep", u"publication_info.journal_record.$ref"),
+            ("journals", u"related_records.record.$ref"),
+        ],
+        u"institutions": [
+            ("hep", u"thesis_info.institutions.record.$ref"),
+            ("hep", u"authors.affiliations.record.$ref"),
+            ("hep", u"record_affiliations.record.$ref"),
+            ("authors", u"positions.record.$ref"),
+            ("experiments", u"institutions.record.$ref"),
+            ("institutions", u"related_records.record.$ref"),
+            ("seminars", u"speakers.affiliations.record.$ref"),
+            ("jobs", u"institutions.record.$ref"),
+        ],
+    }
+
+    result = dict(utils.get_refs_to_schemas())
+    assert ordered(result) == ordered(expected)

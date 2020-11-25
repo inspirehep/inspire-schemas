@@ -6,7 +6,7 @@ properties:
     curated_relation:
         type: boolean
     record:
-        $ref: json_reference.json
+        $ref: json_reference/any.json
         description: |-
             :MARC: ``510__0`` (for Institutions and Experiments), ``530__0``
                 (for Journals), ``78002/78502/78708w`` (for Literature).

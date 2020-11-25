@@ -1,0 +1,13 @@
+additionalProperties: false
+properties:
+    $ref:
+        description: |-
+            jobs record
+        format: uri
+        minLength: 1
+        type: string
+        pattern: ".*/api/jobs/\\d+$"
+required:
+- $ref
+title: Reference to job record
+type: object

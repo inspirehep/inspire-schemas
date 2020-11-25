@@ -62,7 +62,7 @@ properties:
 
             For the opposite concept, see :ref:`new_record`.
         items:
-            $ref: elements/json_reference.json
+            $ref: elements/json_reference/seminar.json
         minItems: 1
         type: array
         uniqueItems: true
@@ -128,7 +128,7 @@ properties:
         type: array
         uniqueItems: true
     new_record:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/seminar.json
         description: |-
             Contains a reference to the record replacing the current one, if it
             is marked as :ref:`deleted`.
@@ -154,7 +154,7 @@ properties:
         type: array
         uniqueItems: true
     self:
-        $ref: elements/json_reference.json
+        $ref: elements/json_reference/seminar.json
     series:
         items:
             additionalProperties: false
@@ -184,7 +184,7 @@ properties:
                             curated_relation:
                                 type: boolean
                             record:
-                                $ref: elements/json_reference.json
+                                $ref: elements/json_reference/institution.json
                             value:
                                 description: |-
                                     Currently, the old
@@ -220,7 +220,7 @@ properties:
                     pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
                     type: string
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/author.json
             required:
             - name
             type: object
@@ -235,7 +235,7 @@ properties:
                 curated_relation:
                     type: boolean
                 record:
-                    $ref: elements/json_reference.json
+                    $ref: elements/json_reference/literature.json
             required:
                 - record
             type: object

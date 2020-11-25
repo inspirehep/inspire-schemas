@@ -20,14 +20,14 @@
     "accelerator": {
         "curated_relation": true,
         "record": {
-            "$ref": "http://1PK7LCL6"
+            "$ref": "http://1PK7LCL6/api/experiments/12"
         },
         "value": "occaecat enim veniam incididunt fugiat"
     },
     "collaboration": {
         "curated_relation": false,
         "record": {
-            "$ref": "http://1hfzx"
+            "$ref": "http://1hfzx/api/experiments/23"
         },
         "subgroup_names": [
             "mollit Lorem quis",
@@ -46,10 +46,10 @@
     "deleted": true,
     "deleted_records": [
         {
-            "$ref": "http://1OuPqa1/"
+            "$ref": "http://1OuPqa1/api/experiments/1212"
         },
         {
-            "$ref": "http://1Vffg"
+            "$ref": "http://1Vffg/api/experiments/1212"
         }
     ],
     "description": "consequat dolore in quis",
@@ -85,35 +85,35 @@
         {
             "curated_relation": true,
             "record": {
-                "$ref": "http://1.K-/"
+                "$ref": "http://1.K-/api/institutions/111"
             },
             "value": "quis"
         },
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1"
+                "$ref": "http://1/api/institutions/111"
             },
             "value": "ut"
         },
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1VG-AjYv"
+                "$ref": "http://1VG-AjYv/api/institutions/111"
             },
             "value": "laboris in"
         },
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1r"
+                "$ref": "http://1r/api/institutions/111"
             },
             "value": "proident"
         },
         {
             "curated_relation": false,
             "record": {
-                "$ref": "http://1"
+                "$ref": "http://1/api/institutions/111"
             },
             "value": "dolore"
         }
@@ -128,7 +128,7 @@
         "non "
     ],
     "new_record": {
-        "$ref": "http://1sCTg"
+        "$ref": "http://1sCTg/api/experiments/111"
     },
     "project_type": [
         "collaboration"
@@ -154,7 +154,7 @@
         }
     ],
     "self": {
-        "$ref": "http://1rk1AKem"
+        "$ref": "http://1rk1AKem/api/experiments/111"
     },
     "urls": [
         {
