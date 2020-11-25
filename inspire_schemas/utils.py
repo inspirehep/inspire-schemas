@@ -660,20 +660,32 @@ def get_schema_path(schema, resolved=False):
     raise SchemaNotFound(schema=schema)
 
 
-def load_schema(schema_name, resolved=False):
+def load_schema(schema_name, resolved=False, _cache={}):
     """Load the given schema from wherever it's installed.
 
     Args:
         schema_name(str): Name of the schema to load, for example 'authors'.
         resolved(bool): If True will return the resolved schema, that is with
             all the $refs replaced by their targets.
+        _cache(dict): Private argument used for memoization.
 
     Returns:
         dict: the schema with the given name.
     """
-    schema_data = ''
-    with open(get_schema_path(schema_name, resolved)) as schema_fd:
-        schema_data = json.loads(schema_fd.read())
+    if schema_name in _cache:
+        return _cache[schema_name]
+
+    schema_path = get_schema_path(schema_name, resolved)
+    if schema_path in _cache:
+        schema_data = _cache[schema_path]
+        _cache[schema_name] = schema_data
+        return schema_data
+
+    with open(schema_path) as schema_fd:
+        schema_data = json.load(schema_fd)
+
+    _cache[schema_name] = schema_data
+    _cache[schema_path] = schema_data
 
     return schema_data
 
