@@ -230,6 +230,13 @@ def test_load_schema_with_schema_key(mock_get_schema_path, mock_open):
     assert loaded_schema == myschema
 
 
+def test_load_schema_uses_memoization():
+    schema = utils.load_schema("authors")
+    schema2 = utils.load_schema("authors.json")
+
+    assert schema is schema2
+
+
 def test_split_page_artid_page_range():
     page_string = '451-487'
     result = utils.split_page_artid(page_string)
