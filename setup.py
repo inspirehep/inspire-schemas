@@ -206,6 +206,8 @@ def do_setup():
             'develop': CustomDevelop,
         },
         description='Inspire JSON schemas and utilities to use them.',
+        long_description="Inspire JSON schemas and utilities to use them.",
+        long_description_content_type='text/plain',
         install_requires=[
             'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
