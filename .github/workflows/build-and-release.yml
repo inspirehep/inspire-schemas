@@ -53,13 +53,12 @@ jobs:
         if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: |
           python setup.py sdist bdist_wheel --universal
-          ls -la
-          ls -la dist/
 
       - name: Publish package
         if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         uses: pypa/gh-action-pypi-publish@v1.3.1
         with:
+          verify_metadata: false
           user: __token__
           password: ${{ secrets.pypi_password }}
 
