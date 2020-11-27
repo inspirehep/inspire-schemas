@@ -1172,6 +1172,11 @@
                     }
                 ]
             }
+        },
+        {
+            "record": {
+                "$ref": "http://13/api/data/1111"
+            }
         }
     ],
     "related_records": [
