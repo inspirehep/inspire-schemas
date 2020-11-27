@@ -63,11 +63,13 @@ jobs:
           password: ${{ secrets.pypi_password }}
 
       - name: Build npm package
+        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: |
           npm install --dev
           npm run build
 
       - name: Publish npm package
+        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
