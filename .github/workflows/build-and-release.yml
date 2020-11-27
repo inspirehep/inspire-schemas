@@ -61,8 +61,12 @@ jobs:
           user: __token__
           password: ${{ secrets.pypi_password }}
 
-      - name: Run build npm package
-        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7' }}
-        working-directory: .
+      - name: Build npm package
         run: |
-          ./build-npm-package.sh
+          npm install --dev
+          npm run build
+
+      - name: Publish npm package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
