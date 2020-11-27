@@ -52,7 +52,8 @@ jobs:
       - name: Build package
         if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: |
-          python setup.py sdist bdist_wheel --universal
+          mkdir clean-build
+          python setup.py sdist bdist_wheel --universal --dist-dir ./clean-build
 
       - name: Publish package
         if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
@@ -61,6 +62,7 @@ jobs:
           verify_metadata: false
           user: __token__
           password: ${{ secrets.pypi_password }}
+          packages_dir: clean-build/
 
       - name: Build npm package
         if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
