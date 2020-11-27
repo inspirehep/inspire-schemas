@@ -1,0 +1,17 @@
+{
+    "additionalProperties": false,
+    "properties": {
+        "$ref": {
+            "description": "hep/data record",
+            "format": "uri",
+            "minLength": 1,
+            "pattern": ".*/api/(literature|data)/\\d+$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "$ref"
+    ],
+    "title": "Reference to citeable (literature or data) record",
+    "type": "object"
+}

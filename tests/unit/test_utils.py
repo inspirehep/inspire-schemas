@@ -1407,6 +1407,7 @@ def test_get_references_for_schema_returns_proper_schemas():
             ("seminars", u"contact_details.record.$ref"),
             ("jobs", u"contact_details.record.$ref"),
         ],
+        u'data': [('hep', u'references.record.$ref')],
         u"journals": [
             ("hep", u"publication_info.journal_record.$ref"),
             ("journals", u"related_records.record.$ref"),

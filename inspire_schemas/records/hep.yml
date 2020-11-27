@@ -1597,7 +1597,7 @@ properties:
                     type: array
                     uniqueItems: true
                 record:
-                    $ref: elements/json_reference/literature.json
+                    $ref: elements/json_reference/citeable.json
                     description: |-
                         :MARC: ``999C50``
                 reference:

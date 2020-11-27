@@ -1133,10 +1133,11 @@ def get_refs_to_schemas(references=defaultdict(list)):
         for reference_field in get_paths(schema):
             if reference_field[0] in {"deleted_records", "self", "new_record"}:
                 continue
-            index_name = reference_field.pop().split(" ")[0]
+            index_names = reference_field.pop().split(" ")[0].split('/')
             reference_search_path = '.'.join(reference_field)
             if reference_field[0] == "related_records":
                 references[schema_name].append((schema_name, reference_search_path))
             else:
-                references[index_name].append((schema_name, reference_search_path))
+                for index_name in index_names:
+                    references[index_name].append((schema_name, reference_search_path))
     return references
