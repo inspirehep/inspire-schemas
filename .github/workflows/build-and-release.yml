@@ -71,6 +71,11 @@ jobs:
           npm install --dev
           npm run build
 
+      - name: Version npm package
+        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
+        run: |
+          npm version $(git describe --always --tags)
+
       - name: Publish npm package
         if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: npm publish
