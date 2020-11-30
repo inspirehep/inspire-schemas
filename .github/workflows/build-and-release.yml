@@ -24,6 +24,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.14.0
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
