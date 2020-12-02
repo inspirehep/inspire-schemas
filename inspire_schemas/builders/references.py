@@ -217,17 +217,19 @@ class ReferenceBuilder(object):
             self.add_author(author)
 
     def add_author(self, full_name, role=None):
+        normalized_name = normalize_name(full_name)
+        if not normalized_name:
+            return
         self._ensure_reference_field('authors', [])
-
         if role is not None:
             inspire_role = 'editor' if role == 'ed.' else role
             self.obj['reference']['authors'].append({
-                'full_name': normalize_name(full_name),
+                'full_name': normalized_name,
                 'inspire_role': inspire_role,
             })
         else:
             self.obj['reference']['authors'].append({
-                'full_name': normalize_name(full_name),
+                'full_name': normalized_name,
             })
 
     def set_pubnote(self, pubnote):
