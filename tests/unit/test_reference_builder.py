@@ -1365,3 +1365,27 @@ def test_pop_additional_pubnotes_includes_raw_ref():
     assert expected == result
     assert 'misc' not in builder.obj['reference']
     assert builder.obj['raw_refs'] == expected_raw_refs
+
+
+def test_reference_builder_skip_authors_without_full_names():
+    rb = ReferenceBuilder()
+    rb.add_refextract_authors_str("Author 1,   ,Author 2")
+    rb.add_raw_reference("Author 1, , Author 2, Some Title"),
+    rb.add_title("Some title")
+
+    expected_authors = [{'full_name': '1, Author'}, {'full_name': '2, Author'}]
+
+    assert len(rb.obj['reference']['authors'])
+    assert rb.obj['reference']['authors'] == expected_authors
+
+
+def test_reference_builder_is_not_creating_author_empty_list_when_authors_missing():
+    rb = ReferenceBuilder()
+    rb.add_author(" ")
+    rb.add_author("    ")
+    assert 'reference' not in rb.obj
+
+    rb.add_title("Title")
+    rb.add_author("      ")
+
+    assert 'authors' not in rb.obj['reference']
