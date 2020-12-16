@@ -23,16 +23,8 @@ properties:
         uniqueItems: true
     country_code:
         $ref: country_code.json
-    latitude:
-        description: |-
-            :example: 50.7736
-        title: Latitude of the location
-        type: number
-    longitude:
-        description: |-
-            :example: 6.07532
-        title: Longitude of the location
-        type: number
+    coordinates:
+        $ref: coordinates.json
     place_name:
         description: |-
             Name of the specific place where this is located.

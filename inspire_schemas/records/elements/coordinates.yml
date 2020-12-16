@@ -1,0 +1,12 @@
+additionalProperties: true
+description: |-
+    Coordinates of the location
+properties:
+    lon:
+        title: Longitude of the location
+        type: number
+    lat:
+        title: Latitude of the location
+        type: number
+title: Coordinates of the location
+type: object
