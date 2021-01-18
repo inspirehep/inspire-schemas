@@ -5,8 +5,8 @@ properties:
             authors record
         format: uri
         minLength: 1
+        pattern: .*/api/authors/\d+$
         type: string
-        pattern: ".*/api/authors/\\d+$"
 required:
 - $ref
 title: Reference to author record

@@ -5,8 +5,8 @@ properties:
             conferences record
         format: uri
         minLength: 1
+        pattern: .*/api/conferences/\d+$
         type: string
-        pattern: ".*/api/conferences/\\d+$"
 required:
 - $ref
 title: Reference to conference record

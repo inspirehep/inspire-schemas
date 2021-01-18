@@ -48,13 +48,14 @@ properties:
             properties:
                 curated_relation:
                     type: boolean
-                hidden:
-                    type: boolean
-                    description: Whether this advisor should be hidden
                 degree_type:
                     $ref: elements/degree_type.json
                     description: |-
                         :MARC: ``701__g``
+                hidden:
+                    description: |-
+                        Whether this advisor should be hidden
+                    type: boolean
                 ids:
                     description: |-
                         :MARC: ``701__i``
@@ -351,15 +352,16 @@ properties:
                     description: |-
                         :MARC: ``371__z:current`` corresponds to ``true``
                     type: boolean
-                hidden:
-                    type: boolean
-                    description: Whether this position should be hidden
                 end_date:
                     description: |-
                         :MARC: ``371__t``
                     format: date
                     minLength: 1
                     type: string
+                hidden:
+                    description: |-
+                        Whether this position should be hidden
+                    type: boolean
                 institution:
                     description: |-
                         :MARC: ``371__a``
@@ -398,9 +400,6 @@ properties:
                         :MARC: ``693__z`` corresponds to ``true``
                     title: Whether the author is still involved in it
                     type: boolean
-                hidden:
-                    type: boolean
-                    description: Whether this project should be hidden
                 end_date:
                     description: |-
                         :MARC: ``693__d``
@@ -409,6 +408,10 @@ properties:
                     format: date
                     minLength: 1
                     type: string
+                hidden:
+                    description: |-
+                        Whether this project should be hidden
+                    type: boolean
                 name:
                     description: |-
                         :MARC: ``693__e``

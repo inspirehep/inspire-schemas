@@ -5,8 +5,8 @@ properties:
             experiments record
         format: uri
         minLength: 1
+        pattern: .*/api/experiments/\d+$
         type: string
-        pattern: ".*/api/experiments/\\d+$"
 required:
 - $ref
 title: Reference to experiment record

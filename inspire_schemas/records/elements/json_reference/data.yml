@@ -5,8 +5,8 @@ properties:
             data record
         format: uri
         minLength: 1
+        pattern: .*/api/data/\d+$
         type: string
-        pattern: ".*/api/data/\\d+$"
 required:
 - $ref
 title: Reference to data record
