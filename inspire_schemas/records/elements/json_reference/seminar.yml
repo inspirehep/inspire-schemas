@@ -5,8 +5,8 @@ properties:
             seminars record
         format: uri
         minLength: 1
+        pattern: .*/api/seminars/\d+$
         type: string
-        pattern: ".*/api/seminars/\\d+$"
 required:
 - $ref
 title: Reference to seminar record

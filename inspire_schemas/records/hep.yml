@@ -812,9 +812,9 @@ properties:
                         form is ``/files/bucket/key``. It can temprorarily be
                         the url to download the document from, until actually
                         downloaded.
-                    format: 'uri-reference'
-                    pattern: ^(https?://|/api/files/).*
+                    format: uri-reference
                     minLength: 1
+                    pattern: ^(https?://|/api/files/).*
                     type: string
             required:
             - key
@@ -973,9 +973,9 @@ properties:
 
                         Relative URL to the file containing the figure. Its
                         form is ``/files/bucket/key``.
-                    format: 'uri-reference'
-                    pattern: ^(https?://|/api/files/).*
+                    format: uri-reference
                     minLength: 1
+                    pattern: ^(https?://|/api/files/).*
                     type: string
             required:
             - key
@@ -1649,6 +1649,12 @@ properties:
         title: List of report numbers assigned to the record
         type: array
         uniqueItems: true
+    rpp:
+        description: |-
+            :MARC: ``210__a:RPP`` corresponds to ``true``
+
+            Whether this record is (part of) the Review of Particle Physics
+        type: boolean
     self:
         $ref: elements/json_reference/literature.json
     texkeys:

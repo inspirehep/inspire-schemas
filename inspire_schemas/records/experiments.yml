@@ -250,7 +250,6 @@ properties:
                 :MARC: ``372__a``
 
                 Category to which this experiment belongs.
-
             minLength: 1
             type: string
         minItems: 1

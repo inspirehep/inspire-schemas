@@ -127,18 +127,34 @@ properties:
         title: List of keywords
         type: array
         uniqueItems: true
+    literature_records:
+        items:
+            additionalProperties: false
+            properties:
+                curated_relation:
+                    type: boolean
+                record:
+                    $ref: elements/json_reference/literature.json
+            required:
+            - record
+            type: object
+        minItems: 1
+        title: List of literature records related to the seminar
+        type: array
+        uniqueItems: true
+    material_urls:
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        title: Links to related material such as slides.
+        type: array
+        uniqueItems: true
     new_record:
         $ref: elements/json_reference/seminar.json
         description: |-
             Contains a reference to the record replacing the current one, if it
             is marked as :ref:`deleted`.
         title: Record replacing this one
-    material_urls:
-        items:
-            $ref: elements/url.json
-        title: Links to related material such as slides.
-        type: array 
-        uniqueItems: true               
     public_notes:
         description: |-
             Any notes about the document that do not fit into another field.
@@ -226,21 +242,6 @@ properties:
             type: object
         minItems: 1
         title: List of speakers
-        type: array
-        uniqueItems: true
-    literature_records:
-        items:
-            additionalProperties: false
-            properties:
-                curated_relation:
-                    type: boolean
-                record:
-                    $ref: elements/json_reference/literature.json
-            required:
-                - record
-            type: object
-        minItems: 1
-        title: List of literature records related to the seminar
         type: array
         uniqueItems: true
     start_datetime:

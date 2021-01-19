@@ -5,8 +5,8 @@ properties:
             hep record
         format: uri
         minLength: 1
+        pattern: .*/api/literature/\d+$
         type: string
-        pattern: ".*/api/literature/\\d+$"
 required:
 - $ref
 title: Reference to literature record

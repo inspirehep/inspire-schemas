@@ -5,8 +5,8 @@ properties:
             institutions record
         format: uri
         minLength: 1
+        pattern: .*/api/institutions/\d+$
         type: string
-        pattern: ".*/api/institutions/\\d+$"
 required:
 - $ref
 title: Reference to institution record
