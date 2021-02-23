@@ -239,6 +239,8 @@ properties:
                     cited document is a book chapter.
                 minLength: 1
                 type: string
+            journal_record:
+                $ref: json_reference/journal.json
             year:
                 description: |-
                     :MARC: ``999C5y``

@@ -1150,6 +1150,9 @@
                     "parent_isbn": "X",
                     "parent_report_number": "in in est",
                     "parent_title": "nisi quis",
+                    "journal_record": {
+                        "$ref": "http://13/api/journals/3333"
+                    },
                     "year": 1287
                 },
                 "report_numbers": [
