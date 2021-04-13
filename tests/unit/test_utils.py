@@ -33,6 +33,8 @@ import six
 from inspire_schemas import errors, utils
 from inspire_utils.query import ordered
 
+from inspire_schemas.utils import normalize_collaboration_name
+
 
 def test_classify_field_returns_none_on_falsy_value():
     assert utils.classify_field('') is None
@@ -1427,3 +1429,16 @@ def test_get_references_for_schema_returns_proper_schemas():
 
     result = dict(utils.get_refs_to_schemas())
     assert ordered(result) == ordered(expected)
+
+
+@pytest.mark.parametrize(
+    "collaboration_name,expected_normalized_name",
+    [
+        ("SOME/-*NAME", "SOME/-*NAME"),
+        ("Some GrOuP Team  EXPERIMENT ", "Some"),
+        ("   Ugly     NAmE \n with   \n \t whitespace   characters    ", "Ugly NAmE with whitespace characters"),
+        ("group community consortium concept group experiment team stuff", "stuff")
+    ]
+)
+def test_normalize_collaboration_name(collaboration_name, expected_normalized_name):
+    assert normalize_collaboration_name(collaboration_name) == expected_normalized_name
