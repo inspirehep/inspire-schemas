@@ -347,8 +347,6 @@ SCHEMAS = [
     "journals",
 ]
 
-compiled_collaboration_cleaner_regexp = None
-
 
 def _load_countries_data(filename):
     path = resource_filename(__name__, 'countries')
@@ -1147,7 +1145,7 @@ def get_refs_to_schemas(references=defaultdict(list)):
 
 def normalize_collaboration_name(full_collaboration_string):
     words_to_ignore = ['group', 'community', 'consortium', 'concept group', 'experiment', 'team']
-    compiled_regexp = compiled_collaboration_cleaner_regexp or re.compile(
+    compiled_regexp = re.compile(
         r'\b(' + '|'.join(words_to_ignore) + r')\b', flags=re.IGNORECASE
     )
     return ' '.join(compiled_regexp.sub('', full_collaboration_string).split())
