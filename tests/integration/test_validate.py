@@ -29,10 +29,12 @@ import jsonschema
 import pytest
 import six
 
+from datetime import datetime
 from inspire_schemas import api
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
+    
 
 def get_schema_names(fixtures_path):
     schema_names = []
@@ -90,3 +92,10 @@ def test_schemas_validate_negative(schema_name):
     example_data = change_something(example_data)
     with pytest.raises(jsonschema.ValidationError):
         api.validate(data=example_data, schema=schema_name)
+
+
+def test_date_validation(date_text):
+    with pytest.raises('ValueError"):
+    validate(schema, date_text)
+
+    
