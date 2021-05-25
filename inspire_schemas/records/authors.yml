@@ -128,9 +128,7 @@ properties:
     birth_date:
         description: |-
             :MARC: ``100__d`` (first part)
-        format: date
-        minLength: 1
-        type: string
+        $ref: elements/json_reference/author.json
     control_number:
         description: |-
             :MARC: ``001``
@@ -143,9 +141,7 @@ properties:
             :MARC: ``100__d`` (second part)
 
             See also :ref:`status` ``deceased``.
-        format: date
-        minLength: 1
-        type: string
+        $ref: elements/json_reference/author.json
     deleted:
         description: |-
             :MARC: ``980__a/c:deleted``
@@ -212,9 +208,7 @@ properties:
         type: array
         uniqueItems: true
     legacy_creation_date:
-        format: date
-        minLength: 1
-        type: string
+        $ref: elements/json_reference/author.json
     legacy_version:
         description: |-
             :MARC: ``005``
@@ -355,9 +349,7 @@ properties:
                 end_date:
                     description: |-
                         :MARC: ``371__t``
-                    format: date
-                    minLength: 1
-                    type: string
+                    $ref: elements/json_reference/author.json
                 hidden:
                     description: |-
                         Whether this position should be hidden
@@ -378,9 +370,7 @@ properties:
                 start_date:
                     description: |-
                         :MARC: ``371__s``
-                    format: date
-                    minLength: 1
-                    type: string
+                    $ref: elements/json_reference/author.json
             required:
             - institution
             type: object
@@ -405,9 +395,7 @@ properties:
                         :MARC: ``693__d``
 
                         Date the author stopped working on this project.
-                    format: date
-                    minLength: 1
-                    type: string
+                    $ref: elements/json_reference/author.json
                 hidden:
                     description: |-
                         Whether this project should be hidden
@@ -428,9 +416,7 @@ properties:
                         :MARC: ``693__s``
 
                         Date the author started working on this project.
-                    format: date
-                    minLength: 1
-                    type: string
+                    $ref: elements/json_reference/author.json
             required:
             - name
             type: object

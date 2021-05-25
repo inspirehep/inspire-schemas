@@ -95,7 +95,8 @@ def test_schemas_validate_negative(schema_name):
 
 
 def test_date_validation(date_text):
-    with pytest.raises('ValueError"):
-    validate(schema, date_text)
+    example_data = load_example("authors")
+    example_data['birth_date'] = "4.12.1979"
+    with pytest.raises(ValueError):
+        api.validate(schema=date_text, data=example_data)
 
-    
