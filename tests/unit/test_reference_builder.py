@@ -1389,3 +1389,11 @@ def test_reference_builder_is_not_creating_author_empty_list_when_authors_missin
     rb.add_author("      ")
 
     assert 'authors' not in rb.obj['reference']
+
+
+def test_reference_builder_is_not_adding_doi_when_already_present():
+    rb = ReferenceBuilder()
+    rb.add_url('https://doi.org/10.1088/1009-0630/7/4/022')
+    rb.add_uid('10.1088/1009-0630/7/4/022')
+
+    assert rb.obj['reference']['dois'] == ['10.1088/1009-0630/7/4/022']
