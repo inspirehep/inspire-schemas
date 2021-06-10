@@ -287,7 +287,8 @@ class ReferenceBuilder(object):
             self._ensure_reference_field('arxiv_eprint', normalize_arxiv(uid))
         elif idutils.is_doi(uid):
             self._ensure_reference_field('dois', [])
-            self.obj['reference']['dois'].append(idutils.normalize_doi(uid))
+            if uid not in self.obj['reference']['dois']:
+                self.obj['reference']['dois'].append(idutils.normalize_doi(uid))
         elif idutils.is_handle(uid) and not skip_handle:
             self._ensure_reference_field('persistent_identifiers', [])
             self.obj['reference']['persistent_identifiers'].append({
