@@ -365,6 +365,7 @@ def test_add_url_adds_uid():
     builder = ReferenceBuilder()
 
     builder.add_url('10.1109/NSSMIC.2005.1596597')
+    builder.add_url('https://doi.org/10.1109/NSSMIC.2005.1596597')
 
     expected = [
         {
