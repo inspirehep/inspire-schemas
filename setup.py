@@ -166,7 +166,7 @@ def _generate_json_schemas():
 
 build_requires = [
     'autosemver==0.5.5',
-    'pyyaml',
+    'pyyaml==5.4.1'
 ]
 
 tests_require = [
@@ -216,7 +216,7 @@ def do_setup():
             'idutils',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
-            'pyyaml',
+            'pyyaml==5.4.1',
             'pytz',
             'rfc3987',
             'six',
@@ -230,7 +230,7 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['autosemver==0.5.5', 'pyyaml'],
+        setup_requires=['autosemver==0.5.5', 'pyyaml==5.4.1'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
