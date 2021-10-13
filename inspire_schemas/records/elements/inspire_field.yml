@@ -21,6 +21,7 @@ properties:
         - Accelerators
         - Astrophysics
         - Computing
+        - Condensed Matter
         - Data Analysis and Statistics
         - Experiment-HEP
         - Experiment-Nucl
@@ -31,6 +32,7 @@ properties:
         - Math and Math Physics
         - Other
         - Phenomenology-HEP
+        - Quantum Physics
         - Theory-HEP
         - Theory-Nucl
         minLength: 1
