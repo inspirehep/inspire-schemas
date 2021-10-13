@@ -203,11 +203,13 @@ def test_inspire_categories():
     record = {
         'inspire_categories': [
             {'term': 'Experiment-HEP'},
+            {'term': 'Quantum Physics'},
+            {'term': 'Condensed Matter'},
         ],
     }
     assert validate(record['inspire_categories'], subschema) is None
 
-    expected = ['Experiment-HEP']
+    expected = ['Experiment-HEP', 'Quantum Physics', 'Condensed Matter']
     result = LiteratureReader(record).inspire_categories
 
     assert expected == result
