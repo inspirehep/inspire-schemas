@@ -867,6 +867,7 @@ def test_add_url_handles_cds_ids():
     builder = ReferenceBuilder()
 
     builder.add_url('http://cds.cern.ch/record/2310556?ln=en')
+    builder.add_url('http://cds.cern.ch/record/2310556?ln=fr')
 
     expected = [
         {
