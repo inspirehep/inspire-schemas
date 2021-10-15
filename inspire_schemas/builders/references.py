@@ -307,10 +307,10 @@ class ReferenceBuilder(object):
             self.obj['reference']['publication_info']['cnum'] = uid
         elif is_cds_url(uid):
             self._ensure_reference_field('external_system_identifiers', [])
-            self.obj['reference']['external_system_identifiers'].append({
-                'schema': 'CDS',
-                'value': extract_cds_id(uid),
-            })
+            cds_id = extract_cds_id(uid)
+            cds_id_dict = {'schema': 'CDS', 'value': cds_id}
+            if cds_id_dict not in self.obj['reference']['external_system_identifiers']:
+                self.obj['reference']['external_system_identifiers'].append(cds_id_dict)
         elif is_ads_url(uid):
             self._ensure_reference_field('external_system_identifiers', [])
             self.obj['reference']['external_system_identifiers'].append({
