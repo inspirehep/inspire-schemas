@@ -291,6 +291,23 @@ def test_add_email_addresses_with_hidden_parameter():
     assert expected == result
 
 
+def test_add_email_addresses_with_current_parameter():
+    schema = load_schema('authors')
+    subschema = schema['properties']['email_addresses']
+
+    author = AuthorBuilder()
+    author.add_email_address('example@test.com', current=True)
+
+    expected = [{
+        "value": 'example@test.com',
+        "current": True,
+    }]
+    result = author.obj['email_addresses']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_email_addresses_with_hidden_parameter_only_updates_hidden_field():
     schema = load_schema('authors')
     subschema = schema['properties']['email_addresses']

@@ -102,7 +102,7 @@ class AuthorBuilder(RecordBuilder):
         self.obj['name'].setdefault('previous_names', []).append(name)
 
     @filter_empty_parameters
-    def add_email_address(self, email, hidden=None):
+    def add_email_address(self, email, current=None, hidden=None):
         """Add email address.
 
         Args:
@@ -119,6 +119,8 @@ class AuthorBuilder(RecordBuilder):
         )
         if found_email is None:
             new_email = {'value': email}
+            if current is not None:
+                new_email['current'] = current
             if hidden is not None:
                 new_email['hidden'] = hidden
             self._append_to('email_addresses', new_email)
