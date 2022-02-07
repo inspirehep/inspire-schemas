@@ -359,7 +359,7 @@ properties:
 
                             Role of the author according to the `Contributor
                             Roles Taxonomy (CRediT)
-                            <http://dictionary.casrai.org/Contributor_Roles>`_
+                            <https://credit.niso.org/>`_
                         enum:
                         - Conceptualization
                         - Data curation
