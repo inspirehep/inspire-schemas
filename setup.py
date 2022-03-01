@@ -213,7 +213,7 @@ def do_setup():
             'Unidecode~=1.0,>=1.0.22',
             'autosemver==0.5.5',
             'jsonschema~=2.0,>=2.6.0',
-            'idutils',
+            'idutils==1.1.11',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
             'pyyaml==5.4.1',
