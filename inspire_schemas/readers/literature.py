@@ -462,15 +462,16 @@ class LiteratureReader(object):
             '054021'
 
         """
-        if 'artid' in publication_info:
-            return publication_info['artid']
 
-        elif 'page_start' in publication_info and 'page_end' in publication_info:
+        if 'page_start' in publication_info and 'page_end' in publication_info:
             page_start = publication_info['page_start']
             page_end = publication_info['page_end']
             return text_type('{}{}{}').format(
                 page_start, text_type(separator), page_end
             )
+
+        elif 'artid' in publication_info:
+            return publication_info['artid']
 
         return ''
 
