@@ -95,6 +95,7 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         affiliations=input_data_hep['affiliations'],
         roles=input_data_hep['roles'],
         raw_affiliations=input_data_hep['raw_affiliations'],
+        affiliations_identifiers=input_data_hep['affiliations_identifiers']
     )
     builder.add_author(author)
 
