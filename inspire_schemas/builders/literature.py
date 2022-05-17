@@ -186,7 +186,8 @@ class LiteratureBuilder(RecordBuilder):
                     ids=(),
                     emails=(),
                     alternative_names=(),
-                    record=None):
+                    record=None,
+                    affiliations_identifiers=()):
         """Make a subrecord representing an author.
 
         Args:
@@ -225,6 +226,9 @@ class LiteratureBuilder(RecordBuilder):
 
         for email in emails:
             builder.add_email(email)
+
+        for schema, value in affiliations_identifiers:
+            builder.add_affiliations_identifiers(value, schema=schema)
 
         for alternative_name in alternative_names:
             builder.add_alternative_name(alternative_name)

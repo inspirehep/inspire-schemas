@@ -32,6 +32,19 @@
             "author",
             "editor"
          ],
+         "affiliations_identifiers": [
+            { 
+               "schema": "GRID", 
+               "value": "grid.21100.32" 
+            },
+            {
+               "schema": "ROR", 
+               "value": "https://ror.org/039shy520"
+            },
+            {  "schema": "GRID", 
+               "value": "grid.1010.0"
+            }
+         ],
          "raw_affiliations":[
             {
                "value": "Institute of Modern Physics, Chinese Academy of Sciences, 730000 Lanzhou, China",

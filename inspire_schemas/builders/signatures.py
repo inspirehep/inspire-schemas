@@ -108,6 +108,13 @@ class SignatureBuilder(object):
         })
 
     @filter_empty_parameters
+    def add_affiliations_identifiers(self, uid, schema):
+        self._ensure_list_field('affiliations_identifiers', {
+            'value': uid,
+            'schema': schema
+        })
+
+    @filter_empty_parameters
     def set_uid(self, uid, schema=None):
         """Set a unique ID.
 
