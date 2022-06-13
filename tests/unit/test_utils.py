@@ -1140,8 +1140,9 @@ def test_author_id_normalize_and_schema_unknown():
 
 
 def test_author_id_normalize_and_schema_conflict():
-    with pytest.raises(errors.SchemaUIDConflict):
-        utils.author_id_normalize_and_schema('SLAC-123456', 'CERN')
+    uid, schema = utils.author_id_normalize_and_schema('SLAC-123456', 'CERN')
+    assert 'SLAC-123456' == uid
+    assert 'CERN' == schema
 
 
 @pytest.mark.parametrize('arg1,arg2,source,material', [

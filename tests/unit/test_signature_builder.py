@@ -27,6 +27,7 @@ import inspect
 
 from inspire_schemas.utils import load_schema, validate
 from inspire_schemas.builders.signatures import SignatureBuilder
+from jsonschema import ValidationError
 
 
 @pytest.fixture(scope='module')
@@ -41,6 +42,12 @@ def assert_field_valid(expected, result, property, schema):
         result[property],
         schema['properties'][property]
     ) is None
+
+
+def assert_field_invalid(expected, result, property, schema):
+    assert expected == result
+    with pytest.raises(ValidationError):
+        assert validate(result[property], schema["properties"][property])
 
 
 def test_ensure_fields():
@@ -207,6 +214,15 @@ def test_set_uid(subschema):
     builder.set_uid('INSPIRE-12345678')
 
     assert_field_valid(expected, builder.obj, 'ids', subschema)
+
+
+def test_set_uid_with_unknown_schema(subschema):
+    expected = {"ids": [{"value": "Frank-Castle", "schema": "a-random-schema"}]}
+
+    builder = SignatureBuilder()
+    builder.set_uid("Frank-Castle", schema="a-random-schema")
+
+    assert_field_invalid(expected, builder.obj, "ids", subschema)
 
 
 def test_add_inspire_role(subschema):
