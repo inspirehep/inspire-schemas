@@ -437,14 +437,14 @@ def author_id_normalize_and_schema(uid, schema=None):
 
     if schema and schema not in _RE_AUTHORS_UID:
         # Schema explicitly specified, but this function can't handle it
-        raise UnknownUIDSchema(uid)
+        return uid, schema
 
     if schema:
         normalized_uid = _get_uid_normalized_in_schema(uid, schema)
         if normalized_uid:
             return normalized_uid, schema
         else:
-            raise SchemaUIDConflict(schema, uid)
+            return uid, schema
 
     match_schema, normalized_uid = None, None
     for candidate_schema in _RE_AUTHORS_UID:
