@@ -253,6 +253,12 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'physics.soc-ph': 'Other',
     'physics.space-ph': 'Astrophysics',
     'quant-ph': 'Quantum Physics',
+    'stat.AP': 'Data Analysis and Statistics',
+    'stat.CO': 'Data Analysis and Statistics',
+    'stat.ML': 'Data Analysis and Statistics',
+    'stat.ME': 'Data Analysis and Statistics',
+    'stat.OT': 'Data Analysis and Statistics',
+    'stat.TH': 'Data Analysis and Statistics'
 }
 
 _JOURNALS_ALREADY_ENDING_WITH_A_LETTER = {
