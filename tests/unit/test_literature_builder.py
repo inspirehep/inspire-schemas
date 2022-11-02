@@ -255,7 +255,7 @@ def test_add_document():
     builder.add_document(
         'key',
         description='description',
-        fulltext=True,
+        fulltext=False,
         hidden=True,
         material='preprint',
         original_url='http://www.example.com/original_url',
@@ -267,7 +267,7 @@ def test_add_document():
     expected = [
         {
             'description': 'description',
-            'fulltext': True,
+            'fulltext': False,
             'hidden': True,
             'key': 'key',
             'material': 'preprint',

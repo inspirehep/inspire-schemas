@@ -933,7 +933,7 @@ class LiteratureBuilder(RecordBuilder):
             'url',
             'filename',
         ):
-            if kwargs.get(dict_key):
+            if kwargs.get(dict_key) is not None:
                 document[dict_key] = kwargs[dict_key]
 
         if key_already_there(document, self.record.get('documents', ())):
