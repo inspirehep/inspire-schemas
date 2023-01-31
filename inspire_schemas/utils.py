@@ -87,15 +87,36 @@ _RE_AUTHORS_UID = {
 
 # Matches new style arXiv ID, with an old-style class specification
 # (Malformed, but appears in APS records)
+RE_ARXIV_POST_2007 = r"((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$"
 RE_ARXIV_POST_2007_CLASS = re.compile(
-    r"(arxiv:)?((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$",
+    r"(arxiv:)?{}".format(RE_ARXIV_POST_2007),
     flags=re.I
 )
 
+RE_ARXIV_PRE_2007 = r"(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$"
 RE_ARXIV_PRE_2007_CLASS = re.compile(
-    r"(arxiv:)?(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$",
+    r"(arxiv:)?{}".format(RE_ARXIV_PRE_2007),
     flags=re.I
 )
+
+RE_ARXIV_DOI_POST_2007_CLASS = re.compile(r"10.48550/arXiv.{}".format(RE_ARXIV_POST_2007), re.I)
+RE_ARXIV_DOI_PRE_2007_CLASS = re.compile(r"10.48550/arXiv.{}".format(RE_ARXIV_PRE_2007), re.I)
+RE_ARXIV_URL_PRE_2007_CLASS = re.compile(r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_PRE_2007), re.I)
+RE_ARXIV_URL_POST_2007_CLASS = re.compile(r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_POST_2007), re.I)
+
+ARXIV_PATTERNS_PRE_2007 = [
+    RE_ARXIV_PRE_2007_CLASS,
+    RE_ARXIV_DOI_PRE_2007_CLASS,
+    RE_ARXIV_URL_PRE_2007_CLASS,
+]
+
+ARXIV_PATTERNS_POST_2007 = [
+    RE_ARXIV_POST_2007_CLASS,
+    RE_ARXIV_DOI_POST_2007_CLASS,
+    RE_ARXIV_URL_POST_2007_CLASS,
+]
+
+ARXIV_PATTERNS = ARXIV_PATTERNS_PRE_2007 + ARXIV_PATTERNS_POST_2007
 
 JOURNALS_IGNORED_IN_OLD_TO_NEW = [
     'econf',
@@ -1064,6 +1085,13 @@ def normalize_isbn(isbn):
         return isbn
 
 
+def _get_first_regex_match(regex_list, obj_to_match):
+    for regex in regex_list:
+        match = regex.match(obj_to_match)
+        if match:
+            return match
+
+
 def is_arxiv(obj):
     """Return ``True`` if ``obj`` contains an arXiv identifier.
 
@@ -1074,8 +1102,7 @@ def is_arxiv(obj):
     if not arxiv_test:
         return False
 
-    matched_arxiv = (RE_ARXIV_PRE_2007_CLASS.match(arxiv_test[0]) or
-                     RE_ARXIV_POST_2007_CLASS.match(arxiv_test[0]))
+    matched_arxiv = _get_first_regex_match(ARXIV_PATTERNS, arxiv_test[0])
 
     if not matched_arxiv:
         return False
@@ -1093,11 +1120,11 @@ def normalize_arxiv(obj):
     """Return a normalized arXiv identifier from ``obj``."""
     obj = obj.split()[0]
 
-    matched_arxiv_pre = RE_ARXIV_PRE_2007_CLASS.match(obj)
+    matched_arxiv_pre = _get_first_regex_match(ARXIV_PATTERNS_PRE_2007, obj)
     if matched_arxiv_pre:
         return ('/'.join(matched_arxiv_pre.group("extraidentifier", "identifier"))).lower()
 
-    matched_arxiv_post = RE_ARXIV_POST_2007_CLASS.match(obj)
+    matched_arxiv_post = _get_first_regex_match(ARXIV_PATTERNS_POST_2007, obj)
     if matched_arxiv_post:
         return matched_arxiv_post.group("identifier")
 
