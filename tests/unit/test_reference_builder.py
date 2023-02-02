@@ -1399,3 +1399,55 @@ def test_reference_builder_is_not_adding_doi_when_already_present():
     rb.add_uid('10.1088/1009-0630/7/4/022')
 
     assert rb.obj['reference']['dois'] == ['10.1088/1009-0630/7/4/022']
+
+
+def test_reference_builder_adds_arxiv_in_doi_format_pre_2007():
+    rb = ReferenceBuilder()
+    rb.add_uid('10.48550/arXiv.hep-th/050502')
+
+    expected = {
+        'reference': {
+            'arxiv_eprint': 'hep-th/050502'
+        },
+    }
+
+    assert rb.obj == expected
+
+
+def test_reference_builder_adds_arxiv_in_doi_format_post_2007():
+    rb = ReferenceBuilder()
+    rb.add_uid('10.48550/arXiv.2212.07286')
+
+    expected = {
+        'reference': {
+            'arxiv_eprint': '2212.07286'
+        },
+    }
+
+    assert rb.obj == expected
+
+
+def test_reference_builder_adds_arxiv_url_pre_2007():
+    rb = ReferenceBuilder()
+    rb.add_uid('https://arXiv.org/abs/hep-th/050502')
+
+    expected = {
+        'reference': {
+            'arxiv_eprint': 'hep-th/050502'
+        },
+    }
+
+    assert rb.obj == expected
+
+
+def test_reference_builder_adds_arxiv_url_pre_2007():
+    rb = ReferenceBuilder()
+    rb.add_uid('https://arXiv.org/pdf/2212.07286')
+
+    expected = {
+        'reference': {
+            'arxiv_eprint': '2212.07286'
+        },
+    }
+
+    assert rb.obj == expected
