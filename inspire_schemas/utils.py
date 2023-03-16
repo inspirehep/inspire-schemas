@@ -36,7 +36,7 @@ import rfc3987
 import six
 from bleach.linkifier import LinkifyFilter
 from bleach.sanitizer import Cleaner
-from idutils import is_orcid
+from idutils import is_isni
 from inspire_utils.date import PartialDate
 from isbn import ISBN
 from jsonschema import Draft4Validator, RefResolver, draft4_format_checker
@@ -122,7 +122,12 @@ JOURNALS_IGNORED_IN_OLD_TO_NEW = [
     'econf',
 ]
 
+ORCID_ISNI_RANGES = [
+    (15000000, 35000000),
+    (900000000000, 900100000000),
+]
 
+ORCID_URLS = ["http://orcid.org/", "https://orcid.org/"]
 # list produced from https://arxiv.org/archive/
 _NEW_CATEGORIES = {
     'acc-phys': 'physics.acc-ph',
@@ -435,6 +440,22 @@ def filter_empty_parameters(func):
         return func(self, *args, **my_kwargs)
 
     return func_wrapper
+
+
+def is_orcid(val):
+    """Test if argument is an ORCID ID.
+    See http://support.orcid.org/knowledgebase/
+        articles/116780-structure-of-the-orcid-identifier
+    """
+    for orcid_url in ORCID_URLS:
+        if val.startswith(orcid_url):
+            val = val[len(orcid_url):]
+            break
+    val = val.replace("-", "").replace(" ", "")
+    if is_isni(val):
+        val = int(val[:-1], 10)  # Remove check digit and convert to int.
+        return any(start <= val <= end for start, end in ORCID_ISNI_RANGES)
+    return False
 
 
 def author_id_normalize_and_schema(uid, schema=None):
