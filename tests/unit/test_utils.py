@@ -33,7 +33,7 @@ import six
 from inspire_schemas import errors, utils
 from inspire_utils.query import ordered
 
-from inspire_schemas.utils import normalize_collaboration_name
+from inspire_schemas.utils import is_orcid, normalize_collaboration_name
 
 
 def test_classify_field_returns_none_on_falsy_value():
@@ -1443,3 +1443,20 @@ def test_get_references_for_schema_returns_proper_schemas():
 )
 def test_normalize_collaboration_name(collaboration_name, expected_normalized_name):
     assert normalize_collaboration_name(collaboration_name) == expected_normalized_name
+
+
+def test_is_orcid():
+    orcids = [
+        "http://orcid.org/0000-0002-1825-0097",
+        "0000-0002-1825-0097",
+        "http://orcid.org/0000-0002-1825-0097",
+        "0000-0002-1694-233X",
+        "http://orcid.org/0000-0002-1694-233X",
+        "0009-0005-6000-7479",
+        "http://orcid.org/0009-0005-6000-7479",
+        "https://orcid.org/0009-0002-4767-9017",
+        "0009-0002-4767-9017",
+        "http://orcid.org/0009-0002-4767-9017",
+    ]
+    for orcid in orcids:
+        assert is_orcid(orcid)
