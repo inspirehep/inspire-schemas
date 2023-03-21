@@ -1,6 +1,6 @@
 ..
     This file is part of INSPIRE-SCHEMAS.
-    Copyright (C) 2016 CERN.
+    Copyright (C) 2023 CERN.
 
     INSPIRE-SCHEMAS is free software; you can redistribute it
     and/or modify it under the terms of the GNU General Public License as
