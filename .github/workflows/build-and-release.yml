@@ -60,14 +60,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install bump2version
 
-      - name: Bump version
-        run: |
-          bump2version patch --tag --verbose
-
       - name: Configure git
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+
+      - name: Bump version
+        run: |
+          bump2version patch --tag --verbose
 
       - name: Push changes
         uses: ad-m/github-push-action@master
