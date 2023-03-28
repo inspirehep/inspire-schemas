@@ -208,7 +208,7 @@ def do_setup():
         long_description_content_type='text/plain',
         install_requires=[
             'bump2version~=0.0,<1; python_version == "2.7"',
-            'bump2version~=1.0',
+            'bump2version~=1.0; python_version >= "3"',
             'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
             'jsonschema~=2.0,>=2.6.0',
