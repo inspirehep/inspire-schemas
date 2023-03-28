@@ -23,3 +23,5 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Schemas and utilities used in inspirehep."""
+
+__version__ = "61.5.1"

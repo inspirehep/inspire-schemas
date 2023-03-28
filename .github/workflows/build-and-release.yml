@@ -1,4 +1,4 @@
-name: Build and release
+name: bump, build and release
 
 on:
   push:
@@ -7,12 +7,11 @@ on:
     branches: [master]
 
 jobs:
-  Test:
+  test:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
         python-version: [2.7, 3.6]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,7 +23,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.14.0
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: "https://registry.npmjs.org"
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -50,14 +49,46 @@ jobs:
         run: |
           ./run-tests.sh
 
+  bump-version:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Bump version
+        run: |
+          bump2version patch --tag --verbose
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+  build-and-release:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
       - name: Build package
-        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: |
           mkdir clean-build
           python setup.py sdist bdist_wheel --universal --dist-dir ./clean-build
 
       - name: Publish package
-        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         uses: pypa/gh-action-pypi-publish@v1.3.1
         with:
           verify_metadata: false
@@ -66,18 +97,15 @@ jobs:
           packages_dir: clean-build/
 
       - name: Build npm package
-        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: |
           npm install --dev
           npm run build
 
       - name: Version npm package
-        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: |
           npm version $(git describe --always --tags) --no-git-tag-version
 
       - name: Publish npm package
-        if: ${{ success() && github.event_name == 'push' && matrix.python-version == '2.7'  }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
