@@ -165,7 +165,6 @@ def _generate_json_schemas():
 
 
 build_requires = [
-    'autosemver==0.5.5',
     'pyyaml==5.4.1'
 ]
 
@@ -209,9 +208,9 @@ def do_setup():
         long_description="Inspire JSON schemas and utilities to use them.",
         long_description_content_type='text/plain',
         install_requires=[
+            'bump2version~=1.0,<2',
             'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
-            'autosemver==0.5.5',
             'jsonschema~=2.0,>=2.6.0',
             'idutils==1.1.11',
             'inspire-utils~=3.0,>=3.0.0',
@@ -230,11 +229,10 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['autosemver==0.5.5', 'pyyaml==5.4.1'],
+        setup_requires=['pyyaml==5.4.1'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
-        autosemver=True,
     )
 
 
