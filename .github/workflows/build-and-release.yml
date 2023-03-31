@@ -124,7 +124,7 @@ jobs:
 
       - name: Version npm package
         run: |
-          npm version $(git describe --always --tags) --no-git-tag-version
+          npm version $(git describe --tags)
 
       - name: Publish npm package
         run: npm publish
