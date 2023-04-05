@@ -43,9 +43,8 @@ jobs:
         run: |
           ./run-tests.sh
 
-  bump-version:
-    needs: test
-    uses: cern-sis/gh-workflows/.github/actions/python-package-bump/action.yml@python-package-bump
+      - name: Bump version
+        uses: cern-sis/gh-workflows/.github/actions/python-package-bump/action.yml@python-package-bump
 
   build-and-release:
     needs: bump-version
