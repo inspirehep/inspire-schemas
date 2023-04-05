@@ -45,7 +45,7 @@ jobs:
 
   bump-version:
     needs: test
-    uses: cern-sis/gh-workflows/.github/workflows/python-package-bump/action.yml@python-package-bump
+    uses: cern-sis/gh-workflows/.github/actions/python-package-bump/action.yml@python-package-bump
 
   build-and-release:
     needs: bump-version
