@@ -111,3 +111,5 @@ node_modules
 
 # rope project files
 .ropeproject
+
+clean-build
