@@ -113,6 +113,7 @@ jobs:
       - name: Version npm package
         run: |
           git status
+          git diff
           npm version $(git describe --tags)
 
       - name: Publish npm package
