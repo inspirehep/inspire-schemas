@@ -44,10 +44,10 @@ jobs:
           ./run-tests.sh
 
       - name: Bump version
-        uses: cern-sis/gh-workflows/.github/actions/python-package-bump/action.yml@python-package-bump
+        uses: cern-sis/gh-workflows/.github/actions/python-package-bump@python-package-bump
 
   build-and-release:
-    needs: bump-version
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
