@@ -45,6 +45,8 @@ jobs:
 
       - name: Bump version
         uses: cern-sis/gh-workflows/.github/actions/python-package-bump@python-package-bump
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-release:
     needs: test
