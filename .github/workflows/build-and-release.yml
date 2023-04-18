@@ -47,15 +47,37 @@ jobs:
     needs: test
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
+      - name: Check out the repository
         uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          fetch-depth: 0
+          python-version: 3.x
+
+      - name: Install bump2version
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install bump2version
+
+      - name: Configure git
+        shell: bash
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
       - name: Bump version
-        uses: cern-sis/gh-workflows/.github/actions/python-package-bump@python-package-bump
+        shell: bash
+        run: |
+          bump2version patch --tag --verbose
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ inputs.token }}
+          branch: ${{ github.ref }}
+          tags: true
 
   build-and-release:
     needs: bump
@@ -109,12 +131,6 @@ jobs:
         run: |
           npm install --dev
           npm run build
-
-      - name: Version npm package
-        run: |
-          git status
-          git diff
-          npm version $(git describe --tags)
 
       - name: Publish npm package
         run: npm publish
