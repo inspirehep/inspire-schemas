@@ -45,6 +45,7 @@ jobs:
 
   bump:
     needs: test
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Check out the repository
@@ -81,6 +82,7 @@ jobs:
 
   publish:
     needs: bump
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
