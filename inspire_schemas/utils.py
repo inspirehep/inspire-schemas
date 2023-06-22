@@ -99,8 +99,8 @@ RE_ARXIV_PRE_2007_CLASS = re.compile(
     flags=re.I
 )
 
-RE_ARXIV_DOI_POST_2007_CLASS = re.compile(r"10.48550/arXiv.{}".format(RE_ARXIV_POST_2007), re.I)
-RE_ARXIV_DOI_PRE_2007_CLASS = re.compile(r"10.48550/arXiv.{}".format(RE_ARXIV_PRE_2007), re.I)
+RE_ARXIV_DOI_POST_2007_CLASS = re.compile(r"(doi:)?10.48550/arXiv.{}".format(RE_ARXIV_POST_2007), re.I)
+RE_ARXIV_DOI_PRE_2007_CLASS = re.compile(r"(doi:)?10.48550/arXiv.{}".format(RE_ARXIV_PRE_2007), re.I)
 RE_ARXIV_URL_PRE_2007_CLASS = re.compile(r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_PRE_2007), re.I)
 RE_ARXIV_URL_POST_2007_CLASS = re.compile(r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_POST_2007), re.I)
 
