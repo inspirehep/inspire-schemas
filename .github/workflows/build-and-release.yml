@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        container: [python:2.7.18-buster, python:3.8-buster]
+        container: ["python:2.7.18-buster", "python:3.8-buster"]
+
     container:
       image: ${{ matrix.container }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
