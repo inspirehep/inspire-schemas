@@ -1403,7 +1403,7 @@ def test_reference_builder_is_not_adding_doi_when_already_present():
 
 def test_reference_builder_adds_arxiv_in_doi_format_pre_2007():
     rb = ReferenceBuilder()
-    rb.add_uid('10.48550/arXiv.hep-th/050502')
+    rb.add_uid('doi:10.48550/arXiv.hep-th/050502')
 
     expected = {
         'reference': {
@@ -1416,7 +1416,7 @@ def test_reference_builder_adds_arxiv_in_doi_format_pre_2007():
 
 def test_reference_builder_adds_arxiv_in_doi_format_post_2007():
     rb = ReferenceBuilder()
-    rb.add_uid('10.48550/arXiv.2212.07286')
+    rb.add_uid('doi:10.48550/arXiv.2212.07286')
 
     expected = {
         'reference': {
