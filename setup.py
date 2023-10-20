@@ -164,7 +164,7 @@ def _generate_json_schemas():
 
 
 build_requires = [
-    'pyyaml~=5.0,>=5.3.0'
+    'pyyaml>=5.3.0'
 ]
 
 tests_require = [
