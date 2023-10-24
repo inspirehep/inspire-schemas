@@ -21,7 +21,8 @@
 # or submit itself to any jurisdiction.
 
 from __future__ import absolute_import, division, print_function
-
+from inspire_schemas.utils import load_schema, validate
+import jsonschema
 import pytest
 
 from inspire_schemas.builders import ConferenceBuilder
@@ -260,6 +261,8 @@ def test_add_private_note_with_source():
 
 
 def test_add_private_note_without_source():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['_private_notes']
     expected = {
         '_collections': ['Conferences'],
         '_private_notes': [{'value': 'Note'}]
@@ -267,11 +270,16 @@ def test_add_private_note_without_source():
     builder = ConferenceBuilder()
     builder.add_private_note('Note', '')
 
-    assert builder.record == expected
-    builder.validate_record()
+    result = builder.record
+
+    assert result == expected
+    assert validate(result['_private_notes'], subschema) is None
 
 
 def test_add_acronym():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['acronyms']
+
     expected = {
         '_collections': ['Conferences'],
         'acronyms': ['SUSY 2018', 'SUSY 2019']
@@ -280,8 +288,10 @@ def test_add_acronym():
     builder.add_acronym('SUSY 2018')
     builder.add_acronym('SUSY 2019')
 
-    assert builder.record == expected
-    builder.validate_record()
+    result = builder.record
+
+    assert result == expected
+    assert validate(result['acronyms'], subschema) is None
 
 
 def test_add_empry_acronym():
@@ -292,10 +302,12 @@ def test_add_empry_acronym():
     builder.add_acronym('')
 
     assert builder.record == expected
-    builder.validate_record()
 
 
 def test_add_address():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['addresses']
+
     expected = {
         '_collections': ['Conferences'],
         'addresses': [
@@ -313,11 +325,16 @@ def test_add_address():
         state='CA'
     )
 
-    assert builder.record == expected
-    builder.validate_record()
+    result = builder.record
+
+    assert result == expected
+    assert validate(result['addresses'], subschema) is None
 
 
 def test_add_alternative_title():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['alternative_titles']
+
     expected = {
         '_collections': ['Conferences'],
         'alternative_titles': [
@@ -327,11 +344,16 @@ def test_add_alternative_title():
     builder = ConferenceBuilder()
     builder.add_alternative_title('Foo', 'Bar', 'arXiv')
 
-    assert builder.record == expected
-    builder.validate_record()
+    result = builder.record
+
+    assert result == expected
+    assert validate(result['alternative_titles'], subschema) is None
 
 
 def test_add_cnum():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['cnum']
+
     expected = {
         '_collections': ['Conferences'],
         'cnum': 'C75-09-03.1'
@@ -339,8 +361,10 @@ def test_add_cnum():
     builder = ConferenceBuilder()
     builder.set_cnum('C75-09-03.1')
 
-    assert builder.record == expected
-    builder.validate_record()
+    result = builder.record
+
+    assert result == expected
+    assert validate(result['cnum'], subschema) is None
 
 
 def test_add_empty_cnum():
@@ -351,7 +375,6 @@ def test_add_empty_cnum():
     builder.set_cnum()
 
     assert builder.record == expected
-    builder.validate_record()
 
 
 def test_add_contact():
@@ -445,6 +468,9 @@ def test_add_external_system_identifier_empty_kwargs():
 
 
 def test_add_inspire_categories():
+    schema = load_schema('conferences')
+    subschema = schema['properties']['inspire_categories']
+
     expected = {
         '_collections': ['Conferences'],
         'inspire_categories': [{'source': 'arxiv', 'term': 'Computing'}]
@@ -452,8 +478,10 @@ def test_add_inspire_categories():
     builder = ConferenceBuilder()
     builder.add_inspire_categories(['Computing'], 'arxiv')
 
-    assert builder.record == expected
-    builder.validate_record()
+    result = builder.record
+
+    assert result == expected
+    assert validate(result['inspire_categories'], subschema) is None
 
 
 def test_add_keyword():
@@ -495,6 +523,13 @@ def test_add_series():
     builder.add_series(series_name, number=1)
 
     assert builder.record == expected
+
+
+def test_conference_builder_title_required():
+    builder = ConferenceBuilder()
+
+    with pytest.raises(jsonschema.exceptions.ValidationError):
+        builder.validate_record()
 
 
 def test_add_title():
