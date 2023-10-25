@@ -306,6 +306,7 @@ properties:
         type: array
         uniqueItems: true
 required:
+- titles
 - _collections
 title: Conference
 type: object
