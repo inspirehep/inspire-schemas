@@ -1384,6 +1384,10 @@ def test_code_to_name_uses_prefers_current_country_over_old_country():
     assert utils.country_code_to_name("SK") == "Slovakia"
 
 
+def test_code_to_name_respects_overrides():
+    assert utils.country_code_to_name("CS") == "Czechoslovakia"
+
+
 def test_get_references_for_schema_returns_proper_schemas():
     expected = {
         u"experiments": [

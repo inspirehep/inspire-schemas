@@ -1,0 +1,13 @@
+{
+  "overrides": [
+    {
+      "alpha_2": "CS",
+      "alpha_3": "CSK",
+      "alpha_4": "CSHH",
+      "common_name": "Czechoslovakia",
+      "name": "Czechoslovakia, Czechoslovak Socialist Republic",
+      "numeric": "200",
+      "withdrawal_date": "1993-06-15"
+    }
+  ]
+}
