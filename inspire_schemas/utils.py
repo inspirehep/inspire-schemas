@@ -380,24 +380,26 @@ SCHEMAS = [
 ]
 
 
-def _load_countries_data(filename):
+def _load_countries_data(dataset_name):
     path = resource_filename(__name__, 'countries')
+    filename = "iso_{}.json".format(dataset_name)
     with open(os.path.join(path, filename)) as json_fd:
-        return json.load(json_fd)
+        return json.load(json_fd)[dataset_name]
 
 
 def _get_country_name(country):
     return country.get("common_name") or country["name"]
 
 
-# https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/master/data/iso_3166-1.json
-COUNTRY_NAME_TO_CODE_ISO_3166_1 = _load_countries_data('iso_3166-1.json')['3166-1']
-# https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/master/data/iso_3166-3.json
-COUNTRY_NAME_TO_CODE_ISO_3166_3 = _load_countries_data('iso_3166-3.json')['3166-3']
+# https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/main/data/iso_3166-1.json
+COUNTRY_NAME_TO_CODE_ISO_3166_1 = _load_countries_data('3166-1')
+# https://salsa.debian.org/iso-codes-team/iso-codes/-/blob/main/data/iso_3166-3.json
+COUNTRY_NAME_TO_CODE_ISO_3166_3 = _load_countries_data('3166-3')
+COUNTRY_NAME_TO_CODE_OVERRIDES = _load_countries_data('overrides')
 
 COUNTRY_CODE_TO_NAME = {
     country['alpha_2']: _get_country_name(country)
-    for country in COUNTRY_NAME_TO_CODE_ISO_3166_3 + COUNTRY_NAME_TO_CODE_ISO_3166_1
+    for country in COUNTRY_NAME_TO_CODE_ISO_3166_3 + COUNTRY_NAME_TO_CODE_ISO_3166_1 + COUNTRY_NAME_TO_CODE_OVERRIDES
 }
 COUNTRY_NAME_TO_CODE = {
     value: key
