@@ -212,7 +212,7 @@ def do_setup():
             'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
             'jsonschema~=2.0,>=2.6.0',
-            'idutils==1.1.11',
+            'idutils==1.2.1',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
             'pyyaml==5.3.0',
