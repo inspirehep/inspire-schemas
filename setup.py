@@ -176,7 +176,8 @@ tests_require = [
     'pytest~=3.0,>=3.6.0',
     'pytest-pep8',
     'mock',
-    'idutils',
+    'idutils==1.2.1',
+    'isbnid',
 ]
 
 docs_require = [
@@ -213,6 +214,7 @@ def do_setup():
             'Unidecode~=1.0,>=1.0.22',
             'jsonschema~=2.0,>=2.6.0',
             'idutils==1.2.1',
+            'isbnid',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
             'pyyaml==5.3.0',
