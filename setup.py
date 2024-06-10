@@ -176,7 +176,8 @@ tests_require = [
     'pytest~=3.0,>=3.6.0',
     'pytest-pep8',
     'mock',
-    'inspire-idutils==1.2.2',
+    'inspire-idutils==1.2.4; python_version == "2.7"',
+    'idutils~=1.2,>=1.2.1; python_version >= "3"',
     'isbnid',
 ]
 
@@ -213,7 +214,8 @@ def do_setup():
             'bleach~=3.0,>=3.2.1',
             'Unidecode~=1.0,>=1.0.22',
             'jsonschema~=2.0,>=2.6.0',
-            'inspire-idutils==1.2.2',
+            'inspire-idutils==1.2.4; python_version == "2.7"',
+            'idutils~=1.2,>=1.2.1; python_version >= "3"',
             'isbnid',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
