@@ -85,8 +85,7 @@ class ConferenceBuilder(RecordBuilder):
         self,
         cities=None,
         country_code=None,
-        latitude=None,
-        longitude=None,
+        coordinates=None,
         place_name=None,
         postal_address=None,
         postal_code=None,
@@ -97,8 +96,7 @@ class ConferenceBuilder(RecordBuilder):
         Args:
             cities (list): list of strings containing cities.
             country_code (str): string of length 2 representing the country.
-            latitude (float): latitude of the location.
-            longitude (float): longitude of the location.
+            coordinates (dict(lon, lat)): a dict of coordinates for loaction
             place_name (str): name of the specific place where this is located.
             postal_address (str): full postal address in original language.
             postal_code (str): postal code of the location.
@@ -108,8 +106,7 @@ class ConferenceBuilder(RecordBuilder):
             'addresses',
             cities=cities,
             country_code=country_code,
-            latitude=latitude,
-            longitude=longitude,
+            coordinates=coordinates,
             place_name=place_name,
             postal_address=postal_address,
             postal_code=postal_code,
