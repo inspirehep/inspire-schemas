@@ -1,0 +1,19 @@
+name: Pull request master
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  python2_tests:
+    uses: ./.github/workflows/test-python-2.yml
+
+  python3_tests:
+    uses: ./.github/workflows/test-python-3.yml
+
+  bump_version:
+    needs: [python2_tests, python3_tests]
+    uses: ./.github/workflows/bump-and-publish.yml
+    secrets: inherit
+

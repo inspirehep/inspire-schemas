@@ -1,0 +1,102 @@
+name: Bump package version and publish to pypi
+
+on:
+  workflow_call:
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.INSPIRE_BOT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Configure git
+        shell: bash
+        run: |
+          git config user.name github-actions
+          git config user.email "38065702145+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install bump2version
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install bump2version
+
+      - name: Bump version
+        shell: bash
+        run: |
+          bump2version patch --tag --verbose
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          branch: ${{ github.ref }}
+          github_token: ${{ secrets.INSPIRE_BOT_TOKEN }}
+          tags: true
+
+  publish:
+    needs: bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 10.14.0
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install npm dependencies
+        run: |
+          npm install buffer-shims
+          npm install --global rollup
+
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+          pip install -e .[tests,docs]
+
+      - name: Show python dependencies
+        run: |
+          python3 --version
+          pip freeze
+
+      - name: Build package
+        run: |
+          python setup.py sdist bdist_wheel --universal --dist-dir ./clean-build
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@v1.9.0
+        with:
+          verify_metadata: false
+          user: __token__
+          password: ${{ secrets.pypi_password }}
+          packages_dir: clean-build/
+
+      - name: Build npm package
+        run: |
+          npm install --dev
+          npm run build
+
+      - name: Publish npm package
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}

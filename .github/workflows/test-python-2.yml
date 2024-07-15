@@ -1,0 +1,36 @@
+name: Test Python 2
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - python: python2
+            pip: pip
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          fetch-depth: 0
+
+      - name: Install python dependencies
+        run: |
+          wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+          ${{ matrix.python }} get-pip.py
+          ${{ matrix.python }} -m ${{ matrix.pip }} install --user --upgrade pip
+          ${{ matrix.python }} -m ${{ matrix.pip }} --no-cache-dir install --user setuptools wheel "urllib3==1.25.11"
+          ${{ matrix.python }} -m ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,elasticsearch5]
+
+      - name: Show python dependencies
+        run: |
+          ${{ matrix.python }} --version
+          ${{ matrix.pip }} freeze
+
+      - name: Run tests
+        run: |
+          ./run-tests.sh
