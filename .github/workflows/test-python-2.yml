@@ -23,8 +23,7 @@ jobs:
           wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
           ${{ matrix.python }} get-pip.py
           ${{ matrix.python }} -m ${{ matrix.pip }} install --user --upgrade pip
-          ${{ matrix.python }} -m ${{ matrix.pip }} --no-cache-dir install --user setuptools wheel "urllib3==1.25.11"
-          ${{ matrix.python }} -m ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,elasticsearch5]
+          ${{ matrix.python }} -m ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
 
       - name: Show python dependencies
         run: |
