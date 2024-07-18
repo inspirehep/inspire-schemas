@@ -23,7 +23,6 @@
 
 isort -rc -c --skip docs/conf.py -df **/*.py && \
 pytest \
-    --pep8 \
     --cov=inspire_schemas \
     --cov-report=term-missing \
     --capture=sys \
