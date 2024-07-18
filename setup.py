@@ -220,7 +220,7 @@ def do_setup():
             'isbnid',
             'inspire-utils @ git+https://github.com/PascalEgn/inspire-utils.git@add-hepcrawl-parsers',
             'isodate',
-            'pyyaml==5.4.1',
+            'pyyaml==5.3.1',
             'pytz',
             'rfc3987',
             'six',
