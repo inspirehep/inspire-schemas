@@ -31,6 +31,7 @@ import json
 def test_json_files_are_created_from_yml_files():
     cur_dir = os.path.dirname(__file__)
     result = call('%s/test_setup.sh' % cur_dir)
+    print(result)
     assert result == 0
 
 
