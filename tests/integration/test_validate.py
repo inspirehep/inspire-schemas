@@ -38,9 +38,7 @@ def get_schema_names(fixtures_path):
     schema_names = []
     _, _, files = six.next(os.walk(fixtures_path))
     schema_names.extend(
-        file_name.split('_', 1)[0]
-        for file_name in files
-        if file_name.endswith('.json')
+        file_name.split('_', 1)[0] for file_name in files if file_name.endswith('.json')
     )
 
     return schema_names
@@ -58,8 +56,7 @@ def change_something(data):
     for key, elem in data.items():
         if isinstance(elem, int):
             data[key] = (
-                "Look, I'm a knight, I'm supposed to get as much peril as I"
-                " can."
+                "Look, I'm a knight, I'm supposed to get as much peril as I" " can."
             )
         else:
             data[key] = 42

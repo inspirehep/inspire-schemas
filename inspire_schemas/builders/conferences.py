@@ -26,7 +26,7 @@
 
 from __future__ import absolute_import, division, print_function
 
-import six
+from inspire_utils.date import normalize_date
 
 from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.utils import (
@@ -34,7 +34,6 @@ from inspire_schemas.utils import (
     sanitize_html,
     validate,
 )
-from inspire_utils.date import normalize_date
 
 
 class ConferenceBuilder(RecordBuilder):
@@ -50,9 +49,7 @@ class ConferenceBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {
-            'value': value
-        }
+        entry = {'value': value}
         if description:
             entry['description'] = description
         return entry
@@ -125,11 +122,7 @@ class ConferenceBuilder(RecordBuilder):
             subtitle (str): subtitle for this title.
             source (str): source for the given title.
         """
-        title_entry = self._sourced_dict(
-            source,
-            title=title,
-            subtitle=subtitle
-        )
+        title_entry = self._sourced_dict(source, title=title, subtitle=subtitle)
 
         self._append_to('alternative_titles', title_entry)
 
@@ -211,10 +204,13 @@ class ConferenceBuilder(RecordBuilder):
             value (str): public note for the current article.
             source (str): source for the given notes.
         """
-        self._append_to('public_notes', self._sourced_dict(
-            source,
-            value=value,
-        ))
+        self._append_to(
+            'public_notes',
+            self._sourced_dict(
+                source,
+                value=value,
+            ),
+        )
 
     @filter_empty_parameters
     def add_series(self, name, number=None):
@@ -290,6 +286,5 @@ class ConferenceBuilder(RecordBuilder):
             source (str): source of the description.
         """
         self.record['short_description'] = self._sourced_dict(
-            source=source,
-            value=sanitize_html(value)
+            source=source, value=sanitize_html(value)
         )

@@ -30,7 +30,7 @@ from inspire_schemas.utils import load_schema, validate
 
 
 @pytest.mark.parametrize(
-    'expected_result,formdata',
+    ('expected_result', 'formdata'),
     [
         (
             True,
@@ -38,36 +38,39 @@ from inspire_schemas.utils import load_schema, validate
                 {
                     'journal_title': 'High Energy Physics Libraries Webzine',
                     'journal_volume': '192',
-                    'artid': '2550'
+                    'artid': '2550',
                 }
-            ]
-        ), (
+            ],
+        ),
+        (
             True,
             [
                 {
                     'journal_title': 'High Energy Physics Libraries Webzine',
                     'journal_volume': '192',
-                    'page_start': '28'
+                    'page_start': '28',
                 }
-            ]
-        ), (
+            ],
+        ),
+        (
             False,
             [
                 {
                     'journal_title': 'High Energy Physics Libraries Webzine',
                     'journal_volume': '192',
                 }
-            ]
-        ), (
+            ],
+        ),
+        (
             False,
             [
                 {
                     'journal_title': 'High Energy Physics Libraries Webzine',
-                    'page_start': '25'
+                    'page_start': '25',
                 }
-            ]
-        )
-    ]
+            ],
+        ),
+    ],
 )
 def test_is_citeable(expected_result, formdata):
     assert is_citeable(formdata) is expected_result
@@ -88,10 +91,7 @@ def test_append_to():
 def test_sourced_dict_local_source():
     builder = LiteratureBuilder('global')
 
-    expected = {
-        'source': 'local',
-        'value': 'foo'
-    }
+    expected = {'source': 'local', 'value': 'foo'}
 
     result = builder._sourced_dict('local', value='foo')
 
@@ -101,10 +101,7 @@ def test_sourced_dict_local_source():
 def test_sourced_dict_global_source():
     builder = LiteratureBuilder('global')
 
-    expected = {
-        'source': 'global',
-        'value': 'foo'
-    }
+    expected = {'source': 'global', 'value': 'foo'}
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -114,9 +111,7 @@ def test_sourced_dict_global_source():
 def test_sourced_dict_no_source():
     builder = LiteratureBuilder()
 
-    expected = {
-        'value': 'foo'
-    }
+    expected = {'value': 'foo'}
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -138,7 +133,7 @@ def test_add_figure():
         url='https://www.example.com/url',
         description='description',
         filename='filename',
-        original_url='http://www.example.com/original_url'
+        original_url='http://www.example.com/original_url',
     )
 
     expected = [
@@ -150,7 +145,7 @@ def test_add_figure():
             'source': 'source',
             'url': 'https://www.example.com/url',
             'filename': 'filename',
-            'original_url': 'http://www.example.com/original_url'
+            'original_url': 'http://www.example.com/original_url',
         },
     ]
     result = builder.record
@@ -158,7 +153,7 @@ def test_add_figure():
     assert validate(result['figures'], subschema) is None
     assert expected == result['figures']
 
-    for key in subschema['items']['properties'].keys():
+    for key in subschema['items']['properties']:
         assert key in result['figures'][0]
 
 
@@ -176,7 +171,7 @@ def test_add_figure_inspire_next():
         source='source',
         url='/api/files/a1/123',
         description='description',
-        original_url='http://www.example.com/original_url'
+        original_url='http://www.example.com/original_url',
     )
 
     expected = [
@@ -187,7 +182,7 @@ def test_add_figure_inspire_next():
             'material': 'publication',
             'source': 'source',
             'url': '/api/files/a1/123',
-            'original_url': 'http://www.example.com/original_url'
+            'original_url': 'http://www.example.com/original_url',
         },
     ]
     result = builder.record
@@ -208,10 +203,10 @@ def test_add_figure_fails_on_duplicated_key():
         url='url',
         description='description',
         filename='filename',
-        original_ur='original_url'
+        original_ur='original_url',
     )
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="There's already a figure with the key key."):
         builder.add_figure(
             'key',
             caption='caption',
@@ -221,7 +216,7 @@ def test_add_figure_fails_on_duplicated_key():
             url='url',
             description='description',
             filename='filename',
-            original_ur='original_url'
+            original_ur='original_url',
         )
 
 
@@ -230,19 +225,18 @@ def test_add_figure_fails_on_non_file_api_relative_url():
     subschema = schema['properties']['figures']
 
     builder = LiteratureBuilder('test')
-
+    builder.add_figure(
+        'key',
+        caption='caption',
+        label='label',
+        material='publication',
+        source='source',
+        url='/not/api/url/for/files',
+        description='description',
+        original_url='http://www.example.com/original_url',
+    )
+    result = builder.record
     with pytest.raises(ValidationError):
-        builder.add_figure(
-            'key',
-            caption='caption',
-            label='label',
-            material='publication',
-            source='source',
-            url='/not/api/url/for/files',
-            description='description',
-            original_url='http://www.example.com/original_url'
-        )
-        result = builder.record
         validate(result['figures'], subschema)
 
 
@@ -261,7 +255,7 @@ def test_add_document():
         original_url='http://www.example.com/original_url',
         source='source',
         url='https://www.example.com/url',
-        filename='filename'
+        filename='filename',
     )
 
     expected = [
@@ -274,7 +268,7 @@ def test_add_document():
             'original_url': 'http://www.example.com/original_url',
             'source': 'source',
             'url': 'https://www.example.com/url',
-            'filename': 'filename'
+            'filename': 'filename',
         },
     ]
     result = builder.record
@@ -282,7 +276,7 @@ def test_add_document():
     assert validate(result['documents'], subschema) is None
     assert expected == result['documents']
 
-    for key in subschema['items']['properties'].keys():
+    for key in subschema['items']['properties']:
         assert key in result['documents'][0]
 
 
@@ -332,10 +326,12 @@ def test_add_document_fails_on_existing_key():
         original_url='http://www.example.com/original_url',
         source='source',
         url='url',
-        filename='filename'
+        filename='filename',
     )
 
-    with pytest.raises(ValueError):
+    with pytest.raises(
+        ValueError, match="There's already a document with the key key."
+    ):
         builder.add_document(
             'key',
             description='description',
@@ -345,7 +341,7 @@ def test_add_document_fails_on_existing_key():
             original_url='http://www.example.com/original_url',
             source='source',
             url='url',
-            filename='filename'
+            filename='filename',
         )
 
 
@@ -354,20 +350,20 @@ def test_add_document_fails_on_non_file_api_relative_url():
     subschema = schema['properties']['documents']
 
     builder = LiteratureBuilder('test')
+    builder.add_document(
+        'key',
+        description='description',
+        fulltext=True,
+        hidden=True,
+        material='preprint',
+        original_url='http://www.example.com/original_url',
+        source='source',
+        url='/not/api/url/for/files',
+        filename='filename',
+    )
+    result = builder.record
 
     with pytest.raises(ValidationError):
-        builder.add_document(
-            'key',
-            description='description',
-            fulltext=True,
-            hidden=True,
-            material='preprint',
-            original_url='http://www.example.com/original_url',
-            source='source',
-            url='/not/api/url/for/files',
-            filename='filename'
-        )
-        result = builder.record
         validate(result['documents'], subschema)
 
 
@@ -383,7 +379,7 @@ def test_make_author():
         raw_affiliations=['CERN, 1211 Geneva', 'SLAC, Stanford'],
         emails=['john.smith@example.org'],
         ids=[('INSPIRE BAI', 'J.Smith.1')],
-        alternative_names=['Johnny Smith']
+        alternative_names=['Johnny Smith'],
     )
     expected = {
         'full_name': 'Smith, John',
@@ -392,14 +388,11 @@ def test_make_author():
             {'value': 'SLAC'},
         ],
         'raw_affiliations': [
-            {
-                'value': 'CERN, 1211 Geneva',
-                'source': 'submitter'
-            },
+            {'value': 'CERN, 1211 Geneva', 'source': 'submitter'},
             {
                 'value': 'SLAC, Stanford',
                 'source': 'submitter',
-            }
+            },
         ],
         'emails': ['john.smith@example.org'],
         'ids': [
@@ -498,24 +491,16 @@ def test_repr_handles_source_none():
 
 def test_repr_handles_source_present():
     builder = LiteratureBuilder('publisher')
-    assert repr(builder).startswith(
-        "LiteratureBuilder(source='publisher', record={"
-    )
+    assert repr(builder).startswith("LiteratureBuilder(source='publisher', record={")
 
 
 def test_add_reference():
     builder = LiteratureBuilder()
     reference = {
         "reference": {
-            "authors": [
-                {
-                    "full_name": "Smith, J."
-                }
-            ],
+            "authors": [{"full_name": "Smith, J."}],
             "label": "1",
-            "publication_info": {
-                "year": 1996
-            }
+            "publication_info": {"year": 1996},
         }
     }
     builder.add_reference(reference)
@@ -528,10 +513,9 @@ def test_add_accelerator_experiment():
     legacy_name = 'FNAL-E-0900'
     experiment_record = {'$ref': 'http://url/api/experiments/123'}
     builder.add_accelerator_experiment('FNAL-E-0900', record=experiment_record)
-    assert builder.record['accelerator_experiments'] == [{
-        'legacy_name': legacy_name,
-        'record': experiment_record
-    }]
+    assert builder.record['accelerator_experiments'] == [
+        {'legacy_name': legacy_name, 'record': experiment_record}
+    ]
 
 
 def test_publication_info_public_note():
@@ -570,11 +554,7 @@ def test_imprint_date_normalizes_date():
 
     result = builder.record['imprints']
 
-    expected = [
-        {
-            'date': '2005-09-19'
-        }
-    ]
+    expected = [{'date': '2005-09-19'}]
 
     assert expected == result
 
@@ -585,11 +565,7 @@ def test_add_book_normalizes_date():
 
     result = builder.record['imprints']
 
-    expected = [
-        {
-            'date': '1990-11-09'
-        }
-    ]
+    expected = [{'date': '1990-11-09'}]
 
     assert expected == result
 
@@ -600,11 +576,7 @@ def test_add_isbn_normalizes_isbn():
 
     result = builder.record['isbns']
 
-    expected = [
-        {
-            'value': '9783642239083'
-        }
-    ]
+    expected = [{'value': '9783642239083'}]
 
     assert expected == result
 
@@ -615,11 +587,7 @@ def test_add_parent_isbn_normalizes_isbn():
 
     result = builder.record['publication_info']
 
-    expected = [
-        {
-            'parent_isbn': '9783642239083'
-        }
-    ]
+    expected = [{'parent_isbn': '9783642239083'}]
 
     assert expected == result
 
