@@ -31,5 +31,5 @@ from .conferences import ConferenceBuilder  # noqa
 from .jobs import JobBuilder  # noqa
 from .literature import LiteratureBuilder  # noqa
 from .references import ReferenceBuilder  # noqa
-from .signatures import SignatureBuilder  # noqa
 from .seminars import SeminarBuilder  # noqa
+from .signatures import SignatureBuilder  # noqa

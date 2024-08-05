@@ -24,12 +24,13 @@
 
 from __future__ import absolute_import, division, print_function
 
-from inspire_schemas.builders.builder import RecordBuilder
-from inspire_schemas.utils import filter_empty_parameters, load_schema
-from inspire_utils.date import normalize_date, PartialDate
+from inspire_utils.date import PartialDate, normalize_date
 from inspire_utils.helpers import force_list
 from inspire_utils.name import normalize_name
 from inspire_utils.record import get_value
+
+from inspire_schemas.builders.builder import RecordBuilder
+from inspire_schemas.utils import filter_empty_parameters, load_schema
 
 RANKS = load_schema('elements/rank')['enum']
 RANKS.append(None)
@@ -51,7 +52,8 @@ class AuthorBuilder(RecordBuilder):
         """Set the name for the author.
 
         Args:
-            :param name: should be the family name, the given names, or both, and at least one is required.
+            :param name: should be the family name,
+                the given names, or both, and at least one is required.
             :type name: string
         """
         self._ensure_field('name', {})
@@ -114,8 +116,12 @@ class AuthorBuilder(RecordBuilder):
         """
         existing_emails = get_value(self.obj, 'email_addresses', [])
         found_email = next(
-            (existing_email for existing_email in existing_emails if existing_email.get('value') == email),
-            None
+            (
+                existing_email
+                for existing_email in existing_emails
+                if existing_email.get('value') == email
+            ),
+            None,
         )
         if found_email is None:
             new_email = {'value': email}
@@ -170,26 +176,34 @@ class AuthorBuilder(RecordBuilder):
         """Add a linkedIn id.
 
         Args:
-            :param id_: Identifier of LinkedIn profile i.e. the part after ``linkedin.com/in/`` in the URL.
+            :param id_: Identifier of LinkedIn profile i.e.
+                the part after ``linkedin.com/in/`` in the URL.
             :type id_: string
         """
-        self._append_to('ids', {
-            'value': id_,
-            'schema': 'LINKEDIN',
-        })
+        self._append_to(
+            'ids',
+            {
+                'value': id_,
+                'schema': 'LINKEDIN',
+            },
+        )
 
     @filter_empty_parameters
     def add_twitter(self, id_):
         """Add a Twitter id.
 
         Args:
-            :param id_: Identifier of Twitter profile i.e. the part after ``twitter.com/`` in the URL.
+            :param id_: Identifier of Twitter profile i.e.
+                the part after ``twitter.com/`` in the URL.
             :type id_: string
         """
-        self._append_to('ids', {
-            'value': id_,
-            'schema': 'TWITTER',
-        })
+        self._append_to(
+            'ids',
+            {
+                'value': id_,
+                'schema': 'TWITTER',
+            },
+        )
 
     @filter_empty_parameters
     def add_orcid(self, id_):
@@ -199,10 +213,13 @@ class AuthorBuilder(RecordBuilder):
             :param id_: The ORCID identifier.
             :type id_: string
         """
-        self._append_to('ids', {
-            'value': id_,
-            'schema': 'ORCID',
-        })
+        self._append_to(
+            'ids',
+            {
+                'value': id_,
+                'schema': 'ORCID',
+            },
+        )
 
     @filter_empty_parameters
     def add_bai(self, id_):
@@ -212,10 +229,13 @@ class AuthorBuilder(RecordBuilder):
             :param id_: The BAI.
             :type id_: string
         """
-        self._append_to('ids', {
-            'value': id_,
-            'schema': 'INSPIRE BAI',
-        })
+        self._append_to(
+            'ids',
+            {
+                'value': id_,
+                'schema': 'INSPIRE BAI',
+            },
+        )
 
     @filter_empty_parameters
     def add_arxiv_category(self, category):
@@ -280,7 +300,9 @@ class AuthorBuilder(RecordBuilder):
         new_institution['curated_relation'] = curated
         new_institution['current'] = current
         self._append_to('positions', new_institution)
-        self.obj['positions'].sort(key=self._get_institution_priority_tuple, reverse=True)
+        self.obj['positions'].sort(
+            key=self._get_institution_priority_tuple, reverse=True
+        )
 
     @staticmethod
     def _get_institution_priority_tuple(institution):
@@ -290,8 +312,14 @@ class AuthorBuilder(RecordBuilder):
 
     @filter_empty_parameters
     def add_project(
-            self, name, record=None, start_date=None, end_date=None, curated=False,
-            current=False, hidden=False
+        self,
+        name,
+        record=None,
+        start_date=None,
+        end_date=None,
+        curated=False,
+        current=False,
+        hidden=False,
     ):
         """Add an experiment that the person worked on.
 
@@ -329,7 +357,9 @@ class AuthorBuilder(RecordBuilder):
         new_experiment['curated_relation'] = curated
         new_experiment['current'] = current
         self._append_to('project_membership', new_experiment)
-        self.obj['project_membership'].sort(key=self._get_work_priority_tuple, reverse=True)
+        self.obj['project_membership'].sort(
+            key=self._get_work_priority_tuple, reverse=True
+        )
 
     @staticmethod
     def _get_work_priority_tuple(work):
@@ -340,7 +370,9 @@ class AuthorBuilder(RecordBuilder):
         )
 
     @filter_empty_parameters
-    def add_advisor(self, name, ids=None, degree_type=None, record=None, curated=False, hidden=False):
+    def add_advisor(
+        self, name, ids=None, degree_type=None, record=None, curated=False, hidden=False
+    ):
         """Add an advisor.
 
         Args:

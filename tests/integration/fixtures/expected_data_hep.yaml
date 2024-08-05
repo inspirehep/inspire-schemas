@@ -33,15 +33,15 @@
             "editor"
          ],
          "affiliations_identifiers": [
-            { 
-               "schema": "GRID", 
-               "value": "grid.21100.32" 
+            {
+               "schema": "GRID",
+               "value": "grid.21100.32"
             },
             {
-               "schema": "ROR", 
+               "schema": "ROR",
                "value": "https://ror.org/039shy520"
             },
-            {  "schema": "GRID", 
+            {  "schema": "GRID",
                "value": "grid.1010.0"
             }
          ],

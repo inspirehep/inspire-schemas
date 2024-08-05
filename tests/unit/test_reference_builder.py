@@ -22,11 +22,10 @@
 
 from __future__ import absolute_import, division, print_function
 
-from inspire_schemas.utils import load_schema, validate
 from inspire_schemas.builders.references import (
     ReferenceBuilder,
-    _split_refextract_authors_str,
 )
+from inspire_schemas.utils import load_schema, validate
 
 
 def test_set_label():
@@ -213,16 +212,14 @@ def test_add_raw_reference_no_source():
 
     builder = ReferenceBuilder()
 
-    builder.add_raw_reference('Phys. Rev. C 80 (doi:10.1103/'
-                              'PhysRevC.80.044313)')
+    builder.add_raw_reference('Phys. Rev. C 80 (doi:10.1103/' 'PhysRevC.80.044313)')
 
     expected = [
         {
             'raw_refs': [
                 {
                     'schema': 'text',
-                    'value': 'Phys. Rev. C 80 (doi:10.1103/'
-                             'PhysRevC.80.044313)',
+                    'value': 'Phys. Rev. C 80 (doi:10.1103/' 'PhysRevC.80.044313)',
                 },
             ],
         },
@@ -239,8 +236,9 @@ def test_add_raw_reference_with_source():
 
     builder = ReferenceBuilder()
 
-    builder.add_raw_reference('Phys. Rev. C 80 (doi:10.1103/'
-                              'PhysRevC.80.044313)', 'arXiv')
+    builder.add_raw_reference(
+        'Phys. Rev. C 80 (doi:10.1103/' 'PhysRevC.80.044313)', 'arXiv'
+    )
 
     expected = [
         {
@@ -248,8 +246,7 @@ def test_add_raw_reference_with_source():
                 {
                     'schema': 'text',
                     'source': 'arXiv',
-                    'value': 'Phys. Rev. C 80 (doi:10.1103/'
-                             'PhysRevC.80.044313)',
+                    'value': 'Phys. Rev. C 80 (doi:10.1103/' 'PhysRevC.80.044313)',
                 },
             ],
         },
@@ -370,9 +367,7 @@ def test_add_url_adds_uid():
     expected = [
         {
             'reference': {
-                'dois': [
-                    '10.1109/NSSMIC.2005.1596597'
-                ],
+                'dois': ['10.1109/NSSMIC.2005.1596597'],
             },
         },
     ]
@@ -413,9 +408,7 @@ def test_add_refextract_authors_str_noninitials():
 
     builder = ReferenceBuilder()
 
-    builder.add_refextract_authors_str(
-        'Igor R. Klebanov and Juan Martin Maldacena'
-    )
+    builder.add_refextract_authors_str('Igor R. Klebanov and Juan Martin Maldacena')
 
     expected = [
         {
@@ -617,9 +610,7 @@ def test_set_pubnote_puts_incomplete_pubnote_in_misc():
 
     expected = [
         {
-            'reference': {
-                'misc': ['Phys.Rev.,D43,']
-            },
+            'reference': {'misc': ['Phys.Rev.,D43,']},
         },
     ]
     result = [builder.obj]
@@ -847,10 +838,12 @@ def test_add_url_handles_ads_ids():
     expected = [
         {
             'reference': {
-                'external_system_identifiers': [{
-                    'schema': 'ADS',
-                    'value': '2018ApJ...853...70U',
-                }],
+                'external_system_identifiers': [
+                    {
+                        'schema': 'ADS',
+                        'value': '2018ApJ...853...70U',
+                    }
+                ],
             },
         },
     ]
@@ -872,10 +865,12 @@ def test_add_url_handles_cds_ids():
     expected = [
         {
             'reference': {
-                'external_system_identifiers': [{
-                    'schema': 'CDS',
-                    'value': '2310556',
-                }],
+                'external_system_identifiers': [
+                    {
+                        'schema': 'CDS',
+                        'value': '2310556',
+                    }
+                ],
             },
         },
     ]
@@ -963,9 +958,7 @@ def test_set_journal_title():
     expected = [
         {
             'reference': {
-                'publication_info': {
-                    'journal_title': 'Phys. Rev. D'
-                },
+                'publication_info': {'journal_title': 'Phys. Rev. D'},
             },
         },
     ]
@@ -986,9 +979,7 @@ def test_set_journal_issue():
     expected = [
         {
             'reference': {
-                'publication_info': {
-                    'journal_issue': '12'
-                },
+                'publication_info': {'journal_issue': '12'},
             },
         },
     ]
@@ -1009,9 +1000,7 @@ def test_set_journal_volume():
     expected = [
         {
             'reference': {
-                'publication_info': {
-                    'journal_volume': '2016'
-                },
+                'publication_info': {'journal_volume': '2016'},
             },
         },
     ]
@@ -1081,11 +1070,13 @@ def test_is_arxiv_matches_valid_categories():
     expected = [
         {
             'reference': {
-                'persistent_identifiers': [{
-                    'value': 'BF/0234502',
-                    'schema': 'HDL',
-                }],
-                'arxiv_eprint': 'math/0311149'
+                'persistent_identifiers': [
+                    {
+                        'value': 'BF/0234502',
+                        'schema': 'HDL',
+                    }
+                ],
+                'arxiv_eprint': 'math/0311149',
             },
         },
     ]
@@ -1106,9 +1097,7 @@ def test_add_url_rejects_empty_cds_id():
     expected = [
         {
             'reference': {
-                'urls': [{
-                    'value': 'https://cds.cern.ch/record/'
-                }],
+                'urls': [{'value': 'https://cds.cern.ch/record/'}],
             },
         },
     ]
@@ -1129,9 +1118,7 @@ def test_add_url_rejects_empty_ads_id():
     expected = [
         {
             'reference': {
-                'urls': [{
-                    'value': 'http://adsabs.harvard.edu/abs/'
-                }],
+                'urls': [{'value': 'http://adsabs.harvard.edu/abs/'}],
             },
         },
     ]
@@ -1198,7 +1185,7 @@ def test_pop_additional_pubnotes_single_pubnote():
                     'journal_title': 'J.Testing',
                     'journal_volume': '42',
                     'page_start': 'R477',
-                    'artid': 'R477'
+                    'artid': 'R477',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1218,7 +1205,9 @@ def test_pop_additional_pubnotes_several_pubnotes():
     subschema = schema['properties']['references']
 
     builder = ReferenceBuilder()
-    builder.add_misc("Additional pubnote: J.Improbable Testing,453,42-47 / some other stuff")
+    builder.add_misc(
+        "Additional pubnote: J.Improbable Testing,453,42-47 / some other stuff"
+    )
     builder.add_misc("Additional pubnote: J.Testing,42,R477")
 
     expected = [
@@ -1228,7 +1217,7 @@ def test_pop_additional_pubnotes_several_pubnotes():
                     'journal_title': 'J.Improbable Testing',
                     'journal_volume': '453',
                     'page_start': '42',
-                    'page_end': '47'
+                    'page_end': '47',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1241,7 +1230,7 @@ def test_pop_additional_pubnotes_several_pubnotes():
                     'journal_title': 'J.Testing',
                     'journal_volume': '42',
                     'page_start': 'R477',
-                    'artid': 'R477'
+                    'artid': 'R477',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1271,7 +1260,7 @@ def test_pop_additional_pubnotes_several_pubnotes_without_remaining_misc():
                     'journal_title': 'J.Improbable Testing',
                     'journal_volume': '453',
                     'page_start': '42',
-                    'page_end': '47'
+                    'page_end': '47',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1284,7 +1273,7 @@ def test_pop_additional_pubnotes_several_pubnotes_without_remaining_misc():
                     'journal_title': 'J.Testing',
                     'journal_volume': '42',
                     'page_start': 'R477',
-                    'artid': 'R477'
+                    'artid': 'R477',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1314,7 +1303,7 @@ def test_pop_additional_pubnotes_includes_label():
                     'journal_title': 'J.Testing',
                     'journal_volume': '42',
                     'page_start': 'R477',
-                    'artid': 'R477'
+                    'artid': 'R477',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1340,10 +1329,7 @@ def test_pop_additional_pubnotes_includes_raw_ref():
     builder.add_raw_reference("A raw ref")
 
     expected_raw_refs = [
-        {
-            'schema': 'text',
-            'value': 'A raw ref'
-        },
+        {'schema': 'text', 'value': 'A raw ref'},
     ]
     expected = [
         {
@@ -1352,7 +1338,7 @@ def test_pop_additional_pubnotes_includes_raw_ref():
                     'journal_title': 'J.Testing',
                     'journal_volume': '42',
                     'page_start': 'R477',
-                    'artid': 'R477'
+                    'artid': 'R477',
                 },
                 'misc': [
                     'Additional pubnote split from previous reference',
@@ -1406,9 +1392,7 @@ def test_reference_builder_adds_arxiv_in_doi_format_pre_2007():
     rb.add_uid('doi:10.48550/arXiv.hep-th/050502')
 
     expected = {
-        'reference': {
-            'arxiv_eprint': 'hep-th/050502'
-        },
+        'reference': {'arxiv_eprint': 'hep-th/050502'},
     }
 
     assert rb.obj == expected
@@ -1419,35 +1403,29 @@ def test_reference_builder_adds_arxiv_in_doi_format_post_2007():
     rb.add_uid('doi:10.48550/arXiv.2212.07286')
 
     expected = {
-        'reference': {
-            'arxiv_eprint': '2212.07286'
-        },
+        'reference': {'arxiv_eprint': '2212.07286'},
     }
 
     assert rb.obj == expected
 
 
-def test_reference_builder_adds_arxiv_url_pre_2007():
+def test_reference_builder_adds_arxiv_url_pre_2007_1():
     rb = ReferenceBuilder()
     rb.add_uid('https://arXiv.org/abs/hep-th/050502')
 
     expected = {
-        'reference': {
-            'arxiv_eprint': 'hep-th/050502'
-        },
+        'reference': {'arxiv_eprint': 'hep-th/050502'},
     }
 
     assert rb.obj == expected
 
 
-def test_reference_builder_adds_arxiv_url_pre_2007():
+def test_reference_builder_adds_arxiv_url_pre_2007_2():
     rb = ReferenceBuilder()
     rb.add_uid('https://arXiv.org/pdf/2212.07286')
 
     expected = {
-        'reference': {
-            'arxiv_eprint': '2212.07286'
-        },
+        'reference': {'arxiv_eprint': '2212.07286'},
     }
 
     assert rb.obj == expected

@@ -22,14 +22,14 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
+import json
 import os
 
-import json
 import pytest
 import yaml
 
 from inspire_schemas import api
-from inspire_schemas.builders import JobBuilder, ConferenceBuilder, SeminarBuilder
+from inspire_schemas.builders import ConferenceBuilder, JobBuilder, SeminarBuilder
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -50,27 +50,27 @@ def load_json_file(file_name):
     return data
 
 
-@pytest.fixture('module')
+@pytest.fixture(scope='module')
 def expected_data_hep():
     return load_file('expected_data_hep.yaml')
 
 
-@pytest.fixture('module')
+@pytest.fixture(scope='module')
 def input_data_hep():
     return load_file('input_data_hep.yaml')
 
 
-@pytest.fixture('module')
+@pytest.fixture(scope='module')
 def job_data():
     return load_json_file('jobs_example.json')
 
 
-@pytest.fixture('module')
+@pytest.fixture(scope='module')
 def conference_data():
     return load_json_file('conferences_example.json')
 
 
-@pytest.fixture('module')
+@pytest.fixture(scope='module')
 def seminar_data():
     return load_json_file('seminars_example.json')
 
@@ -84,28 +84,23 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
     )
     builder.add_arxiv_eprint(
         arxiv_id=input_data_hep['arxiv_id'],
-        arxiv_categories=input_data_hep['arxiv_categories']
+        arxiv_categories=input_data_hep['arxiv_categories'],
     )
-    builder.add_doi(
-        doi=input_data_hep['doi'],
-        material=input_data_hep['material']
-    )
+    builder.add_doi(doi=input_data_hep['doi'], material=input_data_hep['material'])
     author = builder.make_author(
         full_name=input_data_hep['full_name'],
         affiliations=input_data_hep['affiliations'],
         roles=input_data_hep['roles'],
         raw_affiliations=input_data_hep['raw_affiliations'],
-        affiliations_identifiers=input_data_hep['affiliations_identifiers']
+        affiliations_identifiers=input_data_hep['affiliations_identifiers'],
     )
     builder.add_author(author)
 
     builder.add_inspire_categories(
         subject_terms=input_data_hep['subject_terms'],
-        source=input_data_hep['source_categories']
+        source=input_data_hep['source_categories'],
     )
-    builder.add_private_note(
-        private_notes=input_data_hep['private_notes']
-    )
+    builder.add_private_note(private_notes=input_data_hep['private_notes'])
     builder.add_publication_info(
         year=input_data_hep['year'],
         cnum=input_data_hep['cnum'],
@@ -119,14 +114,12 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         parent_record=input_data_hep['parent_record'],
         parent_isbn=input_data_hep['parent_isbn'],
     )
-    builder.add_preprint_date(
-        preprint_date=input_data_hep['preprint_date']
-    )
+    builder.add_preprint_date(preprint_date=input_data_hep['preprint_date'])
     builder.add_thesis(
         defense_date=input_data_hep['defense_date'],
         degree_type=input_data_hep['degree_type'],
         institution=input_data_hep['institution'],
-        date=input_data_hep['date']
+        date=input_data_hep['date'],
     )
     builder.add_accelerator_experiments_legacy_name(
         legacy_name=input_data_hep['legacy_name']
@@ -136,30 +129,25 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         url=input_data_hep['license_url'],
         license=input_data_hep['license'],
         imposing=input_data_hep['license_imposing'],
-        material=input_data_hep['material']
+        material=input_data_hep['material'],
     )
-    builder.add_public_note(
-        public_note=input_data_hep['public_note']
-    )
+    builder.add_public_note(public_note=input_data_hep['public_note'])
     builder.add_title(
         title=input_data_hep['title'],
         subtitle=input_data_hep['subtitle'],
     )
     builder.add_title_translation(
-        title=input_data_hep['title'],
-        language=input_data_hep['language']
+        title=input_data_hep['title'], language=input_data_hep['language']
     )
     builder.add_url(url=input_data_hep['url'])
-    builder.add_report_number(
-        report_number=input_data_hep['report_number']
-    )
+    builder.add_report_number(report_number=input_data_hep['report_number'])
     builder.add_collaboration(collaboration=input_data_hep['collaboration'])
     builder.add_acquisition_source(
         method=input_data_hep['method'],
         submission_number=input_data_hep['submission_number'],
         internal_uid=input_data_hep['internal_uid'],
         email=input_data_hep['email'],
-        orcid=input_data_hep['orcid']
+        orcid=input_data_hep['orcid'],
     )
     builder.add_document_type(document_type=input_data_hep['document_type'])
     builder.add_copyright(
@@ -167,34 +155,22 @@ def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
         year=input_data_hep['year'],
         holder=input_data_hep['holder'],
         statement=input_data_hep['statement'],
-        url=input_data_hep['copyright_url']
+        url=input_data_hep['copyright_url'],
     )
-    builder.add_number_of_pages(
-        number_of_pages=input_data_hep['number_of_pages']
-    )
-    builder.add_collection(
-        collection=input_data_hep['collection']
-    )
-    builder.add_publication_type(
-        publication_type=input_data_hep['publication_type']
-    )
-    builder.add_book_edition(
-        edition=input_data_hep['book_edition']
-    )
+    builder.add_number_of_pages(number_of_pages=input_data_hep['number_of_pages'])
+    builder.add_collection(collection=input_data_hep['collection'])
+    builder.add_publication_type(publication_type=input_data_hep['publication_type'])
+    builder.add_book_edition(edition=input_data_hep['book_edition'])
     builder.add_book(
         publisher=input_data_hep['publisher'],
         place=input_data_hep['place'],
-        date=input_data_hep['imprint_date']
+        date=input_data_hep['imprint_date'],
     )
     builder.add_book_series(
-        title=input_data_hep['title'],
-        volume=input_data_hep['book_volume']
+        title=input_data_hep['title'], volume=input_data_hep['book_volume']
     )
     for isbn in input_data_hep['isbns']:
-        builder.add_isbn(
-            isbn=isbn['code'],
-            medium=isbn['type_of_isbn']
-        )
+        builder.add_isbn(isbn=isbn['code'], medium=isbn['type_of_isbn'])
     builder.set_core(core=input_data_hep['core'])
     builder.set_refereed(refereed=input_data_hep['refereed'])
     builder.set_withdrawn(withdrawn=input_data_hep['withdrawn'])
@@ -228,7 +204,7 @@ def test_job_builder(job_data):
         'legacy_version': job_data['legacy_version'],
         'new_record': job_data['new_record'],
         'public_notes': job_data['public_notes'],
-        'self': job_data['self']
+        'self': job_data['self'],
     }
     builder = JobBuilder(start_data)
 
@@ -353,7 +329,9 @@ def test_conference_builder(conference_data):
 
     inspire_cats = ["Gravitation and Cosmology", "General Physics"]
     builder.add_inspire_categories(subject_terms=inspire_cats, source="user")
-    builder.add_inspire_categories(subject_terms=["Math and Math Physics"], source="curator")
+    builder.add_inspire_categories(
+        subject_terms=["Math and Math Physics"], source="curator"
+    )
     builder.add_inspire_categories(subject_terms=["Astrophysics"], source="magpie")
 
     keywords = conference_data['keywords']
@@ -400,7 +378,7 @@ def test_seminar_builder(seminar_data):
         'acquisition_source': seminar_data['acquisition_source'],
         'new_record': seminar_data['new_record'],
         'public_notes': seminar_data['public_notes'],
-        'self': seminar_data['self']
+        'self': seminar_data['self'],
     }
     builder = SeminarBuilder(start_data)
 
@@ -413,7 +391,9 @@ def test_seminar_builder(seminar_data):
 
     inspire_categories = seminar_data['inspire_categories']
     for category in inspire_categories:
-        builder.add_inspire_categories(subject_terms=[category['term']], source=category.get('source'))
+        builder.add_inspire_categories(
+            subject_terms=[category['term']], source=category.get('source')
+        )
 
     keywords = seminar_data['keywords']
     for keyword in keywords:

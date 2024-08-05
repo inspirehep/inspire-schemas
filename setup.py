@@ -27,7 +27,6 @@ from __future__ import absolute_import, division, print_function
 
 import json
 import os
-import shutil
 
 from setuptools import find_packages, setup
 from setuptools.command import develop, install, sdist
@@ -64,18 +63,18 @@ def _resolve_json_schema(json_schema, path):
     import yaml
 
     if isinstance(json_schema, list):
-        json_schema = [
-            _resolve_json_schema(item, path) for item in json_schema
-        ]
+        json_schema = [_resolve_json_schema(item, path) for item in json_schema]
     elif isinstance(json_schema, dict):
         for key in json_schema:
             if key == '$ref' and not isinstance(json_schema[key], dict):
                 subschema_path = os.path.join(path, json_schema[key])
                 subschema_path = os.path.splitext(subschema_path)[0]
-                with open(subschema_path+'.yml', 'rb') as yaml_fd:
+                with open(subschema_path + '.yml', 'rb') as yaml_fd:
                     raw_data = yaml_fd.read()
                 data = yaml.load(raw_data)
-                data = _resolve_json_schema(data, os.path.join(path, os.path.dirname(json_schema[key])))
+                data = _resolve_json_schema(
+                    data, os.path.join(path, os.path.dirname(json_schema[key]))
+                )
                 return data
             else:
                 json_schema[key] = _resolve_json_schema(json_schema[key], path)
@@ -89,9 +88,7 @@ def _yaml2json(yaml_file, json_file):
         raw_data = yaml_fd.read()
     data = yaml.load(raw_data)
     with open(json_file, 'w') as json_fd:
-        json.dump(
-            data, json_fd, indent=4, separators=(',', ': '), sort_keys=True
-        )
+        json.dump(data, json_fd, indent=4, separators=(',', ': '), sort_keys=True)
         json_fd.write('\n')
 
     path = os.path.dirname(yaml_file)
@@ -123,18 +120,17 @@ def _find(basepath, extension='.yml'):
 
 def _generate_country_js_file():
     import json
+
     from inspire_schemas.utils import COUNTRY_CODE_TO_NAME
 
-    schemas_js_dir = os.path.join(
-        os.path.dirname(__file__),
-        'js'
-    )
+    schemas_js_dir = os.path.join(os.path.dirname(__file__), 'js')
     with open(os.path.join(schemas_js_dir, 'countryCodeToName.json'), 'w+') as json_fd:
         json.dump(COUNTRY_CODE_TO_NAME, json_fd)
 
 
 def _generate_country_code(base_path):
     import yaml
+
     from inspire_schemas.utils import COUNTRY_CODE_TO_NAME
 
     countries_code_path = os.path.join(base_path, 'elements', 'country_code.yml')
@@ -143,7 +139,7 @@ def _generate_country_code(base_path):
         'minLength': 2,
         'title': 'ISO 3166-1 or 3166-3 alpha 2 country code',
         'type': 'string',
-        'enum': list(COUNTRY_CODE_TO_NAME.keys())
+        'enum': list(COUNTRY_CODE_TO_NAME.keys()),
     }
 
     with open(countries_code_path, 'w') as yaml_fd:
@@ -151,10 +147,7 @@ def _generate_country_code(base_path):
 
 
 def _generate_json_schemas():
-    schemas_dir = os.path.join(
-        os.path.dirname(__file__),
-        'inspire_schemas/records'
-    )
+    schemas_dir = os.path.join(os.path.dirname(__file__), 'inspire_schemas/records')
 
     _generate_country_code(schemas_dir)
 
@@ -163,9 +156,7 @@ def _generate_json_schemas():
         _yaml2json(yaml_file=yaml_file, json_file=json_file)
 
 
-build_requires = [
-    'pyyaml>=5.3.0'
-]
+build_requires = ['pyyaml>=5.3.0']
 
 tests_require = [
     'check-manifest',
@@ -186,9 +177,14 @@ docs_require = [
     'Sphinx',
 ]
 
+dev_require = [
+    "pre-commit==3.5.0",
+]
+
 extras_require = {
     'docs': docs_require,
     'tests': tests_require,
+    'dev': dev_require,
     'tests:python_version=="2.7"': [
         'unicode-string-literal~=1.0,>=1.1',
     ],
@@ -223,7 +219,8 @@ def do_setup():
             'pytz',
             'rfc3987',
             'six',
-            # requests requires a urllib3 version <1.26 but not 1.25.0 and 1.25.1 we pin it down here to solve dependency problems
+            # requests requires a urllib3 version <1.26 but not 1.25.0 and 1.25.1
+            # we pin it down here to solve dependency problems
             'urllib3>=1.21.1,<1.26,!=1.25.0,!=1.25.1',
         ],
         tests_require=tests_require,
