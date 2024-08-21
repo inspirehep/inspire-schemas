@@ -71,7 +71,7 @@ def _resolve_json_schema(json_schema, path):
                 subschema_path = os.path.splitext(subschema_path)[0]
                 with open(subschema_path + '.yml', 'rb') as yaml_fd:
                     raw_data = yaml_fd.read()
-                data = yaml.load(raw_data)
+                data = yaml.full_load(raw_data)
                 data = _resolve_json_schema(
                     data, os.path.join(path, os.path.dirname(json_schema[key]))
                 )
@@ -86,7 +86,7 @@ def _yaml2json(yaml_file, json_file):
 
     with open(yaml_file, 'rb') as yaml_fd:
         raw_data = yaml_fd.read()
-    data = yaml.load(raw_data)
+    data = yaml.full_load(raw_data)
     with open(json_file, 'w') as json_fd:
         json.dump(data, json_fd, indent=4, separators=(',', ': '), sort_keys=True)
         json_fd.write('\n')
@@ -156,7 +156,7 @@ def _generate_json_schemas():
         _yaml2json(yaml_file=yaml_file, json_file=json_file)
 
 
-build_requires = ['pyyaml>=5.3.0']
+build_requires = ['pyyaml>=6.0,<7.0']
 
 tests_require = [
     'check-manifest',
@@ -174,7 +174,7 @@ tests_require = [
 ]
 
 docs_require = [
-    'jsonschema2rst>=0.1',
+    'jsonschema2rst>=0.1.6',
     'Sphinx',
 ]
 
@@ -216,7 +216,7 @@ def do_setup():
             'isbnid',
             'inspire-utils~=3.0,>=3.0.0',
             'isodate',
-            'pyyaml==5.3.0',
+            'pyyaml>=6.0,<7.0',
             'pytz',
             'rfc3987',
             'six',
@@ -233,7 +233,7 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['pyyaml==5.3.0'],
+        setup_requires=['pyyaml>=6.0,<7.0'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
