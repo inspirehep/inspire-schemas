@@ -213,15 +213,12 @@ def do_setup():
             'inspire-idutils==1.2.4; python_version == "2.7"',
             'idutils~=1.2,>=1.2.1; python_version >= "3"',
             'isbnid',
-            'inspire-utils~=3.0,>=3.0.0',
+            'inspire-utils',
             'isodate',
             'pyyaml==5.3.0',
             'pytz',
             'rfc3987',
             'six',
-            # requests requires a urllib3 version <1.26 but not 1.25.0 and 1.25.1
-            # we pin it down here to solve dependency problems
-            'urllib3>=1.21.1,<1.26,!=1.25.0,!=1.25.1',
         ],
         tests_require=tests_require,
         extras_require=extras_require,
