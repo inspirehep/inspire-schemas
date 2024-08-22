@@ -164,12 +164,13 @@ tests_require = [
     'isort~=4.0,>=4.3.0',
     'pytest-cache',
     'pytest-cov==2.6.1',
-    'pytest~=3.0,>=3.6.0',
+    'pytest',
     'pytest-pep8',
     'mock',
     'inspire-idutils==1.2.4; python_version == "2.7"',
     'idutils~=1.2,>=1.2.1; python_version >= "3"',
     'isbnid',
+    'deepdiff'
 ]
 
 docs_require = [
