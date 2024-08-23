@@ -26,7 +26,7 @@ from __future__ import (
     print_function,
 )
 
-from inspire_utils.parsers.author_xml import AuthorXMLParser
+from inspire_schemas.parsers.author_xml import AuthorXMLParser
 
 
 def test_parsing_author_xml():

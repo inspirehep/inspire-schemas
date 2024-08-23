@@ -29,13 +29,6 @@ from itertools import chain
 import six
 from inspire_utils.dedupers import dedupe_list
 from inspire_utils.helpers import maybe_int
-from inspire_utils.utils import (
-    CONFERENCE_WORDS,
-    THESIS_WORDS,
-    coll_cleanforthe,
-    get_node,
-    split_fullname,
-)
 from pylatexenc.latex2text import (
     EnvironmentTextSpec,
     LatexNodes2Text,
@@ -44,6 +37,13 @@ from pylatexenc.latex2text import (
 )
 
 from inspire_schemas.api import LiteratureBuilder
+from inspire_schemas.parsers.utils import (
+    CONFERENCE_WORDS,
+    THESIS_WORDS,
+    coll_cleanforthe,
+    get_node,
+    split_fullname,
+)
 from inspire_schemas.utils import classify_field, normalize_arxiv_category
 
 RE_CONFERENCE = re.compile(

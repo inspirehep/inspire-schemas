@@ -31,8 +31,8 @@ import json
 import pytest
 import yaml
 from fixtures import get_test_suite_path
-from inspire_utils.parsers.crossref import CrossrefParser
 
+from inspire_schemas.parsers.crossref import CrossrefParser
 from inspire_schemas.utils import validate
 
 
