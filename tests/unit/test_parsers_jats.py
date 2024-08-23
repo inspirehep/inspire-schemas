@@ -32,8 +32,8 @@ import pytest
 import yaml
 from deepdiff import DeepDiff
 from fixtures import get_test_suite_path
-from inspire_utils.parsers.jats import JatsParser
 
+from inspire_schemas.parsers.jats import JatsParser
 from inspire_schemas.utils import validate
 
 

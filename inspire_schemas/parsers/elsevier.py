@@ -28,9 +28,9 @@ import re
 import six
 from inspire_utils.date import PartialDate
 from inspire_utils.helpers import maybe_int, remove_tags
-from inspire_utils.utils import get_node
 
 from inspire_schemas.api import LiteratureBuilder, ReferenceBuilder
+from inspire_schemas.parsers.utils import get_node
 
 DOCTYPE_MAPPING = {
     "abs": "abstract",

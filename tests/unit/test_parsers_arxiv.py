@@ -26,7 +26,7 @@ from __future__ import (
     print_function,
 )
 
-from inspire_utils.parsers.arxiv import ArxivParser
+from inspire_schemas.parsers.arxiv import ArxivParser
 
 
 def test_latex_to_unicode_handles_arxiv_escape_sequences():
