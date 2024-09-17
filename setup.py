@@ -156,7 +156,28 @@ def _generate_json_schemas():
         _yaml2json(yaml_file=yaml_file, json_file=json_file)
 
 
-build_requires = ['pyyaml>=6.0,<7.0']
+build_requires = [
+    'pyyaml>=6.0,<7.0',
+]
+
+install_requires=[
+    'bump2version~=0.0,<1; python_version == "2.7"',
+    'bump2version~=1.0; python_version >= "3"',
+    'bleach~=3.0,>=3.2.1',
+    'Unidecode~=1.0,>=1.0.22',
+    'jsonschema~=2.0,>=2.6.0',
+    'inspire-idutils==1.2.4; python_version == "2.7"',
+    'idutils~=1.2,>=1.2.1; python_version >= "3"',
+    'isbnid',
+    'inspire-utils',
+    'isodate',
+    'pyyaml>=6.0,<7.0',
+    'pytz',
+    'rfc3987',
+    'six',
+    'scrapy',
+    'pylatexenc',
+]
 
 tests_require = [
     'check-manifest',
@@ -205,27 +226,7 @@ def do_setup():
         description='Inspire JSON schemas and utilities to use them.',
         long_description="Inspire JSON schemas and utilities to use them.",
         long_description_content_type='text/plain',
-        install_requires=[
-            'bump2version~=0.0,<1; python_version == "2.7"',
-            'bump2version~=1.0; python_version >= "3"',
-            'bleach~=3.0,>=3.2.1',
-            'Unidecode~=1.0,>=1.0.22',
-            'jsonschema~=2.0,>=2.6.0',
-            'inspire-idutils==1.2.4; python_version == "2.7"',
-            'idutils~=1.2,>=1.2.1; python_version >= "3"',
-            'isbnid',
-            'inspire-utils~=3.0,>=3.0.0',
-            'isodate',
-            'pyyaml>=6.0,<7.0',
-            'pytz',
-            'rfc3987',
-            'six',
-            # requests requires a urllib3 version <1.26 but not 1.25.0 and 1.25.1
-            # we pin it down here to solve dependency problems
-            'urllib3>=1.21.1,<1.26,!=1.25.0,!=1.25.1',
-            'scrapy',
-            'pylatexenc',
-        ],
+        install_requires=install_requires,
         tests_require=tests_require,
         extras_require=extras_require,
         build_requires=build_requires,
@@ -233,7 +234,7 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['pyyaml>=6.0,<7.0'],
+        setup_requires=install_requires,
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
