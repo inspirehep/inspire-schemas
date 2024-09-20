@@ -234,7 +234,7 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=install_requires,
+        setup_requires=['pyyaml>=6.0,<7.0'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
