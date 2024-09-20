@@ -82,7 +82,7 @@ jobs:
   publish:
     needs: bump
     if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -90,9 +90,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.x
 
       - name: Setup nodejs
         uses: actions/setup-node@v1
