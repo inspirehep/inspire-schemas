@@ -82,17 +82,17 @@ jobs:
   publish:
     needs: bump
     if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8.10'
+          python-version: "3.11"
 
       - name: Setup nodejs
         uses: actions/setup-node@v1
@@ -108,8 +108,8 @@ jobs:
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip --no-cache-dir install setuptools wheel
-          pip --no-cache-dir install -e .[tests,docs]
+          pip install setuptools wheel
+          pip install -e .[tests,docs]
 
       - name: Show python dependencies
         run: |
