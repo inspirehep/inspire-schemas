@@ -1,6 +1,6 @@
 {
     "name": "inspire-schemas",
-    "version": "61.5.35",
+    "version": "61.5.36",
     "description": "Inspire schemas.",
     "main": "js/build/index.js",
     "module": "js/build/index.es.js",
