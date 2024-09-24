@@ -14,8 +14,8 @@
         "access": "public"
     },
     "devDependencies": {
-        "@rollup/plugin-json": "^4.0.3",
-        "rollup": "^2.11.2",
+        "@rollup/plugin-json": "^6.1.0",
+        "rollup": "^4.22.4",
         "json-schema-faker": "^0.4.1",
         "moment": "^2.19.1"
     }
