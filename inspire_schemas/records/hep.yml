@@ -667,6 +667,31 @@ properties:
             are all curated eventually, whereas non-core records are
             not systematically curated.
         type: boolean
+    data:
+        items:
+            properties:
+                curated_relation:
+                    default: false
+                    type: boolean
+                doi:
+                    additionalProperties: false
+                    properties:
+                        source:
+                            $ref: elements/source.json
+                        value:
+                            minLength: 1
+                            pattern: ^10\.\d+(\.\d+)?/\S+$
+                            title: DOI
+                            type: string
+                    required:
+                    - value
+                    type: object
+                record:
+                    $ref: elements/json_reference/data.json
+        minItems: 1
+        title: List of associated datasets
+        type: array
+        uniqueItems: true
     deleted:
         description: |-
             :MARC: ``980__a/c:deleted``
