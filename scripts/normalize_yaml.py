@@ -102,7 +102,7 @@ def process_tree(value, key=None, parent_key=None):
                 )
 
     def _is_leaf(value):
-        return not isinstance(value, collections.Container) or isinstance(value, str)
+        return not isinstance(value, collections.abc.Container) or isinstance(value, str)
 
     if _is_leaf(value):
         return _process_leaf(value, key, parent_key)

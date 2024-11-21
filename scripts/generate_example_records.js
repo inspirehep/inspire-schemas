@@ -79,6 +79,6 @@ for (var schema_name of schemas) {
     var full_schema = resolve_schema(unresolved_schema, "inspire_schemas/records")
     var sample = jsf(full_schema)
     var outfile = schema_name + '_example.json'
-    fs.writeFile(outfile, JSON.stringify(sample, null, 4))
+    fs.writeFileSync(outfile, JSON.stringify(sample, null, 4))
     console.log('    Generated at ' + outfile)
 }

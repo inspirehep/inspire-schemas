@@ -23,6 +23,7 @@
 from __future__ import absolute_import, division, print_function
 
 import inspect
+import sys
 
 import pytest
 from jsonschema import ValidationError
@@ -249,6 +250,7 @@ def test_add_raw_affiliation(subschema):
     assert_field_valid(expected, builder.obj, 'raw_affiliations', subschema)
 
 
+@pytest.mark.skipif(sys.version_info < (3,3), reason="`inspect.signature` requires python 3")
 @pytest.mark.parametrize('field_name', dir(SignatureBuilder))
 def test_public_method_ignores_none_params(field_name):
     builder = SignatureBuilder()
@@ -257,7 +259,7 @@ def test_public_method_ignores_none_params(field_name):
     if not inspect.ismethod(field) or field_name.startswith('_'):
         return
 
-    argc = len(inspect.getargspec(field).args) - 1
+    argc = len(inspect.signature(field).parameters)
 
     if argc == 0:
         return

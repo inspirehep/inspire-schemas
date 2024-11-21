@@ -185,7 +185,7 @@ tests_require = [
     'isort~=4.0,>=4.3.0',
     'pytest-cache',
     'pytest-cov==2.6.1',
-    'pytest',
+    'pytest~=6.0,>=6.2.5',
     'pytest-pep8',
     'mock',
     'inspire-idutils==1.2.4; python_version == "2.7"',
@@ -238,7 +238,7 @@ def do_setup():
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
-        version="61.5.41",
+        version="61.6.0",
     )
 
 

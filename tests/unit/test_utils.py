@@ -1424,6 +1424,7 @@ def test_get_references_for_schema_returns_proper_schemas():
             ("jobs", u"accelerator_experiments.record.$ref"),
         ],
         u"hep": [
+            ("data", u"literature.record.$ref"),
             ("hep", u"references.record.$ref"),
             ("hep", u"publication_info.parent_record.$ref"),
             ("hep", u"related_records.record.$ref"),
@@ -1438,7 +1439,10 @@ def test_get_references_for_schema_returns_proper_schemas():
             ("seminars", u"contact_details.record.$ref"),
             ("jobs", u"contact_details.record.$ref"),
         ],
-        u'data': [('hep', u'references.record.$ref')],
+        u'data': [
+            ('hep', u'references.record.$ref'),
+            ('hep', u'data.record.$ref'),
+        ],
         u"journals": [
             ("hep", u"publication_info.journal_record.$ref"),
             ('hep', u'references.reference.publication_info.journal_record.$ref'),
