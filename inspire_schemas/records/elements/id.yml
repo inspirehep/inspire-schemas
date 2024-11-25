@@ -340,6 +340,46 @@ anyOf:
     properties:
         schema:
             enum:
+            - BLUESKY
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                A Bluesky/ATProto handle, often preceded by ``@``.
+
+                :example: ``kylecranmer.bsky.social``
+            minLength: 1
+            pattern: ^([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$
+            type: string
+    required:
+    - schema
+    - value
+    title: Bluesky handle
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - MASTODON
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                A Mastodon/ActivityPub handle, often preceded by ``@``.
+
+                :example: ``freyablekman@sciencemastodon.com``
+            minLength: 1
+            pattern: ^.+@.+$
+            type: string
+    required:
+    - schema
+    - value
+    title: Mastodon handle
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
             - LINKEDIN
             minLength: 1
             type: string

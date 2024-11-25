@@ -27,7 +27,7 @@ from __future__ import print_function
 import os
 from io import open
 
-from autosemver.packaging import get_changelog, get_current_version
+from inspire_schemas import __version__
 from jsonschema2rst.parser_runner import run_parser
 
 
@@ -45,15 +45,6 @@ _generate_schemas_doc()
 
 if not os.path.exists('_build/html/_static'):
     os.makedirs('_build/html/_static')
-
-with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
-    changelog_fd.write(
-        get_changelog(
-            project_dir='..',
-            bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
-        )
-    )
-
 
 # -- General configuration ------------------------------------------------
 
@@ -101,7 +92,7 @@ author = u'CERN'
 # The short X.Y version.
 
 # Get the version string. Cannot be done with import!
-version = get_current_version(project_dir='..')
+version = __version__
 
 # The full version, including alpha/beta/rc tags.
 release = version
