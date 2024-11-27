@@ -384,6 +384,7 @@ SCHEMAS = [
     "seminars",
     "jobs",
     "journals",
+    "data",
 ]
 
 
