@@ -192,6 +192,8 @@ properties:
                     :MARC: ``999C5n``
                 minLength: 1
                 type: string
+            journal_record:
+                $ref: json_reference/journal.json
             journal_title:
                 description: |-
                     :MARC: first part of ``999C5s``
@@ -239,8 +241,6 @@ properties:
                     cited document is a book chapter.
                 minLength: 1
                 type: string
-            journal_record:
-                $ref: json_reference/journal.json
             year:
                 description: |-
                     :MARC: ``999C5y``

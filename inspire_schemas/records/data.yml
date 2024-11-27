@@ -30,6 +30,322 @@ properties:
         title: Collections to which record belongs
         type: array
         uniqueItems: true
+    abstracts:
+        items:
+            $ref: elements/sourced_value.json
+        minItems: 1
+        title: List of abstracts
+        type: array
+        uniqueItems: true
+    accelerator_experiments:
+        items:
+            additionalProperties: false
+            properties:
+                accelerator:
+                    description: |-
+                        :MARC: ``693__a``
+
+                        If present, :ref:`institution` should contain the
+                        institution where this accelerator is located.
+
+                        .. note::
+
+                            Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
+                    type: string
+                curated_relation:
+                    default: false
+                    type: boolean
+                experiment:
+                    description: |-
+                        :MARC: not present.
+
+                        If present, :ref:`institution` should contain the
+                        institution where this experiment is located and
+                        :ref:`accelerator` may contain the accelerator that this
+                        experiment is using (if appropriate).
+
+                        .. note::
+
+                            Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
+                    type: string
+                institution:
+                    description: |-
+                        :MARC: not present.
+
+                        .. note::
+
+                            Currently not used, see :ref:`legacy_name`.
+                    minLength: 1
+                    title: Institution hosting the experiment
+                    type: string
+                legacy_name:
+                    description: |-
+                        :MARC: ``693__e``
+
+                        This field is used when migrating from legacy instead
+                        of separate :ref:`institution`, :ref:`accelerator` and
+                        :ref:`experiment`. In the future, it will be deprecated and
+                        the other fields will be used instead.
+
+                        :example: ``CERN-LHC-CMS``
+                    minLength: 1
+                    title: Identifier of the experiment on legacy
+                    type: string
+                record:
+                    $ref: elements/json_reference/experiment.json
+            type: object
+        minItems: 1
+        title: List of related accelerators/experiments
+        type: array
+        uniqueItems: true
+    acquisition_source:
+        $ref: elements/acquisition_source.json
+    authors:
+        items:
+            additionalProperties: false
+            properties:
+                affiliations:
+                    items:
+                        additionalProperties: false
+                        properties:
+                            curated_relation:
+                                type: boolean
+                            record:
+                                $ref: elements/json_reference/institution.json
+                            value:
+                                description: |-
+                                    :MARC: ``100/700/701__u``
+
+                                    Currently, the old
+                                    :ref:`institutions.json#/properties/legacy_ICN`
+                                    is used here. In the future, this will
+                                    change and become the new
+                                    :ref:`institutions.json#/properties/ICN`.
+                                minLength: 1
+                                title: ICN of affiliation
+                                type: string
+                        required:
+                        - value
+                        type: object
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                affiliations_identifiers:
+                    description: |-
+                        :MARC: ``100/700/701__t``
+
+                        List of identifiers of this institution on external systems.
+                    items:
+                        anyOf:
+                        -   additionalProperties: false
+                            properties:
+                                schema:
+                                    description: |-
+                                        :MARC: first part of ``100/700/701__t`` before the :
+                                    enum:
+                                    - GRID
+                                    minLength: 1
+                                    type: string
+                                value:
+                                    description: |-
+                                        :MARC: last part of ``100/700/701__t`` after the :
+                                    minLength: 1
+                                    pattern: ^grid\.\d+\.\w+$
+                                    type: string
+                            required:
+                            - schema
+                            - value
+                            title: GRID identifier
+                            type: object
+                        -   additionalProperties: false
+                            properties:
+                                schema:
+                                    description: |-
+                                        :MARC: first part of ``100/700/701__t`` before the :
+                                    enum:
+                                    - ROR
+                                    minLength: 1
+                                    type: string
+                                value:
+                                    description: |-
+                                        :MARC: last part of ``100/700/701__t`` after the :
+                                    minLength: 1
+                                    pattern: ^https://ror\.org/0\w{6}\d{2}$
+                                    type: string
+                            required:
+                            - schema
+                            - value
+                            title: ROR identifier
+                            type: object
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                alternative_names:
+                    items:
+                        description: |-
+                            :MARC: ``100/700/701__q``
+                            :example: ``楼 立洋``
+                            :example: ``Smith, Joe John``
+                        minLength: 1
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                credit_roles:
+                    items:
+                        description: |-
+                            :MARC: not present.
+
+                            Role of the author according to the `Contributor
+                            Roles Taxonomy (CRediT)
+                            <https://credit.niso.org/>`_
+                        enum:
+                        - Conceptualization
+                        - Data curation
+                        - Formal analysis
+                        - Funding acquisition
+                        - Investigation
+                        - Methodology
+                        - Project administration
+                        - Resources
+                        - Software
+                        - Supervision
+                        - Validation
+                        - Visualization
+                        - Writing - original draft
+                        - Writing - review & editing
+                        minLength: 1
+                        title: CRedit role of author
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                curated_relation:
+                    default: false
+                    type: boolean
+                emails:
+                    description: |-
+                        :MARC: ``100/700/701__m``
+                    items:
+                        format: email
+                        minLength: 1
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                full_name:
+                    description: |-
+                        :MARC: ``100/700/701__a``
+
+                        Author name in Latin alphabet (may contain diacritics).
+                        Should be of the form 'family names, first names', and,
+                        except for a possible reordering, be exactly as on the
+                        paper.
+
+                        :example: ``Smith Davis, John F.K.``
+                    minLength: 1
+                    pattern: ^[^,]+(,[^,]+)?(,?[^,]+)?$
+                    title: Author name
+                    type: string
+                ids:
+                    description: |-
+                        :MARC: ``100/700/701__i/j``
+                    items:
+                        $ref: elements/id.json
+                    minItems: 1
+                    title: Identifiers of the author
+                    type: array
+                    uniqueItems: true
+                inspire_roles:
+                    items:
+                        default: author
+                        description: |-
+                            ``supervisor``
+                                :MARC: ``701`` is used for supervisor metadata.
+
+                                This person is a thesis supervisor. Should be
+                                used together with the ``thesis``
+                                :ref:`hep.json#/properties/document_type`.
+
+                            ``editor``
+                                :MARC: ``100/700__e:ed.``
+
+                                This person is an editor of the conference
+                                proceedings. Should be used together with the
+                                ``proceedings``
+                                :ref:`hep.json#/properties/document_type`.
+                        enum:
+                        - author
+                        - supervisor
+                        - editor
+                        minLength: 1
+                        type: string
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                raw_affiliations:
+                    description: |-
+                        :MARC: ``100/700/701__v``
+
+                        List of full affiliations, as written on the paper.
+                    items:
+                        $ref: elements/sourced_value.json
+                    minItems: 1
+                    type: array
+                    uniqueItems: true
+                record:
+                    $ref: elements/json_reference/author.json
+                signature_block:
+                    description: |-
+                        Phonetic representation of the name, needed for author
+                        disambiguation. This field should not be edited
+                        manually.
+                    minLength: 1
+                    type: string
+                uuid:
+                    description: |-
+                        Used by the BEARD author disambiguation tool. This
+                        field should not be edited manually.
+                    minLength: 1
+                    pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                    title: UUID
+                    type: string
+            required:
+            - full_name
+            type: object
+        minItems: 1
+        title: Authors
+        type: array
+        uniqueItems: false
+    collaborations:
+        items:
+            additionalProperties: false
+            properties:
+                record:
+                    $ref: elements/json_reference/experiment.json
+                value:
+                    description: |-
+                        :MARC: ``710__g``
+
+                        Collaboration name as it appears on the paper (with the
+                        ``Collaboration`` suffix dropped).
+
+                        :example: ``ATLAS`` instead of ``ATLAS Collaboration``
+                        :example: ``Particle Data Group``
+                    minLength: 1
+                    title: Collaboration name
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        required:
+        - value
+        title: List of collaborations
+        type: array
+        uniqueItems: true
     control_number:
         description: |-
             :MARC: ``001``
@@ -37,6 +353,11 @@ properties:
             Read-only field. Also called ``record ID`` or ``recid``.
         title: ID of current record
         type: integer
+    creation_date:
+        format: date
+        minLength: 1
+        title: Creation date of the dataset
+        type: string
     deleted:
         description: |-
             :MARC: ``980__a/c:deleted``
@@ -80,6 +401,23 @@ properties:
         title: List of DOIs
         type: array
         uniqueItems: true
+    keywords:
+        items:
+            additionalProperties: false
+            properties:
+                source:
+                    $ref: elements/source.json
+                value:
+                    minLength: 1
+                    title: A keyword
+                    type: string
+            required:
+            - value
+            type: object
+        minItems: 1
+        title: List of keywords
+        type: array
+        uniqueItems: true
     legacy_version:
         description: |-
             :MARC: ``005``
@@ -88,6 +426,31 @@ properties:
         minLength: 1
         title: Last record update
         type: string
+    literature:
+        items:
+            properties:
+                curated_relation:
+                    default: false
+                    type: boolean
+                doi:
+                    additionalProperties: false
+                    properties:
+                        source:
+                            $ref: elements/source.json
+                        value:
+                            minLength: 1
+                            pattern: ^10\.\d+(\.\d+)?/\S+$
+                            title: DOI
+                            type: string
+                    required:
+                    - value
+                    type: object
+                record:
+                    $ref: elements/json_reference/literature.json
+        minItems: 1
+        title: List of associated papers
+        type: array
+        uniqueItems: true
     new_record:
         $ref: elements/json_reference/data.json
         description: |-
@@ -98,5 +461,50 @@ properties:
         title: Record replacing this one
     self:
         $ref: elements/json_reference/data.json
+    texkeys:
+        description: |-
+            :MARC: ``035`` with ``9:SPIRESTeX`` or ``9:INSPIRETeX``
+
+            These keys are used to cite this record using TeX/LaTeX/BibTex. The
+            first one is the valid one being shown in the TeX display formats,
+            the others are the obsolete ones which are kept in order to
+            identify this record by those texkeys.
+        items:
+            minLength: 1
+            type: string
+        minItems: 1
+        title: List of TeX keys
+        type: array
+        uniqueItems: true
+    titles:
+        description: |-
+            :MARC: ``245``
+
+            There can be several because the preprint title often differs from
+            the published version. The title should be kept as on the document
+            and in the same language as the document (see :ref:`languages`).
+
+            Translations go into :ref:`title_translations`.
+        items:
+            $ref: elements/title.json
+        minItems: 1
+        title: List of titles
+        type: array
+        uniqueItems: true
+    urls:
+        description: |-
+            :MARC: ``8564``
+
+            URLs to external resources related to this record.
+
+            .. note::
+
+                Links to internal resources are found in :ref:`figures` or
+                :ref:`documents`.
+        items:
+            $ref: elements/url.json
+        minItems: 1
+        type: array
+        uniqueItems: true
 title: A data record
 type: object
