@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
-# Copyright (C) 2016-2019 CERN.
+# Copyright (C) 2016-2024 CERN.
 #
 # INSPIRE-SCHEMAS is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -29,7 +29,7 @@ import pytest
 import yaml
 
 from inspire_schemas import api
-from inspire_schemas.builders import ConferenceBuilder, JobBuilder, SeminarBuilder
+from inspire_schemas.builders import ConferenceBuilder, DataBuilder, JobBuilder, SeminarBuilder
 
 FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 
@@ -59,12 +59,6 @@ def expected_data_hep():
 def input_data_hep():
     return load_file('input_data_hep.yaml')
 
-
-@pytest.fixture(scope='module')
-def job_data():
-    return load_json_file('jobs_example.json')
-
-
 @pytest.fixture(scope='module')
 def conference_data():
     return load_json_file('conferences_example.json')
@@ -73,6 +67,16 @@ def conference_data():
 @pytest.fixture(scope='module')
 def seminar_data():
     return load_json_file('seminars_example.json')
+
+
+@pytest.fixture(scope='module')
+def job_data():
+    return load_json_file('jobs_example.json')
+
+
+@pytest.fixture(scope='module')
+def data_data():
+    return load_json_file('data_example.json')
 
 
 def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
@@ -435,3 +439,69 @@ def test_seminar_builder(seminar_data):
     builder.validate_record()
 
     assert builder.record == seminar_data
+
+
+def test_data_builder(data_data):
+    start_data = {
+        '_bucket': data_data['_bucket'],
+        '_collections': data_data['_collections'][0],
+        'control_number': data_data['control_number'],
+        'deleted': data_data['deleted'],
+        'deleted_records': data_data['deleted_records'],
+        'creation_date': data_data['creation_date'],
+        'legacy_version': data_data['legacy_version'],
+        'new_record': data_data['new_record'],
+        'self': data_data['self'],
+    }
+    builder = DataBuilder(start_data)
+
+    dois = data_data['dois']
+    for doi in dois:
+        builder.add_doi(doi['value'], doi['source'])
+    assert builder.record['dois'] == dois
+
+    collaborations = data_data['collaborations']
+    for collaboration in collaborations:
+        builder.add_collaboration(collaboration['value'])
+    assert len(builder.record['collaborations']) == len(collaborations)
+
+    accelerator_experiments = data_data['accelerator_experiments']
+    for experiment in accelerator_experiments:
+        builder.add_accelerator_experiment(experiment['legacy_name'])
+    assert len(builder.record['accelerator_experiments']) == len(accelerator_experiments)
+
+    abstracts = data_data['abstracts']
+    for abstract in abstracts:
+        builder.add_abstract(abstract["value"], abstract["source"])
+    assert builder.record['abstracts'] == abstracts
+
+    keywords = data_data['keywords']
+    for keyword in keywords:
+        builder.add_keyword(keyword=keyword['value'], source=keyword['source'])
+    assert builder.record['keywords'] == keywords
+
+    literatures = data_data['literature']
+    for literature in literatures:
+        builder.add_literature(literature.get("doi"), literature.get('record'))
+    assert builder.record['literature'] == literatures
+
+    urls = data_data['urls']
+    for url in urls:
+        builder.add_url(**url)
+    assert builder.record['urls'] == urls
+
+    titles = data_data['titles']
+    for title in titles:
+        builder.add_title(**title)
+    assert builder.record['titles'] == titles
+
+    acquisition_source = data_data['acquisition_source']
+    builder.add_acquisition_source(**acquisition_source)
+    assert builder.record['acquisition_source'] == acquisition_source
+
+    authors = data_data['authors']
+    for author in authors:
+        builder.add_author(author)
+    assert builder.record['authors'] == authors
+
+    builder.validate_record()
