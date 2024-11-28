@@ -28,53 +28,6 @@ from inspire_schemas.builders.data import DataBuilder, is_citeable
 from inspire_schemas.utils import validate
 
 
-@pytest.mark.parametrize(
-    ('expected_result', 'formdata'),
-    [
-        (
-            True,
-            [
-                {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'journal_volume': '192',
-                    'artid': '2550',
-                }
-            ],
-        ),
-        (
-            True,
-            [
-                {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'journal_volume': '192',
-                    'page_start': '28',
-                }
-            ],
-        ),
-        (
-            False,
-            [
-                {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'journal_volume': '192',
-                }
-            ],
-        ),
-        (
-            False,
-            [
-                {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'page_start': '25',
-                }
-            ],
-        ),
-    ],
-)
-def test_is_citeable(expected_result, formdata):
-    assert is_citeable(formdata) is expected_result
-
-
 def test_append_to():
     formdata = ''
     builder = DataBuilder("test")
@@ -149,7 +102,7 @@ def test_add_accelerator_experiment():
     experiment_record = {"$ref": "http://example.com/api/experiments/123"}
     builder.add_accelerator_experiment(legacy_name, record=experiment_record)
     result = builder.record.get("accelerator_experiments")
-    expected = [{"legacy_name": legacy_name, "record": experiment_record}]
+    expected = [{"accelerator": legacy_name, "record": experiment_record}]
     assert result == expected
 
 

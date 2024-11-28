@@ -107,20 +107,35 @@ class DataBuilder(RecordBuilder):
         self._append_to('accelerator_experiments', {'legacy_name': legacy_name})
 
     @filter_empty_parameters
-    def add_accelerator_experiment(self, legacy_name, record=None):
-        """Add legacy name in accelerator experiment.
+    def add_accelerator_experiment(
+        self,
+        accelerator=None,
+        curated_relation=None,
+        experiment=None,
+        institution=None,
+        legacy_name=None,
+        record=None,
+    ):
+        """Add experiment to ``accelerator_experiment`` field.
 
-        :type legacy_name: string
-
-        :param record: reference to the experiment record
-        :type record: dict
+        Args:
+            accelerator (str)
+            curated_relation (bool)
+            experiment (str)
+            institution (str)
+            legacy_name (str)
+            record (dict): URL to the referenced resource.
+            When it's string, a new object will be created for record
         """
-        experiment = {'legacy_name': legacy_name}
-
-        if record is not None:
-            experiment['record'] = record
-
-        self._append_to('accelerator_experiments', experiment)
+        self._append_to(
+            'accelerator_experiments',
+            accelerator=accelerator,
+            curated_relation=curated_relation,
+            experiment=experiment,
+            institution=institution,
+            legacy_name=legacy_name,
+            record=record,
+        )
 
     @filter_empty_parameters
     def add_acquisition_source(
@@ -318,21 +333,36 @@ class DataBuilder(RecordBuilder):
 
         self._append_to('titles', title_entry)
 
-    @filter_empty_parameters
-    def add_url(self, url):
-        """Add url.
+    @staticmethod
+    def _prepare_url(value, description=None):
+        """Build url dict satysfying url.yml requirements
 
-        :param url: url for additional information for the current document
-        :type url: string
+        Args:
+            value (str): URL itself
+            description (str): URL description
         """
-        self._append_to('urls', {'value': url})
+        entry = {'value': value}
+        if description:
+            entry['description'] = description
+        return entry
 
     @filter_empty_parameters
-    def add_literature(self, doi, curated_relation=None , record=None):
+    def add_url(self, value, description=None):
+        """Add url dict to ``urls`` list.
+
+        Args:
+            value (str): Url itself.
+            description (str): Description of the url.
+        """
+        entry = self._prepare_url(value, description)
+        self._append_to('urls', entry)
+
+    @filter_empty_parameters
+    def add_literature(self, doi=None, curated_relation=None, record=None):
         """Add literature.
         
         :param doi: doi of the literature
-        :type doi: string
+        :type doi: dict
         
         :param curated_relation: mark if relation is curated [NOT REQUIRED]
         :type curated_relation: boolean
@@ -340,7 +370,6 @@ class DataBuilder(RecordBuilder):
         :param record: dictionary with ``$ref`` pointing to proper record.
         :type record: dict
         """
-        
         literature_dict = {
             'doi': doi,
             'curated_relation': curated_relation,

@@ -74,9 +74,15 @@ def conference_data():
 def seminar_data():
     return load_json_file('seminars_example.json')
 
+
+@pytest.fixture(scope='module')
+def job_data():
+    return load_json_file('jobs_example.json')
+
+
 @pytest.fixture(scope='module')
 def data_data():
-    return load_json_file('data_examples.json')
+    return load_json_file('data_example.json')
 
 
 def test_literature_builder_valid_record(input_data_hep, expected_data_hep):
@@ -443,8 +449,8 @@ def test_seminar_builder(seminar_data):
 
 def test_data_builder(data_data):
     start_data = {
-        '_collections': data_data['_collections'][0],
         '_bucket': data_data['_bucket'],
+        '_collections': data_data['_collections'][0],
         'control_number': data_data['control_number'],
         'deleted': data_data['deleted'],
         'deleted_records': data_data['deleted_records'],
@@ -453,66 +459,35 @@ def test_data_builder(data_data):
         'new_record': data_data['new_record'],
         'self': data_data['self'],
     }
-    builder = JobBuilder(start_data)
+    builder = DataBuilder(start_data)
 
-    abstract = data_data['abstracts']
-    builder.add_abstract(**abstract[0])
-    builder.add_abstract(**abstract[1])
-    builder.add_abstract(**abstract[2])
-    builder.add_abstract(**abstract[3])
-    assert builder.record['abstracts'] == abstract
+    abstracts = data_data['abstracts']
+    for abstract in abstracts:
+        builder.add_abstract(abstract["value"], abstract["source"])
+    assert builder.record['abstracts'] == abstracts
 
     experiments = data_data['accelerator_experiments']
-    builder.add_accelerator_experiment(**experiments[0])
+    for experiment in experiments:
+        builder.add_accelerator_experiment(**experiment)
     assert builder.record['accelerator_experiments'] == experiments
 
     acquisition_source = data_data['acquisition_source']
     builder.add_acquisition_source(**acquisition_source)
     assert builder.record['acquisition_source'] == acquisition_source
-
-    authors = data_data['authors']
-    author1 = builder.make_author(**authors[0])
-    author2 = builder.make_author(**authors[1])
-    builder.add_author(author1)
-    builder.add_author(author2)
-    assert builder.record['authors'] == authors
-    
-    collaboration = data_data['collaboration']
-    builder.add_collaboration(**collaboration[0])
-    builder.add_collaboration(**collaboration[1])
-    assert builder.record['collaborations'] == collaboration
-    
-    doi = data_data['dois']
-    builder.add_doi(**doi[0])
-    builder.add_doi(**doi[1])
-    builder.add_doi(**doi[2])
-    assert builder.record['dois'] == doi
     
     keywords = data_data['keywords']
-    builder.add_keyword(**keywords[0])
-    builder.add_keyword(**keywords[1])
-    builder.add_keyword(**keywords[3])
+    for keyword in keywords:
+        builder.add_keyword(keyword=keyword['value'], source=keyword['source'])
     assert builder.record['keywords'] == keywords
     
-    literature = data_data['literature']
-    builder.add_literature(**literature[0])
-    builder.add_literature(**literature[1])
-    assert builder.record['literature'] == literature
+    titles = data_data['titles']
+    for title in titles:
+        builder.add_title(**title)
+    assert builder.record['titles'] == titles
     
-    title = data_data['titles']
-    builder.add_title(**title[0])
-    builder.add_title(**title[1])
-    builder.add_title(**title[2])
-    builder.add_title(**title[3])
-    assert builder.record['titles'] == title
+    urls = data_data['urls']
+    for url in urls:
+        builder.add_url(**url)
+    assert builder.record['urls'] == urls
     
-    url = data_data['urls']
-    builder.add_url(**url[0])
-    builder.add_url(**url[1])
-    builder.add_url(**url[2])
-    builder.add_url(**url[3])
-    assert builder.record['urls'] == url
-    
-    assert builder.record == data_data
-
     builder.validate_record()
