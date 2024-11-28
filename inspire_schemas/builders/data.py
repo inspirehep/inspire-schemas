@@ -26,7 +26,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import contextlib
 import warnings
 
 import idutils
@@ -37,31 +36,14 @@ from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.builders.signatures import SignatureBuilder
 from inspire_schemas.utils import (
     filter_empty_parameters,
-    get_license_from_url,
     normalize_collaboration,
-    normalize_isbn,
     validate,
 )
 
 
-def is_citeable(publication_info):
-    """Check some fields in order to define if the article is citeable.
-
-    :param publication_info: publication_info field
-    already populated
-    :type publication_info: list
-    """
-
-    def _item_has_pub_info(item):
-        return all(key in item for key in ('journal_title', 'journal_volume'))
-
-    def _item_has_page_or_artid(item):
-        return any(key in item for key in ('page_start', 'artid'))
-
-    has_pub_info = any(_item_has_pub_info(item) for item in publication_info)
-    has_page_or_artid = any(_item_has_page_or_artid(item) for item in publication_info)
-
-    return has_pub_info and has_page_or_artid
+def is_citeable():
+    #TODO Implement this function
+    return False
 
 
 def key_already_there(element, elements):
