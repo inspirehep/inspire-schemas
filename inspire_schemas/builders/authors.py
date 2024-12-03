@@ -206,6 +206,38 @@ class AuthorBuilder(RecordBuilder):
         )
 
     @filter_empty_parameters
+    def add_bluesky(self, id_):
+        """Add a Bluesky id.
+
+        Args:
+            :param id_: Identifier of Bluesky profile.
+            :type id_: string
+        """
+        self._append_to(
+            'ids',
+            {
+                'value': id_,
+                'schema': 'BLUESKY',
+            },
+        )
+
+    @filter_empty_parameters
+    def add_mastodon(self, id_):
+        """Add a Mastdon id.
+
+        Args:
+            :param id_: Identifier of Mastodon profile.
+            :type id_: string
+        """
+        self._append_to(
+            'ids',
+            {
+                'value': id_,
+                'schema': 'MASTODON',
+            },
+        )
+
+    @filter_empty_parameters
     def add_orcid(self, id_):
         """Add a ORCID identifier.
 

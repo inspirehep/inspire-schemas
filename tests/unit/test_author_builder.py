@@ -416,6 +416,34 @@ def test_add_twitter():
     assert expected == result
 
 
+def test_add_bluesky():
+    schema = load_schema('authors')
+    subschema = schema['properties']['ids']
+
+    author = AuthorBuilder()
+    author.add_bluesky('kylecranmer.bsky.social')
+
+    expected = [{"value": "kylecranmer.bsky.social", "schema": "BLUESKY"}]
+    result = author.obj['ids']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
+def test_add_mastodon():
+    schema = load_schema('authors')
+    subschema = schema['properties']['ids']
+
+    author = AuthorBuilder()
+    author.add_mastodon('freyablekman@sciencemastodon.com')
+
+    expected = [{"value": "freyablekman@sciencemastodon.com", "schema": "MASTODON"}]
+    result = author.obj['ids']
+
+    assert validate(result, subschema) is None
+    assert expected == result
+
+
 def test_add_orcid():
     schema = load_schema('authors')
     subschema = schema['properties']['ids']
