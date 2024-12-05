@@ -382,6 +382,11 @@ properties:
         items:
             additionalProperties: false
             properties:
+                material:
+                    $ref: elements/material.json
+                    description: |-
+                        :MARC: ``0247_q``
+                    type: string
                 source:
                     $ref: elements/source.json
                     description: |-
@@ -393,7 +398,6 @@ properties:
                     minLength: 1
                     pattern: ^10\.\d+(\.\d+)?/\S+$
                     title: DOI
-                    type: string
             required:
             - value
             type: object
