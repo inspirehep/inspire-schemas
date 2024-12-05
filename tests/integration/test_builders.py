@@ -457,7 +457,7 @@ def test_data_builder(data_data):
 
     dois = data_data['dois']
     for doi in dois:
-        builder.add_doi(doi['value'], doi['source'])
+        builder.add_doi(doi['value'], doi['source'], doi['material'])
     assert builder.record['dois'] == dois
 
     collaborations = data_data['collaborations']

@@ -236,14 +236,17 @@
     ],
     "dois": [
         {
+            "material": "version",
             "source": "in ad et",
             "value": "10.8756/tTM"
         },
         {
+            "material": "part",
             "source": "mollit deserunt eu",
             "value": "10.5/.Aww=bT@"
         },
         {
+            "material": "data",
             "source": "adipisicing et",
             "value": "10.0.9747720/#}O=W:$"
         }
