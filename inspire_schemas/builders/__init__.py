@@ -28,6 +28,7 @@ from __future__ import absolute_import, division, print_function
 
 from .authors import AuthorBuilder  # noqa
 from .conferences import ConferenceBuilder  # noqa
+from .data import DataBuilder  # noqa
 from .jobs import JobBuilder  # noqa
 from .literature import LiteratureBuilder  # noqa
 from .references import ReferenceBuilder  # noqa
