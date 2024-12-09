@@ -448,7 +448,6 @@ def test_data_builder(data_data):
         'control_number': data_data['control_number'],
         'deleted': data_data['deleted'],
         'deleted_records': data_data['deleted_records'],
-        'creation_date': data_data['creation_date'],
         'legacy_version': data_data['legacy_version'],
         'new_record': data_data['new_record'],
         'self': data_data['self'],
@@ -459,6 +458,10 @@ def test_data_builder(data_data):
     for doi in dois:
         builder.add_doi(doi['value'], doi['source'], doi['material'])
     assert builder.record['dois'] == dois
+
+    creation_date = data_data['creation_date']
+    builder.add_creation_date(creation_date)
+    assert builder.record['creation_date'] == creation_date
 
     collaborations = data_data['collaborations']
     for collaboration in collaborations:

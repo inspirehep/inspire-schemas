@@ -29,6 +29,7 @@ from __future__ import absolute_import, division, print_function
 import warnings
 
 import idutils
+from inspire_utils.date import normalize_date
 from six import python_2_unicode_compatible, text_type
 
 from inspire_schemas.builders.builder import RecordBuilder
@@ -91,6 +92,15 @@ class DataBuilder(RecordBuilder):
                 value=abstract.strip(),
             ),
         )
+
+    @filter_empty_parameters
+    def add_creation_date(self, date=None):
+        """
+        Args:
+            date (str)
+        """
+        if date is not None:
+            self.record['creation_date'] = normalize_date(date)
 
     @filter_empty_parameters
     def add_accelerator_experiments_legacy_name(self, legacy_name):
