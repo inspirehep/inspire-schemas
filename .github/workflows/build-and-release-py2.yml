@@ -1,4 +1,4 @@
-name: bump, build and release
+name: test (python 2.7)
 
 on:
   push:
@@ -13,17 +13,11 @@ jobs:
       matrix:
         python: [python2.7]
         pip: [pip2]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "2.7"
 
       - name: Install npm dependencies
         run: |
@@ -32,13 +26,13 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          pip install --upgrade pip
-          pip --no-cache-dir install -e .[tests,docs]
+          ${{ matrix.pip }} install --user --upgrade pip
+          ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
 
       - name: Show python dependencies
         run: |
-          python --version
-          pip freeze
+          ${{ matrix.python }} --version
+          ${{ matrix.pip }} freeze
 
       - name: Run tests
         run: |
