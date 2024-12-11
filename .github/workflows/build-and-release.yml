@@ -39,7 +39,6 @@ jobs:
         run: |
           ./run-tests.sh
 
-
   bump:
     outputs:
       new_sha: ${{ steps.sha.outputs.SHA }}
