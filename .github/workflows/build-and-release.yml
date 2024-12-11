@@ -8,18 +8,17 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - python: python3
+            pip: pip3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
 
       - name: Install npm dependencies
         run: |
@@ -28,17 +27,18 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          pip install --upgrade pip
-          pip --no-cache-dir install -e .[all,tests,docs]
+          ${{ matrix.pip }} install --user --upgrade pip
+          ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
 
       - name: Show python dependencies
         run: |
-          python --version
-          pip freeze
+          ${{ matrix.python }} --version
+          ${{ matrix.pip }} freeze
 
       - name: Run tests
         run: |
           ./run-tests.sh
+
 
   bump:
     outputs:
