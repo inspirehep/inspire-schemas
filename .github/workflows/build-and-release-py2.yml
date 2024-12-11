@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python: [python2.7]
-        pip: [pip2]
+        include:
+          - python: python2
+            pip: pip
     steps:
       - name: Checkout
         uses: actions/checkout@v2
