@@ -125,7 +125,7 @@ def process_tree(value, key=None, parent_key=None):
 def normalize_yaml(file_name):
     print('Normalizing', file_name, '...')
     with open(file_name, 'r') as file_stream:
-        schema = yaml.full_load(file_stream)
+        schema = yaml.load(file_stream)
 
     schema = process_tree(schema)
     yaml_schema = yaml.dump(schema, **DUMPER_OPTIONS)

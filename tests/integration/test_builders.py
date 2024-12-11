@@ -37,7 +37,7 @@ FIXTURES_PATH = os.path.join(os.path.dirname(__file__), 'fixtures')
 def load_file(file_name):
     path = os.path.join(FIXTURES_PATH, file_name)
     with open(path) as input_data:
-        data = yaml.full_load(input_data.read())
+        data = yaml.load(input_data.read())
 
     return data
 
