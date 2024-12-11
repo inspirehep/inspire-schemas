@@ -1,0 +1,45 @@
+name: bump, build and release
+
+on:
+  push:
+    branches: [py-2]
+  pull_request:
+    branches: [py-2]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python: [python2.7]
+        pip: [pip2]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "2.7"
+
+      - name: Install npm dependencies
+        run: |
+          npm install buffer-shims
+          npm install --global rollup
+
+      - name: Install python dependencies
+        run: |
+          pip install --user --upgrade pip
+          pip --no-cache-dir install --user -e .[tests,docs]
+
+      - name: Show python dependencies
+        run: |
+          python --version
+          pip freeze
+
+      - name: Run tests
+        run: |
+          ./run-tests.sh
