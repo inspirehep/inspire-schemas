@@ -28,8 +28,8 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          pip install --user --upgrade pip
-          pip --no-cache-dir install --user -e .[tests,docs]
+          pip install --upgrade pip
+          pip --no-cache-dir install -e .[all,tests,docs]
 
       - name: Show python dependencies
         run: |
