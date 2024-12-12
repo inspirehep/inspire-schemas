@@ -24,8 +24,8 @@
 
 import mock
 import pytest
-from jsonschema import ValidationError
 
+from jsonschema import ValidationError
 from inspire_schemas import api, errors, utils
 
 
@@ -37,9 +37,8 @@ def test_validate_raises_if_no_schema_key():
 @mock.patch('inspire_schemas.utils.LocalRefResolver')
 @mock.patch('inspire_schemas.utils.load_schema')
 @mock.patch('inspire_schemas.utils.jsonschema_validate')
-def test_validate_ok_if_schema_key(
-    mock_jsonschema_validate, mock_load_schema, mock_localrefresolver
-):
+def test_validate_ok_if_schema_key(mock_jsonschema_validate, mock_load_schema,
+                                   mock_localrefresolver):
     mydata = {'$schema': 'The Castle Anthrax'}
     mock_load_schema.side_effect = lambda schema_name: schema_name
 
@@ -52,9 +51,8 @@ def test_validate_ok_if_schema_key(
 @mock.patch('inspire_schemas.utils.LocalRefResolver')
 @mock.patch('inspire_schemas.utils.load_schema')
 @mock.patch('inspire_schemas.utils.jsonschema_validate')
-def test_validate_ok_if_schema_str(
-    mock_jsonschema_validate, mock_load_schema, mock_localrefresolver
-):
+def test_validate_ok_if_schema_str(mock_jsonschema_validate,
+                                   mock_load_schema, mock_localrefresolver):
     mydata = 'The Castle Anthrax'
     schema_name = 'Sir Galad'
     mock_load_schema.side_effect = lambda schema_name: schema_name
@@ -72,7 +70,11 @@ def test_validate_raises_if_invalid_data():
     schema = {
         '$schema': 'http://json-schema.org/schema#',
         'type': 'object',
-        'properties': {'foo': {'type': 'integer'}},
+        'properties': {
+            'foo': {
+                'type': 'integer'
+            }
+        }
     }
 
     with pytest.raises(ValidationError):
@@ -105,7 +107,7 @@ def test_validate_raises_on_invalid_date():
 
 
 def test_validate_raises_on_invalid_date_time():
-    data = ('2017-42-12T12:34:56',)
+    data = '2017-42-12T12:34:56',
 
     schema = {
         '$schema': 'http://json-schema.org/schema#',

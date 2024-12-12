@@ -59,7 +59,11 @@ class ConferenceReader(object):
             'jp'
 
         """
-        return get_value(self.record, 'addresses.country_code[0]', default='').lower()
+        return get_value(
+            self.record,
+            'addresses.country_code[0]',
+            default=''
+        ).lower()
 
     @property
     def end_date(self):

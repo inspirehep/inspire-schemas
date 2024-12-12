@@ -22,6 +22,8 @@
 
 from __future__ import absolute_import, division, print_function
 
+import pytest
+
 from inspire_schemas.builders import SeminarBuilder
 
 
@@ -111,7 +113,10 @@ def test_ensure_dict_field_existing():
 def test_sourced_dict_local_source():
     builder = SeminarBuilder(source='global')
 
-    expected = {'source': 'local', 'value': 'foo'}
+    expected = {
+        'source': 'local',
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict('local', value='foo')
 
@@ -121,7 +126,10 @@ def test_sourced_dict_local_source():
 def test_sourced_dict_global_source():
     builder = SeminarBuilder(source='global')
 
-    expected = {'source': 'global', 'value': 'foo'}
+    expected = {
+        'source': 'global',
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -131,7 +139,9 @@ def test_sourced_dict_global_source():
 def test_sourced_dict_no_source():
     builder = SeminarBuilder()
 
-    expected = {'value': 'foo'}
+    expected = {
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -166,12 +176,16 @@ def test_append_to_field_complex_data():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = SeminarBuilder()
@@ -187,12 +201,16 @@ def test_append_to_field_dumplicated_complex_data():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = SeminarBuilder()
@@ -209,12 +227,16 @@ def test_append_to_field_from_kwargs():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = SeminarBuilder()
@@ -229,16 +251,27 @@ def test_append_to_field_from_kwargs():
 def test_set_address():
     expected = {
         '_collections': ['Seminars'],
-        'address': {'cities': ['Anaheim'], 'country_code': 'US', 'state': 'CA'},
+        'address': {
+            'cities': ['Anaheim'],
+            'country_code': 'US',
+            'state': 'CA'
+        }
     }
     builder = SeminarBuilder()
-    builder.set_address(cities=['Anaheim'], country_code='US', state='CA')
+    builder.set_address(
+        cities=['Anaheim'],
+        country_code='US',
+        state='CA'
+    )
 
     assert builder.record == expected
 
 
 def test_set_captioned():
-    expected = {'_collections': ['Seminars'], 'captioned': True}
+    expected = {
+        '_collections': ['Seminars'],
+        'captioned': True
+    }
     builder = SeminarBuilder()
     builder.set_captioned(True)
 
@@ -251,20 +284,28 @@ def test_add_contact():
             'name': 'name',
             'email': 'email',
             'curated_relation': True,
-            'record': {'$ref': 'http://nothing'},
+            'record': {'$ref': 'http://nothing'}
         },
-        {'name': 'name2', 'email': 'email2'},
+        {
+            'name': 'name2',
+            'email': 'email2'
+        },
         {
             'name': 'name3',
         },
-        {'email': 'email3'},
+        {
+            'email': 'email3'
+        }
     ]
 
     builder = SeminarBuilder()
     builder.add_contact(
         name='name', email='email', curated_relation=True, record='http://nothing'
     )
-    builder.add_contact(name='name2', email='email2')
+    builder.add_contact(
+        name='name2',
+        email='email2'
+    )
     builder.add_contact(name='name3')
     builder.add_contact(email='email3')
     assert builder.record['contact_details'] == expected
@@ -273,7 +314,7 @@ def test_add_contact():
 def test_add_inspire_categories():
     expected = {
         '_collections': ['Seminars'],
-        'inspire_categories': [{'source': 'arxiv', 'term': 'Computing'}],
+        'inspire_categories': [{'source': 'arxiv', 'term': 'Computing'}]
     }
     builder = SeminarBuilder()
     builder.add_inspire_categories(['Computing'], 'arxiv')
@@ -284,7 +325,9 @@ def test_add_inspire_categories():
 def test_add_keyword():
     expected = {
         '_collections': ['Seminars'],
-        'keywords': [{'schema': 'INSPIRE', 'source': 'arxiv', 'value': '29.27.Fh'}],
+        'keywords': [
+            {'schema': 'INSPIRE', 'source': 'arxiv', 'value': '29.27.Fh'}
+        ]
     }
     builder = SeminarBuilder()
     builder.add_keyword('29.27.Fh', schema='INSPIRE', source='arxiv')
@@ -295,7 +338,7 @@ def test_add_keyword():
 def test_add_public_note():
     expected = {
         '_collections': ['Seminars'],
-        'public_notes': [{'source': 'http://some/source', 'value': 'Note'}],
+        'public_notes': [{'source': 'http://some/source', 'value': 'Note'}]
     }
     builder = SeminarBuilder()
     builder.add_public_note('Note', 'http://some/source')
@@ -307,7 +350,12 @@ def test_add_series():
     series_name = 'Warsaw Symposium on Elementary Particle Physics'
     expected = {
         '_collections': ['Seminars'],
-        'series': [{'name': series_name, 'number': 1}],
+        'series': [
+            {
+                'name': series_name,
+                'number': 1
+            }
+        ],
     }
     builder = SeminarBuilder()
     builder.add_series(series_name, number=1)
@@ -320,8 +368,8 @@ def test_set_title():
         '_collections': ['Seminars'],
         'title': {
             'title': 'Electronic Components Conference',
-            'subtitle': 'A Real Sub-Title',
-        },
+            'subtitle': 'A Real Sub-Title'
+        }
     }
     builder = SeminarBuilder()
     builder.set_title('Electronic Components Conference', 'A Real Sub-Title')
@@ -334,7 +382,7 @@ def test_set_title_without_subtitle():
         '_collections': ['Seminars'],
         'title': {
             'title': 'Electronic Components Conference',
-        },
+        }
     }
     builder = SeminarBuilder()
     builder.set_title('Electronic Components Conference')
@@ -387,7 +435,7 @@ def test_add_material_url():
 def test_set_end_datetime():
     expected = {
         '_collections': ['Seminars'],
-        'end_datetime': '4254-10-11T22:18:22.063Z',
+        'end_datetime': '4254-10-11T22:18:22.063Z'
     }
     builder = SeminarBuilder()
     builder.set_end_datetime('4254-10-11T22:18:22.063Z')
@@ -398,7 +446,7 @@ def test_set_end_datetime():
 def test_set_start_datetime():
     expected = {
         '_collections': ['Seminars'],
-        'start_datetime': '4254-10-11T22:18:22.063Z',
+        'start_datetime': '4254-10-11T22:18:22.063Z'
     }
     builder = SeminarBuilder()
     builder.set_start_datetime('4254-10-11T22:18:22.063Z')
@@ -407,7 +455,10 @@ def test_set_start_datetime():
 
 
 def test_set_abstract_without_source():
-    expected = {'_collections': ['Seminars'], 'abstract': {'value': 'lorem ipsum'}}
+    expected = {
+        '_collections': ['Seminars'],
+        'abstract': {'value': 'lorem ipsum'}
+    }
     builder = SeminarBuilder()
     builder.set_abstract('lorem ipsum')
 
@@ -417,7 +468,7 @@ def test_set_abstract_without_source():
 def test_set_abstract_with_source():
     expected = {
         '_collections': ['Seminars'],
-        'abstract': {'value': 'lorem ipsum', 'source': 'arxiv'},
+        'abstract': {'value': 'lorem ipsum', 'source': 'arxiv'}
     }
     builder = SeminarBuilder(source='arxiv')
     builder.set_abstract('lorem ipsum')
@@ -426,14 +477,10 @@ def test_set_abstract_with_source():
 
 
 def test_sanitization_of_abstract():
-    expected = (
-        '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'
+    expected = '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'\
         'http://example.com</a></div>'
-    )
-    description = (
-        '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '
+    description = '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '\
         'http://example.com</div>'
-    )
     builder = SeminarBuilder()
     builder.set_abstract(description)
 
@@ -441,7 +488,10 @@ def test_sanitization_of_abstract():
 
 
 def test_set_timezone():
-    expected = {'_collections': ['Seminars'], 'timezone': 'Europe/Zurich'}
+    expected = {
+        '_collections': ['Seminars'],
+        'timezone': 'Europe/Zurich'
+    }
     builder = SeminarBuilder()
     builder.set_timezone('Europe/Zurich')
 
@@ -450,14 +500,17 @@ def test_set_timezone():
 
 def test_add_speaker():
     expected = [
-        {'name': 'Author1', 'record': {'$ref': 'http://author/1'}},
+        {
+            'name': 'Author1',
+            'record': {'$ref': 'http://author/1'}
+        },
         {
             'name': 'Another',
             'record': {'$ref': 'http://author/another'},
             'affiliations': [
                 {'value': 'CERN', 'record': {'$ref': 'http://institution/cern'}},
-                {'value': 'Turkiye Kareli Gomlek Giyenler Ensitisu'},
-            ],
+                {'value': 'Turkiye Kareli Gomlek Giyenler Ensitisu'}
+            ]
         },
         {
             'name': 'Guy, Some',
@@ -465,14 +518,16 @@ def test_add_speaker():
     ]
 
     builder = SeminarBuilder()
-    builder.add_speaker(name='author1', record={'$ref': 'http://author/1'})
+    builder.add_speaker(
+        name='author1', record={'$ref': 'http://author/1'}
+    )
     builder.add_speaker(
         name='Another',
         record={'$ref': 'http://author/another'},
         affiliations=[
             {'value': 'CERN', 'record': {'$ref': 'http://institution/cern'}},
-            {'value': 'Turkiye Kareli Gomlek Giyenler Ensitisu'},
-        ],
+            {'value': 'Turkiye Kareli Gomlek Giyenler Ensitisu'}
+        ]
     )
     builder.add_speaker(name='some guy')
     assert builder.record['speakers'] == expected
@@ -480,13 +535,21 @@ def test_add_speaker():
 
 def test_add_literature_record():
     expected = [
-        {'record': {'$ref': 'http://literature/1'}},
-        {'record': {'$ref': 'http://literature/another'}, 'curated_relation': True},
+        {
+            'record': {'$ref': 'http://literature/1'}
+        },
+        {
+            'record': {'$ref': 'http://literature/another'},
+            'curated_relation': True
+        },
     ]
 
     builder = SeminarBuilder()
-    builder.add_literature_record(record={'$ref': 'http://literature/1'})
     builder.add_literature_record(
-        record={'$ref': 'http://literature/another'}, curated_relation=True
+        record={'$ref': 'http://literature/1'}
+    )
+    builder.add_literature_record(
+        record={'$ref': 'http://literature/another'},
+        curated_relation=True
     )
     assert builder.record['literature_records'] == expected

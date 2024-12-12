@@ -23,12 +23,11 @@
 from __future__ import absolute_import, division, print_function
 
 from itertools import chain
-
-from inspire_utils.helpers import force_list
-from inspire_utils.record import get_value
 from six import text_type
 
 from inspire_schemas.builders.literature import is_citeable
+from inspire_utils.helpers import force_list
+from inspire_utils.record import get_value
 
 
 class LiteratureReader(object):
@@ -82,11 +81,8 @@ class LiteratureReader(object):
             ['hep-th', 'hep-ph']
 
         """
-        return list(
-            chain.from_iterable(
-                get_value(self.record, 'arxiv_eprints.categories', default=[])
-            )
-        )
+        return list(chain.from_iterable(
+            get_value(self.record, 'arxiv_eprints.categories', default=[])))
 
     @property
     def arxiv_id(self):
@@ -209,7 +205,10 @@ class LiteratureReader(object):
             'Phys.Part.Nucl.Lett.'
 
         """
-        return get_value(self.record, 'publication_info.journal_title[0]', default='')
+        return get_value(
+            self.record, 'publication_info.journal_title[0]',
+            default=''
+        )
 
     @property
     def journal_issue(self):
@@ -228,7 +227,11 @@ class LiteratureReader(object):
             '5'
 
         """
-        return get_value(self.record, 'publication_info.journal_issue[0]', default='')
+        return get_value(
+            self.record,
+            'publication_info.journal_issue[0]',
+            default=''
+        )
 
     @property
     def journal_volume(self):
@@ -247,7 +250,11 @@ class LiteratureReader(object):
             'D94'
 
         """
-        return get_value(self.record, 'publication_info.journal_volume[0]', default='')
+        return get_value(
+            self.record,
+            'publication_info.journal_volume[0]',
+            default=''
+        )
 
     @property
     def language(self):
@@ -334,7 +341,11 @@ class LiteratureReader(object):
             '2017'
 
         """
-        return str(get_value(self.record, 'publication_info.year[0]', default=''))
+        return str(get_value(
+            self.record,
+            'publication_info.year[0]',
+            default=''
+        ))
 
     @property
     def is_published(self):
@@ -360,13 +371,12 @@ class LiteratureReader(object):
             True
 
         """
-        citeable = 'publication_info' in self.record and is_citeable(
-            self.record['publication_info']
-        )
+        citeable = 'publication_info' in self.record and \
+            is_citeable(self.record['publication_info'])
 
         submitted = 'dois' in self.record and any(
-            'journal_title' in el
-            for el in force_list(self.record.get('publication_info'))
+            'journal_title' in el for el in
+            force_list(self.record.get('publication_info'))
         )
 
         return citeable or submitted
@@ -484,7 +494,12 @@ class LiteratureReader(object):
             '054021'
 
         """
-        publication_info = get_value(self.record, 'publication_info[0]', default={})
+        publication_info = get_value(
+            self.record,
+            'publication_info[0]',
+            default={}
+        )
         return LiteratureReader.get_page_artid_for_publication_info(
-            publication_info, separator
+            publication_info,
+            separator
         )

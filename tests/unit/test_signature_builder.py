@@ -22,14 +22,13 @@
 
 from __future__ import absolute_import, division, print_function
 
+import pytest
 import inspect
 import sys
 
-import pytest
-from jsonschema import ValidationError
-
-from inspire_schemas.builders.signatures import SignatureBuilder
 from inspire_schemas.utils import load_schema, validate
+from inspire_schemas.builders.signatures import SignatureBuilder
+from jsonschema import ValidationError
 
 
 @pytest.fixture(scope='module')
@@ -40,7 +39,10 @@ def subschema():
 
 def assert_field_valid(expected, result, property, schema):
     assert expected == result
-    assert validate(result[property], schema['properties'][property]) is None
+    assert validate(
+        result[property],
+        schema['properties'][property]
+    ) is None
 
 
 def assert_field_invalid(expected, result, property, schema):
@@ -117,15 +119,15 @@ def test_add_affiliation(subschema):
             {
                 'value': 'Institution',
                 'curated_relation': True,
-                'record': {'$ref': 'http://reference/api/institutions/123'},
+                'record': {
+                    '$ref': 'http://reference/api/institutions/123'
+                },
             },
         ],
     }
 
     builder = SignatureBuilder()
-    builder.add_affiliation(
-        'Institution', True, {'$ref': 'http://reference/api/institutions/123'}
-    )
+    builder.add_affiliation('Institution', True, {'$ref': 'http://reference/api/institutions/123'})
 
     assert_field_valid(expected, builder.obj, 'affiliations', subschema)
 

@@ -24,15 +24,13 @@
 
 from __future__ import absolute_import, division, print_function
 
-import contextlib
-
 from inspire_utils.name import normalize_name
 
-from inspire_schemas.errors import UnknownUIDSchema
-from inspire_schemas.utils import (
-    author_id_normalize_and_schema,
+from ..utils import (
     filter_empty_parameters,
+    author_id_normalize_and_schema,
 )
+from ..errors import UnknownUIDSchema
 
 
 class SignatureBuilder(object):
@@ -77,7 +75,9 @@ class SignatureBuilder(object):
             record (dict): affiliation JSON reference
         """
         if value:
-            affiliation = {'value': value}
+            affiliation = {
+                'value': value
+            }
             if record:
                 affiliation['record'] = record
             if curated_relation is not None:
@@ -102,13 +102,17 @@ class SignatureBuilder(object):
 
     @filter_empty_parameters
     def _add_uid(self, uid, schema):
-        self._ensure_list_field('ids', {'value': uid, 'schema': schema})
+        self._ensure_list_field('ids', {
+            'value': uid,
+            'schema': schema
+        })
 
     @filter_empty_parameters
     def add_affiliations_identifiers(self, uid, schema):
-        self._ensure_list_field(
-            'affiliations_identifiers', {'value': uid, 'schema': schema}
-        )
+        self._ensure_list_field('affiliations_identifiers', {
+            'value': uid,
+            'schema': schema
+        })
 
     @filter_empty_parameters
     def set_uid(self, uid, schema=None):
@@ -126,16 +130,16 @@ class SignatureBuilder(object):
         Raises:
             SchemaUIDConflict: it UID and schema are not matching
         """
-        with contextlib.suppress(UnknownUIDSchema):
+        try:
+            uid, schema = author_id_normalize_and_schema(uid, schema)
+        except UnknownUIDSchema:
             # Explicit schema wasn't provided, and the UID is too little
             # to figure out the schema of it, this however doesn't mean
             # the UID is invalid
-            uid, schema = author_id_normalize_and_schema(uid, schema)
+            pass
 
         self._ensure_field('ids', [])
-        self.obj['ids'] = [
-            id_ for id_ in self.obj['ids'] if id_.get('schema') != schema
-        ]
+        self.obj['ids'] = [id_ for id_ in self.obj['ids'] if id_.get('schema') != schema]
         self._add_uid(uid, schema)
 
     @filter_empty_parameters

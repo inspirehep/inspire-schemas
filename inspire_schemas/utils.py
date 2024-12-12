@@ -46,7 +46,8 @@ from pytz import UnknownTimeZoneError, timezone
 from six.moves.urllib.parse import urlsplit
 from unidecode import unidecode
 
-from inspire_schemas.errors import SchemaKeyNotFound, SchemaNotFound, UnknownUIDSchema
+from .errors import (SchemaKeyNotFound, SchemaNotFound, SchemaUIDConflict,
+                     UnknownUIDSchema)
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 
@@ -56,8 +57,12 @@ _RE_AND = re.compile(r'\band\b', re.IGNORECASE)
 _RE_COLLABORATION_LEADING = re.compile(
     r'^\s*(\b(for|on behalf of|representing)\b)?\s*(\bthe\b)?', re.IGNORECASE
 )
-_RE_COLLABORATION_TRAILING = re.compile(r'\bcollaborations?\s*$', re.IGNORECASE)
-_RE_PUBLIC_DOMAIN_URL = re.compile(r'^/publicdomain/zero(?:/(?P<version>[\.\d]*))?')
+_RE_COLLABORATION_TRAILING = re.compile(
+    r'\bcollaborations?\s*$', re.IGNORECASE
+)
+_RE_PUBLIC_DOMAIN_URL = re.compile(
+    r'^/publicdomain/zero(?:/(?P<version>[\.\d]*))?'
+)
 _RE_LICENSE_URL = re.compile(
     r'^/licenses/(?P<sublicense>[-\w]*)(?:/(?P<version>[\.\d]*))?'
 )
@@ -76,38 +81,28 @@ _RE_AUTHORS_UID = {
     'JACOW': (re.compile(r'^(JACOW-)?(?P<uid>\d{8})$', flags=re.I), 'JACoW-{}'),
     'SLAC': (re.compile(r'^(SLAC-)?(?P<uid>\d+)$', flags=re.I), 'SLAC-{}'),
     'DESY': (re.compile(r'^(DESY-)?(?P<uid>\d+)$', flags=re.I), 'DESY-{}'),
-    'INSPIRE ID': (
-        re.compile(r'^(INSPIRE-)?(?P<uid>\d{8})$', flags=re.I),
-        'INSPIRE-{}',
-    ),
+    'INSPIRE ID': (re.compile(r'^(INSPIRE-)?(?P<uid>\d{8})$', flags=re.I), 'INSPIRE-{}'),
     'INSPIRE BAI': (re.compile(r'^(?P<uid>((\w|\-|\')+\.)+\d+)$'), '{}'),
 }
 
 # Matches new style arXiv ID, with an old-style class specification
 # (Malformed, but appears in APS records)
-RE_ARXIV_POST_2007 = r"((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$" # noqa: E501
-
+RE_ARXIV_POST_2007 = r"((?P<category>(?:[a-z-]+)(?:\.[a-z]{2})?)/)?(?P<identifier>\d{4}\.\d{4,5})(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$"
 RE_ARXIV_POST_2007_CLASS = re.compile(
-    r"(arxiv:)?{}".format(RE_ARXIV_POST_2007), flags=re.I
+    r"(arxiv:)?{}".format(RE_ARXIV_POST_2007),
+    flags=re.I
 )
 
-RE_ARXIV_PRE_2007 = r"(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$" # noqa: E501
+RE_ARXIV_PRE_2007 = r"(?P<category>(?P<extraidentifier>[a-z-]+)(?:\.[a-z]{2})?)/(?P<identifier>\d{4}\d+)(v\d+)?\s*(\[(?:[a-z\-\.]+)\])?$"
 RE_ARXIV_PRE_2007_CLASS = re.compile(
-    r"(arxiv:)?{}".format(RE_ARXIV_PRE_2007), flags=re.I
+    r"(arxiv:)?{}".format(RE_ARXIV_PRE_2007),
+    flags=re.I
 )
 
-RE_ARXIV_DOI_POST_2007_CLASS = re.compile(
-    r"(doi:)?10.48550/arXiv.{}".format(RE_ARXIV_POST_2007), re.I
-)
-RE_ARXIV_DOI_PRE_2007_CLASS = re.compile(
-    r"(doi:)?10.48550/arXiv.{}".format(RE_ARXIV_PRE_2007), re.I
-)
-RE_ARXIV_URL_PRE_2007_CLASS = re.compile(
-    r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_PRE_2007), re.I
-)
-RE_ARXIV_URL_POST_2007_CLASS = re.compile(
-    r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_POST_2007), re.I
-)
+RE_ARXIV_DOI_POST_2007_CLASS = re.compile(r"(doi:)?10.48550/arXiv.{}".format(RE_ARXIV_POST_2007), re.I)
+RE_ARXIV_DOI_PRE_2007_CLASS = re.compile(r"(doi:)?10.48550/arXiv.{}".format(RE_ARXIV_PRE_2007), re.I)
+RE_ARXIV_URL_PRE_2007_CLASS = re.compile(r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_PRE_2007), re.I)
+RE_ARXIV_URL_POST_2007_CLASS = re.compile(r"https?://arXiv.org/(abs|pdf)/{}.*".format(RE_ARXIV_POST_2007), re.I)
 
 ARXIV_PATTERNS_PRE_2007 = [
     RE_ARXIV_PRE_2007_CLASS,
@@ -289,7 +284,7 @@ ARXIV_TO_INSPIRE_CATEGORY_MAPPING = {
     'stat.ML': 'Data Analysis and Statistics',
     'stat.ME': 'Data Analysis and Statistics',
     'stat.OT': 'Data Analysis and Statistics',
-    'stat.TH': 'Data Analysis and Statistics',
+    'stat.TH': 'Data Analysis and Statistics'
 }
 
 _JOURNALS_ALREADY_ENDING_WITH_A_LETTER = {
@@ -356,9 +351,7 @@ _JOURNALS_RENAMED_OLD_TO_NEW = {
     'Proc.Roy.Irish Acad.(Sect.A)': 'Proc.Roy.Irish Acad.A',
     'Univ.Politech.Bucharest Sci.Bull.': 'Univ.Politech.Bucharest Sci.Bull.A',
 }
-_JOURNALS_RENAMED_NEW_TO_OLD = {
-    v: k for (k, v) in six.iteritems(_JOURNALS_RENAMED_OLD_TO_NEW)
-}
+_JOURNALS_RENAMED_NEW_TO_OLD = {v: k for (k, v) in six.iteritems(_JOURNALS_RENAMED_OLD_TO_NEW)}
 
 _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
     'JHEP',
@@ -407,11 +400,12 @@ COUNTRY_NAME_TO_CODE_OVERRIDES = _load_countries_data('overrides')
 
 COUNTRY_CODE_TO_NAME = {
     country['alpha_2']: _get_country_name(country)
-    for country in COUNTRY_NAME_TO_CODE_ISO_3166_3
-    + COUNTRY_NAME_TO_CODE_ISO_3166_1
-    + COUNTRY_NAME_TO_CODE_OVERRIDES
+    for country in COUNTRY_NAME_TO_CODE_ISO_3166_3 + COUNTRY_NAME_TO_CODE_ISO_3166_1 + COUNTRY_NAME_TO_CODE_OVERRIDES
 }
-COUNTRY_NAME_TO_CODE = {value: key for key, value in COUNTRY_CODE_TO_NAME.items()}
+COUNTRY_NAME_TO_CODE = {
+    value: key
+    for key, value in COUNTRY_CODE_TO_NAME.items()
+}
 
 
 def country_code_to_name(code):
@@ -436,16 +430,14 @@ def filter_empty_parameters(func):
     :param func: function that you want wrapping
     :type func: function
     """
-
     @wraps(func)
     def func_wrapper(self, *args, **kwargs):
-        my_kwargs = {
-            key: value for key, value in kwargs.items() if value not in EMPTIES
-        }
+        my_kwargs = {key: value for key, value in kwargs.items()
+                     if value not in EMPTIES}
         args_is_empty = all(arg in EMPTIES for arg in args)
 
         if (
-            {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
+                {'source', 'material'}.issuperset(my_kwargs) or not my_kwargs
         ) and args_is_empty:
             return
         return func(self, *args, **my_kwargs)
@@ -460,7 +452,7 @@ def is_orcid(val):
     """
     for orcid_url in ORCID_URLS:
         if val.startswith(orcid_url):
-            val = val[len(orcid_url) :]
+            val = val[len(orcid_url):]
             break
     val = val.replace("-", "").replace(" ", "")
     if is_isni(val):
@@ -485,7 +477,6 @@ def author_id_normalize_and_schema(uid, schema=None):
         UnknownUIDSchema: if UID is too little to definitively guess the schema
         SchemaUIDConflict: if specified schema is not matching the given UID
     """
-
     def _get_uid_normalized_in_schema(_uid, _schema):
         regex, template = _RE_AUTHORS_UID[_schema]
         match = regex.match(_uid)
@@ -538,10 +529,8 @@ def normalize_arxiv_category(category):
     """
     category = _NEW_CATEGORIES.get(category.lower(), category)
     for valid_category in valid_arxiv_categories():
-        if (
-            category.lower() == valid_category.lower()
-            or category.lower().replace('-', '.') == valid_category.lower()
-        ):
+        if (category.lower() == valid_category.lower() or
+                category.lower().replace('-', '.') == valid_category.lower()):
             return valid_category
     return category  # XXX: will fail validation and be logged
 
@@ -630,9 +619,7 @@ def split_pubnote(pubnote_str):
     if len(parts) > 2:
         pubnote['journal_title'] = parts[0]
         pubnote['journal_volume'] = parts[1]
-        pubnote['page_start'], pubnote['page_end'], pubnote['artid'] = split_page_artid(
-            parts[2]
-        )
+        pubnote['page_start'], pubnote['page_end'], pubnote['artid'] = split_page_artid(parts[2])
 
     return {key: val for (key, val) in six.iteritems(pubnote) if val is not None}
 
@@ -651,11 +638,7 @@ def build_pubnote(title, volume, page_start=None, page_end=None, artid=None):
         return None
 
     return pubnote_format.format(
-        title=title,
-        volume=volume,
-        page_start=page_start,
-        page_end=page_end,
-        artid=artid,
+        title=title, volume=volume, page_start=page_start, page_end=page_end, artid=artid
     )
 
 
@@ -689,7 +672,6 @@ def get_schema_path(schema, resolved=False):
     Raises:
         SchemaNotFound: if no schema could be found.
     """
-
     def _strip_first_path_elem(path):
         """Pass doctests.
 
@@ -729,8 +711,7 @@ def get_schema_path(schema, resolved=False):
     raise SchemaNotFound(schema=schema)
 
 
-# Holy moly is this absuing mutables in function calls
-def load_schema(schema_name, resolved=False, _cache={}):  # noqa: B006
+def load_schema(schema_name, resolved=False, _cache={}):
     """Load the given schema from wherever it's installed.
 
     Args:
@@ -847,7 +828,7 @@ def get_validation_errors(data, schema=None):
     errors = Draft4Validator(
         schema,
         resolver=LocalRefResolver.from_schema(schema),
-        format_checker=inspire_format_checker,
+        format_checker=inspire_format_checker
     )
     return errors.iter_errors(data)
 
@@ -874,12 +855,10 @@ def normalize_collaboration(collaboration):
         collaboration = collaboration[1:-1]
 
     collaborations = _RE_AND.split(collaboration)
-    collaborations = (
-        _RE_COLLABORATION_LEADING.sub('', collab) for collab in collaborations
-    )
-    collaborations = (
-        _RE_COLLABORATION_TRAILING.sub('', collab) for collab in collaborations
-    )
+    collaborations = (_RE_COLLABORATION_LEADING.sub('', collab)
+                      for collab in collaborations)
+    collaborations = (_RE_COLLABORATION_TRAILING.sub('', collab)
+                      for collab in collaborations)
 
     return [collab.strip() for collab in collaborations]
 
@@ -976,50 +955,32 @@ def convert_old_publication_info_to_new(publication_infos):
 
         journal_volume = _publication_info.get('journal_volume')
 
-        if (
-            journal_title
-            and journal_title.upper() in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME
-            and journal_volume
-            and len(journal_volume) == 4
-        ):
+        if journal_title and journal_title.upper() in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and \
+                journal_volume and len(journal_volume) == 4:
             try:
                 was_last_century = int(journal_volume[:2]) > 50
             except ValueError:
                 pass
             else:
-                _publication_info['year'] = int(
-                    '19' + journal_volume[:2]
-                    if was_last_century
-                    else '20' + journal_volume[:2]
-                )
+                _publication_info['year'] = int('19' + journal_volume[:2] if was_last_century else '20' + journal_volume[:2])
                 _publication_info['journal_volume'] = journal_volume[2:]
             result.append(_publication_info)
             continue
 
-        if (
-            journal_title
-            and journal_volume
-            and journal_title.lower() not in JOURNALS_IGNORED_IN_OLD_TO_NEW
-        ):
-            volume_starts_with_a_letter = _RE_VOLUME_STARTS_WITH_A_LETTER.match(
-                journal_volume
-            )
-            volume_ends_with_a_letter = _RE_VOLUME_ENDS_WITH_A_LETTER.match(
-                journal_volume
-            )
+        if journal_title and journal_volume and journal_title.lower() not in JOURNALS_IGNORED_IN_OLD_TO_NEW:
+            volume_starts_with_a_letter = _RE_VOLUME_STARTS_WITH_A_LETTER.match(journal_volume)
+            volume_ends_with_a_letter = _RE_VOLUME_ENDS_WITH_A_LETTER.match(journal_volume)
             match = volume_starts_with_a_letter or volume_ends_with_a_letter
             if match:
                 _publication_info.pop('journal_record', None)
                 if journal_title in _JOURNALS_RENAMED_OLD_TO_NEW.values():
                     _publication_info['journal_title'] = journal_title
                 else:
-                    _publication_info['journal_title'] = ''.join(
-                        [
-                            journal_title,
-                            '' if journal_title.endswith('.') else ' ',
-                            match.group('letter'),
-                        ]
-                    )
+                    _publication_info['journal_title'] = ''.join([
+                        journal_title,
+                        '' if journal_title.endswith('.') else ' ',
+                        match.group('letter'),
+                    ])
                 _publication_info['journal_volume'] = match.group('volume')
 
         hidden = _publication_info.pop('hidden', None)
@@ -1049,11 +1010,10 @@ def convert_new_publication_info_to_old(publication_infos):
         list(dict): a ``publication_info`` in the old format.
 
     """
-
     def _needs_a_hidden_pubnote(journal_title, journal_volume):
         return (
-            journal_title in _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE
-            and journal_volume in _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE[journal_title]
+            journal_title in _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE and
+            journal_volume in _JOURNALS_THAT_NEED_A_HIDDEN_PUBNOTE[journal_title]
         )
 
     result = []
@@ -1073,17 +1033,10 @@ def convert_new_publication_info_to_old(publication_infos):
         journal_volume = _publication_info.get('journal_volume')
         year = _publication_info.get('year')
 
-        if (
-            journal_title
-            and journal_title.upper() in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME
-            and year
-            and journal_volume
-            and len(journal_volume) == 2
-        ):
+        if (journal_title and journal_title.upper() in _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME and
+                year and journal_volume and len(journal_volume) == 2):
             two_digit_year = str(year)[2:]
-            _publication_info['journal_volume'] = ''.join(
-                [two_digit_year, journal_volume]
-            )
+            _publication_info['journal_volume'] = ''.join([two_digit_year, journal_volume])
             result.append(_publication_info)
             continue
 
@@ -1091,21 +1044,15 @@ def convert_new_publication_info_to_old(publication_infos):
             match = _RE_TITLE_ENDS_WITH_A_LETTER.match(journal_title)
             if match and _needs_a_hidden_pubnote(journal_title, journal_volume):
                 _publication_info['journal_title'] = match.group('title').strip()
-                _publication_info['journal_volume'] = journal_volume + match.group(
-                    'letter'
-                )
+                _publication_info['journal_volume'] = journal_volume + match.group('letter')
                 result.append(_publication_info)
                 _publication_info = copy.deepcopy(publication_info)
                 _publication_info['hidden'] = True
                 _publication_info['journal_title'] = match.group('title').strip()
-                _publication_info['journal_volume'] = (
-                    match.group('letter') + journal_volume
-                )
+                _publication_info['journal_volume'] = match.group('letter') + journal_volume
             elif match and journal_title not in _JOURNALS_ALREADY_ENDING_WITH_A_LETTER:
                 _publication_info['journal_title'] = match.group('title').strip()
-                _publication_info['journal_volume'] = (
-                    match.group('letter') + journal_volume
-                )
+                _publication_info['journal_volume'] = match.group('letter') + journal_volume
 
         result.append(_publication_info)
 
@@ -1113,8 +1060,7 @@ def convert_new_publication_info_to_old(publication_infos):
 
 
 def fix_url_bars_instead_of_slashes(string):
-    """A common error in urls is that all ``/`` have been changed for ``|``,
-        we fix that in this function"""
+    """A common error in urls is that all ``/`` have been changed for ``|``, we fix that in this function"""
     if string[:7] == 'http:||' or string[:8] == 'https:||':
         string = string.replace('|', '/')
     return string
@@ -1188,14 +1134,10 @@ def is_arxiv(obj):
     if not matched_arxiv.group('category'):
         return True
 
-    valid_arxiv_categories_lower = [
-        category.lower() for category in valid_arxiv_categories()
-    ]
+    valid_arxiv_categories_lower = [category.lower() for category in valid_arxiv_categories()]
     category = matched_arxiv.group('category').lower()
-    return (
-        category in valid_arxiv_categories_lower
-        or category.replace('-', '.') in valid_arxiv_categories_lower
-    )
+    return (category in valid_arxiv_categories_lower or
+            category.replace('-', '.') in valid_arxiv_categories_lower)
 
 
 def normalize_arxiv(obj):
@@ -1204,9 +1146,7 @@ def normalize_arxiv(obj):
 
     matched_arxiv_pre = _get_first_regex_match(ARXIV_PATTERNS_PRE_2007, obj)
     if matched_arxiv_pre:
-        return (
-            '/'.join(matched_arxiv_pre.group("extraidentifier", "identifier"))
-        ).lower()
+        return ('/'.join(matched_arxiv_pre.group("extraidentifier", "identifier"))).lower()
 
     matched_arxiv_post = _get_first_regex_match(ARXIV_PATTERNS_POST_2007, obj)
     if matched_arxiv_post:
@@ -1218,8 +1158,7 @@ def normalize_arxiv(obj):
 def sanitize_html(text):
     """Sanitize HTML for use inside records fields.
 
-    This strips most of the tags and attributes, only allowing a safe whitelisted subset.
-    """
+    This strips most of the tags and attributes, only allowing a safe whitelisted subset."""
     return _bleach_cleaner.clean(text)
 
 
@@ -1239,13 +1178,11 @@ def get_paths(schema, previous_node=None):
                 yield [val]
 
 
-def get_refs_to_schemas(references=None):
-    """For every schema return path and index name for every referenced record
-    Returns:
-        dict(list(tuple)): index and path to the referenced record
+def get_refs_to_schemas(references=defaultdict(list)):
+    """ For every schema return path and index name for every referenced record
+        Returns:
+            dict(list(tuple)): index and path to the referenced record
     """
-    if references is None:
-        references = defaultdict(list)
     if references:
         return references
     for schema_name in SCHEMAS:
@@ -1264,14 +1201,7 @@ def get_refs_to_schemas(references=None):
 
 
 def normalize_collaboration_name(full_collaboration_string):
-    words_to_ignore = [
-        'group',
-        'community',
-        'consortium',
-        'concept group',
-        'experiment',
-        'team',
-    ]
+    words_to_ignore = ['group', 'community', 'consortium', 'concept group', 'experiment', 'team']
     compiled_regexp = re.compile(
         r'\b(' + '|'.join(words_to_ignore) + r')\b', flags=re.IGNORECASE
     )

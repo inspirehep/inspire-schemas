@@ -21,12 +21,11 @@
 # or submit itself to any jurisdiction.
 
 from __future__ import absolute_import, division, print_function
-
+from inspire_schemas.utils import load_schema, validate
 import jsonschema
 import pytest
 
 from inspire_schemas.builders import ConferenceBuilder
-from inspire_schemas.utils import load_schema, validate
 
 
 def test_no_data():
@@ -115,7 +114,10 @@ def test_ensure_dict_field_existing():
 def test_sourced_dict_local_source():
     builder = ConferenceBuilder(source='global')
 
-    expected = {'source': 'local', 'value': 'foo'}
+    expected = {
+        'source': 'local',
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict('local', value='foo')
 
@@ -125,7 +127,10 @@ def test_sourced_dict_local_source():
 def test_sourced_dict_global_source():
     builder = ConferenceBuilder(source='global')
 
-    expected = {'source': 'global', 'value': 'foo'}
+    expected = {
+        'source': 'global',
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -135,7 +140,9 @@ def test_sourced_dict_global_source():
 def test_sourced_dict_no_source():
     builder = ConferenceBuilder()
 
-    expected = {'value': 'foo'}
+    expected = {
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -170,12 +177,16 @@ def test_append_to_field_complex_data():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = ConferenceBuilder()
@@ -191,12 +202,16 @@ def test_append_to_field_dumplicated_complex_data():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = ConferenceBuilder()
@@ -213,12 +228,16 @@ def test_append_to_field_from_kwargs():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = ConferenceBuilder()
@@ -233,7 +252,7 @@ def test_append_to_field_from_kwargs():
 def test_add_private_note_with_source():
     expected = {
         '_collections': ['Conferences'],
-        '_private_notes': [{'source': 'http://some/source', 'value': 'Note'}],
+        '_private_notes': [{'source': 'http://some/source', 'value': 'Note'}]
     }
     builder = ConferenceBuilder()
     builder.add_private_note('Note', 'http://some/source')
@@ -244,7 +263,10 @@ def test_add_private_note_with_source():
 def test_add_private_note_without_source():
     schema = load_schema('conferences')
     subschema = schema['properties']['_private_notes']
-    expected = {'_collections': ['Conferences'], '_private_notes': [{'value': 'Note'}]}
+    expected = {
+        '_collections': ['Conferences'],
+        '_private_notes': [{'value': 'Note'}]
+    }
     builder = ConferenceBuilder()
     builder.add_private_note('Note', '')
 
@@ -258,7 +280,10 @@ def test_add_acronym():
     schema = load_schema('conferences')
     subschema = schema['properties']['acronyms']
 
-    expected = {'_collections': ['Conferences'], 'acronyms': ['SUSY 2018', 'SUSY 2019']}
+    expected = {
+        '_collections': ['Conferences'],
+        'acronyms': ['SUSY 2018', 'SUSY 2019']
+    }
     builder = ConferenceBuilder()
     builder.add_acronym('SUSY 2018')
     builder.add_acronym('SUSY 2019')
@@ -285,10 +310,20 @@ def test_add_address():
 
     expected = {
         '_collections': ['Conferences'],
-        'addresses': [{'cities': ['Anaheim'], 'country_code': 'US', 'state': 'CA'}],
+        'addresses': [
+            {
+                'cities': ['Anaheim'],
+                'country_code': 'US',
+                'state': 'CA'
+            }
+        ]
     }
     builder = ConferenceBuilder()
-    builder.add_address(cities=['Anaheim'], country_code='US', state='CA')
+    builder.add_address(
+        cities=['Anaheim'],
+        country_code='US',
+        state='CA'
+    )
 
     result = builder.record
 
@@ -302,7 +337,9 @@ def test_add_alternative_title():
 
     expected = {
         '_collections': ['Conferences'],
-        'alternative_titles': [{'title': 'Foo', 'subtitle': 'Bar', 'source': 'arXiv'}],
+        'alternative_titles': [
+            {'title': 'Foo', 'subtitle': 'Bar', 'source': 'arXiv'}
+        ]
     }
     builder = ConferenceBuilder()
     builder.add_alternative_title('Foo', 'Bar', 'arXiv')
@@ -317,7 +354,10 @@ def test_add_cnum():
     schema = load_schema('conferences')
     subschema = schema['properties']['cnum']
 
-    expected = {'_collections': ['Conferences'], 'cnum': 'C75-09-03.1'}
+    expected = {
+        '_collections': ['Conferences'],
+        'cnum': 'C75-09-03.1'
+    }
     builder = ConferenceBuilder()
     builder.set_cnum('C75-09-03.1')
 
@@ -343,20 +383,28 @@ def test_add_contact():
             'name': 'name',
             'email': 'email',
             'curated_relation': True,
-            'record': {'$ref': 'http://nothing'},
+            'record': {'$ref': 'http://nothing'}
         },
-        {'name': 'name2', 'email': 'email2'},
+        {
+            'name': 'name2',
+            'email': 'email2'
+        },
         {
             'name': 'name3',
         },
-        {'email': 'email3'},
+        {
+            'email': 'email3'
+        }
     ]
 
     builder = ConferenceBuilder()
     builder.add_contact(
         name='name', email='email', curated_relation=True, record='http://nothing'
     )
-    builder.add_contact(name='name2', email='email2')
+    builder.add_contact(
+        name='name2',
+        email='email2'
+    )
     builder.add_contact(name='name3')
     builder.add_contact(email='email3')
     assert builder.record['contact_details'] == expected
@@ -425,7 +473,7 @@ def test_add_inspire_categories():
 
     expected = {
         '_collections': ['Conferences'],
-        'inspire_categories': [{'source': 'arxiv', 'term': 'Computing'}],
+        'inspire_categories': [{'source': 'arxiv', 'term': 'Computing'}]
     }
     builder = ConferenceBuilder()
     builder.add_inspire_categories(['Computing'], 'arxiv')
@@ -439,7 +487,9 @@ def test_add_inspire_categories():
 def test_add_keyword():
     expected = {
         '_collections': ['Conferences'],
-        'keywords': [{'schema': 'INSPIRE', 'source': 'arxiv', 'value': '29.27.Fh'}],
+        'keywords': [
+            {'schema': 'INSPIRE', 'source': 'arxiv', 'value': '29.27.Fh'}
+        ]
     }
     builder = ConferenceBuilder()
     builder.add_keyword('29.27.Fh', schema='INSPIRE', source='arxiv')
@@ -450,7 +500,7 @@ def test_add_keyword():
 def test_add_public_note():
     expected = {
         '_collections': ['Conferences'],
-        'public_notes': [{'source': 'http://some/source', 'value': 'Note'}],
+        'public_notes': [{'source': 'http://some/source', 'value': 'Note'}]
     }
     builder = ConferenceBuilder()
     builder.add_public_note('Note', 'http://some/source')
@@ -462,7 +512,12 @@ def test_add_series():
     series_name = 'Warsaw Symposium on Elementary Particle Physics'
     expected = {
         '_collections': ['Conferences'],
-        'series': [{'name': series_name, 'number': 1}],
+        'series': [
+            {
+                'name': series_name,
+                'number': 1
+            }
+        ],
     }
     builder = ConferenceBuilder()
     builder.add_series(series_name, number=1)
@@ -483,9 +538,9 @@ def test_add_title():
         'titles': [
             {
                 'title': 'Electronic Components Conference',
-                'subtitle': 'A Real Sub-Title',
+                'subtitle': 'A Real Sub-Title'
             }
-        ],
+        ]
     }
     builder = ConferenceBuilder()
     builder.add_title('Electronic Components Conference', 'A Real Sub-Title')
@@ -519,7 +574,10 @@ def test_set_core():
 
 
 def test_set_closing_date():
-    expected = {'_collections': ['Conferences'], 'closing_date': '1978-04-26'}
+    expected = {
+        '_collections': ['Conferences'],
+        'closing_date': '1978-04-26'
+    }
     builder = ConferenceBuilder()
     builder.set_closing_date('1978-04-26')
 
@@ -527,7 +585,10 @@ def test_set_closing_date():
 
 
 def test_set_opening_date():
-    expected = {'_collections': ['Conferences'], 'opening_date': '1978-04-26'}
+    expected = {
+        '_collections': ['Conferences'],
+        'opening_date': '1978-04-26'
+    }
     builder = ConferenceBuilder()
     builder.set_opening_date('1978-04-26')
 
@@ -537,7 +598,7 @@ def test_set_opening_date():
 def test_set_short_description_without_source():
     expected = {
         '_collections': ['Conferences'],
-        'short_description': {'value': 'lorem ipsum'},
+        'short_description': {'value': 'lorem ipsum'}
     }
     builder = ConferenceBuilder()
     builder.set_short_description('lorem ipsum')
@@ -548,7 +609,7 @@ def test_set_short_description_without_source():
 def test_set_short_description_with_source():
     expected = {
         '_collections': ['Conferences'],
-        'short_description': {'value': 'lorem ipsum', 'source': 'arxiv'},
+        'short_description': {'value': 'lorem ipsum', 'source': 'arxiv'}
     }
     builder = ConferenceBuilder(source='arxiv')
     builder.set_short_description('lorem ipsum')
@@ -557,14 +618,10 @@ def test_set_short_description_with_source():
 
 
 def test_sanitization_of_short_description():
-    expected = (
-        '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'
+    expected = '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'\
         'http://example.com</a></div>'
-    )
-    description = (
-        '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '
+    description = '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '\
         'http://example.com</div>'
-    )
     builder = ConferenceBuilder()
     builder.set_short_description(description)
 

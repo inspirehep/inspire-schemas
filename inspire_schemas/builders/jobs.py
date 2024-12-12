@@ -28,7 +28,7 @@ from __future__ import absolute_import, division, print_function
 
 import logging
 
-from inspire_utils.date import normalize_date
+import six
 from jsonschema._format import is_email
 
 from inspire_schemas.builders.builder import RecordBuilder
@@ -37,6 +37,7 @@ from inspire_schemas.utils import (
     sanitize_html,
     validate,
 )
+from inspire_utils.date import normalize_date
 
 LOG = logging.getLogger(__name__)
 
@@ -46,11 +47,7 @@ class JobBuilder(RecordBuilder):
 
     _collections = ['Jobs']
 
-    def __init__(
-        self,
-        record=None,
-        source=None,
-    ):
+    def __init__(self, record=None, source=None,):
         super(JobBuilder, self).__init__(record, source)
         if record is None:
             self.record['status'] = 'pending'
@@ -76,7 +73,8 @@ class JobBuilder(RecordBuilder):
         experiment=None,
         institution=None,
         legacy_name=None,
-        record=None,
+        record=None
+
     ):
         """Add experiment to ``accelerator_experiment`` field.
 
@@ -96,7 +94,7 @@ class JobBuilder(RecordBuilder):
             experiment=experiment,
             institution=institution,
             legacy_name=legacy_name,
-            record=record,
+            record=record
         )
 
     @filter_empty_parameters
@@ -109,6 +107,7 @@ class JobBuilder(RecordBuilder):
         orcid=None,
         source=None,
         submission_number=None,
+
     ):
         """Add acquisition source.
 
@@ -187,7 +186,7 @@ class JobBuilder(RecordBuilder):
             'institutions',
             value=value,
             curated_relation=curated_relation,
-            record=record,
+            record=record
         )
 
     @filter_empty_parameters
@@ -207,7 +206,9 @@ class JobBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {'value': value}
+        entry = {
+            'value': value
+        }
         if description:
             entry['description'] = description
         return entry

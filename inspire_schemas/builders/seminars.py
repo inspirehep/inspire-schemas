@@ -26,14 +26,16 @@
 
 from __future__ import absolute_import, division, print_function
 
-from inspire_utils.name import normalize_name
+import six
 
+from inspire_utils.name import normalize_name
 from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.utils import (
     filter_empty_parameters,
     sanitize_html,
     validate,
 )
+from inspire_utils.date import normalize_date
 
 
 class SeminarBuilder(RecordBuilder):
@@ -49,7 +51,9 @@ class SeminarBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {'value': value}
+        entry = {
+            'value': value
+        }
         if description:
             entry['description'] = description
         return entry
@@ -122,9 +126,7 @@ class SeminarBuilder(RecordBuilder):
         )
 
     @filter_empty_parameters
-    def add_speaker(
-        self, name=None, record=None, affiliations=None, ids=None, curated_relation=None
-    ):
+    def add_speaker(self, name=None, record=None, affiliations=None, ids=None, curated_relation=None):
         """
         Args:
             name (str): name of the contact.
@@ -213,13 +215,10 @@ class SeminarBuilder(RecordBuilder):
             value (str): public note for the current article.
             source (str): source for the given notes.
         """
-        self._append_to(
-            'public_notes',
-            self._sourced_dict(
-                source,
-                value=value,
-            ),
-        )
+        self._append_to('public_notes', self._sourced_dict(
+            source,
+            value=value,
+        ))
 
     @filter_empty_parameters
     def add_series(self, name, number=None):
@@ -241,7 +240,11 @@ class SeminarBuilder(RecordBuilder):
             subtitle (str): subtitle for the current document.
             source (str): source for the given title.
         """
-        title_dict = self._sourced_dict(source, title=title, subtitle=subtitle)
+        title_dict = self._sourced_dict(
+            source,
+            title=title,
+            subtitle=subtitle
+        )
         self.record['title'] = title_dict
 
     @filter_empty_parameters
@@ -286,7 +289,8 @@ class SeminarBuilder(RecordBuilder):
             source (str): source of the description.
         """
         self.record['abstract'] = self._sourced_dict(
-            source=source, value=sanitize_html(value)
+            source=source,
+            value=sanitize_html(value)
         )
 
     def set_timezone(self, timezone=None):

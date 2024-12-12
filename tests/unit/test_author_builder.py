@@ -21,9 +21,8 @@
 # or submit itself to any jurisdiction.
 
 from __future__ import absolute_import, division, print_function
-
-import jsonschema
 import pytest
+import jsonschema
 
 from inspire_schemas.api import load_schema, validate
 from inspire_schemas.builders.authors import AuthorBuilder
@@ -106,7 +105,10 @@ def test_set_display_name():
     author.set_name('Torre, Riccardo')
     author.set_display_name('Rick')
 
-    expected = {'value': 'Torre, Riccardo', 'preferred_name': 'Rick'}
+    expected = {
+        'value': 'Torre, Riccardo',
+        'preferred_name': 'Rick'
+    }
     result = author.obj['name']
 
     assert validate(result, subschema) is None
@@ -122,7 +124,10 @@ def test_set_display_name_can_be_called_multiple_times():
     author.set_display_name('Ricardo')
     author.set_display_name('Rick')
 
-    expected = {'value': 'Torre, Riccardo', 'preferred_name': 'Rick'}
+    expected = {
+        'value': 'Torre, Riccardo',
+        'preferred_name': 'Rick'
+    }
     result = author.obj['name']
 
     assert validate(result, subschema) is None
@@ -141,7 +146,10 @@ def test_add_name_variant():
 
     expected = {
         'value': 'Abad, Francisco Jose Garcia',
-        'native_names': ['Garcia Abad', 'Francisco Jose'],
+        'native_names': [
+            'Garcia Abad',
+            'Francisco Jose'
+        ]
     }
     result = author.obj['name']
 
@@ -157,7 +165,12 @@ def test_add_native_name():
     author.set_name('Torre, Riccardo')
     author.add_native_name('Rick')
 
-    expected = {'value': 'Torre, Riccardo', 'native_names': ['Rick']}
+    expected = {
+        'value': 'Torre, Riccardo',
+        'native_names': [
+            'Rick'
+        ]
+    }
     result = author.obj['name']
 
     assert validate(result, subschema) is None
@@ -174,7 +187,9 @@ def test_add_previous_name():
 
     expected = {
         'value': 'Acharya, Bannanje Sripath',
-        'previous_names': ['Do not confuse with Acharya, Bobby Samir'],
+        'previous_names': [
+            'Do not confuse with Acharya, Bobby Samir'
+        ]
     }
     result = author.obj['name']
 
@@ -198,7 +213,7 @@ def test_add_multiple_native_names():
             'Rick',
             'Torrecillas',
             'Ricardo',
-        ],
+        ]
     }
     result = author.obj['name']
 
@@ -213,7 +228,9 @@ def test_add_email_address():
     author = AuthorBuilder()
     author.add_email_address('example@test.com')
 
-    expected = [{"value": 'example@test.com'}]
+    expected = [{
+        "value": 'example@test.com'
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -228,7 +245,12 @@ def test_add_multiple_email_addresses():
     author.add_email_address('example@test.com')
     author.add_email_address('test@example.com')
 
-    expected = [{"value": 'example@test.com'}, {"value": 'test@example.com'}]
+    expected = [{
+        "value": 'example@test.com'
+    },
+        {
+        "value": 'test@example.com'
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -243,7 +265,9 @@ def test_add_email_addresses_skips_duplicate_ones():
     author.add_email_address('example@test.com')
     author.add_email_address('example@test.com')
 
-    expected = [{"value": 'example@test.com'}]
+    expected = [{
+        "value": 'example@test.com'
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -257,12 +281,10 @@ def test_add_email_addresses_with_hidden_parameter():
     author = AuthorBuilder()
     author.add_email_address('example@test.com', hidden=True)
 
-    expected = [
-        {
-            "value": 'example@test.com',
-            "hidden": True,
-        }
-    ]
+    expected = [{
+        "value": 'example@test.com',
+        "hidden": True,
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -276,12 +298,10 @@ def test_add_email_addresses_with_current_parameter():
     author = AuthorBuilder()
     author.add_email_address('example@test.com', current=True)
 
-    expected = [
-        {
-            "value": 'example@test.com',
-            "current": True,
-        }
-    ]
+    expected = [{
+        "value": 'example@test.com',
+        "current": True,
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -296,12 +316,10 @@ def test_add_email_addresses_with_hidden_parameter_only_updates_hidden_field():
     author.add_email_address('example@test.com')
     author.add_email_address('example@test.com', hidden=False)
 
-    expected = [
-        {
-            "value": 'example@test.com',
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "value": 'example@test.com',
+        "hidden": False,
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -316,12 +334,10 @@ def test_add_email_addresses_without_hidden_parameter_skip_updates_hidden_field(
     author.add_email_address('example@test.com', hidden=True)
     author.add_email_address('example@test.com')
 
-    expected = [
-        {
-            "value": 'example@test.com',
-            "hidden": True,
-        }
-    ]
+    expected = [{
+        "value": 'example@test.com',
+        "hidden": True,
+    }]
     result = author.obj['email_addresses']
 
     assert validate(result, subschema) is None
@@ -349,7 +365,9 @@ def test_add_url_without_description():
     author = AuthorBuilder()
     author.add_url('https://www.example.com')
 
-    expected = [{"value": "https://www.example.com"}]
+    expected = [{
+        "value": "https://www.example.com"
+    }]
     result = author.obj['urls']
 
     assert validate(result, subschema) is None
@@ -363,9 +381,10 @@ def test_add_url_with_description():
     author = AuthorBuilder()
     author.add_url('https://www.example.com', 'this is an example')
 
-    expected = [
-        {"value": "https://www.example.com", "description": "this is an example"}
-    ]
+    expected = [{
+        "value": "https://www.example.com",
+        "description": "this is an example"
+    }]
     result = author.obj['urls']
 
     assert validate(result, subschema) is None
@@ -379,7 +398,10 @@ def test_add_blog():
     author = AuthorBuilder()
     author.add_blog('https://www.blog.com')
 
-    expected = [{"value": "https://www.blog.com", "description": "blog"}]
+    expected = [{
+        "value": "https://www.blog.com",
+        "description": "blog"
+    }]
     result = author.obj['urls']
 
     assert validate(result, subschema) is None
@@ -393,9 +415,10 @@ def test_add_linkedin():
     author = AuthorBuilder()
     author.add_linkedin('https://www.linkedin.com/in/example-12345/')
 
-    expected = [
-        {"value": "https://www.linkedin.com/in/example-12345/", "schema": "LINKEDIN"}
-    ]
+    expected = [{
+        "value": "https://www.linkedin.com/in/example-12345/",
+        "schema": "LINKEDIN"
+    }]
     result = author.obj['ids']
 
     assert validate(result, subschema) is None
@@ -409,7 +432,10 @@ def test_add_twitter():
     author = AuthorBuilder()
     author.add_twitter('https://twitter.com/Example')
 
-    expected = [{"value": "https://twitter.com/Example", "schema": "TWITTER"}]
+    expected = [{
+        "value": "https://twitter.com/Example",
+        "schema": "TWITTER"
+    }]
     result = author.obj['ids']
 
     assert validate(result, subschema) is None
@@ -451,7 +477,10 @@ def test_add_orcid():
     author = AuthorBuilder()
     author.add_orcid('0000-0002-7638-5686')
 
-    expected = [{"value": "0000-0002-7638-5686", "schema": "ORCID"}]
+    expected = [{
+        "value": "0000-0002-7638-5686",
+        "schema": "ORCID"
+    }]
     result = author.obj['ids']
 
     assert validate(result, subschema) is None
@@ -465,7 +494,9 @@ def test_add_arxiv_category():
     author = AuthorBuilder()
     author.add_arxiv_category('math.CV')
 
-    expected = ["math.CV"]
+    expected = [
+        "math.CV"
+    ]
     result = author.obj['arxiv_categories']
 
     assert validate(result, subschema) is None
@@ -497,28 +528,28 @@ def test_add_institution():
     subschema = schema['properties']['positions']
 
     author = AuthorBuilder()
-    author.add_institution(
-        institution='Colgate University',
-        start_date='1994-02-01',
-        end_date='1995-01-31',
-        rank='PHD',
-        record={"$ref": "http://180/api/institutions/113"},
-        curated=True,
-        current=False,
-    )
+    author.add_institution(institution='Colgate University',
+                           start_date='1994-02-01',
+                           end_date='1995-01-31',
+                           rank='PHD',
+                           record={
+                                "$ref": "http://180/api/institutions/113"
+                           },
+                           curated=True,
+                           current=False)
 
-    expected = [
-        {
-            "institution": 'Colgate University',
-            "start_date": u'1994-02-01',
-            "end_date": u'1995-01-31',
-            "rank": 'PHD',
-            "record": {"$ref": "http://180/api/institutions/113"},
-            "curated_relation": True,
-            "current": False,
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "institution": 'Colgate University',
+        "start_date": u'1994-02-01',
+        "end_date": u'1995-01-31',
+        "rank": 'PHD',
+        "record": {
+            "$ref": "http://180/api/institutions/113"
+        },
+        "curated_relation": True,
+        "current": False,
+        "hidden": False
+    }]
     result = author.obj['positions']
 
     assert validate(result, subschema) is None
@@ -530,10 +561,11 @@ def test_add_institution_sorts_by_current():
     subschema = schema['properties']['positions']
 
     author = AuthorBuilder()
-    author.add_institution(institution='Colgate University', start_date='1994-02-01')
-    author.add_institution(
-        institution='First University', start_date='1950-02-01', current=True
-    )
+    author.add_institution(institution='Colgate University',
+                           start_date='1994-02-01')
+    author.add_institution(institution='First University',
+                           start_date='1950-02-01',
+                           current=True)
 
     expected = [
         {
@@ -541,14 +573,14 @@ def test_add_institution_sorts_by_current():
             "start_date": u'1950-02-01',
             "curated_relation": False,
             "current": True,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "start_date": u'1994-02-01',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
     ]
     result = author.obj['positions']
@@ -562,11 +594,12 @@ def test_add_institution_sorts_by_start_date():
     subschema = schema['properties']['positions']
 
     author = AuthorBuilder()
-    author.add_institution(institution='First University', start_date='1950-02-01')
+    author.add_institution(institution='First University',
+                           start_date='1950-02-01')
     author.add_institution(institution='Dateless University')
-    author.add_institution(
-        institution='Colgate University', start_date='1994-02-01', hidden=True
-    )
+    author.add_institution(institution='Colgate University',
+                           start_date='1994-02-01',
+                           hidden=True)
 
     expected = [
         {
@@ -574,21 +607,21 @@ def test_add_institution_sorts_by_start_date():
             "start_date": u'1994-02-01',
             "curated_relation": False,
             "current": False,
-            "hidden": True,
+            "hidden": True
         },
         {
             "institution": 'First University',
             "start_date": u'1950-02-01',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Dateless University',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
-        },
+            "hidden": False
+        }
     ]
     result = author.obj['positions']
 
@@ -601,16 +634,25 @@ def test_add_institution_sorts_by_rank():
     subschema = schema['properties']['positions']
 
     author = AuthorBuilder()
-    author.add_institution(institution='Colgate University', rank='MASTER')
-    author.add_institution(institution='Colgate University', rank='PHD')
-    author.add_institution(institution='Colgate University', rank='VISITOR')
-    author.add_institution(institution='Colgate University', rank='STAFF')
-    author.add_institution(institution='Colgate University', rank='SENIOR')
-    author.add_institution(institution='Colgate University', rank='OTHER')
-    author.add_institution(institution='Colgate University', rank='UNDERGRADUATE')
+    author.add_institution(institution='Colgate University',
+                           rank='MASTER')
+    author.add_institution(institution='Colgate University',
+                           rank='PHD')
+    author.add_institution(institution='Colgate University',
+                           rank='VISITOR')
+    author.add_institution(institution='Colgate University',
+                           rank='STAFF')
+    author.add_institution(institution='Colgate University',
+                           rank='SENIOR')
+    author.add_institution(institution='Colgate University',
+                           rank='OTHER')
+    author.add_institution(institution='Colgate University',
+                           rank='UNDERGRADUATE')
     author.add_institution(institution='Colgate University')
-    author.add_institution(institution='Colgate University', rank='POSTDOC')
-    author.add_institution(institution='Colgate University', rank='JUNIOR')
+    author.add_institution(institution='Colgate University',
+                           rank='POSTDOC')
+    author.add_institution(institution='Colgate University',
+                           rank='JUNIOR')
 
     expected = [
         {
@@ -618,69 +660,70 @@ def test_add_institution_sorts_by_rank():
             "rank": 'STAFF',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'SENIOR',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'JUNIOR',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
+
         },
         {
             "institution": 'Colgate University',
             "rank": 'VISITOR',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'POSTDOC',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'PHD',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'MASTER',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'UNDERGRADUATE',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "rank": 'OTHER',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
         {
             "institution": 'Colgate University',
             "curated_relation": False,
             "current": False,
-            "hidden": False,
+            "hidden": False
         },
     ]
     result = author.obj['positions']
@@ -694,19 +737,16 @@ def test_add_institution_normalizes_start_date():
     subschema = schema['properties']['positions']
 
     author = AuthorBuilder()
-    author.add_institution(
-        institution='Colgate University', start_date='February 1 1994'
-    )
+    author.add_institution(institution='Colgate University',
+                           start_date='February 1 1994')
 
-    expected = [
-        {
-            "institution": 'Colgate University',
-            "start_date": u'1994-02-01',
-            "curated_relation": False,
-            "current": False,
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "institution": 'Colgate University',
+        "start_date": u'1994-02-01',
+        "curated_relation": False,
+        "current": False,
+        "hidden": False
+    }]
     result = author.obj['positions']
 
     assert validate(result, subschema) is None
@@ -718,17 +758,16 @@ def test_add_institution_normalizes_end_date():
     subschema = schema['properties']['positions']
 
     author = AuthorBuilder()
-    author.add_institution(institution='Colgate University', end_date='31 January 2005')
+    author.add_institution(institution='Colgate University',
+                           end_date='31 January 2005')
 
-    expected = [
-        {
-            "institution": 'Colgate University',
-            "end_date": u'2005-01-31',
-            "curated_relation": False,
-            "current": False,
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "institution": 'Colgate University',
+        "end_date": u'2005-01-31',
+        "curated_relation": False,
+        "current": False,
+        "hidden": False
+    }]
     result = author.obj['positions']
 
     assert validate(result, subschema) is None
@@ -740,26 +779,26 @@ def test_add_project():
     subschema = schema['properties']['project_membership']
 
     author = AuthorBuilder()
-    author.add_project(
-        name='pariatur',
-        start_date='1997-05-01',
-        end_date='2001-12-31',
-        record={"$ref": "http://180/api/experiments/1324"},
-        curated=True,
-        current=True,
-    )
+    author.add_project(name='pariatur',
+                       start_date='1997-05-01',
+                       end_date='2001-12-31',
+                       record={
+                            "$ref": "http://180/api/experiments/1324"
+                       },
+                       curated=True,
+                       current=True)
 
-    expected = [
-        {
-            "name": 'pariatur',
-            "start_date": u'1997-05-01',
-            "end_date": u'2001-12-31',
-            "record": {"$ref": "http://180/api/experiments/1324"},
-            "curated_relation": True,
-            "current": True,
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "name": 'pariatur',
+        "start_date": u'1997-05-01',
+        "end_date": u'2001-12-31',
+        "record": {
+            "$ref": "http://180/api/experiments/1324"
+        },
+        "curated_relation": True,
+        "current": True,
+        "hidden": False
+    }]
     result = author.obj['project_membership']
 
     assert validate(result, subschema) is None
@@ -771,8 +810,11 @@ def test_add_project_sorts_by_current():
     subschema = schema['properties']['project_membership']
 
     author = AuthorBuilder()
-    author.add_project(name='pariatur', start_date='1997-05-01')
-    author.add_project(name='current one', start_date='1949-05-01', current=True)
+    author.add_project(name='pariatur',
+                       start_date='1997-05-01')
+    author.add_project(name='current one',
+                       start_date='1949-05-01',
+                       current=True)
 
     expected = [
         {
@@ -780,15 +822,15 @@ def test_add_project_sorts_by_current():
             'start_date': '1949-05-01',
             'curated_relation': False,
             'current': True,
-            'hidden': False,
+            'hidden': False
         },
         {
             'name': 'pariatur',
             'start_date': u'1997-05-01',
             'curated_relation': False,
             'current': False,
-            'hidden': False,
-        },
+            'hidden': False
+        }
     ]
     result = author.obj['project_membership']
 
@@ -801,8 +843,10 @@ def test_add_project_sorts_by_start_date():
     subschema = schema['properties']['project_membership']
 
     author = AuthorBuilder()
-    author.add_project(name='earliest one', start_date='1949-05-01')
-    author.add_project(name='pariatur', start_date='1997-05-01')
+    author.add_project(name='earliest one',
+                       start_date='1949-05-01')
+    author.add_project(name='pariatur',
+                       start_date='1997-05-01')
 
     expected = [
         {
@@ -810,14 +854,14 @@ def test_add_project_sorts_by_start_date():
             'start_date': u'1997-05-01',
             'curated_relation': False,
             'current': False,
-            'hidden': False,
+            'hidden': False
         },
         {
             'name': 'earliest one',
             'start_date': '1949-05-01',
             'curated_relation': False,
             'current': False,
-            'hidden': False,
+            'hidden': False
         },
     ]
     result = author.obj['project_membership']
@@ -831,17 +875,16 @@ def test_add_project_normalizes_start_date():
     subschema = schema['properties']['project_membership']
 
     author = AuthorBuilder()
-    author.add_project(name='pariatur', start_date='1999 February')
+    author.add_project(name='pariatur',
+                       start_date='1999 February')
 
-    expected = [
-        {
-            "name": 'pariatur',
-            "start_date": u'1999-02',
-            "curated_relation": False,
-            "current": False,
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "name": 'pariatur',
+        "start_date": u'1999-02',
+        "curated_relation": False,
+        "current": False,
+        "hidden": False
+    }]
     result = author.obj['project_membership']
 
     assert validate(result, subschema) is None
@@ -853,17 +896,16 @@ def test_add_project_normalizes_end_date():
     subschema = schema['properties']['project_membership']
 
     author = AuthorBuilder()
-    author.add_project(name='pariatur', end_date='5 2016 January')
+    author.add_project(name='pariatur',
+                       end_date='5 2016 January')
 
-    expected = [
-        {
-            "name": 'pariatur',
-            "end_date": u'2016-01-05',
-            "curated_relation": False,
-            "current": False,
-            "hidden": False,
-        }
-    ]
+    expected = [{
+        "name": 'pariatur',
+        "end_date": u'2016-01-05',
+        "curated_relation": False,
+        "current": False,
+        "hidden": False
+    }]
     result = author.obj['project_membership']
 
     assert validate(result, subschema) is None
@@ -875,9 +917,13 @@ def test_add_private_note():
     subschema = schema['properties']['_private_notes']
 
     author = AuthorBuilder()
-    author.add_private_note(note='this is an example', source='curator')
+    author.add_private_note(note='this is an example',
+                            source='curator')
 
-    expected = [{"value": 'this is an example', "source": 'curator'}]
+    expected = [{
+        "value": 'this is an example',
+        "source": 'curator'
+    }]
     result = author.obj['_private_notes']
 
     assert validate(result, subschema) is None
@@ -891,7 +937,9 @@ def test_add_private_note_without_source():
     author = AuthorBuilder()
     author.add_private_note('this is an example')
 
-    expected = [{"value": 'this is an example'}]
+    expected = [{
+        "value": 'this is an example'
+    }]
     result = author.obj['_private_notes']
 
     assert validate(result, subschema) is None
@@ -903,33 +951,47 @@ def test_add_advisor():
     subschema = schema['properties']['advisors']
 
     author = AuthorBuilder()
-    author.add_advisor(
-        name='Torres, Riccardo',
-        ids=[
-            {"schema": "DESY", "value": "DESY-55924820881"},
-            {"schema": "SCOPUS", "value": "7039712595"},
-            {"schema": "SCOPUS", "value": "8752067273"},
-        ],
-        degree_type='bachelor',
-        record={"$ref": "http://180/api/authors/1212"},
-        curated=True,
-        hidden=True,
-    )
+    author.add_advisor(name='Torres, Riccardo',
+                       ids=[{
+                            "schema": "DESY",
+                            "value": "DESY-55924820881"
+                            },
+                            {
+                            "schema": "SCOPUS",
+                            "value": "7039712595"
+                            },
+                            {
+                            "schema": "SCOPUS",
+                            "value": "8752067273"
+                            }],
+                       degree_type='bachelor',
+                       record={
+                           "$ref": "http://180/api/authors/1212"
+                       },
+                       curated=True,
+                       hidden=True)
 
-    expected = [
-        {
-            "name": 'Torres, Riccardo',
-            "ids": [
-                {"schema": "DESY", "value": "DESY-55924820881"},
-                {"schema": "SCOPUS", "value": "7039712595"},
-                {"schema": "SCOPUS", "value": "8752067273"},
-            ],
-            "degree_type": 'bachelor',
-            "record": {"$ref": "http://180/api/authors/1212"},
-            "curated_relation": True,
-            "hidden": True,
-        }
-    ]
+    expected = [{
+        "name": 'Torres, Riccardo',
+        "ids": [{
+            "schema": "DESY",
+            "value": "DESY-55924820881"
+        },
+            {
+            "schema": "SCOPUS",
+            "value": "7039712595"
+        },
+            {
+            "schema": "SCOPUS",
+            "value": "8752067273"
+        }],
+        "degree_type": 'bachelor',
+        "record": {
+            "$ref": "http://180/api/authors/1212"
+        },
+        "curated_relation": True,
+        "hidden": True
+    }]
     result = author.obj['advisors']
 
     assert validate(result, subschema) is None
@@ -943,9 +1005,11 @@ def test_add_advisor_normalizes_name():
     author = AuthorBuilder()
     author.add_advisor('Riccardo Torres Jr')
 
-    expected = [
-        {"name": 'Torres, Riccardo, Jr.', "curated_relation": False, "hidden": False}
-    ]
+    expected = [{
+        "name": 'Torres, Riccardo, Jr.',
+        "curated_relation": False,
+        "hidden": False
+    }]
     result = author.obj['advisors']
 
     assert validate(result, subschema) is None
@@ -984,7 +1048,10 @@ def test_add_bai():
     author = AuthorBuilder()
     author.add_bai('T.Zivko.1')
 
-    expected = [{"value": "T.Zivko.1", "schema": "INSPIRE BAI"}]
+    expected = [{
+        "value": "T.Zivko.1",
+        "schema": "INSPIRE BAI"
+    }]
     result = author.obj['ids']
 
     assert validate(result, subschema) is None

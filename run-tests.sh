@@ -21,7 +21,9 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
+isort -rc -c --skip docs/conf.py -df **/*.py && \
 pytest \
+    --pep8 \
     --cov=inspire_schemas \
     --cov-report=term-missing \
     --capture=sys \

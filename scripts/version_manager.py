@@ -32,7 +32,6 @@ repository.
 from __future__ import print_function
 
 import argparse
-import contextlib
 import copy
 import os
 import re
@@ -43,7 +42,9 @@ import dulwich.repo
 import dulwich.walk
 
 PROJECT_NAME = 'inspire-schemas'
-BUG_URL_REG = re.compile(r'.*(closes #|fixes #|adresses #)(?P<bugid>\d+)')
+BUG_URL_REG = re.compile(
+    r'.*(closes #|fixes #|adresses #)(?P<bugid>\d+)'
+)
 BUGTRACKER_URL = 'http://github.com/inspirehep/' + PROJECT_NAME
 VALID_TAG = re.compile(r'^\d+\.\d+$')
 FEAT_HEADER = re.compile(
@@ -56,8 +57,10 @@ MAJOR_INVENIO = re.compile(r'\n\* INCOMPATIBLE')
 
 
 def get_repo_object(repo, object_name):
-    with contextlib.suppress(Exception):
+    try:
         object_name = object_name.encode()
+    except:
+        pass
 
     return repo.get_object(object_name)
 
@@ -93,27 +96,27 @@ def get_github_from_commit_msg(commit_msg):
 
 
 def pretty_commit(commit, version=None, commit_type='bug'):
-    commit.message.decode('utf-8')
+    message = commit.message.decode('utf-8')
     subject = commit.message.split(b'\n', 1)[0]  # noqa
     short_hash = commit.sha().hexdigest()[:8]  # noqa
     author = commit.author  # noqa
     bugs = get_github_from_commit_msg(commit.message)
     if bugs:
-        BUGTRACKER_URL + '/issue/'
-        changelog_bugs = (
-            fit_to_cols(
-                'FIXED ISSUES: {bugtracker_url}{bugs}'.format(**vars()),
-                indent='    ',
-            )
-            + '\n'
-        )
+        bugtracker_url = BUGTRACKER_URL + '/issue/'
+        changelog_bugs = fit_to_cols(
+            'FIXED ISSUES: {bugtracker_url}{bugs}'.format(**vars()),
+            indent='    ',
+        ) + '\n'
     else:
         changelog_bugs = ''  # noqa
 
-    if commit_type == 'feature' or commit_type == 'api_break':
-        pass
+    feature_header = ''
+    if commit_type == 'feature':
+        feature_header = 'FEATURE'
+    elif commit_type == 'api_break':
+        feature_header = 'MAJOR'
     else:
-        pass
+        feature_header = 'MINOR'
 
     changelog_message = fit_to_cols(  # noqa
         '{feature_header} {short_hash}: {subject}'.format(**vars()),
@@ -121,9 +124,10 @@ def pretty_commit(commit, version=None, commit_type='bug'):
     )
 
     return (
-        ('* {version} "{author}"\n' if version is not None else '')
-        + '{changelog_message}\n'
-        + '{changelog_bugs}'
+        (
+            '* {version} "{author}"\n'
+            if version is not None else ''
+        ) + '{changelog_message}\n' + '{changelog_bugs}'
     ).format(**vars())
 
 
@@ -131,8 +135,9 @@ def get_tags(repo):
     return {
         commit: os.path.basename(tag_ref)
         for tag_ref, commit in repo.get_refs().items()
-        if tag_ref.startswith(b'refs/tags/')
-        and VALID_TAG.match(tag_ref[len('refs/tags/') :])
+        if tag_ref.startswith(b'refs/tags/') and VALID_TAG.match(
+            tag_ref[len('refs/tags/'):]
+        )
     }
 
 
@@ -177,7 +182,8 @@ def get_first_parents(repo_path):
     for entry in repo.get_walker(order=dulwich.walk.ORDER_TOPO):
         commit = entry.commit
         # In order to properly work on python 2 and 3 we need some utf magic
-        parents = commit.parents and [i.decode('utf-8') for i in commit.parents]
+        parents = commit.parents and [i.decode('utf-8') for i in
+                                      commit.parents]
         if not parents:
             if commit.sha().hexdigest() not in first_parents:
                 first_parents.append(commit.sha().hexdigest())
@@ -192,18 +198,17 @@ def get_first_parents(repo_path):
                 first_parents.append(commit.sha().hexdigest())
             if parents[0] not in first_parents:
                 first_parents.append(parents[0])
-        elif (
-            parents
-            and commit.sha().hexdigest() in first_parents
-            and parents[0] not in first_parents
-        ):
-            first_parents.append(parents[0])
+        elif parents and commit.sha().hexdigest() in first_parents:
+            if parents[0] not in first_parents:
+                first_parents.append(parents[0])
 
     return first_parents
 
 
 def has_firstparent_child(sha, first_parents, parents_per_child):
-    return any(child for child in parents_per_child[sha] if child in first_parents)
+    return any(
+        child for child in parents_per_child[sha] if child in first_parents
+    )
 
 
 def get_merged_commits(repo, commit, first_parents, children_per_parent):
@@ -215,14 +220,15 @@ def get_merged_commits(repo, commit, first_parents, children_per_parent):
         next_sha = to_explore.pop()
         next_commit = get_repo_object(repo, next_sha)
         if (
-            next_sha not in first_parents
-            and not has_firstparent_child(next_sha, first_parents, children_per_parent)
-            or next_sha in commit.parents
+            next_sha not in first_parents and not has_firstparent_child(
+                next_sha, first_parents, children_per_parent
+            ) or next_sha in commit.parents
         ):
             merge_children.add(next_sha)
 
         non_first_parents = (
-            parent for parent in next_commit.parents if parent not in first_parents
+            parent
+            for parent in next_commit.parents if parent not in first_parents
         )
         for child_sha in non_first_parents:
             if child_sha not in merge_children and child_sha != next_sha:
@@ -256,9 +262,8 @@ def get_children_per_first_parent(repo_path):
     return children_per_first_parent
 
 
-def get_version(
-    commit, tags, maj_version=0, feat_version=0, fix_version=0, children=None
-):
+def get_version(commit, tags, maj_version=0, feat_version=0, fix_version=0,
+                children=None):
     children = children or []
     commit_type = get_commit_type(commit, children)
     commit_sha = commit.sha().hexdigest()
@@ -283,14 +288,16 @@ def get_version(
 
 
 def is_api_break(commit):
-    return MAJOR_HEADER.search(commit.message.decode('utf-8')) or MAJOR_INVENIO.search(
-        commit.message.decode('utf-8')
+    return (
+        MAJOR_HEADER.search(commit.message.decode('utf-8')) or
+        MAJOR_INVENIO.search(commit.message.decode('utf-8'))
     )
 
 
 def is_feature(commit):
-    return FEAT_HEADER.search(commit.message.decode('utf-8')) or FEAT_INVENIO.search(
-        commit.message.decode('utf-8')
+    return (
+        FEAT_HEADER.search(commit.message.decode('utf-8')) or
+        FEAT_INVENIO.search(commit.message.decode('utf-8'))
     )
 
 
@@ -362,9 +369,8 @@ def get_changelog(repo_path, from_commit=None):
         version_str = '%s.%s.%s' % version
 
         if (
-            start_including
-            or commit_sha.startswith(from_commit)
-            or fuzzy_matches_refs(from_commit, refs.get(commit_sha, []))
+            start_including or commit_sha.startswith(from_commit) or
+            fuzzy_matches_refs(from_commit, refs.get(commit_sha, []))
         ):
             commit_type = get_commit_type(
                 commit=commit,
@@ -380,7 +386,9 @@ def get_changelog(repo_path, from_commit=None):
                     prev_version=prev_version,
                 )
                 cur_line += pretty_commit(
-                    commit=child, version=None, commit_type=commit_type
+                    commit=child,
+                    version=None,
+                    commit_type=commit_type
                 )
             start_including = True
             changelog.append(cur_line)
@@ -411,7 +419,7 @@ def get_current_version(repo_path):
     fix_version = 0
 
     for commit_sha, children in reversed(
-        get_children_per_first_parent(repo_path).items()
+            get_children_per_first_parent(repo_path).items()
     ):
         commit = get_repo_object(repo, commit_sha)
         maj_version, feat_version, fix_version = get_version(
@@ -444,9 +452,8 @@ def get_authors(repo_path, from_commit):
     ):
         commit = get_repo_object(repo, commit_sha)
         if (
-            start_including
-            or commit_sha.startswith(from_commit)
-            or fuzzy_matches_refs(from_commit, refs.get(commit_sha, []))
+            start_including or commit_sha.startswith(from_commit) or
+            fuzzy_matches_refs(from_commit, refs.get(commit_sha, []))
         ):
             authors.add(commit.author.decode())
             for child in children:
@@ -496,9 +503,8 @@ def get_releasenotes(repo_path, from_commit):
         version_str = '%s.%s.%s' % version
 
         if (
-            start_including
-            or commit_sha.startswith(from_commit)
-            or fuzzy_matches_refs(from_commit, refs.get(commit_sha, []))
+            start_including or commit_sha.startswith(from_commit) or
+            fuzzy_matches_refs(from_commit, refs.get(commit_sha, []))
         ):
             parent_commit_type = get_commit_type(
                 commit=commit,
@@ -514,7 +520,9 @@ def get_releasenotes(repo_path, from_commit):
                     prev_version=prev_version,
                 )
                 cur_line += pretty_commit(
-                    commit=child, version=None, commit_type=commit_type
+                    commit=child,
+                    version=None,
+                    commit_type=commit_type
                 )
             start_including = True
 
@@ -543,33 +551,41 @@ Bugfixes and minor changes
 --------------------------
 %s
 ''' % (
-        version_str,
-        '\n'.join(reversed(api_break_changes)),
-        '\n'.join(reversed(features)),
-        '\n'.join(reversed(bugs)),
-    )
+            version_str,
+            '\n'.join(reversed(api_break_changes)),
+            '\n'.join(reversed(features)),
+            '\n'.join(reversed(bugs)),
+        )
 
 
 def main(args):
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('repo_path', help='Git repo to generate the changelog for')
+    parser.add_argument(
+        'repo_path', help='Git repo to generate the changelog for'
+    )
     subparsers = parser.add_subparsers()
     changelog_parser = subparsers.add_parser('changelog')
     changelog_parser.add_argument(
-        '--from-commit', default=None, help='Commit to start the changelog from'
+        '--from-commit',
+        default=None,
+        help='Commit to start the changelog from'
     )
     changelog_parser.set_defaults(func=get_changelog)
     version_parser = subparsers.add_parser('version')
     version_parser.set_defaults(func=get_current_version)
     releasenotes_parser = subparsers.add_parser('releasenotes')
     releasenotes_parser.add_argument(
-        '--from-commit', default=None, help='Commit to start the release notes from'
+        '--from-commit',
+        default=None,
+        help='Commit to start the release notes from'
     )
     releasenotes_parser.set_defaults(func=get_releasenotes)
     authors_parser = subparsers.add_parser('authors')
     authors_parser.add_argument(
-        '--from-commit', default=None, help='Commit to start the authors from'
+        '--from-commit',
+        default=None,
+        help='Commit to start the authors from'
     )
     authors_parser.set_defaults(func=get_authors)
     args = parser.parse_args(args)

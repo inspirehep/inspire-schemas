@@ -39,7 +39,8 @@ class SchemaNotFound(InspireSchemasException):
 
         :param schema: the schema that was requested.
         """
-        message = 'Unable to find schema "{}"'.format(schema)
+        message = 'Unable to find schema "{}"'.format(
+            schema)
         super(SchemaNotFound, self).__init__(message)
 
 

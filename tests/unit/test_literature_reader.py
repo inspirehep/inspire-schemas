@@ -326,6 +326,7 @@ def test_get_page_range_not_artid():
                 'page_end': '432',
                 'page_start': '402',
                 "artid": "18184",
+
             },
         ],
     }
@@ -440,5 +441,42 @@ def test_title():
 
     expected = 'The General Theory of Relativity'
     result = LiteratureReader(record).title
+
+    assert expected == result
+
+
+def test_page_artid_handles_artid():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {'artid': '054021'},
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '054021'
+    result = LiteratureReader(record).get_page_artid()
+
+    assert expected == result
+
+
+def test_get_page_artid_handles_page_range():
+    schema = load_schema('hep')
+    subschema = schema['properties']['publication_info']
+
+    record = {
+        'publication_info': [
+            {
+                'page_end': '588',
+                'page_start': '579',
+            },
+        ],
+    }
+    assert validate(record['publication_info'], subschema) is None
+
+    expected = '579-588'
+    result = LiteratureReader(record).get_page_artid()
 
     assert expected == result

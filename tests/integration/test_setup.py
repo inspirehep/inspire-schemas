@@ -23,9 +23,9 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 from __future__ import absolute_import, division, print_function
 
-import json
 import os
 from subprocess import call
+import json
 
 
 def test_json_files_are_created_from_yml_files():

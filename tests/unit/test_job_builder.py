@@ -28,7 +28,10 @@ from inspire_schemas.builders.jobs import JobBuilder
 
 
 def test_no_data():
-    expected = {'_collections': ['Jobs'], 'status': 'pending'}
+    expected = {
+        '_collections': ['Jobs'],
+        'status': 'pending'
+    }
     builder = JobBuilder()
 
     assert builder.record == expected
@@ -136,7 +139,10 @@ def test_ensure_dict_field_existing():
 def test_sourced_dict_local_source():
     builder = JobBuilder(source='global')
 
-    expected = {'source': 'local', 'value': 'foo'}
+    expected = {
+        'source': 'local',
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict('local', value='foo')
 
@@ -146,7 +152,10 @@ def test_sourced_dict_local_source():
 def test_sourced_dict_global_source():
     builder = JobBuilder(source='global')
 
-    expected = {'source': 'global', 'value': 'foo'}
+    expected = {
+        'source': 'global',
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -156,7 +165,9 @@ def test_sourced_dict_global_source():
 def test_sourced_dict_no_source():
     builder = JobBuilder()
 
-    expected = {'value': 'foo'}
+    expected = {
+        'value': 'foo'
+    }
 
     result = builder._sourced_dict(None, value='foo')
 
@@ -191,12 +202,16 @@ def test_append_to_field_complex_data():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = JobBuilder()
@@ -212,12 +227,16 @@ def test_append_to_field_dumplicated_complex_data():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = JobBuilder()
@@ -234,12 +253,16 @@ def test_append_to_field_from_kwargs():
     element_one = {
         'key': 'value',
         'list_key': ['some', 'values'],
-        'dict_key': {'key': 'another_value', 'something': 'else'},
+        'dict_key': {
+            'key': 'another_value',
+            'something': 'else'
+        }
     }
 
     element_two = {
         'key': 'value2',
         'other_list_key': ['some', 'values'],
+
     }
 
     builder = JobBuilder()
@@ -253,9 +276,8 @@ def test_append_to_field_from_kwargs():
 
 def test_add_private_note_with_source():
     expected = {
-        '_collections': ['Jobs'],
-        'status': 'pending',
-        '_private_notes': [{'source': 'http://some/source', 'value': 'Note'}],
+        '_collections': ['Jobs'], 'status': 'pending',
+        '_private_notes': [{'source': 'http://some/source', 'value': 'Note'}]
     }
     builder = JobBuilder()
 
@@ -266,9 +288,8 @@ def test_add_private_note_with_source():
 
 def test_add_private_note_without_source():
     expected = {
-        '_collections': ['Jobs'],
-        'status': 'pending',
-        '_private_notes': [{'value': 'Note'}],
+        '_collections': ['Jobs'], 'status': 'pending',
+        '_private_notes': [{'value': 'Note'}]
     }
     builder = JobBuilder()
 
@@ -281,16 +302,14 @@ def test_add_accelerator_experiment():
     expected = {
         '_collections': ['Jobs'],
         'status': 'pending',
-        'accelerator_experiments': [
-            {
-                'accelerator': 'accelerator',
-                'curated_relation': False,
-                'experiment': 'test1',
-                'institution': 'test2',
-                'legacy_name': 'test3',
-                'record': {'$ref': 'http://something'},
-            }
-        ],
+        'accelerator_experiments': [{
+            'accelerator': 'accelerator',
+            'curated_relation': False,
+            'experiment': 'test1',
+            'institution': 'test2',
+            'legacy_name': 'test3',
+            'record': {'$ref': 'http://something'}
+        }]
     }
 
     builder = JobBuilder()
@@ -313,14 +332,14 @@ def test_add_acquisition_source():
             'email': 'email@email.com',
             'method': 'method',
             'orcid': 'orcid',
-            'internal_uid': 'uuid',
-        },
+            'internal_uid': 'uuid'
+        }
     }
 
     expected2 = {
         '_collections': ['Jobs'],
         'status': 'pending',
-        'acquisition_source': {'submission_number': 'None', 'email': 'blah@email.gov'},
+        'acquisition_source': {'submission_number': 'None', 'email': 'blah@email.gov'}
     }
 
     builder = JobBuilder()
@@ -337,9 +356,8 @@ def test_add_acquisition_source():
 
 def test_add_arxiv_category():
     expected = {
-        '_collections': ['Jobs'],
-        'status': 'pending',
-        'arxiv_categories': ['cat1', 'cat2'],
+        '_collections': ['Jobs'], 'status': 'pending',
+        'arxiv_categories': ['cat1', 'cat2']
     }
 
     builder = JobBuilder()
@@ -357,20 +375,28 @@ def test_add_contact():
             'name': 'name',
             'email': 'email',
             'curated_relation': True,
-            'record': {'$ref': 'http://nothing'},
+            'record': {'$ref': 'http://nothing'}
         },
-        {'name': 'name2', 'email': 'email2'},
+        {
+            'name': 'name2',
+            'email': 'email2'
+        },
         {
             'name': 'name3',
         },
-        {'email': 'email3'},
+        {
+            'email': 'email3'
+        }
     ]
 
     builder = JobBuilder()
     builder.add_contact(
         name='name', email='email', curated_relation=True, record='http://nothing'
     )
-    builder.add_contact(name='name2', email='email2')
+    builder.add_contact(
+        name='name2',
+        email='email2'
+    )
     builder.add_contact(name='name3')
     builder.add_contact(email='email3')
     assert builder.record['contact_details'] == expected
@@ -379,7 +405,7 @@ def test_add_contact():
 def test_add_external_system_identifiers():
     expected = [
         {'schema': 'schema1', 'value': 'value1'},
-        {'schema': 'schema2', 'value': 'value2'},
+        {'schema': 'schema2', 'value': 'value2'}
     ]
 
     builder = JobBuilder()
@@ -394,14 +420,20 @@ def test_add_external_system_identifiers():
 
 def test_add_institution():
     expected = [
-        {'value': 'value', 'curated_relation': False, 'record': {'$ref': 'http://xyz'}},
-        {'value': 'value2'},
+        {
+            'value': 'value',
+            'curated_relation': False,
+            'record': {'$ref': 'http://xyz'}
+        },
+        {'value': 'value2'}
     ]
 
     builder = JobBuilder()
 
     builder.add_institution(
-        value='value', curated_relation=False, record={'$ref': 'http://xyz'}
+        value='value',
+        curated_relation=False,
+        record={'$ref': 'http://xyz'}
     )
     builder.add_institution('value2')
 
@@ -436,7 +468,7 @@ def test_reference_urls():
     expected = {
         'urls': [
             {'value': 'http://some_url.ch'},
-            {'value': 'http://other.url.com', 'description': 'url description'},
+            {'value': 'http://other.url.com', 'description': 'url description'}
         ]
     }
 
@@ -454,8 +486,8 @@ def test_add_reference_both():
         'emails': ['poczta@domena.pl', 'postane@domain.tr'],
         'urls': [
             {'value': 'https://jakas_strona.pl'},
-            {'value': 'http://xyz.uk', 'description': 'Some description'},
-        ],
+            {'value': 'http://xyz.uk', 'description': 'Some description'}
+        ]
     }
 
     builder = JobBuilder()
@@ -483,7 +515,7 @@ def test_add_region():
 def test_add_url():
     expected = [
         {'value': 'http://url.com'},
-        {'value': 'https://url2.ch', 'description': 'Description for this url'},
+        {'value': 'https://url2.ch', 'description': 'Description for this url'}
     ]
 
     builder = JobBuilder()
@@ -567,29 +599,30 @@ def test_process_reference_contact_list():
     contacts = [
         "some.email@cern.ch",
         "http://some-url.com/other/?url=1&part=2",
-        "other@email.com",
+        "other@email.com"
     ]
 
     builder = JobBuilder()
     builder.add_reference_contacts(contacts)
 
     expected_data = {
-        'emails': ['some.email@cern.ch', 'other@email.com'],
-        'urls': [{'value': 'http://some-url.com/other/?url=1&part=2'}],
+        'emails': [
+            'some.email@cern.ch',
+            'other@email.com'
+        ],
+        'urls': [
+            {'value': 'http://some-url.com/other/?url=1&part=2'}
+        ]
     }
 
     assert builder.record['reference_letters'] == expected_data
 
 
 def test_sanitization_of_description():
-    expected = (
-        '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'
+    expected = '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">'\
         'http://example.com</a></div>'
-    )
-    description = (
-        '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '
+    description = '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to '\
         'http://example.com</div>'
-    )
     builder = JobBuilder()
     builder.set_description(description)
 

@@ -26,22 +26,22 @@
 
 from __future__ import absolute_import, division, print_function
 
-import contextlib
 import warnings
 
 import idutils
-from inspire_utils.date import normalize_date
 from six import python_2_unicode_compatible, string_types, text_type
 
 from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.builders.signatures import SignatureBuilder
 from inspire_schemas.utils import (
+    EMPTIES,
     filter_empty_parameters,
     get_license_from_url,
     normalize_collaboration,
     normalize_isbn,
     validate,
 )
+from inspire_utils.date import normalize_date
 
 
 def is_citeable(publication_info):
@@ -53,20 +53,35 @@ def is_citeable(publication_info):
     """
 
     def _item_has_pub_info(item):
-        return all(key in item for key in ('journal_title', 'journal_volume'))
+        return all(
+            key in item for key in (
+                'journal_title', 'journal_volume'
+            )
+        )
 
     def _item_has_page_or_artid(item):
-        return any(key in item for key in ('page_start', 'artid'))
+        return any(
+            key in item for key in (
+                'page_start', 'artid'
+            )
+        )
 
-    has_pub_info = any(_item_has_pub_info(item) for item in publication_info)
-    has_page_or_artid = any(_item_has_page_or_artid(item) for item in publication_info)
+    has_pub_info = any(
+        _item_has_pub_info(item) for item in publication_info
+    )
+    has_page_or_artid = any(
+        _item_has_page_or_artid(item) for item in publication_info
+    )
 
     return has_pub_info and has_page_or_artid
 
 
 def key_already_there(element, elements):
     """Checks if the given element existng by using the key `key`."""
-    return any(element['key'] == existing_element['key'] for existing_element in elements)
+    for existing_element in elements:
+        if element['key'] == existing_element['key']:
+            return True
+    return False
 
 
 @python_2_unicode_compatible
@@ -98,13 +113,10 @@ class LiteratureBuilder(RecordBuilder):
         :param source: source for the given abstract.
         :type source: string
         """
-        self._append_to(
-            'abstracts',
-            self._sourced_dict(
-                source,
-                value=abstract.strip(),
-            ),
-        )
+        self._append_to('abstracts', self._sourced_dict(
+            source,
+            value=abstract.strip(),
+        ))
 
     @filter_empty_parameters
     def add_arxiv_eprint(self, arxiv_id, arxiv_categories):
@@ -116,13 +128,10 @@ class LiteratureBuilder(RecordBuilder):
         :param arxiv_categories: arXiv categories for the current document.
         :type arxiv_categories: list
         """
-        self._append_to(
-            'arxiv_eprints',
-            {
-                'value': arxiv_id,
-                'categories': arxiv_categories,
-            },
-        )
+        self._append_to('arxiv_eprints', {
+            'value': arxiv_id,
+            'categories': arxiv_categories,
+        })
         self.set_citeable(True)
 
     @filter_empty_parameters
@@ -149,7 +158,10 @@ class LiteratureBuilder(RecordBuilder):
         if not doi:
             return
 
-        dois = self._sourced_dict(source, value=doi)
+        dois = self._sourced_dict(
+            source,
+            value=doi
+        )
         if material is not None:
             dois['material'] = material
 
@@ -166,19 +178,16 @@ class LiteratureBuilder(RecordBuilder):
         self._append_to('authors', author)
 
     @filter_empty_parameters
-    def make_author(
-        self,
-        full_name,
-        affiliations=(),
-        roles=(),
-        raw_affiliations=(),
-        source=None,
-        ids=(),
-        emails=(),
-        alternative_names=(),
-        record=None,
-        affiliations_identifiers=(),
-    ):
+    def make_author(self, full_name,
+                    affiliations=(),
+                    roles=(),
+                    raw_affiliations=(),
+                    source=None,
+                    ids=(),
+                    emails=(),
+                    alternative_names=(),
+                    record=None,
+                    affiliations_identifiers=()):
         """Make a subrecord representing an author.
 
         Args:
@@ -337,13 +346,10 @@ class LiteratureBuilder(RecordBuilder):
         :param source: source for the given private notes
         :type source: string
         """
-        self._append_to(
-            '_private_notes',
-            self._sourced_dict(
-                source,
-                value=private_notes,
-            ),
-        )
+        self._append_to('_private_notes', self._sourced_dict(
+            source,
+            value=private_notes,
+        ))
 
     @filter_empty_parameters
     def add_publication_info(
@@ -415,34 +421,16 @@ class LiteratureBuilder(RecordBuilder):
         # If only journal title is present, and no other fields, assume the
         # paper was submitted, but not yet published
         if journal_title and all(
-            not field
-            for field in (
-                cnum,
-                artid,
-                journal_issue,
-                journal_volume,
-                page_start,
-                page_end,
-            )
-        ):
+            not field for field in (cnum, artid, journal_issue,
+                                    journal_volume, page_start, page_end)):
             self.add_public_note(u'Submitted to {}'.format(journal_title))
             return
 
         publication_item = {}
-        for key in (
-            'cnum',
-            'artid',
-            'page_end',
-            'page_start',
-            'journal_issue',
-            'journal_title',
-            'journal_volume',
-            'year',
-            'pubinfo_freetext',
-            'material',
-            'journal_record',
-            'conference_record',
-        ):
+        for key in ('cnum', 'artid', 'page_end', 'page_start',
+                    'journal_issue', 'journal_title',
+                    'journal_volume', 'year', 'pubinfo_freetext', 'material',
+                    'journal_record', 'conference_record'):
             if locals()[key] is not None:
                 publication_item[key] = locals()[key]
         if parent_record is not None:
@@ -453,8 +441,12 @@ class LiteratureBuilder(RecordBuilder):
         if parent_isbn is not None:
             publication_item['parent_isbn'] = normalize_isbn(parent_isbn)
         if page_start and page_end:
-            with contextlib.suppress(TypeError, ValueError):
-                self.add_number_of_pages(int(page_end) - int(page_start) + 1)
+            try:
+                self.add_number_of_pages(
+                    int(page_end) - int(page_start) + 1
+                )
+            except (TypeError, ValueError):
+                pass
 
         self._append_to('publication_info', publication_item)
 
@@ -468,7 +460,9 @@ class LiteratureBuilder(RecordBuilder):
         :type imprint_date: string. A (partial) date in any format.
             The date should contain at least a year
         """
-        self._append_to('imprints', {'date': normalize_date(imprint_date)})
+        self._append_to('imprints', {
+            'date': normalize_date(imprint_date)
+        })
 
     @filter_empty_parameters
     def add_preprint_date(self, preprint_date):
@@ -481,7 +475,11 @@ class LiteratureBuilder(RecordBuilder):
 
     @filter_empty_parameters
     def add_thesis(
-        self, defense_date=None, degree_type=None, institution=None, date=None
+        self,
+        defense_date=None,
+        degree_type=None,
+        institution=None,
+        date=None
     ):
         """Add thesis info.
 
@@ -518,7 +516,9 @@ class LiteratureBuilder(RecordBuilder):
 
         :type legacy_name: string
         """
-        self._append_to('accelerator_experiments', {'legacy_name': legacy_name})
+        self._append_to('accelerator_experiments', {
+            'legacy_name': legacy_name
+        })
 
     @filter_empty_parameters
     def add_accelerator_experiment(self, legacy_name, record=None):
@@ -546,7 +546,13 @@ class LiteratureBuilder(RecordBuilder):
         self._append_to('languages', language)
 
     @filter_empty_parameters
-    def add_license(self, url=None, license=None, material=None, imposing=None):
+    def add_license(
+        self,
+        url=None,
+        license=None,
+        material=None,
+        imposing=None
+    ):
         """Add license.
 
         :param url: url for the description of the license
@@ -586,13 +592,10 @@ class LiteratureBuilder(RecordBuilder):
         :param source: source for the given notes.
         :type source: string
         """
-        self._append_to(
-            'public_notes',
-            self._sourced_dict(
-                source,
-                value=public_note,
-            ),
-        )
+        self._append_to('public_notes', self._sourced_dict(
+            source,
+            value=public_note,
+        ))
 
     @filter_empty_parameters
     def add_title(self, title, subtitle=None, source=None):
@@ -644,7 +647,9 @@ class LiteratureBuilder(RecordBuilder):
         :param url: url for additional information for the current document
         :type url: string
         """
-        self._append_to('urls', {'value': url})
+        self._append_to('urls', {
+            'value': url
+        })
 
     @filter_empty_parameters
     def add_external_system_identifier(self, extid, schema):
@@ -656,13 +661,10 @@ class LiteratureBuilder(RecordBuilder):
         :param schema: identifies the external system for the given identifier
         :type schema: string
         """
-        self._append_to(
-            'external_system_identifiers',
-            {
-                'schema': schema,
-                'value': extid,
-            },
-        )
+        self._append_to('external_system_identifiers', {
+            'schema': schema,
+            'value': extid,
+        })
 
     @filter_empty_parameters
     def add_report_number(self, report_number, source=None):
@@ -674,13 +676,10 @@ class LiteratureBuilder(RecordBuilder):
         :param source: source for the given report number
         :type source: string
         """
-        self._append_to(
-            'report_numbers',
-            self._sourced_dict(
-                source,
-                value=report_number,
-            ),
-        )
+        self._append_to('report_numbers', self._sourced_dict(
+            source,
+            value=report_number,
+        ))
 
     @filter_empty_parameters
     def add_collaboration(self, collaboration):
@@ -691,7 +690,9 @@ class LiteratureBuilder(RecordBuilder):
         """
         collaborations = normalize_collaboration(collaboration)
         for collaboration in collaborations:
-            self._append_to('collaborations', {'value': collaboration})
+            self._append_to('collaborations', {
+                'value': collaboration
+            })
 
     @filter_empty_parameters
     def add_acquisition_source(
@@ -734,9 +735,7 @@ class LiteratureBuilder(RecordBuilder):
         if date is not None:
             if datetime is not None:
                 raise ValueError("Conflicting args: 'date' and 'datetime'")
-            warnings.warn(
-                "Use 'datetime', not 'date'", DeprecationWarning, stacklevel=1
-            )
+            warnings.warn("Use 'datetime', not 'date'", DeprecationWarning)
             datetime = date
 
         acquisition_source = self._sourced_dict(source)
@@ -758,7 +757,12 @@ class LiteratureBuilder(RecordBuilder):
 
     @filter_empty_parameters
     def add_copyright(
-        self, material=None, holder=None, statement=None, url=None, year=None
+        self,
+        material=None,
+        holder=None,
+        statement=None,
+        url=None,
+        year=None
     ):
         """Add Copyright.
 
@@ -892,11 +896,12 @@ class LiteratureBuilder(RecordBuilder):
 
         if key_already_there(figure, self.record.get('figures', ())):
             raise ValueError(
-                'There\'s already a figure with the key %s.' % figure['key']
+                'There\'s already a figure with the key %s.'
+                % figure['key']
             )
 
         self._append_to('figures', figure)
-        self.add_document()
+        self.add_document
 
     @filter_empty_parameters
     def add_document(self, key, url, **kwargs):
@@ -933,7 +938,8 @@ class LiteratureBuilder(RecordBuilder):
 
         if key_already_there(document, self.record.get('documents', ())):
             raise ValueError(
-                'There\'s already a document with the key %s.' % document['key']
+                'There\'s already a document with the key %s.'
+                % document['key']
             )
 
         self._append_to('documents', document)

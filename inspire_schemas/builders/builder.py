@@ -26,7 +26,7 @@ from __future__ import absolute_import, division, print_function
 
 import six
 
-from inspire_schemas.utils import EMPTIES, filter_empty_parameters
+from ..utils import EMPTIES, filter_empty_parameters
 
 
 class RecordBuilder(object):
@@ -43,7 +43,9 @@ class RecordBuilder(object):
     def __repr__(self):
         """Printable representation of the builder."""
         return u'{}(source={!r}, record={})'.format(
-            type(self).__name__, self.source, self.record
+            type(self).__name__,
+            self.source,
+            self.record
         )
 
     @filter_empty_parameters
