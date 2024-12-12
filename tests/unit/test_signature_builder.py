@@ -252,7 +252,7 @@ def test_add_raw_affiliation(subschema):
     assert_field_valid(expected, builder.obj, 'raw_affiliations', subschema)
 
 
-@pytest.mark.skipif(sys.version_info < (3,3), reason="`inspect.signature` requires python 3")
+@pytest.mark.skipif(sys.version_info < (3, 3), reason="`inspect.signature` requires python 3")
 @pytest.mark.parametrize('field_name', dir(SignatureBuilder))
 def test_public_method_ignores_none_params(field_name):
     builder = SignatureBuilder()

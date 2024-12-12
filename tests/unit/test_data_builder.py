@@ -72,12 +72,14 @@ def test_add_title():
     ]
     assert result == expected
 
+
 def test_add_creation_date():
     builder = DataBuilder()
     creation_date = "2020-01-01"
     builder.add_creation_date(creation_date)
     result = builder.record.get("creation_date")
     assert result == creation_date
+
 
 def test_add_doi():
     builder = DataBuilder()

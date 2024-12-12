@@ -28,8 +28,9 @@ import os
 import shutil
 from io import open
 
-from inspire_schemas import __version__
 from jsonschema2rst.parser_runner import run_parser
+
+from inspire_schemas import __version__
 
 
 def _generate_schemas_doc():
