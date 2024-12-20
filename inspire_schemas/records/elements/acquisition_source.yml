@@ -55,12 +55,16 @@ properties:
 
             `beard`
                 when created after author disambiguation
+
+            `hepdata`
+                when obtained through the HEPData harvest
         enum:
         - submitter
         - oai
         - batchuploader
         - hepcrawl
         - beard
+        - hepdata
         minLength: 1
         title: How the medata was obtained
         type: string
