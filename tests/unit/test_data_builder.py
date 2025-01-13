@@ -119,10 +119,13 @@ def test_add_literature():
 
     result = builder.record.get("literature")
     expected = [
-        {
-            "doi": doi,
-            "record": record,
-        }
+	    {
+		    "doi": 
+                {
+			        "value":"10.1234/example.doi"
+		        },
+		    "record": record
+	    }
     ]
 
     assert result == expected

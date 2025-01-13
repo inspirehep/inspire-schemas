@@ -485,7 +485,9 @@ def test_data_builder(data_data):
 
     literatures = data_data['literature']
     for literature in literatures:
-        builder.add_literature(literature.get("doi"), literature.get('record'))
+        doi_value = literature.get("doi", {}).get("value")
+        record = literature.get("record")
+        builder.add_literature(doi_value, record)
     assert builder.record['literature'] == literatures
 
     urls = data_data['urls']
