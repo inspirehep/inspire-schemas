@@ -301,7 +301,7 @@ class DataBuilder(RecordBuilder):
         """Add literature.
 
         :param doi: doi of the literature
-        :type doi: dict
+        :type doi: str
 
         :param record: dictionary with ``$ref`` pointing to proper record.
         :type record: dict
@@ -311,6 +311,6 @@ class DataBuilder(RecordBuilder):
         }
 
         if doi:
-            literature_dict['doi'] = doi
+            literature_dict['doi'] = {"value": doi}
 
         self._append_to('literature', literature_dict)
