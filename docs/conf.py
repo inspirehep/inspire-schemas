@@ -25,10 +25,10 @@
 from __future__ import print_function
 
 import os
-from io import open
+
+from jsonschema2rst.parser_runner import run_parser
 
 from inspire_schemas import __version__
-from jsonschema2rst.parser_runner import run_parser
 
 
 def _generate_schemas_doc():
