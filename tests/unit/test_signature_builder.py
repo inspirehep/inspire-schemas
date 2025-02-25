@@ -250,6 +250,30 @@ def test_add_raw_affiliation(subschema):
     assert_field_valid(expected, builder.obj, 'raw_affiliations', subschema)
 
 
+def test_add_raw_affiliation_ror_detection(subschema):
+    expected = {
+        'affiliations_identifiers': [
+            {
+                'value': 'https://ror.org/02bfwt286',
+                'schema': 'ROR',
+            },
+        ],
+        'raw_affiliations': [
+            {
+                'value': 'Josiah Carberry',
+                'source': 'source',
+            },
+        ],
+    }
+    builder = SignatureBuilder()
+    builder.add_raw_affiliation('Josiah https://ror.org/02bfwt286Carberry', 'source')
+    assert expected == builder.obj
+    assert validate(builder.obj['affiliations_identifiers'],
+                    subschema['properties']['affiliations_identifiers']) is None
+    assert validate(builder.obj['raw_affiliations'],
+                    subschema['properties']['raw_affiliations']) is None
+
+
 @pytest.mark.skipif(sys.version_info < (3,3), reason="`inspect.signature` requires python 3")
 @pytest.mark.parametrize('field_name', dir(SignatureBuilder))
 def test_public_method_ignores_none_params(field_name):

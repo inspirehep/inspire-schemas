@@ -25,6 +25,7 @@
 from __future__ import absolute_import, division, print_function
 
 import contextlib
+import re
 
 from inspire_utils.name import normalize_name
 
@@ -68,6 +69,7 @@ class SignatureBuilder(object):
             if value not in self.obj[field_name]:
                 self.obj[field_name].append(value)
 
+    @filter_empty_parameters
     def add_affiliation(self, value, curated_relation=None, record=None):
         """Add an affiliation.
 
@@ -144,6 +146,10 @@ class SignatureBuilder(object):
 
     @filter_empty_parameters
     def add_raw_affiliation(self, raw_affiliation, source=None):
+        ror_pattern = re.compile(r'https:\/\/ror\.org\/0\w{6}\d{2}')
+        if ror_pattern.search(raw_affiliation):
+            self.add_affiliations_identifiers(ror_pattern.search(raw_affiliation).group(0), 'ROR')
+            raw_affiliation = re.sub(ror_pattern, '', raw_affiliation)
         raw_aff_field = {'value': raw_affiliation}
         if source:
             raw_aff_field['source'] = source
