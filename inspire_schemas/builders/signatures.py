@@ -23,6 +23,7 @@
 """Signatures builder class and related code."""
 
 from __future__ import absolute_import, division, print_function
+import re
 
 from inspire_utils.name import normalize_name
 
@@ -148,7 +149,12 @@ class SignatureBuilder(object):
 
     @filter_empty_parameters
     def add_raw_affiliation(self, raw_affiliation, source=None):
+        ror_pattern = re.compile(r'https:\/\/ror\.org\/0\w{6}\d{2}')
+        if ror_pattern.search(raw_affiliation):
+            self.add_affiliations_identifiers(ror_pattern.search(raw_affiliation).group(0), 'ROR')
+            raw_affiliation = re.sub(ror_pattern, '', raw_affiliation)
         raw_aff_field = {'value': raw_affiliation}
+        
         if source:
             raw_aff_field['source'] = source
         self._ensure_list_field('raw_affiliations', raw_aff_field)
