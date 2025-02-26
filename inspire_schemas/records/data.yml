@@ -386,6 +386,7 @@ properties:
                     $ref: elements/material.json
                     description: |-
                         :MARC: ``0247_q``
+                    minLength: 1
                     type: string
                 source:
                     $ref: elements/source.json
@@ -432,6 +433,7 @@ properties:
         type: string
     literature:
         items:
+            additionalProperties: false
             properties:
                 curated_relation:
                     default: false
@@ -451,6 +453,7 @@ properties:
                     type: object
                 record:
                     $ref: elements/json_reference/literature.json
+            type: object
         minItems: 1
         title: List of associated papers
         type: array

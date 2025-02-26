@@ -669,6 +669,7 @@ properties:
         type: boolean
     data:
         items:
+            additionalProperties: false
             properties:
                 curated_relation:
                     default: false
@@ -688,6 +689,7 @@ properties:
                     type: object
                 record:
                     $ref: elements/json_reference/data.json
+            type: object
         minItems: 1
         title: List of associated datasets
         type: array
