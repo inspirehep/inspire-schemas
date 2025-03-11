@@ -32,8 +32,10 @@
             "mollit magna"
         ],
         "country_code": "DK",
-        "latitude": 42002729,
-        "longitude": -69156711,
+        "coordinates": {
+            "lon": 42002729,
+            "lat": -69156711
+        },
         "place_name": "et tempor Lorem mollit esse",
         "postal_address": [
             "nisi consectetur eu",

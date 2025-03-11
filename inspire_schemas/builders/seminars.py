@@ -63,8 +63,7 @@ class SeminarBuilder(RecordBuilder):
         self,
         cities=None,
         country_code=None,
-        latitude=None,
-        longitude=None,
+        coordinates=None,
         place_name=None,
         postal_address=None,
         postal_code=None,
@@ -74,8 +73,7 @@ class SeminarBuilder(RecordBuilder):
         Args:
             cities (list): list of strings containing cities.
             country_code (str): string of length 2 representing the country.
-            latitude (float): latitude of the location.
-            longitude (float): longitude of the location.
+            coordinates (dict(lon, lat)): coordinates of the loaction.
             place_name (str): name of the specific place where this is located.
             postal_address (str): full postal address in original language.
             postal_code (str): postal code of the location.
@@ -87,10 +85,8 @@ class SeminarBuilder(RecordBuilder):
             address['cities'] = cities
         if country_code:
             address['country_code'] = country_code
-        if latitude:
-            address['latitude'] = latitude
-        if longitude:
-            address['longitude'] = longitude
+        if coordinates:
+            address['coordinates'] = coordinates
         if place_name:
             address['place_name'] = place_name
         if postal_address:

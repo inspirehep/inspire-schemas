@@ -32,8 +32,10 @@
                 "sed sint ut"
             ],
             "country_code": "HN",
-            "latitude": 98176984,
-            "longitude": -89125791,
+            "coordinates": {
+                "lon": 98176984,
+                "lat": -89125791
+            },
             "place_name": "qui anim",
             "postal_address": [
                 "qui",

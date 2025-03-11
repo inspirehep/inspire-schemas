@@ -20,8 +20,10 @@
                 "nisi deserunt eu cupidatat"
             ],
             "country_code": "CF",
-            "latitude": 96958276,
-            "longitude": 58308717,
+            "coordinates": {
+                "lon": 96958276,
+                "lat": 58308717
+            },
             "place_name": "anim nulla in",
             "postal_address": [
                 "pariatur id sint irure in",
@@ -35,8 +37,6 @@
                 "consectetur nulla quis"
             ],
             "country_code": "IS",
-            "latitude": -14558297,
-            "longitude": 55541699,
             "place_name": "labore",
             "postal_address": [
                 "sed laborum enim elit",
@@ -54,8 +54,10 @@
                 "ipsum"
             ],
             "country_code": "KZ",
-            "latitude": 65627536,
-            "longitude": -93715142,
+            "coordinates": {
+                "lon": 65627536,
+                "lat": -93715142
+            },
             "place_name": "tempor",
             "postal_address": [
                 "ani",
@@ -70,8 +72,10 @@
                 "in labore sed labo"
             ],
             "country_code": "NU",
-            "latitude": 80630464,
-            "longitude": -58695324,
+            "coordinates": {
+                "lon": 80630464,
+                "lat": -58695324
+            },
             "place_name": "cillum cupidatat sed Lorem in",
             "postal_address": [
                 "sed rep",
@@ -91,8 +95,10 @@
                 "velit quis pariatur"
             ],
             "country_code": "MN",
-            "latitude": -76869123,
-            "longitude": 66796700,
+            "coordinates": {
+                "lon": -76869123,
+                "lat": 66796700
+            },
             "place_name": "cupidatat",
             "postal_address": [
                 "nostrud adipisicing sint Duis",
