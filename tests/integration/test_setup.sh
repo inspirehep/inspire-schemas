@@ -22,7 +22,7 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 prepare() {
     rm -rf dist
-    python setup.py sdist
+    $1 setup.py sdist
     pushd dist
     tar xzf inspire-schemas-*.tar.gz
     popd
@@ -41,7 +41,7 @@ main() {
         missing_files \
         missing_file
 
-    prepare &>/dev/null
+    prepare "$@" &>/dev/null
     pkg_dir=$(find dist -maxdepth 1 -iname inspire-schemas\* -type d)
 
     missing_files=()

@@ -154,7 +154,7 @@ class SignatureBuilder(object):
             self.add_affiliations_identifiers(ror_pattern.search(raw_affiliation).group(0), 'ROR')
             raw_affiliation = re.sub(ror_pattern, '', raw_affiliation)
         raw_aff_field = {'value': raw_affiliation}
-        
+
         if source:
             raw_aff_field['source'] = source
         self._ensure_list_field('raw_affiliations', raw_aff_field)

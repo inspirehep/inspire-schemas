@@ -39,6 +39,9 @@ jobs:
           ${{ matrix.python }} --version
           ${{ matrix.pip }} freeze
 
+      - name: Build Test
+        run: |
+          ./tests/integration/test_setup.sh ${{ matrix.python }}
       - name: Run tests
         run: |
           ./run-tests.sh
