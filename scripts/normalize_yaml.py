@@ -23,10 +23,10 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
-'''
+"""
 Normalize YAML files to use non-flow style and block scalars in
 ``description``.
-'''
+"""
 
 from __future__ import print_function
 
@@ -36,6 +36,7 @@ import os
 import sys
 import warnings
 
+import six
 import yaml
 from yaml.representer import SafeRepresenter
 
@@ -43,19 +44,19 @@ from yaml.representer import SafeRepresenter
 # Configuration
 
 DUMPER_OPTIONS = {
-    'default_flow_style': False,
-    'allow_unicode': True,
-    'indent': 4,
-    'width': 80,
+    "default_flow_style": False,
+    "allow_unicode": True,
+    "indent": 4,
+    "width": 80,
 }
 
-SCALAR_STYLE = '|'
+SCALAR_STYLE = "|"
 
 # -----------------------------------------------
 
 
 class DescriptionContent(str):
-    '''Class to tag the value of ``description``s'''
+    """Class to tag the value of ``description``s"""
 
     pass
 
@@ -70,35 +71,35 @@ def change_style(style, representer):
     return new_representer
 
 
-represent_description_content = change_style(
-    SCALAR_STYLE, SafeRepresenter.represent_str
-)
+represent_description_content = change_style(SCALAR_STYLE, SafeRepresenter.represent_str)
 yaml.add_representer(DescriptionContent, represent_description_content)
 
 
 def process_tree(value, key=None, parent_key=None):
     def _process_leaf(value, key=None, parent_key=None):
-        if key == 'description' and parent_key != 'properties':
+        if key == "description" and parent_key != "properties":
             return DescriptionContent(value.strip())
 
         return value
 
     def _enforce_strict_types(dictionary):
-        if dictionary.get('type') == 'object':
-            dictionary.setdefault('additionalProperties', False)
-        elif dictionary.get('type') == 'string':
-            dictionary.setdefault('minLength', 1)
-        elif dictionary.get('type') == 'array':
-            dictionary.setdefault('uniqueItems', True)
-            dictionary.setdefault('minItems', 1)
+        if dictionary.get("type") == "object":
+            dictionary.setdefault("additionalProperties", False)
+        elif dictionary.get("type") == "string":
+            dictionary.setdefault("minLength", 1)
+        elif dictionary.get("type") == "array":
+            dictionary.setdefault("uniqueItems", True)
+            dictionary.setdefault("minItems", 1)
 
         return dictionary
 
     def _ensure_values_have_types(properties, parent_key):
         for key, val in properties.items():
-            if not val.get('type') and not val.get('$ref'):
+            if not val.get("type") and not val.get("$ref"):
                 warnings.warn(
-                    u'"{}" field of "{}" does not have a type'.format(key, parent_key),
+                    six.ensure_text(
+                        '"{}" field of "{}" does not have a type'.format(key, parent_key)
+                    ),
                     stacklevel=1,
                 )
 
@@ -113,34 +114,32 @@ def process_tree(value, key=None, parent_key=None):
 
     elif isinstance(value, dict):
         value = _enforce_strict_types(value)
-        if key == 'properties':
+        if key == "properties":
             _ensure_values_have_types(value, parent_key)
         return {k: process_tree(v, k, key) for k, v in value.items()}
 
     else:
-        raise TypeError(
-            u"'{}' has unexpected type: {}".format(value, type(value).__name__)
-        )
+        raise TypeError("'{}' has unexpected type: {}".format(value, type(value).__name__))
 
 
 def normalize_yaml(file_name):
-    print('Normalizing', file_name, '...')
-    with open(file_name, 'r') as file_stream:
+    print("Normalizing", file_name, "...")
+    with open(file_name, "r") as file_stream:
         schema = yaml.load(file_stream) if sys.version_info[0] == 2 else yaml.full_load(file_stream)
 
     schema = process_tree(schema)
     yaml_schema = yaml.dump(schema, **DUMPER_OPTIONS)
 
-    with open(file_name, 'w') as file_stream:
+    with open(file_name, "w") as file_stream:
         file_stream.write(yaml_schema)
 
 
 def schema_files():
-    for root, _, filenames in os.walk('inspire_schemas/records'):
-        for filename in fnmatch.filter(filenames, '*.yml'):
+    for root, _, filenames in os.walk("inspire_schemas/records"):
+        for filename in fnmatch.filter(filenames, "*.yml"):
             yield os.path.join(root, filename)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     for schema_file in schema_files():
         normalize_yaml(schema_file)

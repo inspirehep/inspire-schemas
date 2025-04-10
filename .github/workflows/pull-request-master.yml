@@ -1,0 +1,17 @@
+name: Pull request master
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+
+  python3_tests:
+    uses: ./.github/workflows/test-python.yml
+
+  python2_tests:
+    uses: ./.github/workflows/test-python-py2.yml

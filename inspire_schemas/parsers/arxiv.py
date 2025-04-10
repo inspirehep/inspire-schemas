@@ -47,37 +47,35 @@ from inspire_schemas.parsers.utils import (
 from inspire_schemas.utils import classify_field, normalize_arxiv_category
 
 RE_CONFERENCE = re.compile(
-    r'\b(%s)\b' % '|'.join([re.escape(word) for word in CONFERENCE_WORDS]),
+    r"\b(%s)\b" % "|".join([re.escape(word) for word in CONFERENCE_WORDS]),
     re.I | re.U,
 )
 RE_THESIS = re.compile(
-    r'\b(%s)\b' % '|'.join([re.escape(word) for word in THESIS_WORDS]),
+    r"\b(%s)\b" % "|".join([re.escape(word) for word in THESIS_WORDS]),
     re.I | re.U,
 )
-RE_PAGES = re.compile(r'(?i)(\d+)\s*pages?\b')
+RE_PAGES = re.compile(r"(?i)(\d+)\s*pages?\b")
 
-RE_DOIS = re.compile(r'[,;\s]+(?=\s*10[.]\d{4,})')
+RE_DOIS = re.compile(r"[,;\s]+(?=\s*10[.]\d{4,})")
 
 
 def _handle_sqrt(node, l2tobj):
     arg = l2tobj.nodelist_to_text(node.nodeargd.argnlist)
-    format_str = u"\u221a{}" if arg.startswith("(") else u"\u221a({})"
+    format_str = (
+        six.ensure_text("\u221a{}") if arg.startswith("(") else six.ensure_text("\u221a({})")
+    )
     return format_str.format(arg)
 
 
 def get_arxiv_latex_context_db():
     default_db = get_default_latex_context_db()
-    arxiv_db = default_db.filter_context(
-        keep_categories=["latex-base", "advanced-symbols"]
-    )
+    arxiv_db = default_db.filter_context(keep_categories=["latex-base", "advanced-symbols"])
     arxiv_db.add_context_category(
         "overrides", prepend=True, macros=[MacroTextSpec("sqrt", _handle_sqrt)]
     )
 
     # adapted from https://github.com/phfaist/pylatexenc/issues/32
-    arxiv_db.set_unknown_macro_spec(
-        MacroTextSpec("", lambda node: node.latex_verbatim())
-    )
+    arxiv_db.set_unknown_macro_spec(MacroTextSpec("", lambda node: node.latex_verbatim()))
     arxiv_db.set_unknown_environment_spec(
         EnvironmentTextSpec("", lambda node: node.latex_verbatim())
     )
@@ -109,7 +107,7 @@ class ArxivParser(object):
     def __init__(self, arxiv_record, source=None):
         self.root = self.get_root_node(arxiv_record)
         if not source:
-            source = 'arXiv'
+            source = "arXiv"
         self.builder = LiteratureBuilder(source)
 
     def parse(self):
@@ -138,10 +136,8 @@ class ArxivParser(object):
         self.builder.add_arxiv_eprint(self.arxiv_eprint, self.arxiv_categories)
         self.builder.add_private_note(self.private_note)
         self.builder.add_document_type(self.document_type)
-        normalized_categories = [
-            classify_field(arxiv_cat) for arxiv_cat in self.arxiv_categories
-        ]
-        self.builder.add_inspire_categories(dedupe_list(normalized_categories), 'arxiv')
+        normalized_categories = [classify_field(arxiv_cat) for arxiv_cat in self.arxiv_categories]
+        self.builder.add_inspire_categories(dedupe_list(normalized_categories), "arxiv")
 
         return self.builder.record
 
@@ -156,20 +152,20 @@ class ArxivParser(object):
         Returns:
             tuple: a tuple of (authors, collaborations, warning)
         """
-        author_selectors = node.xpath('.//authors//author')
+        author_selectors = node.xpath(".//authors//author")
 
         # take 'for the' out of the general phrases and dont use it in
         # affiliations
         collab_phrases = [
-            'consortium',
-            ' collab ',
-            'collaboration',
-            ' team',
-            'group',
-            ' on behalf of ',
-            ' representing ',
+            "consortium",
+            " collab ",
+            "collaboration",
+            " team",
+            "group",
+            " on behalf of ",
+            " representing ",
         ]
-        inst_phrases = ['institute', 'university', 'department', 'center']
+        inst_phrases = ["institute", "university", "department", "center"]
 
         authors = []
         collaborations = []
@@ -177,12 +173,10 @@ class ArxivParser(object):
         some_affiliation_contains_collaboration = False
 
         authors_and_affiliations = (
-            self._get_author_names_and_affiliations(author)
-            for author in author_selectors
+            self._get_author_names_and_affiliations(author) for author in author_selectors
         )
         next_author_and_affiliations = (
-            self._get_author_names_and_affiliations(author)
-            for author in author_selectors
+            self._get_author_names_and_affiliations(author) for author in author_selectors
         )
         next(next_author_and_affiliations)
 
@@ -193,9 +187,8 @@ class ArxivParser(object):
         ) in six.moves.zip_longest(
             authors_and_affiliations,
             next_author_and_affiliations,
-            fillvalue=('end of author-list', '', None),
+            fillvalue=("end of author-list", "", None),
         ):
-
             name_string = " %s %s " % (forenames, keyname)
 
             # collaborations in affiliation field? Cautious with 'for the' in
@@ -217,7 +210,7 @@ class ArxivParser(object):
                     collaborations.append(coll)
 
             # Check if name is a collaboration, else append to authors
-            collaboration_in_name = ' for the ' in name_string.lower() or any(
+            collaboration_in_name = " for the " in name_string.lower() or any(
                 phrase in name_string.lower() for phrase in collab_phrases
             )
             if collaboration_in_name:
@@ -226,23 +219,23 @@ class ArxivParser(object):
                     surname, given_names = split_fullname(author_name)
                     authors.append(
                         {
-                            'full_name': surname + ', ' + given_names,
-                            'surname': surname,
-                            'given_names': given_names,
-                            'affiliations': [],
+                            "full_name": surname + ", " + given_names,
+                            "surname": surname,
+                            "given_names": given_names,
+                            "affiliations": [],
                         }
                     )
                 if coll and coll not in collaborations:
                     collaborations.append(coll)
-            elif name_string.strip() == ':':
+            elif name_string.strip() == ":":
                 # DANGERZONE : this might not be correct - add a warning for the cataloger
-                warning_tags.append(' %s %s ' % (next_forenames, next_keyname))
+                warning_tags.append(" %s %s " % (next_forenames, next_keyname))
                 if not some_affiliation_contains_collaboration:
                     # everything up to now seems to be collaboration info
                     for author_info in authors:
                         name_string = " %s %s " % (
-                            author_info['given_names'],
-                            author_info['surname'],
+                            author_info["given_names"],
+                            author_info["surname"],
                         )
                         coll, author_name = coll_cleanforthe(name_string)
                         if coll and coll not in collaborations:
@@ -251,38 +244,38 @@ class ArxivParser(object):
             else:
                 authors.append(
                     {
-                        'full_name': keyname + ', ' + forenames,
-                        'surname': keyname,
-                        'given_names': forenames,
-                        'affiliations': affiliations_without_collaborations,
+                        "full_name": keyname + ", " + forenames,
+                        "surname": keyname,
+                        "given_names": forenames,
+                        "affiliations": affiliations_without_collaborations,
                     }
                 )
         if warning_tags:
             warning = (
-                'WARNING: Colon in authors before %s: Check author list for collaboration names!'
-                % ', '.join(warning_tags)
+                "WARNING: Colon in authors before %s: Check author list for collaboration names!"
+                % ", ".join(warning_tags)
             )
         else:
-            warning = ''
+            warning = ""
         return authors, collaborations, warning
 
     @staticmethod
     def _get_author_names_and_affiliations(author_node):
-        forenames = u' '.join(author_node.xpath('.//forenames//text()').extract())
-        keyname = u' '.join(author_node.xpath('.//keyname//text()').extract())
-        affiliations = author_node.xpath('.//affiliation//text()').extract()
+        forenames = six.ensure_text(" ").join(author_node.xpath(".//forenames//text()").extract())
+        keyname = six.ensure_text(" ").join(author_node.xpath(".//keyname//text()").extract())
+        affiliations = author_node.xpath(".//affiliation//text()").extract()
 
         return forenames, keyname, affiliations
 
     @property
     def preprint_date(self):
-        preprint_date = self.root.xpath('.//created/text()').extract_first()
+        preprint_date = self.root.xpath(".//created/text()").extract_first()
 
         return preprint_date
 
     @property
     def abstract(self):
-        abstract = self.root.xpath('.//abstract/text()').extract_first()
+        abstract = self.root.xpath(".//abstract/text()").extract_first()
         long_text_fixed = self.fix_long_text(abstract)
         return self.latex_to_unicode(long_text_fixed)
 
@@ -306,28 +299,24 @@ class ArxivParser(object):
 
     @property
     def dois(self):
-        doi_values = self.root.xpath('.//doi/text()').extract()
-        doi_values_splitted = chain.from_iterable(
-            [re.split(RE_DOIS, doi) for doi in doi_values]
-        )
-        dois = [
-            {'doi': value, 'material': 'publication'} for value in doi_values_splitted
-        ]
+        doi_values = self.root.xpath(".//doi/text()").extract()
+        doi_values_splitted = chain.from_iterable([re.split(RE_DOIS, doi) for doi in doi_values])
+        dois = [{"doi": value, "material": "publication"} for value in doi_values_splitted]
 
         return dois
 
     @property
     def licenses(self):
-        licenses = self.root.xpath('.//license/text()').extract()
-        return [{'url': license, 'material': self.material} for license in licenses]
+        licenses = self.root.xpath(".//license/text()").extract()
+        return [{"url": license, "material": self.material} for license in licenses]
 
     @property
     def material(self):
-        return 'preprint'
+        return "preprint"
 
     @property
     def number_of_pages(self):
-        comments = '; '.join(self.root.xpath('.//comments/text()').extract())
+        comments = "; ".join(self.root.xpath(".//comments/text()").extract())
 
         found_pages = RE_PAGES.search(comments)
         if found_pages:
@@ -339,26 +328,24 @@ class ArxivParser(object):
     @property
     def publication_info(self):
         publication_info = {
-            'material': 'publication',
-            'pubinfo_freetext': self.pubinfo_freetext,
+            "material": "publication",
+            "pubinfo_freetext": self.pubinfo_freetext,
         }
 
         return publication_info
 
     @property
     def pubinfo_freetext(self):
-        return self.root.xpath('.//journal-ref/text()').extract_first()
+        return self.root.xpath(".//journal-ref/text()").extract_first()
 
     @property
     def title(self):
-        long_text_fixed = self.fix_long_text(
-            self.root.xpath('.//title/text()').extract_first()
-        )
+        long_text_fixed = self.fix_long_text(self.root.xpath(".//title/text()").extract_first())
         return self.latex_to_unicode(long_text_fixed)
 
     @staticmethod
     def fix_long_text(text):
-        return re.sub(r'\s+', ' ', text).strip()
+        return re.sub(r"\s+", " ", text).strip()
 
     @staticmethod
     def get_root_node(arxiv_record):
@@ -384,7 +371,7 @@ class ArxivParser(object):
 
     @property
     def public_note(self):
-        comments = '; '.join(self.root.xpath('.//comments/text()').extract())
+        comments = "; ".join(self.root.xpath(".//comments/text()").extract())
 
         return self.latex_to_unicode(comments)
 
@@ -396,49 +383,45 @@ class ArxivParser(object):
 
     @property
     def report_numbers(self):
-        report_numbers = self.root.xpath('.//report-no/text()').extract()
+        report_numbers = self.root.xpath(".//report-no/text()").extract()
         rns = []
         for rn in report_numbers:
-            rns.extend(rn.split(', '))
+            rns.extend(rn.split(", "))
 
         return rns
 
     @property
     def arxiv_eprint(self):
-        return self.root.xpath('.//id/text()').extract_first()
+        return self.root.xpath(".//id/text()").extract_first()
 
     @property
     def arxiv_categories(self):
-        categories = self.root.xpath('.//categories/text()').extract_first(default='[]')
+        categories = self.root.xpath(".//categories/text()").extract_first(default="[]")
         categories = categories.split()
-        categories_without_old = [
-            normalize_arxiv_category(arxiv_cat) for arxiv_cat in categories
-        ]
+        categories_without_old = [normalize_arxiv_category(arxiv_cat) for arxiv_cat in categories]
 
         return dedupe_list(categories_without_old)
 
     @property
     def document_type(self):
-        comments = '; '.join(self.root.xpath('.//comments/text()').extract())
+        comments = "; ".join(self.root.xpath(".//comments/text()").extract())
 
-        doctype = 'article'
+        doctype = "article"
         if RE_THESIS.search(comments):
-            doctype = 'thesis'
+            doctype = "thesis"
         elif RE_CONFERENCE.search(comments):
-            doctype = 'conference paper'
+            doctype = "conference paper"
 
         return doctype
 
     @property
     def source(self):
-        return 'arXiv'
+        return "arXiv"
 
     @property
     def authors_and_collaborations(self):
-        if not hasattr(self, '_authors_and_collaborations'):
-            self._authors_and_collaborations = self._get_authors_and_collaborations(
-                self.root
-            )
+        if not hasattr(self, "_authors_and_collaborations"):
+            self._authors_and_collaborations = self._get_authors_and_collaborations(self.root)
         return self._authors_and_collaborations
 
     @classmethod

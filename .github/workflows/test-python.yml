@@ -1,0 +1,39 @@
+name: Test Python 3
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11','3.12','3.13']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip --no-cache-dir install -e .[tests,docs]
+
+      - name: Show python dependencies
+        run: |
+          python --version
+          pip freeze
+
+      - name: Build Test
+        run: |
+          ./tests/integration/test_setup.sh python
+
+      - name: Run tests
+        run: |
+          ./run-tests.sh

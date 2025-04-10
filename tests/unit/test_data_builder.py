@@ -25,32 +25,22 @@
 from inspire_schemas.builders.data import DataBuilder
 
 base_record = {
-    "titles": [
-            {
-              "title": "test",
-              "source": "HEPData"
-            }],
-    "_collections": [
-            "Data"
-          ],
-    "dois": [
-            {
-              "value": "10.17182/hepdata.127768",
-              "source": "HEPData",
-              "material": "data"
-            }]
+    "titles": [{"title": "test", "source": "HEPData"}],
+    "_collections": ["Data"],
+    "dois": [{"value": "10.17182/hepdata.127768", "source": "HEPData", "material": "data"}],
 }
 
+
 def test_append_to():
-    formdata = ''
+    formdata = ""
     builder = DataBuilder("test")
     expected_result = None
-    builder._append_to('test_field', formdata)
-    assert builder.record.get('test_field') is expected_result
-    formdata = 'value'
-    expected_result = ['value']
-    builder._append_to('test_field_2', formdata)
-    assert builder.record.get('test_field_2') == expected_result
+    builder._append_to("test_field", formdata)
+    assert builder.record.get("test_field") is expected_result
+    formdata = "value"
+    expected_result = ["value"]
+    builder._append_to("test_field_2", formdata)
+    assert builder.record.get("test_field_2") == expected_result
 
 
 def test_add_abstract():
@@ -86,10 +76,12 @@ def test_add_title():
     builder.add_title(title, subtitle, source)
     builder.validate_record()
     result = builder.record.get("titles")
-    expected = [base_record["titles"][0],
+    expected = [
+        base_record["titles"][0],
         {"source": source, "title": title, "subtitle": subtitle},
     ]
     assert result == expected
+
 
 def test_add_creation_date():
     builder = DataBuilder(record=base_record)
@@ -98,6 +90,7 @@ def test_add_creation_date():
     builder.validate_record()
     result = builder.record.get("creation_date")
     assert result == creation_date
+
 
 def test_add_doi():
     builder = DataBuilder(record=base_record)
@@ -145,13 +138,8 @@ def test_add_literature():
     result = builder.record.get("literature")
     expected = [
         {
-            "doi":{
-                "source": "testsource",
-                "value":"10.1234/example.doi"
-            },
-            "record":{
-                "$ref":"http://example.com/api/literature/123"
-            }
+            "doi": {"source": "testsource", "value": "10.1234/example.doi"},
+            "record": {"$ref": "http://example.com/api/literature/123"},
         }
     ]
 

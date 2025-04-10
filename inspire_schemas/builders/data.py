@@ -46,14 +46,14 @@ def is_citeable():
 
 def key_already_there(element, elements):
     """Checks if the given element existng by using the key `key`."""
-    return any(element['key'] == existing_element['key'] for existing_element in elements)
+    return any(element["key"] == existing_element["key"] for existing_element in elements)
 
 
 @python_2_unicode_compatible
 class DataBuilder(RecordBuilder):
     """Data record builder."""
 
-    _collections = ['Data']
+    _collections = ["Data"]
 
     def __init__(self, source=None, record=None):
         super(DataBuilder, self).__init__(record, source)
@@ -64,7 +64,7 @@ class DataBuilder(RecordBuilder):
 
     def validate_record(self):
         """Validate the record in according to the data schema."""
-        validate(self.record, 'data')
+        validate(self.record, "data")
 
     @filter_empty_parameters
     def add_collection(self, collection):
@@ -73,7 +73,7 @@ class DataBuilder(RecordBuilder):
         :param collection: defines the type of the current document
         :type collection: string
         """
-        self._append_to('_collections', collection)
+        self._append_to("_collections", collection)
 
     @filter_empty_parameters
     def add_abstract(self, abstract, source=None):
@@ -86,7 +86,7 @@ class DataBuilder(RecordBuilder):
         :type source: string
         """
         self._append_to(
-            'abstracts',
+            "abstracts",
             self._sourced_dict(
                 source,
                 value=abstract.strip(),
@@ -100,7 +100,7 @@ class DataBuilder(RecordBuilder):
             date (str)
         """
         if date is not None:
-            self.record['creation_date'] = normalize_date(date)
+            self.record["creation_date"] = normalize_date(date)
 
     @filter_empty_parameters
     def add_accelerator_experiments_legacy_name(self, legacy_name):
@@ -108,7 +108,7 @@ class DataBuilder(RecordBuilder):
 
         :type legacy_name: string
         """
-        self._append_to('accelerator_experiments', {'legacy_name': legacy_name})
+        self._append_to("accelerator_experiments", {"legacy_name": legacy_name})
 
     @filter_empty_parameters
     def add_accelerator_experiment(self, legacy_name, record=None):
@@ -119,12 +119,12 @@ class DataBuilder(RecordBuilder):
         :param record: reference to the experiment record
         :type record: dict
         """
-        experiment = {'legacy_name': legacy_name}
+        experiment = {"legacy_name": legacy_name}
 
         if record is not None:
-            experiment['record'] = record
+            experiment["record"] = record
 
-        self._append_to('accelerator_experiments', experiment)
+        self._append_to("accelerator_experiments", experiment)
 
     @filter_empty_parameters
     def add_acquisition_source(
@@ -167,27 +167,25 @@ class DataBuilder(RecordBuilder):
         if date is not None:
             if datetime is not None:
                 raise ValueError("Conflicting args: 'date' and 'datetime'")
-            warnings.warn(
-                "Use 'datetime', not 'date'", DeprecationWarning, stacklevel=1
-            )
+            warnings.warn("Use 'datetime', not 'date'", DeprecationWarning, stacklevel=1)
             datetime = date
 
         acquisition_source = self._sourced_dict(source)
 
         if submission_number is not None:
-            acquisition_source['submission_number'] = str(submission_number)
+            acquisition_source["submission_number"] = str(submission_number)
         if datetime is not None:
-            acquisition_source['datetime'] = datetime
+            acquisition_source["datetime"] = datetime
         if email is not None:
-            acquisition_source['email'] = email
+            acquisition_source["email"] = email
         if method is not None:
-            acquisition_source['method'] = method
+            acquisition_source["method"] = method
         if orcid is not None:
-            acquisition_source['orcid'] = orcid
+            acquisition_source["orcid"] = orcid
         if internal_uid is not None:
-            acquisition_source['internal_uid'] = internal_uid
+            acquisition_source["internal_uid"] = internal_uid
 
-        self.record['acquisition_source'] = acquisition_source
+        self.record["acquisition_source"] = acquisition_source
 
     @filter_empty_parameters
     def add_author(self, author):
@@ -196,7 +194,7 @@ class DataBuilder(RecordBuilder):
         :param author: author dict for a given document
         :type author: dict
         """
-        self._append_to('authors', author)
+        self._append_to("authors", author)
 
     @filter_empty_parameters
     def add_collaboration(self, collaboration):
@@ -205,7 +203,7 @@ class DataBuilder(RecordBuilder):
         :param collaboration: collaboration for the current document
         :type collaboration: string
         """
-        self._append_to('collaborations', {'value': collaboration})
+        self._append_to("collaborations", {"value": collaboration})
 
     @filter_empty_parameters
     def add_doi(self, doi, source=None, material=None):
@@ -233,9 +231,9 @@ class DataBuilder(RecordBuilder):
 
         dois = self._sourced_dict(source, value=doi)
         if material is not None:
-            dois['material'] = material
+            dois["material"] = material
 
-        self._append_to('dois', dois)
+        self._append_to("dois", dois)
 
     @filter_empty_parameters
     def add_keyword(self, keyword, source=None):
@@ -247,7 +245,7 @@ class DataBuilder(RecordBuilder):
         """
         keyword_dict = self._sourced_dict(source, value=keyword)
 
-        self._append_to('keywords', keyword_dict)
+        self._append_to("keywords", keyword_dict)
 
     @filter_empty_parameters
     def add_title(self, title, subtitle=None, source=None):
@@ -268,9 +266,9 @@ class DataBuilder(RecordBuilder):
         )
 
         if subtitle is not None:
-            title_entry['subtitle'] = subtitle
+            title_entry["subtitle"] = subtitle
 
-        self._append_to('titles', title_entry)
+        self._append_to("titles", title_entry)
 
     @staticmethod
     def _prepare_url(value, description=None):
@@ -280,9 +278,9 @@ class DataBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {'value': value}
+        entry = {"value": value}
         if description:
-            entry['description'] = description
+            entry["description"] = description
         return entry
 
     @filter_empty_parameters
@@ -294,7 +292,7 @@ class DataBuilder(RecordBuilder):
             description (str): Description of the url.
         """
         entry = self._prepare_url(value, description)
-        self._append_to('urls', entry)
+        self._append_to("urls", entry)
 
     @filter_empty_parameters
     def add_literature(self, doi=None, record=None, source=None):
@@ -310,13 +308,13 @@ class DataBuilder(RecordBuilder):
         :type source: str
         """
         literature_dict = {
-            'record': record,
+            "record": record,
         }
 
         if doi:
             if source:
-                literature_dict['doi'] = self._sourced_dict(source, value=doi)
+                literature_dict["doi"] = self._sourced_dict(source, value=doi)
             else:
-                literature_dict['doi'] = {"value": doi}
+                literature_dict["doi"] = {"value": doi}
 
-        self._append_to('literature', literature_dict)
+        self._append_to("literature", literature_dict)

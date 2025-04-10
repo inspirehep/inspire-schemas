@@ -93,46 +93,38 @@ class JatsParser(object):
             List[dict]: an array of reference schema records, representing
                 the references in the record
         """
-        ref_nodes = self.root.xpath('./back/ref-list/ref')
-        return list(
-            itertools.chain.from_iterable(
-                self.get_reference(node) for node in ref_nodes
-            )
-        )
+        ref_nodes = self.root.xpath("./back/ref-list/ref")
+        return list(itertools.chain.from_iterable(self.get_reference(node) for node in ref_nodes))
 
     remove_tags_config_abstract = {
-        'allowed_tags': ['sup', 'sub'],
-        'allowed_trees': ['math'],
-        'strip': 'self::pub-id|self::issn',
+        "allowed_tags": ["sup", "sub"],
+        "allowed_trees": ["math"],
+        "strip": "self::pub-id|self::issn",
     }
 
     remove_tags_config_title = {
-        'allowed_trees': ['math'],
+        "allowed_trees": ["math"],
     }
 
     @property
     def abstract(self):
-        abstract_nodes = self.root.xpath('./front//abstract[1]')
+        abstract_nodes = self.root.xpath("./front//abstract[1]")
 
         if not abstract_nodes:
             return
 
-        abstract = remove_tags(
-            abstract_nodes[0], **self.remove_tags_config_abstract
-        ).strip()
+        abstract = remove_tags(abstract_nodes[0], **self.remove_tags_config_abstract).strip()
         return abstract
 
     @property
     def article_type(self):
-        article_type = self.root.xpath('./@article-type').extract_first()
+        article_type = self.root.xpath("./@article-type").extract_first()
 
         return article_type
 
     @property
     def artid(self):
-        artid = self.root.xpath(
-            './front/article-meta//elocation-id//text()'
-        ).extract_first()
+        artid = self.root.xpath("./front/article-meta//elocation-id//text()").extract_first()
 
         return artid
 
@@ -146,48 +138,40 @@ class JatsParser(object):
     @property
     def collaborations(self):
         collab_nodes = self.root.xpath(
-            './front//collab |'
+            "./front//collab |"
             './front//contrib[@contrib-type="collaboration"] |'
-            './front//on-behalf-of'
+            "./front//on-behalf-of"
         )
-        collaborations = set(
-            collab.xpath('string(.)').extract_first() for collab in collab_nodes
-        )
+        collaborations = set(collab.xpath("string(.)").extract_first() for collab in collab_nodes)
 
         return collaborations
 
     @property
     def copyright(self):
         copyright = {
-            'holder': self.copyright_holder,
-            'material': self.material,
-            'statement': self.copyright_statement,
-            'year': self.copyright_year,
+            "holder": self.copyright_holder,
+            "material": self.material,
+            "statement": self.copyright_statement,
+            "year": self.copyright_year,
         }
 
         return copyright
 
     @property
     def copyright_holder(self):
-        copyright_holder = self.root.xpath(
-            './front//copyright-holder/text()'
-        ).extract_first()
+        copyright_holder = self.root.xpath("./front//copyright-holder/text()").extract_first()
 
         return copyright_holder
 
     @property
     def copyright_statement(self):
-        copyright_statement = self.root.xpath(
-            './front//copyright-statement/text()'
-        ).extract_first()
+        copyright_statement = self.root.xpath("./front//copyright-statement/text()").extract_first()
 
         return copyright_statement
 
     @property
     def copyright_year(self):
-        copyright_year = self.root.xpath(
-            './front//copyright-year/text()'
-        ).extract_first()
+        copyright_year = self.root.xpath("./front//copyright-year/text()").extract_first()
 
         return maybe_int(copyright_year)
 
@@ -196,13 +180,13 @@ class JatsParser(object):
         doi_values = self.root.xpath(
             './front/article-meta//article-id[@pub-id-type="doi"]/text()'
         ).extract()
-        dois = [{'doi': value, 'material': self.material} for value in doi_values]
+        dois = [{"doi": value, "material": self.material} for value in doi_values]
 
-        if self.material != 'publication':
+        if self.material != "publication":
             doi_values = self.root.xpath(
                 './front/article-meta//related-article[@ext-link-type="doi"]/@href'
             ).extract()
-            related_dois = ({'doi': value} for value in doi_values)
+            related_dois = ({"doi": value} for value in doi_values)
             dois.extend(related_dois)
 
         return dois
@@ -216,38 +200,34 @@ class JatsParser(object):
     @property
     def is_conference_paper(self):
         """Decide whether the article is a conference paper."""
-        conference_node = self.root.xpath('./front//conference').extract_first()
+        conference_node = self.root.xpath("./front//conference").extract_first()
 
         return bool(conference_node)
 
     @property
     def journal_title(self):
         journal_title = self.root.xpath(
-            './front/journal-meta//abbrev-journal-title/text() |'
-            './front/journal-meta//journal-title/text()'
+            "./front/journal-meta//abbrev-journal-title/text() |"
+            "./front/journal-meta//journal-title/text()"
         ).extract_first()
 
         return JOURNAL_TITLES_MAPPING.get(journal_title) or journal_title
 
     @property
     def journal_issue(self):
-        journal_issue = self.root.xpath(
-            './front/article-meta/issue/text()'
-        ).extract_first()
+        journal_issue = self.root.xpath("./front/article-meta/issue/text()").extract_first()
 
         return journal_issue
 
     @property
     def journal_volume(self):
-        journal_volume = self.root.xpath(
-            './front/article-meta/volume/text()'
-        ).extract_first()
+        journal_volume = self.root.xpath("./front/article-meta/volume/text()").extract_first()
 
         return journal_volume
 
     @property
     def keywords(self):
-        keyword_groups = self.root.xpath('./front//kwd-group')
+        keyword_groups = self.root.xpath("./front//kwd-group")
         keywords = itertools.chain.from_iterable(
             self.get_keywords(group) for group in keyword_groups
         )
@@ -257,9 +237,9 @@ class JatsParser(object):
     @property
     def license(self):
         license = {
-            'license': self.license_statement,
-            'material': self.material,
-            'url': self.license_url,
+            "license": self.license_statement,
+            "material": self.material,
+            "url": self.license_url,
         }
 
         return license
@@ -267,9 +247,7 @@ class JatsParser(object):
     @property
     def license_statement(self):
         license_statement = (
-            self.root.xpath('string(./front/article-meta//license)')
-            .extract_first()
-            .strip()
+            self.root.xpath("string(./front/article-meta//license)").extract_first().strip()
         )
 
         return license_statement
@@ -277,9 +255,9 @@ class JatsParser(object):
     @property
     def license_url(self):
         url_nodes = (
-            './front/article-meta//license_ref/text() |'
-            './front/article-meta//license/@href |'
-            './front/article-meta//license//ext-link/@href'
+            "./front/article-meta//license_ref/text() |"
+            "./front/article-meta//license/@href |"
+            "./front/article-meta//license//ext-link/@href"
         )
         license_url = self.root.xpath(url_nodes).extract_first()
 
@@ -287,34 +265,32 @@ class JatsParser(object):
 
     @property
     def material(self):
-        if self.article_type.startswith('correc'):
-            material = 'erratum'
-        elif self.article_type in ('erratum', 'translation', 'addendum', 'reprint'):
+        if self.article_type.startswith("correc"):
+            material = "erratum"
+        elif self.article_type in ("erratum", "translation", "addendum", "reprint"):
             material = self.article_type
         else:
-            material = 'publication'
+            material = "publication"
 
         return material
 
     @property
     def number_of_pages(self):
         number_of_pages = maybe_int(
-            self.root.xpath('./front/article-meta//page-count/@count').extract_first()
+            self.root.xpath("./front/article-meta//page-count/@count").extract_first()
         )
 
         return number_of_pages
 
     @property
     def page_start(self):
-        page_start = self.root.xpath(
-            './front/article-meta/fpage/text()'
-        ).extract_first()
+        page_start = self.root.xpath("./front/article-meta/fpage/text()").extract_first()
 
         return page_start
 
     @property
     def page_end(self):
-        page_end = self.root.xpath('./front/article-meta/lpage/text()').extract_first()
+        page_end = self.root.xpath("./front/article-meta/lpage/text()").extract_first()
 
         return page_end
 
@@ -335,33 +311,33 @@ class JatsParser(object):
     @property
     def publication_info(self):
         publication_info = {
-            'artid': self.artid,
-            'journal_title': self.journal_title,
-            'journal_issue': self.journal_issue,
-            'journal_volume': self.journal_volume,
-            'material': self.material,
-            'page_start': self.page_start,
-            'page_end': self.page_end,
-            'year': self.year,
+            "artid": self.artid,
+            "journal_title": self.journal_title,
+            "journal_issue": self.journal_issue,
+            "journal_volume": self.journal_volume,
+            "material": self.material,
+            "page_start": self.page_start,
+            "page_end": self.page_end,
+            "year": self.year,
         }
 
         return publication_info
 
     @property
     def publisher(self):
-        publisher = self.root.xpath('./front//publisher-name/text()').extract_first()
+        publisher = self.root.xpath("./front//publisher-name/text()").extract_first()
 
         return publisher
 
     @property
     def subtitle(self):
-        subtitle = self.root.xpath('string(./front//subtitle)').extract_first()
+        subtitle = self.root.xpath("string(./front//subtitle)").extract_first()
 
         return subtitle
 
     @property
     def title(self):
-        title = self.root.xpath('./front//article-title').extract_first()
+        title = self.root.xpath("./front//article-title").extract_first()
         return remove_tags(title, **self.remove_tags_config_title)
 
     def get_affiliation(self, id_):
@@ -390,7 +366,7 @@ class JatsParser(object):
         Returns:
             List[str]: the emails from the node with that id or [] if none found.
         """
-        email_nodes = self.root.xpath('//aff[@id=$id_]/email/text()', id_=id_)
+        email_nodes = self.root.xpath("//aff[@id=$id_]/email/text()", id_=id_)
         return email_nodes.extract()
 
     @property
@@ -417,19 +393,17 @@ class JatsParser(object):
         # Sometimes the rid might have more than one ID (e.g. rid="id0 id1")
         referred_ids = set()
         for raw_referred_id in raw_referred_ids:
-            referred_ids.update(set(raw_referred_id.split(' ')))
+            referred_ids.update(set(raw_referred_id.split(" ")))
 
         affiliations = [
-            self.get_affiliation(rid)
-            for rid in referred_ids
-            if self.get_affiliation(rid)
+            self.get_affiliation(rid) for rid in referred_ids if self.get_affiliation(rid)
         ]
 
         return affiliations
 
     def get_author_emails(self, author_node):
         """Extract an author's email addresses."""
-        emails = author_node.xpath('.//email/text()').extract()
+        emails = author_node.xpath(".//email/text()").extract()
         referred_ids = author_node.xpath('.//xref[@ref-type="aff"]/@rid').extract()
         for referred_id in referred_ids:
             emails.extend(self.get_emails_from_refs(referred_id))
@@ -439,13 +413,13 @@ class JatsParser(object):
     @staticmethod
     def get_author_name(author_node):
         """Extract an author's name."""
-        surname = author_node.xpath('.//surname/text()').extract_first()
+        surname = author_node.xpath(".//surname/text()").extract_first()
         if not surname:
             # the author name is unstructured
-            author_name = author_node.xpath('string(./string-name)').extract_first()
-        given_names = author_node.xpath('.//given-names/text()').extract_first()
-        suffix = author_node.xpath('.//suffix/text()').extract_first()
-        author_name = ', '.join(el for el in (surname, given_names, suffix) if el)
+            author_name = author_node.xpath("string(./string-name)").extract_first()
+        given_names = author_node.xpath(".//given-names/text()").extract_first()
+        suffix = author_node.xpath(".//suffix/text()").extract_first()
+        author_name = ", ".join(el for el in (surname, given_names, suffix) if el)
 
         return author_name
 
@@ -477,19 +451,19 @@ class JatsParser(object):
         Returns:
             PartialDate: the parsed date.
         """
-        iso_string = date_node.xpath('./@iso-8601-date').extract_first(default="")
+        iso_string = date_node.xpath("./@iso-8601-date").extract_first(default="")
         iso_date = self._get_iso_date(iso_string)
         if iso_date:
             return iso_date
-        year = date_node.xpath('string(./year)').extract_first()
-        month = date_node.xpath('string(./month)').extract_first()
-        day = date_node.xpath('string(./day)').extract_first()
+        year = date_node.xpath("string(./year)").extract_first()
+        month = date_node.xpath("string(./month)").extract_first()
+        day = date_node.xpath("string(./day)").extract_first()
 
         date_from_parts = self._get_date_from_parts(year, month, day)
         if date_from_parts:
             return date_from_parts
 
-        string_date = date_node.xpath('string(./string-date)').extract_first()
+        string_date = date_node.xpath("string(./string-date)").extract_first()
         try:
             parsed_date = PartialDate.parse(string_date)
         except ValueError:
@@ -501,16 +475,11 @@ class JatsParser(object):
     def get_keywords(group_node):
         """Extract keywords from a keyword group."""
         schema = None
-        if (
-            'pacs'
-            in group_node.xpath('@kwd-group-type').extract_first(default='').lower()
-        ):
-            schema = 'PACS'
+        if "pacs" in group_node.xpath("@kwd-group-type").extract_first(default="").lower():
+            schema = "PACS"
 
-        keywords = (
-            kwd.xpath('string(.)').extract_first() for kwd in group_node.xpath('.//kwd')
-        )
-        keyword_dicts = ({'keyword': keyword, 'schema': schema} for keyword in keywords)
+        keywords = (kwd.xpath("string(.)").extract_first() for kwd in group_node.xpath(".//kwd"))
+        keyword_dicts = ({"keyword": keyword, "schema": schema} for keyword in keywords)
 
         return keyword_dicts
 
@@ -554,9 +523,7 @@ class JatsParser(object):
 
     @staticmethod
     def get_orcid(author_node):
-        orcid = author_node.xpath(
-            './contrib-id[@contrib-id-type="orcid"]/text()'
-        ).extract_first()
+        orcid = author_node.xpath('./contrib-id[@contrib-id-type="orcid"]/text()').extract_first()
         if orcid:
             return normalize_orcid(orcid)
 
@@ -572,7 +539,7 @@ class JatsParser(object):
             List[str]: list of names
         """
         return ref_node.xpath(
-            './person-group[@person-group-type=$role]/string-name/text()', role=role
+            "./person-group[@person-group-type=$role]/string-name/text()", role=role
         ).extract()
 
     def get_reference(self, ref_node):
@@ -586,13 +553,13 @@ class JatsParser(object):
             dict: the parsed reference, as generated by
                 :class:`inspire_schemas.api.ReferenceBuilder`
         """
-        for citation_node in ref_node.xpath('./mixed-citation'):
+        for citation_node in ref_node.xpath("./mixed-citation"):
             builder = ReferenceBuilder()
 
             builder.add_raw_reference(
                 ref_node.extract().strip(),
                 source=self.builder.source,
-                ref_format='JATS',
+                ref_format="JATS",
             )
 
             fields = [
@@ -607,10 +574,10 @@ class JatsParser(object):
                     'self::node()[@publication-type="book"]/source/text()',
                     builder.add_parent_title,
                 ),
-                ('./publisher-name/text()', builder.set_publisher),
-                ('./volume/text()', builder.set_journal_volume),
-                ('./issue/text()', builder.set_journal_issue),
-                ('./year/text()', builder.set_year),
+                ("./publisher-name/text()", builder.set_publisher),
+                ("./volume/text()", builder.set_journal_volume),
+                ("./issue/text()", builder.set_journal_issue),
+                ("./year/text()", builder.set_year),
                 ('./pub-id[@pub-id-type="arxiv"]/text()', builder.add_uid),
                 ('./pub-id[@pub-id-type="doi"]/text()', builder.add_uid),
                 (
@@ -618,10 +585,10 @@ class JatsParser(object):
                     '[contains(preceding-sibling::text(),"Report No")]/text()',
                     builder.add_report_number,
                 ),
-                ('./article-title/text()', builder.add_title),
+                ("./article-title/text()", builder.add_title),
                 (
-                    '../label/text()',
-                    lambda x, builder=builder: builder.set_label(x.strip('[].')),
+                    "../label/text()",
+                    lambda x, builder=builder: builder.set_label(x.strip("[].")),
                 ),
             ]
 
@@ -653,13 +620,13 @@ class JatsParser(object):
             if remainder:
                 builder.add_misc(remainder)
 
-            for editor in self.get_reference_authors(citation_node, 'editor'):
-                builder.add_author(editor, 'editor')
+            for editor in self.get_reference_authors(citation_node, "editor"):
+                builder.add_author(editor, "editor")
 
-            for author in self.get_reference_authors(citation_node, 'author'):
-                builder.add_author(author, 'author')
+            for author in self.get_reference_authors(citation_node, "author"):
+                builder.add_author(author, "author")
 
-            page_range = citation_node.xpath('./page-range/text()').extract_first()
+            page_range = citation_node.xpath("./page-range/text()").extract_first()
             if page_range:
                 page_artid = split_page_artid(page_range)
                 builder.set_page_artid(*page_artid)

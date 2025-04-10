@@ -30,15 +30,15 @@ from inspire_schemas.utils import load_schema, validate
 
 
 @pytest.mark.parametrize(
-    ('expected_result', 'formdata'),
+    ("expected_result", "formdata"),
     [
         (
             True,
             [
                 {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'journal_volume': '192',
-                    'artid': '2550',
+                    "journal_title": "High Energy Physics Libraries Webzine",
+                    "journal_volume": "192",
+                    "artid": "2550",
                 }
             ],
         ),
@@ -46,9 +46,9 @@ from inspire_schemas.utils import load_schema, validate
             True,
             [
                 {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'journal_volume': '192',
-                    'page_start': '28',
+                    "journal_title": "High Energy Physics Libraries Webzine",
+                    "journal_volume": "192",
+                    "page_start": "28",
                 }
             ],
         ),
@@ -56,8 +56,8 @@ from inspire_schemas.utils import load_schema, validate
             False,
             [
                 {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'journal_volume': '192',
+                    "journal_title": "High Energy Physics Libraries Webzine",
+                    "journal_volume": "192",
                 }
             ],
         ),
@@ -65,8 +65,8 @@ from inspire_schemas.utils import load_schema, validate
             False,
             [
                 {
-                    'journal_title': 'High Energy Physics Libraries Webzine',
-                    'page_start': '25',
+                    "journal_title": "High Energy Physics Libraries Webzine",
+                    "page_start": "25",
                 }
             ],
         ),
@@ -77,33 +77,33 @@ def test_is_citeable(expected_result, formdata):
 
 
 def test_append_to():
-    formdata = ''
+    formdata = ""
     builder = LiteratureBuilder("test")
     expected_result = None
-    builder._append_to('test_field', formdata)
-    assert builder.record.get('test_field') is expected_result
-    formdata = 'value'
-    expected_result = ['value']
-    builder._append_to('test_field_2', formdata)
-    assert builder.record.get('test_field_2') == expected_result
+    builder._append_to("test_field", formdata)
+    assert builder.record.get("test_field") is expected_result
+    formdata = "value"
+    expected_result = ["value"]
+    builder._append_to("test_field_2", formdata)
+    assert builder.record.get("test_field_2") == expected_result
 
 
 def test_sourced_dict_local_source():
-    builder = LiteratureBuilder('global')
+    builder = LiteratureBuilder("global")
 
-    expected = {'source': 'local', 'value': 'foo'}
+    expected = {"source": "local", "value": "foo"}
 
-    result = builder._sourced_dict('local', value='foo')
+    result = builder._sourced_dict("local", value="foo")
 
     assert result == expected
 
 
 def test_sourced_dict_global_source():
-    builder = LiteratureBuilder('global')
+    builder = LiteratureBuilder("global")
 
-    expected = {'source': 'global', 'value': 'foo'}
+    expected = {"source": "global", "value": "foo"}
 
-    result = builder._sourced_dict(None, value='foo')
+    result = builder._sourced_dict(None, value="foo")
 
     assert result == expected
 
@@ -111,297 +111,295 @@ def test_sourced_dict_global_source():
 def test_sourced_dict_no_source():
     builder = LiteratureBuilder()
 
-    expected = {'value': 'foo'}
+    expected = {"value": "foo"}
 
-    result = builder._sourced_dict(None, value='foo')
+    result = builder._sourced_dict(None, value="foo")
 
     assert result == expected
 
 
 def test_add_figure():
-    schema = load_schema('hep')
-    subschema = schema['properties']['figures']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["figures"]
 
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
 
     builder.add_figure(
-        'key',
-        caption='caption',
-        label='label',
-        material='publication',
-        source='source',
-        url='https://www.example.com/url',
-        description='description',
-        filename='filename',
-        original_url='http://www.example.com/original_url',
+        "key",
+        caption="caption",
+        label="label",
+        material="publication",
+        source="source",
+        url="https://www.example.com/url",
+        description="description",
+        filename="filename",
+        original_url="http://www.example.com/original_url",
     )
 
     expected = [
         {
-            'caption': 'caption',
-            'key': 'key',
-            'label': 'label',
-            'material': 'publication',
-            'source': 'source',
-            'url': 'https://www.example.com/url',
-            'filename': 'filename',
-            'original_url': 'http://www.example.com/original_url',
+            "caption": "caption",
+            "key": "key",
+            "label": "label",
+            "material": "publication",
+            "source": "source",
+            "url": "https://www.example.com/url",
+            "filename": "filename",
+            "original_url": "http://www.example.com/original_url",
         },
     ]
     result = builder.record
 
-    assert validate(result['figures'], subschema) is None
-    assert expected == result['figures']
+    assert validate(result["figures"], subschema) is None
+    assert expected == result["figures"]
 
-    for key in subschema['items']['properties']:
-        assert key in result['figures'][0]
+    for key in subschema["items"]["properties"]:
+        assert key in result["figures"][0]
 
 
 def test_add_figure_inspire_next():
-    schema = load_schema('hep')
-    subschema = schema['properties']['figures']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["figures"]
 
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
 
     builder.add_figure(
-        'key',
-        caption='caption',
-        label='label',
-        material='publication',
-        source='source',
-        url='/api/files/a1/123',
-        description='description',
-        original_url='http://www.example.com/original_url',
+        "key",
+        caption="caption",
+        label="label",
+        material="publication",
+        source="source",
+        url="/api/files/a1/123",
+        description="description",
+        original_url="http://www.example.com/original_url",
     )
 
     expected = [
         {
-            'caption': 'caption',
-            'key': 'key',
-            'label': 'label',
-            'material': 'publication',
-            'source': 'source',
-            'url': '/api/files/a1/123',
-            'original_url': 'http://www.example.com/original_url',
+            "caption": "caption",
+            "key": "key",
+            "label": "label",
+            "material": "publication",
+            "source": "source",
+            "url": "/api/files/a1/123",
+            "original_url": "http://www.example.com/original_url",
         },
     ]
     result = builder.record
 
-    assert validate(result['figures'], subschema) is None
-    assert expected == result['figures']
+    assert validate(result["figures"], subschema) is None
+    assert expected == result["figures"]
 
 
 def test_add_figure_fails_on_duplicated_key():
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
 
     builder.add_figure(
-        'key',
-        caption='caption',
-        label='label',
-        material='publication',
-        source='source',
-        url='url',
-        description='description',
-        filename='filename',
-        original_ur='original_url',
+        "key",
+        caption="caption",
+        label="label",
+        material="publication",
+        source="source",
+        url="url",
+        description="description",
+        filename="filename",
+        original_ur="original_url",
     )
 
     with pytest.raises(ValueError, match="There's already a figure with the key key."):
         builder.add_figure(
-            'key',
-            caption='caption',
-            label='label',
-            material='publication',
-            source='source',
-            url='url',
-            description='description',
-            filename='filename',
-            original_ur='original_url',
+            "key",
+            caption="caption",
+            label="label",
+            material="publication",
+            source="source",
+            url="url",
+            description="description",
+            filename="filename",
+            original_ur="original_url",
         )
 
 
 def test_add_figure_fails_on_non_file_api_relative_url():
-    schema = load_schema('hep')
-    subschema = schema['properties']['figures']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["figures"]
 
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
     builder.add_figure(
-        'key',
-        caption='caption',
-        label='label',
-        material='publication',
-        source='source',
-        url='/not/api/url/for/files',
-        description='description',
-        original_url='http://www.example.com/original_url',
+        "key",
+        caption="caption",
+        label="label",
+        material="publication",
+        source="source",
+        url="/not/api/url/for/files",
+        description="description",
+        original_url="http://www.example.com/original_url",
     )
     result = builder.record
     with pytest.raises(ValidationError):
-        validate(result['figures'], subschema)
+        validate(result["figures"], subschema)
 
 
 def test_add_document():
-    schema = load_schema('hep')
-    subschema = schema['properties']['documents']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["documents"]
 
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
 
     builder.add_document(
-        'key',
-        description='description',
+        "key",
+        description="description",
         fulltext=False,
         hidden=True,
-        material='preprint',
-        original_url='http://www.example.com/original_url',
-        source='source',
-        url='https://www.example.com/url',
-        filename='filename',
+        material="preprint",
+        original_url="http://www.example.com/original_url",
+        source="source",
+        url="https://www.example.com/url",
+        filename="filename",
     )
 
     expected = [
         {
-            'description': 'description',
-            'fulltext': False,
-            'hidden': True,
-            'key': 'key',
-            'material': 'preprint',
-            'original_url': 'http://www.example.com/original_url',
-            'source': 'source',
-            'url': 'https://www.example.com/url',
-            'filename': 'filename',
+            "description": "description",
+            "fulltext": False,
+            "hidden": True,
+            "key": "key",
+            "material": "preprint",
+            "original_url": "http://www.example.com/original_url",
+            "source": "source",
+            "url": "https://www.example.com/url",
+            "filename": "filename",
         },
     ]
     result = builder.record
 
-    assert validate(result['documents'], subschema) is None
-    assert expected == result['documents']
+    assert validate(result["documents"], subschema) is None
+    assert expected == result["documents"]
 
-    for key in subschema['items']['properties']:
-        assert key in result['documents'][0]
+    for key in subschema["items"]["properties"]:
+        assert key in result["documents"][0]
 
 
 def test_add_document_inspire_next():
-    schema = load_schema('hep')
-    subschema = schema['properties']['documents']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["documents"]
 
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
 
     builder.add_document(
-        'key',
-        description='description',
+        "key",
+        description="description",
         fulltext=True,
         hidden=True,
-        material='preprint',
-        original_url='http://www.example.com/original_url',
-        source='source',
-        url='/api/files/a1/123',
+        material="preprint",
+        original_url="http://www.example.com/original_url",
+        source="source",
+        url="/api/files/a1/123",
     )
 
     expected = [
         {
-            'description': 'description',
-            'fulltext': True,
-            'hidden': True,
-            'key': 'key',
-            'material': 'preprint',
-            'original_url': 'http://www.example.com/original_url',
-            'source': 'source',
-            'url': '/api/files/a1/123',
+            "description": "description",
+            "fulltext": True,
+            "hidden": True,
+            "key": "key",
+            "material": "preprint",
+            "original_url": "http://www.example.com/original_url",
+            "source": "source",
+            "url": "/api/files/a1/123",
         },
     ]
     result = builder.record
 
-    assert validate(result['documents'], subschema) is None
-    assert expected == result['documents']
+    assert validate(result["documents"], subschema) is None
+    assert expected == result["documents"]
 
 
 def test_add_document_fails_on_existing_key():
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
     builder.add_document(
-        'key',
-        description='description',
+        "key",
+        description="description",
         fulltext=True,
         hidden=True,
-        material='preprint',
-        original_url='http://www.example.com/original_url',
-        source='source',
-        url='url',
-        filename='filename',
+        material="preprint",
+        original_url="http://www.example.com/original_url",
+        source="source",
+        url="url",
+        filename="filename",
     )
 
-    with pytest.raises(
-        ValueError, match="There's already a document with the key key."
-    ):
+    with pytest.raises(ValueError, match="There's already a document with the key key."):
         builder.add_document(
-            'key',
-            description='description',
+            "key",
+            description="description",
             fulltext=True,
             hidden=True,
-            material='preprint',
-            original_url='http://www.example.com/original_url',
-            source='source',
-            url='url',
-            filename='filename',
+            material="preprint",
+            original_url="http://www.example.com/original_url",
+            source="source",
+            url="url",
+            filename="filename",
         )
 
 
 def test_add_document_fails_on_non_file_api_relative_url():
-    schema = load_schema('hep')
-    subschema = schema['properties']['documents']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["documents"]
 
-    builder = LiteratureBuilder('test')
+    builder = LiteratureBuilder("test")
     builder.add_document(
-        'key',
-        description='description',
+        "key",
+        description="description",
         fulltext=True,
         hidden=True,
-        material='preprint',
-        original_url='http://www.example.com/original_url',
-        source='source',
-        url='/not/api/url/for/files',
-        filename='filename',
+        material="preprint",
+        original_url="http://www.example.com/original_url",
+        source="source",
+        url="/not/api/url/for/files",
+        filename="filename",
     )
     result = builder.record
 
     with pytest.raises(ValidationError):
-        validate(result['documents'], subschema)
+        validate(result["documents"], subschema)
 
 
 def test_make_author():
-    schema = load_schema('hep')
-    subschema = schema['properties']['authors']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["authors"]
     builder = LiteratureBuilder()
 
     result = builder.make_author(
-        'Smith, John',
-        affiliations=['CERN', 'SLAC'],
-        source='submitter',
-        raw_affiliations=['CERN, 1211 Geneva', 'SLAC, Stanford'],
-        emails=['john.smith@example.org'],
-        ids=[('INSPIRE BAI', 'J.Smith.1')],
-        alternative_names=['Johnny Smith'],
+        "Smith, John",
+        affiliations=["CERN", "SLAC"],
+        source="submitter",
+        raw_affiliations=["CERN, 1211 Geneva", "SLAC, Stanford"],
+        emails=["john.smith@example.org"],
+        ids=[("INSPIRE BAI", "J.Smith.1")],
+        alternative_names=["Johnny Smith"],
     )
     expected = {
-        'full_name': 'Smith, John',
-        'affiliations': [
-            {'value': 'CERN'},
-            {'value': 'SLAC'},
+        "full_name": "Smith, John",
+        "affiliations": [
+            {"value": "CERN"},
+            {"value": "SLAC"},
         ],
-        'raw_affiliations': [
-            {'value': 'CERN, 1211 Geneva', 'source': 'submitter'},
+        "raw_affiliations": [
+            {"value": "CERN, 1211 Geneva", "source": "submitter"},
             {
-                'value': 'SLAC, Stanford',
-                'source': 'submitter',
+                "value": "SLAC, Stanford",
+                "source": "submitter",
             },
         ],
-        'emails': ['john.smith@example.org'],
-        'ids': [
+        "emails": ["john.smith@example.org"],
+        "ids": [
             {
-                'schema': 'INSPIRE BAI',
-                'value': 'J.Smith.1',
+                "schema": "INSPIRE BAI",
+                "value": "J.Smith.1",
             }
         ],
-        'alternative_names': ['Johnny Smith'],
+        "alternative_names": ["Johnny Smith"],
     }
 
     assert validate([result], subschema) is None
@@ -409,17 +407,17 @@ def test_make_author():
 
 
 def test_add_keyword():
-    schema = load_schema('hep')
-    subschema = schema['properties']['keywords']
-    builder = LiteratureBuilder(source='Publisher')
-    builder.add_keyword('29.27.Fh', schema='PACS')
+    schema = load_schema("hep")
+    subschema = schema["properties"]["keywords"]
+    builder = LiteratureBuilder(source="Publisher")
+    builder.add_keyword("29.27.Fh", schema="PACS")
 
-    result = builder.record['keywords']
+    result = builder.record["keywords"]
     expected = [
         {
-            'value': '29.27.Fh',
-            'schema': 'PACS',
-            'source': 'Publisher',
+            "value": "29.27.Fh",
+            "schema": "PACS",
+            "source": "Publisher",
         }
     ]
 
@@ -428,10 +426,10 @@ def test_add_keyword():
 
 
 def test_field_not_added_when_only_material():
-    builder = LiteratureBuilder(source='Publisher')
-    builder.add_publication_info(material='Publication')
+    builder = LiteratureBuilder(source="Publisher")
+    builder.add_publication_info(material="Publication")
 
-    assert 'publication_info' not in builder.record
+    assert "publication_info" not in builder.record
 
 
 def test_add_doi_handles_none():
@@ -439,19 +437,19 @@ def test_add_doi_handles_none():
     builder.add_doi(None)
 
     result = builder.record
-    assert 'dois' not in result
+    assert "dois" not in result
 
 
 def test_add_doi_normalizes_doi():
-    schema = load_schema('hep')
-    subschema = schema['properties']['dois']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["dois"]
     builder = LiteratureBuilder()
-    builder.add_doi('doi.org/10.1234/foo')
+    builder.add_doi("doi.org/10.1234/foo")
 
-    result = builder.record['dois']
+    result = builder.record["dois"]
     expected = [
         {
-            'value': '10.1234/foo',
+            "value": "10.1234/foo",
         }
     ]
 
@@ -461,22 +459,22 @@ def test_add_doi_normalizes_doi():
 
 def test_add_doi_with_invalid_value():
     builder = LiteratureBuilder()
-    builder.add_doi('invalid doi value, ignore me')
+    builder.add_doi("invalid doi value, ignore me")
 
     result = builder.record
-    assert 'dois' not in result
+    assert "dois" not in result
 
 
 def test_add_license_doesnt_overwrite_name_if_no_url():
-    schema = load_schema('hep')
-    subschema = schema['properties']['license']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["license"]
     builder = LiteratureBuilder()
-    builder.add_license(license='foo')
+    builder.add_license(license="foo")
 
-    result = builder.record['license']
+    result = builder.record["license"]
     expected = [
         {
-            'license': 'foo',
+            "license": "foo",
         }
     ]
 
@@ -486,11 +484,11 @@ def test_add_license_doesnt_overwrite_name_if_no_url():
 
 def test_repr_handles_source_none():
     builder = LiteratureBuilder()
-    assert repr(builder).startswith('LiteratureBuilder(source=None, record={')
+    assert repr(builder).startswith("LiteratureBuilder(source=None, record={")
 
 
 def test_repr_handles_source_present():
-    builder = LiteratureBuilder('publisher')
+    builder = LiteratureBuilder("publisher")
     assert repr(builder).startswith("LiteratureBuilder(source='publisher', record={")
 
 
@@ -504,105 +502,105 @@ def test_add_reference():
         }
     }
     builder.add_reference(reference)
-    assert builder.record['references'] == [reference]
+    assert builder.record["references"] == [reference]
 
 
 def test_add_accelerator_experiment():
     builder = LiteratureBuilder()
 
-    legacy_name = 'FNAL-E-0900'
-    experiment_record = {'$ref': 'http://url/api/experiments/123'}
-    builder.add_accelerator_experiment('FNAL-E-0900', record=experiment_record)
-    assert builder.record['accelerator_experiments'] == [
-        {'legacy_name': legacy_name, 'record': experiment_record}
+    legacy_name = "FNAL-E-0900"
+    experiment_record = {"$ref": "http://url/api/experiments/123"}
+    builder.add_accelerator_experiment("FNAL-E-0900", record=experiment_record)
+    assert builder.record["accelerator_experiments"] == [
+        {"legacy_name": legacy_name, "record": experiment_record}
     ]
 
 
 def test_publication_info_public_note():
-    schema = load_schema('hep')
-    subschema = schema['properties']['public_notes']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["public_notes"]
     builder = LiteratureBuilder(source="APS")
     builder.add_publication_info(journal_title="Phys. Rev. B")
 
     expected = [
         {
-            'source': 'APS',
-            'value': 'Submitted to Phys. Rev. B',
+            "source": "APS",
+            "value": "Submitted to Phys. Rev. B",
         }
     ]
-    result = builder.record['public_notes']
+    result = builder.record["public_notes"]
 
     assert validate(result, subschema) is None
     assert expected == result
-    assert 'publication_info' not in builder.record
+    assert "publication_info" not in builder.record
 
 
 def test_preprint_date_normalizes_date():
     builder = LiteratureBuilder()
-    builder.add_preprint_date('12 April 2010')
+    builder.add_preprint_date("12 April 2010")
 
-    result = builder.record['preprint_date']
+    result = builder.record["preprint_date"]
 
-    expected = '2010-04-12'
+    expected = "2010-04-12"
 
     assert expected == result
 
 
 def test_imprint_date_normalizes_date():
     builder = LiteratureBuilder()
-    builder.add_imprint_date('19 September 2005')
+    builder.add_imprint_date("19 September 2005")
 
-    result = builder.record['imprints']
+    result = builder.record["imprints"]
 
-    expected = [{'date': '2005-09-19'}]
+    expected = [{"date": "2005-09-19"}]
 
     assert expected == result
 
 
 def test_add_book_normalizes_date():
     builder = LiteratureBuilder()
-    builder.add_book(date='9 November 1990')
+    builder.add_book(date="9 November 1990")
 
-    result = builder.record['imprints']
+    result = builder.record["imprints"]
 
-    expected = [{'date': '1990-11-09'}]
+    expected = [{"date": "1990-11-09"}]
 
     assert expected == result
 
 
 def test_add_isbn_normalizes_isbn():
     builder = LiteratureBuilder()
-    builder.add_isbn(isbn='978-3-642-23908-3')
+    builder.add_isbn(isbn="978-3-642-23908-3")
 
-    result = builder.record['isbns']
+    result = builder.record["isbns"]
 
-    expected = [{'value': '9783642239083'}]
+    expected = [{"value": "9783642239083"}]
 
     assert expected == result
 
 
 def test_add_parent_isbn_normalizes_isbn():
     builder = LiteratureBuilder()
-    builder.add_publication_info(parent_isbn='978-3-642-23908-3')
+    builder.add_publication_info(parent_isbn="978-3-642-23908-3")
 
-    result = builder.record['publication_info']
+    result = builder.record["publication_info"]
 
-    expected = [{'parent_isbn': '9783642239083'}]
+    expected = [{"parent_isbn": "9783642239083"}]
 
     assert expected == result
 
 
 def test_make_author_handles_none_in_id_value():
-    schema = load_schema('hep')
-    subschema = schema['properties']['authors']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["authors"]
     builder = LiteratureBuilder()
 
     result = builder.make_author(
-        'Smith, John',
-        ids=[('INSPIRE BAI', None)],
+        "Smith, John",
+        ids=[("INSPIRE BAI", None)],
     )
     expected = {
-        'full_name': 'Smith, John',
+        "full_name": "Smith, John",
     }
 
     assert validate([result], subschema) is None
@@ -610,17 +608,17 @@ def test_make_author_handles_none_in_id_value():
 
 
 def test_make_author_sets_record():
-    schema = load_schema('hep')
-    subschema = schema['properties']['authors']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["authors"]
     builder = LiteratureBuilder()
-    author_record = {'$ref': 'http://url/api/authors/1234'}
+    author_record = {"$ref": "http://url/api/authors/1234"}
     result = builder.make_author(
-        'Smith, John',
+        "Smith, John",
         record=author_record,
     )
     expected = {
-        'full_name': 'Smith, John',
-        'record': author_record,
+        "full_name": "Smith, John",
+        "record": author_record,
     }
 
     assert validate([result], subschema) is None
@@ -628,16 +626,16 @@ def test_make_author_sets_record():
 
 
 def test_make_author_handles_none_in_id_schema():
-    schema = load_schema('hep')
-    subschema = schema['properties']['authors']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["authors"]
     builder = LiteratureBuilder()
 
     result = builder.make_author(
-        'Smith, John',
-        ids=[(None, 'J.Smith.1')],
+        "Smith, John",
+        ids=[(None, "J.Smith.1")],
     )
     expected = {
-        'full_name': 'Smith, John',
+        "full_name": "Smith, John",
     }
 
     assert validate([result], subschema) is None
@@ -645,16 +643,16 @@ def test_make_author_handles_none_in_id_schema():
 
 
 def test_add_external_system_identifier():
-    schema = load_schema('hep')
-    subschema = schema['properties']['external_system_identifiers']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["external_system_identifiers"]
     builder = LiteratureBuilder()
-    builder.add_external_system_identifier('12345', 'osti')
+    builder.add_external_system_identifier("12345", "osti")
 
-    result = builder.record['external_system_identifiers']
+    result = builder.record["external_system_identifiers"]
     expected = [
         {
-            'value': '12345',
-            'schema': 'osti',
+            "value": "12345",
+            "schema": "osti",
         }
     ]
 
@@ -663,21 +661,21 @@ def test_add_external_system_identifier():
 
 
 def test_add_many_external_system_identifier():
-    schema = load_schema('hep')
-    subschema = schema['properties']['external_system_identifiers']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["external_system_identifiers"]
     builder = LiteratureBuilder()
-    builder.add_external_system_identifier('5758037', 'osti')
-    builder.add_external_system_identifier('1992PhRvD..45..124K', 'ADS')
+    builder.add_external_system_identifier("5758037", "osti")
+    builder.add_external_system_identifier("1992PhRvD..45..124K", "ADS")
 
-    result = builder.record['external_system_identifiers']
+    result = builder.record["external_system_identifiers"]
     expected = [
         {
-            'value': '5758037',
-            'schema': 'osti',
+            "value": "5758037",
+            "schema": "osti",
         },
         {
-            'value': '1992PhRvD..45..124K',
-            'schema': 'ADS',
+            "value": "1992PhRvD..45..124K",
+            "schema": "ADS",
         },
     ]
 
@@ -686,16 +684,16 @@ def test_add_many_external_system_identifier():
 
 
 def test_add_external_system_identifier_kwargs():
-    schema = load_schema('hep')
-    subschema = schema['properties']['external_system_identifiers']
+    schema = load_schema("hep")
+    subschema = schema["properties"]["external_system_identifiers"]
     builder = LiteratureBuilder()
-    builder.add_external_system_identifier(schema='osti', extid='12345')
+    builder.add_external_system_identifier(schema="osti", extid="12345")
 
-    result = builder.record['external_system_identifiers']
+    result = builder.record["external_system_identifiers"]
     expected = [
         {
-            'value': '12345',
-            'schema': 'osti',
+            "value": "12345",
+            "schema": "osti",
         }
     ]
 
@@ -705,6 +703,6 @@ def test_add_external_system_identifier_kwargs():
 
 def test_add_external_system_identifier_empty_kwargs():
     builder = LiteratureBuilder()
-    builder.add_external_system_identifier(schema='', extid='')
+    builder.add_external_system_identifier(schema="", extid="")
 
-    assert 'external_system_identifiers' not in builder.record
+    assert "external_system_identifiers" not in builder.record

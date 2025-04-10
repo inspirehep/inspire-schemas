@@ -55,7 +55,8 @@ class AuthorXMLParser(object):
         content.remove_namespaces()
         undefined_or_none_value_regex = re.compile("undefined|none", re.IGNORECASE)
         undefined_or_empty_inspireid_value_regex = re.compile(
-            "undefined|inspire-\s*$", re.IGNORECASE  # noqa
+            "undefined|inspire-\s*$",
+            re.IGNORECASE,  # noqa
         )
         undefined_value_regex = re.compile("undefined", re.IGNORECASE)
         ror_path_value_regex = re.compile("https://ror.org/*")
@@ -63,7 +64,6 @@ class AuthorXMLParser(object):
 
         # Goes through all the authors in the file
         for author in content.xpath("//Person"):
-
             ids = []
             affiliations = []
             affiliations_identifiers = []
@@ -97,15 +97,11 @@ class AuthorXMLParser(object):
             ).getall():
                 orgName = content.xpath(
                     'string(//organizations/Organization[@id="{}"]/orgName[@source="spiresICN"'
-                    'or @source="INSPIRE" and text()!="" ]/text())'.format(
-                        affiliation
-                    )
+                    'or @source="INSPIRE" and text()!="" ]/text())'.format(affiliation)
                 ).get()
 
                 cleaned_org_name = re.sub(remove_new_line_regex, "", orgName)
-                if orgName and not re.match(
-                    undefined_or_none_value_regex, cleaned_org_name
-                ):
+                if orgName and not re.match(undefined_or_none_value_regex, cleaned_org_name):
                     affiliations.append(cleaned_org_name)
 
                 # Gets all the affiliations_identifiers for affiliated organizations
@@ -113,15 +109,11 @@ class AuthorXMLParser(object):
                 for value, source in zip(
                     content.xpath(
                         '//organizations/Organization[@id="{}"]/orgName[@source="ROR"'
-                        'or @source="GRID" and text()!=""]/text()'.format(
-                            affiliation
-                        )
+                        'or @source="GRID" and text()!=""]/text()'.format(affiliation)
                     ).getall(),
                     content.xpath(
                         '//organizations/Organization[@id="{}"]/orgName[@source="ROR"'
-                        'or @source="GRID" and text()!=""]/@source'.format(
-                            affiliation
-                        )
+                        'or @source="GRID" and text()!=""]/@source'.format(affiliation)
                     ).getall(),
                 ):
                     source = re.sub(remove_new_line_regex, "", source)

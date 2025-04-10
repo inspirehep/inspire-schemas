@@ -1,0 +1,39 @@
+name: Test Python 2
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Python2 interpreter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python2
+
+      - name: Install python dependencies
+        run: |
+          wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+          python2 get-pip.py
+          python2 -m pip install --user --upgrade pip
+          python2 -m pip --no-cache-dir install --user -e .[tests,docs]
+
+      - name: Show python dependencies
+        run: |
+          pip --version
+          python2 --version
+          pip freeze
+
+      - name: Build Test
+        run: |
+          ./tests/integration/test_setup.sh python2
+
+      - name: Run tests
+        run: |
+          ./run-tests.sh
