@@ -32,7 +32,7 @@ def get_test_suite_path(*path_chunks):
     project_root_dir = os.path.abspath(
         os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            '..',
+            "..",
         )
     )
-    return os.path.join(project_root_dir, 'unit', 'data', *path_chunks)
+    return os.path.join(project_root_dir, "unit", "data", *path_chunks)

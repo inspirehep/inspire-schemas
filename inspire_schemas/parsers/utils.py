@@ -9,10 +9,12 @@ import re
 from scrapy.selector import Selector
 
 RE_FOR_THE = re.compile(
-    r'\b(?:for|on behalf of|representing)\b',
+    r"\b(?:for|on behalf of|representing)\b",
     re.IGNORECASE,
 )
-INST_PHRASES = ['for the development', ]
+INST_PHRASES = [
+    "for the development",
+]
 
 
 def get_node(text, namespaces=None):
@@ -25,25 +27,25 @@ def get_node(text, namespaces=None):
 
 
 def coll_cleanforthe(coll):
-    """ Cleanup collaboration, try to find author """
+    """Cleanup collaboration, try to find author"""
     author = None
 
     if any(phrase for phrase in INST_PHRASES if phrase in coll.lower()):
         # don't touch it, doesn't look like a collaboration
         return coll, author
 
-    coll = coll.strip('.; ')
+    coll = coll.strip(".; ")
 
     if RE_FOR_THE.search(coll):
         # get strings leading and trailing 'for the'
         (lead, trail) = RE_FOR_THE.split(coll, maxsplit=1)
-        if re.search(r'\w', lead):
+        if re.search(r"\w", lead):
             author = lead.strip()
-        if re.search(r'\w', trail):
+        if re.search(r"\w", trail):
             coll = trail
 
-    coll = re.sub('(?i)^ *the ', '', coll)
-    coll = re.sub('(?i) *collaborations? *', '', coll)
+    coll = re.sub("(?i)^ *the ", "", coll)
+    coll = re.sub("(?i) *collaborations? *", "", coll)
     coll = coll.strip()
 
     return coll, author
@@ -61,7 +63,7 @@ def split_fullname(author, switch_name_order=False):
         return "", ""
 
     if "," in author:
-        fullname = [n.strip() for n in author.split(',')]
+        fullname = [n.strip() for n in author.split(",")]
         surname_first = True
     else:
         fullname = [n.strip() for n in author.split()]
@@ -81,60 +83,60 @@ def split_fullname(author, switch_name_order=False):
 
 
 CONFERENCE_WORDS = [
-    'colloquium',
-    'colloquiums',
-    'conf',
-    'conference',
-    'conferences',
-    'contrib',
-    'contributed',
-    'contribution',
-    'contributions',
-    'forum',
-    'lecture',
-    'lectures',
-    'meeting',
-    'meetings',
-    'pres',
-    'presented',
-    'proc',
-    'proceeding',
-    'proceedings',
-    'rencontre',
-    'rencontres',
-    'school',
-    'schools',
-    'seminar',
-    'seminars',
-    'symp',
-    'symposium',
-    'symposiums',
-    'talk',
-    'talks',
-    'workshop',
-    'workshops'
+    "colloquium",
+    "colloquiums",
+    "conf",
+    "conference",
+    "conferences",
+    "contrib",
+    "contributed",
+    "contribution",
+    "contributions",
+    "forum",
+    "lecture",
+    "lectures",
+    "meeting",
+    "meetings",
+    "pres",
+    "presented",
+    "proc",
+    "proceeding",
+    "proceedings",
+    "rencontre",
+    "rencontres",
+    "school",
+    "schools",
+    "seminar",
+    "seminars",
+    "symp",
+    "symposium",
+    "symposiums",
+    "talk",
+    "talks",
+    "workshop",
+    "workshops",
 ]
 
 THESIS_WORDS = [
-    'diploma',
-    'diplomarbeit',
-    'diplome',
-    'dissertation',
-    'doctoraal',
-    'doctoral',
-    'doctorat',
-    'doctorate',
-    'doktorarbeit',
-    'dottorato',
-    'habilitationsschrift',
-    'hochschule',
-    'inauguraldissertation',
-    'memoire',
-    'phd',
-    'proefschrift',
-    'schlussbericht',
-    'staatsexamensarbeit',
-    'tesi',
-    'thesis',
-    'travail'
+    "diploma",
+    "diplomarbeit",
+    "diplome",
+    "dissertation",
+    "doctoraal",
+    "doctoral",
+    "doctorat",
+    "doctorate",
+    "doktorarbeit",
+    "dottorato",
+    "habilitationsschrift",
+    "hochschule",
+    "inauguraldissertation",
+    "memoire",
+    "phd",
+    "proefschrift",
+    "schlussbericht",
+    "staatsexamensarbeit",
+    "tesi",
+    "thesis",
+    "travail",
 ]

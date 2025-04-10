@@ -20,6 +20,7 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 """Parser for the Crossref API metadata format"""
+
 from __future__ import absolute_import, division, print_function
 
 import itertools
@@ -36,25 +37,25 @@ from the following link: https://api.crossref.org/v1/types
 """
 
 DOC_TYPE_MAP = {
-    'book': 'book',
-    'book-part': 'book chapter',
-    'book-section': 'book chapter',
-    'book-series': 'book',
-    'book-set': 'book',
-    'book-track': 'book chapter',
-    'book-chapter': 'book chapter',
-    'dissertation': 'thesis',
-    'edited-book': 'book',
-    'journal-article': 'article',
-    'journal-volume': 'article',
-    'journal': 'article',
-    'monograph': 'book',
-    'proceedings': 'proceedings',
-    'proceedings-article': 'conference paper',
-    'other': 'note',
-    'reference-book': 'book',
-    'report': 'report',
-    'report-series': 'report',
+    "book": "book",
+    "book-part": "book chapter",
+    "book-section": "book chapter",
+    "book-series": "book",
+    "book-set": "book",
+    "book-track": "book chapter",
+    "book-chapter": "book chapter",
+    "dissertation": "thesis",
+    "edited-book": "book",
+    "journal-article": "article",
+    "journal-volume": "article",
+    "journal": "article",
+    "monograph": "book",
+    "proceedings": "proceedings",
+    "proceedings-article": "conference paper",
+    "other": "note",
+    "reference-book": "book",
+    "report": "report",
+    "report-series": "report",
 }
 
 
@@ -116,7 +117,7 @@ class CrossrefParser(object):
     @property
     def dois(self):
         value = self.record.get("DOI")
-        dois = [{'doi': value, 'material': self.material}]
+        dois = [{"doi": value, "material": self.material}]
 
         return dois
 
@@ -126,33 +127,31 @@ class CrossrefParser(object):
 
     @property
     def material(self):
-        title = self.title or ''
-        subtitle = self.subtitle or ''
+        title = self.title or ""
+        subtitle = self.subtitle or ""
         if title.startswith("Erratum") or subtitle.startswith("Erratum"):
-            material = 'erratum'
+            material = "erratum"
         elif title.startswith("Addendum") or subtitle.startswith("Addendum"):
-            material = 'addendum'
-        elif title.startswith("Publisher's Note") or subtitle.startswith(
-            "Publisher's Note"
-        ):
-            material = 'editorial note'
+            material = "addendum"
+        elif title.startswith("Publisher's Note") or subtitle.startswith("Publisher's Note"):
+            material = "editorial note"
         else:
-            material = 'publication'
+            material = "publication"
 
         return material
 
     @property
     def publication_info(self):
         publication_info = {
-            'artid': self.artid,
-            'journal_title': self.journal_title,
-            'journal_issue': self.journal_issue,
-            'journal_volume': self.journal_volume,
-            'page_start': self.page_start,
-            'page_end': self.page_end,
-            'year': self.year,
-            'material': self.material,
-            'parent_isbn': self.parent_isbn,
+            "artid": self.artid,
+            "journal_title": self.journal_title,
+            "journal_issue": self.journal_issue,
+            "journal_volume": self.journal_volume,
+            "page_start": self.page_start,
+            "page_end": self.page_end,
+            "year": self.year,
+            "material": self.material,
+            "parent_isbn": self.parent_isbn,
         }
 
         return publication_info
@@ -163,7 +162,7 @@ class CrossrefParser(object):
 
     @property
     def journal_title(self):
-        if self.document_type == 'book chapter':
+        if self.document_type == "book chapter":
             return None
 
         return get_value(self.record, "container-title[0]")
@@ -191,7 +190,7 @@ class CrossrefParser(object):
         pages = self.record.get("page")
 
         if pages:
-            return pages.split('-')[0]
+            return pages.split("-")[0]
         else:
             return None
 
@@ -199,8 +198,8 @@ class CrossrefParser(object):
     def page_end(self):
         pages = self.record.get("page")
 
-        if pages and '-' in pages:
-            return pages.split('-')[1]
+        if pages and "-" in pages:
+            return pages.split("-")[1]
         else:
             return None
 
@@ -208,23 +207,23 @@ class CrossrefParser(object):
     def get_author_name(author_key):
         """Extract an author's name."""
         author_name_list = [author_key.get("family"), author_key.get("given")]
-        return ', '.join(filter(None, author_name_list))
+        return ", ".join(filter(None, author_name_list))
 
     @staticmethod
     def get_author_affiliations(author_key):
         """Extract an author's affiliations."""
         affiliations = force_list(author_key.get("affiliation"))
 
-        auth_aff = [affiliation.get('name') for affiliation in affiliations]
+        auth_aff = [affiliation.get("name") for affiliation in affiliations]
 
         return auth_aff
 
     @staticmethod
     def get_author_orcid(author_key):
         """Extract an author's orcid."""
-        orcid_value = author_key.get('ORCID')
+        orcid_value = author_key.get("ORCID")
 
-        return [('ORCID', orcid_value)]
+        return [("ORCID", orcid_value)]
 
     def get_author(self, author_key):
         """Extract one author.
@@ -239,9 +238,7 @@ class CrossrefParser(object):
         affiliations = self.get_author_affiliations(author_key)
         orcid = self.get_author_orcid(author_key)
 
-        return self.builder.make_author(
-            author_name, raw_affiliations=affiliations, ids=orcid
-        )
+        return self.builder.make_author(author_name, raw_affiliations=affiliations, ids=orcid)
 
     @property
     def authors(self):
@@ -267,9 +264,9 @@ class CrossrefParser(object):
             dict: the parsed license, conforming to the Inspire schema.
         """
         license = {
-            'imposing': self.publisher,
-            'material': self.material,
-            'url': self.get_license_url(license_key),
+            "imposing": self.publisher,
+            "material": self.material,
+            "url": self.get_license_url(license_key),
         }
 
         return license
@@ -288,10 +285,10 @@ class CrossrefParser(object):
 
     @property
     def imprints(self):
-        '''issued: Eariest of published-print and published-online
+        """issued: Eariest of published-print and published-online
 
         That is why we use this field to fill the imprints and the publication info.
-        '''
+        """
 
         date_parts = get_value(self.record, "issued.date-parts[0]")
 
@@ -312,9 +309,7 @@ class CrossrefParser(object):
         """
         ref_keys = self.record.get("reference")
         reference_list = list(
-            itertools.chain.from_iterable(
-                self.get_reference(key) for key in force_list(ref_keys)
-            )
+            itertools.chain.from_iterable(self.get_reference(key) for key in force_list(ref_keys))
         )
         return dedupe_list_of_dicts(reference_list)
 
@@ -364,7 +359,7 @@ class CrossrefParser(object):
 
         author = ref_key.get("author")
         if author:
-            builder.add_author(author, 'author')
+            builder.add_author(author, "author")
 
         raw_ref = ref_key.get("unstructured")
         if raw_ref:

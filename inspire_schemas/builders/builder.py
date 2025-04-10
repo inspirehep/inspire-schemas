@@ -36,14 +36,14 @@ class RecordBuilder(object):
 
     def __init__(self, record=None, source=None):
         if record is None:
-            record = {'_collections': [_ for _ in self.__class__._collections]}
+            record = {"_collections": [_ for _ in self.__class__._collections]}
         self.record = record
         self.source = source
 
     def __repr__(self):
         """Printable representation of the builder."""
-        return u'{}(source={!r}, record={})'.format(
-            type(self).__name__, self.source, self.record
+        return six.ensure_text(
+            "{}(source={!r}, record={})".format(type(self).__name__, self.source, self.record)
         )
 
     @filter_empty_parameters
@@ -55,8 +55,8 @@ class RecordBuilder(object):
             if element not in self.record[field]:
                 self.record[field].append(element)
         elif kwargs:
-            if 'record' in kwargs and isinstance(kwargs['record'], six.string_types):
-                kwargs['record'] = {'$ref': kwargs['record']}
+            if "record" in kwargs and isinstance(kwargs["record"], six.string_types):
+                kwargs["record"] = {"$ref": kwargs["record"]}
             self._ensure_list_field(field, default_list)
             if kwargs not in self.record[field]:
                 self.record[field].append(kwargs)
@@ -79,8 +79,8 @@ class RecordBuilder(object):
 
     def _sourced_dict(self, source=None, **kwargs):
         if source:
-            kwargs['source'] = source
+            kwargs["source"] = source
         elif self.source:
-            kwargs['source'] = self.source
+            kwargs["source"] = self.source
 
         return {key: value for key, value in kwargs.items() if value not in EMPTIES}

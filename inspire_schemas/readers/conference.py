@@ -44,7 +44,7 @@ class ConferenceReader(object):
             'Tokyo'
 
         """
-        return get_value(self.record, 'addresses.cities[0][0]', default='')
+        return get_value(self.record, "addresses.cities[0][0]", default="")
 
     @property
     def country(self):
@@ -59,7 +59,7 @@ class ConferenceReader(object):
             'jp'
 
         """
-        return get_value(self.record, 'addresses.country_code[0]', default='').lower()
+        return get_value(self.record, "addresses.country_code[0]", default="").lower()
 
     @property
     def end_date(self):
@@ -74,7 +74,7 @@ class ConferenceReader(object):
             '1999-11-19'
 
         """
-        return self.record.get('closing_date', '')
+        return self.record.get("closing_date", "")
 
     @property
     def start_date(self):
@@ -89,4 +89,4 @@ class ConferenceReader(object):
             '1999-11-16'
 
         """
-        return self.record.get('opening_date', '')
+        return self.record.get("opening_date", "")

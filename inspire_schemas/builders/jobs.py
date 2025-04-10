@@ -44,7 +44,7 @@ LOG = logging.getLogger(__name__)
 class JobBuilder(RecordBuilder):
     """Job record builder."""
 
-    _collections = ['Jobs']
+    _collections = ["Jobs"]
 
     def __init__(
         self,
@@ -53,11 +53,11 @@ class JobBuilder(RecordBuilder):
     ):
         super(JobBuilder, self).__init__(record, source)
         if record is None:
-            self.record['status'] = 'pending'
+            self.record["status"] = "pending"
 
     def validate_record(self):
         """Validate the record in according to the hep schema."""
-        validate(self.record, 'jobs')
+        validate(self.record, "jobs")
 
     @filter_empty_parameters
     def add_private_note(self, value=None, source=None):
@@ -66,7 +66,7 @@ class JobBuilder(RecordBuilder):
             value (str): Value of the note.
             source (str): Source of the information in this field
         """
-        self._append_to('_private_notes', source=source, value=value)
+        self._append_to("_private_notes", source=source, value=value)
 
     @filter_empty_parameters
     def add_accelerator_experiment(
@@ -90,7 +90,7 @@ class JobBuilder(RecordBuilder):
             When it's string, a new object will be created for record
         """
         self._append_to(
-            'accelerator_experiments',
+            "accelerator_experiments",
             accelerator=accelerator,
             curated_relation=curated_relation,
             experiment=experiment,
@@ -123,12 +123,12 @@ class JobBuilder(RecordBuilder):
         """
         acquisition_source = self._sourced_dict(source)
 
-        acquisition_source['submission_number'] = str(submission_number)
-        for key in ('datetime', 'email', 'method', 'orcid', 'internal_uid'):
+        acquisition_source["submission_number"] = str(submission_number)
+        for key in ("datetime", "email", "method", "orcid", "internal_uid"):
             if locals()[key] is not None:
                 acquisition_source[key] = locals()[key]
 
-        self.record['acquisition_source'] = acquisition_source
+        self.record["acquisition_source"] = acquisition_source
 
     @filter_empty_parameters
     def add_arxiv_category(self, category):
@@ -137,8 +137,8 @@ class JobBuilder(RecordBuilder):
         Args:
             category (str)
         """
-        if category != 'other':
-            self._append_to('arxiv_categories', category)
+        if category != "other":
+            self._append_to("arxiv_categories", category)
 
     @filter_empty_parameters
     def add_contact(self, name=None, email=None, curated_relation=None, record=None):
@@ -152,7 +152,7 @@ class JobBuilder(RecordBuilder):
             If string, then will be converted to proper dict
         """
         self._append_to(
-            'contact_details',
+            "contact_details",
             name=name,
             email=email,
             curated_relation=curated_relation,
@@ -168,7 +168,7 @@ class JobBuilder(RecordBuilder):
             schema (str)
         """
         self._append_to(
-            'external_system_identifiers',
+            "external_system_identifiers",
             schema=schema,
             value=value,
         )
@@ -184,7 +184,7 @@ class JobBuilder(RecordBuilder):
             If string, then will be converted to proper dict
         """
         self._append_to(
-            'institutions',
+            "institutions",
             value=value,
             curated_relation=curated_relation,
             record=record,
@@ -197,7 +197,7 @@ class JobBuilder(RecordBuilder):
             rank (str): Rank which will be added to ``ranks`` list.
             One of the ranks specified in jobs schema.
         """
-        self._append_to('ranks', rank)
+        self._append_to("ranks", rank)
 
     @staticmethod
     def _prepare_url(value, description=None):
@@ -207,9 +207,9 @@ class JobBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {'value': value}
+        entry = {"value": value}
         if description:
-            entry['description'] = description
+            entry["description"] = description
         return entry
 
     @filter_empty_parameters
@@ -219,8 +219,8 @@ class JobBuilder(RecordBuilder):
         Args:
             email (str): email itself.
         """
-        main_key = 'reference_letters'
-        email_key = 'emails'
+        main_key = "reference_letters"
+        email_key = "emails"
         self._ensure_dict_field(main_key)
         self._ensure_list_field(email_key, obj=self.record[main_key])
         self.record[main_key][email_key].append(email)
@@ -233,8 +233,8 @@ class JobBuilder(RecordBuilder):
             value (str): URL value
             description (str): URL description
         """
-        main_key = 'reference_letters'
-        url_key = 'urls'
+        main_key = "reference_letters"
+        url_key = "urls"
         self._ensure_dict_field(main_key)
         reference_url = self._prepare_url(value, description)
         self._ensure_list_field(url_key, obj=self.record[main_key])
@@ -262,7 +262,7 @@ class JobBuilder(RecordBuilder):
             region (str): Region which will be added to ``regions`` list.
             One of the regions specified in jobs schema.
         """
-        self._append_to('regions', region)
+        self._append_to("regions", region)
 
     @filter_empty_parameters
     def add_url(self, value, description=None):
@@ -273,7 +273,7 @@ class JobBuilder(RecordBuilder):
             description (str): Description of the url.
         """
         entry = self._prepare_url(value, description)
-        self._append_to('urls', entry)
+        self._append_to("urls", entry)
 
     @filter_empty_parameters
     def set_deadline(self, deadline):
@@ -281,7 +281,7 @@ class JobBuilder(RecordBuilder):
 
         deadline (str): Date in format recognized by ``normalize_date``
         """
-        self.record['deadline_date'] = normalize_date(deadline)
+        self.record["deadline_date"] = normalize_date(deadline)
 
     @filter_empty_parameters
     def set_external_job_identifier(self, identifier):
@@ -289,7 +289,7 @@ class JobBuilder(RecordBuilder):
         Args:
             identifier (str)
         """
-        self.record['external_job_identifier'] = identifier
+        self.record["external_job_identifier"] = identifier
 
     @filter_empty_parameters
     def set_description(self, description):
@@ -298,7 +298,7 @@ class JobBuilder(RecordBuilder):
         Args:
             description (str): Job description
         """
-        self.record['description'] = sanitize_html(description)
+        self.record["description"] = sanitize_html(description)
 
     @filter_empty_parameters
     def set_status(self, status):
@@ -307,7 +307,7 @@ class JobBuilder(RecordBuilder):
         Args:
             status (str): String with the status of the job.
         """
-        self.record['status'] = status
+        self.record["status"] = status
 
     @filter_empty_parameters
     def set_title(self, title):
@@ -316,4 +316,4 @@ class JobBuilder(RecordBuilder):
         Args:
             title (str): Job title
         """
-        self.record['position'] = title
+        self.record["position"] = title

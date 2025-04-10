@@ -1,60 +1,24 @@
-name: bump, build and release
+name: Push master
 
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: ['3.11','3.12','3.13']
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+  python3_tests:
+    uses: ./.github/workflows/test-python.yml
 
-      - name: Install npm dependencies
-        run: |
-          npm install buffer-shims
-          npm install --global rollup
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-
-      - name: Install python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip --no-cache-dir install -e .[tests,docs]
-
-      - name: Show python dependencies
-        run: |
-          python --version
-          pip freeze
-
-      - name: Build Test
-        run: |
-          ./tests/integration/test_setup.sh python
-
-      - name: Run tests
-        run: |
-          ./run-tests.sh
+  python2_tests:
+    uses: ./.github/workflows/test-python-py2.yml
 
   bump:
     outputs:
       new_sha: ${{ steps.sha.outputs.SHA }}
-    needs: test
-    if: ${{ github.event_name == 'push' }}
+    needs: [python3_tests, python2_tests]
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -93,8 +57,7 @@ jobs:
           echo "::set-output name=SHA::$sha_new"
 
   publish:
-    needs: bump
-    if: ${{ github.event_name == 'push' }}
+    needs: [bump]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

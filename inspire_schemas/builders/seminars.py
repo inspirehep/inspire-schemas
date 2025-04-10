@@ -39,7 +39,7 @@ from inspire_schemas.utils import (
 class SeminarBuilder(RecordBuilder):
     """Seminar record builder."""
 
-    _collections = ['Seminars']
+    _collections = ["Seminars"]
 
     @staticmethod
     def _prepare_url(value, description=None):
@@ -49,14 +49,14 @@ class SeminarBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {'value': value}
+        entry = {"value": value}
         if description:
-            entry['description'] = description
+            entry["description"] = description
         return entry
 
     def validate_record(self):
         """Validate the record in according to the hep schema."""
-        validate(self.record, 'seminars')
+        validate(self.record, "seminars")
 
     @filter_empty_parameters
     def set_address(
@@ -84,23 +84,23 @@ class SeminarBuilder(RecordBuilder):
         address = {}
 
         if cities:
-            address['cities'] = cities
+            address["cities"] = cities
         if country_code:
-            address['country_code'] = country_code
+            address["country_code"] = country_code
         if latitude:
-            address['latitude'] = latitude
+            address["latitude"] = latitude
         if longitude:
-            address['longitude'] = longitude
+            address["longitude"] = longitude
         if place_name:
-            address['place_name'] = place_name
+            address["place_name"] = place_name
         if postal_address:
-            address['postal_address'] = postal_address
+            address["postal_address"] = postal_address
         if postal_code:
-            address['postal_code'] = postal_code
+            address["postal_code"] = postal_code
         if state:
-            address['state'] = state
+            address["state"] = state
 
-        self.record['address'] = address
+        self.record["address"] = address
 
     @filter_empty_parameters
     def add_contact(self, name=None, email=None, curated_relation=None, record=None):
@@ -114,7 +114,7 @@ class SeminarBuilder(RecordBuilder):
             If string, then will be converted to proper dict.
         """
         self._append_to(
-            'contact_details',
+            "contact_details",
             name=name,
             email=email,
             curated_relation=curated_relation,
@@ -133,7 +133,7 @@ class SeminarBuilder(RecordBuilder):
             affiliations (list): list of affiliations objects
         """
         self._append_to(
-            'speakers',
+            "speakers",
             name=normalize_name(name),
             record=record,
             affiliations=affiliations,
@@ -150,7 +150,7 @@ class SeminarBuilder(RecordBuilder):
             curated_relation (bool): mark if relation is curated [NOT REQUIRED]
         """
         self._append_to(
-            'literature_records',
+            "literature_records",
             record=record,
             curated_relation=curated_relation,
         )
@@ -164,7 +164,7 @@ class SeminarBuilder(RecordBuilder):
             description (str): description of the url.
         """
         entry = self._prepare_url(value, description)
-        self._append_to('join_urls', entry)
+        self._append_to("join_urls", entry)
 
     @filter_empty_parameters
     def add_inspire_categories(self, subject_terms, source=None):
@@ -179,7 +179,7 @@ class SeminarBuilder(RecordBuilder):
                 source,
                 term=category,
             )
-            self._append_to('inspire_categories', category_dict)
+            self._append_to("inspire_categories", category_dict)
 
     @filter_empty_parameters
     def add_keyword(self, value, schema=None, source=None):
@@ -192,7 +192,7 @@ class SeminarBuilder(RecordBuilder):
         """
         keyword_dict = self._sourced_dict(source, value=value, schema=schema)
 
-        self._append_to('keywords', keyword_dict)
+        self._append_to("keywords", keyword_dict)
 
     @filter_empty_parameters
     def add_material_url(self, value, description=None):
@@ -203,7 +203,7 @@ class SeminarBuilder(RecordBuilder):
             description (str): description of the url.
         """
         entry = self._prepare_url(value, description)
-        self._append_to('material_urls', entry)
+        self._append_to("material_urls", entry)
 
     @filter_empty_parameters
     def add_public_note(self, value, source=None):
@@ -214,7 +214,7 @@ class SeminarBuilder(RecordBuilder):
             source (str): source for the given notes.
         """
         self._append_to(
-            'public_notes',
+            "public_notes",
             self._sourced_dict(
                 source,
                 value=value,
@@ -230,7 +230,7 @@ class SeminarBuilder(RecordBuilder):
             number (int): number of the conference series.
         """
         serie_object = self._sourced_dict(name=name, number=number)
-        self._append_to('series', serie_object)
+        self._append_to("series", serie_object)
 
     @filter_empty_parameters
     def set_title(self, title, subtitle=None, source=None):
@@ -242,7 +242,7 @@ class SeminarBuilder(RecordBuilder):
             source (str): source for the given title.
         """
         title_dict = self._sourced_dict(source, title=title, subtitle=subtitle)
-        self.record['title'] = title_dict
+        self.record["title"] = title_dict
 
     @filter_empty_parameters
     def add_url(self, value, description=None):
@@ -253,7 +253,7 @@ class SeminarBuilder(RecordBuilder):
             description (str): description of the url.
         """
         entry = self._prepare_url(value, description)
-        self._append_to('urls', entry)
+        self._append_to("urls", entry)
 
     def set_captioned(self, captioned=None):
         """
@@ -261,7 +261,7 @@ class SeminarBuilder(RecordBuilder):
             captioned (boolean)
         """
         if captioned is not None:
-            self.record['captioned'] = captioned
+            self.record["captioned"] = captioned
 
     def set_end_datetime(self, date=None):
         """
@@ -269,7 +269,7 @@ class SeminarBuilder(RecordBuilder):
             date (str)
         """
         if date is not None:
-            self.record['end_datetime'] = date
+            self.record["end_datetime"] = date
 
     def set_start_datetime(self, date=None):
         """
@@ -277,7 +277,7 @@ class SeminarBuilder(RecordBuilder):
             date (str)
         """
         if date is not None:
-            self.record['start_datetime'] = date
+            self.record["start_datetime"] = date
 
     def set_abstract(self, value, source=None):
         """
@@ -285,9 +285,7 @@ class SeminarBuilder(RecordBuilder):
             value (str): the description to set.
             source (str): source of the description.
         """
-        self.record['abstract'] = self._sourced_dict(
-            source=source, value=sanitize_html(value)
-        )
+        self.record["abstract"] = self._sourced_dict(source=source, value=sanitize_html(value))
 
     def set_timezone(self, timezone=None):
         """
@@ -295,4 +293,4 @@ class SeminarBuilder(RecordBuilder):
             date (str)
         """
         if timezone is not None:
-            self.record['timezone'] = timezone
+            self.record["timezone"] = timezone

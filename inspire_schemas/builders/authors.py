@@ -32,16 +32,16 @@ from inspire_utils.record import get_value
 from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.utils import filter_empty_parameters, load_schema
 
-RANKS = load_schema('elements/rank')['enum']
+RANKS = load_schema("elements/rank")["enum"]
 RANKS.append(None)
 INSTITUTION_RANK_TO_PRIORITY = {rank: -idx for (idx, rank) in enumerate(RANKS)}
-EARLIEST_DATE = PartialDate.loads('1000')
+EARLIEST_DATE = PartialDate.loads("1000")
 
 
 class AuthorBuilder(RecordBuilder):
     """Author record builder."""
 
-    _collections = ['Authors']
+    _collections = ["Authors"]
 
     def __init__(self, author=None, source=None):
         super(AuthorBuilder, self).__init__(author, source)
@@ -56,8 +56,8 @@ class AuthorBuilder(RecordBuilder):
                 the given names, or both, and at least one is required.
             :type name: string
         """
-        self._ensure_field('name', {})
-        self.obj['name']['value'] = normalize_name(name)
+        self._ensure_field("name", {})
+        self.obj["name"]["value"] = normalize_name(name)
 
     @filter_empty_parameters
     def set_display_name(self, name):
@@ -67,8 +67,8 @@ class AuthorBuilder(RecordBuilder):
             :param name: preferred name to be displayed for the author.
             :type name: string
         """
-        self._ensure_field('name', {})
-        self.obj['name']['preferred_name'] = name
+        self._ensure_field("name", {})
+        self.obj["name"]["preferred_name"] = name
 
     @filter_empty_parameters
     def add_name_variant(self, name):
@@ -78,8 +78,8 @@ class AuthorBuilder(RecordBuilder):
             :param name: name variant for the current author.
             :type name: string
         """
-        self._ensure_field('name', {})
-        self.obj['name'].setdefault('name_variants', []).append(name)
+        self._ensure_field("name", {})
+        self.obj["name"].setdefault("name_variants", []).append(name)
 
     @filter_empty_parameters
     def add_native_name(self, name):
@@ -89,8 +89,8 @@ class AuthorBuilder(RecordBuilder):
             :param name: native name for the current author.
             :type name: string
         """
-        self._ensure_field('name', {})
-        self.obj['name'].setdefault('native_names', []).append(name)
+        self._ensure_field("name", {})
+        self.obj["name"].setdefault("native_names", []).append(name)
 
     @filter_empty_parameters
     def add_previous_name(self, name):
@@ -100,8 +100,8 @@ class AuthorBuilder(RecordBuilder):
             :param name: previous name for the current author.
             :type name: string
         """
-        self._ensure_field('name', {})
-        self.obj['name'].setdefault('previous_names', []).append(name)
+        self._ensure_field("name", {})
+        self.obj["name"].setdefault("previous_names", []).append(name)
 
     @filter_empty_parameters
     def add_email_address(self, email, current=None, hidden=None):
@@ -114,24 +114,24 @@ class AuthorBuilder(RecordBuilder):
             :param hidden: if email is public or not.
             :type hidden: boolean
         """
-        existing_emails = get_value(self.obj, 'email_addresses', [])
+        existing_emails = get_value(self.obj, "email_addresses", [])
         found_email = next(
             (
                 existing_email
                 for existing_email in existing_emails
-                if existing_email.get('value') == email
+                if existing_email.get("value") == email
             ),
             None,
         )
         if found_email is None:
-            new_email = {'value': email}
+            new_email = {"value": email}
             if current is not None:
-                new_email['current'] = current
+                new_email["current"] = current
             if hidden is not None:
-                new_email['hidden'] = hidden
-            self._append_to('email_addresses', new_email)
+                new_email["hidden"] = hidden
+            self._append_to("email_addresses", new_email)
         elif hidden is not None:
-            found_email['hidden'] = hidden
+            found_email["hidden"] = hidden
 
     @filter_empty_parameters
     def set_status(self, status):
@@ -141,7 +141,7 @@ class AuthorBuilder(RecordBuilder):
             :param status: status from the enumeration of statuses.
             :type status: string
         """
-        self.obj['status'] = status
+        self.obj["status"] = status
 
     @filter_empty_parameters
     def add_url(self, url, description=None):
@@ -155,11 +155,11 @@ class AuthorBuilder(RecordBuilder):
             :type description: string
         """
         url = {
-            'value': url,
+            "value": url,
         }
         if description:
-            url['description'] = description
-        self._append_to('urls', url)
+            url["description"] = description
+        self._append_to("urls", url)
 
     @filter_empty_parameters
     def add_blog(self, url):
@@ -169,7 +169,7 @@ class AuthorBuilder(RecordBuilder):
             :param url: url to the person's blog.
             :type url: string
         """
-        self.add_url(url, description='blog')
+        self.add_url(url, description="blog")
 
     @filter_empty_parameters
     def add_linkedin(self, id_):
@@ -181,10 +181,10 @@ class AuthorBuilder(RecordBuilder):
             :type id_: string
         """
         self._append_to(
-            'ids',
+            "ids",
             {
-                'value': id_,
-                'schema': 'LINKEDIN',
+                "value": id_,
+                "schema": "LINKEDIN",
             },
         )
 
@@ -198,10 +198,10 @@ class AuthorBuilder(RecordBuilder):
             :type id_: string
         """
         self._append_to(
-            'ids',
+            "ids",
             {
-                'value': id_,
-                'schema': 'TWITTER',
+                "value": id_,
+                "schema": "TWITTER",
             },
         )
 
@@ -214,10 +214,10 @@ class AuthorBuilder(RecordBuilder):
             :type id_: string
         """
         self._append_to(
-            'ids',
+            "ids",
             {
-                'value': id_,
-                'schema': 'BLUESKY',
+                "value": id_,
+                "schema": "BLUESKY",
             },
         )
 
@@ -230,10 +230,10 @@ class AuthorBuilder(RecordBuilder):
             :type id_: string
         """
         self._append_to(
-            'ids',
+            "ids",
             {
-                'value': id_,
-                'schema': 'MASTODON',
+                "value": id_,
+                "schema": "MASTODON",
             },
         )
 
@@ -246,10 +246,10 @@ class AuthorBuilder(RecordBuilder):
             :type id_: string
         """
         self._append_to(
-            'ids',
+            "ids",
             {
-                'value': id_,
-                'schema': 'ORCID',
+                "value": id_,
+                "schema": "ORCID",
             },
         )
 
@@ -262,10 +262,10 @@ class AuthorBuilder(RecordBuilder):
             :type id_: string
         """
         self._append_to(
-            'ids',
+            "ids",
             {
-                'value': id_,
-                'schema': 'INSPIRE BAI',
+                "value": id_,
+                "schema": "INSPIRE BAI",
             },
         )
 
@@ -277,7 +277,7 @@ class AuthorBuilder(RecordBuilder):
             :param category: valid arxiv category related to the field of research.
             :type category: string
         """
-        self._append_to('arxiv_categories', category)
+        self._append_to("arxiv_categories", category)
 
     @filter_empty_parameters
     def add_institution(
@@ -319,27 +319,25 @@ class AuthorBuilder(RecordBuilder):
             :type hidden: boolean
         """
         new_institution = {}
-        new_institution['institution'] = institution
+        new_institution["institution"] = institution
         if start_date:
-            new_institution['start_date'] = normalize_date(start_date)
+            new_institution["start_date"] = normalize_date(start_date)
         if end_date:
-            new_institution['end_date'] = normalize_date(end_date)
+            new_institution["end_date"] = normalize_date(end_date)
         if rank:
-            new_institution['rank'] = rank
+            new_institution["rank"] = rank
         if record:
-            new_institution['record'] = record
+            new_institution["record"] = record
         new_institution["hidden"] = hidden
-        new_institution['curated_relation'] = curated
-        new_institution['current'] = current
-        self._append_to('positions', new_institution)
-        self.obj['positions'].sort(
-            key=self._get_institution_priority_tuple, reverse=True
-        )
+        new_institution["curated_relation"] = curated
+        new_institution["current"] = current
+        self._append_to("positions", new_institution)
+        self.obj["positions"].sort(key=self._get_institution_priority_tuple, reverse=True)
 
     @staticmethod
     def _get_institution_priority_tuple(institution):
         return AuthorBuilder._get_work_priority_tuple(institution) + (
-            INSTITUTION_RANK_TO_PRIORITY.get(institution.get('rank')),
+            INSTITUTION_RANK_TO_PRIORITY.get(institution.get("rank")),
         )
 
     @filter_empty_parameters
@@ -378,26 +376,24 @@ class AuthorBuilder(RecordBuilder):
             :type hidden: boolean
         """
         new_experiment = {}
-        new_experiment['name'] = name
+        new_experiment["name"] = name
         if start_date:
-            new_experiment['start_date'] = normalize_date(start_date)
+            new_experiment["start_date"] = normalize_date(start_date)
         if end_date:
-            new_experiment['end_date'] = normalize_date(end_date)
+            new_experiment["end_date"] = normalize_date(end_date)
         if record:
-            new_experiment['record'] = record
+            new_experiment["record"] = record
         new_experiment["hidden"] = hidden
-        new_experiment['curated_relation'] = curated
-        new_experiment['current'] = current
-        self._append_to('project_membership', new_experiment)
-        self.obj['project_membership'].sort(
-            key=self._get_work_priority_tuple, reverse=True
-        )
+        new_experiment["curated_relation"] = curated
+        new_experiment["current"] = current
+        self._append_to("project_membership", new_experiment)
+        self.obj["project_membership"].sort(key=self._get_work_priority_tuple, reverse=True)
 
     @staticmethod
     def _get_work_priority_tuple(work):
-        start_date = work.get('start_date')
+        start_date = work.get("start_date")
         return (
-            work.get('current'),
+            work.get("current"),
             PartialDate.parse(start_date) if start_date else EARLIEST_DATE,
         )
 
@@ -427,16 +423,16 @@ class AuthorBuilder(RecordBuilder):
             :type hidden: boolean
         """
         new_advisor = {}
-        new_advisor['name'] = normalize_name(name)
+        new_advisor["name"] = normalize_name(name)
         if ids:
-            new_advisor['ids'] = force_list(ids)
+            new_advisor["ids"] = force_list(ids)
         if degree_type:
-            new_advisor['degree_type'] = degree_type
+            new_advisor["degree_type"] = degree_type
         if record:
-            new_advisor['record'] = record
+            new_advisor["record"] = record
         new_advisor["hidden"] = hidden
-        new_advisor['curated_relation'] = curated
-        self._append_to('advisors', new_advisor)
+        new_advisor["curated_relation"] = curated
+        self._append_to("advisors", new_advisor)
 
     @filter_empty_parameters
     def add_private_note(self, note, source=None):
@@ -450,11 +446,11 @@ class AuthorBuilder(RecordBuilder):
             :type source: string
         """
         note = {
-            'value': note,
+            "value": note,
         }
         if source:
-            note['source'] = source
-        self._append_to('_private_notes', note)
+            note["source"] = source
+        self._append_to("_private_notes", note)
 
     @filter_empty_parameters
     def add_acquisition_source(
@@ -489,9 +485,9 @@ class AuthorBuilder(RecordBuilder):
         """
         acquisition_source = self._sourced_dict(source)
 
-        acquisition_source['submission_number'] = str(submission_number)
-        for key in ('datetime', 'email', 'method', 'orcid', 'internal_uid'):
+        acquisition_source["submission_number"] = str(submission_number)
+        for key in ("datetime", "email", "method", "orcid", "internal_uid"):
             if locals()[key] is not None:
                 acquisition_source[key] = locals()[key]
 
-        self.obj['acquisition_source'] = acquisition_source
+        self.obj["acquisition_source"] = acquisition_source
