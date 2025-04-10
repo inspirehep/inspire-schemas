@@ -1,0 +1,9 @@
+name: Pull request py2
+
+on:
+  pull_request:
+    branches: [py-2]
+
+jobs:
+  python2_tests:
+    uses: ./.github/workflows/test-python-py2.yml

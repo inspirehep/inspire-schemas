@@ -1,53 +1,21 @@
-name: bump, build and release
+name: Push master
 
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
-  test:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        include:
-          - python: python3
-            pip: pip3
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Install npm dependencies
-        run: |
-          npm install buffer-shims
-          npm install --global rollup
-
-      - name: Install python dependencies
-        run: |
-          ${{ matrix.pip }} install --user --upgrade pip
-          ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
-
-      - name: Show python dependencies
-        run: |
-          ${{ matrix.python }} --version
-          ${{ matrix.pip }} freeze
-
-      - name: Run tests
-        run: |
-          ./run-tests.sh
-
+  python3_tests:
+    uses: ./.github/workflows/test-python.yml
+  
   bump:
     outputs:
       new_sha: ${{ steps.sha.outputs.SHA }}
-    needs: test
-    if: ${{ github.event_name == 'push' }}
+    needs: [python3_tests]
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -86,8 +54,7 @@ jobs:
           echo "::set-output name=SHA::$sha_new"
 
   publish:
-    needs: bump
-    if: ${{ github.event_name == 'push' }}
+    needs: [bump]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

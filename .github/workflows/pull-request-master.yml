@@ -1,0 +1,9 @@
+name: Pull request master
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  python3_tests:
+    uses: ./.github/workflows/test-python.yml

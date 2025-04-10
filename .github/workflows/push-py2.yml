@@ -1,0 +1,9 @@
+name: Push py2
+
+on:
+  push:
+    branches: [py-2]
+
+jobs:
+  python2_tests:
+    uses: ./.github/workflows/test-python-py2.yml
