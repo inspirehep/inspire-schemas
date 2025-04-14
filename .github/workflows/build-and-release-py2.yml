@@ -2,13 +2,13 @@ name: test (python 2.7)
 
 on:
   push:
-    branches: [py-2]
+    branches: [master]
   pull_request:
-    branches: [py-2]
+    branches: [master]
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         include:
@@ -16,10 +16,12 @@ jobs:
             pip: pip
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: sudo apt-get update -y && sudo apt-get install -y python2
 
       - name: Install npm dependencies
         run: |
@@ -42,6 +44,7 @@ jobs:
       - name: Build Test
         run: |
           ./tests/integration/test_setup.sh ${{ matrix.python }}
+
       - name: Run tests
         run: |
           ./run-tests.sh

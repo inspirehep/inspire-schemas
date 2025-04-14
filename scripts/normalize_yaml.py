@@ -33,10 +33,10 @@ from __future__ import print_function
 import collections
 import fnmatch
 import os
+import sys
 import warnings
 
 import yaml
-from six import text_type
 from yaml.representer import SafeRepresenter
 
 # -----------------------------------------------
@@ -56,6 +56,7 @@ SCALAR_STYLE = '|'
 
 class DescriptionContent(str):
     '''Class to tag the value of ``description``s'''
+
     pass
 
 
@@ -65,11 +66,13 @@ def change_style(style, representer):
         scalar = representer(dumper, data)
         scalar.style = style
         return scalar
+
     return new_representer
 
 
-represent_description_content = change_style(SCALAR_STYLE,
-                                             SafeRepresenter.represent_str)
+represent_description_content = change_style(
+    SCALAR_STYLE, SafeRepresenter.represent_str
+)
 yaml.add_representer(DescriptionContent, represent_description_content)
 
 
@@ -95,9 +98,8 @@ def process_tree(value, key=None, parent_key=None):
         for key, val in properties.items():
             if not val.get('type') and not val.get('$ref'):
                 warnings.warn(
-                    u'"{}" field of "{}" does not have a type'.format(
-                        key, parent_key
-                    )
+                    u'"{}" field of "{}" does not have a type'.format(key, parent_key),
+                    stacklevel=1,
                 )
 
     def _is_leaf(value):
@@ -116,14 +118,15 @@ def process_tree(value, key=None, parent_key=None):
         return {k: process_tree(v, k, key) for k, v in value.items()}
 
     else:
-        raise TypeError(u"'{}' has unexpected type: {}".format(
-            value, type(value).__name__))
+        raise TypeError(
+            u"'{}' has unexpected type: {}".format(value, type(value).__name__)
+        )
 
 
 def normalize_yaml(file_name):
     print('Normalizing', file_name, '...')
     with open(file_name, 'r') as file_stream:
-        schema = yaml.load(file_stream)
+        schema = yaml.load(file_stream) if sys.version_info[0] == 2 else yaml.full_load(file_stream)
 
     schema = process_tree(schema)
     yaml_schema = yaml.dump(schema, **DUMPER_OPTIONS)

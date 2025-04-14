@@ -29,10 +29,9 @@ import os
 import mock
 import pytest
 import six
-
-from inspire_schemas import errors, utils
 from inspire_utils.query import ordered
 
+from inspire_schemas import errors, utils
 from inspire_schemas.utils import is_orcid, normalize_collaboration_name
 
 
@@ -115,8 +114,8 @@ def test_normalize_arxiv_category_returns_existing_category_when_dot_is_dash():
 
 
 @pytest.mark.parametrize(
-    'schema,expected',
-    (
+    ('schema', 'expected'),
+    [
         ('hep.json', 'hep.json'),
         ('elements/id.json', 'elements/id.json'),
         ('hep', 'hep.json'),
@@ -125,7 +124,7 @@ def test_normalize_arxiv_category_returns_existing_category_when_dot_is_dash():
         ('file://somewhe.re/over/the/rainbow/hep.json', 'hep.json'),
         ('../../../../../hep.json', 'hep.json'),
         ('http://somewhe.re/../../../../../hep.json', 'hep.json'),
-    ),
+    ],
     ids=[
         'relative simple path',
         'relative subfolder path',
@@ -146,17 +145,18 @@ def test_get_schema_path_positive(schema, expected):
 @mock.patch('os.path.exists')
 def test_get_resolved_schema_path(mock_exists):
     schema_path = utils.get_schema_path(schema='hep.json', resolved=True)
-    mock_exists.side_effect = \
-        lambda x: x == os.path.join(utils._schema_root_path, 'hep.json')
+    mock_exists.side_effect = lambda x: x == os.path.join(
+        utils._schema_root_path, 'hep.json'
+    )
     assert schema_path == os.path.join(utils._schema_root_path, 'hep.json')
 
 
 @pytest.mark.parametrize(
     'schema',
-    (
+    [
         'Go and boil your bottoms, sons of a silly person!',
         '../../../../../../etc/passwd',
-    ),
+    ],
     ids=[
         'non existing path',
         'existing malicious path',
@@ -178,6 +178,7 @@ def test_local_ref_resolver_proxied(mock_super, mock_resolve_remote):
         LocalRefResolver without having to instantiate it on both python2 and
         3 as they handle the unbound methods differently.
         """
+
         def __init__(self):
             pass
 
@@ -188,8 +189,9 @@ def test_local_ref_resolver_proxied(mock_super, mock_resolve_remote):
 @mock.patch('inspire_schemas.utils.RefResolver.resolve_remote')
 @mock.patch('inspire_schemas.utils.super')
 @mock.patch('inspire_schemas.utils.get_schema_path')
-def test_local_ref_resolver_adapted(mock_get_schema_path, mock_super,
-                                    mock_resolve_remote):
+def test_local_ref_resolver_adapted(
+    mock_get_schema_path, mock_super, mock_resolve_remote
+):
     def _mocked_resolve_remote(uri):
         if uri.startswith('file://'):
             return uri
@@ -201,6 +203,7 @@ def test_local_ref_resolver_adapted(mock_get_schema_path, mock_super,
         LocalRefResolver without having to instantiate it on both python2 and
         3 as they handle the unbound methods differently.
         """
+
         def __init__(self):
             pass
 
@@ -219,13 +222,14 @@ def test_load_schema_with_schema_key(mock_get_schema_path, mock_open):
         '$schema': {
             'Sir Robin': 'The fleeing brave',
             'shrubbery': 'almaciga',
-
         }
     }
-    mock_open.side_effect = \
-        lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
-    mock_get_schema_path.side_effect = \
+    mock_open.side_effect = lambda x: contextlib.closing(
+        six.StringIO(json.dumps(myschema))
+    )
+    mock_get_schema_path.side_effect = (
         lambda x, y: 'And his nostrils ripped and his bottom burned off'
+    )
 
     loaded_schema = utils.load_schema('And gallantly he chickened out')
 
@@ -387,7 +391,7 @@ def test_get_license_from_url_handles_none():
 
 
 def test_get_license_from_url_raises_when_unknown_url():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match='Unknown license URL'):
         utils.get_license_from_url('http://www.example.com')
 
 
@@ -627,7 +631,8 @@ def test_convert_old_publication_info_to_new_handles_year_added_to_volumes():
     assert expected == result
 
 
-def test_convert_old_publication_info_to_new_handles_year_added_to_volumes_when_journal_title_lowercase():
+def test_convert_old_pub_info_handles_year_added_to_volumes_when_journal_title_lowercase():
+    # Test the conversion of old publication info to new format when the journal title is lowercase.
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
 
@@ -661,20 +666,24 @@ def test_convert_old_publication_info_to_new_handles_year_added_to_volumes_when_
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
 
-    publication_info = [{
-        'artid': '137',
-        'journal_volume': '1709',
-        'year': 2017,
-        'page_start': '137',
-    }]
+    publication_info = [
+        {
+            'artid': '137',
+            'journal_volume': '1709',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
     assert utils.validate(publication_info, subschema) is None
 
-    expected = [{
-        'artid': '137',
-        'journal_volume': '1709',
-        'year': 2017,
-        'page_start': '137',
-    }]
+    expected = [
+        {
+            'artid': '137',
+            'journal_volume': '1709',
+            'year': 2017,
+            'page_start': '137',
+        }
+    ]
     result = utils.convert_old_publication_info_to_new(publication_info)
 
     assert utils.validate(result, subschema) is None
@@ -710,7 +719,9 @@ def test_convert_old_publication_info_to_new_deduces_year_from_volume():
     assert expected == result
 
 
-def test_convert_old_publication_info_to_new_does_not_raise_when_deducing_year_from_malformed_volume():
+def test_convert_old_publication_info_to_new_no_year_from_malformed_volume():
+    # Test that the conversion function does not raise an error when
+    # deducing the year from a malformed volume
     schema = utils.load_schema('hep')
     subschema = schema['properties']['publication_info']
 
@@ -1098,7 +1109,7 @@ def test_draft_validate():
         'titles': [
             {'title': 'A title'},
         ],
-        'preprint_date': 'Jessica Jones'
+        'preprint_date': 'Jessica Jones',
     }
     expected = 'Jessica Jones'
     result = utils.get_validation_errors(record, schema)
@@ -1109,27 +1120,38 @@ def test_draft_validate():
         error = next(result)
 
 
-@pytest.mark.parametrize('uid,explicit_schema,expected_uid,expected_schema', [
-    ('0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),
-    ('http://orcid.org/0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),
-    ('12345', 'CERN', 'CERN-12345', 'CERN'),
-    ('A.Einstein.1', 'INSPIRE BAI', 'A.Einstein.1', 'INSPIRE BAI'),
-    ('12345678', 'INSPIRE ID', 'INSPIRE-12345678', 'INSPIRE ID'),
-    ('12345678', 'JACOW', 'JACoW-12345678', 'JACOW'),
-    ('123456', 'SLAC', 'SLAC-123456', 'SLAC'),
-    ('123456', 'DESY', 'DESY-123456', 'DESY'),
-    ('0000-0002-1825-0097', None, '0000-0002-1825-0097', 'ORCID'),
-    ('http://orcid.org/0000-0002-1825-0097', None, '0000-0002-1825-0097', 'ORCID'),
-    ('CERN-12345', None, 'CERN-12345', 'CERN'),
-    ('A.Einstein.1', None, 'A.Einstein.1', 'INSPIRE BAI'),
-    ('INSPIRE-12345678', None, 'INSPIRE-12345678', 'INSPIRE ID'),
-    ('JACoW-12345678', None, 'JACoW-12345678', 'JACOW'),
-    ('SLAC-123456', None, 'SLAC-123456', 'SLAC'),
-    ('DESY-123456', None, 'DESY-123456', 'DESY'),
-])
+@pytest.mark.parametrize(
+    ('uid', 'explicit_schema', 'expected_uid', 'expected_schema'),
+    [
+        ('0000-0002-1825-0097', 'ORCID', '0000-0002-1825-0097', 'ORCID'),
+        (
+            'http://orcid.org/0000-0002-1825-0097',
+            'ORCID',
+            '0000-0002-1825-0097',
+            'ORCID',
+        ),
+        ('12345', 'CERN', 'CERN-12345', 'CERN'),
+        ('A.Einstein.1', 'INSPIRE BAI', 'A.Einstein.1', 'INSPIRE BAI'),
+        ('12345678', 'INSPIRE ID', 'INSPIRE-12345678', 'INSPIRE ID'),
+        ('12345678', 'JACOW', 'JACoW-12345678', 'JACOW'),
+        ('123456', 'SLAC', 'SLAC-123456', 'SLAC'),
+        ('123456', 'DESY', 'DESY-123456', 'DESY'),
+        ('0000-0002-1825-0097', None, '0000-0002-1825-0097', 'ORCID'),
+        ('http://orcid.org/0000-0002-1825-0097', None, '0000-0002-1825-0097', 'ORCID'),
+        ('CERN-12345', None, 'CERN-12345', 'CERN'),
+        ('A.Einstein.1', None, 'A.Einstein.1', 'INSPIRE BAI'),
+        ('INSPIRE-12345678', None, 'INSPIRE-12345678', 'INSPIRE ID'),
+        ('JACoW-12345678', None, 'JACoW-12345678', 'JACOW'),
+        ('SLAC-123456', None, 'SLAC-123456', 'SLAC'),
+        ('DESY-123456', None, 'DESY-123456', 'DESY'),
+    ],
+)
 def test_author_id_normalize_and_schema(
-        uid, explicit_schema, expected_uid, expected_schema):
-    normalized_uid, guessed_schema = utils.author_id_normalize_and_schema(uid, explicit_schema)
+    uid, explicit_schema, expected_uid, expected_schema
+):
+    normalized_uid, guessed_schema = utils.author_id_normalize_and_schema(
+        uid, explicit_schema
+    )
     assert guessed_schema == expected_schema
     assert normalized_uid == expected_uid
 
@@ -1141,23 +1163,26 @@ def test_author_id_normalize_and_schema_unknown():
 
 def test_author_id_normalize_and_schema_conflict():
     uid, schema = utils.author_id_normalize_and_schema('SLAC-123456', 'CERN')
-    assert 'SLAC-123456' == uid
-    assert 'CERN' == schema
+    assert uid == 'SLAC-123456'
+    assert schema == 'CERN'
 
 
-@pytest.mark.parametrize('arg1,arg2,source,material', [
-    ('value', 'another', None, None),
-    ('value', None, None, None),
-    ('', [], None, None),
-    (None, None, 'source', None),
-    (None, None, None, 'material'),
-])
+@pytest.mark.parametrize(
+    ('arg1', 'arg2', 'source', 'material'),
+    [
+        ('value', 'another', None, None),
+        ('value', None, None, None),
+        ('', [], None, None),
+        (None, None, 'source', None),
+        (None, None, None, 'material'),
+    ],
+)
 def test_filter_empty_parameters(arg1, arg2, source, material):
     @utils.filter_empty_parameters
     def function_no_empty_args(arg1, arg2, source=None, material=None):
         if arg1 or arg2:
             return
-        assert False
+        raise AssertionError()
 
     function_no_empty_args(arg1, arg2, source=source, material=material)
 
@@ -1331,17 +1356,8 @@ def test_is_arxiv_handles_uppercase_with_cls():
 
 def test_is_arxiv_accepts_valid_categories_only():
     assert utils.is_arxiv('CBO/9780511') is False
-
-
-def test_is_arxiv_accepts_valid_categories_only():
     assert utils.is_arxiv('maths/0312059') is False
-
-
-def test_is_arxiv_accepts_valid_categories_only():
     assert utils.is_arxiv('math.ACS/0312059') is False
-
-
-def test_is_arxiv_accepts_valid_categories_only():
     assert utils.is_arxiv('math/0312.059758') is False
 
 
@@ -1351,30 +1367,38 @@ def test_is_arxiv_accepts_valid_category_in_brackets():
 
 def test_sanitize_html():
     expected = '<div>Some text <em>emphasized</em> linking to <a href="http://example.com">http://example.com</a></div>'
-    result = utils.sanitize_html('<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to http://example.com</div>')
+    result = utils.sanitize_html(
+        '<div>Some <span>text</span> <em class="shiny">emphasized</em> linking to http://example.com</div>'
+    )
 
     assert expected == result
 
 
-@pytest.mark.parametrize("country_name,expected", [("Greece", "GR"), ("Monaco", "MC"), ("New Hebrides", "NH")])
+@pytest.mark.parametrize(
+    ('country_name', 'expected'),
+    [("Greece", "GR"), ("Monaco", "MC"), ("New Hebrides", "NH")],
+)
 def test_name_to_code(country_name, expected):
     assert utils.country_name_to_code(country_name) == expected
 
 
 @pytest.mark.parametrize(
-    "country_name,expected", [("Taiwan", "TW"), ("Venezuela", "VE")]
+    ('country_name', 'expected'), [("Taiwan", "TW"), ("Venezuela", "VE")]
 )
 def test_name_to_code_with_common_name(country_name, expected):
     assert utils.country_name_to_code(country_name) == expected
 
 
-@pytest.mark.parametrize("country_code,expected", [("GR", "Greece"), ("MC", "Monaco"), ("NH", "New Hebrides")])
+@pytest.mark.parametrize(
+    ('country_code', 'expected'),
+    [("GR", "Greece"), ("MC", "Monaco"), ("NH", "New Hebrides")],
+)
 def test_code_to_name(country_code, expected):
     assert utils.country_code_to_name(country_code) == expected
 
 
 @pytest.mark.parametrize(
-    "country_code,expected", [("TW", "Taiwan"), ("VE", "Venezuela")]
+    ('country_code', 'expected'), [("TW", "Taiwan"), ("VE", "Venezuela")]
 )
 def test_code_to_name_with_common_name(country_code, expected):
     assert utils.country_code_to_name(country_code) == expected
@@ -1442,13 +1466,16 @@ def test_get_references_for_schema_returns_proper_schemas():
 
 
 @pytest.mark.parametrize(
-    "collaboration_name,expected_normalized_name",
+    ('collaboration_name', 'expected_normalized_name'),
     [
         ("SOME/-*NAME", "SOME/-*NAME"),
         ("Some GrOuP Team  EXPERIMENT ", "Some"),
-        ("   Ugly     NAmE \n with   \n \t whitespace   characters    ", "Ugly NAmE with whitespace characters"),
-        ("group community consortium concept group experiment team stuff", "stuff")
-    ]
+        (
+            "   Ugly     NAmE \n with   \n \t whitespace   characters    ",
+            "Ugly NAmE with whitespace characters",
+        ),
+        ("group community consortium concept group experiment team stuff", "stuff"),
+    ],
 )
 def test_normalize_collaboration_name(collaboration_name, expected_normalized_name):
     assert normalize_collaboration_name(collaboration_name) == expected_normalized_name

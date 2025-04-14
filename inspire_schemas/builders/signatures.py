@@ -28,11 +28,11 @@ import re
 
 from inspire_utils.name import normalize_name
 
-from ..utils import (
-    filter_empty_parameters,
+from inspire_schemas.errors import UnknownUIDSchema
+from inspire_schemas.utils import (
     author_id_normalize_and_schema,
+    filter_empty_parameters,
 )
-from ..errors import UnknownUIDSchema
 
 
 class SignatureBuilder(object):
@@ -78,9 +78,7 @@ class SignatureBuilder(object):
             record (dict): affiliation JSON reference
         """
         if value:
-            affiliation = {
-                'value': value
-            }
+            affiliation = {'value': value}
             if record:
                 affiliation['record'] = record
             if curated_relation is not None:
@@ -105,17 +103,13 @@ class SignatureBuilder(object):
 
     @filter_empty_parameters
     def _add_uid(self, uid, schema):
-        self._ensure_list_field('ids', {
-            'value': uid,
-            'schema': schema
-        })
+        self._ensure_list_field('ids', {'value': uid, 'schema': schema})
 
     @filter_empty_parameters
     def add_affiliations_identifiers(self, uid, schema):
-        self._ensure_list_field('affiliations_identifiers', {
-            'value': uid,
-            'schema': schema
-        })
+        self._ensure_list_field(
+            'affiliations_identifiers', {'value': uid, 'schema': schema}
+        )
 
     @filter_empty_parameters
     def set_uid(self, uid, schema=None):
@@ -142,7 +136,9 @@ class SignatureBuilder(object):
             pass
 
         self._ensure_field('ids', [])
-        self.obj['ids'] = [id_ for id_ in self.obj['ids'] if id_.get('schema') != schema]
+        self.obj['ids'] = [
+            id_ for id_ in self.obj['ids'] if id_.get('schema') != schema
+        ]
         self._add_uid(uid, schema)
 
     @filter_empty_parameters
@@ -156,7 +152,6 @@ class SignatureBuilder(object):
             self.add_affiliations_identifiers(ror_pattern.search(raw_affiliation).group(0), 'ROR')
             raw_affiliation = re.sub(ror_pattern, '', raw_affiliation)
         raw_aff_field = {'value': raw_affiliation}
-
         if source:
             raw_aff_field['source'] = source
         self._ensure_list_field('raw_affiliations', raw_aff_field)

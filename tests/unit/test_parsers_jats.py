@@ -41,7 +41,7 @@ def get_parsed_from_file(filename):
     """A dictionary holding the parsed elements of the record."""
     path = get_test_suite_path('aps', filename)
     with open(path) as f:
-        aps_expected_dict = yaml.load(f)
+        aps_expected_dict = yaml.full_load(f)
 
     return aps_expected_dict
 

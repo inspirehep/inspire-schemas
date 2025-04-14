@@ -26,33 +26,31 @@ from __future__ import absolute_import, division, print_function
 
 import re
 
+import idutils
 import six
 from inspire_utils.date import normalize_date
 from inspire_utils.name import normalize_name
 from inspire_utils.record import get_value
 from isbn import ISBN
 
-import idutils
-
-from ..utils import convert_old_publication_info_to_new, split_pubnote, fix_reference_url, is_arxiv, normalize_arxiv
-
+from inspire_schemas.utils import (
+    convert_old_publication_info_to_new,
+    fix_reference_url,
+    is_arxiv,
+    normalize_arxiv,
+    split_pubnote,
+)
 
 # Matches any separators for author enumerations.
-RE_SPLIT_AUTH = re.compile(r',?\s+and\s|,?\s*&|,|et al\.?|\(?eds?\.\)?',
-                           re.I | re.U)
+RE_SPLIT_AUTH = re.compile(r',?\s+and\s|,?\s*&|,|et al\.?|\(?eds?\.\)?', re.I | re.U)
 # Matches any stream of initials (A. B C D. -E F).
-RE_INITIALS_ONLY = re.compile(r'^\s*-?[A-Z]((\.|\s)\s*-?[A-Z])*\.?\s*$',
-                              re.U)
+RE_INITIALS_ONLY = re.compile(r'^\s*-?[A-Z]((\.|\s)\s*-?[A-Z])*\.?\s*$', re.U)
 
 # Matches CDS urls for id extraction
-CDS_MATCHER = re.compile(
-    r'^(https?://)?cds(web)?\.cern\.ch/record/(\d+)',
-    flags=re.I)
+CDS_MATCHER = re.compile(r'^(https?://)?cds(web)?\.cern\.ch/record/(\d+)', flags=re.I)
 
 # Matches ADS urls for id extraction
-ADS_MATCHER = re.compile(
-    r'^(https?://)?adsabs\.harvard\.edu/abs/(.+)',
-    flags=re.I)
+ADS_MATCHER = re.compile(r'^(https?://)?adsabs\.harvard\.edu/abs/(.+)', flags=re.I)
 
 
 def _split_refextract_authors_str(authors_str):
@@ -66,11 +64,11 @@ def _split_refextract_authors_str(authors_str):
             author = six.text_type(author.decode('utf8', 'ignore'))
 
         # First clean the token.
-        author = re.sub(r'\(|\)', '', author, re.U)
+        author = re.sub(pattern=r'\(|\)', repl='', string=author, count=re.U)
         # Names usually start with characters.
-        author = re.sub(r'^[\W\d]+', '', author, re.U)
+        author = re.sub(pattern=r'^[\W\d]+', repl='', string=author, count=re.U)
         # Names should end with characters or dot.
-        author = re.sub(r'[^.\w]+$', '', author, re.U)
+        author = re.sub(pattern=r'[^.\w]+$', repl='', string=author, count=re.U)
 
         # If we have initials join them with the previous token.
         if RE_INITIALS_ONLY.match(author):
@@ -89,11 +87,7 @@ def _split_refextract_authors_str(authors_str):
     #  * ed might sneak in
     #  * many legacy refs look like 'X. and Somebody E.'
     #  * might miss lowercase initials
-    filters = [
-        lambda a: a == 'ed',
-        lambda a: a.startswith(','),
-        lambda a: len(a) == 1
-    ]
+    filters = [lambda a: a == 'ed', lambda a: a.startswith(','), lambda a: len(a) == 1]
     res = [r for r in res if all(not f(r) for f in filters)]
     return res
 
@@ -134,7 +128,7 @@ class ReferenceBuilder(object):
     RE_VALID_PUBNOTE = re.compile(r'.+,.+,.+(,.*)?')
     RE_ADDITIONAL_PUBNOTE = re.compile(
         r'Additional pubnote: ([\w\s\.-]+,[\w\.-]+,[\w\.-]+(?:,[\w\.-]+)?)\s*(?:/)?\s*',
-        re.UNICODE
+        re.UNICODE,
     )
 
     def __init__(self):
@@ -223,14 +217,18 @@ class ReferenceBuilder(object):
         self._ensure_reference_field('authors', [])
         if role is not None:
             inspire_role = 'editor' if role == 'ed.' else role
-            self.obj['reference']['authors'].append({
-                'full_name': normalized_name,
-                'inspire_role': inspire_role,
-            })
+            self.obj['reference']['authors'].append(
+                {
+                    'full_name': normalized_name,
+                    'inspire_role': inspire_role,
+                }
+            )
         else:
-            self.obj['reference']['authors'].append({
-                'full_name': normalized_name,
-            })
+            self.obj['reference']['authors'].append(
+                {
+                    'full_name': normalized_name,
+                }
+            )
 
     def set_pubnote(self, pubnote):
         """Parse pubnote and populate correct fields."""
@@ -262,8 +260,7 @@ class ReferenceBuilder(object):
         # splitting the report number.
         repno = repno or ''
         if is_arxiv(repno):
-            self._ensure_reference_field('arxiv_eprint',
-                                         normalize_arxiv(repno))
+            self._ensure_reference_field('arxiv_eprint', normalize_arxiv(repno))
         else:
             self._ensure_reference_field('report_numbers', [])
             if repno not in self.obj['reference']['report_numbers']:
@@ -292,16 +289,20 @@ class ReferenceBuilder(object):
                 self.obj['reference']['dois'].append(normalized_doi)
         elif idutils.is_handle(uid) and not skip_handle:
             self._ensure_reference_field('persistent_identifiers', [])
-            self.obj['reference']['persistent_identifiers'].append({
-                'schema': 'HDL',
-                'value': idutils.normalize_handle(uid),
-            })
+            self.obj['reference']['persistent_identifiers'].append(
+                {
+                    'schema': 'HDL',
+                    'value': idutils.normalize_handle(uid),
+                }
+            )
         elif idutils.is_urn(uid):
             self._ensure_reference_field('persistent_identifiers', [])
-            self.obj['reference']['persistent_identifiers'].append({
-                'schema': 'URN',
-                'value': uid,
-            })
+            self.obj['reference']['persistent_identifiers'].append(
+                {
+                    'schema': 'URN',
+                    'value': uid,
+                }
+            )
         elif self.RE_VALID_CNUM.match(uid):
             self._ensure_reference_field('publication_info', {})
             self.obj['reference']['publication_info']['cnum'] = uid
@@ -313,10 +314,12 @@ class ReferenceBuilder(object):
                 self.obj['reference']['external_system_identifiers'].append(cds_id_dict)
         elif is_ads_url(uid):
             self._ensure_reference_field('external_system_identifiers', [])
-            self.obj['reference']['external_system_identifiers'].append({
-                'schema': 'ADS',
-                'value': extract_ads_id(uid),
-            })
+            self.obj['reference']['external_system_identifiers'].append(
+                {
+                    'schema': 'ADS',
+                    'value': extract_ads_id(uid),
+                }
+            )
         else:
             # ``idutils.is_isbn`` is too strict in what it accepts.
             try:
@@ -382,7 +385,7 @@ class ReferenceBuilder(object):
         if not miscs:
             return
 
-        for (index, misc) in enumerate(miscs[:]):
+        for index, misc in enumerate(miscs[:]):
             pubnotes = self.RE_ADDITIONAL_PUBNOTE.findall(misc)
             if not pubnotes:
                 continue

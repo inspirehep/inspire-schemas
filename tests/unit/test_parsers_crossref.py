@@ -40,7 +40,7 @@ def get_parsed_from_file(filename):
     """A dictionary holding the parsed elements of the record."""
     path = get_test_suite_path('crossref', filename)
     with open(path) as f:
-        aps_dict = yaml.load(f)
+        aps_dict = yaml.full_load(f)
 
     return aps_dict
 
