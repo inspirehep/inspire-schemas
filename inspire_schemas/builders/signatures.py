@@ -23,6 +23,7 @@
 """Signatures builder class and related code."""
 
 from __future__ import absolute_import, division, print_function
+
 import re
 
 from inspire_utils.name import normalize_name
@@ -67,6 +68,7 @@ class SignatureBuilder(object):
             if value not in self.obj[field_name]:
                 self.obj[field_name].append(value)
 
+    @filter_empty_parameters
     def add_affiliation(self, value, curated_relation=None, record=None):
         """Add an affiliation.
 

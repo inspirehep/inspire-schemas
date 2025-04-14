@@ -24,6 +24,22 @@
 
 from inspire_schemas.builders.data import DataBuilder
 
+base_record = {
+    "titles": [
+            {
+              "title": "test",
+              "source": "HEPData"
+            }],
+    "_collections": [
+            "Data"
+          ],
+    "dois": [
+            {
+              "value": "10.17182/hepdata.127768",
+              "source": "HEPData",
+              "material": "data"
+            }]
+}
 
 def test_append_to():
     formdata = ''
@@ -38,92 +54,106 @@ def test_append_to():
 
 
 def test_add_abstract():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     abstract = "This is a test abstract."
     source = "Test Source"
     builder.add_abstract(abstract, source)
+    builder.validate_record()
     result = builder.record.get("abstracts")
     expected = [{"source": source, "value": abstract}]
     assert result == expected
 
 
 def test_add_author():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     author_data = {
         "full_name": "Smith, John",
         "affiliations": [{"value": "CERN"}],
         "emails": ["john.smith@example.org"],
     }
     builder.add_author(author_data)
+    builder.validate_record()
     result = builder.record.get("authors")
     expected = [author_data]
     assert result == expected
 
 
 def test_add_title():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     title = "A Great Title"
     subtitle = "An Even Better Subtitle"
     source = "Test Source"
     builder.add_title(title, subtitle, source)
+    builder.validate_record()
     result = builder.record.get("titles")
-    expected = [
+    expected = [base_record["titles"][0],
         {"source": source, "title": title, "subtitle": subtitle},
     ]
     assert result == expected
 
 
 def test_add_creation_date():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     creation_date = "2020-01-01"
     builder.add_creation_date(creation_date)
+    builder.validate_record()
     result = builder.record.get("creation_date")
     assert result == creation_date
 
 
 def test_add_doi():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     doi = "10.1234/example.doi"
     source = "Test Source"
     builder.add_doi(doi, source)
+    builder.validate_record()
     result = builder.record.get("dois")
-    expected = [{"source": source, "value": "10.1234/example.doi"}]
+    expected = [base_record["dois"][0], {"source": source, "value": "10.1234/example.doi"}]
     assert result == expected
 
 
 def test_add_keyword():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     keyword = "Physics"
     source = "Test Source"
     builder.add_keyword(keyword, source)
+    builder.validate_record()
     result = builder.record.get("keywords")
     expected = [{"source": source, "value": keyword}]
     assert result == expected
 
 
 def test_add_accelerator_experiment():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
     legacy_name = "FNAL-E-0900"
     experiment_record = {"$ref": "http://example.com/api/experiments/123"}
     builder.add_accelerator_experiment(legacy_name, record=experiment_record)
+    builder.validate_record()
     result = builder.record.get("accelerator_experiments")
     expected = [{"legacy_name": legacy_name, "record": experiment_record}]
     assert result == expected
 
 
 def test_add_literature():
-    builder = DataBuilder()
+    builder = DataBuilder(record=base_record)
 
     doi = "10.1234/example.doi"
     record = {"$ref": "http://example.com/api/literature/123"}
+    source = "testsource"
 
-    builder.add_literature(doi, record=record)
+    builder.add_literature(doi, record=record, source=source)
+    builder.validate_record()
 
     result = builder.record.get("literature")
     expected = [
         {
-            "doi": doi,
-            "record": record,
+            "doi":{
+                "source": "testsource",
+                "value":"10.1234/example.doi"
+            },
+            "record":{
+                "$ref":"http://example.com/api/literature/123"
+            }
         }
     ]
 

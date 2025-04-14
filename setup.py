@@ -237,7 +237,7 @@ def do_setup():
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,
-        version="61.6.6",
+        version="61.6.12",
     )
 
 

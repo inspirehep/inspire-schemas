@@ -76,11 +76,6 @@ def seminar_data():
 
 
 @pytest.fixture(scope='module')
-def job_data():
-    return load_json_file('jobs_example.json')
-
-
-@pytest.fixture(scope='module')
 def data_data():
     return load_json_file('data_example.json')
 
@@ -511,7 +506,7 @@ def test_data_builder(data_data):
 
     literatures = data_data['literature']
     for literature in literatures:
-        builder.add_literature(literature.get("doi"), literature.get('record'))
+        builder.add_literature(literature.get("doi", {}).get("value"), literature.get('record'), literature.get("doi", {}).get("source"))
     assert builder.record['literature'] == literatures
 
     urls = data_data['urls']

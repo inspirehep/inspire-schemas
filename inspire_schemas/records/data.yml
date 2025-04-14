@@ -513,5 +513,9 @@ properties:
         minItems: 1
         type: array
         uniqueItems: true
+required:
+- titles
+- dois
+- _collections
 title: A data record
 type: object

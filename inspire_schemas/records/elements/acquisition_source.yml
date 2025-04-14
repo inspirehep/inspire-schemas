@@ -55,12 +55,16 @@ properties:
 
             `beard`
                 when created after author disambiguation
+
+            `inspirehep`
+                when obtained through an inspirehep harvest
         enum:
         - submitter
         - oai
         - batchuploader
         - hepcrawl
         - beard
+        - inspirehep
         minLength: 1
         title: How the medata was obtained
         type: string

@@ -297,20 +297,26 @@ class DataBuilder(RecordBuilder):
         self._append_to('urls', entry)
 
     @filter_empty_parameters
-    def add_literature(self, doi=None, record=None):
+    def add_literature(self, doi=None, record=None, source=None):
         """Add literature.
 
         :param doi: doi of the literature
-        :type doi: dict
+        :type doi: str
 
         :param record: dictionary with ``$ref`` pointing to proper record.
         :type record: dict
+
+        :param source: source of the doi
+        :type source: str
         """
         literature_dict = {
             'record': record,
         }
 
         if doi:
-            literature_dict['doi'] = doi
+            if source:
+                literature_dict['doi'] = self._sourced_dict(source, value=doi)
+            else:
+                literature_dict['doi'] = {"value": doi}
 
         self._append_to('literature', literature_dict)

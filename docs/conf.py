@@ -25,10 +25,9 @@
 from __future__ import print_function
 
 import os
-import shutil
-from io import open
 
 from jsonschema2rst.parser_runner import run_parser
+
 
 from inspire_schemas import __version__
 
@@ -48,11 +47,11 @@ _generate_schemas_doc()
 if not os.path.exists('_build/html/_static'):
     os.makedirs('_build/html/_static')
 
-with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
-    changelog_fd.write(get_changelog(
-        project_dir='..',
-        bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
-    ))
+# with open('_build/html/_static/CHANGELOG.txt', 'w') as changelog_fd:
+#     changelog_fd.write(get_changelog(
+#         project_dir='..',
+#         bugtracker_url='https://github.com/inspirehep/inspire-schemas/issues/',
+#     ))
 
 
 # -- General configuration ------------------------------------------------
