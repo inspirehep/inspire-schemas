@@ -24,7 +24,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import contextlib
 import re
 
 from inspire_utils.name import normalize_name
@@ -128,11 +127,13 @@ class SignatureBuilder(object):
         Raises:
             SchemaUIDConflict: it UID and schema are not matching
         """
-        with contextlib.suppress(UnknownUIDSchema):
+        try:
+            uid, schema = author_id_normalize_and_schema(uid, schema)
+        except UnknownUIDSchema:
             # Explicit schema wasn't provided, and the UID is too little
             # to figure out the schema of it, this however doesn't mean
             # the UID is invalid
-            uid, schema = author_id_normalize_and_schema(uid, schema)
+            pass
 
         self._ensure_field('ids', [])
         self.obj['ids'] = [

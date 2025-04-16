@@ -27,6 +27,7 @@ from __future__ import absolute_import, division, print_function
 
 import json
 import os
+import sys
 
 from setuptools import find_packages, setup
 from setuptools.command import develop, install, sdist
@@ -71,10 +72,9 @@ def _resolve_json_schema(json_schema, path):
                 subschema_path = os.path.splitext(subschema_path)[0]
                 with open(subschema_path + '.yml', 'rb') as yaml_fd:
                     raw_data = yaml_fd.read()
-                data = yaml.full_load(raw_data)
+                data = yaml.load(raw_data) if sys.version_info[0] == 2 else yaml.full_load(raw_data)
                 data = _resolve_json_schema(
-                    data, os.path.join(path, os.path.dirname(json_schema[key]))
-                )
+                    data, os.path.join(path, os.path.dirname(json_schema[key])))
                 return data
             else:
                 json_schema[key] = _resolve_json_schema(json_schema[key], path)
@@ -86,9 +86,11 @@ def _yaml2json(yaml_file, json_file):
 
     with open(yaml_file, 'rb') as yaml_fd:
         raw_data = yaml_fd.read()
-    data = yaml.full_load(raw_data)
+    data = yaml.load(raw_data) if sys.version_info[0] == 2 else yaml.full_load(raw_data)
     with open(json_file, 'w') as json_fd:
-        json.dump(data, json_fd, indent=4, separators=(',', ': '), sort_keys=True)
+        json.dump(
+            data, json_fd, indent=4, separators=(',', ': '), sort_keys=True
+        )
         json_fd.write('\n')
 
     path = os.path.dirname(yaml_file)
@@ -123,7 +125,10 @@ def _generate_country_js_file():
 
     from inspire_schemas.utils import COUNTRY_CODE_TO_NAME
 
-    schemas_js_dir = os.path.join(os.path.dirname(__file__), 'js')
+    schemas_js_dir = os.path.join(
+        os.path.dirname(__file__),
+        'js'
+    )
     with open(os.path.join(schemas_js_dir, 'countryCodeToName.json'), 'w+') as json_fd:
         json.dump(COUNTRY_CODE_TO_NAME, json_fd)
 
@@ -139,7 +144,7 @@ def _generate_country_code(base_path):
         'minLength': 2,
         'title': 'ISO 3166-1 or 3166-3 alpha 2 country code',
         'type': 'string',
-        'enum': list(COUNTRY_CODE_TO_NAME.keys()),
+        'enum': list(COUNTRY_CODE_TO_NAME.keys())
     }
 
     with open(countries_code_path, 'w') as yaml_fd:
@@ -147,7 +152,10 @@ def _generate_country_code(base_path):
 
 
 def _generate_json_schemas():
-    schemas_dir = os.path.join(os.path.dirname(__file__), 'inspire_schemas/records')
+    schemas_dir = os.path.join(
+        os.path.dirname(__file__),
+        'inspire_schemas/records'
+    )
 
     _generate_country_code(schemas_dir)
 
@@ -157,26 +165,8 @@ def _generate_json_schemas():
 
 
 build_requires = [
-    'pyyaml>=6.0,<7.0',
-]
-
-install_requires=[
-    'bump2version~=0.0,<1; python_version == "2.7"',
-    'bump2version~=1.0; python_version >= "3"',
-    'bleach~=3.0,>=3.2.1',
-    'Unidecode~=1.0,>=1.0.22',
-    'jsonschema~=2.0,>=2.6.0',
-    'inspire-idutils==1.2.4; python_version == "2.7"',
-    'idutils~=1.2,>=1.2.1; python_version >= "3"',
-    'isbnid',
-    'inspire-utils',
-    'isodate',
-    'pyyaml>=6.0,<7.0',
-    'pytz',
-    'rfc3987',
-    'six',
-    'scrapy',
-    'pylatexenc',
+    'pyyaml==5.3.0; python_version == "2.7"',
+    'pyyaml>=6.0,<7.0; python_version >= "3"',
 ]
 
 tests_require = [
@@ -185,8 +175,9 @@ tests_require = [
     'isort~=4.0,>=4.3.0',
     'pytest-cache',
     'pytest-cov==2.6.1',
-    'pytest~=6.0,>=6.2.5',
-    'pytest-pep8',
+    'pytest~=4.6; python_version == "2.7"',
+    'pytest~=6.0,>=6.2.5; python_version >= "3"',
+    'pytest-pep8; python_version == "2.7"',
     'mock',
     'inspire-idutils==1.2.4; python_version == "2.7"',
     'idutils~=1.2,>=1.2.1; python_version >= "3"',
@@ -199,14 +190,9 @@ docs_require = [
     'Sphinx',
 ]
 
-dev_require = [
-    "pre-commit==3.5.0",
-]
-
 extras_require = {
     'docs': docs_require,
     'tests': tests_require,
-    'dev': dev_require,
     'tests:python_version=="2.7"': [
         'unicode-string-literal~=1.0,>=1.1',
     ],
@@ -226,7 +212,25 @@ def do_setup():
         description='Inspire JSON schemas and utilities to use them.',
         long_description="Inspire JSON schemas and utilities to use them.",
         long_description_content_type='text/plain',
-        install_requires=install_requires,
+        install_requires=[
+            'bump2version~=0.0,<1; python_version == "2.7"',
+            'bump2version~=1.0; python_version >= "3"',
+            'bleach~=3.0,>=3.2.1',
+            'Unidecode~=1.0,>=1.0.22',
+            'jsonschema~=2.0,>=2.6.0',
+            'inspire-idutils==1.2.4; python_version == "2.7"',
+            'idutils~=1.2,>=1.2.1; python_version >= "3"',
+            'isbnid',
+            'inspire-utils~=3.0,>=3.0.0',
+            'isodate',
+            'pyyaml==5.3.0; python_version == "2.7"',
+            'pyyaml>=6.0,<7.0; python_version >= "3"',
+            'pytz',
+            'rfc3987',
+            'six',
+            'scrapy',
+            'pylatexenc',
+        ],
         tests_require=tests_require,
         extras_require=extras_require,
         build_requires=build_requires,
@@ -234,7 +238,9 @@ def do_setup():
         name='inspire-schemas',
         package_data={'': ['*.json', 'CHANGELOG', 'AUTHORS']},
         packages=find_packages(),
-        setup_requires=['pyyaml>=6.0,<7.0'],
+        setup_requires=[
+            'pyyaml==5.3.0; python_version == "2.7"',
+            'pyyaml>=6.0,<7.0; python_version >= "3"'],
         url=URL,
         bugtracker_url=URL + '/issues/',
         zip_safe=False,

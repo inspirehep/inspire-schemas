@@ -8,12 +8,10 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - python: python3
-            pip: pip3
+        python: ['3.11','3.12','3.13']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,15 +23,24 @@ jobs:
           npm install buffer-shims
           npm install --global rollup
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
       - name: Install python dependencies
         run: |
-          ${{ matrix.pip }} install --user --upgrade pip
-          ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
+          python -m pip install --upgrade pip
+          python -m pip --no-cache-dir install -e .[tests,docs]
 
       - name: Show python dependencies
         run: |
-          ${{ matrix.python }} --version
-          ${{ matrix.pip }} freeze
+          python --version
+          pip freeze
+
+      - name: Build Test
+        run: |
+          ./tests/integration/test_setup.sh python
 
       - name: Run tests
         run: |

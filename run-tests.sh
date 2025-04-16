@@ -21,6 +21,7 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
+isort -rc -c --skip docs/conf.py -df **/*.py && \
 pytest \
     --cov=inspire_schemas \
     --cov-report=term-missing \
@@ -28,6 +29,4 @@ pytest \
     -vv \
     "$@" \
     tests \
-    inspire_schemas && \
-sphinx-build -qnN docs docs/_build/html && \
-sphinx-build -qnN -b doctest docs docs/_build/doctest
+    inspire_schemas

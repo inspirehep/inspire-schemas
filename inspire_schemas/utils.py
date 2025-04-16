@@ -46,7 +46,8 @@ from pytz import UnknownTimeZoneError, timezone
 from six.moves.urllib.parse import urlsplit
 from unidecode import unidecode
 
-from inspire_schemas.errors import SchemaKeyNotFound, SchemaNotFound, UnknownUIDSchema
+from inspire_schemas.errors import (SchemaKeyNotFound, SchemaNotFound,
+                                    UnknownUIDSchema)
 
 _schema_root_path = os.path.abspath(resource_filename(__name__, 'records'))
 

@@ -26,7 +26,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import contextlib
 import warnings
 
 import idutils
@@ -453,8 +452,12 @@ class LiteratureBuilder(RecordBuilder):
         if parent_isbn is not None:
             publication_item['parent_isbn'] = normalize_isbn(parent_isbn)
         if page_start and page_end:
-            with contextlib.suppress(TypeError, ValueError):
-                self.add_number_of_pages(int(page_end) - int(page_start) + 1)
+            try:
+                self.add_number_of_pages(
+                    int(page_end) - int(page_start) + 1
+                )
+            except (TypeError, ValueError):
+                pass
 
         self._append_to('publication_info', publication_item)
 

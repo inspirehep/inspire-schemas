@@ -24,14 +24,6 @@
 from __future__ import absolute_import, division, print_function
 
 import json
-import os
-from subprocess import call
-
-
-def test_json_files_are_created_from_yml_files():
-    cur_dir = os.path.dirname(__file__)
-    result = call('%s/test_setup.sh' % cur_dir)
-    assert result == 0
 
 
 def test_load_resolved_schema():
