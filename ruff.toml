@@ -20,7 +20,7 @@ select = [
     # flake8-pytest-style
     "PT",
 ]
-ignore = ["B904"]
+ignore = ["B904","SIM105"]
 
 
 [lint.pycodestyle]

@@ -39,7 +39,7 @@ from inspire_schemas.utils import (
 class ConferenceBuilder(RecordBuilder):
     """Conference record builder."""
 
-    _collections = ['Conferences']
+    _collections = ["Conferences"]
 
     @staticmethod
     def _prepare_url(value, description=None):
@@ -49,14 +49,14 @@ class ConferenceBuilder(RecordBuilder):
             value (str): URL itself
             description (str): URL description
         """
-        entry = {'value': value}
+        entry = {"value": value}
         if description:
-            entry['description'] = description
+            entry["description"] = description
         return entry
 
     def validate_record(self):
         """Validate the record in according to the hep schema."""
-        validate(self.record, 'conferences')
+        validate(self.record, "conferences")
 
     @filter_empty_parameters
     def add_private_note(self, value=None, source=None):
@@ -66,7 +66,7 @@ class ConferenceBuilder(RecordBuilder):
             value (str): Value of the note.
             source (str): Source of the information in this field
         """
-        self._append_to('_private_notes', source=source, value=value)
+        self._append_to("_private_notes", source=source, value=value)
 
     @filter_empty_parameters
     def add_acronym(self, acronym=None):
@@ -75,7 +75,7 @@ class ConferenceBuilder(RecordBuilder):
         Args:
             acronym (str): acronym if the conference, e.g. ``SUSY 2018``.
         """
-        self._append_to('acronyms', acronym)
+        self._append_to("acronyms", acronym)
 
     @filter_empty_parameters
     def add_address(
@@ -102,7 +102,7 @@ class ConferenceBuilder(RecordBuilder):
             state (str): state or province of the location.
         """
         self._append_to(
-            'addresses',
+            "addresses",
             cities=cities,
             country_code=country_code,
             latitude=latitude,
@@ -124,7 +124,7 @@ class ConferenceBuilder(RecordBuilder):
         """
         title_entry = self._sourced_dict(source, title=title, subtitle=subtitle)
 
-        self._append_to('alternative_titles', title_entry)
+        self._append_to("alternative_titles", title_entry)
 
     def set_cnum(self, cnum=None):
         """Add CNUM identifier
@@ -133,7 +133,7 @@ class ConferenceBuilder(RecordBuilder):
             cnum (str): CNUM id of this conference.
         """
         if cnum is not None:
-            self.record['cnum'] = cnum
+            self.record["cnum"] = cnum
 
     @filter_empty_parameters
     def add_contact(self, name=None, email=None, curated_relation=None, record=None):
@@ -147,7 +147,7 @@ class ConferenceBuilder(RecordBuilder):
             If string, then will be converted to proper dict.
         """
         self._append_to(
-            'contact_details',
+            "contact_details",
             name=name,
             email=email,
             curated_relation=curated_relation,
@@ -163,7 +163,7 @@ class ConferenceBuilder(RecordBuilder):
             schema (str): schema to which the identifier belongs.
         """
         self._append_to(
-            'external_system_identifiers',
+            "external_system_identifiers",
             schema=schema,
             value=value,
         )
@@ -181,7 +181,7 @@ class ConferenceBuilder(RecordBuilder):
                 source,
                 term=category,
             )
-            self._append_to('inspire_categories', category_dict)
+            self._append_to("inspire_categories", category_dict)
 
     @filter_empty_parameters
     def add_keyword(self, value, schema=None, source=None):
@@ -194,7 +194,7 @@ class ConferenceBuilder(RecordBuilder):
         """
         keyword_dict = self._sourced_dict(source, value=value, schema=schema)
 
-        self._append_to('keywords', keyword_dict)
+        self._append_to("keywords", keyword_dict)
 
     @filter_empty_parameters
     def add_public_note(self, value, source=None):
@@ -205,7 +205,7 @@ class ConferenceBuilder(RecordBuilder):
             source (str): source for the given notes.
         """
         self._append_to(
-            'public_notes',
+            "public_notes",
             self._sourced_dict(
                 source,
                 value=value,
@@ -222,7 +222,7 @@ class ConferenceBuilder(RecordBuilder):
         """
         serie_object = self._sourced_dict(name=name, number=number)
 
-        self._append_to('series', serie_object)
+        self._append_to("series", serie_object)
 
     @filter_empty_parameters
     def add_title(self, title, subtitle=None, source=None):
@@ -239,7 +239,7 @@ class ConferenceBuilder(RecordBuilder):
             subtitle=subtitle,
         )
 
-        self._append_to('titles', title_entry)
+        self._append_to("titles", title_entry)
 
     @filter_empty_parameters
     def add_url(self, value, description=None):
@@ -250,7 +250,7 @@ class ConferenceBuilder(RecordBuilder):
             description (str): description of the url.
         """
         entry = self._prepare_url(value, description)
-        self._append_to('urls', entry)
+        self._append_to("urls", entry)
 
     def set_closing_date(self, date=None):
         """Add conference closing date.
@@ -259,7 +259,7 @@ class ConferenceBuilder(RecordBuilder):
             date (str): conference closing date.
         """
         if date is not None:
-            self.record['closing_date'] = normalize_date(date=date)
+            self.record["closing_date"] = normalize_date(date=date)
 
     def set_core(self, core=True):
         """Set core flag.
@@ -267,7 +267,7 @@ class ConferenceBuilder(RecordBuilder):
         Args:
             core (bool): define a core article
         """
-        self.record['core'] = core
+        self.record["core"] = core
 
     def set_opening_date(self, date=None):
         """Add conference opening date.
@@ -276,7 +276,7 @@ class ConferenceBuilder(RecordBuilder):
             date (str): conference opening date.
         """
         if date is not None:
-            self.record['opening_date'] = normalize_date(date=date)
+            self.record["opening_date"] = normalize_date(date=date)
 
     def set_short_description(self, value, source=None):
         """Set a short descritpion
@@ -285,6 +285,6 @@ class ConferenceBuilder(RecordBuilder):
             value (str): the description to set.
             source (str): source of the description.
         """
-        self.record['short_description'] = self._sourced_dict(
+        self.record["short_description"] = self._sourced_dict(
             source=source, value=sanitize_html(value)
         )

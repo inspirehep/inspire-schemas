@@ -29,88 +29,88 @@ from inspire_schemas.readers.conference import ConferenceReader
 
 
 def test_city():
-    schema = load_schema('conferences')
-    subschema = schema['properties']['addresses']
+    schema = load_schema("conferences")
+    subschema = schema["properties"]["addresses"]
 
     record = {
-        'addresses': [
+        "addresses": [
             {
-                'cities': [
-                    'Tokyo',
+                "cities": [
+                    "Tokyo",
                 ],
             },
         ],
     }
-    assert validate(record['addresses'], subschema) is None
+    assert validate(record["addresses"], subschema) is None
 
-    expected = 'Tokyo'
+    expected = "Tokyo"
     result = ConferenceReader(record).city
 
     assert expected == result
 
 
 def test_city_when_no_city_in_first_address():
-    schema = load_schema('conferences')
-    subschema = schema['properties']['addresses']
+    schema = load_schema("conferences")
+    subschema = schema["properties"]["addresses"]
 
     record = {
-        'addresses': [
+        "addresses": [
             {
-                'place_name': 'Lido di Venezia',
+                "place_name": "Lido di Venezia",
             },
             {
-                'cities': [
-                    'Venice',
+                "cities": [
+                    "Venice",
                 ],
             },
         ],
     }
-    assert validate(record['addresses'], subschema) is None
+    assert validate(record["addresses"], subschema) is None
 
-    expected = 'Venice'
+    expected = "Venice"
     result = ConferenceReader(record).city
 
     assert expected == result
 
 
 def test_country():
-    schema = load_schema('conferences')
-    subschema = schema['properties']['addresses']
+    schema = load_schema("conferences")
+    subschema = schema["properties"]["addresses"]
 
     record = {
-        'addresses': [
-            {'country_code': 'JP'},
+        "addresses": [
+            {"country_code": "JP"},
         ],
     }
-    assert validate(record['addresses'], subschema) is None
+    assert validate(record["addresses"], subschema) is None
 
-    expected = 'jp'
+    expected = "jp"
     result = ConferenceReader(record).country
 
     assert expected == result
 
 
 def test_get_conference_end_date():
-    schema = load_schema('conferences')
-    subschema = schema['properties']['closing_date']
+    schema = load_schema("conferences")
+    subschema = schema["properties"]["closing_date"]
 
-    record = {'closing_date': '1999-11-19'}
-    assert validate(record['closing_date'], subschema) is None
+    record = {"closing_date": "1999-11-19"}
+    assert validate(record["closing_date"], subschema) is None
 
-    expected = '1999-11-19'
+    expected = "1999-11-19"
     result = ConferenceReader(record).end_date
 
     assert expected == result
 
 
 def test_conference_start_date():
-    schema = load_schema('conferences')
-    subschema = schema['properties']['opening_date']
+    schema = load_schema("conferences")
+    subschema = schema["properties"]["opening_date"]
 
-    record = {'opening_date': '1999-11-16'}
-    assert validate(record['opening_date'], subschema) is None
+    record = {"opening_date": "1999-11-16"}
+    assert validate(record["opening_date"], subschema) is None
 
-    expected = '1999-11-16'
+    expected = "1999-11-16"
     result = ConferenceReader(record).start_date
 
     assert expected == result

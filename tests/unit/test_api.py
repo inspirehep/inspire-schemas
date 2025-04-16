@@ -34,29 +34,29 @@ def test_validate_raises_if_no_schema_key():
         api.validate(data={})
 
 
-@mock.patch('inspire_schemas.utils.LocalRefResolver')
-@mock.patch('inspire_schemas.utils.load_schema')
-@mock.patch('inspire_schemas.utils.jsonschema_validate')
+@mock.patch("inspire_schemas.utils.LocalRefResolver")
+@mock.patch("inspire_schemas.utils.load_schema")
+@mock.patch("inspire_schemas.utils.jsonschema_validate")
 def test_validate_ok_if_schema_key(
     mock_jsonschema_validate, mock_load_schema, mock_localrefresolver
 ):
-    mydata = {'$schema': 'The Castle Anthrax'}
+    mydata = {"$schema": "The Castle Anthrax"}
     mock_load_schema.side_effect = lambda schema_name: schema_name
 
     utils.validate(mydata)
 
-    mock_load_schema.assert_called_with(schema_name=mydata['$schema'])
+    mock_load_schema.assert_called_with(schema_name=mydata["$schema"])
     mock_jsonschema_validate.assert_called()
 
 
-@mock.patch('inspire_schemas.utils.LocalRefResolver')
-@mock.patch('inspire_schemas.utils.load_schema')
-@mock.patch('inspire_schemas.utils.jsonschema_validate')
+@mock.patch("inspire_schemas.utils.LocalRefResolver")
+@mock.patch("inspire_schemas.utils.load_schema")
+@mock.patch("inspire_schemas.utils.jsonschema_validate")
 def test_validate_ok_if_schema_str(
     mock_jsonschema_validate, mock_load_schema, mock_localrefresolver
 ):
-    mydata = 'The Castle Anthrax'
-    schema_name = 'Sir Galad'
+    mydata = "The Castle Anthrax"
+    schema_name = "Sir Galad"
     mock_load_schema.side_effect = lambda schema_name: schema_name
 
     utils.validate(data=mydata, schema=schema_name)
@@ -67,12 +67,12 @@ def test_validate_ok_if_schema_str(
 
 def test_validate_raises_if_invalid_data():
     data = {
-        'foo': 'bar',
+        "foo": "bar",
     }
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'object',
-        'properties': {'foo': {'type': 'integer'}},
+        "$schema": "http://json-schema.org/schema#",
+        "type": "object",
+        "properties": {"foo": {"type": "integer"}},
     }
 
     with pytest.raises(ValidationError):
@@ -80,24 +80,24 @@ def test_validate_raises_if_invalid_data():
 
 
 def test_validate_accepts_partial_date():
-    data = '2017-02'
+    data = "2017-02"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'date',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "date",
     }
 
     utils.validate(data, schema)
 
 
 def test_validate_raises_on_invalid_date():
-    data = '2017-42'
+    data = "2017-42"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'date',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "date",
     }
 
     with pytest.raises(ValidationError):
@@ -105,12 +105,12 @@ def test_validate_raises_on_invalid_date():
 
 
 def test_validate_raises_on_invalid_date_time():
-    data = ('2017-42-12T12:34:56',)
+    data = ("2017-42-12T12:34:56",)
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'date-time',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "date-time",
     }
 
     with pytest.raises(ValidationError):
@@ -118,24 +118,24 @@ def test_validate_raises_on_invalid_date_time():
 
 
 def test_validate_accepts_valid_uri_reference():
-    data = '/foo/bar'
+    data = "/foo/bar"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'uri-reference',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "uri-reference",
     }
 
     utils.validate(data, schema)
 
 
 def test_validate_raises_on_invalid_uri_reference():
-    data = '@[]'
+    data = "@[]"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'uri-reference',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "uri-reference",
     }
 
     with pytest.raises(ValidationError):
@@ -143,24 +143,24 @@ def test_validate_raises_on_invalid_uri_reference():
 
 
 def test_validate_accepts_valid_orcid():
-    data = '0000-0002-3151-4077'
+    data = "0000-0002-3151-4077"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'orcid',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "orcid",
     }
 
     utils.validate(data, schema)
 
 
 def test_validate_raises_on_invalid_orcid():
-    data = '0000-0012-1234-5647'
+    data = "0000-0012-1234-5647"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'orcid',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "orcid",
     }
 
     with pytest.raises(ValidationError):
@@ -171,9 +171,9 @@ def test_validate_accepts_valid_timezone():
     data = "Europe/Zurich"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'timezone',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "timezone",
     }
 
     utils.validate(data, schema)
@@ -183,9 +183,9 @@ def test_validate_raises_on_invalid_timezone():
     data = "SevenKingdoms/KingsLanding"
 
     schema = {
-        '$schema': 'http://json-schema.org/schema#',
-        'type': 'string',
-        'format': 'timezone',
+        "$schema": "http://json-schema.org/schema#",
+        "type": "string",
+        "format": "timezone",
     }
 
     with pytest.raises(ValidationError):

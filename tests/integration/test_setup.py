@@ -27,7 +27,7 @@ import json
 
 
 def test_load_resolved_schema():
-    with open('inspire_schemas/records/hep.json', 'rb') as json_fd:
+    with open("inspire_schemas/records/hep.json", "rb") as json_fd:
         raw_data = json_fd.read()
     schema = json.loads(raw_data)
-    assert '$ref' not in schema['properties']['urls']['items']
+    assert "$ref" not in schema["properties"]["urls"]["items"]

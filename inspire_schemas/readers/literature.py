@@ -57,7 +57,7 @@ class LiteratureReader(object):
             'Probably not.'
 
         """
-        return get_value(self.record, 'abstracts.value[0]', default='')
+        return get_value(self.record, "abstracts.value[0]", default="")
 
     @property
     def arxiv_categories(self):
@@ -83,9 +83,7 @@ class LiteratureReader(object):
 
         """
         return list(
-            chain.from_iterable(
-                get_value(self.record, 'arxiv_eprints.categories', default=[])
-            )
+            chain.from_iterable(get_value(self.record, "arxiv_eprints.categories", default=[]))
         )
 
     @property
@@ -111,7 +109,7 @@ class LiteratureReader(object):
             '1612.08928'
 
         """
-        return get_value(self.record, 'arxiv_eprints.value[0]', default='')
+        return get_value(self.record, "arxiv_eprints.value[0]", default="")
 
     @property
     def collaborations(self):
@@ -126,7 +124,7 @@ class LiteratureReader(object):
             ['CMS']
 
         """
-        return get_value(self.record, 'collaborations.value', default=[])
+        return get_value(self.record, "collaborations.value", default=[])
 
     @property
     def document_types(self):
@@ -140,7 +138,7 @@ class LiteratureReader(object):
             ['article']
 
         """
-        return get_value(self.record, 'document_type', default=[])
+        return get_value(self.record, "document_type", default=[])
 
     @property
     def doi(self):
@@ -157,7 +155,7 @@ class LiteratureReader(object):
             '10.1016/0029-5582(61)90469-2'
 
         """
-        return get_value(self.record, 'dois.value[0]', default='')
+        return get_value(self.record, "dois.value[0]", default="")
 
     @property
     def inspire_categories(self):
@@ -176,7 +174,7 @@ class LiteratureReader(object):
             ['Experiment-HEP']
 
         """
-        return get_value(self.record, 'inspire_categories.term', default=[])
+        return get_value(self.record, "inspire_categories.term", default=[])
 
     @property
     def inspire_id(self):
@@ -190,7 +188,7 @@ class LiteratureReader(object):
             1507156
 
         """
-        return self.record['control_number']
+        return self.record["control_number"]
 
     @property
     def journal_title(self):
@@ -209,7 +207,7 @@ class LiteratureReader(object):
             'Phys.Part.Nucl.Lett.'
 
         """
-        return get_value(self.record, 'publication_info.journal_title[0]', default='')
+        return get_value(self.record, "publication_info.journal_title[0]", default="")
 
     @property
     def journal_issue(self):
@@ -228,7 +226,7 @@ class LiteratureReader(object):
             '5'
 
         """
-        return get_value(self.record, 'publication_info.journal_issue[0]', default='')
+        return get_value(self.record, "publication_info.journal_issue[0]", default="")
 
     @property
     def journal_volume(self):
@@ -247,7 +245,7 @@ class LiteratureReader(object):
             'D94'
 
         """
-        return get_value(self.record, 'publication_info.journal_volume[0]', default='')
+        return get_value(self.record, "publication_info.journal_volume[0]", default="")
 
     @property
     def language(self):
@@ -264,7 +262,7 @@ class LiteratureReader(object):
             'it'
 
         """
-        return get_value(self.record, 'languages[0]', default='en')
+        return get_value(self.record, "languages[0]", default="en")
 
     @property
     def keywords(self):
@@ -286,7 +284,7 @@ class LiteratureReader(object):
             ['CKM matrix']
 
         """
-        return get_value(self.record, 'keywords.value', default=[])
+        return get_value(self.record, "keywords.value", default=[])
 
     @property
     def method(self):
@@ -306,7 +304,7 @@ class LiteratureReader(object):
             'oai'
 
         """
-        return get_value(self.record, 'acquisition_source.method', default='')
+        return get_value(self.record, "acquisition_source.method", default="")
 
     @property
     def peer_reviewed(self):
@@ -320,7 +318,7 @@ class LiteratureReader(object):
             True
 
         """
-        return 'refereed' in self.record and self.record['refereed']
+        return "refereed" in self.record and self.record["refereed"]
 
     @property
     def publication_date(self):
@@ -334,7 +332,7 @@ class LiteratureReader(object):
             '2017'
 
         """
-        return str(get_value(self.record, 'publication_info.year[0]', default=''))
+        return str(get_value(self.record, "publication_info.year[0]", default=""))
 
     @property
     def is_published(self):
@@ -360,13 +358,12 @@ class LiteratureReader(object):
             True
 
         """
-        citeable = 'publication_info' in self.record and is_citeable(
-            self.record['publication_info']
+        citeable = "publication_info" in self.record and is_citeable(
+            self.record["publication_info"]
         )
 
-        submitted = 'dois' in self.record and any(
-            'journal_title' in el
-            for el in force_list(self.record.get('publication_info'))
+        submitted = "dois" in self.record and any(
+            "journal_title" in el for el in force_list(self.record.get("publication_info"))
         )
 
         return citeable or submitted
@@ -389,7 +386,7 @@ class LiteratureReader(object):
             'arxiv'
 
         """
-        return get_value(self.record, 'acquisition_source.source', default='')
+        return get_value(self.record, "acquisition_source.source", default="")
 
     @property
     def subtitle(self):
@@ -411,7 +408,7 @@ class LiteratureReader(object):
             'A mathematical exposition'
 
         """
-        return get_value(self.record, 'titles.subtitle[0]', default='')
+        return get_value(self.record, "titles.subtitle[0]", default="")
 
     @property
     def title(self):
@@ -433,7 +430,7 @@ class LiteratureReader(object):
             'The General Theory of Relativity'
 
         """
-        return get_value(self.record, 'titles.title[0]', default='')
+        return get_value(self.record, "titles.title[0]", default="")
 
     @staticmethod
     def get_page_artid_for_publication_info(publication_info, separator):
@@ -453,19 +450,17 @@ class LiteratureReader(object):
 
         """
 
-        if 'page_start' in publication_info and 'page_end' in publication_info:
-            page_start = publication_info['page_start']
-            page_end = publication_info['page_end']
-            return text_type('{}{}{}').format(
-                page_start, text_type(separator), page_end
-            )
+        if "page_start" in publication_info and "page_end" in publication_info:
+            page_start = publication_info["page_start"]
+            page_end = publication_info["page_end"]
+            return text_type("{}{}{}").format(page_start, text_type(separator), page_end)
 
-        elif 'artid' in publication_info:
-            return publication_info['artid']
+        elif "artid" in publication_info:
+            return publication_info["artid"]
 
-        return ''
+        return ""
 
-    def get_page_artid(self, separator='-'):
+    def get_page_artid(self, separator="-"):
         """Return the page range or the article id of a record.
 
         Args:
@@ -484,7 +479,5 @@ class LiteratureReader(object):
             '054021'
 
         """
-        publication_info = get_value(self.record, 'publication_info[0]', default={})
-        return LiteratureReader.get_page_artid_for_publication_info(
-            publication_info, separator
-        )
+        publication_info = get_value(self.record, "publication_info[0]", default={})
+        return LiteratureReader.get_page_artid_for_publication_info(publication_info, separator)
