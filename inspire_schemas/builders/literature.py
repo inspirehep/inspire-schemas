@@ -30,6 +30,7 @@ import warnings
 
 import idutils
 from inspire_utils.date import normalize_date
+from inspire_utils.isbn import normalize_isbn
 from six import python_2_unicode_compatible, string_types, text_type
 
 from inspire_schemas.builders.builder import RecordBuilder
@@ -38,7 +39,6 @@ from inspire_schemas.utils import (
     filter_empty_parameters,
     get_license_from_url,
     normalize_collaboration,
-    normalize_isbn,
     validate,
 )
 
