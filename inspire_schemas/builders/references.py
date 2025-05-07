@@ -27,11 +27,12 @@ from __future__ import absolute_import, division, print_function
 import re
 
 import idutils
+import isbnlib
 import six
 from inspire_utils.date import normalize_date
 from inspire_utils.name import normalize_name
 from inspire_utils.record import get_value
-from isbn import ISBN
+from inspire_utils.isbn import normalize_isbn
 
 from inspire_schemas.utils import (
     convert_old_publication_info_to_new,
@@ -321,12 +322,11 @@ class ReferenceBuilder(object):
                 }
             )
         else:
-            # ``idutils.is_isbn`` is too strict in what it accepts.
-            try:
-                isbn = str(ISBN(uid))
+            if isbnlib.is_isbn10(uid) or isbnlib.is_isbn13(uid):
+                isbn =  normalize_isbn(uid)
                 self._ensure_reference_field('isbn', {})
                 self.obj['reference']['isbn'] = isbn
-            except Exception:
+            else:
                 raise ValueError('Unrecognized uid type')
 
     def add_collaboration(self, collaboration):
