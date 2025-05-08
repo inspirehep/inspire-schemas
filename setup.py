@@ -172,7 +172,6 @@ tests_require = [
     "mock",
     'inspire-idutils==1.2.4; python_version == "2.7"',
     'idutils~=1.2,>=1.2.1; python_version >= "3"',
-    "isbnid",
     "deepdiff",
 ]
 
@@ -208,8 +207,7 @@ def do_setup():
             "jsonschema~=2.0,>=2.6.0",
             'inspire-idutils==1.2.4; python_version == "2.7"',
             'idutils~=1.2,>=1.2.1; python_version >= "3"',
-            "isbnid",
-            "inspire-utils~=3.0,>=3.0.0",
+            "inspire-utils~=3.0,>=3.0.65",
             "isodate",
             'pyyaml==5.3.0; python_version == "2.7"',
             'pyyaml>=6.0,<7.0; python_version >= "3"',
@@ -233,7 +231,7 @@ def do_setup():
         url=URL,
         bugtracker_url=URL + "/issues/",
         zip_safe=False,
-        version="61.6.13",
+        version="61.6.14",
     )
 
 
