@@ -20,17 +20,6 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10.14.0
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install npm dependencies
-        run: |
-          npm install buffer-shims
-          npm install --global rollup
-
       - name: Configure git
         shell: bash
         run: |
@@ -76,6 +65,17 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.14.0
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install npm dependencies
+        run: |
+          npm install buffer-shims
+          npm install --global rollup
 
       - name: Install python dependencies
         run: |
