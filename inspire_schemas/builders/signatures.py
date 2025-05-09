@@ -78,38 +78,36 @@ class SignatureBuilder(object):
             record (dict): affiliation JSON reference
         """
         if value:
-            affiliation = {'value': value}
+            affiliation = {"value": value}
             if record:
-                affiliation['record'] = record
+                affiliation["record"] = record
             if curated_relation is not None:
-                affiliation['curated_relation'] = curated_relation
-            self._ensure_list_field('affiliations', affiliation)
+                affiliation["curated_relation"] = curated_relation
+            self._ensure_list_field("affiliations", affiliation)
 
     @filter_empty_parameters
     def add_alternative_name(self, alternative_name):
-        self._ensure_list_field('alternative_names', alternative_name)
+        self._ensure_list_field("alternative_names", alternative_name)
 
     @filter_empty_parameters
     def add_credit_role(self, credit_role):
-        self._ensure_list_field('credit_roles', credit_role)
+        self._ensure_list_field("credit_roles", credit_role)
 
     @filter_empty_parameters
     def add_email(self, email):
-        self._ensure_list_field('emails', email)
+        self._ensure_list_field("emails", email)
 
     @filter_empty_parameters
     def set_full_name(self, full_name):
-        self._ensure_field('full_name', normalize_name(full_name))
+        self._ensure_field("full_name", normalize_name(full_name))
 
     @filter_empty_parameters
     def _add_uid(self, uid, schema):
-        self._ensure_list_field('ids', {'value': uid, 'schema': schema})
+        self._ensure_list_field("ids", {"value": uid, "schema": schema})
 
     @filter_empty_parameters
     def add_affiliations_identifiers(self, uid, schema):
-        self._ensure_list_field(
-            'affiliations_identifiers', {'value': uid, 'schema': schema}
-        )
+        self._ensure_list_field("affiliations_identifiers", {"value": uid, "schema": schema})
 
     @filter_empty_parameters
     def set_uid(self, uid, schema=None):
@@ -135,30 +133,28 @@ class SignatureBuilder(object):
             # the UID is invalid
             pass
 
-        self._ensure_field('ids', [])
-        self.obj['ids'] = [
-            id_ for id_ in self.obj['ids'] if id_.get('schema') != schema
-        ]
+        self._ensure_field("ids", [])
+        self.obj["ids"] = [id_ for id_ in self.obj["ids"] if id_.get("schema") != schema]
         self._add_uid(uid, schema)
 
     @filter_empty_parameters
     def add_inspire_role(self, inspire_role):
-        self._ensure_list_field('inspire_roles', inspire_role)
+        self._ensure_list_field("inspire_roles", inspire_role)
 
     @filter_empty_parameters
     def add_raw_affiliation(self, raw_affiliation, source=None):
-        ror_pattern = re.compile(r'https:\/\/ror\.org\/0\w{6}\d{2}')
+        ror_pattern = re.compile(r"https:\/\/ror\.org\/0\w{6}\d{2}")
         if ror_pattern.search(raw_affiliation):
-            self.add_affiliations_identifiers(ror_pattern.search(raw_affiliation).group(0), 'ROR')
-            raw_affiliation = re.sub(ror_pattern, '', raw_affiliation)
-        raw_aff_field = {'value': raw_affiliation}
+            self.add_affiliations_identifiers(ror_pattern.search(raw_affiliation).group(0), "ROR")
+            raw_affiliation = re.sub(ror_pattern, "", raw_affiliation)
+        raw_aff_field = {"value": raw_affiliation}
         if source:
-            raw_aff_field['source'] = source
-        self._ensure_list_field('raw_affiliations', raw_aff_field)
+            raw_aff_field["source"] = source
+        self._ensure_list_field("raw_affiliations", raw_aff_field)
 
     @filter_empty_parameters
     def set_record(self, record):
-        self.obj['record'] = record
+        self.obj["record"] = record
 
     def curate(self):
-        self.obj['curated_relation'] = True
+        self.obj["curated_relation"] = True
