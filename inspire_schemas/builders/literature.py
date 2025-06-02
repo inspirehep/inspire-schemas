@@ -28,8 +28,8 @@ from __future__ import absolute_import, division, print_function
 
 import warnings
 
-import idutils
 import six
+from idutils import normalize_doi
 from inspire_utils.date import normalize_date
 from inspire_utils.isbn import normalize_isbn
 from six import python_2_unicode_compatible, string_types, text_type
@@ -142,7 +142,7 @@ class LiteratureBuilder(RecordBuilder):
             return
 
         try:
-            doi = idutils.normalize_doi(doi)
+            doi = normalize_doi(doi)
         except AttributeError:
             return
 

@@ -26,9 +26,9 @@ from __future__ import absolute_import, division, print_function
 
 import re
 
-import idutils
 import isbnlib
 import six
+from idutils import is_doi, is_handle, is_urn, normalize_doi, normalize_handle
 from inspire_utils.date import normalize_date
 from inspire_utils.isbn import normalize_isbn
 from inspire_utils.name import normalize_name
@@ -283,20 +283,20 @@ class ReferenceBuilder(object):
         uid = uid or ""
         if is_arxiv(uid):
             self._ensure_reference_field("arxiv_eprint", normalize_arxiv(uid))
-        elif idutils.is_doi(uid):
+        elif is_doi(uid):
             self._ensure_reference_field("dois", [])
-            normalized_doi = idutils.normalize_doi(uid)
+            normalized_doi = normalize_doi(uid)
             if normalized_doi not in self.obj["reference"]["dois"]:
                 self.obj["reference"]["dois"].append(normalized_doi)
-        elif idutils.is_handle(uid) and not skip_handle:
+        elif is_handle(uid) and not skip_handle:
             self._ensure_reference_field("persistent_identifiers", [])
             self.obj["reference"]["persistent_identifiers"].append(
                 {
                     "schema": "HDL",
-                    "value": idutils.normalize_handle(uid),
+                    "value": normalize_handle(uid),
                 }
             )
-        elif idutils.is_urn(uid):
+        elif is_urn(uid):
             self._ensure_reference_field("persistent_identifiers", [])
             self.obj["reference"]["persistent_identifiers"].append(
                 {
