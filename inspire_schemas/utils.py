@@ -28,6 +28,7 @@ import copy
 import json
 import os
 import re
+import sys
 from collections import defaultdict
 from functools import partial, wraps
 
@@ -741,7 +742,10 @@ def load_schema(schema_name, resolved=False, _cache={}):  # noqa: B006
     return schema_data
 
 
-inspire_format_checker = draft4_format_checker
+if sys.version_info[0] < 3:
+    inspire_format_checker = draft4_format_checker
+else:
+    inspire_format_checker = Draft4Validator.FORMAT_CHECKER
 inspire_format_checker.checks("date", raises=ValueError)(PartialDate.loads)
 inspire_format_checker.checks("uri-reference", raises=ValueError)(
     partial(rfc3987.parse, rule="URI_reference")
