@@ -70,7 +70,7 @@ def test_validate_raises_if_invalid_data():
         "foo": "bar",
     }
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "object",
         "properties": {"foo": {"type": "integer"}},
     }
@@ -83,7 +83,7 @@ def test_validate_accepts_partial_date():
     data = "2017-02"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "date",
     }
@@ -95,7 +95,7 @@ def test_validate_raises_on_invalid_date():
     data = "2017-42"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "date",
     }
@@ -108,7 +108,7 @@ def test_validate_raises_on_invalid_date_time():
     data = ("2017-42-12T12:34:56",)
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "date-time",
     }
@@ -121,7 +121,7 @@ def test_validate_accepts_valid_uri_reference():
     data = "/foo/bar"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "uri-reference",
     }
@@ -133,7 +133,7 @@ def test_validate_raises_on_invalid_uri_reference():
     data = "@[]"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "uri-reference",
     }
@@ -146,7 +146,7 @@ def test_validate_accepts_valid_orcid():
     data = "0000-0002-3151-4077"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "orcid",
     }
@@ -158,7 +158,7 @@ def test_validate_raises_on_invalid_orcid():
     data = "0000-0012-1234-5647"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "orcid",
     }
@@ -171,7 +171,7 @@ def test_validate_accepts_valid_timezone():
     data = "Europe/Zurich"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "timezone",
     }
@@ -183,7 +183,7 @@ def test_validate_raises_on_invalid_timezone():
     data = "SevenKingdoms/KingsLanding"
 
     schema = {
-        "$schema": "http://json-schema.org/draft-04/schema#",
+        "$schema": "http://json-schema.org/schema#",
         "type": "string",
         "format": "timezone",
     }
