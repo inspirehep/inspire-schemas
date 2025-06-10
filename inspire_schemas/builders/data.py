@@ -28,7 +28,7 @@ from __future__ import absolute_import, division, print_function
 
 import warnings
 
-from idutils import normalize_doi
+import idutils
 from inspire_utils.date import normalize_date
 from six import python_2_unicode_compatible, text_type
 
@@ -222,7 +222,7 @@ class DataBuilder(RecordBuilder):
             return
 
         try:
-            doi = normalize_doi(doi)
+            doi = idutils.normalize_doi(doi)
         except AttributeError:
             return
 
