@@ -158,6 +158,14 @@ def _generate_json_schemas():
 build_requires = [
     'pyyaml==5.3.0; python_version == "2.7"',
     'pyyaml>=6.0,<7.0; python_version >= "3"',
+    'inspire-idutils==1.2.4; python_version == "2.7"',
+    'idutils~=1.2,>=1.2.1; python_version >= "3"',
+    "rfc3987",
+    "six",
+    "bleach",
+    "inspire-utils~=3.0,>=3.0.65",
+    "jsonschema~=2.0,>=2.6.0",
+    "pytz",
 ]
 
 tests_require = [
@@ -224,10 +232,7 @@ def do_setup():
         name="inspire-schemas",
         package_data={"": ["*.json", "CHANGELOG", "AUTHORS"]},
         packages=find_packages(),
-        setup_requires=[
-            'pyyaml==5.3.0; python_version == "2.7"',
-            'pyyaml>=6.0,<7.0; python_version >= "3"',
-        ],
+        setup_requires=build_requires,
         url=URL,
         bugtracker_url=URL + "/issues/",
         zip_safe=False,
