@@ -98,9 +98,13 @@ jobs:
           user: __token__
           password: ${{ secrets.pypi_password }}
 
+      - name: Generate schema JSON
+        run: |
+          python -c "import setup; setup._generate_country_js_file(); setup._generate_json_schemas()"
+
       - name: Build npm package
         run: |
-          npm install --dev
+          npm install --only=dev
           npm run build
 
       - name: Publish npm package
