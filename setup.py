@@ -164,7 +164,8 @@ build_requires = [
     "six",
     "bleach",
     "inspire-utils~=3.0,>=3.0.65",
-    "jsonschema~=2.0,>=2.6.0",
+    'jsonschema~=2.0,>=2.6.0; python_version == "2.7"',
+    'jsonschema~=4.0,>=4.24.0; python_version >= "3"',
     "pytz",
 ]
 
@@ -212,7 +213,8 @@ def do_setup():
         install_requires=[
             "bleach~=3.0,>=3.2.1",
             "Unidecode~=1.0,>=1.0.22",
-            "jsonschema~=2.0,>=2.6.0",
+            'jsonschema~=2.0,>=2.6.0; python_version == "2.7"',
+            'jsonschema~=4.0,>=4.24.0; python_version >= "3"',
             'inspire-idutils==1.2.4; python_version == "2.7"',
             'idutils~=1.2,>=1.2.1; python_version >= "3"',
             "inspire-utils~=3.0,>=3.0.65",

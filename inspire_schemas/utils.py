@@ -28,6 +28,7 @@ import copy
 import json
 import os
 import re
+import sys
 from collections import defaultdict
 from functools import partial, wraps
 
@@ -38,7 +39,13 @@ from bleach.linkifier import LinkifyFilter
 from bleach.sanitizer import Cleaner
 from idutils import is_isni
 from inspire_utils.date import PartialDate
-from jsonschema import Draft4Validator, RefResolver, draft4_format_checker
+from jsonschema import (
+    Draft4Validator,
+    RefResolver,
+    ValidationError,
+    draft4_format_checker,
+    validators,
+)
 from jsonschema import validate as jsonschema_validate
 from pkg_resources import resource_filename
 from pytz import UnknownTimeZoneError, timezone
@@ -741,7 +748,32 @@ def load_schema(schema_name, resolved=False, _cache={}):  # noqa: B006
     return schema_data
 
 
-inspire_format_checker = draft4_format_checker
+def _make_hashable(item):
+    if isinstance(item, (str, int, float, bool, type(None))):
+        return item
+    return json.dumps(item, sort_keys=True, separators=(",", ":"))
+
+
+def fast_unique(validator, unique_items_value, instance, schema):
+    should_check_unique_items = bool(unique_items_value) and validator.is_type(instance, "array")
+    if not should_check_unique_items:
+        return
+
+    seen = set()
+    for item in instance:
+        key = _make_hashable(item)
+        if key in seen:
+            yield ValidationError("%r has non-unique elements" % (instance,))
+            return
+        seen.add(key)
+
+
+FastDraft4Validator = validators.extend(Draft4Validator, {"uniqueItems": fast_unique})
+
+if sys.version_info[0] < 3:
+    inspire_format_checker = draft4_format_checker
+else:
+    inspire_format_checker = FastDraft4Validator.FORMAT_CHECKER
 inspire_format_checker.checks("date", raises=ValueError)(PartialDate.loads)
 inspire_format_checker.checks("uri-reference", raises=ValueError)(
     partial(rfc3987.parse, rule="URI_reference")
@@ -796,11 +828,20 @@ def validate(data, schema=None):
     """
     schema = _load_schema_for_record(data, schema)
 
+    if sys.version_info[0] < 3:
+        return jsonschema_validate(
+            instance=data,
+            schema=schema,
+            resolver=LocalRefResolver.from_schema(schema),
+            format_checker=inspire_format_checker,
+        )
+
     return jsonschema_validate(
         instance=data,
         schema=schema,
         resolver=LocalRefResolver.from_schema(schema),
         format_checker=inspire_format_checker,
+        cls=FastDraft4Validator,
     )
 
 
@@ -824,8 +865,9 @@ def get_validation_errors(data, schema=None):
         jsonschema.SchemaError: if the schema is invalid.
     """
     schema = _load_schema_for_record(data, schema)
+    Validator = Draft4Validator if sys.version_info[0] < 3 else FastDraft4Validator
 
-    errors = Draft4Validator(
+    errors = Validator(
         schema,
         resolver=LocalRefResolver.from_schema(schema),
         format_checker=inspire_format_checker,
