@@ -8,4 +8,6 @@ COPY . .
 RUN python -m pip install --user --upgrade pip
 RUN python -m pip --no-cache-dir install --user -e .[tests,docs]
 
+ENV PATH="/root/.local/bin:${PATH}"
+
 CMD ["/bin/bash"]
