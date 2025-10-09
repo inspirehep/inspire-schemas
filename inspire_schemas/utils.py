@@ -361,8 +361,13 @@ _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
 
 EMPTIES = [None, "", [], {}]
 
+if sys.version_info[0] < 3:
+    _TAGS = ["a", "b", "br", "div", "em", "i", "li", "ol", "p", "strong", "ul"]
+else:
+    _TAGS = {"a", "b", "br", "div", "em", "i", "li", "ol", "p", "strong", "ul"}
+
 _BLEACH_CONFIG = {
-    "tags": ["a", "b", "br", "div", "em", "i", "li", "ol", "p", "strong", "ul"],
+    "tags": _TAGS,
     "attributes": {"a": ["href", "title"]},
     "strip": True,
     "filters": [partial(LinkifyFilter, callbacks=[])],
