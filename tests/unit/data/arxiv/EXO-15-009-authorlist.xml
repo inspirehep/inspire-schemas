@@ -1,0 +1,42 @@
+%auto-ignore
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE collaborationauthorlist SYSTEM "authors.dtd">
+<collaborationauthorlist
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:cal="http://www.slac.stanford.edu/spires/hepnames/authors_xml/"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <cal:creationdate>2017-03-21_22:01</cal:creationdate>
+  <cal:collaboration>
+    <foaf:name>CMS</foaf:name>
+    <cal:experimentNumber></cal:experimentNumber>
+  </cal:collaboration>
+  <cal:organizations>
+    <foaf:Organization id="o1">
+      <cal:orgDomain rdf:resource="http://yerphi.am"/>
+      <foaf:name>Yerevan Physics Institute, Yerevan, Armenia</foaf:name>
+      <cal:orgName source="spiresICN">Yerevan Phys. Inst.</cal:orgName>
+      <cal:orgName source="InstId">780</cal:orgName>
+      <cal:orgStatus>CMS</cal:orgStatus>
+      <cal:orgAddress></cal:orgAddress>
+      <cal:orgStatus>member</cal:orgStatus>
+    </foaf:Organization>
+  </cal:organizations>
+  <cal:authors>
+    <foaf:Person>
+      <foaf:name>Albert M. Sirunyan</foaf:name>
+      <foaf:givenName>Albert M.</foaf:givenName>
+      <foaf:familyName>Sirunyan</foaf:familyName>
+      <cal:authorNameNative lang=""></cal:authorNameNative>
+      <cal:authorSuffix></cal:authorSuffix>
+      <cal:authorStatus></cal:authorStatus>
+      <cal:authorNamePaper>A.M. Sirunyan</cal:authorNamePaper>
+      <cal:authorAffiliations>
+        <cal:authorAffiliation organizationid="o1" connection="" />
+      </cal:authorAffiliations>
+      <cal:authorIDs>
+        <cal:authorID source="INSPIRE">INSPIRE-00312131</cal:authorID>
+        <cal:authorID source="CCID">432142</cal:authorID>
+      </cal:authorIDs>
+    </foaf:Person>
+  </cal:authors>
+</collaborationauthorlist>

@@ -29,6 +29,7 @@ from __future__ import (
 
 import re
 
+import six
 from inspire_utils.name import normalize_name
 from scrapy.selector import Selector
 from six import binary_type
@@ -96,8 +97,10 @@ class AuthorXMLParser(object):
                 "./authorAffiliations/authorAffiliation/@organizationid"
             ).getall():
                 orgName = content.xpath(
-                    'string(//organizations/Organization[@id="{}"]/orgName[@source="spiresICN"'
-                    'or @source="INSPIRE" and text()!="" ]/text())'.format(affiliation)
+                    six.ensure_text(
+                        'string(//organizations/Organization[@id="{}"]/orgName[@source="spiresICN"'
+                        'or @source="INSPIRE" and text()!="" ]/text())'
+                    ).format(affiliation)
                 ).get()
 
                 cleaned_org_name = re.sub(remove_new_line_regex, "", orgName)
@@ -108,12 +111,16 @@ class AuthorXMLParser(object):
                 # using the organization ids from author
                 for value, source in zip(
                     content.xpath(
-                        '//organizations/Organization[@id="{}"]/orgName[@source="ROR"'
-                        'or @source="GRID" and text()!=""]/text()'.format(affiliation)
+                        six.ensure_text(
+                            '//organizations/Organization[@id="{}"]/orgName[@source="ROR"'
+                            'or @source="GRID" and text()!=""]/text()'
+                        ).format(affiliation)
                     ).getall(),
                     content.xpath(
-                        '//organizations/Organization[@id="{}"]/orgName[@source="ROR"'
-                        'or @source="GRID" and text()!=""]/@source'.format(affiliation)
+                        six.ensure_text(
+                            '//organizations/Organization[@id="{}"]/orgName[@source="ROR"'
+                            'or @source="GRID" and text()!=""]/@source'
+                        ).format(affiliation)
                     ).getall(),
                 ):
                     source = re.sub(remove_new_line_regex, "", source)
@@ -128,7 +135,7 @@ class AuthorXMLParser(object):
 
                     affiliations_identifiers.append([source, value])
 
-            name = "{}, {}".format(
+            name = six.ensure_text("{}, {}").format(
                 author.xpath(".//familyName/text()").get(),
                 author.xpath(".//givenName/text()").get(),
             )
