@@ -58,9 +58,13 @@ enum:
 - Astronomy experiments|Gravitational lensing/Dark matter
 - Non-experimental
 - Non-experimental|Data Analysis
+- Non-experimental|Feynman Diagram Calculation
+- Non-experimental|Feynman Diagram Calculation|Higher-Order
 - Non-experimental|Simulation tools
+- Non-experimental|Simulation tools|BSM Models
 - Non-experimental|Simulation tools|Detector Simulation
 - Non-experimental|Simulation tools|Event Simulation
+- Non-experimental|Simulation tools|General Purpose
 - Non-experimental|Parton Distribution Fits
 - Non-experimental|Lattice Gauge Theory
 - Non-experimental|Neutrino Physics
