@@ -8,6 +8,12 @@
       "name": "Czechoslovakia, Czechoslovak Socialist Republic",
       "numeric": "200",
       "withdrawal_date": "1993-06-15"
+    },
+    {
+      "alpha_2": "XK",
+      "alpha_3": "XKK",
+      "common_name": "Kosovo",
+      "name": "Republic of Kosovo"
     }
   ]
 }
