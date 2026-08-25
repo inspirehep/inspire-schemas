@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2017, 2024 CERN.
@@ -24,13 +23,10 @@
 
 """Data builder class and related code."""
 
-from __future__ import absolute_import, division, print_function
-
 import warnings
 
 import idutils
 from inspire_utils.date import normalize_date
-from six import python_2_unicode_compatible, text_type
 
 from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.utils import (
@@ -49,7 +45,6 @@ def key_already_there(element, elements):
     return any(element["key"] == existing_element["key"] for existing_element in elements)
 
 
-@python_2_unicode_compatible
 class DataBuilder(RecordBuilder):
     """Data record builder."""
 
@@ -60,7 +55,7 @@ class DataBuilder(RecordBuilder):
 
     def __str__(self):
         """Print the current record."""
-        return text_type(self.record)
+        return str(self.record)
 
     def validate_record(self):
         """Validate the record in according to the data schema."""

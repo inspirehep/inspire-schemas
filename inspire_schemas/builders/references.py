@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2017 CERN.
@@ -22,13 +21,10 @@
 
 """Reference builder class and related code."""
 
-from __future__ import absolute_import, division, print_function
-
 import re
 
 import idutils
 import isbnlib
-import six
 from inspire_utils.date import normalize_date
 from inspire_utils.isbn import normalize_isbn
 from inspire_utils.name import normalize_name
@@ -61,8 +57,8 @@ def _split_refextract_authors_str(authors_str):
 
     current = ""
     for author in author_seq:
-        if not isinstance(author, six.text_type):
-            author = six.text_type(author.decode("utf8", "ignore"))
+        if not isinstance(author, str):
+            author = author.decode("utf8", "ignore")
 
         # First clean the token.
         author = re.sub(pattern=r"\(|\)", repl="", string=author, count=re.U)
@@ -234,7 +230,7 @@ class ReferenceBuilder(object):
     def set_pubnote(self, pubnote):
         """Parse pubnote and populate correct fields."""
         if "publication_info" in self.obj.get("reference", {}):
-            self.add_misc(six.ensure_text("Additional pubnote: {}".format(pubnote)))
+            self.add_misc("Additional pubnote: {}".format(pubnote))
             return
 
         if self.RE_VALID_PUBNOTE.match(pubnote):

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2019 CERN.
@@ -23,8 +22,6 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Readers to facilitate the reading of schema-compliant records."""
-
-from __future__ import absolute_import, division, print_function
 
 from .conference import ConferenceReader  # noqa
 from .literature import LiteratureReader  # noqa

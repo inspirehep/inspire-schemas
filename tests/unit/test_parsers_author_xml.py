@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2024 CERN.
@@ -20,15 +19,8 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-)
-
 import io
 
-import six
 from fixtures import get_test_suite_path
 
 from inspire_schemas.parsers.author_xml import AuthorXMLParser
@@ -38,7 +30,7 @@ def get_parser_by_file(filename):
     """A ArxivParser instanciated on an APS article."""
     path = get_test_suite_path("arxiv", filename)
     with io.open(path, encoding="utf-8") as f:
-        arxiv_content = six.ensure_text(f.read())
+        arxiv_content = f.read()
 
     return AuthorXMLParser(arxiv_content)
 
