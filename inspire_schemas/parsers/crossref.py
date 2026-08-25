@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2024 CERN.
@@ -20,8 +19,6 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 """Parser for the Crossref API metadata format"""
-
-from __future__ import absolute_import, division, print_function
 
 import itertools
 

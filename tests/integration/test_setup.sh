@@ -22,7 +22,8 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 prepare() {
     rm -rf dist
-    $1 setup.py sdist
+    python -m scripts.generate_schemas
+    poetry build --format sdist
     pushd dist
     tar xzf inspire[-_]schemas-*.tar.gz
     popd
@@ -63,4 +64,4 @@ main() {
 }
 
 
-main "$@"
+main

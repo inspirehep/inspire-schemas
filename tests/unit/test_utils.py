@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2016, 2017 CERN.
@@ -23,12 +22,12 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 import contextlib
+import io
 import json
 import os
+from unittest import mock
 
-import mock
 import pytest
-import six
 from inspire_utils.query import ordered
 
 from inspire_schemas import errors, utils
@@ -86,8 +85,8 @@ def test_normalize_arxiv_category_returns_input_for_correct_category():
 
 
 def test_normalize_arxiv_category_returns_input_for_inexistent_category():
-    expected = six.ensure_text("😃")
-    result = utils.normalize_arxiv_category(six.ensure_text("😃"))
+    expected = "😃"
+    result = utils.normalize_arxiv_category("😃")
 
     assert expected == result
 
@@ -172,9 +171,8 @@ def test_local_ref_resolver_proxied(mock_super, mock_resolve_remote):
     mock_super.side_effect = lambda *x: utils.RefResolver
 
     class MockResolver(utils.LocalRefResolver):
-        """Needed to be able to call the resolve_remote function on the
-        LocalRefResolver without having to instantiate it on both python2 and
-        3 as they handle the unbound methods differently.
+        """Skips RefResolver.__init__ so resolve_remote can be called
+        without providing its required base_uri/referrer arguments.
         """
 
         def __init__(self):
@@ -195,9 +193,8 @@ def test_local_ref_resolver_adapted(mock_get_schema_path, mock_super, mock_resol
         raise ValueError()
 
     class MockResolver(utils.LocalRefResolver):
-        """Needed to be able to call the resolve_remote function on the
-        LocalRefResolver without having to instantiate it on both python2 and
-        3 as they handle the unbound methods differently.
+        """Skips RefResolver.__init__ so resolve_remote can be called
+        without providing its required base_uri/referrer arguments.
         """
 
         def __init__(self):
@@ -220,7 +217,7 @@ def test_load_schema_with_schema_key(mock_get_schema_path, mock_open):
             "shrubbery": "almaciga",
         }
     }
-    mock_open.side_effect = lambda x: contextlib.closing(six.StringIO(json.dumps(myschema)))
+    mock_open.side_effect = lambda x: contextlib.closing(io.StringIO(json.dumps(myschema)))
     mock_get_schema_path.side_effect = (
         lambda x, y: "And his nostrils ripped and his bottom burned off"
     )
@@ -265,7 +262,7 @@ def test_split_page_artid_artid():
 
 
 def test_split_page_artid_unicode_dash():
-    page_string = six.ensure_text("45−47")
+    page_string = "45−47"
     result = utils.split_page_artid(page_string)
 
     expected = "45", "47", None
@@ -339,10 +336,10 @@ def test_build_pubnote_title_volume_page_start_artid():
 
 
 def test_build_pubnote_handles_unicode():
-    title = six.ensure_text("J.Tëstíng")
+    title = "J.Tëstíng"
     volume = "42"
     page_start = "123"
-    expected = six.ensure_text("J.Tëstíng,42,123")
+    expected = "J.Tëstíng,42,123"
 
     assert utils.build_pubnote(title, volume, page_start) == expected
 

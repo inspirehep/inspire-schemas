@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2024 CERN.
@@ -20,12 +19,9 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-from __future__ import absolute_import, division, print_function
-
 import itertools
 import re
 
-import six
 from inspire_utils.date import PartialDate
 from inspire_utils.helpers import maybe_int, remove_tags
 
@@ -486,10 +482,7 @@ class ElsevierParser(object):
             scrapy.selector.Selector: a selector on the root ``<article>``
                 node.
         """
-        if isinstance(elsevier_record, six.string_types):
-            root = get_node(elsevier_record)
-        else:
-            root = elsevier_record
+        root = get_node(elsevier_record) if isinstance(elsevier_record, str) else elsevier_record
         root.remove_namespaces()
 
         return root

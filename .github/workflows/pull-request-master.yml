@@ -13,7 +13,3 @@ jobs:
   python3_tests:
     needs: [lint]
     uses: ./.github/workflows/test-python.yml
-
-  python2_tests:
-    needs: [lint]
-    uses: ./.github/workflows/test-python-py2.yml

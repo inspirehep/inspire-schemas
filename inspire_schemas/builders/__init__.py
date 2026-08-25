@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2016, 2017 CERN.
@@ -23,8 +22,6 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Builders to facilitate the creation of schema-compliant records."""
-
-from __future__ import absolute_import, division, print_function
 
 from .authors import AuthorBuilder  # noqa
 from .conferences import ConferenceBuilder  # noqa

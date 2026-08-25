@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2016 CERN.
@@ -27,7 +26,6 @@ import os
 
 import jsonschema
 import pytest
-import six
 
 from inspire_schemas import api
 
@@ -36,7 +34,7 @@ FIXTURES_PATH = os.path.join(os.path.dirname(__file__), "fixtures")
 
 def get_schema_names(fixtures_path):
     schema_names = []
-    _, _, files = six.next(os.walk(fixtures_path))
+    _, _, files = next(os.walk(fixtures_path))
     schema_names.extend(
         file_name.split("_", 1)[0] for file_name in files if file_name.endswith(".json")
     )
