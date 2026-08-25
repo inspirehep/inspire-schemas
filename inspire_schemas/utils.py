@@ -47,14 +47,13 @@ from jsonschema import (
     validators,
 )
 from jsonschema import validate as jsonschema_validate
-from pkg_resources import resource_filename
 from pytz import UnknownTimeZoneError, timezone
 from six.moves.urllib.parse import urlsplit
 from unidecode import unidecode
 
 from inspire_schemas.errors import SchemaKeyNotFound, SchemaNotFound, UnknownUIDSchema
 
-_schema_root_path = os.path.abspath(resource_filename(__name__, "records"))
+_schema_root_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "records")
 
 _RE_2_CHARS = re.compile(r"[a-z].*[a-z]", re.IGNORECASE)
 _RE_CHAR = re.compile(r"[a-z]", re.IGNORECASE)
@@ -388,7 +387,7 @@ SCHEMAS = [
 
 
 def _load_countries_data(dataset_name):
-    path = resource_filename(__name__, "countries")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "countries")
     filename = "iso_{}.json".format(dataset_name)
     with open(os.path.join(path, filename)) as json_fd:
         return json.load(json_fd)[dataset_name]

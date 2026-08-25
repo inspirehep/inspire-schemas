@@ -1,0 +1,91 @@
+[build-system]
+requires = ["poetry-core>=2.0,<3.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "inspire-schemas"
+version = "61.6.33"
+description = "Inspire JSON schemas and utilities to use them."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-2.0-only"
+authors = [
+    { name = "CERN", email = "admin@inspirehep.net" },
+]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "bleach>=6.2,<7",
+    "idutils>=1.2.1,<2",
+    "inspire-utils>=3.0.65,<4",
+    "isodate",
+    "jsonschema>=4.24,<5",
+    "pylatexenc",
+    "pytz",
+    "pyyaml>=6,<7",
+    "rfc3987",
+    "scrapy",
+    "six",
+    "unidecode>=1.0.22,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/inspirehep/inspire-schemas"
+Issues = "https://github.com/inspirehep/inspire-schemas/issues/"
+
+[project.optional-dependencies]
+docs = [
+    "jsonschema2rst>=0.1.7",
+    "sphinx",
+]
+tests = [
+    "check-manifest",
+    "coverage",
+    "deepdiff",
+    "mock",
+    "pytest>=8.3,<9",
+    "pytest-cov>=6,<7",
+]
+
+[project.entry-points."invenio_base.apps"]
+inspire_schemas = "inspire_schemas:inspireschemas"
+
+[project.entry-points."invenio_i18n.translations"]
+messages = "inspire_schemas"
+
+[tool.poetry]
+packages = [{ include = "inspire_schemas" }]
+include = [
+    "AUTHORS",
+    "CHANGELOG",
+    { path = "inspire_schemas/records/**/*.json", format = ["sdist", "wheel"] },
+    { path = "scripts/generate_schemas.py", format = ["sdist"] },
+]
+
+[tool.poetry.group.test.dependencies]
+check-manifest = "*"
+coverage = "*"
+deepdiff = "*"
+mock = "*"
+pytest = ">=8.3,<9"
+pytest-cov = ">=6,<7"
+
+[tool.poetry.group.docs.dependencies]
+jsonschema2rst = ">=0.1.7"
+sphinx = "*"
+
+[tool.pytest.ini_options]
+addopts = "--cov=inspire_schemas --cov-report=term-missing --capture=sys -vv"
+testpaths = ["tests", "inspire_schemas"]
