@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2017 CERN.
@@ -20,13 +19,10 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-from __future__ import absolute_import, division, print_function
-
 import inspect
 import sys
 
 import pytest
-import six
 from jsonschema import ValidationError
 
 from inspire_schemas.builders.signatures import SignatureBuilder
@@ -132,14 +128,14 @@ def test_add_affiliation(subschema):
 def test_add_alternative_name(subschema):
     expected = {
         "alternative_names": [
-            six.ensure_text("Petrovich Sidorov, Ivan"),
-            six.ensure_text("Петрович Сидоров, Иван"),
+            "Petrovich Sidorov, Ivan",
+            "Петрович Сидоров, Иван",
         ]
     }
 
     builder = SignatureBuilder()
-    builder.add_alternative_name(six.ensure_text("Petrovich Sidorov, Ivan"))
-    builder.add_alternative_name(six.ensure_text("Петрович Сидоров, Иван"))
+    builder.add_alternative_name("Petrovich Sidorov, Ivan")
+    builder.add_alternative_name("Петрович Сидоров, Иван")
 
     assert_field_valid(expected, builder.obj, "alternative_names", subschema)
 

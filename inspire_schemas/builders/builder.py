@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2019 CERN.
@@ -22,10 +21,6 @@
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
-from __future__ import absolute_import, division, print_function
-
-import six
-
 from inspire_schemas.utils import EMPTIES, filter_empty_parameters
 
 
@@ -42,9 +37,7 @@ class RecordBuilder(object):
 
     def __repr__(self):
         """Printable representation of the builder."""
-        return six.ensure_text(
-            "{}(source={!r}, record={})".format(type(self).__name__, self.source, self.record)
-        )
+        return "{}(source={!r}, record={})".format(type(self).__name__, self.source, self.record)
 
     @filter_empty_parameters
     def _append_to(self, field, element=None, default_list=None, **kwargs):
@@ -55,7 +48,7 @@ class RecordBuilder(object):
             if element not in self.record[field]:
                 self.record[field].append(element)
         elif kwargs:
-            if "record" in kwargs and isinstance(kwargs["record"], six.string_types):
+            if "record" in kwargs and isinstance(kwargs["record"], str):
                 kwargs["record"] = {"$ref": kwargs["record"]}
             self._ensure_list_field(field, default_list)
             if kwargs not in self.record[field]:

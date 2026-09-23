@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2019 CERN.
@@ -20,13 +19,10 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-from __future__ import absolute_import, division, print_function
-
 from itertools import chain
 
 from inspire_utils.helpers import force_list
 from inspire_utils.record import get_value
-from six import text_type
 
 from inspire_schemas.builders.literature import is_citeable
 
@@ -453,7 +449,7 @@ class LiteratureReader(object):
         if "page_start" in publication_info and "page_end" in publication_info:
             page_start = publication_info["page_start"]
             page_end = publication_info["page_end"]
-            return text_type("{}{}{}").format(page_start, text_type(separator), page_end)
+            return "{}{}{}".format(page_start, separator, page_end)
 
         elif "artid" in publication_info:
             return publication_info["artid"]

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2016, 2017 CERN.
@@ -31,10 +30,10 @@ import re
 import sys
 from collections import defaultdict
 from functools import partial, wraps
+from urllib.parse import urlsplit
 
 import idutils
 import rfc3987
-import six
 from bleach.linkifier import LinkifyFilter
 from bleach.sanitizer import Cleaner
 from idutils import is_isni
@@ -47,14 +46,12 @@ from jsonschema import (
     validators,
 )
 from jsonschema import validate as jsonschema_validate
-from pkg_resources import resource_filename
 from pytz import UnknownTimeZoneError, timezone
-from six.moves.urllib.parse import urlsplit
 from unidecode import unidecode
 
 from inspire_schemas.errors import SchemaKeyNotFound, SchemaNotFound, UnknownUIDSchema
 
-_schema_root_path = os.path.abspath(resource_filename(__name__, "records"))
+_schema_root_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "records")
 
 _RE_2_CHARS = re.compile(r"[a-z].*[a-z]", re.IGNORECASE)
 _RE_CHAR = re.compile(r"[a-z]", re.IGNORECASE)
@@ -352,7 +349,7 @@ _JOURNALS_RENAMED_OLD_TO_NEW = {
     "Proc.Roy.Irish Acad.(Sect.A)": "Proc.Roy.Irish Acad.A",
     "Univ.Politech.Bucharest Sci.Bull.": "Univ.Politech.Bucharest Sci.Bull.A",
 }
-_JOURNALS_RENAMED_NEW_TO_OLD = {v: k for (k, v) in six.iteritems(_JOURNALS_RENAMED_OLD_TO_NEW)}
+_JOURNALS_RENAMED_NEW_TO_OLD = {v: k for (k, v) in _JOURNALS_RENAMED_OLD_TO_NEW.items()}
 
 _JOURNALS_WITH_YEAR_ADDED_TO_VOLUME = {
     "JHEP",
@@ -388,7 +385,7 @@ SCHEMAS = [
 
 
 def _load_countries_data(dataset_name):
-    path = resource_filename(__name__, "countries")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "countries")
     filename = "iso_{}.json".format(dataset_name)
     with open(os.path.join(path, filename)) as json_fd:
         return json.load(json_fd)[dataset_name]
@@ -569,7 +566,7 @@ def classify_field(value):
             otherwise the corresponding Inspire category.
 
     """
-    if not (isinstance(value, six.string_types) and value):
+    if not (isinstance(value, str) and value):
         return
 
     schema = load_schema("elements/inspire_field")
@@ -593,7 +590,7 @@ def split_page_artid(page_artid):
         return None, None, None
 
     # normalize unicode dashes
-    page_artid = unidecode(six.text_type(page_artid))
+    page_artid = unidecode(str(page_artid))
 
     if "-" in page_artid:
         # if it has a dash it's a page range
@@ -627,19 +624,19 @@ def split_pubnote(pubnote_str):
         pubnote["journal_volume"] = parts[1]
         pubnote["page_start"], pubnote["page_end"], pubnote["artid"] = split_page_artid(parts[2])
 
-    return {key: val for (key, val) in six.iteritems(pubnote) if val is not None}
+    return {key: val for (key, val) in pubnote.items() if val is not None}
 
 
 def build_pubnote(title, volume, page_start=None, page_end=None, artid=None):
     """Build pubnote string from parts (reverse of split_pubnote)."""
     if title and volume and artid and artid != page_start:
-        pubnote_format = six.ensure_text("{title},{volume},{artid}")
+        pubnote_format = "{title},{volume},{artid}"
     elif title and volume and page_start and page_end:
-        pubnote_format = six.ensure_text("{title},{volume},{page_start}-{page_end}")
+        pubnote_format = "{title},{volume},{page_start}-{page_end}"
     elif title and volume and page_start:
-        pubnote_format = six.ensure_text("{title},{volume},{page_start}")
+        pubnote_format = "{title},{volume},{page_start}"
     elif title and volume:
-        pubnote_format = six.ensure_text("{title},{volume}")
+        pubnote_format = "{title},{volume}"
     else:
         return None
 
@@ -808,7 +805,7 @@ def _load_schema_for_record(data, schema=None):
             raise SchemaKeyNotFound(data=data)
         schema = data["$schema"]
 
-    if isinstance(schema, six.string_types):
+    if isinstance(schema, str):
         schema = load_schema(schema_name=schema)
     return schema
 
@@ -944,7 +941,7 @@ def get_license_from_url(url):
     else:
         raise ValueError("Unknown license URL")
 
-    return six.ensure_text(" ").join(license)
+    return " ".join(license)
 
 
 def convert_old_publication_info_to_new(publication_infos):

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2017 CERN.
@@ -19,10 +18,6 @@
 # In applying this license, CERN does not waive the privileges and immunities
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
-
-from __future__ import absolute_import, division, print_function
-
-import six
 
 from inspire_schemas.builders.references import (
     ReferenceBuilder,
@@ -457,13 +452,13 @@ def test_add_refextract_authors_str_unicode():
 
     builder = ReferenceBuilder()
 
-    builder.add_refextract_authors_str(six.ensure_text("Kätlne, J."))
+    builder.add_refextract_authors_str("Kätlne, J.")
 
     expected = [
         {
             "reference": {
                 "authors": [
-                    {"full_name": six.ensure_text("Kätlne, J.")},
+                    {"full_name": "Kätlne, J."},
                 ],
             },
         },

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2024 CERN.
@@ -22,11 +21,8 @@
 
 """Extractrs for various metadata formats"""
 
-from __future__ import absolute_import, division, print_function
-
 import itertools
 
-import six
 from idutils import normalize_orcid
 from inspire_utils.date import PartialDate
 from inspire_utils.helpers import maybe_int, remove_tags
@@ -497,7 +493,7 @@ class JatsParser(object):
             scrapy.selector.Selector: a selector on the root ``<article>``
                 node.
         """
-        root = get_node(jats_record) if isinstance(jats_record, six.string_types) else jats_record
+        root = get_node(jats_record) if isinstance(jats_record, str) else jats_record
         root.remove_namespaces()
 
         return root

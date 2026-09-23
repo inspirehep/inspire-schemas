@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2019 CERN.
@@ -21,8 +20,6 @@
 # In applying this license, CERN does not
 # waive the privileges and immunities granted to it by virtue of its status
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
-
-from __future__ import absolute_import, division, print_function
 
 from inspire_schemas.api import load_schema, validate
 from inspire_schemas.readers.conference import ConferenceReader
