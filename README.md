@@ -102,6 +102,7 @@ separately by pre-commit in CI.
 - Ensure GitHub Actions passes on all supported Python versions, starting
   with Python 3.11.
 
+
 Commit with a sign-off and a descriptive message, push your branch, and open
 a pull request on GitHub:
 
