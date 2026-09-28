@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2016, 2019, 2024 CERN.

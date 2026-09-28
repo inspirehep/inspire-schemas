@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2024 CERN.
@@ -21,12 +20,9 @@
 # or submit itself to any jurisdiction.
 """Parser for the arXiv metadata format"""
 
-from __future__ import absolute_import, division, print_function
-
 import re
-from itertools import chain
+from itertools import chain, zip_longest
 
-import six
 from inspire_utils.dedupers import dedupe_list
 from inspire_utils.helpers import maybe_int
 from pylatexenc.latex2text import (
@@ -61,9 +57,7 @@ RE_DOIS = re.compile(r"[,;\s]+(?=\s*10[.]\d{4,})")
 
 def _handle_sqrt(node, l2tobj):
     arg = l2tobj.nodelist_to_text(node.nodeargd.argnlist)
-    format_str = (
-        six.ensure_text("\u221a{}") if arg.startswith("(") else six.ensure_text("\u221a({})")
-    )
+    format_str = "\u221a{}" if arg.startswith("(") else "\u221a({})"
     return format_str.format(arg)
 
 
@@ -184,7 +178,7 @@ class ArxivParser(object):
             next_forenames,
             next_keyname,
             _,
-        ) in six.moves.zip_longest(
+        ) in zip_longest(
             authors_and_affiliations,
             next_author_and_affiliations,
             fillvalue=("end of author-list", "", None),
@@ -261,8 +255,8 @@ class ArxivParser(object):
 
     @staticmethod
     def _get_author_names_and_affiliations(author_node):
-        forenames = six.ensure_text(" ").join(author_node.xpath(".//forenames//text()").extract())
-        keyname = six.ensure_text(" ").join(author_node.xpath(".//keyname//text()").extract())
+        forenames = " ".join(author_node.xpath(".//forenames//text()").extract())
+        keyname = " ".join(author_node.xpath(".//keyname//text()").extract())
         affiliations = author_node.xpath(".//affiliation//text()").extract()
 
         return forenames, keyname, affiliations
@@ -361,10 +355,7 @@ class ArxivParser(object):
             scrapy.selector.Selector: a selector on the root ``<article>``
                 node.
         """
-        if isinstance(arxiv_record, six.string_types):
-            root = get_node(arxiv_record)
-        else:
-            root = arxiv_record
+        root = get_node(arxiv_record) if isinstance(arxiv_record, str) else arxiv_record
         root.remove_namespaces()
 
         return root

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2024 CERN.
@@ -20,13 +19,6 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-)
-
-import sys
 
 import pytest
 import yaml
@@ -115,8 +107,6 @@ def test_field(field_name, records):
 
     if field_name == "authors":
         diffs = DeepDiff(result, expected, ignore_order=True)
-        if sys.version_info[0] < 3 and "type_changes" in diffs:
-            del diffs["type_changes"]
         assert diffs == {}
     else:
         assert result == expected

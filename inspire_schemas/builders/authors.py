@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE.
 # Copyright (C) 2014-2017 CERN.
@@ -21,8 +20,6 @@
 # or submit itself to any jurisdiction.
 
 """Author builder class and related code."""
-
-from __future__ import absolute_import, division, print_function
 
 from inspire_utils.date import PartialDate, normalize_date
 from inspire_utils.helpers import force_list

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2017 CERN.
@@ -28,15 +27,11 @@ Normalize YAML files to use non-flow style and block scalars in
 ``description``.
 """
 
-from __future__ import print_function
-
 import collections
 import fnmatch
 import os
-import sys
 import warnings
 
-import six
 import yaml
 from yaml.representer import SafeRepresenter
 
@@ -97,9 +92,7 @@ def process_tree(value, key=None, parent_key=None):
         for key, val in properties.items():
             if not val.get("type") and not val.get("$ref"):
                 warnings.warn(
-                    six.ensure_text(
-                        '"{}" field of "{}" does not have a type'.format(key, parent_key)
-                    ),
+                    '"{}" field of "{}" does not have a type'.format(key, parent_key),
                     stacklevel=1,
                 )
 
@@ -125,7 +118,7 @@ def process_tree(value, key=None, parent_key=None):
 def normalize_yaml(file_name):
     print("Normalizing", file_name, "...")
     with open(file_name, "r") as file_stream:
-        schema = yaml.load(file_stream) if sys.version_info[0] == 2 else yaml.full_load(file_stream)
+        schema = yaml.full_load(file_stream)
 
     schema = process_tree(schema)
     yaml_schema = yaml.dump(schema, **DUMPER_OPTIONS)

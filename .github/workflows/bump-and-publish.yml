@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
@@ -38,7 +38,7 @@ jobs:
           bump2version patch --tag --verbose
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.8.0
+        uses: ad-m/github-push-action@v1.3.0
         with:
           branch: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -56,20 +56,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ needs.bump.outputs.new_sha }}
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
       - name: Setup nodejs
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v7
         with:
-          node-version: 10.14.0
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install npm dependencies
@@ -79,32 +79,32 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install "setuptools<81" wheel
-          pip install -e .[tests]
+          pipx install poetry==2.2.1
+          poetry install --with test --no-interaction
 
       - name: Show python dependencies
         run: |
           python3 --version
-          pip freeze
+          poetry show
 
       - name: Build package
         run: |
-          python setup.py sdist bdist_wheel
+          poetry run python -m scripts.generate_schemas
+          poetry build
 
       - name: Publish package
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        uses: pypa/gh-action-pypi-publish@v1.14.2
         with:
           user: __token__
           password: ${{ secrets.pypi_password }}
 
       - name: Generate schema JSON
         run: |
-          python -c "import setup; setup._generate_country_js_file(); setup._generate_json_schemas()"
+          poetry run python -m scripts.generate_schemas
 
       - name: Build npm package
         run: |
-          npm install --only=dev
+          npm install --include=dev
           npm run build
 
       - name: Publish npm package

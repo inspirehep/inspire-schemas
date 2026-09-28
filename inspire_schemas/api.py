@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2016, 2017 CERN.
@@ -23,8 +22,6 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 """Public api for methods and functions to handle/verify the jsonschemas."""
-
-from __future__ import absolute_import, division, print_function
 
 from .builders import LiteratureBuilder, ReferenceBuilder  # noqa
 from .utils import load_schema, validate  # noqa

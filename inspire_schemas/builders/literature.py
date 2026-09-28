@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # This file is part of INSPIRE-SCHEMAS.
 # Copyright (C) 2017, 2019 CERN.
@@ -24,15 +23,11 @@
 
 """Literature builder class and related code."""
 
-from __future__ import absolute_import, division, print_function
-
 import warnings
 
 import idutils
-import six
 from inspire_utils.date import normalize_date
 from inspire_utils.isbn import normalize_isbn
-from six import python_2_unicode_compatible, string_types, text_type
 
 from inspire_schemas.builders.builder import RecordBuilder
 from inspire_schemas.builders.signatures import SignatureBuilder
@@ -69,7 +64,6 @@ def key_already_there(element, elements):
     return any(element["key"] == existing_element["key"] for existing_element in elements)
 
 
-@python_2_unicode_compatible
 class LiteratureBuilder(RecordBuilder):
     """Literature record builder."""
 
@@ -82,7 +76,7 @@ class LiteratureBuilder(RecordBuilder):
 
     def __str__(self):
         """Print the current record."""
-        return text_type(self.record)
+        return str(self.record)
 
     def validate_record(self):
         """Validate the record in according to the hep schema."""
@@ -425,7 +419,7 @@ class LiteratureBuilder(RecordBuilder):
                 page_end,
             )
         ):
-            self.add_public_note(six.ensure_text("Submitted to {}".format(journal_title)))
+            self.add_public_note("Submitted to {}".format(journal_title))
             return
 
         publication_item = {}
@@ -447,7 +441,7 @@ class LiteratureBuilder(RecordBuilder):
                 publication_item[key] = locals()[key]
         if parent_record is not None:
             # TODO: remove `if string` check [BREAKING] while bumping major version
-            if isinstance(parent_record, string_types):
+            if isinstance(parent_record, str):
                 parent_record = {"$ref": parent_record}
             publication_item["parent_record"] = parent_record
         if parent_isbn is not None:
@@ -906,7 +900,6 @@ class LiteratureBuilder(RecordBuilder):
             material (string):
             original_url (string): original url
             filename (string): current url
-
 
         Returns: None
 

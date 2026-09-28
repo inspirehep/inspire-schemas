@@ -22,7 +22,10 @@
     as an Intergovernmental Organization or submit itself to any jurisdiction.
 
 
-.. include:: ../README.rst
+inspire-schemas
+===============
+
+INSPIRE JSON schemas and related tools.
 
 User's Guide
 ------------
@@ -43,8 +46,7 @@ automatically, and will only download minor and feature updates (1.X.Y).
 .. toctree::
    :maxdepth: 2
 
-   installation
-   usage
+   Installation <https://github.com/inspirehep/inspire-schemas/blob/master/README.md#installation>
 
 
 API Reference
@@ -80,7 +82,7 @@ interested.
 .. toctree::
    :maxdepth: 1
 
-   contributing
+   Contributing <https://github.com/inspirehep/inspire-schemas/blob/master/README.md#contributing>
    license
 
 
