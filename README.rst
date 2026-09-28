@@ -43,5 +43,6 @@
 
 Inspirehep schemas and related tools bundle.
 
+
 * Free software: GPLv2 license
 * Documentation: https://inspire-schemas.readthedocs.io
