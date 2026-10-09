@@ -36,6 +36,8 @@ properties:
                     - editor
                     minLength: 1
                     type: string
+            required:
+            - full_name
             type: object
         minItems: 1
         title: List of authors
