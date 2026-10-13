@@ -19,6 +19,9 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
+import pytest
+from jsonschema import ValidationError
+
 from inspire_schemas.builders.references import (
     ReferenceBuilder,
 )
@@ -1420,3 +1423,13 @@ def test_reference_builder_adds_arxiv_url_pre_2007_2():
     }
 
     assert rb.obj == expected
+
+
+def test_reference_author_requires_full_name():
+    schema = load_schema("hep")
+    subschema = schema["properties"]["references"]
+
+    record = [{"reference": {"authors": [{"inspire_role": "author"}]}}]
+
+    with pytest.raises(ValidationError):
+        validate(record, subschema)
