@@ -306,6 +306,7 @@ properties:
                     :MARC: ``100__c``
                 enum:
                 - Sir
+                - Dame
                 minLength: 1
                 type: string
             value:
