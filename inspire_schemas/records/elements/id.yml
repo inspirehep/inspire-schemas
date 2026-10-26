@@ -81,6 +81,50 @@ anyOf:
     title: ORCID
     type: object
 -   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - WIKIPEDIA
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                A page name on the English Wikipedia, i.e. the ``Page_name``
+                part in http://en.wikipedia.org/wiki/Page_name.
+
+                :example: ``Albert_Einstein``
+
+                Non-English Wikipedia pages can be referenced by prepending the language.
+
+                :example: ``it:Fabiola_Gianotti``
+            minLength: 1
+            type: string
+    required:
+    - schema
+    - value
+    title: Wikipedia Page_name of the person
+    type: object
+-   additionalProperties: false
+    properties:
+        schema:
+            enum:
+            - LINKEDIN
+            minLength: 1
+            type: string
+        value:
+            description: |-
+                Identifier of Linkedin profile, i.e. the part after
+                ``linkedin.com/in/`` in the URL.
+
+                :example: ``kylecranmer``
+            minLength: 1
+            type: string
+    required:
+    - schema
+    - value
+    title: LinkedIn profile
+    type: object
+-   additionalProperties: false
     description: |-
         Author identfier assigned by the Joint Accelerator Conferences Website
         (`JACoW <http://jacow.org>`_).
@@ -279,30 +323,6 @@ anyOf:
     properties:
         schema:
             enum:
-            - WIKIPEDIA
-            minLength: 1
-            type: string
-        value:
-            description: |-
-                A page name on the English Wikipedia, i.e. the ``Page_name``
-                part in http://en.wikipedia.org/wiki/Page_name.
-
-                :example: ``Albert_Einstein``
-
-                Non-English Wikipedia pages can be referenced by prepending the language.
-
-                :example: ``it:Fabiola_Gianotti``
-            minLength: 1
-            type: string
-    required:
-    - schema
-    - value
-    title: Wikipedia Page_name of the person
-    type: object
--   additionalProperties: false
-    properties:
-        schema:
-            enum:
             - SLAC
             minLength: 1
             type: string
@@ -375,24 +395,4 @@ anyOf:
     - schema
     - value
     title: Mastodon handle
-    type: object
--   additionalProperties: false
-    properties:
-        schema:
-            enum:
-            - LINKEDIN
-            minLength: 1
-            type: string
-        value:
-            description: |-
-                Identifier of Linkedin profile, i.e. the part after
-                ``linkedin.com/in/`` in the URL.
-
-                :example: ``kylecranmer``
-            minLength: 1
-            type: string
-    required:
-    - schema
-    - value
-    title: LinkedIn profile
     type: object
