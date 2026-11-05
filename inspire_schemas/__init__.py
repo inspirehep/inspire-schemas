@@ -23,4 +23,4 @@
 
 """Schemas and utilities used in inspirehep."""
 
-__version__ = "61.6.38"
+__version__ = "61.6.39"
