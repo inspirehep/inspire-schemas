@@ -22,7 +22,7 @@
 import re
 
 from inspire_utils.name import normalize_name
-from scrapy.selector import Selector
+from parsel import Selector
 
 from inspire_schemas.api import LiteratureBuilder
 

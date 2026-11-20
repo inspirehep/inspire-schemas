@@ -103,7 +103,7 @@ class ElsevierParser(object):
     subclassed to customize its behavior.
 
     Args:
-        elsevier_record (Union[str, scrapy.selector.Selector]): the record in Elsevier
+        elsevier_record (Union[str, parsel.Selector]): the record in Elsevier
             format to parse.
         source (Optional[str]): if provided, sets the ``source`` everywhere in
             the record. Otherwise, the source is extracted from the Elsevier metadata.
@@ -476,10 +476,10 @@ class ElsevierParser(object):
         the XML.
 
         Args:
-            elsevier_record(Union[str, scrapy.selector.Selector]): the record in Elsevier format.
+            elsevier_record(Union[str, parsel.Selector]): the record in Elsevier format.
 
         Returns:
-            scrapy.selector.Selector: a selector on the root ``<article>``
+            parsel.Selector: a selector on the root ``<article>``
                 node.
         """
         root = get_node(elsevier_record) if isinstance(elsevier_record, str) else elsevier_record
@@ -491,7 +491,7 @@ class ElsevierParser(object):
         """Extract one author.
 
         Args:
-            author_node(scrapy.selector.Selector): a selector on a single
+            author_node(parsel.Selector): a selector on a single
                 author, e.g. a ``<contrib contrib-type="author">``.
 
         Returns:
@@ -508,7 +508,7 @@ class ElsevierParser(object):
         """Extract authors from a reference node.
 
         Args:
-            ref_node(scrapy.selector.Selector): a selector on a single reference.
+            ref_node(parsel.Selector): a selector on a single reference.
 
         Returns:
             List[str]: list of names
@@ -526,7 +526,7 @@ class ElsevierParser(object):
         """Extract authors of `role` from a reference node.
 
         Args:
-            ref_node(scrapy.selector.Selector): a selector on a single reference.
+            ref_node(parsel.Selector): a selector on a single reference.
 
         Returns:
             List[str]: list of names
@@ -553,7 +553,7 @@ class ElsevierParser(object):
         """Extract one reference.
 
          Args:
-             ref_node(scrapy.selector.Selector): a selector on a single
+             ref_node(parsel.Selector): a selector on a single
                  reference, i.e. ``<ref>``.
 
         Yields:

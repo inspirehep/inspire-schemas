@@ -1,6 +1,6 @@
 import re
 
-from scrapy.selector import Selector
+from parsel import Selector
 
 RE_FOR_THE = re.compile(
     r"\b(?:for|on behalf of|representing)\b",
@@ -12,7 +12,7 @@ INST_PHRASES = [
 
 
 def get_node(text, namespaces=None):
-    """Get a scrapy selector for the given text node."""
+    """Get a parsel selector for the given text node."""
     node = Selector(text=text, type="xml")
     if namespaces:
         for ns in namespaces:

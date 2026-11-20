@@ -84,7 +84,7 @@ class ArxivParser(object):
     subclassed to customize its behavior.
 
     Args:
-        arxiv_record (Union[str, scrapy.selector.Selector]): the record in arXiv format to parse.
+        arxiv_record (Union[str, parsel.Selector]): the record in arXiv format to parse.
         source (Optional[str]): if provided, sets the ``source`` everywhere in
             the record. Otherwise, the source is extracted from the arXiv metadata.
     """
@@ -349,10 +349,10 @@ class ArxivParser(object):
         the XML.
 
         Args:
-            arxiv_record(Union[str, scrapy.selector.Selector]): the record in arXiv format.
+            arxiv_record(Union[str, parsel.Selector]): the record in arXiv format.
 
         Returns:
-            scrapy.selector.Selector: a selector on the root ``<article>``
+            parsel.Selector: a selector on the root ``<article>``
                 node.
         """
         root = get_node(arxiv_record) if isinstance(arxiv_record, str) else arxiv_record
