@@ -7,7 +7,7 @@ name = "inspire-schemas"
 version = "61.6.39"
 description = "Inspire JSON schemas and utilities to use them."
 readme = "README.md"
-requires-python = ">=3.11,<3.15"
+requires-python = ">=3.11,<4"
 license = "GPL-2.0-only"
 authors = [
     { name = "CERN", email = "admin@inspirehep.net" },
@@ -23,6 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
@@ -36,25 +37,13 @@ dependencies = [
     "pytz",
     "pyyaml>=6,<7",
     "rfc3987",
-    "scrapy",
+    "parsel",
     "unidecode>=1.0.22,<2",
 ]
 
 [project.urls]
 Homepage = "https://github.com/inspirehep/inspire-schemas"
 Issues = "https://github.com/inspirehep/inspire-schemas/issues/"
-
-[project.optional-dependencies]
-docs = [
-    "jsonschema2rst>=0.1.7",
-    "sphinx",
-]
-tests = [
-    "coverage",
-    "deepdiff",
-    "pytest>=8.3,<9",
-    "pytest-cov>=6,<7",
-]
 
 [project.entry-points."invenio_base.apps"]
 inspire_schemas = "inspire_schemas:inspireschemas"

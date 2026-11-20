@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.11', '3.12', '3.13', '3.14']
+        python: ['3.11', '3.12', '3.13', '3.14','3.15']
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -22,7 +22,7 @@ jobs:
 
       - name: Install python dependencies
         run: |
-          pipx install poetry==2.2.1
+          pipx install poetry==2.5.1
           poetry install --with test,docs --no-interaction
 
       - name: Show python dependencies

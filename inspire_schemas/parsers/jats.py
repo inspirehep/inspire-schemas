@@ -41,7 +41,7 @@ class JatsParser(object):
     subclassed to customize its behavior.
 
     Args:
-        jats_record (Union[str, scrapy.selector.Selector]): the record in JATS format to parse.
+        jats_record (Union[str, parsel.Selector]): the record in JATS format to parse.
         source (Optional[str]): if provided, sets the ``source`` everywhere in
             the record. Otherwise, the source is extracted from the JATS metadata.
     """
@@ -487,10 +487,10 @@ class JatsParser(object):
         the XML.
 
         Args:
-            jats_record(Union[str, scrapy.selector.Selector]): the record in JATS format.
+            jats_record(Union[str, parsel.Selector]): the record in JATS format.
 
         Returns:
-            scrapy.selector.Selector: a selector on the root ``<article>``
+            parsel.Selector: a selector on the root ``<article>``
                 node.
         """
         root = get_node(jats_record) if isinstance(jats_record, str) else jats_record
@@ -502,7 +502,7 @@ class JatsParser(object):
         """Extract one author.
 
         Args:
-            author_node(scrapy.selector.Selector): a selector on a single
+            author_node(parsel.Selector): a selector on a single
                 author, e.g. a ``<contrib contrib-type="author">``.
 
         Returns:
@@ -528,7 +528,7 @@ class JatsParser(object):
         """Extract authors of `role` from a reference node.
 
         Args:
-            ref_node(scrapy.selector.Selector): a selector on a single reference.
+            ref_node(parsel.Selector): a selector on a single reference.
             role(str): author role
 
         Returns:
@@ -542,7 +542,7 @@ class JatsParser(object):
         """Extract one reference.
 
         Args:
-            ref_node(scrapy.selector.Selector): a selector on a single
+            ref_node(parsel.Selector): a selector on a single
                 reference, i.e. ``<ref>``.
 
         Returns:
